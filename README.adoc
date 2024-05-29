@@ -1,0 +1,3 @@
+Update hosts with `nixos-rebuild`:
+
+% sudo nixos-rebuild boot --impure --upgrade-all --flake ~/.config/flakes/nixos/#perrrkele
