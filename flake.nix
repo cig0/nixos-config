@@ -5,33 +5,42 @@
     nixpkgs.url = "nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
-    # Addons
-      auto-cpufreq = {
-        url = "github:AdnanHodzic/auto-cpufreq";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-      flake-utils.url = "github:numtide/flake-utils";
-      # home-manager = {
-      #   url = "github:nix-community/home-manager";
-      #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-      # };
-      nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz";
-      nixos-cosmic = {
-        url = "github:lilyinstarlight/nixos-cosmic";
-        inputs.nixpkgs.follows = "nixpkgs-unstable";
-      };
-      nixos-hardware.url = "https://flakehub.com/f/NixOS/nixos-hardware/0.1.1656.tar.gz";
-      nixvim = {
-        url = "github:nix-community/nixvim";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-      rust-overlay.url = "github:oxalica/rust-overlay";
-      sops-nix.url = "github:Mic92/sops-nix";
+    auto-cpufreq = { # Energy efficiency
+      url = "github:AdnanHodzic/auto-cpufreq";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # home-manager = { # Maybe in the future
+    #   url = "github:nix-community/home-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
+
+    nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
+
+    nixos-cosmic = { # Shaping nicely!
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    nixos-hardware.url = "https://flakehub.com/f/NixOS/nixos-hardware/0.1.1656.tar.gz"; # Hardware-specific optimizations
+
+    nixvim = { # The intended way to configure Neovim?
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    rust-overlay.url = "github:oxalica/rust-overlay"; # Crabby dancing sideways
+
+    sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
   };
 
   outputs = { self, auto-cpufreq, nix-flatpak, nixos-cosmic, nixos-hardware, nixpkgs, nixpkgs-unstable, nixvim, rust-overlay, sops-nix, ... }@inputs:
     let
       commonModules = [
+        auto-cpufreq.nixosModules.default
+        nixvim.nixosModules.nixvim
+        sops-nix.nixosModules.sops
+
         ./nixos/modules/cups.nix
         ./nixos/modules/current-system-packages.nix
         ./nixos/modules/dns.nix
@@ -61,11 +70,12 @@
         ./nixos/modules/virtualization.nix
         ./nixos/modules/zsh.nix
         ./nixos/modules/zram.nix
-        auto-cpufreq.nixosModules.default
-        nixvim.nixosModules.nixvim
-        sops-nix.nixosModules.sops
       ];
+
       endUserModules = [
+        nixos-cosmic.nixosModules.default
+        nix-flatpak.nixosModules.nix-flatpak
+
         ./nixos/modules/cosmic.nix
         ./nixos/modules/firefox.nix
         ./nixos/modules/flatpak.nix
@@ -74,8 +84,6 @@
         ./nixos/modules/sddm.nix
         ./nixos/modules/ungoogled-chromium.nix
         ./nixos/modules/xdg-desktop-portal.nix
-        nixos-cosmic.nixosModules.default
-        nix-flatpak.nixosModules.nix-flatpak
       ];
 
       system = "x86_64-linux";
@@ -106,6 +114,8 @@
             inherit system;
             specialArgs = { inherit inputs unstablePkgs; };
             modules = commonModules ++ endUserModules ++ [
+              nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
+
               # Home Manager
               # home-manager.nixosModules.perrrkele
 
@@ -123,7 +133,6 @@
                 services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
               }
 
-              nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7 # Additional hardware settings
             ];
           };
 
