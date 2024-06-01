@@ -121,6 +121,7 @@ let
       unstablePkgs.yamlfmt
 
     # Security - CLI
+    unstablePkgs.age
     unstablePkgs.chkrootkit
     unstablePkgs.gpg-tui
     unstablePkgs.lynis
