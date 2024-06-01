@@ -1,3 +1,74 @@
-Update hosts with `nixos-rebuild`:
+λ sudo nixos-rebuild boot --upgrade --flake ~/.nixos-config
 
-% sudo nixos-rebuild boot --impure --upgrade-all --flake ~/.config/flakes/nixos/#perrrkele
+λ nh os switch --update ~/.nixos-config
+
+```
+.nixos-config on  main λ tree --dirsfirst -av --matchdirs -I '.git|.vscode'  
+.
+├── .etc
+│   └── nixos
+│       └── confusedungabunga.gif
+├── home-manager
+│   └── modules
+│       └── .gitkeep
+├── nixos
+│   ├── hosts
+│   │   ├── perrrkele
+│   │   │   ├── configuration.nix
+│   │   │   └── hardware-configuration.nix
+│   │   ├── satama
+│   │   └── vittusaatana
+│   ├── modules
+│   │   ├── nixvim
+│   │   │   └── plugins
+│   │   │       └── .gitkeep
+│   │   ├── cosmic.nix
+│   │   ├── cups.nix
+│   │   ├── current-system-packages.nix
+│   │   ├── dns.nix
+│   │   ├── emacs.nix
+│   │   ├── firefox.nix
+│   │   ├── firewall.nix
+│   │   ├── flatpak.nix
+│   │   ├── fonts.nix
+│   │   ├── gnupg.nix
+│   │   ├── import-overlays.nix
+│   │   ├── intel-updateMicrocode.nix
+│   │   ├── kdeconnect.nix
+│   │   ├── kernel.nix
+│   │   ├── keyd.nix
+│   │   ├── mtr.nix
+│   │   ├── nix-alien.nix
+│   │   ├── nixvim.nix
+│   │   ├── ntp.nix
+│   │   ├── ollama.nix
+│   │   ├── openssh.nix
+│   │   ├── pcscd.nix
+│   │   ├── plymouth.nix
+│   │   ├── powerManagement.nix
+│   │   ├── sddm.nix
+│   │   ├── sops.nix
+│   │   ├── sshguard.nix
+│   │   ├── starship.nix
+│   │   ├── stevenblack-unblacklist.nix
+│   │   ├── stevenblack.nix
+│   │   ├── syncthing.nix
+│   │   ├── systemAutoUpgrade.nix
+│   │   ├── systemPackages.nix
+│   │   ├── ungoogled-chromium.nix
+│   │   ├── users.nix
+│   │   ├── virtualization.nix
+│   │   ├── xdg-desktop-portal.nix
+│   │   ├── zram.nix
+│   │   └── zsh.nix
+│   └── overlays
+│       └── nixos-option.nix
+├── secrets
+│   └── secrets.yaml
+├── .sops.yaml
+├── README.adoc
+├── flake.lock
+└── flake.nix
+
+15 directories, 50 files
+```
