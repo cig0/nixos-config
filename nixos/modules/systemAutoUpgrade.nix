@@ -3,7 +3,7 @@
 {
   system.autoUpgrade = {
     enable = true;
-    flake = "/home/cig0/.hiutale/";
+    flake = "/home/cig0/.nixos-config/";
     flags = [
       "--update-input"
       "nixpkgs"
