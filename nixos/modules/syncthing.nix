@@ -1,5 +1,5 @@
 # Syncthing shares
-{ ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   services.syncthing = {
@@ -24,6 +24,9 @@
         urAccepted = 2; # Send telemetry
       };
       devices = {
+        perrrkele ={
+          id = "I7UYHKV-NU5RSCD-LSZHJ47-LFZY2JE-QKWUTB5-LAZRA7S-S6ZZS3S-2QNVLAA";
+        };
         satama = {
           id = "DZTYQXD-3RE6PHR-QM7EE3X-DVXNEQQ-7ONTWG4-NYK4CUZ-RFVZTAV-L6MSPQJ";
         };
@@ -36,91 +39,91 @@
           id = "m3q6z-itat6";
           label = ".aws";
           path = "/home/cig0/.aws";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         ".krew" = {
           id = "zo6vm-ycvnv";
           label = ".krew";
           path = "/home/cig0/.krew";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         ".kube" = {
           id = "cbvut-r9kxc";
           label = ".kube";
           path = "/home/cig0/.kube";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         ".ssh" = {
           id = "7cgim-4pyuc";
           label = ".ssh";
           path = "/home/cig0/.ssh";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         ".terraform.versions" = {
           id = "uoocx-gswyo";
           label = ".terraform.versions";
           path = "/home/cig0/.terraform.versions";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         "Default Folder" = {
           id = "default";
           label = "Default Folder";
           path = "/home/cig0/Sync";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         "Desktop" = {
           id = "bevao-ecdck";
           label = "Desktop";
           path = "/home/cig0/Desktop";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         "Documents" = {
           id = "4plzj-q9hjx";
           label = "Documents";
           path = "/home/cig0/Documents";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         "Downloads" = {
           id = "v72dy-fzjsf";
           label = "Downloads";
           path = "/home/cig0/Downloads";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         "KeePassXC" = {
           id = "nsqaf-gequ7";
           label = "KeePassXC";
           path = "/home/cig0/KeePassXC";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         "Pictures" = {
           id = "zhepz-tkl9u";
           label = "Pictures";
           path = "/home/cig0/Pictures";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         "stash" = {
           id = "inznp-cjdxe";
           label = "stash";
           path = "/home/cig0/stash";
-          devices = [ "vittusaatana" ];
+          devices = [ "perrrkele" "vittusaatana" ];
         };
         "Videos" = {
           id = "g7amc-cstmt";
           label = "Videos";
           path = "/home/cig0/Videos";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         "bin" = {
           id = "mtzdy-xgvcf";
           label = "bin";
           path = "/home/cig0/bin";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
         };
         "w" = {
           id = "rn6um-4btcp";
           label = "w";
           path = "/home/cig0/w";
-          devices = [ "satama" "vittusaatana" ];
+          devices = [ "perrrkele" "satama" "vittusaatana" ];
           versioning.type = "simple";
         };
       };

@@ -56,6 +56,7 @@
         ./nixos/modules/ollama.nix
         ./nixos/modules/openssh.nix
         ./nixos/modules/powerManagement.nix
+        ./nixos/modules/sops.nix
         ./nixos/modules/starship.nix
         ./nixos/modules/stevenblack.nix
         ./nixos/modules/stevenblack-unblacklist.nix
@@ -100,7 +101,7 @@
         nixosConfigurations = {
           satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
             inherit system;
-            specialArgs = { inherit inputs; };
+            specialArgs = { inherit inputs unstablePkgs; };
             modules = commonModules ++ [
               # Main configuration file
               ./nixos/hosts/satama/configuration.nix
@@ -138,7 +139,7 @@
 
           vittusaatana = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
             inherit system;
-            specialArgs = { inherit inputs; };
+            specialArgs = { inherit inputs unstablePkgs; };
             modules = commonModules ++ endUserModules ++ [
               # Home Manager
               # home-manager.nixosModules.vittusaatana
