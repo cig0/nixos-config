@@ -1,9 +1,9 @@
-{ ... }:
+{ inputs, ... }:
 
 {
   system.autoUpgrade = {
     enable = true;
-    flake = "/home/cig0/.nixos-config/";
+    flake = inputs.self.outPath;
     flags = [
       "--update-input"
       "nixpkgs"
