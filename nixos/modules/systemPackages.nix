@@ -215,7 +215,7 @@ let
     unstablePkgs.aha # Required by KDE's About this System
     # amarok
     unstablePkgs.kdePackages.alpaka
-    pkgs.kdePackages.kdeconnect-kde
+    unstablePkgs.kdePackages.discover
     unstablePkgs.kdePackages.kio-zeroconf
     unstablePkgs.kdePackages.kjournald
     unstablePkgs.qtcreator
