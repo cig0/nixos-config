@@ -22,13 +22,12 @@
     };
       tmp.cleanOnBoot = true;
   };
-  # Fstab mount options
-  fileSystems = {
+
+  fileSystems = { # /etc/fstab mount options
     "/" = {
       options = [ "data=journal" "discard" "relatime" ];
     };
   };
-
 
   # Enable periodic SSD TRIM of mounted partitions in background.
   services.fstrim.enable = true;
