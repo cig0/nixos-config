@@ -45,6 +45,7 @@
         ./nixos/modules/current-system-packages.nix
         ./nixos/modules/dns.nix
         ./nixos/modules/firewall.nix
+        ./nixos/modules/fwupd.nix
         ./nixos/modules/gnupg.nix
         ./nixos/modules/import-overlays.nix
         ./nixos/modules/intel-updateMicrocode.nix
