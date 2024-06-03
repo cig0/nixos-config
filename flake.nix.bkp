@@ -4,63 +4,42 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    
-      #####  THIRD-PARTY MODULES  #####
-      auto-cpufreq = { # Energy efficiency
-        inputs.nixpkgs.follows = "nixpkgs";
-        url = "github:AdnanHodzic/auto-cpufreq?rev=3f6d7a3e77732c1dbe4873b69404fefd899ad35e";
-      };
 
-      # home-manager = { # Maybe in the future
-      #   url = "github:nix-community/home-manager";
-      #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-      # };
+    auto-cpufreq = { # Energy efficiency
+      url = "github:AdnanHodzic/auto-cpufreq";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-      nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
+    # home-manager = { # Maybe in the future
+    #   url = "github:nix-community/home-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
 
-      # nixos-cosmic = { # Shaping nicely!
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
-      #  url = "github:lilyinstarlight/nixos-cosmic";
-      #};
+    nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
-      nixos-hardware.url = "https://flakehub.com/f/NixOS/nixos-hardware/0.1.1656.tar.gz"; # Hardware-specific optimizations
+    nixos-cosmic = { # Shaping nicely!
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
-      nixvim = { # The intended way to configure Neovim?
-        inputs.nixpkgs.follows = "nixpkgs";
-        url = "github:nix-community/nixvim";
-      };
+    nixos-hardware.url = "https://flakehub.com/f/NixOS/nixos-hardware/0.1.1656.tar.gz"; # Hardware-specific optimizations
 
-      rust-overlay.url = "github:oxalica/rust-overlay"; # Crabby dancing sideways
+    nixvim = { # The intended way to configure Neovim?
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-      sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
+    rust-overlay.url = "github:oxalica/rust-overlay"; # Crabby dancing sideways
+
+    sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable,
-        #####  THIRD-PARTY MODULES  #####
-    auto-cpufreq,         # Energy efficiency
-    nix-flatpak,          # Enhanced Flatpak support
-    # nixos-cosmic,         # COSMIC Desktop Environment
-    nixos-hardware,       # Hardware configuration
-    nixvim,               # Neovim configuration
-    rust-overlay,         # Rust overlay
-    sops-nix,             # SOPS for managing secrets
-  ... }@inputs:
+  outputs = { self, auto-cpufreq, nix-flatpak, nixos-cosmic, nixos-hardware, nixpkgs, nixpkgs-unstable, nixvim, rust-overlay, sops-nix, ... }@inputs:
     let
       commonModules = [
-          #####  THIRD-PARTY MODULES  #####
-          auto-cpufreq.nixosModules.default
-          ./nixos/modules/auto-cpufreq.nix
-
-          nixvim.nixosModules.nixvim
-          ./nixos/modules/nixvim.nix
-          
-          sops-nix.nixosModules.sops
-          ./nixos/modules/sops.nix
-
-          ({ pkgs, ... }: { # Rust
-            nixpkgs.overlays = [ rust-overlay.overlays.default ];
-            environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
-          })
+        auto-cpufreq.nixosModules.default
+        nixvim.nixosModules.nixvim
+        sops-nix.nixosModules.sops
 
         ./nixos/modules/cups.nix
         ./nixos/modules/current-system-packages.nix
@@ -73,16 +52,22 @@
         ./nixos/modules/kernel.nix
         ./nixos/modules/keyd.nix
         ./nixos/modules/mtr.nix
+        ./nixos/modules/nixvim.nix
         ./nixos/modules/ntp.nix
         ./nixos/modules/ollama.nix
         ./nixos/modules/openssh.nix
         ./nixos/modules/powerManagement.nix
+        ./nixos/modules/sops.nix
         ./nixos/modules/starship.nix
         ./nixos/modules/stevenblack.nix
         ./nixos/modules/stevenblack-unblacklist.nix
         ./nixos/modules/syncthing.nix
         ./nixos/modules/systemAutoUpgrade.nix
         ./nixos/modules/systemPackages.nix
+          ({ pkgs, ... }: { # Rust
+            nixpkgs.overlays = [ rust-overlay.overlays.default ];
+            environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
+           })
         ./nixos/modules/users.nix
         ./nixos/modules/virtualization.nix
         ./nixos/modules/zsh.nix
@@ -90,14 +75,12 @@
       ];
 
       endUserModules = [
-          #####  THIRD-PARTY MODULES  #####
-          # nixos-cosmic.nixosModules.default
-          # ./nixos/modules/cosmic.nix
-          
-          nix-flatpak.nixosModules.nix-flatpak
-          ./nixos/modules/nix-flatpak.nix
+        nixos-cosmic.nixosModules.default
+        nix-flatpak.nixosModules.nix-flatpak
 
+        ./nixos/modules/cosmic.nix
         ./nixos/modules/firefox.nix
+        ./nixos/modules/flatpak.nix
         ./nixos/modules/fonts.nix
         ./nixos/modules/kdeconnect.nix
         ./nixos/modules/sddm.nix
@@ -133,22 +116,22 @@
             inherit system;
             specialArgs = { inherit inputs unstablePkgs; };
             modules = commonModules ++ endUserModules ++ [
-                #####  THIRD-PARTY MODULES  #####
-                nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
+              nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
 
-                # home-manager.nixosModules.perrrkele
+              # Home Manager
+              # home-manager.nixosModules.perrrkele
 
               # Main configuration file
               ./nixos/hosts/perrrkele/configuration.nix
 
               {
+                # ===== DESKTOP ENVIRONMENTS =====
                 services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
                 programs.dconf.enable = true; # https://nixos.wiki/wiki/KDE#Installation
 
                 # ===== DISPLAY MANAGERS =====
                 # Only one at a time can be active
-                  #####  THIRD-PARTY MODULES  ##### 
-                  # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
+                services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
                 services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
               }
 
@@ -159,20 +142,20 @@
             inherit system;
             specialArgs = { inherit inputs unstablePkgs; };
             modules = commonModules ++ endUserModules ++ [
-                #####  THIRD-PARTY MODULES  #####
-                # home-manager.nixosModules.vittusaatana
+              # Home Manager
+              # home-manager.nixosModules.vittusaatana
 
               # Main configuration file
               ./nixos/hosts/vittusaatana/configuration.nix
 
               {
+                # ===== DESKTOP ENVIRONMENTS =====
                 services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
                 programs.dconf.enable = true; # https://nixos.wiki/wiki/KDE#Installation
 
                 # ===== DISPLAY MANAGERS =====
                 # Only one at a time can be active
-                  #####  THIRD-PARTY MODULES  #####    
-                  # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
+                services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
                 services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
               }
 
