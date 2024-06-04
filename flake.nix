@@ -8,7 +8,7 @@
       #####  THIRD-PARTY MODULES  #####
       auto-cpufreq = { # Energy efficiency
         inputs.nixpkgs.follows = "nixpkgs";
-        url = "github:AdnanHodzic/auto-cpufreq?rev=3f6d7a3e77732c1dbe4873b69404fefd899ad35e";
+        url = "github:AdnanHodzic/auto-cpufreq";
       };
 
       # home-manager = { # Maybe in the future
