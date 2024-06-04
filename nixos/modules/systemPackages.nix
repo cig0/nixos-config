@@ -189,8 +189,7 @@ let
   endUserPackages = [ # meant to run by a human user
     # AI
     unstablePkgs.aichat
-    #unstablePkgs.lmstudio
-    unstablePkgs.ollama
+    unstablePkgs.lmstudio
     unstablePkgs.oterm
 
     # Comms
