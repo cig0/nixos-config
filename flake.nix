@@ -24,8 +24,8 @@
       #};
 
       nix-index.url = "github:nix-community/nix-index";
-      nix-index-database.url = "github:nix-community/nix-index-database";
-      nix-index-database.inputs.nixpkgs.follows = "nixpkgs"; 
+      # nix-index-database.url = "github:nix-community/nix-index-database";
+      # nix-index-database.inputs.nixpkgs.follows = "nixpkgs"; 
 
       nixos-hardware.url = "https://flakehub.com/f/NixOS/nixos-hardware/0.1.1656.tar.gz"; # Hardware-specific optimizations
 
@@ -36,7 +36,7 @@
 
       rust-overlay.url = "github:oxalica/rust-overlay"; # Crabby dancing sideways
 
-      sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
+      # sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable,
@@ -44,12 +44,12 @@
     auto-cpufreq,         # Energy efficiency
     nix-flatpak,          # Enhanced Flatpak support
     nix-index,            # A files database for nixpkgs
-    nix-index-database,   # A files database for nixpkgs
+    # nix-index-database,   # A files database for nixpkgs
     # nixos-cosmic,         # COSMIC Desktop Environment
     nixos-hardware,       # Hardware configuration
     nixvim,               # Neovim configuration
     rust-overlay,         # Rust overlay
-    sops-nix,             # SOPS for managing secrets
+    # sops-nix,             # SOPS for managing secrets
   ... }@inputs:
     let
       commonModules = [
@@ -57,14 +57,14 @@
           auto-cpufreq.nixosModules.default
           ./nixos/modules/auto-cpufreq.nix
           
-          nix-index-database.nixosModules.nix-index
-          { programs.nix-index-database.comma.enable = true; }
+          # nix-index-database.nixosModules.nix-index
+          # { programs.nix-index-database.comma.enable = true; }
 
           nixvim.nixosModules.nixvim
           ./nixos/modules/nixvim.nix
           
-          sops-nix.nixosModules.sops
-          ./nixos/modules/sops.nix
+          # sops-nix.nixosModules.sops
+          # ./nixos/modules/sops.nix
 
           ({ pkgs, ... }: { # Rust
             nixpkgs.overlays = [ rust-overlay.overlays.default ];
