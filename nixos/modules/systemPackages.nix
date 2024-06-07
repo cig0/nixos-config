@@ -145,6 +145,7 @@ let
     unstablePkgs.chezmoi
     unstablePkgs.clinfo
     unstablePkgs.cmatrix
+    unstablePkgs.comma
     unstablePkgs.difftastic
     unstablePkgs.delta
     unstablePkgs.dmidecode
