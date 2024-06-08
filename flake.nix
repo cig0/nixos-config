@@ -16,6 +16,12 @@
       #   inputs.nixpkgs.follows = "nixpkgs-unstable";
       # };
 
+      lanzaboote = {
+        url = "github:nix-community/lanzaboote/v0.3.0"; 
+        # Optional but recommended to limit the size of your system closure.
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
       nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
       # nixos-cosmic = { # Shaping nicely!
@@ -42,6 +48,7 @@
   outputs = { self, nixpkgs, nixpkgs-unstable,
         #####  THIRD-PARTY MODULES  #####
     auto-cpufreq,         # Energy efficiency
+    lanzaboote,           # Secure Boot for NixOS
     nix-flatpak,          # Enhanced Flatpak support
     nix-index,            # A files database for nixpkgs
     # nix-index-database,   # A files database for nixpkgs
@@ -59,6 +66,23 @@
           
           # nix-index-database.nixosModules.nix-index
           # { programs.nix-index-database.comma.enable = true; }
+
+          lanzaboote.nixosModules.lanzaboote
+          ({ lib, ... }: {
+            # Refs:
+              # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
+              # https://wiki.nixos.org/wiki/Secure_Boot
+            
+            # Lanzaboote currently replaces the systemd-boot module.
+            # This setting is usually set to true in configuration.nix
+            # generated at installation time. So we force it to false
+            # for now.
+            boot.loader.systemd-boot.enable = lib.mkForce false;
+            boot.lanzaboote = {
+              enable = true;
+              pkiBundle = "/etc/secureboot";
+            };
+          })
 
           nixvim.nixosModules.nixvim
           ./nixos/modules/nixvim.nix
