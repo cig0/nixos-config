@@ -192,7 +192,6 @@ let
 
   endUserPackages = [ # meant to run by a human user
     # AI
-    # Notes: LM Studio ships Ollama version 1.38, which lags behind the latest version 
     unstablePkgs.aichat
     unstablePkgs.lmstudio
     unstablePkgs.oterm
