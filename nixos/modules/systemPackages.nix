@@ -108,6 +108,9 @@ let
       # JS
       # nodejs_latest
 
+      # Nickel
+      unstablePkgs.nickel
+
       # Python
       unstablePkgs.python312Full
       unstablePkgs.python312Packages.ipython
