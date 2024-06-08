@@ -9,13 +9,15 @@
   hardware.tuxedo-keyboard.enable = false; # Tuxedo
 
   boot.kernel.sysctl = {
-    # https://wiki.archlinux.org/title/Gaming
+    # ref: https://wiki.archlinux.org/title/Gaming
+    # ref: https://wiki.nixos.org/wiki/Linux_kernel
     "compaction_proactiveness" = false;
+    "kernel.sysrq" = "1";
+    "min_free_kbytes" = "1048576";
+    "page_lock_unfairness" = true;
+    "swappiness" = "10";
     "watermark_boost_factor" = true;
     "watermark_scale_factor" = "500";
-    "min_free_kbytes" = "1048576";
-    "swappiness" = "10";
-    "page_lock_unfairness" = true;
   };
   boot.kernelParams = [
     # Keyboard and Lighting:
