@@ -50,6 +50,7 @@
     # Memory Management:
     #    page_alloc.shuffle=1: Randomizes physical memory page allocation, potentially improving security.
     #    iommu=pt (with caution): Enables IOMMU pass-through for devices assigned to VMs. This can improve performance for VMs using these devices, but verify compatibility and consider using intel_iommu=sm_on instead (see below).
+    
     # "tuxedo_keyboard.mode=0"
     # "tuxedo_keyboard.brightness=127"
     # "tuxedo_keyboard.color_left=0xff0a0a"
@@ -70,9 +71,21 @@
     "kvm.ignore_msrs=1"
     "kvm.report_ignored_msrs=0"
     "rd.driver.pre=vfio_pci"
-    "video=2880x1800"
     "zram"
+    "logo.nologo=0"
+    # "video=uvesafb:1024x768-16@60"
     # "splash"
     # "quiet"
   ];
+  boot.kernelPatches = [{
+    name = "tux-logo";
+    patch = null;
+    extraConfig = ''
+      FRAMEBUFFER_CONSOLE y
+      LOGO y
+      LOGO_LINUX_MONO y
+      LOGO_LINUX_VGA16 y
+      LOGO_LINUX_CLUT224 y
+    '';
+  }];
 }
