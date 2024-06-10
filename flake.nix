@@ -59,156 +59,157 @@
     rust-overlay,             # Rust overlay
     sops-nix,                 # SOPS for managing secrets
   ... }:
-    let
-      commonModules = [
-          auto-cpufreq.nixosModules.default
-          ./nixos/modules/auto-cpufreq.nix
 
-          # home-manager.nixosModules.home-manager
+  let
+    commonModules = [
+        auto-cpufreq.nixosModules.default
+        ./nixos/modules/auto-cpufreq.nix
 
-          lanzaboote.nixosModules.lanzaboote
-          ({ lib, ... }: {
-            # Refs:
-              # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
-              # https://wiki.nixos.org/wiki/Secure_Boot
+        # home-manager.nixosModules.home-manager
 
-            # Lanzaboote currently replaces the systemd-boot module.
-            # This setting is usually set to true in configuration.nix
-            # generated at installation time. So we force it to false
-            # for now.
-            boot.loader.systemd-boot.enable = lib.mkForce false;
-            boot.lanzaboote = {
-              enable = true;
-              pkiBundle = "/etc/secureboot";
-            };
-          })
+        lanzaboote.nixosModules.lanzaboote
+        ({ lib, ... }: {
+          # Refs:
+            # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
+            # https://wiki.nixos.org/wiki/Secure_Boot
 
-          # nix-index-database.nixosModules.nix-index
-          # { programs.nix-index-database.comma.enable = true; }
+          # Lanzaboote currently replaces the systemd-boot module.
+          # This setting is usually set to true in configuration.nix
+          # generated at installation time. So we force it to false
+          # for now.
+          boot.loader.systemd-boot.enable = lib.mkForce false;
+          boot.lanzaboote = {
+            enable = true;
+            pkiBundle = "/etc/secureboot";
+          };
+        })
 
-          nixvim.nixosModules.nixvim
-          ./nixos/modules/nixvim.nix
+        # nix-index-database.nixosModules.nix-index
+        # { programs.nix-index-database.comma.enable = true; }
 
-          ({ pkgs, ... }: { # Rust
-            nixpkgs.overlays = [ rust-overlay.overlays.default ];
-            environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
-          })
+        nixvim.nixosModules.nixvim
+        ./nixos/modules/nixvim.nix
 
-          # sops-nix.nixosModules.sops
-          # ./nixos/modules/sops.nix
+        ({ pkgs, ... }: { # Rust
+          nixpkgs.overlays = [ rust-overlay.overlays.default ];
+          environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
+        })
 
-        ./nixos/modules/cups.nix
-        ./nixos/modules/current-system-packages.nix
-        ./nixos/modules/dns.nix
-        ./nixos/modules/firewall.nix
-        ./nixos/modules/fwupd.nix
-        ./nixos/modules/gnupg.nix
-        ./nixos/modules/hwaccel.nix
-        ./nixos/modules/kernel.nix
-        ./nixos/modules/keyd.nix
-        ./nixos/modules/mtr.nix
-        ./nixos/modules/ntp.nix
-        ./nixos/modules/ollama.nix
-        ./nixos/modules/openssh.nix
-        ./nixos/modules/powermanagement.nix
-        ./nixos/modules/starship.nix
-        ./nixos/modules/stevenblack.nix
-        ./nixos/modules/stevenblack-unblacklist.nix
-        ./nixos/modules/syncthing.nix
-        ./nixos/modules/systemmaintenance.nix
-        ./nixos/modules/systempackages.nix
-        ./nixos/modules/timezone.nix
-        ./nixos/modules/ucode.nix
-        ./nixos/modules/users.nix
-        ./nixos/modules/virtualization.nix
-        ./nixos/modules/zsh.nix
-        ./nixos/modules/zram.nix
-        ./nixos/overlays/overlays.nix
-      ];
+        # sops-nix.nixosModules.sops
+        # ./nixos/modules/sops.nix
 
-      userSideModules = [
-          # nixos-cosmic.nixosModules.default
-          # ./nixos/modules/cosmic.nix
+      ./nixos/modules/cups.nix
+      ./nixos/modules/current-system-packages.nix
+      ./nixos/modules/dns.nix
+      ./nixos/modules/firewall.nix
+      ./nixos/modules/fwupd.nix
+      ./nixos/modules/gnupg.nix
+      ./nixos/modules/hwaccel.nix
+      ./nixos/modules/kernel.nix
+      ./nixos/modules/keyd.nix
+      ./nixos/modules/mtr.nix
+      ./nixos/modules/ntp.nix
+      ./nixos/modules/ollama.nix
+      ./nixos/modules/openssh.nix
+      ./nixos/modules/powermanagement.nix
+      ./nixos/modules/starship.nix
+      ./nixos/modules/stevenblack.nix
+      ./nixos/modules/stevenblack-unblacklist.nix
+      ./nixos/modules/syncthing.nix
+      ./nixos/modules/systemmaintenance.nix
+      ./nixos/modules/systempackages.nix
+      ./nixos/modules/timezone.nix
+      ./nixos/modules/ucode.nix
+      ./nixos/modules/users.nix
+      ./nixos/modules/virtualization.nix
+      ./nixos/modules/zsh.nix
+      ./nixos/modules/zram.nix
+      ./nixos/overlays/overlays.nix
+    ];
 
-          nix-flatpak.nixosModules.nix-flatpak
-          ./nixos/modules/nix-flatpak.nix
+    userSideModules = [
+        # nixos-cosmic.nixosModules.default
+        # ./nixos/modules/cosmic.nix
 
-        ./nixos/modules/firefox.nix
-        ./nixos/modules/fonts.nix
-        ./nixos/modules/kdeconnect.nix
-        ./nixos/modules/sddm.nix
-        ./nixos/modules/ungoogled-chromium.nix
-        ./nixos/modules/xdg-desktop-portal.nix
-      ];
+        nix-flatpak.nixosModules.nix-flatpak
+        ./nixos/modules/nix-flatpak.nix
 
-      system = "x86_64-linux";
+      ./nixos/modules/firefox.nix
+      ./nixos/modules/fonts.nix
+      ./nixos/modules/kdeconnect.nix
+      ./nixos/modules/sddm.nix
+      ./nixos/modules/ungoogled-chromium.nix
+      ./nixos/modules/xdg-desktop-portal.nix
+    ];
 
-      unstablePkgs = import "${nixpkgs-unstable}" {
-        inherit system;
-        config = {
-          allowUnfree = true;
-          permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
-        };
-      };
-    in
-    {
-      nixosConfigurations = {
-        satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
-          inherit system;
-          specialArgs = { inherit inputs system unstablePkgs; };
-          modules = commonModules ++ [
-            # Main configuration file
-            ./nixos/hosts/satama/configuration.nix
+    system = "x86_64-linux";
 
-            {
-            }
-          ];
-        };
-
-        perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
-          inherit system;
-          specialArgs = { inherit inputs system unstablePkgs; };
-          modules = commonModules ++ userSideModules ++ [
-            nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
-
-            # Main configuration file
-            ./nixos/hosts/perrrkele/configuration.nix
-
-            {
-              services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
-              programs.dconf.enable = true; # https://nixos.wiki/wiki/KDE#Installation
-
-              # ===== DISPLAY MANAGERS =====
-              # Only one at a time can be active
-                #####  THIRD-PARTY MODULES  #####
-                # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
-              services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
-            }
-
-          ];
-        };
-
-        vittusaatana = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
-          inherit system;
-          specialArgs = { inherit inputs system unstablePkgs; };
-          modules = commonModules ++ userSideModules ++ [
-            # Main configuration file
-            ./nixos/hosts/vittusaatana/configuration.nix
-
-            {
-              services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
-              programs.dconf.enable = true; # https://nixos.wiki/wiki/KDE#Installation
-
-              # ===== DISPLAY MANAGERS =====
-              # Only one at a time can be active
-                #####  THIRD-PARTY MODULES  #####
-                # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
-              services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
-            }
-
-            # TODO: Nvidia drivers
-          ];
-        };
+    unstablePkgs = import "${nixpkgs-unstable}" {
+      inherit system;
+      config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
       };
     };
+  in
+  {
+    nixosConfigurations = {
+      satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
+        inherit system;
+        specialArgs = { inherit inputs system unstablePkgs; };
+        modules = commonModules ++ [
+          # Main configuration file
+          ./nixos/hosts/satama/configuration.nix
+
+          {
+          }
+        ];
+      };
+
+      perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
+        inherit system;
+        specialArgs = { inherit inputs system unstablePkgs; };
+        modules = commonModules ++ userSideModules ++ [
+          nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
+
+          # Main configuration file
+          ./nixos/hosts/perrrkele/configuration.nix
+
+          {
+            services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
+            programs.dconf.enable = true; # https://nixos.wiki/wiki/KDE#Installation
+
+            # ===== DISPLAY MANAGERS =====
+            # Only one at a time can be active
+              #####  THIRD-PARTY MODULES  #####
+              # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
+            services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
+          }
+
+        ];
+      };
+
+      vittusaatana = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
+        inherit system;
+        specialArgs = { inherit inputs system unstablePkgs; };
+        modules = commonModules ++ userSideModules ++ [
+          # Main configuration file
+          ./nixos/hosts/vittusaatana/configuration.nix
+
+          {
+            services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
+            programs.dconf.enable = true; # https://nixos.wiki/wiki/KDE#Installation
+
+            # ===== DISPLAY MANAGERS =====
+            # Only one at a time can be active
+              #####  THIRD-PARTY MODULES  #####
+              # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
+            services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
+          }
+
+          # TODO: Nvidia drivers
+        ];
+      };
+    };
+  };
 }
