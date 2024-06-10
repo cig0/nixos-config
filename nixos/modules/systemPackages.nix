@@ -194,7 +194,7 @@ let
                         # https://gitlab.com
       unstablePkgs.jujutsu
       unstablePkgs.tig
-      
+
       # Radicle
       unstablePkgs.radicle-node
   ];
