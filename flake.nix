@@ -139,20 +139,12 @@
       ];
 
       system = "x86_64-linux";
-
-      unstablePkgs = import "${nixpkgs-unstable}" {
-        inherit system;
-        config = {
-          allowUnfree = true;
-          permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
-        };
-      };
     in
       {
         nixosConfigurations = {
           satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
             inherit system;
-            specialArgs = { inherit inputs unstablePkgs; };
+            specialArgs = { inherit inputs nixpkgs-unstable system; };
             modules = commonModules ++ [
               # Main configuration file
               ./nixos/hosts/satama/configuration.nix
@@ -164,7 +156,7 @@
 
           perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
             inherit system;
-            specialArgs = { inherit inputs unstablePkgs; };
+            specialArgs = { inherit inputs nixpkgs-unstable system; };
             modules = commonModules ++ userSideModules ++ [
                 #####  THIRD-PARTY MODULES  #####
                 nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
@@ -190,7 +182,7 @@
 
           vittusaatana = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
             inherit system;
-            specialArgs = { inherit inputs unstablePkgs; };
+            specialArgs = { inherit inputs nixpkgs-unstable system; };
             modules = commonModules ++ userSideModules ++ [
                 #####  THIRD-PARTY MODULES  #####
                 # home-manager.nixosModules.vittusaatana
