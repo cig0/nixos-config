@@ -3,6 +3,6 @@
 
 {
   nixpkgs.overlays = [
-    (import ../overlays/nixos-option.nix)
+    (import ./nixos-option.nix)
   ];
 }

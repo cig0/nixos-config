@@ -1,10 +1,13 @@
+# https://github.com/StevenBlack/hosts
 { ... }:
 
 {
-  networking.stevenblack.enable = true;
-  networking.stevenblack.block = [
-    "gambling"
-    "porn"
-    "social"
-  ];
+  networking.stevenblack = {
+    enable = true;
+    block = [
+      "gambling"
+      "porn"
+      "social"
+    ];
+  };
 }

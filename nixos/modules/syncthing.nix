@@ -1,5 +1,5 @@
 # Syncthing shares
-{ config, pkgs, inputs, ... }:
+{ ... }:
 
 {
   services.syncthing = {

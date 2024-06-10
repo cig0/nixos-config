@@ -3,6 +3,11 @@
 {
   ## SDDM Display Manager
   services.displayManager = {
+    autoLogin = {
+      enable = false;
+      user = "cig0";
+    };
+    defaultSession = "plasma";
     sddm = {
       # enable = true;
       enableHidpi = true;
@@ -11,8 +16,5 @@
         compositor = "kwin";
       };
     };
-    autoLogin.enable = false;
-    autoLogin.user = "cig0";
-    defaultSession = "plasma";
   };
 }
