@@ -1,4 +1,4 @@
-# Ollama
+# Ollama server
 { config, ... }:
 
 {

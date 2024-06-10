@@ -1,7 +1,6 @@
-# OpenSSH service
+# OpenSSH server
 { ... }:
 
 {
-  # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 }
