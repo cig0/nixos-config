@@ -14,3 +14,9 @@ in
   isVittusaatana = isVittusaatana;
   isIntelHost = isIntelHost;
 }
+
+
+# Copy & paste ready!
+# let
+#   hostnameLogic = import ../helpers/hostnames.nix { inherit config lib; };
+# in
