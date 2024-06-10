@@ -2,17 +2,9 @@
 
 let
   commonPackages = [ # packages common to all hosts
-    # Git
-    unstablePkgs.ggshield
-    unstablePkgs.gh # GitHub CLI client.
-                    # https://github.com
-    unstablePkgs.git
-    unstablePkgs.git-lfs
-    unstablePkgs.gitui
-    unstablePkgs.glab # GitLab CLI client.
-                      # https://gitlab.com
-    unstablePkgs.jujutsu
-    unstablePkgs.tig
+    # Comms
+    unstablePkgs.discordo
+    unstablePkgs.weechat
 
     # IaaS / PaaS / SaaS
     unstablePkgs.awscli2
@@ -135,6 +127,7 @@ let
     unstablePkgs.vt-cli
 
     # Storage - CLI
+    unstablePkgs.borgbackup
     unstablePkgs.du-dust
     unstablePkgs.duf
     unstablePkgs.dysk
@@ -188,20 +181,34 @@ let
     unstablePkgs.wayland-utils
     unstablePkgs.wl-clipboard
     unstablePkgs.zola
+
+    # VCS
+      # Git
+      unstablePkgs.ggshield
+      unstablePkgs.gh # GitHub CLI client.
+                      # https://github.com
+      unstablePkgs.git
+      unstablePkgs.git-lfs
+      unstablePkgs.gitui
+      unstablePkgs.glab # GitLab CLI client.
+                        # https://gitlab.com
+      unstablePkgs.jujutsu
+      unstablePkgs.tig
+      
+      # Radicle
+      unstablePkgs.radicle-node
   ];
 
-  endUserPackages = [ # meant to run by a human user
+  userSidePackages = [ # meant to run by a human user
     # AI
     unstablePkgs.aichat
     unstablePkgs.lmstudio
     unstablePkgs.oterm
 
     # Comms
-    unstablePkgs.discordo
     unstablePkgs.element-desktop-wayland
     unstablePkgs.shortwave
     unstablePkgs.telegram-desktop
-    unstablePkgs.weechat
     unstablePkgs.zoom-us
 
     # Infrastructure: CNCF / K8s / OCI / virtualization
@@ -259,11 +266,10 @@ let
     unstablePkgs.keepassxc
 
     # Storage - GUI
-    unstablePkgs.borgbackup
     unstablePkgs.vorta
 
     # Terminal utilities - GUI
-    unstablePkgs.warp-terminal
+    # unstablePkgs.warp-terminal
 
     # Virtualization - GUI
     unstablePkgs.virt-viewer
@@ -279,7 +285,7 @@ let
 
   systemPackages =
     if config.networking.hostName == "perrrkele" then
-      let perrrkelePackages = commonPackages ++ endUserPackages;
+      let perrrkelePackages = commonPackages ++ userSidePackages;
       in perrrkelePackages
 
     else if config.networking.hostName == "satama" then
@@ -287,7 +293,9 @@ let
       in satamaPackages
 
     else if config.networking.hostName == "vittusaatana" then
-      let vittusaatanaPackages = commonPackages ++ endUserPackages ++ [ pkgs.nvtop ];
+      let vittusaatanaPackages = commonPackages ++ userSidePackages ++ [
+        pkgs.nvtop # Nvidia top-like utility
+      ];
       in vittusaatanaPackages
 
     else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
