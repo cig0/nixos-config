@@ -1,9 +1,8 @@
 # https://wiki.nixos.org/wiki/NTP
-
-{ options, ... }:
+{ ... }:
 
 {
-  networking.timeServers = options.networking.timeServers.default ++ [
+  networking.timeServers = [
     "1.ar.pool.ntp.org"
     "1.south-america.pool.ntp.org"
     "0.nixos.pool.ntp.org"
