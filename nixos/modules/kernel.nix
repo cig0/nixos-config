@@ -50,7 +50,7 @@
     # Memory Management:
     #    page_alloc.shuffle=1: Randomizes physical memory page allocation, potentially improving security.
     #    iommu=pt (with caution): Enables IOMMU pass-through for devices assigned to VMs. This can improve performance for VMs using these devices, but verify compatibility and consider using intel_iommu=sm_on instead (see below).
-    
+
     # "tuxedo_keyboard.mode=0"
     # "tuxedo_keyboard.brightness=127"
     # "tuxedo_keyboard.color_left=0xff0a0a"

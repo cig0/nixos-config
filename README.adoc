@@ -3,7 +3,7 @@
 λ nh os switch --update ~/.nixos-config
 
 ```
-.nixos-config on  main λ tree --dirsfirst -av --matchdirs -I '.git|.vscode'  
+.nixos-config on  main λ tree --dirsfirst -av --matchdirs -I '.git|.vscode'
 .
 ├── .etc
 │   └── nixos
