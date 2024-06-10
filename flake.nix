@@ -101,21 +101,22 @@
         ./nixos/modules/firewall.nix
         ./nixos/modules/fwupd.nix
         ./nixos/modules/gnupg.nix
-        ./nixos/modules/hwAccel.nix
+        ./nixos/modules/hwaccel.nix
         ./nixos/modules/kernel.nix
         ./nixos/modules/keyd.nix
         ./nixos/modules/mtr.nix
         ./nixos/modules/ntp.nix
         ./nixos/modules/ollama.nix
         ./nixos/modules/openssh.nix
-        ./nixos/modules/powerManagement.nix
+        ./nixos/modules/powermanagement.nix
         ./nixos/modules/starship.nix
         ./nixos/modules/stevenblack.nix
         ./nixos/modules/stevenblack-unblacklist.nix
         ./nixos/modules/syncthing.nix
-        ./nixos/modules/systemMaintenance.nix
-        ./nixos/modules/systemPackages.nix
-        ./nixos/modules/uCodeIntel.nix
+        ./nixos/modules/systemmaintenance.nix
+        ./nixos/modules/systempackages.nix
+        ./nixos/modules/timezone.nix
+        ./nixos/modules/ucodeIntel.nix
         ./nixos/modules/users.nix
         ./nixos/modules/virtualization.nix
         ./nixos/modules/zsh.nix

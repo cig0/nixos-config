@@ -1,6 +1,8 @@
-{ config, pkgs, unstablePkgs, ... }:
+{ config, lib, pkgs, unstablePkgs, ... }:
 
 let
+  hostnameLogic = import ../helpers/hostnames.nix { inherit config lib; };
+
   commonPackages = [ # packages common to all hosts
     # Comms
     unstablePkgs.discordo
@@ -284,15 +286,15 @@ let
   ];
 
   systemPackages =
-    if config.networking.hostName == "perrrkele" then
+    if hostnameLogic.isPerrrkele then
       let perrrkelePackages = commonPackages ++ userSidePackages;
       in perrrkelePackages
 
-    else if config.networking.hostName == "satama" then
+    else if hostnameLogic.isSatama then
       let satamaPackages = commonPackages ++ [ unstablePkgs.cockpit ];
       in satamaPackages
 
-    else if config.networking.hostName == "vittusaatana" then
+    else if hostnameLogic.isVittusaatana then
       let vittusaatanaPackages = commonPackages ++ userSidePackages ++ [ unstablePkgs.nvtop ];
       in vittusaatanaPackages
 

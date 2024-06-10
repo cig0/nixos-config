@@ -20,3 +20,16 @@ in
 # let
 #   hostnameLogic = import ../helpers/hostnames.nix { inherit config lib; };
 # in
+# {
+    # myFunction =
+    #   if hostnameLogic.isPerrrkele then
+    #     something
+
+    #   else if hostnameLogic.isSatama then
+    #     "something else"
+
+    #   else if hostnameLogic.isVittusaatana then
+    #     NiceGuysFinishLast
+
+    #   else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
+# }
