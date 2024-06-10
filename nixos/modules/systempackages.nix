@@ -3,7 +3,7 @@
 let
   hostnameLogic = import ../helpers/hostnames.nix { inherit config lib; };
 
-  commonPackages = [ # packages common to all hosts
+  commonPackages = [ # Packages common to all hosts
     # Comms
     unstablePkgs.discordo
     unstablePkgs.weechat
@@ -201,7 +201,7 @@ let
       unstablePkgs.radicle-node
   ];
 
-  userSidePackages = [ # meant to run by a human user
+  userSidePackages = [ # Meant to run in a [role]client device (as opposite on a [role]server device)
     # AI
     unstablePkgs.aichat
     unstablePkgs.lmstudio
@@ -284,21 +284,6 @@ let
     # Everything else
     unstablePkgs.wiki-tui
   ];
-
-  systemPackages =
-    if hostnameLogic.isPerrrkele then
-      let perrrkelePackages = commonPackages ++ userSidePackages;
-      in perrrkelePackages
-
-    else if hostnameLogic.isSatama then
-      let satamaPackages = commonPackages ++ [ unstablePkgs.cockpit ];
-      in satamaPackages
-
-    else if hostnameLogic.isVittusaatana then
-      let vittusaatanaPackages = commonPackages ++ userSidePackages ++ [ unstablePkgs.nvtop ];
-      in vittusaatanaPackages
-
-    else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 in
 {
   imports = [
@@ -321,6 +306,16 @@ in
     allowUnfree = true;
   };
 
-  # Install system packages based on the determined host list
-  environment.systemPackages = systemPackages;
+  # Install packages system-wide based on the host
+  environment.systemPackages =
+    if hostnameLogic.isPerrrkele then
+      commonPackages ++ userSidePackages
+
+    else if hostnameLogic.isSatama then
+      commonPackages ++ [ unstablePkgs.cockpit ]
+
+    else if hostnameLogic.isVittusaatana then
+      commonPackages ++ userSidePackages ++ [ unstablePkgs.nvtop ]
+
+    else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 }
