@@ -13,7 +13,7 @@
     '';
     syntaxHighlighting.enable = true;
     shellAliases = {
-      nixup = "sudo nixos-rebuild switch";
+      nixinfo = "nix-info --host-os -m";
     };
     histSize = 10000;
     histFile = "$HOME/.local/share/zsh/zsh_history";
