@@ -3,7 +3,6 @@
 {
   # Open ports in the firewall.
   # Services allowed:
-  #   - OpenSSH: 22
   #   - Syncthing: 21017 22000
 
   networking = {
@@ -12,7 +11,7 @@
     firewall = {
       enable = true;
       allowPing = false;
-      allowedTCPPorts = [ 22 22000 ];
+      allowedTCPPorts = [ 22000 ];
       allowedUDPPorts = [ 21027 22000 ];
       trustedInterfaces = [ "virbr0" ];
       checkReversePath = "loose";
