@@ -64,8 +64,7 @@
           auto-cpufreq.nixosModules.default
           ./nixos/modules/auto-cpufreq.nix
 
-          # nix-index-database.nixosModules.nix-index
-          # { programs.nix-index-database.comma.enable = true; }
+          # home-manager.nixosModules.home-manager
 
           lanzaboote.nixosModules.lanzaboote
           ({ lib, ... }: {
@@ -84,16 +83,19 @@
             };
           })
 
+          # nix-index-database.nixosModules.nix-index
+          # { programs.nix-index-database.comma.enable = true; }
+
           nixvim.nixosModules.nixvim
           ./nixos/modules/nixvim.nix
-
-          # sops-nix.nixosModules.sops
-          # ./nixos/modules/sops.nix
 
           ({ pkgs, ... }: { # Rust
             nixpkgs.overlays = [ rust-overlay.overlays.default ];
             environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
           })
+
+          # sops-nix.nixosModules.sops
+          # ./nixos/modules/sops.nix
 
         ./nixos/modules/cups.nix
         ./nixos/modules/current-system-packages.nix
@@ -167,8 +169,7 @@
           inherit system;
           specialArgs = { inherit inputs system unstablePkgs; };
           modules = commonModules ++ userSideModules ++ [
-              # home-manager.nixosModules.home-manager
-              nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
+            nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
 
             # Main configuration file
             ./nixos/hosts/perrrkele/configuration.nix
@@ -191,8 +192,6 @@
           inherit system;
           specialArgs = { inherit inputs system unstablePkgs; };
           modules = commonModules ++ userSideModules ++ [
-              # home-manager.nixosModules.home-manager
-
             # Main configuration file
             ./nixos/hosts/vittusaatana/configuration.nix
 
