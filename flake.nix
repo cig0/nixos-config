@@ -47,16 +47,16 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable,
         #####  THIRD-PARTY MODULES  #####
-    auto-cpufreq,         # Energy efficiency
-    lanzaboote,           # Secure Boot for NixOS
-    nix-flatpak,          # Enhanced Flatpak support
-    nix-index,            # A files database for nixpkgs
-    # nix-index-database,   # A files database for nixpkgs
-    # nixos-cosmic,         # COSMIC Desktop Environment
-    nixos-hardware,       # Hardware configuration
-    nixvim,               # Neovim configuration
-    rust-overlay,         # Rust overlay
-    # sops-nix,             # SOPS for managing secrets
+    auto-cpufreq,           # Energy efficiency
+    lanzaboote,             # Secure Boot for NixOS
+    nix-flatpak,            # Enhanced Flatpak support
+    nix-index,              # A files database for nixpkgs
+    # nix-index-database,     # A files database for nixpkgs
+    # nixos-cosmic,           # COSMIC Desktop Environment
+    nixos-hardware,         # Hardware configuration
+    nixvim,                 # Neovim configuration
+    rust-overlay,           # Rust overlay
+    # sops-nix,               # SOPS for managing secrets
   ... }@inputs:
     let
       commonModules = [
@@ -122,7 +122,7 @@
         ./nixos/modules/zram.nix
       ];
 
-      endUserModules = [
+      userSideModules = [
           #####  THIRD-PARTY MODULES  #####
           # nixos-cosmic.nixosModules.default
           # ./nixos/modules/cosmic.nix
@@ -165,7 +165,7 @@
           perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
             inherit system;
             specialArgs = { inherit inputs unstablePkgs; };
-            modules = commonModules ++ endUserModules ++ [
+            modules = commonModules ++ userSideModules ++ [
                 #####  THIRD-PARTY MODULES  #####
                 nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
 
@@ -191,7 +191,7 @@
           vittusaatana = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
             inherit system;
             specialArgs = { inherit inputs unstablePkgs; };
-            modules = commonModules ++ endUserModules ++ [
+            modules = commonModules ++ userSideModules ++ [
                 #####  THIRD-PARTY MODULES  #####
                 # home-manager.nixosModules.vittusaatana
 
