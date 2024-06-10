@@ -45,10 +45,10 @@
       sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable,
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable,
         #####  THIRD-PARTY MODULES  #####
     auto-cpufreq,           # Energy efficiency
-    home-manager            # User-specific settings and packages
+    home-manager,           # User-specific settings and packages
     lanzaboote,             # Secure Boot for NixOS
     nix-flatpak,            # Enhanced Flatpak support
     nix-index,              # A files database for nixpkgs
@@ -58,7 +58,7 @@
     nixvim,                 # Neovim configuration
     rust-overlay,           # Rust overlay
     sops-nix,               # SOPS for managing secrets
-  ... }@inputs:
+  ... }:
     let
       commonModules = [
           #####  THIRD-PARTY MODULES  #####
