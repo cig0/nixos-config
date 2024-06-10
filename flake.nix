@@ -11,10 +11,10 @@
         url = "github:AdnanHodzic/auto-cpufreq";
       };
 
-      # home-manager = { # Maybe in the future
-      #   url = "github:nix-community/home-manager";
-      #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-      # };
+      home-manager = { # Maybe in the future
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs-unstable";
+      };
 
       lanzaboote = {
         url = "github:nix-community/lanzaboote/v0.3.0";
@@ -24,14 +24,14 @@
 
       nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
-      # nixos-cosmic = { # Shaping nicely!
-      # inputs.nixpkgs.follows = "nixpkgs-unstable";
-      #  url = "github:lilyinstarlight/nixos-cosmic";
-      #};
+      nixos-cosmic = { # Shaping nicely!
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+       url = "github:lilyinstarlight/nixos-cosmic";
+      };
 
       nix-index.url = "github:nix-community/nix-index";
-      # nix-index-database.url = "github:nix-community/nix-index-database";
-      # nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+      nix-index-database.url = "github:nix-community/nix-index-database";
+      nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
       nixos-hardware.url = "https://flakehub.com/f/NixOS/nixos-hardware/0.1.1656.tar.gz"; # Hardware-specific optimizations
 
@@ -42,12 +42,13 @@
 
       rust-overlay.url = "github:oxalica/rust-overlay"; # Crabby dancing sideways
 
-      # sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
+      sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable,
         #####  THIRD-PARTY MODULES  #####
     auto-cpufreq,           # Energy efficiency
+    # home-manager            # User-specific settings and packages
     lanzaboote,             # Secure Boot for NixOS
     nix-flatpak,            # Enhanced Flatpak support
     nix-index,              # A files database for nixpkgs
@@ -56,7 +57,7 @@
     nixos-hardware,         # Hardware configuration
     nixvim,                 # Neovim configuration
     rust-overlay,           # Rust overlay
-    # sops-nix,               # SOPS for managing secrets
+    sops-nix,               # SOPS for managing secrets
   ... }@inputs:
     let
       commonModules = [
