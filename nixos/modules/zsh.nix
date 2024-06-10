@@ -2,7 +2,7 @@
 
 {
   programs.command-not-found.enable = false;
-  
+
   # Zsh
   programs.zsh = {
     enable = true;

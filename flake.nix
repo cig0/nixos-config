@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    
+
       #####  THIRD-PARTY MODULES  #####
       auto-cpufreq = { # Energy efficiency
         inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +17,7 @@
       # };
 
       lanzaboote = {
-        url = "github:nix-community/lanzaboote/v0.3.0"; 
+        url = "github:nix-community/lanzaboote/v0.3.0";
         # Optional but recommended to limit the size of your system closure.
         inputs.nixpkgs.follows = "nixpkgs";
       };
@@ -31,7 +31,7 @@
 
       nix-index.url = "github:nix-community/nix-index";
       # nix-index-database.url = "github:nix-community/nix-index-database";
-      # nix-index-database.inputs.nixpkgs.follows = "nixpkgs"; 
+      # nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
       nixos-hardware.url = "https://flakehub.com/f/NixOS/nixos-hardware/0.1.1656.tar.gz"; # Hardware-specific optimizations
 
@@ -63,7 +63,7 @@
           #####  THIRD-PARTY MODULES  #####
           auto-cpufreq.nixosModules.default
           ./nixos/modules/auto-cpufreq.nix
-          
+
           # nix-index-database.nixosModules.nix-index
           # { programs.nix-index-database.comma.enable = true; }
 
@@ -72,7 +72,7 @@
             # Refs:
               # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
               # https://wiki.nixos.org/wiki/Secure_Boot
-            
+
             # Lanzaboote currently replaces the systemd-boot module.
             # This setting is usually set to true in configuration.nix
             # generated at installation time. So we force it to false
@@ -86,7 +86,7 @@
 
           nixvim.nixosModules.nixvim
           ./nixos/modules/nixvim.nix
-          
+
           # sops-nix.nixosModules.sops
           # ./nixos/modules/sops.nix
 
@@ -126,7 +126,7 @@
           #####  THIRD-PARTY MODULES  #####
           # nixos-cosmic.nixosModules.default
           # ./nixos/modules/cosmic.nix
-          
+
           nix-flatpak.nixosModules.nix-flatpak
           ./nixos/modules/nix-flatpak.nix
 
@@ -180,7 +180,7 @@
 
                 # ===== DISPLAY MANAGERS =====
                 # Only one at a time can be active
-                  #####  THIRD-PARTY MODULES  ##### 
+                  #####  THIRD-PARTY MODULES  #####
                   # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
                 services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
               }
@@ -204,7 +204,7 @@
 
                 # ===== DISPLAY MANAGERS =====
                 # Only one at a time can be active
-                  #####  THIRD-PARTY MODULES  #####    
+                  #####  THIRD-PARTY MODULES  #####
                   # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
                 services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
               }

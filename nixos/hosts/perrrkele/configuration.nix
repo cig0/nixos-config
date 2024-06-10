@@ -12,8 +12,8 @@
       # <nixos-hardware/tuxedo/infinitybook/pro14/gen7>
     ];
 
-  # Bootloader.
-  boot = {
+
+  boot = { # Bootloader
     initrd.luks.devices."luks-e74bc2fe-fb37-4407-9592-0442f5c329bc".device = "/dev/disk/by-uuid/e74bc2fe-fb37-4407-9592-0442f5c329bc";
     loader = {
       # systemd-boot.configurationLimit = 5;
@@ -23,18 +23,18 @@
       tmp.cleanOnBoot = true;
   };
 
+
   fileSystems = { # /etc/fstab mount options
     "/" = {
       options = [ "data=journal" "discard" "relatime" ];
     };
   };
 
-  # Enable periodic SSD TRIM of mounted partitions in background.
-  services.fstrim.enable = true;
+
+  services.fstrim.enable = true; # Enable periodic SSD TRIM of mounted partitions in background
 
 
-  nix = {
-    # General settings
+  nix = { # General settings
     settings = {
       allowed-users = [ "@builders" "@wheel" ];
       auto-optimise-store = true; # Nix store
@@ -55,8 +55,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
 
-  # Enable networking
-  networking = {
+  networking = { # Enable networking
     hostName = "perrrkele"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networkmanager = {
@@ -67,8 +66,7 @@
   };
 
 
-  # Enable bluetooth
-  hardware = {
+  hardware = { # Enable bluetooth
     bluetooth = {
       enable = true; # enables support for Bluetooth
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
