@@ -3,7 +3,8 @@
 {
   # Open ports in the firewall.
   # Services allowed:
-  #   - Syncthing
+  #   - OpenSSH: 22
+  #   - Syncthing: 21017 22000
 
   networking = {
     nftables.enable = true; # Explicitly required by Incus
@@ -11,7 +12,7 @@
     firewall = {
       enable = true;
       allowPing = false;
-      allowedTCPPorts = [ 22000 ];
+      allowedTCPPorts = [ 22 22000 ];
       allowedUDPPorts = [ 21027 22000 ];
       trustedInterfaces = [ "virbr0" ];
       checkReversePath = "loose";
