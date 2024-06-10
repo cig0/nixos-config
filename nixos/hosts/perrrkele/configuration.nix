@@ -37,15 +37,7 @@
   nix = { # General settings
     settings = {
       allowed-users = [ "@builders" "@wheel" ];
-      auto-optimise-store = true; # Nix store
       experimental-features = [ "nix-command" "flakes" ];
-    };
-
-    # Automatic system cleanup
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 10d";
     };
   };
 

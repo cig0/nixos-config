@@ -114,7 +114,7 @@
         ./nixos/modules/stevenblack.nix
         ./nixos/modules/stevenblack-unblacklist.nix
         ./nixos/modules/syncthing.nix
-        ./nixos/modules/systemAutoUpgrade.nix
+        ./nixos/modules/systemMaintenance.nix
         ./nixos/modules/systemPackages.nix
         ./nixos/modules/users.nix
         ./nixos/modules/virtualization.nix
