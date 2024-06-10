@@ -117,7 +117,7 @@
         ./nixos/modules/systemmaintenance.nix
         ./nixos/modules/systempackages.nix
         ./nixos/modules/timezone.nix
-        ./nixos/modules/ucodeIntel.nix
+        ./nixos/modules/ucode.nix
         ./nixos/modules/users.nix
         ./nixos/modules/virtualization.nix
         ./nixos/modules/zsh.nix
