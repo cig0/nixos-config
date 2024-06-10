@@ -1,4 +1,4 @@
-{ config, pkgs, unstablePkgs, ... }:
+{ config, nixpkgs-unstable, pkgs, system, ... }:
 
 let
   commonPackages = [ # packages common to all hosts
@@ -289,16 +289,23 @@ let
       in perrrkelePackages
 
     else if config.networking.hostName == "satama" then
-      let satamaPackages = commonPackages ++ [ pkgs.cockpit ];
+      let satamaPackages = commonPackages ++ [ unstablePkgs.cockpit ];
       in satamaPackages
 
     else if config.networking.hostName == "vittusaatana" then
-      let vittusaatanaPackages = commonPackages ++ userSidePackages ++ [
-        pkgs.nvtop # Nvidia top-like utility
-      ];
+      let vittusaatanaPackages = commonPackages ++ userSidePackages ++ [ unstablePkgs.nvtop ];
       in vittusaatanaPackages
 
     else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
+
+  unstablePkgs = import "${nixpkgs-unstable}" {
+    inherit system;
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
+    };
+  };
+
 in
   {
     imports = [
@@ -307,10 +314,10 @@ in
 
     # ===== Packages to exclude =====
     ## GNOME Desktop
-    environment.gnome.excludePackages = (with pkgs; [ # for packages that are pkgs.***
+    environment.gnome.excludePackages = (with unstablePkgs; [ # for packages that are pkgs.***
       gnome-tour
       gnome-connections
-        ]) ++ (with pkgs.gnome; [ # for packages that are pkgs.gnome.***
+        ]) ++ (with unstablePkgs.gnome; [ # for packages that are pkgs.gnome.***
         epiphany # web browser
         geary # email reader
         evince # document viewer
