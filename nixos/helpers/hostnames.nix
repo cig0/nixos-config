@@ -16,8 +16,10 @@ in
 }
 
 
-# Copy & paste ready!
-# -------------------
+# Ready for copy & paste
+# -----------------------
+
+# (Don't forget to add config, and lib, to the moduel you will be importing this module from!)
 
 # let
 #   hostnameLogic = import ../helpers/hostnames.nix { inherit config lib; };
