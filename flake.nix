@@ -101,7 +101,7 @@
         ./nixos/modules/firewall.nix
         ./nixos/modules/fwupd.nix
         ./nixos/modules/gnupg.nix
-        ./nixos/modules/intel-updateMicrocode.nix
+        ./nixos/modules/hwAccel.nix
         ./nixos/modules/kernel.nix
         ./nixos/modules/keyd.nix
         ./nixos/modules/mtr.nix
@@ -115,6 +115,7 @@
         ./nixos/modules/syncthing.nix
         ./nixos/modules/systemMaintenance.nix
         ./nixos/modules/systemPackages.nix
+        ./nixos/modules/uCodeIntel.nix
         ./nixos/modules/users.nix
         ./nixos/modules/virtualization.nix
         ./nixos/modules/zsh.nix
@@ -148,70 +149,70 @@
         };
       };
     in
-      {
-        nixosConfigurations = {
-          satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
-            inherit system;
-            specialArgs = { inherit inputs system unstablePkgs; };
-            modules = commonModules ++ [
-              # Main configuration file
-              ./nixos/hosts/satama/configuration.nix
+    {
+      nixosConfigurations = {
+        satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
+          inherit system;
+          specialArgs = { inherit inputs system unstablePkgs; };
+          modules = commonModules ++ [
+            # Main configuration file
+            ./nixos/hosts/satama/configuration.nix
 
-              {
-              }
-            ];
-          };
+            {
+            }
+          ];
+        };
 
-          perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
-            inherit system;
-            specialArgs = { inherit inputs system unstablePkgs; };
-            modules = commonModules ++ userSideModules ++ [
+        perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
+          inherit system;
+          specialArgs = { inherit inputs system unstablePkgs; };
+          modules = commonModules ++ userSideModules ++ [
+              #####  THIRD-PARTY MODULES  #####
+              nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
+
+              # home-manager.nixosModules.perrrkele
+
+            # Main configuration file
+            ./nixos/hosts/perrrkele/configuration.nix
+
+            {
+              services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
+              programs.dconf.enable = true; # https://nixos.wiki/wiki/KDE#Installation
+
+              # ===== DISPLAY MANAGERS =====
+              # Only one at a time can be active
                 #####  THIRD-PARTY MODULES  #####
-                nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
+                # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
+              services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
+            }
 
-                # home-manager.nixosModules.perrrkele
+          ];
+        };
 
-              # Main configuration file
-              ./nixos/hosts/perrrkele/configuration.nix
+        vittusaatana = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
+          inherit system;
+          specialArgs = { inherit inputs system unstablePkgs; };
+          modules = commonModules ++ userSideModules ++ [
+              #####  THIRD-PARTY MODULES  #####
+              # home-manager.nixosModules.vittusaatana
 
-              {
-                services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
-                programs.dconf.enable = true; # https://nixos.wiki/wiki/KDE#Installation
+            # Main configuration file
+            ./nixos/hosts/vittusaatana/configuration.nix
 
-                # ===== DISPLAY MANAGERS =====
-                # Only one at a time can be active
-                  #####  THIRD-PARTY MODULES  #####
-                  # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
-                services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
-              }
+            {
+              services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
+              programs.dconf.enable = true; # https://nixos.wiki/wiki/KDE#Installation
 
-            ];
-          };
-
-          vittusaatana = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
-            inherit system;
-            specialArgs = { inherit inputs system unstablePkgs; };
-            modules = commonModules ++ userSideModules ++ [
+              # ===== DISPLAY MANAGERS =====
+              # Only one at a time can be active
                 #####  THIRD-PARTY MODULES  #####
-                # home-manager.nixosModules.vittusaatana
+                # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
+              services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
+            }
 
-              # Main configuration file
-              ./nixos/hosts/vittusaatana/configuration.nix
-
-              {
-                services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
-                programs.dconf.enable = true; # https://nixos.wiki/wiki/KDE#Installation
-
-                # ===== DISPLAY MANAGERS =====
-                # Only one at a time can be active
-                  #####  THIRD-PARTY MODULES  #####
-                  # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
-                services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
-              }
-
-              # TODO: Nvidia drivers
-            ];
-          };
+            # TODO: Nvidia drivers
+          ];
         };
       };
+    };
 }
