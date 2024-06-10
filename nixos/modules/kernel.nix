@@ -71,10 +71,9 @@
     "kvm.ignore_msrs=1"
     "kvm.report_ignored_msrs=0"
     "rd.driver.pre=vfio_pci"
-    "zram"
     "logo.nologo=0"
+    "splash"
     # "video=uvesafb:1024x768-16@60"
-    # "splash"
     # "quiet"
   ];
   boot.kernelPatches = [{
