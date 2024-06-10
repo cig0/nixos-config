@@ -298,27 +298,27 @@ let
 
     else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 in
-  {
-    imports = [
-      # ./systemPackages-overrides.nix
-    ];
+{
+  imports = [
+    # ./systemPackages-overrides.nix
+  ];
 
-    # ===== Packages to exclude =====
-    ## GNOME Desktop
-    environment.gnome.excludePackages = (with unstablePkgs; [ # for packages that are pkgs.***
-      gnome-tour
-      gnome-connections
-        ]) ++ (with unstablePkgs.gnome; [ # for packages that are pkgs.gnome.***
-        epiphany # web browser
-        geary # email reader
-        evince # document viewer
-    ]);
+  # ===== Packages to exclude =====
+  ## GNOME Desktop
+  environment.gnome.excludePackages = (with unstablePkgs; [ # for packages that are pkgs.***
+    gnome-tour
+    gnome-connections
+      ]) ++ (with unstablePkgs.gnome; [ # for packages that are pkgs.gnome.***
+      epiphany # web browser
+      geary # email reader
+      evince # document viewer
+  ]);
 
-    # Allow lincense-burdened packages
-    nixpkgs.config = {
-      allowUnfree = true;
-    };
+  # Allow lincense-burdened packages
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
-    # Install system packages based on the determined host list
-    environment.systemPackages = systemPackages;
-  }
+  # Install system packages based on the determined host list
+  environment.systemPackages = systemPackages;
+}
