@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ unstablePkgs, ... }:
 
 {
   programs.nixvim = {
@@ -9,7 +9,7 @@
       shiftwidth = 2;        # Tab width should be 2
     };
 
-    extraPlugins = with pkgs.vimPlugins; [
+    extraPlugins = with unstablePkgs.vimPlugins; [
       vim-nix
     ];
   };

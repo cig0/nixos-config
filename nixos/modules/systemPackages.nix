@@ -1,4 +1,4 @@
-{ config, nixpkgs-unstable, pkgs, system, ... }:
+{ config, pkgs, unstablePkgs, ... }:
 
 let
   commonPackages = [ # packages common to all hosts
@@ -297,15 +297,6 @@ let
       in vittusaatanaPackages
 
     else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
-
-  unstablePkgs = import "${nixpkgs-unstable}" {
-    inherit system;
-    config = {
-      allowUnfree = true;
-      permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
-    };
-  };
-
 in
   {
     imports = [

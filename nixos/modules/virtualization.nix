@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ unstablePkgs, ... }:
 
 {
   # Load Podman containers configurations :: https://nixos.wiki/wiki/Podman
@@ -27,7 +27,7 @@
       enable = true;
       onBoot = "ignore";
       qemu.ovmf = {
-        packages = [ pkgs.OVMF.fd ];
+        packages = [ unstablePkgs.OVMF.fd ];
       };
     };
     incus = {

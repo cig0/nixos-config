@@ -101,7 +101,6 @@
         ./nixos/modules/firewall.nix
         ./nixos/modules/fwupd.nix
         ./nixos/modules/gnupg.nix
-        ./nixos/modules/import-overlays.nix
         ./nixos/modules/intel-updateMicrocode.nix
         ./nixos/modules/kernel.nix
         ./nixos/modules/keyd.nix
@@ -120,6 +119,7 @@
         ./nixos/modules/virtualization.nix
         ./nixos/modules/zsh.nix
         ./nixos/modules/zram.nix
+        ./nixos/overlays/overlays.nix
       ];
 
       userSideModules = [
@@ -139,12 +139,20 @@
       ];
 
       system = "x86_64-linux";
+
+      unstablePkgs = import "${nixpkgs-unstable}" {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
+        };
+      };
     in
       {
         nixosConfigurations = {
           satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
             inherit system;
-            specialArgs = { inherit inputs nixpkgs-unstable system; };
+            specialArgs = { inherit inputs system unstablePkgs; };
             modules = commonModules ++ [
               # Main configuration file
               ./nixos/hosts/satama/configuration.nix
@@ -156,7 +164,7 @@
 
           perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
             inherit system;
-            specialArgs = { inherit inputs nixpkgs-unstable system; };
+            specialArgs = { inherit inputs system unstablePkgs; };
             modules = commonModules ++ userSideModules ++ [
                 #####  THIRD-PARTY MODULES  #####
                 nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
@@ -182,7 +190,7 @@
 
           vittusaatana = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
             inherit system;
-            specialArgs = { inherit inputs nixpkgs-unstable system; };
+            specialArgs = { inherit inputs system unstablePkgs; };
             modules = commonModules ++ userSideModules ++ [
                 #####  THIRD-PARTY MODULES  #####
                 # home-manager.nixosModules.vittusaatana

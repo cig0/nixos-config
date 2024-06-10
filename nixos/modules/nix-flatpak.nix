@@ -1,6 +1,6 @@
 # https://github.com/gmodena/nix-flatpak?tab=readme-ov-file
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   services.flatpak ={

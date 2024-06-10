@@ -1,8 +1,6 @@
 { config, inputs, ... }:
 
 {
-  # imports = [ inputs.sops-nix.nixosModules.sops ];
-
   sops = {
     age.keyFile = "/home/cig0/.config/sops/age/keys.txt";
     defaultSopsFile = ../../secrets/secrets.yaml;

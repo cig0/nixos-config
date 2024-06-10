@@ -1,5 +1,5 @@
 # Keyboard remap
-{ config, ... }:
+{ ... }:
 
 {
   services.keyd = {
