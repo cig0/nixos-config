@@ -48,7 +48,7 @@
   outputs = { self, nixpkgs, nixpkgs-unstable,
         #####  THIRD-PARTY MODULES  #####
     auto-cpufreq,           # Energy efficiency
-    # home-manager            # User-specific settings and packages
+    home-manager            # User-specific settings and packages
     lanzaboote,             # Secure Boot for NixOS
     nix-flatpak,            # Enhanced Flatpak support
     nix-index,              # A files database for nixpkgs
@@ -170,9 +170,9 @@
           specialArgs = { inherit inputs system unstablePkgs; };
           modules = commonModules ++ userSideModules ++ [
               #####  THIRD-PARTY MODULES  #####
+              # home-manager.nixosModules.home-manager
               nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
 
-              # home-manager.nixosModules.perrrkele
 
             # Main configuration file
             ./nixos/hosts/perrrkele/configuration.nix
@@ -196,7 +196,7 @@
           specialArgs = { inherit inputs system unstablePkgs; };
           modules = commonModules ++ userSideModules ++ [
               #####  THIRD-PARTY MODULES  #####
-              # home-manager.nixosModules.vittusaatana
+              # home-manager.nixosModules.home-manager
 
             # Main configuration file
             ./nixos/hosts/vittusaatana/configuration.nix
