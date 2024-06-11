@@ -118,6 +118,7 @@
       ./nixos/modules/syncthing.nix
       ./nixos/modules/systemmaintenance.nix
       ./nixos/modules/systempackages.nix
+      ./nixos/modules/tailscale.nix
       ./nixos/modules/timezone.nix
       ./nixos/modules/ucode.nix
       ./nixos/modules/users.nix
