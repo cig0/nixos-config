@@ -47,7 +47,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable,
-    auto-cpufreq,             # Energy efficiency
+    auto-cpufreq,             # Energy efficiency.configDir
     home-manager,             # User-specific settings and packages
     lanzaboote,               # Secure Boot for NixOS
     nix-flatpak,              # Enhanced Flatpak support
@@ -107,6 +107,7 @@
       ./nixos/modules/hwaccel.nix
       ./nixos/modules/kernel.nix
       ./nixos/modules/keyd.nix
+      ./nixos/modules/monitoring.nix
       ./nixos/modules/mtr.nix
       ./nixos/modules/ntp.nix
       ./nixos/modules/ollama.nix
