@@ -43,7 +43,7 @@
 
     rust-overlay.url = "github:oxalica/rust-overlay"; # Crabby dancing sideways
 
-    sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
+    # sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable,
@@ -57,7 +57,7 @@
     nixos-hardware,           # Hardware configuration
     nixvim,                   # Neovim configuration
     rust-overlay,             # Rust overlay
-    sops-nix,                 # SOPS for managing secrets
+    # sops-nix,                 # SOPS for managing secrets
   ... }:
 
   let
@@ -124,8 +124,8 @@
       ./nixos/modules/ucode.nix
       ./nixos/modules/users.nix
       ./nixos/modules/virtualization.nix
-      ./nixos/modules/zsh.nix
       ./nixos/modules/zram.nix
+      ./nixos/modules/zsh.nix
       ./nixos/overlays/overlays.nix
     ];
 

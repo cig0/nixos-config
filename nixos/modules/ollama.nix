@@ -4,7 +4,7 @@
 {
   services.ollama = {
     enable = true;
-    acceleration = false; # perrrkele, satama
+    acceleration = false; # TODO: add hostnameLogic to enable for vittu
     home = "${config.users.users.cig0.home}/.local/share/ollama";
     models = "${config.users.users.cig0.home}/ModelZoo";
     sandbox = false;
