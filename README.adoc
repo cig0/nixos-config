@@ -12,6 +12,8 @@
 │   └── modules
 │       └── .gitkeep
 ├── nixos
+│   ├── helpers
+│   │   └── hostnames.nix
 │   ├── hosts
 │   │   ├── perrrkele
 │   │   │   ├── configuration.nix
@@ -22,6 +24,7 @@
 │   │   ├── nixvim
 │   │   │   └── plugins
 │   │   │       └── .gitkeep
+│   │   ├── auto-cpufreq.nix
 │   │   ├── cosmic.nix
 │   │   ├── cups.nix
 │   │   ├── current-system-packages.nix
@@ -29,23 +32,24 @@
 │   │   ├── emacs.nix
 │   │   ├── firefox.nix
 │   │   ├── firewall.nix
-│   │   ├── flatpak.nix
 │   │   ├── fonts.nix
+│   │   ├── fwupd.nix
 │   │   ├── gnupg.nix
-│   │   ├── import-overlays.nix
-│   │   ├── intel-updateMicrocode.nix
+│   │   ├── homemanager.nix
+│   │   ├── hwaccel.nix
 │   │   ├── kdeconnect.nix
 │   │   ├── kernel.nix
 │   │   ├── keyd.nix
+│   │   ├── monitoring.nix
 │   │   ├── mtr.nix
-│   │   ├── nix-alien.nix
+│   │   ├── nix-flatpak.nix
 │   │   ├── nixvim.nix
 │   │   ├── ntp.nix
 │   │   ├── ollama.nix
 │   │   ├── openssh.nix
 │   │   ├── pcscd.nix
 │   │   ├── plymouth.nix
-│   │   ├── powerManagement.nix
+│   │   ├── powermanagement.nix
 │   │   ├── sddm.nix
 │   │   ├── sops.nix
 │   │   ├── sshguard.nix
@@ -53,8 +57,11 @@
 │   │   ├── stevenblack-unblacklist.nix
 │   │   ├── stevenblack.nix
 │   │   ├── syncthing.nix
-│   │   ├── systemAutoUpgrade.nix
-│   │   ├── systemPackages.nix
+│   │   ├── systemmaintenance.nix
+│   │   ├── systempackages.nix
+│   │   ├── tailscale.nix
+│   │   ├── timezone.nix
+│   │   ├── ucode.nix
 │   │   ├── ungoogled-chromium.nix
 │   │   ├── users.nix
 │   │   ├── virtualization.nix
@@ -62,7 +69,8 @@
 │   │   ├── zram.nix
 │   │   └── zsh.nix
 │   └── overlays
-│       └── nixos-option.nix
+│       ├── nixos-option.nix
+│       └── overlays.nix
 ├── secrets
 │   └── secrets.yaml
 ├── .sops.yaml
@@ -70,5 +78,5 @@
 ├── flake.lock
 └── flake.nix
 
-15 directories, 50 files
+16 directories, 57 files
 ```
