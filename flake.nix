@@ -22,10 +22,10 @@
 
     nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
-    nixos-cosmic = { # Shaping nicely!
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:lilyinstarlight/nixos-cosmic";
-    };
+    # nixos-cosmic = {
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #   url = "github:lilyinstarlight/nixos-cosmic";
+    # };
 
     nix-index.url = "github:nix-community/nix-index";
 
@@ -53,7 +53,7 @@
     nix-flatpak,              # Enhanced Flatpak support
     nix-index,                # A files database for nixpkgs
     # nix-index-database,       # A files database for nixpkgs
-    nixos-cosmic,             # COSMIC Desktop Environment
+    # nixos-cosmic,             # COSMIC Desktop Environment
     nixos-hardware,           # Hardware configuration
     nixvim,                   # Neovim configuration
     rust-overlay,             # Rust overlay
