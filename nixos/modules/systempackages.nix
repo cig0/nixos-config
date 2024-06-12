@@ -254,7 +254,7 @@ let
     unstablePkgs.wireshark-qt
 
     # Productivity
-    unstablePkgs.obsidian
+    pkgs.obsidian
     unstablePkgs.todoist-electron
 
     # Programming - GUI
