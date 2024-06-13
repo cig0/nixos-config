@@ -1,4 +1,5 @@
-# Update the CPU microcode for Intel processors.
+# Update the CPU microcode.
+
 { ... }:
 
 {

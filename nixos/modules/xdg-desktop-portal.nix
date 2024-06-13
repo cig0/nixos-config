@@ -1,4 +1,5 @@
-# Enable XDG desktop integration for other desktops toolkits
+# Enable XDG desktop integration for other desktops toolkits.
+
 { pkgs, ... }:
 
 {
