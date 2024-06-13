@@ -1,11 +1,8 @@
-{ unstablePkgs, ... }:
+# https://nixos.wiki/wiki/Podman
+
+{ ... }:
 
 {
-  # Load Podman containers configurations :: https://nixos.wiki/wiki/Podman
-  # imports = [ "containers.nix" ];
-
-  programs.virt-manager.enable = true;
-
   virtualisation = {
     # Enable running Podman containers as systemd services
     oci-containers.backend = "podman";
@@ -20,20 +17,6 @@
       dockerCompat = true;
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
-    };
-
-    # virt-manager
-    libvirtd = {
-      enable = true;
-      onBoot = "ignore";
-      qemu.ovmf = {
-        packages = [ unstablePkgs.OVMF.fd ];
-      };
-    };
-    incus = {
-      enable = true;
-      socketActivation = true;
-      startTimeout = 120;
     };
   };
 }

@@ -1,3 +1,5 @@
+# TODO: configure this module
+
 { unstablePkgs, ... }:
 
 {

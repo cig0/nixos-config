@@ -1,7 +1,7 @@
 { config, lib, pkgs, unstablePkgs, ... }:
 
 let
-  hostnameLogic = import ../helpers/hostnames.nix { inherit config lib; };
+  hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
 
   commonPackages = [ # Packages common to all hosts
     # Comms
@@ -290,6 +290,11 @@ in
     # ./systemPackages-overrides.nix
   ];
 
+  # Allow lincense-burdened packages
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
   # ===== Packages to exclude =====
   ## GNOME Desktop
   environment.gnome.excludePackages = (with unstablePkgs; [ # for packages that are pkgs.***
@@ -301,11 +306,35 @@ in
       evince # document viewer
   ]);
 
-  # Allow lincense-burdened packages
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
 
+  # =====  Managed by NixOS options  =====
+    #===  Emacs
+    services = {
+      emacs = { # Launches Emacs as server
+        enable = false;
+        package = unstablePkgs.emacs; # replace with emacs-gtk, or a version provided by the community overlay if desired.
+      };
+    };
+
+    #===  Firefox
+    # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
+    programs.firefox = {
+      enable = true;
+      preferences = { "widget.use-xdg-desktop-portal.file-picker" = "1"; };
+    };
+
+    #===  MTR - https://wiki.nixos.org/wiki/Mtr
+    programs.mtr.enable = true; # Network diagnostic tool
+    # services.mtr-exporter.enable = true; # Prometheus-ready exporter.
+    # TODO: add logic to enable the Prometheus exporter on satama.
+
+    #===  Ungoogle Chromium
+    nixpkgs.config.chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+    programs.chromium.enablePlasmaBrowserIntegration = true;
+    security.chromiumSuidSandbox.enable = true;
+
+
+  # =====  systemPackages  =====
   # Install packages system-wide based on the host
   environment.systemPackages =
     if hostnameLogic.isPerrrkele then

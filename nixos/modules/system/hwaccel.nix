@@ -3,7 +3,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  hostnameLogic = import ../helpers/hostnames.nix { inherit config lib; };
+  hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
 in
 {
   # Intel iGPU hosts

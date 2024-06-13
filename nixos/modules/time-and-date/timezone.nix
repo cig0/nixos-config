@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  hostnameLogic = import ../helpers/hostnames.nix { inherit config lib; };
+  hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
 in
 {
   time.timeZone =
