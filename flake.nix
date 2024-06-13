@@ -10,10 +10,10 @@
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
-    home-manager = { # Maybe in the future
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      url = "github:nix-community/home-manager";
-    };
+    # home-manager = { # Maybe in the future
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
+    #   url = "github:nix-community/home-manager";
+    # };
 
     lanzaboote = {
       inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of your system closure.
@@ -48,7 +48,7 @@
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable,
     auto-cpufreq,             # Energy efficiency.configDir
-    home-manager,             # User-specific settings and packages
+    # home-manager,             # User-specific settings and packages
     lanzaboote,               # Secure Boot for NixOS
     nix-flatpak,              # Enhanced Flatpak support
     nix-index,                # A files database for nixpkgs
