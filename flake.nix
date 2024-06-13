@@ -1,5 +1,5 @@
 {
-  description = "cig0's NixOS configuration flake";
+  description = "cig0's NixOS flake";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.05";
@@ -63,7 +63,7 @@
   let
     commonModules = [
         auto-cpufreq.nixosModules.default
-        ./nixos/modules/auto-cpufreq.nix
+        ./nixos/modules/power-management/auto-cpufreq.nix
 
         # home-manager.nixosModules.home-manager
 
@@ -88,7 +88,7 @@
         # { programs.nix-index-database.comma.enable = true; }
 
         nixvim.nixosModules.nixvim
-        ./nixos/modules/nixvim.nix
+        ./nixos/modules/applications/nixvim.nix
 
         ({ pkgs, ... }: { # Rust
           nixpkgs.overlays = [ rust-overlay.overlays.default ];
@@ -96,52 +96,51 @@
         })
 
         # sops-nix.nixosModules.sops
-        # ./nixos/modules/sops.nix
+        # ./nixos/modules/security/sops.nix
 
-      ./nixos/modules/cups.nix
-      ./nixos/modules/current-system-packages.nix
-      ./nixos/modules/dns.nix
-      ./nixos/modules/firewall.nix
-      ./nixos/modules/fwupd.nix
-      ./nixos/modules/gnupg.nix
-      ./nixos/modules/hwaccel.nix
-      ./nixos/modules/kernel.nix
-      ./nixos/modules/keyd.nix
-      ./nixos/modules/monitoring.nix
-      ./nixos/modules/mtr.nix
-      ./nixos/modules/ntp.nix
-      ./nixos/modules/ollama.nix
-      ./nixos/modules/openssh.nix
-      ./nixos/modules/powermanagement.nix
-      ./nixos/modules/starship.nix
-      ./nixos/modules/stevenblack.nix
-      ./nixos/modules/stevenblack-unblacklist.nix
-      ./nixos/modules/syncthing.nix
-      ./nixos/modules/systemmaintenance.nix
-      ./nixos/modules/systempackages.nix
-      ./nixos/modules/tailscale.nix
-      ./nixos/modules/timezone.nix
-      ./nixos/modules/ucode.nix
-      ./nixos/modules/users.nix
-      ./nixos/modules/virtualization.nix
-      ./nixos/modules/zram.nix
-      ./nixos/modules/zsh.nix
+      ./nixos/modules/applications/applications.nix
+      ./nixos/modules/applications/current-system-packages.nix
+      ./nixos/modules/applications/ollama.nix
+      ./nixos/modules/applications/syncthing.nix
+      ./nixos/modules/networking/dns.nix
+      ./nixos/modules/networking/stevenblack.nix
+      ./nixos/modules/networking/stevenblack-unblacklist.nix
+      ./nixos/modules/networking/tailscale.nix
+      ./nixos/modules/observability/observability.nix
+      ./nixos/modules/power-management/power-management.nix
+      ./nixos/modules/security/firewall.nix
+      ./nixos/modules/security/openssh.nix
+      ./nixos/modules/shell/starship.nix
+      ./nixos/modules/shell/zsh.nix
+      ./nixos/modules/system/cups.nix
+      ./nixos/modules/system/fwupd.nix
+      ./nixos/modules/system/gnupg.nix
+      ./nixos/modules/system/hwaccel.nix
+      ./nixos/modules/system/kernel.nix
+      ./nixos/modules/system/keyd.nix
+      ./nixos/modules/system/maintenance.nix
+      ./nixos/modules/system/ucode.nix
+      ./nixos/modules/system/users.nix
+      ./nixos/modules/system/zram.nix
+      ./nixos/modules/time-and-date/ntp.nix
+      ./nixos/modules/time-and-date/timezone.nix
+      ./nixos/modules/virtualization/containerization.nix
+      ./nixos/modules/virtualization/incus.nix
+      ./nixos/modules/virtualization/libvirt.nix
       ./nixos/overlays/overlays.nix
     ];
 
     userSideModules = [
         # nixos-cosmic.nixosModules.default
-        # ./nixos/modules/cosmic.nix
+        # ./nixos/modules/desktop-environments/cosmic.nix
 
         nix-flatpak.nixosModules.nix-flatpak
-        ./nixos/modules/nix-flatpak.nix
+        ./nixos/modules/applications/nix-flatpak.nix
 
-      ./nixos/modules/firefox.nix
-      ./nixos/modules/fonts.nix
-      ./nixos/modules/kdeconnect.nix
-      ./nixos/modules/sddm.nix
-      ./nixos/modules/ungoogled-chromium.nix
-      ./nixos/modules/xdg-desktop-portal.nix
+      ./nixos/modules/system/fonts.nix
+      ./nixos/modules/desktop-environments/kdeconnect.nix
+      ./nixos/modules/desktop-environments/sddm.nix
+      ./nixos/modules/desktop-environments/xdg-desktop-portal.nix
     ];
 
     system = "x86_64-linux";
