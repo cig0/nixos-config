@@ -18,19 +18,18 @@ in
 
 # Ready for copy & paste
 # -----------------------
-
-# (Don't forget to add config, and lib, to the moduel you will be importing this module from!)
-
+#
+# .Don't forget to add `config, lib,` to the module you will be importing this module from!
+# .Replace hostnames as desired, i.e. `isMyHost`
+#
 # let
 #   hostnameLogic = import ../helpers/hostnames.nix { inherit config lib; };
 # in
 # {
-    # myFunction =
-    #   if hostnameLogic.isPerrrkele then
-    #     something
-
-    #   else if hostnameLogic.isSatama then
-    #     "something else"
-
-    #   else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
+#  myFunction =
+#    if hostnameLogic.isPerrrkele then
+#      something
+#    else if hostnameLogic.isSatama then
+#      "something else"
+#    else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 # }

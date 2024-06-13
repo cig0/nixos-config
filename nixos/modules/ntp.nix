@@ -1,4 +1,5 @@
 # https://wiki.nixos.org/wiki/NTP
+
 { ... }:
 
 {

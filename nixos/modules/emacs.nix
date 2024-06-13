@@ -1,4 +1,5 @@
-# Launches Emacs server
+# Launches Emacs as server
+
 { unstablePkgs, ... }:
 
 {
