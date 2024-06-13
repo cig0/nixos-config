@@ -1,6 +1,6 @@
 # Check these modules for additional options:
-# ./dns.nix
-# ./firewall.nix
+#   - ./dns.nix
+#   - ./firewall.nix
 
 { ... }:
 
