@@ -1,8 +1,6 @@
-# Enable SSHGuard
 { ... }:
 
 {
-  # SSHGuard
   services.sshguard = {
     enable = true;
     blocktime = 300;

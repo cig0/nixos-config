@@ -1,7 +1,6 @@
 { ... }:
 
 {
-  ## SDDM Display Manager
   services.displayManager = {
     autoLogin = {
       enable = false;

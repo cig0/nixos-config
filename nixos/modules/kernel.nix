@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  # TODO: add hostnameLogic for specific per-host settings
+  # I.e:
+  #   - satama: LTS kernel
+  #   - vittu: Nvidia drivers
+
   # https://wiki.nixos.org/wiki/Linux_kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;

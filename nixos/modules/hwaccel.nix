@@ -1,4 +1,5 @@
-# Configure hardware acceleration
+# Hardware acceleration
+
 { config, lib, pkgs, ... }:
 
 let

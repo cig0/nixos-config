@@ -22,6 +22,7 @@
   # 2.56.220.2        GCore Free :: https://gcore.com/public-dns
   # 8.8.8.8           GoogleDNS
   # 194.242.2.2       Mullvad Public DNS
+  # 100.100.100.100   Tailscale
   # 64.6.64.6         Verisign DNS :: https://www.verisign.com/
 
 

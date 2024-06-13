@@ -1,4 +1,5 @@
-# Keyboard remap
+# Keyboard remapping
+
 { ... }:
 
 {
