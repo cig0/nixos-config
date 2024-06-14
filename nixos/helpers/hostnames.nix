@@ -17,6 +17,7 @@ rec {
 
   # Hosts grouping definition.
   isIntelHost = isPerrrkele || isSatama;  # Combined condition for Intel iGPU hosts.
+  isUserSideHost = isPerrrkele || isVittusaatana;  # Combined condition for user-side hosts.
 }
 
 
