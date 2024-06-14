@@ -1,4 +1,4 @@
-# Hosts mapping
+# Hosts mapping.
 
 { config, lib, ... }:
 
@@ -7,16 +7,16 @@ let
   hostName = config.networking.hostName;
 in
 rec {
-  # Export mkIf for reuse
+  # Export mkIf for reuse.
   mkIf = lib.mkIf;
 
-  # Individual hosts definition
+  # Individual hosts definition.
   isPerrrkele = hostName == "perrrkele";
   isSatama = hostName == "satama";
   isVittusaatana = hostName == "vittusaatana";
 
-  # Hosts grouping definition
-  isIntelHost = isPerrrkele || isSatama;  # Combined condition for Intel iGPU hosts
+  # Hosts grouping definition.
+  isIntelHost = isPerrrkele || isSatama;  # Combined condition for Intel iGPU hosts.
 }
 
 
