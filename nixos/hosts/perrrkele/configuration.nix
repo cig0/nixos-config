@@ -8,13 +8,10 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      # Additional hardware settings
-      # <nixos-hardware/tuxedo/infinitybook/pro14/gen7>
     ];
 
 
   boot = { # Bootloader
-    initrd.luks.devices."luks-e74bc2fe-fb37-4407-9592-0442f5c329bc".device = "/dev/disk/by-uuid/e74bc2fe-fb37-4407-9592-0442f5c329bc";
     loader = {
       # systemd-boot.configurationLimit = 5;
       systemd-boot.enable = true;
@@ -31,7 +28,15 @@
   };
 
 
-  services.fstrim.enable = true; # Enable periodic SSD TRIM of mounted partitions in background
+  services.fstrim.enable = true; # Enable periodic SSD TRIM of mounted partitions in background.
+
+
+  # Set the lowest priority to allow zRAM to kick in before swapping to disk.
+  swapDevices =
+    [ {
+        device = "/dev/disk/by-uuid/0c641660-76fb-4b3d-8074-3a34c26de27f";
+        priority = 1;
+    }];
 
 
   nix = { # General settings
@@ -66,27 +71,14 @@
   };
 
 
-  # ===== HARDENING
-  # https://xeiaso.net/blog/paranoid-nixos-2021-07-18/
+  # HARDENING - https://xeiaso.net/blog/paranoid-nixos-2021-07-18/
   security.sudo = {
     execWheelOnly = true;
     enable = true;
   };
-  # https://nixos.wiki/wiki/Doas
-  # security.doas = {
-  #   enable = false;
-  #   extraRules = [{
-  #     users = [ "cig0" "fine" ];
-  #     # Optional, retains environment variables while running commands
-  #     # e.g. retains your NIX_PATH when applying your config
-  #     keepEnv = true;
-  #     persist = true;  # Optional, only require password verification a single time
-  #   }];
-  # };
 
 
-  # ===== LOCALE
-  # Select internationalisation properties.
+  # LOCALE - Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
