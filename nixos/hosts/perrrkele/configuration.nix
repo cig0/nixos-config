@@ -22,11 +22,6 @@
         tmp.cleanOnBoot = true;
     };
 
-    fileSystems."/var/lib/lxcfs" =
-      { device = "lxcfs";
-        fsType = "fuse.lxcfs";
-      };
-
     fileSystems = { # /etc/fstab mount options.
       "/" = {
         options = [ "data=journal" "discard" "relatime" ];
