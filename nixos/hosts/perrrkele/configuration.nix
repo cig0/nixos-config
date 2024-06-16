@@ -11,32 +11,36 @@
     ];
 
 
-  boot = { # Bootloader
-    loader = {
-      # systemd-boot.configurationLimit = 5;
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+  # These options are not part of the initial generation of hardware-configuration.nix (nixos-generate-config --dir ~/tmp). 
+    boot = { # Bootloader
+      initrd.luks.devices."luks-e74bc2fe-fb37-4407-9592-0442f5c329bc".device = "/dev/disk/by-uuid/e74bc2fe-fb37-4407-9592-0442f5c329bc"; # Encrypted swap partition.
+      loader = {
+        # systemd-boot.configurationLimit = 5;
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+      };
+        tmp.cleanOnBoot = true;
     };
-      tmp.cleanOnBoot = true;
-  };
 
+    fileSystems."/var/lib/lxcfs" =
+      { device = "lxcfs";
+        fsType = "fuse.lxcfs";
+      };
 
-  fileSystems = { # /etc/fstab mount options
-    "/" = {
-      options = [ "data=journal" "discard" "relatime" ];
+    fileSystems = { # /etc/fstab mount options.
+      "/" = {
+        options = [ "data=journal" "discard" "relatime" ];
+      };
     };
-  };
 
-
-  services.fstrim.enable = true; # Enable periodic SSD TRIM of mounted partitions in background.
-
-
-  # Set the lowest priority to allow zRAM to kick in before swapping to disk.
-  swapDevices =
-    [ {
+    # Set the lowest priority to allow zRAM to kick in before swapping to disk.
+    swapDevices =
+      [{
         device = "/dev/disk/by-uuid/0c641660-76fb-4b3d-8074-3a34c26de27f";
         priority = 1;
-    }];
+      }];
+
+    services.fstrim.enable = true; # Enable periodic SSD TRIM of mounted partitions in background.
 
 
   nix = { # General settings
