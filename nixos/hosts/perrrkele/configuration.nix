@@ -11,7 +11,7 @@
     ];
 
 
-  # These options are not part of the initial generation of hardware-configuration.nix (nixos-generate-config --dir ~/tmp). 
+  # These options are not part of the initial generation of hardware-configuration.nix (nixos-generate-config --dir ~/tmp).
     boot = { # Bootloader
       initrd.luks.devices."luks-e74bc2fe-fb37-4407-9592-0442f5c329bc".device = "/dev/disk/by-uuid/e74bc2fe-fb37-4407-9592-0442f5c329bc"; # Encrypted swap partition.
       loader = {
