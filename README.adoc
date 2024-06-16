@@ -1,7 +1,7 @@
 = My NixOS flake
 :author: Martín Cigorraga
 :email:  cig0.github@tutanota.com
-:doctype: article
+:doctype: book
 
 This is the result of my elbow grease after six weeks of having migrated to NixOS and working on the flake. I hope you find it useful in the same way I found many similar resources that helped me quickly start building my system configuration 🤓
 
@@ -9,7 +9,7 @@ This is the result of my elbow grease after six weeks of having migrated to NixO
 <div></p></div>
 ++++
 
-image::.assets/frostedflakes.jpg[alt="Frosted Flakes", align="center"]
+image::.repo_assets/frostedflakes.jpg[alt="Frosted Flakes", align="center"]
 
 ++++
 <div style="text-align: center;">
