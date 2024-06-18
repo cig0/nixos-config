@@ -10,10 +10,10 @@ in
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
-    # interactiveShellInit = shellConfig.interactiveShellInit;
-    loginShellInit = shellConfig.interactiveShellInit;
+    interactiveShellInit = shellConfig.interactiveShellInit;
+    loginShellInit = shellConfig.loginShellInit;
+    setOptions = shellConfig.setOptions;
     shellAliases = shellConfig.shellAliases;
-    setOptions = shellConfig.setOptions; # TODO
     syntaxHighlighting.enable = true;
 
     # History is managed by Atuin
