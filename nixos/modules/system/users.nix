@@ -3,7 +3,7 @@
 {
   users.mutableUsers = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # cig0
   users.users.cig0 = {
     shell = pkgs.zsh;
     isNormalUser = true;
@@ -14,6 +14,7 @@
     useDefaultShell = true;
     description = "This is me";
   };
+
   home-manager.users.cig0 = { ... }: {
     home.packages = [ ];
 
@@ -23,6 +24,7 @@
   };
 
 
+  # fine
   users.users.fine = {
     isNormalUser = true;
     createHome = true;
@@ -33,6 +35,8 @@
     description = "This is fine";
   };
 
+
+  # anotherUser
   # users.users.anotherUser = {
   #   isNormalUser = true;
   #   home = "/home/fine";
