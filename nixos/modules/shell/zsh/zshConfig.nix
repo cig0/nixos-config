@@ -89,6 +89,7 @@ rec {
     }
   '';
 
+
   loginShellInit = interactiveShellInit;
 
 

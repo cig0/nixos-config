@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  shellConfig = import ./shellConfig.nix { inherit pkgs; };
+  zshConfig = import ./zshConfig.nix { inherit pkgs; };
 in
 {
   programs.command-not-found.enable = false;
@@ -10,10 +10,10 @@ in
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
-    interactiveShellInit = shellConfig.interactiveShellInit;
-    loginShellInit = shellConfig.loginShellInit;
-    setOptions = shellConfig.setOptions;
-    shellAliases = shellConfig.shellAliases;
+    interactiveShellInit = zshConfig.interactiveShellInit;
+    loginShellInit = zshConfig.loginShellInit;
+    setOptions = zshConfig.setOptions;
+    shellAliases = zshConfig.shellAliases;
     syntaxHighlighting.enable = true;
 
     # History is managed by Atuin
@@ -22,7 +22,7 @@ in
 
     ohMyZsh = {
       enable = true;
-      plugins = shellConfig.ohMyZsh.plugins;
+      plugins = zshConfig.ohMyZsh.plugins;
     };
   };
 }
