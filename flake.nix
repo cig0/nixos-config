@@ -96,8 +96,9 @@
       ./nixos/modules/security/openssh.nix
 
       # Shell
+      ./nixos/modules/shell/environment.nix
       ./nixos/modules/shell/starship.nix
-      ./nixos/modules/shell/zsh.nix
+      ./nixos/modules/shell/zsh/zsh.nix
 
       # System
         # home-manager.nixosModules.home-manager
