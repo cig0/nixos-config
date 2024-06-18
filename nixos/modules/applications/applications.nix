@@ -237,7 +237,8 @@ let
 
     # Multimedia
     unstablePkgs.blender
-    unstablePkgs.darktable
+    # unstablePkgs.darktable
+    pkgs.darktable
     unstablePkgs.exiftool
     unstablePkgs.gimp
     unstablePkgs.imagemagick
