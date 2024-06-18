@@ -14,6 +14,14 @@
     useDefaultShell = true;
     description = "This is me";
   };
+  home-manager.users.cig0 = { ... }: {
+    home.packages = [ ];
+
+    # The state version is required and should stay at the version you
+    # originally installed.
+    home.stateVersion = "24.05";
+  };
+
 
   users.users.fine = {
     isNormalUser = true;
