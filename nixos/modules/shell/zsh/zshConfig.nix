@@ -93,6 +93,16 @@ rec {
   loginShellInit = interactiveShellInit;
 
 
+  shellInit = ''
+    # Preferred editor for local and remote sessions
+    if [[ -n $SSH_CONNECTION ]]; then
+      export EDITOR='vim'
+    else
+      export EDITOR='lvim'
+    fi
+  '';
+
+
   # Oh My Zsh Plugins
   ohMyZsh = {
     plugins = [ "fzf" "history-substring-search" ];
