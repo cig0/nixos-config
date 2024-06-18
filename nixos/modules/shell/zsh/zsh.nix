@@ -12,7 +12,7 @@ in
     autosuggestions.enable = true;
     interactiveShellInit = zshConfig.interactiveShellInit;
     loginShellInit = zshConfig.loginShellInit;
-    shellInit = shellInit;
+    shellInit = zshConfig.shellInit;
     setOptions = zshConfig.setOptions;
     shellAliases = zshConfig.shellAliases;
     syntaxHighlighting.enable = true;
