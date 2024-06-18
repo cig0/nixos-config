@@ -236,6 +236,7 @@ let
     unstablePkgs.kdePackages.yakuake
 
     # Multimedia
+    unstablePkgs.ansel
     unstablePkgs.blender
     # unstablePkgs.darktable
     pkgs.darktable
