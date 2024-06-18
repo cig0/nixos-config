@@ -3,7 +3,7 @@
 {
   users.mutableUsers = true;
 
-  # cig0
+  # User: cig0
   users.users.cig0 = {
     shell = pkgs.zsh;
     isNormalUser = true;
@@ -24,7 +24,7 @@
   };
 
 
-  # fine
+  # User: fine
   users.users.fine = {
     isNormalUser = true;
     createHome = true;
