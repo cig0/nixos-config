@@ -7,13 +7,13 @@ let
 in
 {
   # Intel iGPU hosts
-  nixpkgs.config = hostnameLogic.mkIf hostnameLogic.isIntelHost {
+  nixpkgs.config = hostnameLogic.mkIf hostnameLogic.isIntelGPUHost {
     packageOverrides = pkgs: {
       intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
     };
   };
 
-  hardware.opengl = hostnameLogic.mkIf hostnameLogic.isIntelHost {
+  hardware.opengl = hostnameLogic.mkIf hostnameLogic.isIntelGPUHost {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
@@ -29,8 +29,11 @@ in
     ];
   };
 
+  services.xserver.videoDrivers =
+    hostnameLogic.mkIf hostnameLogic.isIntelGPUHost [ "modesetting" "fbdev" ] ++
+    hostnameLogic.mkIf hostnameLogic.isVittusaatana [ "nvidia" ];
+
   # ===== FOR WHEN MIGRATING VITTU
   # Nvidia GPU host
-  services.xserver.videoDrivers = hostnameLogic.mkIf hostnameLogic.isVittusaatana [ "nvidia" ];
   hardware.nvidia.modesetting.enable = hostnameLogic.mkIf hostnameLogic.isVittusaatana true;
 }

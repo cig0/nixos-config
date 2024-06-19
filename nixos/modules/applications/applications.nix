@@ -227,6 +227,16 @@ let
     # GNOME
     # gnomeExtensions.appindicator
 
+    # Intel GPU hosts
+    unstablePkgs.intel-compute-runtime
+    unstablePkgs.intel-ocl
+    unstablePkgs.intel-media-driver  # LIBVA_DRIVER_NAME=iHD
+    unstablePkgs.intel-vaapi-driver  # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+    unstablePkgs.libvdpau-va-gl
+    unstablePkgs.libdrm
+    unstablePkgs.libGL
+    unstablePkgs.mesa
+
     # KDE
     unstablePkgs.aha # Required by KDE's About this System
     # amarok
