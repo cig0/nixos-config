@@ -276,6 +276,31 @@ rec {
     lsa = "ls -a --color=always --group-directories-first";
     lsrt = "ls -rt";
 
+    # Hosts
+    s.perrrkele = "ssh perrrkele";
+    s.satama = "ssh satama";
+    s.terasbetoni = "ssh terasbetoni";
+    s.vittusaatana = "ssh vittusaatana";
+    t.perrrkele = "ssh perrrkele -t 'tmux attach-session -t'";
+    t.satama = "ssh satama -t 'tmux attach-session -t'";
+    t.terasbetoni = "ssh terasbetoni -t 'tmux attach-session -t'";
+    t.vittusaatana = "ssh vittusaatana -t 'tmux attach-session -t'";
+
+    # Navigation (CLI)
+      __ = exit;
+      e = exit;
+      jo = joshuto;
+
+      # Directories shortcuts
+      0 = "cd ~/w/cig0";
+      D = "cd ~/Downloads";
+      DE = "cd ~/Desktop";
+      DOC = "cd ~/Documents";
+      P = "cd ~/Pictures";
+      S = "cd ~/Sync";
+      T = "cd ~/tmp";
+      W = "cd ~/w";
+
     # Trans - CLI client for Goolge Translator
       # English
       tenes = "trans en:es";
