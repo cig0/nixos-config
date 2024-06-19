@@ -107,11 +107,31 @@ rec {
       unsetopt null_glob
     }
 
+    # Diff
+    diffstring() {
+      # Using delta :: https://github.com/dandavison/delta
+      d <(echo "$1") <(echo "$2")
+    }
+
+    # General
+    bkp() {
+      source=$1
+      cp -i "$source" "$source.bkp"
+    }
+    freemem() {
+      printf '\n=== Superuser password required to elevate permissions ===\n\n'
+      su -c "echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\\n%s\\n' 'RAM-cache and Swap Cleared'" root
+    }
+
+    # Podman
+    prminone() {
+      podman rmi --force $(podman images | grep -i '<none>' | awk -F' ' '{ print $3 }')
+    }
+
     # Visual Studio Code
     c() {
       /run/current-system/sw/bin/code --profile cig0 $@
     }
-
   '';
 
 
@@ -198,8 +218,11 @@ rec {
     aws_account_region = "aws configure get region";
     aws-central-poc = "export AWS_PROFILE=481635650710_AWS-rw-All";
 
-    # Shortcuts for Rust's Cargo package manager
-    cargoApps = "$EDITOR ~/.config/Cargo.apps";
+    # Diff
+    codif = "colordiff -y -W 212";
+    d = "delta --paging=never";
+    dp = "delta --paging=auto";
+    dt = "difft";
 
     # Distrobox - https://github.com/89luca89/distrobox
     # https://distrobox.it/
@@ -215,6 +238,22 @@ rec {
     fls = "flatpak search";
 
     # General
+    _h = "history | grep -i";
+    ___ = "_h";
+    _fi = "find . -maxdepth 1 -iname";
+    _t = "tmux -f $HOME/.config/tmux/tmux-zsh.conf new-session -s $(hostnamectl hostname)";
+    cm = "chezmoi --color true --progress true";
+    cp = "cp -i";
+    dudir = "du -sh ./"; # Use */ for all dirs in the target directory
+    g = "gwenview";
+    gi = "grep -i --color=always";
+    glow = "glow --pager -";
+    ic = "imgcat";
+    rs = "rsync -Pav";
+    surs = "sudo rsync -Pav";
+    tt = "oathtool --totp -b $(wl-paste -n -p) | wl-copy -n";
+    sw3m = "s -b w3m";
+    v = "lvim";
 
     # GitHub CLI
     ghrw = "gh run watch";
@@ -240,23 +279,26 @@ rec {
     grm = "git rm --cached";
     grss = "git restore --staged";
     gd = "git diff";
-    # Git Log
-    gloH = "git log origin..HEAD --oneline";
-    # Git Status
-    gsb = "git status --short --branch";
-    gst = "git status";
-    # Git Switch
-    gsw = "git switch";
-    gswc = "git switch --create";
-    gswm = "git switch $\"\(git_main_branch\)\"";
-    gswd = "git switch $\"\(git_develop_branch\)\"";
-    gsws = "git switch sandbox";
-    # Plus, related aliases/commands
-    gg = "lazygit";
+      # Git Log
+      gloH = "git log origin..HEAD --oneline";
+      # Git Status
+      gsb = "git status --short --branch";
+      gst = "git status";
+      # Git Switch
+      gsw = "git switch";
+      gswc = "git switch --create";
+      gswm = "git switch $\"\(git_main_branch\)\"";
+      gswd = "git switch $\"\(git_develop_branch\)\"";
+      gsws = "git switch sandbox";
+      # Plus, related aliases/commands
+      gg = "lazygit";
+      # GitGuardian
+      ggs = "ggshield --no-check-for-updates";
+      ggssr = "ggshield --no-check-for-updates secret scan repo";
 
-    # GitGuardian
-    ggs = "ggshield --no-check-for-updates";
-    ggssr = "ggshield --no-check-for-updates secret scan repo";
+    # Golang
+    cdgosrc = "cd $(go env GOPATH)/src";
+    go_clean_vcs_cache = "rm -rf $GOPATH/pkg/mod/cache/vcs";
 
     # GPG
     gpgc = "gpg -c --cipher-algo aes256";
@@ -264,12 +306,18 @@ rec {
     # Compress and encrypt files & dirs using GNU GPG
     gpgtare = "gpgtar --encrypt --symmetric --gpg-args --cipher-algo aes256 --output"; # input_folder/output_file input_folder
 
+    # K8s
+    h = "helm";
+    k9s = "k9s --headless";
+    k = "kubectl";
+
     # ls
     l = "ls -lh --group-directories-first";
     l1 = "ls -1 --group-directories-first";
     l11 = "ls -1rt";
     ldir = "ls -dl */ --color=always --group-directories-first";
     ll = "ls -1rt";
+    lla = "ls -lAh --group-directories-first";
     lm = "ls -lrt --color=always";
     lma = "ls -lartA --color=always";
     lsa = "ls -a --color=always --group-directories-first";
@@ -285,15 +333,18 @@ rec {
     tterasbetoni = "ssh terasbetoni -t 'tmux attach-session -t'";
     tvittusaatana = "ssh vittusaatana -t 'tmux attach-session -t'";
 
+    # Minikube
+    m = "minikube";
+    minikube = "minikube-linux-amd64";
+
     # Navigation (CLI)
       __ = "exit";
       e = "exit";
       jo = "joshuto";
+      o = "ranger";
 
       # Directories shortcuts
       _0 = "cd ~/w/cig0";
-      lla = "ls -lAh --group-directories-first";
-
       D = "cd ~/Downloads";
       DE = "cd ~/Desktop";
       DOC = "cd ~/Documents";
@@ -301,6 +352,23 @@ rec {
       S = "cd ~/Sync";
       T = "cd ~/tmp";
       W = "cd ~/w";
+
+    # Podman
+    # docker = "podman";
+    p = "podman";
+    pi = "podman images";
+    psa = "podman ps -a";
+    ptui = "podman-tui";
+
+    # Rust's Cargo package manager
+    cargoApps = "$EDITOR ~/.config/Cargo.apps";
+
+    # SSH commands library
+    sshFingerprint = "ssh-keygen -E hash_type -lf /path/to/key"; # Get key fingerprint
+
+    # Terraform / OpenTofu
+    ot = "opentofu";
+    tf = "terraform";
 
     # Trans - CLI client for Goolge Translator
       # English
