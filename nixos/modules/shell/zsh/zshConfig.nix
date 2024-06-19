@@ -36,6 +36,9 @@ rec {
 
 
   interactiveShellInit = ''
+    umask 0077
+    fpath+=~/.zfunc
+
     # Needs https://github.com/nix-community/nix-index
     source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
 
@@ -121,6 +124,31 @@ rec {
     freemem() {
       printf '\n=== Superuser password required to elevate permissions ===\n\n'
       su -c "echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\\n%s\\n' 'RAM-cache and Swap Cleared'" root
+    }
+
+    # Kubernetes
+    kla() {
+      # List all resources
+      kubectl api-resources --verbs=list --namespaced -o name | xargs -t -n 1 kubectl get --show-kind --ignore-not-found "$@"
+    }
+    kla_events() {
+      # List all events
+      for i in $(kubectl api-resources --verbs=list --namespaced -o name | grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq); do
+        echo "Resource:" $i
+
+        if [ -z "$1" ]
+        then
+            kubectl get --ignore-not-found $i
+        else
+            kubectl -n $1 get --ignore-not-found $i
+        fi
+      done
+    }
+    kdecrypts() {
+      # Secret decrypt
+      # $1 = secret name
+      # $2 = .data.{OBJECT}
+      kubectl get secret "$1" -o jsonpath="{.data.$2}" | base64 --decode
     }
 
     # Podman
@@ -310,6 +338,8 @@ rec {
     h = "helm";
     k9s = "k9s --headless";
     k = "kubectl";
+    kx = "k ctx";
+    kn = "k ns";
 
     # ls
     l = "ls -lh --group-directories-first";
