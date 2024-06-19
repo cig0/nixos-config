@@ -199,11 +199,11 @@ rec {
     aws-central-poc = "export AWS_PROFILE=481635650710_AWS-rw-All";
 
     # Shortcuts for Rust's Cargo package manager
-    Cargo.apps = "$EDITOR ~/.config/Cargo.apps";
+    cargoApps = "$EDITOR ~/.config/Cargo.apps";
 
     # Distrobox - https://github.com/89luca89/distrobox
     # https://distrobox.it/
-    db = distrobox;
+    db = "distrobox";
     dbc = "distrobox create";
     dbe = "db enter";
     dbl = "db list";
@@ -248,11 +248,11 @@ rec {
     # Git Switch
     gsw = "git switch";
     gswc = "git switch --create";
-    gswm = "git switch $"(git_main_branch)"";
-    gswd = "git switch $"(git_develop_branch)"";
+    gswm = "git switch $\"\(git_main_branch\)\"";
+    gswd = "git switch $\"\(git_develop_branch\)\"";
     gsws = "git switch sandbox";
     # Plus, related aliases/commands
-    gg = lazygit;
+    gg = "lazygit";
 
     # GitGuardian
     ggs = "ggshield --no-check-for-updates";
@@ -265,7 +265,6 @@ rec {
     gpgtare = "gpgtar --encrypt --symmetric --gpg-args --cipher-algo aes256 --output"; # input_folder/output_file input_folder
 
     # ls
-    l. = "ls -lAh --group-directories-first";
     l = "ls -lh --group-directories-first";
     l1 = "ls -1 --group-directories-first";
     l11 = "ls -1rt";
@@ -277,22 +276,24 @@ rec {
     lsrt = "ls -rt";
 
     # Hosts
-    s.perrrkele = "ssh perrrkele";
-    s.satama = "ssh satama";
-    s.terasbetoni = "ssh terasbetoni";
-    s.vittusaatana = "ssh vittusaatana";
-    t.perrrkele = "ssh perrrkele -t 'tmux attach-session -t'";
-    t.satama = "ssh satama -t 'tmux attach-session -t'";
-    t.terasbetoni = "ssh terasbetoni -t 'tmux attach-session -t'";
-    t.vittusaatana = "ssh vittusaatana -t 'tmux attach-session -t'";
+    sperrrkele = "ssh perrrkele";
+    ssatama = "ssh satama";
+    sterasbetoni = "ssh terasbetoni";
+    svittusaatana = "ssh vittusaatana";
+    tperrrkele = "ssh perrrkele -t 'tmux attach-session -t'";
+    tsatama = "ssh satama -t 'tmux attach-session -t'";
+    tterasbetoni = "ssh terasbetoni -t 'tmux attach-session -t'";
+    tvittusaatana = "ssh vittusaatana -t 'tmux attach-session -t'";
 
     # Navigation (CLI)
-      __ = exit;
-      e = exit;
-      jo = joshuto;
+      __ = "exit";
+      e = "exit";
+      jo = "joshuto";
 
       # Directories shortcuts
-      0 = "cd ~/w/cig0";
+      _0 = "cd ~/w/cig0";
+      lla = "ls -lAh --group-directories-first";
+
       D = "cd ~/Downloads";
       DE = "cd ~/Desktop";
       DOC = "cd ~/Documents";
