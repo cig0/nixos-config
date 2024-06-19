@@ -1,8 +1,9 @@
+# TODO:
+#   - Split interactiveShellInit
+#   - Split shellAliases
+
 { pkgs }:
 
-let
-  nixos = import ./nixos.nix;
-in
 rec {
   setOptions = [
     # https://superuser.com/questions/519596/share-history-in-multiple-zsh-shell
@@ -44,7 +45,45 @@ rec {
     # ANSI escape code for resetting text attributes
     local reset="\e[0m"
 
-    ${nixos}
+    # Nix and NixOS
+      # Hydra
+        hc() {
+          # hydra-check example: `hydra-check --arch x86_64-linux --channel unstable starship`
+          hydra-check --arch x86_64-linux --channel 24.05 "$1"
+        }
+
+        hcs() {
+          # hydra-check example: `hydra-check --arch x86_64-linux --channel unstable starship`
+          hydra-check --arch x86_64-linux --channel staging "$1"
+        }
+
+        hcu() {
+          # hydra-check example: `hydra-check --arch x86_64-linux --channel unstable starship`
+          hydra-check --arch x86_64-linux --channel unstable "$1"
+        }
+
+      # Shell
+        # `nix shell` packages from nixpkgs
+        nixsh() {
+          local p
+          for p in "$@"; do
+            NIXPKGS_ALLOW_UNFREE=1 nix shell --impure nixpkgs#$p
+          done
+        }
+
+        # `nix shell` packages from nixpkgs/nixos-unstable
+        nixshu() {
+          local p
+          for p in "$@"; do
+            NIXPKGS_ALLOW_UNFREE=1 nix shell --impure nixpkgs/nixos-unstable#$p
+          done
+        }
+
+      # System
+        nixcv() {
+          local channel_version="$(nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version')"
+          echo -e "\n$bold_greenNix channel version: $bold_white$channel_version$reset"
+        }
   '';
 
 
@@ -76,6 +115,16 @@ rec {
 
     # Shell editing Emacs' style
     bindkey -e
+
+    # zsh_reload
+    zr() {
+      if [ -n "$(jobs)" ]; then
+        print -P "Error: %j job(s) in background"
+      else
+        [[ -n "$ORIGINAL_PATH" ]] && export PATH="$ORIGINAL_PATH"
+        exec zsh
+      fi
+    }
   '';
 
 
@@ -86,17 +135,34 @@ rec {
 
 
   shellAliases = {
-    # Cleaning
-    nhc = "nh clean all --keep 3";
-    nixc = "nix-collect-garbage -d 3";
+    # Nix and NixOS aliases
+      # Cleaning
+      nhc = "nh clean all --keep 3";
+      nixc = "nix-collect-garbage -d 3";
 
-    # Searching
-    nixse = "nix search nixpkgs";
-    nixseu = "nix search nixpkgs/nixos-unstable#";
-    nhs = "nh search";
+      # Searching
+      nixse = "nix search nixpkgs";
+      nixseu = "nix search nixpkgs/nixos-unstable#";
+      nhs = "nh search";
 
-    # System
-    nixinfo = "nix-info --host-os -m";
-    nixlg = "nixos-rebuild list-generations";
+      # System
+      nixinfo = "nix-info --host-os -m";
+      nixlg = "nixos-rebuild list-generations";
+
+
+    # General aliases
+      # AIChat
+        # Google Gemini
+        aG = "aichat -m gemini";
+        aGc = "aichat -m gemini --code";
+        aGl = "aichat -m gemini --list-sessions";
+        aGs = "aichat -m gemini --session";
+
+      # Bat - A cat(1) clone with syntax highlighting and Git integration.
+      # https://github.com/sharkdp/bat
+      b = "bat --paging=always --style=plain --theme='Dracula' --wrap=auto" # Plain + paging=always
+      bb =" bat --paging=never --style=plain --theme='Dracula' --wrap=auto" # Plain, no paging
+      bnp = "bat --paging=always --style=numbers --theme='Dracula' --wrap=auto" # Numbers + paging=always
+
   };
 }
