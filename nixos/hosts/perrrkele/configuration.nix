@@ -158,6 +158,9 @@
 
     # https://stackoverflow.com/questions/76591674/nix-gives-no-space-left-on-device-even-though-nix-has-lots
     TMPDIR = "/tmp";
+
+    # Fuzzy finder
+    FZF_DEFAULT_OPTS = "--height 40% --layout=reverse --border";
   };
 
 
