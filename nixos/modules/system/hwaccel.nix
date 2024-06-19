@@ -30,8 +30,9 @@ in
   };
 
   services.xserver.videoDrivers =
-    hostnameLogic.mkIf hostnameLogic.isIntelGPUHost [ "modesetting" "fbdev" ] ++
-    hostnameLogic.mkIf hostnameLogic.isVittusaatana [ "nvidia" ];
+    if hostnameLogic.isIntelGPUHost then [ "modesetting" "fbdev" ]
+    else if hostnameLogic.isVittusaatana then [ "nvidia" ]
+    else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 
   # ===== FOR WHEN MIGRATING VITTU
   # Nvidia GPU host
