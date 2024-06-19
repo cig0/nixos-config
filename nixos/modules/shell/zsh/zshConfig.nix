@@ -84,6 +84,34 @@ rec {
           local channel_version="$(nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version')"
           echo -e "\n$bold_greenNix channel version: $bold_white$channel_version$reset"
         }
+
+
+    # Other functions
+    # ls
+    a() {
+      setopt null_glob
+      hidden_found=false
+      for entry in .*; do
+        [[ $entry != "." && $entry != ".." ]] && hidden_found=true && break
+      done
+      $hidden_found && ls -dl --color=always --group-directories-first .??* || echo -e '\nNo hidden files found.\e[0m'
+      unsetopt null_glob
+    }
+    la() {
+      setopt null_glob
+      hidden_found=false
+      for entry in .*; do
+        [[ $entry != "." && $entry != ".." ]] && hidden_found=true && break
+      done
+      $hidden_found && ls -dl --color=always --group-directories-first .??* || echo -e '\nNo hidden files found.\e[0m'
+      unsetopt null_glob
+    }
+
+    # Visual Studio Code
+    c() {
+      /run/current-system/sw/bin/code --profile cig0 $@
+    }
+
   '';
 
 
@@ -93,9 +121,9 @@ rec {
   shellInit = ''
     # Preferred editor for local and remote sessions
     if [[ -n $SSH_CONNECTION ]]; then
-      export EDITOR='vim'
+      export EDITOR="vim"
     else
-      export EDITOR='lvim'
+      export EDITOR="lvim"
     fi
 
     # Uncomment the following line to display red dots whilst waiting for completion.
@@ -150,18 +178,120 @@ rec {
       nixlg = "nixos-rebuild list-generations";
 
 
-    # General aliases
-      # AIChat
-        # Google Gemini
-        aG = "aichat -m gemini";
-        aGc = "aichat -m gemini --code";
-        aGl = "aichat -m gemini --list-sessions";
-        aGs = "aichat -m gemini --session";
+    # Other aliases
+    # AIChat
+      # Google Gemini
+      aG = "aichat -m gemini";
+      aGc = "aichat -m gemini --code";
+      aGl = "aichat -m gemini --list-sessions";
+      aGs = "aichat -m gemini --session";
 
-      # Bat - A cat(1) clone with syntax highlighting and Git integration.
-      # https://github.com/sharkdp/bat
-      b = "bat --paging=always --style=plain --theme='Dracula' --wrap=auto"; # Plain + paging=always
-      bb = " bat --paging=never --style=plain --theme='Dracula' --wrap=auto"; # Plain, no paging
-      bnp = "bat --paging=always --style=numbers --theme='Dracula' --wrap=auto"; # Numbers + paging=always
+    # Bat - A cat(1) clone with syntax highlighting and Git integration.
+    # https://github.com/sharkdp/bat
+    b = "bat --paging=always --style=plain --theme='Dracula' --wrap=auto"; # Plain + paging=always
+    bb = " bat --paging=never --style=plain --theme='Dracula' --wrap=auto"; # Plain, no paging
+    bnp = "bat --paging=always --style=numbers --theme='Dracula' --wrap=auto"; # Numbers + paging=always
+
+    # AWS
+    aws_account_describe = "aws organizations describe-account --account-id $(aws_account_id)";
+    aws_account_id = "aws sts get-caller-identity --query Account --output text";
+    aws_account_region = "aws configure get region";
+    aws-central-poc = "export AWS_PROFILE=481635650710_AWS-rw-All";
+
+    # Shortcuts for Rust's Cargo package manager
+    Cargo.apps = "$EDITOR ~/.config/Cargo.apps";
+
+    # Distrobox - https://github.com/89luca89/distrobox
+    # https://distrobox.it/
+    db = distrobox;
+    dbc = "distrobox create";
+    dbe = "db enter";
+    dbl = "db list";
+    dbr = "db run";
+
+    # Flatpak
+    fll = "flatpak list";
+    flp = "flatpak ps";
+    fls = "flatpak search";
+
+    # General
+
+    # GitHub CLI
+    ghrw = "gh run watch";
+    ghwv = "gh workflow view";
+
+    # Git
+    # Adds an extra new line at the beginning of the pretty decoration
+    # https://git-scm.com/docs/pretty-formats
+    glols = "git log --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
+    ga = "git add";
+    gaf = "git add --force";
+    gb = "git branch";
+    gca = "git commit -am";
+    gch = "git checkout";
+    gcl = "git clone";
+    gcl1 = "git clone --depth=1";
+    gco = "git commit -m";
+    gf = "git fetch";
+    gf1 = "git fetch --depth=1";
+    gls = "git ls-tree --full-tree --name-only -r HEAD | lines";
+    gp = "git pull";
+    gpu = "git push";
+    grm = "git rm --cached";
+    grss = "git restore --staged";
+    gd = "git diff";
+    # Git Log
+    gloH = "git log origin..HEAD --oneline";
+    # Git Status
+    gsb = "git status --short --branch";
+    gst = "git status";
+    # Git Switch
+    gsw = "git switch";
+    gswc = "git switch --create";
+    gswm = "git switch $"(git_main_branch)"";
+    gswd = "git switch $"(git_develop_branch)"";
+    gsws = "git switch sandbox";
+    # Plus, related aliases/commands
+    gg = lazygit;
+
+    # GitGuardian
+    ggs = "ggshield --no-check-for-updates";
+    ggssr = "ggshield --no-check-for-updates secret scan repo";
+
+    # GPG
+    gpgc = "gpg -c --cipher-algo aes256";
+    gpgd = "gpg -d";
+    # Compress and encrypt files & dirs using GNU GPG
+    gpgtare = "gpgtar --encrypt --symmetric --gpg-args --cipher-algo aes256 --output"; # input_folder/output_file input_folder
+
+    # ls
+    l. = "ls -lAh --group-directories-first";
+    l = "ls -lh --group-directories-first";
+    l1 = "ls -1 --group-directories-first";
+    l11 = "ls -1rt";
+    ldir = "ls -dl */ --color=always --group-directories-first";
+    ll = "ls -1rt";
+    lm = "ls -lrt --color=always";
+    lma = "ls -lartA --color=always";
+    lsa = "ls -a --color=always --group-directories-first";
+    lsrt = "ls -rt";
+
+    # Trans - CLI client for Goolge Translator
+      # English
+      tenes = "trans en:es";
+      tesen = "trans es:en";
+      # Suomi
+      tenfi = "trans en:fi";
+      tfien = "trans fi:en";
+
+    # Trasher - https://crates.io/crates/trasher
+    rm = "trasher --exclude /var rm";
+    rmp = "trasher --exclude /var rm -p";
+    te = "trasher --exclude /var empty";
+    tls = "trasher --exclude /var ls";
+    tp = "trasher --exclude /var path-of";
+
+    # systemd
+    journalctl_boot_err = "journalctl -xep err -b";
   };
 }
