@@ -161,6 +161,8 @@
         inherit system;
         specialArgs = { inherit inputs system unstablePkgs; };
         modules = commonModules ++ [
+          home-manager.nixosModules.home-manager
+
           # Main configuration file
           ./nixos/hosts/satama/configuration.nix
 
@@ -176,8 +178,8 @@
           home-manager.nixosModules.home-manager
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
 
-          # Main configuration file
-          ./nixos/hosts/perrrkele/configuration.nix
+          ./nixos/hosts/perrrkele/configuration.nix # Main configuration file
+          ./home-manager/home.nix # Home Manager
 
           {
             services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
@@ -197,6 +199,8 @@
         inherit system;
         specialArgs = { inherit inputs system unstablePkgs; };
         modules = commonModules ++ userSideModules ++ [
+          home-manager.nixosModules.home-manager
+
           # Main configuration file
           ./nixos/hosts/vittusaatana/configuration.nix
 
