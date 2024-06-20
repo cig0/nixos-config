@@ -11,7 +11,7 @@
     };
 
     home-manager = { # Maybe in the future
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
 
@@ -130,6 +130,9 @@
     ];
 
     userSideModules = [
+      # Home Manager configuration
+      ./home-manager/home.nix
+
       # Applications - Flatpak
       nix-flatpak.nixosModules.nix-flatpak
       ./nixos/modules/applications/nix-flatpak.nix
@@ -178,8 +181,8 @@
           home-manager.nixosModules.home-manager
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
 
-          ./nixos/hosts/perrrkele/configuration.nix # Main configuration file
-          ./home-manager/home.nix # Home Manager
+          # Main configuration file
+          ./nixos/hosts/perrrkele/configuration.nix
 
           {
             services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
