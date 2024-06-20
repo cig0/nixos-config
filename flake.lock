@@ -410,12 +410,12 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1718806950,
-        "narHash": "sha256-E+W/kbedZAiOuPtT+KQRposLaXGDLd7lyK7oL3IH/5U=",
-        "rev": "acb4f0e9bfa8ca2d6fca5e692307b5c994e7dbda",
-        "revCount": 1720,
+        "lastModified": 1718894893,
+        "narHash": "sha256-hxQBUtDbFOCCW1CsFZTS9Q5Ov1ZKdJgbBZHSez1M6iA=",
+        "rev": "083823b7904e43a4fc1c7229781417e875359a42",
+        "revCount": 1733,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/NixOS/nixos-hardware/0.1.1720%2Brev-acb4f0e9bfa8ca2d6fca5e692307b5c994e7dbda/01903190-df91-704b-86b6-c40c959c0d82/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/NixOS/nixos-hardware/0.1.1733%2Brev-083823b7904e43a4fc1c7229781417e875359a42/019036b6-f0da-76cc-be4c-840fe9ff9bb9/source.tar.gz"
       },
       "original": {
         "type": "tarball",
