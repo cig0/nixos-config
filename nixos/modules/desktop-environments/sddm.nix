@@ -7,7 +7,7 @@
       user = "cig0";
     };
     defaultSession = "plasma";
-    sddm = { # The enable option is managed from the flake
+    sddm = { # The enable option is managed from the flake.
       enableHidpi = true;
       wayland = {
         enable = true;
