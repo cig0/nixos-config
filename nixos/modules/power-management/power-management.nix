@@ -5,7 +5,7 @@
 {
   powerManagement = {
     enable = true;
-    powertop.enable = false;
+    powertop.enable = true;
   };
 
   services.thermald.enable = true;
