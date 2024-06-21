@@ -78,7 +78,7 @@
       ./nixos/modules/networking/dns.nix
       ./nixos/modules/networking/stevenblack.nix
       ./nixos/modules/networking/stevenblack-unblacklist.nix
-      ./nixos/modules/networking/tailscale.nix
+      # ./nixos/modules/networking/tailscale.nix
 
       # Observability
       ./nixos/modules/observability/observability.nix
