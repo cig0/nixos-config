@@ -6,7 +6,6 @@
     enable = true;
     user = "cig0";
     group = "users";
-    # configDir = "/home/cig0/.config/syncthing"; # As per NixOS options: config.services.syncthing.dataDir + "/.config/syncthing"
     dataDir = "/home/cig0";
     overrideDevices = true;
     overrideFolders = true;
