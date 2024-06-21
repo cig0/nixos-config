@@ -11,7 +11,7 @@
     };
 
     home-manager = { # Maybe in the future
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/home-manager?ref=release-24.05";
     };
 
