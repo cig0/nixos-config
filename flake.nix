@@ -15,10 +15,10 @@
       url = "github:nix-community/home-manager?ref=release-24.05";
     };
 
-    lanzaboote = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable"; # Optional but recommended to limit the size of your system closure.
-      url = "github:nix-community/lanzaboote/v0.4.1";
-    };
+    # lanzaboote = {
+    #   inputs.nixpkgs.follows = "nixpkgs-unstable"; # Optional but recommended to limit the size of your system closure.
+    #   url = "github:nix-community/lanzaboote/v0.4.1";
+    # };
 
     nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
@@ -49,7 +49,7 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable,
     auto-cpufreq,             # Energy efficiency.configDir
     home-manager,             # User-specific settings and packages
-    lanzaboote,               # Secure Boot for NixOS
+    # lanzaboote,               # Secure Boot for NixOS
     nix-flatpak,              # Enhanced Flatpak support
     nix-index,                # A files database for nixpkgs
     # nix-index-database,       # A files database for nixpkgs
@@ -92,7 +92,8 @@
         # sops-nix.nixosModules.sops
         # ./nixos/modules/security/sops.nix
       ./nixos/modules/security/firewall.nix
-      ./nixos/modules/security/lanzaboote.nix
+        # lanzaboote.nixosModules.lanzaboote
+        # ./nixos/modules/security/lanzaboote.nix
       ./nixos/modules/security/openssh.nix
 
       # Shell
@@ -104,7 +105,6 @@
         # home-manager.nixosModules.home-manager
         # nix-index-database.nixosModules.nix-index
         # { programs.nix-index-database.comma.enable = true; }
-      lanzaboote.nixosModules.lanzaboote
       ./nixos/modules/system/cups.nix
       ./nixos/modules/system/fwupd.nix
       ./nixos/modules/system/gnupg.nix
