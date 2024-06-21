@@ -15,10 +15,10 @@
       url = "github:nix-community/home-manager?ref=release-24.05";
     };
 
-    # lanzaboote = {
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable"; # Optional but recommended to limit the size of your system closure.
-    #   url = "github:nix-community/lanzaboote/v0.4.1";
-    # };
+    lanzaboote = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable"; # Optional but recommended to limit the size of your system closure.
+      url = "github:nix-community/lanzaboote/v0.4.1";
+    };
 
     nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
@@ -49,7 +49,7 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable,
     auto-cpufreq,             # Energy efficiency.configDir
     home-manager,             # User-specific settings and packages
-    # lanzaboote,               # Secure Boot for NixOS
+    lanzaboote,               # Secure Boot for NixOS
     nix-flatpak,              # Enhanced Flatpak support
     nix-index,                # A files database for nixpkgs
     # nix-index-database,       # A files database for nixpkgs
@@ -84,16 +84,14 @@
       ./nixos/modules/observability/observability.nix
 
       # Energy efficiency
-      auto-cpufreq.nixosModules.default
-      ./nixos/modules/power-management/auto-cpufreq.nix
+      auto-cpufreq.nixosModules.default ./nixos/modules/power-management/auto-cpufreq.nix
       ./nixos/modules/power-management/power-management.nix
 
       # Security
-        # sops-nix.nixosModules.sops
-        # ./nixos/modules/security/sops.nix
+      # sops-nix.nixosModules.sops
+      # ./nixos/modules/security/sops.nix
       ./nixos/modules/security/firewall.nix
-        # lanzaboote.nixosModules.lanzaboote
-        # ./nixos/modules/security/lanzaboote.nix
+      lanzaboote.nixosModules.lanzaboote ./nixos/modules/security/lanzaboote.nix
       ./nixos/modules/security/openssh.nix
 
       # Shell
@@ -102,9 +100,9 @@
       ./nixos/modules/shell/zsh/zsh.nix
 
       # System
-        # home-manager.nixosModules.home-manager
-        # nix-index-database.nixosModules.nix-index
-        # { programs.nix-index-database.comma.enable = true; }
+      # home-manager.nixosModules.home-manager
+      # nix-index-database.nixosModules.nix-index
+      # { programs.nix-index-database.comma.enable = true; }
       ./nixos/modules/system/cups.nix
       ./nixos/modules/system/fwupd.nix
       ./nixos/modules/system/gnupg.nix
@@ -134,15 +132,14 @@
       ./home-manager/home.nix
 
       # Applications - Flatpak
-      nix-flatpak.nixosModules.nix-flatpak
-      ./nixos/modules/applications/nix-flatpak.nix
+      nix-flatpak.nixosModules.nix-flatpak ./nixos/modules/applications/nix-flatpak.nix
 
       # System - GUI
       ./nixos/modules/system/fonts.nix
 
       # Desktop Environments / Window Managers
-        # nixos-cosmic.nixosModules.default
-        # ./nixos/modules/desktop-environments/cosmic.nix
+      # nixos-cosmic.nixosModules.default
+      # ./nixos/modules/desktop-environments/cosmic.nix
       ./nixos/modules/desktop-environments/kdeconnect.nix
       ./nixos/modules/desktop-environments/sddm.nix
       ./nixos/modules/desktop-environments/xdg-desktop-portal.nix
