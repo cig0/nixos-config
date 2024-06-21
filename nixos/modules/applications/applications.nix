@@ -51,7 +51,7 @@ let
     unstablePkgs.inxi
     unstablePkgs.iotop
     unstablePkgs.lm_sensors
-    # unstablePkgs.powertop
+    unstablePkgs.powertop
     unstablePkgs.s-tui
     unstablePkgs.vdpauinfo
 
