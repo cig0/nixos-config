@@ -45,7 +45,6 @@
       "io.gitlab.gregorni.Letterpress"
       "org.nickvision.tubeconverter"
       "io.github.flattool.Warehouse"
-      "net.waterfox.waterfox"
     ];
   };
 
