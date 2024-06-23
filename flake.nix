@@ -178,7 +178,6 @@
               # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
             services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
           }
-
         ];
       };
 
@@ -198,7 +197,6 @@
               # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
             services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
           }
-
           # TODO: Nvidia drivers
         ];
       };
