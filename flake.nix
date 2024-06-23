@@ -1,3 +1,13 @@
+#---------------------------------------------------------------------
+# Martín Cigorraga
+# https://github.com/cig0/nixos-config-public
+# May 1st, 2024
+# My personal NixOS configuration
+#
+# ¯\_(ツ)_/¯
+#---------------------------------------------------------------------
+
+
 {
   description = "cig0's NixOS flake";
 
