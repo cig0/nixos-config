@@ -85,6 +85,7 @@
 
       # Networking related
       ./nixos/modules/networking/dns.nix
+      ./nixos/modules/networking/nftables.nix
       ./nixos/modules/networking/stevenblack.nix
       ./nixos/modules/networking/stevenblack-unblacklist.nix
       ./nixos/modules/networking/tailscale.nix

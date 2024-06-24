@@ -7,8 +7,6 @@
 
 {
   networking = {
-    nftables.enable = true; # Explicitly required by Incus
-
     firewall = {
       enable = true;
       allowPing = false;
