@@ -22,6 +22,7 @@
     };
   };
 
+  programs.kdeconnect.enable = true;
   services = {
     openssh.openFirewall = false;
     syncthing.openDefaultPorts = true;
