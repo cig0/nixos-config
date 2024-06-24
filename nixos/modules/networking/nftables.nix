@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  networking.nftables.enable = true; # Explicitly required by Incus.
+  networking.nftables.enable = true; # Required by Incus.
 }
