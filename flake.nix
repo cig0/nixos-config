@@ -144,7 +144,6 @@
 
       # Desktop Environments / Window Managers
       # ./nixos/modules/desktop-environments/cosmic.nix nixos-cosmic.nixosModules.default
-      ./nixos/modules/desktop-environments/kdeconnect.nix
       ./nixos/modules/desktop-environments/sddm.nix
       ./nixos/modules/desktop-environments/xdg-desktop-portal.nix
     ];
