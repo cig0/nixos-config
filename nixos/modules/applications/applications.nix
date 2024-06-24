@@ -55,7 +55,7 @@ let
 
     # Networking
     unstablePkgs.aria2
-    # unstablePkgs.dig
+    unstablePkgs.dig
     unstablePkgs.dnstracer
     unstablePkgs.gping # Ping, but with a graph :: https://github.com/orf/gping
     unstablePkgs.grpcurl
