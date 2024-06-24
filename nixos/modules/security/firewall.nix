@@ -14,7 +14,7 @@
       allowPing = false;
       allowedTCPPorts = [];
       allowedUDPPorts = [];
-      trustedInterfaces = [ "virbr0" ];
+      trustedInterfaces = [ "tailscale0" "virbr0" ];
       checkReversePath = "loose";
       # The networking.firewall.checkReversePath option in NixOS controls whether the Linux kernel's
       # reverse path filtering mechanism should be enabled or not, which can enhance security by
