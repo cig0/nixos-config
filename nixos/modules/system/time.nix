@@ -1,8 +1,10 @@
 # TODO dynamically configure NTP pool depending on timezonne/region
 
-{ pkgs, ... }:
+{ ... }:
 
 let
+  hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
+
   commonNTPPool = [
     "0.nixos.pool.ntp.org"
     "1.nixos.pool.ntp.org"
@@ -29,10 +31,22 @@ in
   # Set NTP servers pool
   networking.timeServers = ntpPool;
 
+    time.timeZone =
+    if hostnameLogic.isPerrrkele then
+      "America/Argentina/Buenos_Aires"
+
+    else if hostnameLogic.isSatama then
+      "America/Argentina/Buenos_Aires"
+
+    else if hostnameLogic.isVittusaatana then
+      "America/Argentina/Buenos_Aires"
+
+    else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
+
   # Dynamically set the timezone
-  services = {
-    automatic-timezoned.enable = true;
-    localtimed.enable = true;
-    tzupdate.enable = true;
-  };
+  # services = {
+  #   automatic-timezoned.enable = true;
+  #   localtimed.enable = true;
+  #   tzupdate.enable = true;
+  # };
 }
