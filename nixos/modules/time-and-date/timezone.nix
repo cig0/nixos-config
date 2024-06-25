@@ -1,3 +1,7 @@
+# TODO add logic to dynamically update the time zone at build time depending on
+# what region of the planet I'm connecting to the intertubez from.
+
+
 { config, lib, ... }:
 
 let
