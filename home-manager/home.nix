@@ -8,7 +8,7 @@
   home-manager = {
     backupFileExtension = "bkp";
     useGlobalPkgs = true; # Using global packages
-    useUserPackages = true; # Allowing user-specific packages
+    useUserPackages = true; # Allow user-specific packages
 
     users.cig0 = { ... }: {
       # Define user-specific packages and configurations
