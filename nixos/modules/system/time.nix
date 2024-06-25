@@ -1,4 +1,4 @@
-# TODO configure NTP pool depending on timezonne/region
+# TODO dynamically configure NTP pool depending on timezonne/region
 
 { pkgs, ... }:
 
@@ -32,7 +32,6 @@ in
   # Dynamically set the timezone
   services = {
     automatic-timezoned.enable = true;
-    automatic-timezoned.package = pkgs.automatic-timezoned;
     localtimed.enable = true;
     tzupdate.enable = true;
   };
