@@ -1,4 +1,7 @@
 # https://wiki.nixos.org/wiki/NTP
+# TODO evaluate adding capability to switch the NTP servers dynamically at build time
+# depending on what region of the planet I'm connecting to the intertubez from.
+
 
 { ... }:
 
