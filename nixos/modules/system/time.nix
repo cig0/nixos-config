@@ -1,3 +1,5 @@
+# TODO configure NTP pool depending on timezonne/region
+
 { pkgs, ... }:
 
 let
@@ -8,26 +10,20 @@ let
     "3.nixos.pool.ntp.org"
   ];
 
-  # Geolocation data fetching
-  regionData = builtins.fromJSON (
-    builtins.readFile (
-      pkgs.fetchurl {
-        url = "https://ipapi.co/json/";
-        sha256 = "9CSp6Tc7dmQcj3UewQb8ZxUpz/bngzuHGTr/osCVCcw=";
-      }
-    )
-  );
+  argentinaNTPPool = [
+    "1.ar.pool.ntp.org"
+    "0.south-america.pool.ntp.org"
+  ];
 
-  # Set NTP pool according to region
-  region = regionData.continent_code;
-  ntpPool =
-    if region == "SA" then [
-      "1.ar.pool.ntp.org"
-      "0.south-america.pool.ntp.org"
-    ] ++ commonNTPPool
-    else if region == "NA" then [ "0.north-america.pool.ntp.org" ] ++ commonNTPPool
-    else if region == "EU" then [ "0.europe.pool.ntp.org" ] ++ commonNTPPool
-    else commonNTPPool;
+  naNTPPool = [
+    "0.north-america.pool.ntp.org"
+  ];
+
+  euNTPPool = [
+    "0.europe.pool.ntp.org"
+  ];
+
+  ntpPool = argentinaNTPPool ++ commonNTPPool;
 in
 {
   # Set NTP servers pool
