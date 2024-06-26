@@ -103,7 +103,7 @@
       ./nixos/modules/security/openssh.nix
       # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops
 
-      # ShellTCP
+      # Shell
       ./nixos/modules/shell/environment.nix
       ./nixos/modules/shell/starship.nix
       ./nixos/modules/shell/zsh/zsh.nix
