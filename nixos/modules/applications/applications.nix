@@ -262,7 +262,7 @@ let
     # Security - GUI
     pkgs.bitwarden
     pkgs.keepassxc
-    pkgs.protonvpn-gui
+    unstablePkgs.protonvpn-gui
 
     # Storage - GUI
     unstablePkgs.vorta
