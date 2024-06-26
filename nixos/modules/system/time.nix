@@ -1,6 +1,6 @@
 # TODO dynamically configure NTP pool depending on timezonne/region
 
-{ ... }:
+{ config, lib, ... }:
 
 let
   hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
