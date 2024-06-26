@@ -203,6 +203,7 @@ let
     unstablePkgs.oterm
 
     # Comms
+    unstablePkgs.element-desktop
     unstablePkgs.element-desktop-wayland
     unstablePkgs.shortwave
     unstablePkgs.telegram-desktop
