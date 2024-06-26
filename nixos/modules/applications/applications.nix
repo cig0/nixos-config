@@ -50,7 +50,7 @@ let
     pkgs.lm_sensors
     pkgs.powertop
     unstablePkgs.s-tui
-    unstablePkgs.vdpauinfo
+    pkgs.vdpauinfo
 
     # Networking
     unstablePkgs.aria2
