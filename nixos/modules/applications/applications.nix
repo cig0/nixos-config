@@ -95,10 +95,10 @@ let
       # JS
         # nodejs_latest
       # Nickel
-        unstablePkgs.nickel
+        pkgs.nickel
       # Python
-        unstablePkgs.python312Full
-        unstablePkgs.python312Packages.ipython
+        pkgs.python312Full
+        pkgs.python312Packages.ipython
         # uv
       # Rust
         unstablePkgs.cargo-binstall
@@ -106,9 +106,9 @@ let
         unstablePkgs.chit
       # Everything else...
         unstablePkgs.devbox
-        unstablePkgs.gcc
-        unstablePkgs.mold
-        unstablePkgs.shellcheck
+        pkgs.gcc
+        pkgs.mold
+        pkgs.shellcheck
         unstablePkgs.tokei
         unstablePkgs.yamlfmt
 
@@ -262,7 +262,7 @@ let
     # Security - GUI
     pkgs.bitwarden
     pkgs.keepassxc
-    unstablePkgs.protonvpn-gui
+    pkgs.protonvpn-gui
 
     # Storage - GUI
     unstablePkgs.vorta
