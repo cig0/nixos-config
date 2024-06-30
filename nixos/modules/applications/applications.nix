@@ -206,6 +206,7 @@ let
         "--enable-features=UseOzonePlatform"
         "--ozone-platform=wayland"
       ];
+      enableWideVine = true;
     })
     elinks
   ];
