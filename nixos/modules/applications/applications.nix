@@ -202,23 +202,10 @@ let
   userSidePackages = with pkgs; [ # Only packages from the stable release channel.
     # Meant to run in a [role]client device, as opposite on a [role]server device.
 
-    # AI
-    aichat
-    lmstudio
-    oterm
-
     # Comms
     element-desktop
-    shortwave
     telegram-desktop
     zoom-us
-
-    # Infrastructure: CNCF / K8s / OCI / virtualization
-    openlens
-    podman-desktop
-
-    # Games
-    naev
 
     # GNOME
     # gnomeExtensions.appindicator
@@ -234,34 +221,8 @@ let
     kdePackages.plasma-browser-integration
     kdePackages.yakuake
 
-    # Multimedia
-    blender
-    darktable
-    davinci-resolve
-    exiftool
-    gimp
-    imagemagick
-    inkscape
-    jp2a
-    libheif
-    mediainfo
-    mpv
-    nicotine-plus
-    pngcrush
-    shortwave
-    yt-dlp
-
     # Networking
     wireshark-qt
-
-    # Productivity
-    todoist-electron
-
-    # Programming
-    imhex
-    sublime-merge
-    sublime4
-    vscode-fhs
 
     # Security
       bitwarden
@@ -269,11 +230,7 @@ let
       kpcli
       protonvpn-cli
       protonvpn-gui
-      # Web
-      burpsuite
-      mitmproxy
-      nikto
-
+    
     # Storage
     vorta
 

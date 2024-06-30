@@ -15,7 +15,53 @@
       cig0 = { ... }: {
         # Define user-specific packages and configurations
         home.packages = with unstablePkgs; [
+          # AI
+          aichat
+          lmstudio
+          oterm
+
+          # Comms
+          shortwave
+
+          # Infrastructure: CNCF / K8s / OCI / virtualization
+          openlens
+          podman-desktop
+
+          # Games
+          naev
+
+          # Multimedia
+          blender
+          darktable
+          davinci-resolve
+          exiftool
+          gimp
+          imagemagick
+          inkscape
+          jp2a
+          libheif
+          mediainfo
+          mpv
+          nicotine-plus
+          pngcrush
+          shortwave
+          yt-dlp
+
+          # Productivity
           obsidian
+          todoist-electron
+
+          # Programming
+          imhex
+          sublime-merge
+          sublime4
+          vscode-fhs
+          
+          # Security
+            # Web
+            burpsuite
+            mitmproxy
+            nikto
         ];
 
         # The state version is required and should stay at the version you
