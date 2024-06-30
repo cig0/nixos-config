@@ -1,112 +1,38 @@
 # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
 
-{ unstablePkgs, ... }:
+{ modulesPath, pkgs, unstablePkgs, ... }: # Note!!! using the unstable release channel, defined in the flake
 
 {
+  imports = [
+    (modulesPath + "/profiles/minimal.nix")
+  ];
+
   # Optionally, use home-manager.extraSpecialArgs to pass
   # arguments to home.nix
   home-manager = {
     backupFileExtension = "bkp";
-    useGlobalPkgs = true; # Using global packages
-    useUserPackages = true; # Allow user-specific packages
+    useGlobalPkgs = false; # Whether or not use global packages; if true, saves space by symlinking packages from the system store; if false, improves isolation by downloading and installing any needed pacakges.
+    useUserPackages = true; # Allow user-specific packages. This option is what makes Home Manager, Home Manager :)
 
-    users.cig0 = { ... }: {
-      # Define user-specific packages and configurations
-      home.packages = [
-        # AI
-        unstablePkgs.aichat
-        unstablePkgs.lmstudio
-        unstablePkgs.oterm
+    users = {
+      cig0 = { ... }: {
+        # Define user-specific packages and configurations
+        home.packages = [
+        ];
 
-        # Comms
-        unstablePkgs.element-desktop
-        unstablePkgs.shortwave
-        unstablePkgs.telegram-desktop
-        unstablePkgs.zoom-us
+        # The state version is required and should stay at the version you
+        # originally installed.
+        home.stateVersion = "23.11";
+      };
+      
+      fine = { ... }: {
+        home.packages = [
+        ];
 
-        # Infrastructure: CNCF / K8s / OCI / virtualization
-        unstablePkgs.openlens
-        unstablePkgs.podman-desktop
-
-        # Games
-        unstablePkgs.naev
-
-        # GNOME
-        # gnomeExtensions.appindicator
-
-        # KDE
-        unstablePkgs.aha # Required by KDE's About this System
-        # amarok
-        unstablePkgs.kdePackages.alpaka
-        unstablePkgs.kdePackages.discover
-        unstablePkgs.kdePackages.kio-zeroconf
-        unstablePkgs.kdePackages.kjournald
-        unstablePkgs.qtcreator
-        unstablePkgs.kdePackages.plasma-browser-integration
-        unstablePkgs.kdePackages.yakuake
-
-        # Multimedia
-        unstablePkgs.ansel
-        unstablePkgs.blender
-        unstablePkgs.darktable
-        unstablePkgs.davinci-resolve
-        unstablePkgs.exiftool
-        unstablePkgs.gimp
-        unstablePkgs.imagemagick
-        unstablePkgs.inkscape
-        unstablePkgs.jp2a
-        unstablePkgs.libheif
-        unstablePkgs.mediainfo
-        unstablePkgs.mpv
-        unstablePkgs.nicotine-plus
-        unstablePkgs.pngcrush
-        unstablePkgs.shortwave
-        unstablePkgs.yt-dlp
-
-        # Networking - GUI
-        unstablePkgs.wireshark-qt
-
-        # Productivity
-        unstablePkgs.obsidian
-        unstablePkgs.todoist-electron
-
-        # Programming - GUI
-        unstablePkgs.imhex
-        unstablePkgs.sublime-merge
-        unstablePkgs.sublime4
-        unstablePkgs.vscode-fhs
-
-        # Security
-          # GUI
-          unstablePkgs.bitwarden
-          unstablePkgs.keepassxc
-          unstablePkgs.protonvpn-gui
-          # Web
-          unstablePkgs.burpsuite
-          unstablePkgs.mitmproxy
-          unstablePkgs.nikto
-
-        # Storage - GUI
-        unstablePkgs.vorta
-
-        # Terminal utilities - GUI
-        # unstablePkgs.warp-terminal
-
-        # Virtualization - GUI
-        unstablePkgs.virt-viewer
-
-        # Web
-        unstablePkgs.librewolf
-        unstablePkgs.tor-browser
-        # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
-
-        # Everything else
-        unstablePkgs.wiki-tui
-      ];
-
-      # The state version is required and should stay at the version you
-      # originally installed.
-      home.stateVersion = "23.11";
+        # The state version is required and should stay at the version you
+        # originally installed.
+        home.stateVersion = "23.11";
+      };
     };
   };
 }
