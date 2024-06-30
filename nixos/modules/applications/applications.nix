@@ -255,7 +255,6 @@ let
     wireshark-qt
 
     # Productivity
-    obsidian
     todoist-electron
 
     # Programming
@@ -332,12 +331,14 @@ in
 
   #===  Install programas for all users
     #===  Chromium options
-    security.chromiumSuidSandbox.enable = true;
+    nixpkgs.config.chromium.commandLineArgs =
+      if hostnameLogic.isRoleUser then "--enable-features=UseOzonePlatform --ozone-platform=wayland"
+      else {};
+    security.chromiumSuidSandbox.enable = hostnameLogic.isRoleUser;
   programs = {
     chromium = {
       enable = true;
-      #commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
-      enablePlasmaBrowserIntegration = true;
+      enablePlasmaBrowserIntegration = hostnameLogic.isRoleUser;
     };
     firefox = { # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
       enable = true;
