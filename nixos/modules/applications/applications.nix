@@ -91,23 +91,23 @@ let
       # golangci-lint
       # golangci-lint-langserver
       # gopls
-      
+
       # JS
       # nodejs_latest
-      
+
       # Nickel
       nickel
-      
+
       # Python
       python312Full
       python312Packages.ipython
       # uv
-      
+
       # Rust
       cargo-binstall
       cargo-cache
       chit
-      
+
       # Everything else...
       devbox
       gcc
@@ -193,7 +193,7 @@ let
       glab # GitLab CLI client.
       jujutsu
       tig
-      
+
       # Radicle
       radicle-node
   ];
@@ -216,7 +216,7 @@ let
     kdePackages.yakuake
   ];
 
-  pkgsList = 
+  pkgsList =
     let
       basePackages = if hostnameLogic.isRoleUser then commonPackages ++ userSidePackages
                      else if hostnameLogic.isRoleServer then commonPackages ++ [ pkgs.cockpit ]
