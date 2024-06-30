@@ -271,7 +271,7 @@ in
 
   programs = {
     firefox = { # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
-      enable = false;
+      enable = true;
       preferences = { "widget.use-xdg-desktop-portal.file-picker" = "1"; };
     };
   };
