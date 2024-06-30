@@ -196,6 +196,18 @@ let
 
       # Radicle
       radicle-node
+
+    # Web
+    (chromium.override {
+      commandLineArgs = [
+        "--enable-features=VaapiVideoDecodeLinuxGL"
+        "--ignore-gpu-blocklist"
+        "--enable-zero-copy"
+        "--enable-features=UseOzonePlatform"
+        "--ozone-platform=wayland"
+      ];
+    })
+    elinks
   ];
 
   userSidePackages = with pkgs; [ # Only packages from the stable release channel.
@@ -254,17 +266,11 @@ in
 
   #===  Install programas for all users
     #===  Chromium options
-    nixpkgs.config.chromium.commandLineArgs =
-      if hostnameLogic.isRoleUser then "--enable-features=UseOzonePlatform --ozone-platform=wayland"
-      else {};
     security.chromiumSuidSandbox.enable = hostnameLogic.isRoleUser;
+
   programs = {
-    chromium = {
-      enable = true;
-      enablePlasmaBrowserIntegration = hostnameLogic.isRoleUser;
-    };
     firefox = { # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
-      enable = true;
+      enable = false;
       preferences = { "widget.use-xdg-desktop-portal.file-picker" = "1"; };
     };
   };

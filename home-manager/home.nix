@@ -19,7 +19,15 @@
         home.packages = with unstablePkgs; [
           # AI
           aichat
-          lmstudio
+          (lmstudio.override {
+            commandLineArgs = [
+              "--enable-features=VaapiVideoDecodeLinuxGL"
+              "--ignore-gpu-blocklist"
+              "--enable-zero-copy"
+              "--enable-features=UseOzonePlatform"
+              "--ozone-platform=wayland"
+            ];
+          })
           oterm
 
           # Comms
@@ -56,7 +64,15 @@
           wireshark-qt
 
           # Productivity
-          obsidian
+          (obsidian.override {
+            commandLineArgs = [
+              "--enable-features=VaapiVideoDecodeLinuxGL"
+              "--ignore-gpu-blocklist"
+              "--enable-zero-copy"
+              "--enable-features=UseOzonePlatform"
+              "--ozone-platform=wayland"
+            ];
+          })
           todoist-electron
 
           # Programming
@@ -64,7 +80,7 @@
           sublime-merge
           sublime4
           vscode-fhs
-          
+
           # Security
           bitwarden
           keepassxc
@@ -75,7 +91,7 @@
             burpsuite
             mitmproxy
             nikto
-        
+
           # Storage
           vorta
 
@@ -83,11 +99,10 @@
           virt-viewer
 
           # Web
-          elinks
           librewolf
           tor-browser
           # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
-          
+
           # Everything else
           terminal-parrot
           wiki-tui
@@ -98,7 +113,7 @@
         # originally installed.
         home.stateVersion = "23.11";
       };
-      
+
       fine = { ... }: {
         home.packages = with unstablePkgs; [
         ];
