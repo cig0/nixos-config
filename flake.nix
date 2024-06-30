@@ -157,17 +157,6 @@
   in
   {
     nixosConfigurations = {
-      satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
-        inherit system;
-        specialArgs = { inherit inputs system unstablePkgs; };
-        modules = commonModules ++ [
-          ./nixos/hosts/satama/configuration.nix
-
-          {
-          }
-        ];
-      };
-
       perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
         inherit system;
         specialArgs = { inherit inputs system unstablePkgs; };
@@ -184,6 +173,17 @@
               #####  THIRD-PARTY MODULES  #####
               # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
             services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
+          }
+        ];
+      };
+
+      satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
+        inherit system;
+        specialArgs = { inherit inputs system unstablePkgs; };
+        modules = commonModules ++ [
+          ./nixos/hosts/satama/configuration.nix
+
+          {
           }
         ];
       };
