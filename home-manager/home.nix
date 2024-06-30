@@ -1,11 +1,13 @@
 # https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
  # Note!!! Home Manageer is configured to use the unstable release channel, defined in the flake.
 
-{ modulesPath, unstablePkgs, ... }:
+# { modulesPath, unstablePkgs, ... }:
+{ unstablePkgs, ... }:
+
 {
-  imports = [
-    (modulesPath + "/profiles/minimal.nix")
-  ];
+  # imports = [
+  #   (modulesPath + "/profiles/minimal.nix")
+  # ];
 
   home-manager = {
     backupFileExtension = "bkp";
@@ -21,7 +23,10 @@
           oterm
 
           # Comms
+          element-desktop
           shortwave
+          telegram-desktop
+          zoom-us
 
           # Infrastructure: CNCF / K8s / OCI / virtualization
           openlens
@@ -47,6 +52,9 @@
           shortwave
           yt-dlp
 
+          # Networking
+          wireshark-qt
+
           # Productivity
           obsidian
           todoist-electron
@@ -58,10 +66,32 @@
           vscode-fhs
           
           # Security
+          bitwarden
+          keepassxc
+          kpcli
+          protonvpn-cli
+          protonvpn-gui
             # Web
             burpsuite
             mitmproxy
             nikto
+        
+          # Storage
+          vorta
+
+          # Virtualization
+          virt-viewer
+
+          # Web
+          elinks
+          librewolf
+          tor-browser
+          # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
+          
+          # Everything else
+          terminal-parrot
+          wiki-tui
+          zola
         ];
 
         # The state version is required and should stay at the version you

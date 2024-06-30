@@ -182,7 +182,6 @@ let
     vulkan-tools
     wayland-utils
     wl-clipboard
-    zola
 
     # VCS
       # Git
@@ -202,11 +201,6 @@ let
   userSidePackages = with pkgs; [ # Only packages from the stable release channel.
     # Meant to run in a [role]client device, as opposite on a [role]server device.
 
-    # Comms
-    element-desktop
-    telegram-desktop
-    zoom-us
-
     # GNOME
     # gnomeExtensions.appindicator
 
@@ -220,34 +214,6 @@ let
     qtcreator
     kdePackages.plasma-browser-integration
     kdePackages.yakuake
-
-    # Networking
-    wireshark-qt
-
-    # Security
-      bitwarden
-      keepassxc
-      kpcli
-      protonvpn-cli
-      protonvpn-gui
-    
-    # Storage
-    vorta
-
-    # Terminal utilities
-    # warp-terminal
-
-    # Virtualization
-    virt-viewer
-
-    # Web
-    elinks
-    librewolf
-    tor-browser
-    # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
-
-    # Everything else
-    wiki-tui
   ];
 
   pkgsList = 
