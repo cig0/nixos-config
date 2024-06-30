@@ -27,6 +27,7 @@ in
       libGL
       mesa
     ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
   };
 
   services.xserver.videoDrivers =
