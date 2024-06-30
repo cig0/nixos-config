@@ -198,6 +198,10 @@ let
     # Meant to run in a [role]client device, as opposite on a [role]server device.
     # Also, these packages/applications are available for all the users.
 
+    # Hyprland
+    # pkgs.waybar
+    # pkgs.wofi
+
     # Web
     unstablePkgs.ungoogled-chromium
     unstablePkgs.elinks
