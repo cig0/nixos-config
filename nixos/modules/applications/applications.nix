@@ -194,10 +194,13 @@ let
       unstablePkgs.radicle-node
   ];
 
-  userSidePackages = [ # Meant to run in a [role]client device (as opposite on a [role]server device)
-    #
-    # Note: user-side applications were moved to Home Manager
-    #
+  userSidePackages = [
+    # Meant to run in a [role]client device, as opposite on a [role]server device.
+    # Also, these packages/applications are available for all the users.
+
+    # Web
+    unstablePkgs.ungoogled-chromium
+    unstablePkgs.elinks
   ];
 in
 {

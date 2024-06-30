@@ -96,8 +96,6 @@
         unstablePkgs.virt-viewer
 
         # Web
-        unstablePkgs.ungoogled-chromium
-        unstablePkgs.elinks
         unstablePkgs.librewolf
         unstablePkgs.tor-browser
         # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
