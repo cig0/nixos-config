@@ -381,7 +381,7 @@ rec {
       D = "cd ~/Downloads";
       DE = "cd ~/Desktop";
       DOC = "cd ~/Documents";
-      F = "cd ~/.nixos-config"; # Flake directory.
+      F = "cd /etc/nixos/nixos-config"; # Flake directory.
       Ff = "cd ~/w/cig0/nixos/nixos-config-public"; # Public flake.
       P = "cd ~/Pictures";
       S = "cd ~/Sync";
