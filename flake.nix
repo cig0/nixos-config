@@ -79,7 +79,7 @@
       })
       ./nixos/modules/applications/applications.nix
       ./nixos/modules/applications/current-system-packages.nix
-      ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
+      # ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
       ./nixos/modules/applications/ollama.nix
       ./nixos/modules/applications/syncthing.nix
 
