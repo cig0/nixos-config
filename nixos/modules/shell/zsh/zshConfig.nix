@@ -162,7 +162,7 @@ rec {
 
     # Visual Studio Code
     c() {
-      /run/current-system/sw/bin/code --profile cig0 $@
+      /run/current-system/sw/bin/code --profile cig0 --enable-features=VaapiVideoDecodeLinuxGL --ignore-gpu-blocklist --enable-zero-copy --enable-features=UseOzonePlatform --ozone-platform=wayland $@
     }
   '';
 
