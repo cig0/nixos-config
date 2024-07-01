@@ -51,6 +51,9 @@ let
     s-tui
     vdpauinfo
 
+    # Multimedia
+    glaxnimate # Kdenlive dependency
+
     # Networking
     aria2
     bind
@@ -112,7 +115,7 @@ let
       devbox
       gcc
       mold
-      shellcheck
+      shellcheck>
       tokei
       yamlfmt
 
@@ -135,7 +138,7 @@ let
 
     # # Terminal utilities
     antora
-    at
+    at>
     atuin
     bat
     chezmoi
@@ -198,16 +201,6 @@ let
       radicle-node
 
     # Web
-    (chromium.override {
-      commandLineArgs = [
-        "--enable-features=VaapiVideoDecodeLinuxGL"
-        "--ignore-gpu-blocklist"
-        "--enable-zero-copy"
-        "--enable-features=UseOzonePlatform"
-        "--ozone-platform=wayland"
-      ];
-      enableWideVine = true;
-    })
     elinks
   ];
 
