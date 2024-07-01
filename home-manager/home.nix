@@ -105,6 +105,7 @@
           virt-viewer
 
           # Web
+          brave
           librewolf
           tor-browser
           # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
