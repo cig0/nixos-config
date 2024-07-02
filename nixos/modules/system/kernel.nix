@@ -36,7 +36,7 @@ in
   boot = {
     kernelPackages =
       if hostnameLogic.isRoleServer then pkgs.linuxPackages_hardened
-      else if hostnameLogic.isRoleUser then pkgs.linuxPackages_latest
+      else if hostnameLogic.isRoleUser then pkgs.linuxPackages_xanmod_latest
       else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 
     kernel.sysctl =
