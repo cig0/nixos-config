@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
