@@ -115,7 +115,7 @@ let
       devbox
       gcc
       mold
-      shellcheck>
+      shellcheck
       tokei
       yamlfmt
 
@@ -138,7 +138,7 @@ let
 
     # # Terminal utilities
     antora
-    at>
+    at
     atuin
     bat
     chezmoi
