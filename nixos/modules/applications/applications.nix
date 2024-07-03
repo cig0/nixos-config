@@ -185,6 +185,7 @@ let
     vulkan-tools
     wayland-utils
     wl-clipboard
+    xfsprogs
 
     # VCS
       # Git
