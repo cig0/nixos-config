@@ -56,7 +56,7 @@ in
         "fbcon=nodefer"                   # Prevent the kernel from blanking plymouth out of the framebuffer.
         "intel_pstate=disable"
         "i915.enable_fbc=1"
-        "i915.enable_guc=3"
+        "i915.enable_guc=2"
         "i915.enable_psr=1"
         "logo.nologo=0"
         "init_on_alloc=1"
