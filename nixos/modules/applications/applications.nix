@@ -80,6 +80,7 @@ let
     hydra-check
     nh
     niv
+    nix-diff
     nix-index
     nix-tree
     nixfmt-classic
