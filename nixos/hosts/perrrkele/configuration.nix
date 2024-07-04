@@ -5,51 +5,52 @@
 { pkgs, ... }:
 
 {
-  # Include the results of the hardware scan.
-  imports =
+  imports = # Include the results of the hardware scan.
     [
       ./hardware-configuration.nix
     ];
 
 
-  # These options are not part of the initial generation of hardware-configuration.nix (nixos-generate-config --dir ~/tmp).
-  boot = { # Bootloader
-    initrd.luks.devices."luks-e74bc2fe-fb37-4407-9592-0442f5c329bc".device = "/dev/disk/by-uuid/e74bc2fe-fb37-4407-9592-0442f5c329bc"; # Encrypted swap partition.
-    loader = {
-      # systemd-boot.configurationLimit = 5;
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+  # Complementary options for hardware-configuration.nix. Hint: run nixos-generate-config --dir ~/tmp to create a fresh set of configuration.nix and hardware-configuration.nix.
+    boot = { # Bootloader
+      initrd.luks.devices."luks-e74bc2fe-fb37-4407-9592-0442f5c329bc".device = "/dev/disk/by-uuid/e74bc2fe-fb37-4407-9592-0442f5c329bc"; # Encrypted swap partition.
+      loader = {
+        # systemd-boot.configurationLimit = 5;
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+      };
+        tmp.cleanOnBoot = true;
     };
-      tmp.cleanOnBoot = true;
-  };
 
-  fileSystems = { # /etc/fstab mount options.
-    "/" = {
-      options = [ "data=journal" "discard" "relatime" ];
-    };
-    "/run/media/data" = {
-      device = "/dev/disk/by-uuid/d232bb5e-3259-49ed-bae8-1a1dc7515d48";
-      fsType = "xfs";
-      label = "data";
-      options = [ "defaults" "users" "nofail" "noatime" "nodiratime" "inode64" "logbufs=8" "logbsize=256k" "allocsize=64m" ];
-    };
-    "/home/cig0/data" = {
-      depends = [ "/run/media/data" ];
-      device = "/run/media/data";
-      fsType = "none";
-      label = "data";
-      options = [ "bind" ];
-    };
-  };
+    environment.etc.crypttab.text = ''
+      # Unlock the internal data storage as /dev/mapper/corsair
+      corsair UUID=75e285f3-11c0-45f0-a3e7-a81270c22725 /root/.config/crypttab/corsair.key
+    '';
 
-  # Set the lowest priority to allow zRAM to kick in before swapping to disk.
-  swapDevices =
-    [{
-      device = "/dev/disk/by-uuid/0c641660-76fb-4b3d-8074-3a34c26de27f";
-      priority = 1;
+    fileSystems = { # /etc/fstab mount options.
+      "/" = {
+        options = [ "commit=15" "data=journal" "discard" "errors=remount-ro" "noatime"  ];
+      };
+      "/run/media/corsair" = {
+        device = "/dev/disk/by-uuid/ad32c7c0-ddba-4526-8d72-aa2948dac99b"; # /dev/mapper/data
+        fsType = "xfs";
+        label = "data";
+        options = [ "allocsize=64m" "defaults" "discard" "inode64" "logbsize=256k" "logbufs=8" "noatime" "nodiratime" "nofail" "users" ];
+      };
+      "/home/cig0/media" = {
+        device = "/run/media";
+        fsType = "none";
+        label = "data";
+        options = [ "bind" ];
+      };
+    };
+
+    swapDevices = [{
+        device = "/dev/disk/by-uuid/0c641660-76fb-4b3d-8074-3a34c26de27f";
+        priority = 1; # Set the lowest priority to allow zRAM to kick in before swapping to disk.
     }];
 
-  services.fstrim.enable = true; # Enable periodic SSD TRIM of mounted partitions in background.
+    services.fstrim.enable = true; # Enable periodic SSD TRIM of mounted partitions in background.
 
 
   nix = { # General settings
