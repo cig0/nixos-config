@@ -382,6 +382,8 @@ rec {
       __ = "_0";
       _0 = "cd ~/w/cig0";
       D = "cd ~/Downloads";
+      DA = "cd ~/data";
+      DAr = "cd /run/media/data";
       DE = "cd ~/Desktop";
       DOC = "cd ~/Documents";
       F = "cd /etc/nixos/nixos-config"; # Flake directory.

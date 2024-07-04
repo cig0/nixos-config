@@ -27,6 +27,19 @@
     "/" = {
       options = [ "data=journal" "discard" "relatime" ];
     };
+    "/run/media/data" = {
+      device = "/dev/disk/by-uuid/d232bb5e-3259-49ed-bae8-1a1dc7515d48";
+      fsType = "xfs";
+      label = "data";
+      options = [ "defaults" "users" "nofail" "noatime" "nodiratime" "inode64" "logbufs=8" "logbsize=256k" "allocsize=64m" ];
+    };
+    "/home/cig0/data" = {
+      depends = [ "/run/media/data" ];
+      device = "/run/media/data";
+      fsType = "none";
+      label = "data";
+      options = [ "bind" ];
+    };
   };
 
   # Set the lowest priority to allow zRAM to kick in before swapping to disk.
