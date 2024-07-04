@@ -229,7 +229,7 @@ let
     let
       basePackages = if hostnameLogic.isRoleUser then commonPackages ++ userSidePackages
                      else if hostnameLogic.isRoleServer then commonPackages ++ [ pkgs.cockpit ]
-                     else [];
+                     else [ ];
     in
       if hostnameLogic.isNvidiaGPUHost then basePackages ++ [ pkgs.nvtop ]
       else
