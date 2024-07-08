@@ -124,8 +124,10 @@ let
     age
     chkrootkit
     gpg-tui
+    kpcli
     lynis
     oath-toolkit
+    protonvpn-cli
     rustscan
     sops
     vt-cli
@@ -174,7 +176,6 @@ let
     pciutils
     pipe-rename
     rust-petname
-    pinentry-curses
     qrscan
     ripgrep
     strace-analyzer
@@ -223,13 +224,22 @@ let
     kdePackages.yakuake
     krita
     krita-plugin-gmic
+
+    # Infrastructure: CNCF / K8s / OCI / virtualization
+    kasmweb
+
+    # Security
+    pinentry-qt
   ];
 
   pkgsList =
     let
       basePackages = if hostnameLogic.isRoleUser then commonPackages ++ userSidePackages
-                     else if hostnameLogic.isRoleServer then commonPackages ++ [ pkgs.cockpit ]
-                     else [ ];
+        else if hostnameLogic.isRoleServer then commonPackages ++ [
+          pkgs.cockpit
+          pkgs.pinentry-curses
+        ]
+        else [ ];
     in
       if hostnameLogic.isNvidiaGPUHost then basePackages ++ [ pkgs.nvtop ]
       else
