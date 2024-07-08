@@ -16,6 +16,8 @@
     uninstallUnmanaged = true;
     packages = [
       # { appId = "com.brave.Browser"; origin = "flathub";  }
+
+      # KDE
       "org.kde.akregator"
       "org.kde.arianna"
       "org.kde.digikam"
@@ -36,15 +38,64 @@
       "org.kde.ktimetracker"
       "org.kde.neochat"
       "org.kde.tokodon"
+
+      # ASCII fun
       "io.github.nokse22.asciidraw"
+      "io.gitlab.gregorni.Letterpress"
+
+      # Comms
+      "im.riot.Riot" # Element (Matrix client)
+      "org.telegram.desktop"
+
+      # Games
+      "org.naev.Naev"
+
+      # Infrastructure: CNCF / K8s / OCI / virtualization
+      "dev.k8slens.OpenLens"
+      "io.podman_desktop.PodmanDesktop"
+
+      # Maintenance
+      "com.github.tchx84.Flatseal"
+      "io.github.giantpinkrobots.flatsweep"
+      "io.github.flattool.Warehouse"
+
+      # Multimedia
+      "org.darktable.Darktable"
+      "org.inkscape.Inkscape"
+      "org.openshot.OpenShot"
+      "com.rawtherapee.RawTherapee"
+      "org.shotcut.Shotcut"
+      "org.nickvision.tubeconverter"
+
+      # Networking
+      "org.wireshark.Wireshark"
+
+      # Productivity
+      "md.obsidian.Obsidian"
+      "com.todoist.Todoist"
+
+      # Programming
+      "net.werwolv.ImHex"
+
+      # Radio
+      "de.haeckerfelix.Shortwave"
+
+      # Security
+      "net.mullvad.MullvadBrowser"
+      "com.protonvpn.www"
+
+      # Sharing-is-caring
+      "org.nicotine_plus.Nicotine"
+      "org.onionshare.OnionShare"
+
+      # Storage
+      "com.borgbase.Vorta"
+
+      # Web
       "com.brave.Browser"
       "com.google.Chrome"
       "com.google.EarthPro"
-      "com.github.tchx84.Flatseal"
-      "io.github.giantpinkrobots.flatsweep"
-      "io.gitlab.gregorni.Letterpress"
-      "org.nickvision.tubeconverter"
-      "io.github.flattool.Warehouse"
+      "io.gitlab.librewolf-community"
     ];
   };
 

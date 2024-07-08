@@ -31,58 +31,37 @@
           oterm
 
           # Comms
-          element-desktop
-          shortwave
-          telegram-desktop
           zoom-us
 
-          # Infrastructure: CNCF / K8s / OCI / virtualization
-          openlens
-          podman-desktop
-
-          # Games
-          naev
-
           # Multimedia
-          blender
+          #blender
           cinelerra
-          darktable
           davinci-resolve
           exiftool
-          gimp
+          gimp-with-plugins
           imagemagick
-          inkscape
           jp2a
           libheif
           lightworks
           mediainfo
           mpv
-          nicotine-plus
           olive-editor
-          openshot-qt
           pngcrush
-          rawtherapee
-          shortwave
-          shotcut
           yt-dlp
 
-          # Networking
-          wireshark-qt
-
           # Productivity
-          (obsidian.override {
-            commandLineArgs = [
-              "--enable-features=VaapiVideoDecodeLinuxGL"
-              "--ignore-gpu-blocklist"
-              "--enable-zero-copy"
-              "--enable-features=UseOzonePlatform"
-              "--ozone-platform=wayland"
-            ];
-          })
-          todoist-electron
+          # (obsidian.override {
+          #   commandLineArgs = [
+          #     "--enable-features=VaapiVideoDecodeLinuxGL"
+          #     "--ignore-gpu-blocklist"
+          #     "--enable-zero-copy"
+          #     "--enable-features=UseOzonePlatform"
+          #     "--ozone-platform=wayland"
+          #   ];
+          # })
+          # todoist-electron
 
           # Programming
-          imhex
           sublime-merge
           sublime4
           vscode-fhs
@@ -90,23 +69,15 @@
           # Security
           bitwarden
           keepassxc
-          kpcli
-          protonvpn-cli
-          protonvpn-gui
             # Web
             burpsuite
             mitmproxy
             nikto
 
-          # Storage
-          vorta
-
           # Virtualization
           virt-viewer
 
           # Web
-          librewolf
-          tor-browser
           # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
 
           # Everything else
