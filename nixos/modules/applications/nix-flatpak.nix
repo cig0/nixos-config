@@ -82,7 +82,7 @@
       "de.haeckerfelix.Shortwave"
 
       # Security
-      "net.mullvad.MullvadBrowser"
+      "com.bitwarden.desktop"
       "com.protonvpn.www"
 
       # Sharing-is-caring

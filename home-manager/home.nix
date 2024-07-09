@@ -19,15 +19,15 @@
         home.packages = with unstablePkgs; [
           # AI
           aichat
-          (lmstudio.override {
-            commandLineArgs = [
-              "--enable-features=VaapiVideoDecodeLinuxGL"
-              "--ignore-gpu-blocklist"
-              "--enable-zero-copy"
-              "--enable-features=UseOzonePlatform"
-              "--ozone-platform=wayland"
-            ];
-          })
+          # (lmstudio.override {
+          #   commandLineArgs = [
+          #     "--enable-features=VaapiVideoDecodeLinuxGL"
+          #     "--ignore-gpu-blocklist"
+          #     "--enable-zero-copy"
+          #     "--enable-features=UseOzonePlatform"
+          #     "--ozone-platform=wayland"
+          #   ];
+          # })
           oterm
 
           # Comms
@@ -67,7 +67,6 @@
           vscode-fhs
 
           # Security
-          bitwarden
           keepassxc
             # Web
             burpsuite
