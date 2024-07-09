@@ -225,9 +225,6 @@ let
     krita
     krita-plugin-gmic
 
-    # Infrastructure: CNCF / K8s / OCI / virtualization
-    kasmweb
-
     # Security
     pinentry-qt
   ];
@@ -280,6 +277,12 @@ in
       enable = true;
       preferences = { "widget.use-xdg-desktop-portal.file-picker" = "1"; };
     };
+  };
+
+  services.kasmweb = {
+    enable = false;
+    listenPort = 77443;
+    listenAddress = "0.0.0.0";
   };
 
   # =====  systemPackages  =====
