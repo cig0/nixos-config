@@ -60,6 +60,7 @@
       "io.github.flattool.Warehouse"
 
       # Multimedia
+      "org.blender.Blender"
       "org.darktable.Darktable"
       "org.inkscape.Inkscape"
       "org.openshot.OpenShot"
