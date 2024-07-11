@@ -171,7 +171,6 @@ let
     lurk # A simple and pretty alternative to strace
     mc
     nushell
-    osquery
     p7zip
     pciutils
     pipe-rename
@@ -279,10 +278,15 @@ in
     };
   };
 
-  services.kasmweb = {
-    enable = false;
-    listenPort = 77443;
-    listenAddress = "0.0.0.0";
+  services = {
+    kasmweb = {
+      enable = false; # Crashes upon start
+      listenPort = 37443;
+      listenAddress = "0.0.0.0";
+    };
+    osquery = {
+      enable = false;
+    };
   };
 
   # =====  systemPackages  =====
