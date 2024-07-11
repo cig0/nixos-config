@@ -34,7 +34,6 @@
           zoom-us
 
           # Multimedia
-          #blender
           cinelerra
           davinci-resolve
           exiftool
@@ -62,6 +61,7 @@
           # todoist-electron
 
           # Programming
+          gitbutler
           sublime-merge
           sublime4
           vscode-fhs
