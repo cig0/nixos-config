@@ -67,6 +67,7 @@
       "com.rawtherapee.RawTherapee"
       "org.shotcut.Shotcut"
       "org.nickvision.tubeconverter"
+      "org.videolan.VLC"
 
       # Networking
       "org.wireshark.Wireshark"
