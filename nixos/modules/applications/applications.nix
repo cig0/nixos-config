@@ -103,7 +103,7 @@ let
       nickel
 
       # Python
-      python312Full
+      python3
       python312Packages.ipython
       # uv
 
