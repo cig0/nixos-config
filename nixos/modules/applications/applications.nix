@@ -105,7 +105,7 @@ let
       # Python
       python3
       python312Packages.ipython
-      # uv
+      uv
 
       # Rust
       cargo-binstall
