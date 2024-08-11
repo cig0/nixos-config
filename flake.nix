@@ -16,7 +16,7 @@
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     auto-cpufreq = { # Energy efficiency
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs"; # Commented out since we track the NixOS stable branch, not unstable.
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
