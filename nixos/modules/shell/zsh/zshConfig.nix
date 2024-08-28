@@ -306,6 +306,7 @@ rec {
     gi = "grep -i --color=always";
     glow = "glow --pager -";
     ic = "imgcat";
+    mv = "mv -i";
     rs = "rsync -Pav";
     surs = "sudo rsync -Pav";
     tt = "oathtool --totp -b $(wl-paste -n -p) | wl-copy -n";
