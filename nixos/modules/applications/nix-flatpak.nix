@@ -62,6 +62,7 @@
       # Multimedia
       "org.blender.Blender"
       "org.darktable.Darktable"
+      "fr.handbrake.ghb"
       "org.inkscape.Inkscape"
       "org.openshot.OpenShot"
       "com.rawtherapee.RawTherapee"
