@@ -33,6 +33,9 @@
           # Comms
           zoom-us
 
+          # KDE Apps
+          # calligra
+
           # Multimedia
           cinelerra
           davinci-resolve
