@@ -67,6 +67,7 @@
           sublime-merge
           sublime4
           vscode-fhs
+          zig
 
           # Security
           keepassxc
@@ -75,6 +76,11 @@
             mitmproxy
             nikto
 
+          # Terminal
+          terminal-parrot
+          yazi-unwrapped
+          wiki-tui
+
           # Virtualization
           virt-viewer
 
@@ -82,8 +88,6 @@
           # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
 
           # Everything else
-          terminal-parrot
-          wiki-tui
           zola
         ];
 
