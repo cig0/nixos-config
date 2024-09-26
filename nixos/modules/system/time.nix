@@ -27,11 +27,12 @@ let
 in
 {
   # Set NTP servers pool
-  networking.timeServers = argentinaNTPPool ++ commonNTPPool;
+  # networking.timeServers = argentinaNTPPool ++ commonNTPPool;
+  networking.timeServers = commonNTPPool;
 
   time.timeZone =
     if hostnameLogic.isPerrrkele then
-      "America/Argentina/Buenos_Aires"
+      "Europe/Helsinki"
 
     else if hostnameLogic.isSatama then
       "America/Argentina/Buenos_Aires"
