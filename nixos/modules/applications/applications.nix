@@ -284,7 +284,7 @@ in
     kasmweb = {
       enable = false; # Crashes upon start
       listenPort = 37443;
-      listenAddress = "0.0.0.0";
+      listenAddress = "127.0.0.1";
     };
     osquery = {
       enable = false;
