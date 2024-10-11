@@ -5,6 +5,12 @@
 let
   hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
 
+  # Define kernel type per host or role, e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`.
+  kernelPackages_isRoleServer = pkgs.linuxPackages_hardened;
+  kernelPackages_fallback = pkgs.linuxPackages_latest;
+
+  kernelPatches_enable = "false"; # Enable/disable applying kernel patches.
+
   commonKernelSysctl = {
     # ref: https://wiki.archlinux.org/title/Gaming https://wiki.nixos.org/wiki/Linux_kernel
     "compaction_proactiveness" = false;
@@ -35,8 +41,11 @@ in
 
   boot = {
     kernelPackages =
-      if hostnameLogic.isRoleServer then pkgs.linuxPackages_hardened
-      else pkgs.linuxPackages_latest; # If no specific kernel package is selected, default to NixOS latest kernel.
+        # Example:
+        # if hostnameLogic.isRoleUser then isRoleUser
+
+      if hostnameLogic.isRoleServer then kernelPackages_isRoleServer
+      else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
 
     kernel.sysctl =
       # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
@@ -52,7 +61,7 @@ in
     kernelParams =
       if hostnameLogic.isTuxedoInfinityBook || hostnameLogic.isChuweiMiniPC
         then commonKernelParams ++ [
-        "fbcon=nodefer"                   # Prevent the kernel from blanking plymouth out of the framebuffer.
+        "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
         "intel_pstate=disable"
         "i915.enable_fbc=1"
         "i915.enable_guc=2"
@@ -66,17 +75,23 @@ in
       ]
       else {};
 
-    kernelPatches = [{
-      name = "tux-logo";
-      patch = null;
-      extraConfig = ''
-        FRAMEBUFFER_CONSOLE y
-        LOGO y
-        LOGO_LINUX_MONO y
-        LOGO_LINUX_VGA16 y
-        LOGO_LINUX_CLUT224 y
-      '';
-    }];
+    kernelPatches =
+        # Patches could be configured by host role or hardware, kernel type and so on.
+
+      # All kernel types/roles/hardware
+      if kernelPatches_enable == "true" then
+        [{
+          name = "tux-logo";
+          patch = null;
+          extraConfig = ''
+            FRAMEBUFFER_CONSOLE y
+            LOGO y
+            LOGO_LINUX_MONO y
+            LOGO_LINUX_VGA16 y
+            LOGO_LINUX_CLUT224 y
+          '';
+        }]
+      else [];
   };
 }
 
