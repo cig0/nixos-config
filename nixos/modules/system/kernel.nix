@@ -7,6 +7,7 @@ let
 
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`.
   kernelPackages_isRoleServer = pkgs.linuxPackages_hardened;
+  kernelPackages_isTuxedoInfinityBook = pkgs.linuxPackages_xanmod_latest;
   kernelPackages_fallback = pkgs.linuxPackages_latest;
 
   kernelPatches_enable = "false"; # Enable/disable applying kernel patches.
@@ -45,6 +46,7 @@ in
         # if hostnameLogic.isRoleUser then isRoleUser
 
       if hostnameLogic.isRoleServer then kernelPackages_isRoleServer
+      else if hostnameLogic.isTuxedoInfinityBook then kernelPackages_isTuxedoInfinityBook
       else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
 
     kernel.sysctl =
