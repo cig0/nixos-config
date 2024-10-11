@@ -77,7 +77,7 @@
         nixpkgs.overlays = [ rust-overlay.overlays.default ];
         environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
       })
-      ./nixos/modules/applications/applications.nix
+      ./nixos/modules/applications/packages.nix
       ./nixos/modules/applications/current-system-packages.nix
       # ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
       ./nixos/modules/applications/ollama.nix
