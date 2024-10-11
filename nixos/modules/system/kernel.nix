@@ -5,7 +5,7 @@
 let
   hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
 
-  # Define kernel type per host or role, e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`.
+  # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`.
   kernelPackages_isRoleServer = pkgs.linuxPackages_hardened;
   kernelPackages_fallback = pkgs.linuxPackages_latest;
 
