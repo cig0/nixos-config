@@ -36,8 +36,7 @@ in
   boot = {
     kernelPackages =
       if hostnameLogic.isRoleServer then pkgs.linuxPackages_hardened
-      else if hostnameLogic.isRoleUser then pkgs.linuxPackages_xanmod_latest
-      else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
+      else pkgs.linuxPackages_latest; # If no specific kernel package is selected, default to NixOS latest kernel.
 
     kernel.sysctl =
       # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
@@ -65,8 +64,7 @@ in
         "iommu=pt"
         # "quiet"
       ]
-
-    else {};
+      else {};
 
     kernelPatches = [{
       name = "tux-logo";

@@ -183,6 +183,7 @@ let
     translate-shell
     tree
     ugrep
+    usbutils
     vulkan-tools
     wayland-utils
     wl-clipboard
