@@ -148,6 +148,7 @@ let
     clinfo
     cmatrix
     comma
+    cyme # https://github.com/tuna-f1sh/cyme :: List system USB buses and devices.
     difftastic
     delta
     dmidecode
