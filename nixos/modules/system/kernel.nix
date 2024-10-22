@@ -7,7 +7,7 @@ let
 
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`.
   kernelPackages_isRoleServer = pkgs.linuxPackages_hardened;
-  kernelPackages_isTuxedoInfinityBook = pkgs.linuxPackages_xanmod_latest;
+  kernelPackages_isTuxedoInfinityBook = pkgs.linuxPackages_latest;
   kernelPackages_fallback = pkgs.linuxPackages_latest;
 
   kernelPatches_enable = "false"; # Enable/disable applying kernel patches.
