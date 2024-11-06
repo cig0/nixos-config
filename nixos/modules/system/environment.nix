@@ -32,6 +32,8 @@ let
 
     # https://stackoverflow.com/questions/76591674/nix-gives-no-space-left-on-device-even-though-nix-has-lots
     TMPDIR = "/tmp";
+
+    GITHUB_TOKEN=""; # I need to find a way to dynamically feed this variable for when GitHub complains of too many calls to its API
   };
 
   intelEnvSessionVars = {
