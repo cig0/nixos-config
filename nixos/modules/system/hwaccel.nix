@@ -17,17 +17,17 @@ in
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      intel-compute-runtime
-      intel-ocl
-      intel-media-driver  # LIBVA_DRIVER_NAME=iHD
-      intel-vaapi-driver  # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      libvdpau-va-gl
-      libdrm
-      libGL
-      mesa
-    ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
+    # extraPackages = with pkgs; [
+    #   intel-compute-runtime
+    #   intel-ocl
+    #   intel-media-driver  # LIBVA_DRIVER_NAME=iHD
+    #   intel-vaapi-driver  # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+    #   libvdpau-va-gl
+    #   libdrm
+    #   libGL
+    #   mesa
+    # ];
+    # extraPackages32 = with pkgs.pkgsi686Linux; [ intel-vaapi-driver ];
   };
 
   services.xserver.videoDrivers =
