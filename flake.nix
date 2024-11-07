@@ -81,7 +81,7 @@
       ./nixos/modules/applications/current-system-packages.nix
       # ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
       ./nixos/modules/applications/ollama.nix
-      ./nixos/modules/applications/syncthing.nix
+      # ./nixos/modules/applications/syncthing.nix
 
       # Networking related
       ./nixos/modules/networking/dns.nix
