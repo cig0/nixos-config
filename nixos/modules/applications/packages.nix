@@ -200,7 +200,7 @@ let
       gitu # It's Gitu! - A Git porcelain outside of Emacs - https://github.com/altsem/gitu
       gitui
       glab # GitLab CLI client.
-      jujutsu
+      # jujutsu
       tig
 
       # Radicle
