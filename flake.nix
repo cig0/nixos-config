@@ -141,6 +141,7 @@
 
       # Display Managers / Desktop Environments / Window Managers
         ./nixos/modules/desktop/cosmic.nix nixos-cosmic.nixosModules.default
+        ./nixos/modules/desktop/gnome.nix
         ./nixos/modules/desktop/kde.nix
         ./nixos/modules/desktop/ly.nix
         ./nixos/modules/desktop/sddm.nix

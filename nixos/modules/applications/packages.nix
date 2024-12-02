@@ -1,3 +1,10 @@
+# packages.nix
+# This file contains the lists of packages to be installed on a host.
+#
+# TODO:
+# [ ] Unriddle the current lists, e.g. commonPackages should contain only the same base packages for every system, userSidePackages all the packages a human user would need, and so on.
+# [ ] Create as much lists as needed to provide enough flexibility when assembling a host.
+
 { pkgs, ... }:
 
 let
