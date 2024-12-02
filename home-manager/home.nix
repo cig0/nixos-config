@@ -80,6 +80,9 @@
 
           # Web
             # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
+
+          # Everything else
+            wiki-tui
         ];
 
         # The state version is required and should stay at the version you

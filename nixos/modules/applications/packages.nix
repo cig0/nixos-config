@@ -188,7 +188,6 @@ let
       usbutils
       vulkan-tools
       wayland-utils
-      wiki-tui
       wl-clipboard
       xfsprogs
       yazi-unwrapped
