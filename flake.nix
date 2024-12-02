@@ -171,9 +171,9 @@
           # Only one at a time can be active
             # services.displayManager.
           services.displayManager = {
-            cosmic-greeter = { # COSMIC Desktop Greeter
-              enable = false;
-            };
+            # cosmic-greeter = { # COSMIC Desktop Greeter
+            #   enable = false;
+            # };
             ly = { # Ly Display Manager
               enable = false;
               settings = {
