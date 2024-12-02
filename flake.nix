@@ -31,10 +31,10 @@
 
     nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
-    # nixos-cosmic = {
-    #   inputs.nixpkgs.follows = "nixpkgs-unstable";
-    #   url = "github:lilyinstarlight/nixos-cosmic";
-    # };
+    nixos-cosmic = {
+      inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs";
+      url = "github:lilyinstarlight/nixos-cosmic";
+    };
 
     nix-index.url = "github:nix-community/nix-index";
 
@@ -62,7 +62,7 @@
     nix-flatpak,              # Enhanced Flatpak support.
     nix-index,                # A files database for nixpkgs.
     # nix-index-database,       # A files database for nixpkgs - pre-baked.
-    # nixos-cosmic,             # COSMIC Desktop Environment.
+    nixos-cosmic,             # COSMIC Desktop Environment.
     nixos-hardware,           # Additional hardware configuration.
     nixvim,                   # WIP Neovim configuration (rocking on LunarVim ATM).
     rust-overlay,             # Oxalica's Rust toolchain overlay.
@@ -133,16 +133,17 @@
 
     userSideModules = [
       # Applications - Flatpak
-      ./home-manager/home.nix home-manager.nixosModules.home-manager
-      ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
-
-      # System - GUI
-      ./nixos/modules/system/fonts.nix
+        ./home-manager/home.nix home-manager.nixosModules.home-manager
+        ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
       # Desktop Environments / Window Managers
         # ./nixos/modules/desktop-environments/cosmic.nix nixos-cosmic.nixosModules.default
-      ./nixos/modules/desktop-environments/sddm.nix
-      ./nixos/modules/desktop-environments/xdg-desktop-portal.nix
+        ./nixos/modules/desktop-environments/ly.nix
+        ./nixos/modules/desktop-environments/sddm.nix
+        ./nixos/modules/desktop-environments/xdg-desktop-portal.nix
+
+      # System - GUI
+        ./nixos/modules/system/fonts.nix
     ];
 
     system = "x86_64-linux";
@@ -154,40 +155,36 @@
         permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
       };
     };
+
   in
   {
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
       inherit system;
       specialArgs = { inherit inputs system unstablePkgs; };
       modules = commonModules ++ userSideModules ++ [
+        nixos-cosmic.nixosModules.default
         nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
         ./nixos/hosts/perrrkele/configuration.nix
 
         {
+          nix.settings = {
+            substituters = [ "https://cosmic.cachix.org/" ];
+            trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+          };
+
           services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
           programs.dconf.enable = true; # https://wiki.nixos.org/wiki/KDE#Installation
 
           # ===== DISPLAY MANAGERS =====
-          # Only one at a time can be active
-            # services.displayManager.
+          # Only one at a time can be active.
+          # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/desktop-environments/
           services.displayManager = {
-            # cosmic-greeter = { # COSMIC Desktop Greeter
-            #   enable = false;
-            # };
-            ly = { # Ly Display Manager
+            autoLogin = {
               enable = false;
-              settings = {
-                animation = "doom";
-                hide_borders = true;
-              };
             };
-            sddm = { # SDDM / KDE Display Manager
-              enable = true;
-              wayland = {
-                enable = true;
-                compositor = "kwin";
-              };
-            };
+            cosmic.enable = false; # COSMIC Desktop Greeter
+            ly.enable = false; # Ly Display Manager
+            sddm.enable = true; # SDDM / KDE Display Manager
           };
         }
       ];
