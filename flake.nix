@@ -137,11 +137,11 @@
         ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
       # Display Managers / Desktop Environments / Window Managers
-        ./nixos/modules/desktop-environments/cosmic.nix nixos-cosmic.nixosModules.default
-        ./nixos/modules/desktop-environments/kde.nix
-        ./nixos/modules/desktop-environments/ly.nix
-        ./nixos/modules/desktop-environments/sddm.nix
-        ./nixos/modules/desktop-environments/xdg-desktop-portal.nix
+        ./nixos/modules/desktop/cosmic.nix nixos-cosmic.nixosModules.default
+        ./nixos/modules/desktop/kde.nix
+        ./nixos/modules/desktop/ly.nix
+        ./nixos/modules/desktop/sddm.nix
+        ./nixos/modules/desktop/xdg-desktop-portal.nix
 
       # System - GUI
         ./nixos/modules/system/fonts.nix
@@ -174,7 +174,7 @@
 
           # ===== DISPLAY MANAGERS =====
           # Only one at a time can be active.
-          # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/desktop-environments/
+          # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/desktop/
           services.displayManager = {
             autoLogin = {
               enable = false;
