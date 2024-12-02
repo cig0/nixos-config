@@ -31,64 +31,64 @@
           oterm
 
           # Comms
-          zoom-us
+            zoom-us
 
           # KDE Apps
           # calligra
 
           # Multimedia
-#           cinelerra
-#           davinci-resolve
-          exiftool
-          gimp-with-plugins
-          imagemagick
-          jp2a
-          libheif
-          lightworks
-          mediainfo
-          mpv
-#           olive-editor
-          pngcrush
-          yt-dlp
+            # cinelerra
+            # davinci-resolve
+            exiftool
+            gimp-with-plugins
+            imagemagick
+            jp2a
+            libheif
+            lightworks
+            mediainfo
+            mpv
+            # olive-editor
+            pngcrush
+            yt-dlp
 
           # Productivity
-          # (obsidian.override {
-          #   commandLineArgs = [
-          #     "--enable-features=VaapiVideoDecodeLinuxGL"
-          #     "--ignore-gpu-blocklist"
-          #     "--enable-zero-copy"
-          #     "--enable-features=UseOzonePlatform"
-          #     "--ozone-platform=wayland"
-          #   ];
-          # })
-          # todoist-electron
+            # (obsidian.override {
+            #   commandLineArgs = [
+            #     "--enable-features=VaapiVideoDecodeLinuxGL"
+            #     "--ignore-gpu-blocklist"
+            #     "--enable-zero-copy"
+            #     "--enable-features=UseOzonePlatform"
+            #     "--ozone-platform=wayland"
+            #   ];
+            # })
+            # todoist-electron
 
           # Programming
-          sublime-merge
-          sublime4
-          vscode-fhs
-          zig
+            sublime-merge
+            sublime4
+            vscode-fhs
+            zig
 
           # Security
-          keepassxc
-            # Web
-            burpsuite
-            mitmproxy
-            nikto
+            keepassxc
+              # Web
+              burpsuite
+              mitmproxy
+              nikto
 
-          # Terminal
-          terminal-parrot
-          yazi-unwrapped
-          wiki-tui
+          # Terminal utilities
+            terminal-parrot
+            yazi-unwrapped
+            wiki-tui
 
           # Virtualization
-          virt-viewer
+            virt-viewer
 
           # Web
-          # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
+            # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
 
           # Everything else
-          zola
+            zola
         ];
 
         # The state version is required and should stay at the version you
