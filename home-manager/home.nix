@@ -10,7 +10,7 @@
   # ];
 
   home-manager = {
-    backupFileExtension = "bkp";
+    backupFileExtension = "backup";
     useGlobalPkgs = false;
     useUserPackages = true;
     users = {
@@ -82,7 +82,7 @@
             # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
 
           # Everything else
-            wiki-tui
+              wiki-tui
         ];
 
         # The state version is required and should stay at the version you
