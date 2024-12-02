@@ -15,7 +15,7 @@
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     auto-cpufreq = { # Energy efficiency
-      # inputs.nixpkgs.follows = "nixpkgs"; # Commented out since we track the NixOS stable branch, not unstable.
+      inputs.nixpkgs.follows = "nixpkgs"; # Commented out since we track the NixOS stable branch, not unstable.
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
@@ -96,7 +96,7 @@
         ./nixos/modules/observability/observability.nix
 
       # Power management
-        # Broken upstream # ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
+        ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
         ./nixos/modules/power-management/power-management.nix
 
       # Security
