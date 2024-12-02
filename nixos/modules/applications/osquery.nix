@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  services.osquery.enable = false;
+  services.osquery.enable = true;
 }
