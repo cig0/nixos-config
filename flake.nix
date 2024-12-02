@@ -138,6 +138,7 @@
 
       # Display Managers / Desktop Environments / Window Managers
         # ./nixos/modules/desktop-environments/cosmic.nix nixos-cosmic.nixosModules.default
+        ./nixos/modules/desktop-environments/kde.nix
         ./nixos/modules/desktop-environments/ly.nix
         ./nixos/modules/desktop-environments/sddm.nix
         ./nixos/modules/desktop-environments/xdg-desktop-portal.nix
@@ -162,7 +163,6 @@
       inherit system;
       specialArgs = { inherit inputs system unstablePkgs; };
       modules = commonModules ++ userSideModules ++ [
-        nixos-cosmic.nixosModules.default
         nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
         ./nixos/hosts/perrrkele/configuration.nix
 
@@ -171,7 +171,6 @@
             cosmic.enable = false; # COSMIC Desktop Environment
             plasma6.enable = true; # KDE Plasma Desktop Environment
           };
-          programs.dconf.enable = true; # https://wiki.nixos.org/wiki/KDE#Installation
 
           # ===== DISPLAY MANAGERS =====
           # Only one at a time can be active.
