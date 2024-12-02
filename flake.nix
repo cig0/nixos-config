@@ -32,7 +32,7 @@
     nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
     nixos-cosmic = {
-      inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:lilyinstarlight/nixos-cosmic";
     };
 
@@ -172,7 +172,10 @@
             trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
           };
 
-          services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
+          services.desktopManager = {
+            cosmic.enable = false; # COSMIC Desktop Environment
+            plasma6.enable = true; # KDE Plasma Desktop Environment
+          };
           programs.dconf.enable = true; # https://wiki.nixos.org/wiki/KDE#Installation
 
           # ===== DISPLAY MANAGERS =====
@@ -182,7 +185,7 @@
             autoLogin = {
               enable = false;
             };
-            cosmic.enable = false; # COSMIC Desktop Greeter
+            cosmic-greeter.enable = false; # COSMIC Desktop Greeter
             ly.enable = false; # Ly Display Manager
             sddm.enable = true; # SDDM / KDE Display Manager
           };
