@@ -32,7 +32,7 @@ in
 
   time.timeZone =
     if hostnameLogic.isPerrrkele then
-      "Europe/Helsinki"
+      "Europe/Tallinn"
 
     else if hostnameLogic.isSatama then
       "America/Argentina/Buenos_Aires"

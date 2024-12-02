@@ -13,10 +13,8 @@ in
     };
   };
 
-  hardware.opengl = hostnameLogic.mkIf hostnameLogic.isIntelGPUHost {
+   hardware.graphics = hostnameLogic.mkIf hostnameLogic.isIntelGPUHost {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
     extraPackages = with pkgs; [
       intel-compute-runtime
       intel-ocl

@@ -37,8 +37,8 @@
           # calligra
 
           # Multimedia
-          cinelerra
-          davinci-resolve
+#           cinelerra
+#           davinci-resolve
           exiftool
           gimp-with-plugins
           imagemagick
@@ -47,7 +47,7 @@
           lightworks
           mediainfo
           mpv
-          olive-editor
+#           olive-editor
           pngcrush
           yt-dlp
 
@@ -93,14 +93,14 @@
 
         # The state version is required and should stay at the version you
         # originally installed.
-        home.stateVersion = "23.11";
+        home.stateVersion = "24.11";
       };
 
       fine = { ... }: {
         home.packages = with unstablePkgs; [
         ];
 
-        home.stateVersion = "23.11";
+        home.stateVersion = "24.11";
       };
     };
   };

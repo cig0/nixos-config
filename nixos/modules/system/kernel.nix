@@ -38,9 +38,11 @@ let
   ];
 in
 {
-  hardware.tuxedo-keyboard.enable = false; # Tuxedo kernel parameters
+  hardware.tuxedo-drivers.enable = false; # Tuxedo kernel parameters
 
   boot = {
+    initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ]; # Override parameter in hardware-configuration.nix
+    kernelModules = [ "kvm-intel" "i915" ]; # Override parameter in hardware-configuration.nix
     kernelPackages =
         # Example:
         # if hostnameLogic.isRoleUser then isRoleUser
