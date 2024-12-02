@@ -32,7 +32,7 @@
     nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
     nixos-cosmic = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
       url = "github:lilyinstarlight/nixos-cosmic";
     };
 
