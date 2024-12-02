@@ -197,6 +197,7 @@ let
       gh # GitHub CLI client.
       git
       git-lfs
+      gitmoji-cli # https://github.com/carloscuesta/gitmoji-cli
       gitty # https://github.com/muesli/gitty/?tab=readme-ov-file
       gitu # It's Gitu! - A Git porcelain outside of Emacs - https://github.com/altsem/gitu
       gitui
