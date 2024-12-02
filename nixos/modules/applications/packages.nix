@@ -236,6 +236,10 @@ let
     pinentry-qt
   ];
 
+  # TODO: Move Packages lists to a separate file and rename this file to install.nix or similar
+  kasmwebApp = import ./kasmweb.nix;
+  osqueryApp = import ./osquery.nix;
+
   pkgsList =
     let
       basePackages = if hostnameLogic.isRoleUser then commonPackages ++ userSidePackages
@@ -250,8 +254,10 @@ let
         basePackages;
 in
 {
-  imports = [
+  imports = builtins.filter (x: x != null) [
     # ./systemPackages-overrides.nix
+    # (if hostnameLogic.isRoleServer then kasmwebApp else null)
+    # osqueryApp
   ];
 
   # Allow lincense-burdened packages
@@ -275,9 +281,8 @@ in
   programs.mtr.enable = true; # Network diagnostic tool
   services.mtr-exporter.enable = hostnameLogic.isRoleServer; # Prometheus-ready exporter.
 
-  #===  Install programas for all users
-    #===  Chromium options
-    security.chromiumSuidSandbox.enable = hostnameLogic.isRoleUser;
+  #===  Chromium options
+  security.chromiumSuidSandbox.enable = hostnameLogic.isRoleUser;
 
   programs = {
     firefox = { # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
@@ -287,14 +292,8 @@ in
   };
 
   services = {
-    kasmweb = {
-      enable = false; # Crashes upon start
-      listenPort = 37443;
-      listenAddress = "127.0.0.1";
-    };
-    osquery = {
-      enable = false;
-    };
+    kasmweb = kasmwebApp.services.kasmweb;
+    osquery = osqueryApp.services.osquery;
   };
 
   # =====  systemPackages  =====
