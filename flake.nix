@@ -169,9 +169,26 @@
 
           # ===== DISPLAY MANAGERS =====
           # Only one at a time can be active
-            #####  THIRD-PARTY MODULES  #####
-            # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
-          services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
+            # services.displayManager.
+          services.displayManager = {
+            cosmic-greeter = { # COSMIC Desktop Greeter
+              enable = false;
+            };
+            ly = { # Ly Display Manager
+              enable = false;
+              settings = {
+                animation = "doom";
+                hide_borders = true;
+              };
+            };
+            sddm = { # SDDM / KDE Display Manager
+              enable = true;
+              wayland = {
+                enable = true;
+                compositor = "kwin";
+              };
+            };
+          };
         }
       ];
     };
