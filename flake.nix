@@ -136,7 +136,7 @@
         ./home-manager/home.nix home-manager.nixosModules.home-manager
         ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
-      # Desktop Environments / Window Managers
+      # Display Managers / Desktop Environments / Window Managers
         # ./nixos/modules/desktop-environments/cosmic.nix nixos-cosmic.nixosModules.default
         ./nixos/modules/desktop-environments/ly.nix
         ./nixos/modules/desktop-environments/sddm.nix
