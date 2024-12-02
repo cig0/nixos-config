@@ -1,0 +1,5 @@
+{ ... }:
+
+{
+  services.osquery.enable = false;
+}
