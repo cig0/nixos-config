@@ -67,7 +67,6 @@
             sublime-merge
             sublime4
             vscode-fhs
-            zig
 
           # Security
             keepassxc
