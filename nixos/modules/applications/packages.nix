@@ -171,6 +171,7 @@ let
     lunarvim
     lurk # A simple and pretty alternative to strace
     mc
+    neovim
     nushell
     p7zip
     pciutils
