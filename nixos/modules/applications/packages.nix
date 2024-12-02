@@ -225,6 +225,7 @@ let
     kdePackages.kdenlive
     kdePackages.kio-zeroconf
     kdePackages.kjournald
+    kdePackages.krohnkite
     qtcreator
     kdePackages.plasma-browser-integration
     kdePackages.yakuake
