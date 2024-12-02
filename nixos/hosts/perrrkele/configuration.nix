@@ -83,7 +83,7 @@
     nix = {
       settings = {
         allowed-users = [ "@builders" "@wheel" ];
-        auto-optimise-store = true;
+        # auto-optimise-store = true; # Managed by nixos/modules/system/maintenance.nix
         cores = 4;
         experimental-features = [ "nix-command" "flakes" ];
         max-jobs = 4;
