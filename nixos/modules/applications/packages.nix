@@ -1,3 +1,8 @@
+# TODO: clean up this mess! The plan would be:
+# 1. Move all the configurations for individual applications/tools to a separate file
+# 2. Leave here only as many groups of packages as needed, e.g. for a specific role
+# 3. Create a new install.nix or assemble.nix file to assemble all the groups of packages depending on the role of the host(s)
+
 { config, lib, pkgs, ... }:
 
 let
@@ -237,8 +242,9 @@ let
   ];
 
   # TODO: Move Packages lists to a separate file and rename this file to install.nix or similar
-  kasmwebApp = import ./kasmweb.nix;
-  osqueryApp = import ./osquery.nix;
+  kasmwebConfig = import ./kasmweb.nix { inherit config; };
+  mtrConfig = import ./mtr.nix { inherit config; };
+  osqueryConfig = import ./osquery.nix { inherit config; };
 
   pkgsList =
     let
@@ -256,8 +262,7 @@ in
 {
   imports = builtins.filter (x: x != null) [
     # ./systemPackages-overrides.nix
-    # (if hostnameLogic.isRoleServer then kasmwebApp else null)
-    # osqueryApp
+    mtrConfig
   ];
 
   # Allow lincense-burdened packages
@@ -277,10 +282,7 @@ in
       evince # document viewer
   ]);
 
-  #===  MTR - https://wiki.nixos.org/wiki/Mtr
-  programs.mtr.enable = true; # Network diagnostic tool
-  services.mtr-exporter.enable = hostnameLogic.isRoleServer; # Prometheus-ready exporter.
-
+  # TODO: move to its own file
   #===  Chromium options
   security.chromiumSuidSandbox.enable = hostnameLogic.isRoleUser;
 
@@ -292,8 +294,10 @@ in
   };
 
   services = {
-    kasmweb = kasmwebApp.services.kasmweb;
-    osquery = osqueryApp.services.osquery;
+    kasmweb = kasmwebConfig.services.kasmweb // {
+      enable = hostnameLogic.isRoleServer;
+    };
+    osquery = osqueryConfig.services.osquery;
   };
 
   # =====  systemPackages  =====
