@@ -236,6 +236,10 @@ let
     pinentry-qt
   ];
 
+  # TODO: Move Packages lists to a separate file and rename this file to install.nix or similar
+  kasmwebApp = import ./kasmweb.nix;
+  osqueryApp = import ./osquery.nix;
+
   pkgsList =
     let
       basePackages = if hostnameLogic.isRoleUser then commonPackages ++ userSidePackages
@@ -286,16 +290,6 @@ in
     };
   };
 
-  services = {
-    kasmweb = {
-      enable = false; # Crashes upon start
-      listenPort = 37443;
-      listenAddress = "127.0.0.1";
-    };
-    osquery = {
-      enable = false;
-    };
-  };
 
   # =====  systemPackages  =====
   # Install packages system-wide based on the host
