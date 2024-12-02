@@ -18,23 +18,23 @@
         # Define user-specific packages and configurations
         home.packages = with unstablePkgs; [
           # AI
-          aichat
-          (lmstudio.override {
-            commandLineArgs = [
-              "--enable-features=VaapiVideoDecodeLinuxGL"
-              "--ignore-gpu-blocklist"
-              "--enable-zero-copy"
-              "--enable-features=UseOzonePlatform"
-              "--ozone-platform=wayland"
-            ];
-          })
-          oterm
+            aichat
+            (lmstudio.override {
+              commandLineArgs = [
+                "--enable-features=VaapiVideoDecodeLinuxGL"
+                "--ignore-gpu-blocklist"
+                "--enable-zero-copy"
+                "--enable-features=UseOzonePlatform"
+                "--ozone-platform=wayland"
+              ];
+            })
+            oterm
 
           # Comms
             zoom-us
 
           # KDE Apps
-          # calligra
+            # calligra
 
           # Multimedia
             # cinelerra
@@ -75,19 +75,11 @@
               mitmproxy
               nikto
 
-          # Terminal utilities
-            terminal-parrot
-            yazi-unwrapped
-            wiki-tui
-
           # Virtualization
             virt-viewer
 
           # Web
             # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
-
-          # Everything else
-            zola
         ];
 
         # The state version is required and should stay at the version you
