@@ -3,7 +3,7 @@
 # https://github.com/cig0/nixos-config-public
 # May 1st, 2024
 #
-# My personal NixOS configuration ¯\_(ツ)_/¯
+# My personal NixOS configuration flake ¯\_(ツ)_/¯
 #---------------------------------------------------------------------
 
 
