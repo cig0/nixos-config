@@ -14,4 +14,5 @@
       };
     };
   };
+  services.power-profiles-daemon.enable = false; # Needs to be disable as it interferes with auto-cpufreq.
 }

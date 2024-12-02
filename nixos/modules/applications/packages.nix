@@ -38,7 +38,7 @@ let
     tflint
     tfsec
     tfswitch
-    vagrant
+    # vagrant
 
     # Monitoring & Observability
     btop
