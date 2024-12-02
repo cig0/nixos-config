@@ -1,13 +1,6 @@
-# TODO: clean up this mess! The plan would be:
-# 1. Move all the configurations for individual applications/tools to a separate file
-# 2. Leave here only as many groups of packages as needed, e.g. for a specific role
-# 3. Create a new install.nix or assemble.nix file to assemble all the groups of packages depending on the role of the host(s)
-
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 let
-  hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
-
   commonPackages = with pkgs; [ # Packages common to all hosts, only from the stable release channel!
     # Comms
       iamb
@@ -72,7 +65,7 @@ let
       nfstrace
       nmap
       ookla-speedtest
-      prettyping # prettyping is a wrapper around the standard ping tool, making the output prettier, more colorful, more compact, and easier to read :: https://github.com/denilsonsa/prettyping
+      prettyping # prettyping is a wrapper around the standard ping tool, making the output prettier, more colorful, more compact, and easier to read :: https://github.com/deniconfig, lib,lsonsa/prettyping
       socat
       sshfs-fuse
       tcpdump
@@ -241,66 +234,10 @@ let
     pinentry-qt
   ];
 
-  # TODO: Move Packages lists to a separate file and rename this file to install.nix or similar
-  kasmwebConfig = import ./kasmweb.nix { inherit config; };
-  mtrConfig = import ./mtr.nix { inherit config; };
-  osqueryConfig = import ./osquery.nix { inherit config; };
-
-  pkgsList =
-    let
-      basePackages = if hostnameLogic.isRoleUser then commonPackages ++ userSidePackages
-        else if hostnameLogic.isRoleServer then commonPackages ++ [
-          pkgs.cockpit
-          pkgs.pinentry-curses
-        ]
-        else [ ];
-    in
-      if hostnameLogic.isNvidiaGPUHost then basePackages ++ [ pkgs.nvtop ]
-      else
-        basePackages;
 in
 {
-  imports = builtins.filter (x: x != null) [
-    # ./systemPackages-overrides.nix
-    mtrConfig
-  ];
-
-  # Allow lincense-burdened packages
-  nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
+  lists = {
+    commonPackages = commonPackages;
+    userSidePackages = userSidePackages;
   };
-
-  # ===== Packages to exclude =====
-  ## GNOME Desktop
-  environment.gnome.excludePackages = (with pkgs; [ # for packages that are pkgs.***
-    gnome-tour
-    gnome-connections
-      ]) ++ (with pkgs.gnome; [ # for packages that are pkgs.gnome.***
-      epiphany # web browser
-      geary # email reader
-      evince # document viewer
-  ]);
-
-  # TODO: move to its own file
-  #===  Chromium options
-  security.chromiumSuidSandbox.enable = hostnameLogic.isRoleUser;
-
-  programs = {
-    firefox = { # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
-      enable = true;
-      preferences = { "widget.use-xdg-desktop-portal.file-picker" = "1"; };
-    };
-  };
-
-  services = {
-    kasmweb = kasmwebConfig.services.kasmweb // {
-      enable = hostnameLogic.isRoleServer;
-    };
-    osquery = osqueryConfig.services.osquery;
-  };
-
-  # =====  systemPackages  =====
-  # Install packages system-wide based on the host
-  environment.systemPackages = pkgsList;
 }

@@ -76,10 +76,10 @@
           nixpkgs.overlays = [ rust-overlay.overlays.default ];
           environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
         })
-        ./nixos/modules/applications/packages.nix
+        ./nixos/modules/applications/assemble.nix
         ./nixos/modules/applications/current-system-packages.nix
-        # ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
-        # ./nixos/modules/applications/ollama.nix
+
+      # Data
         # ./nixos/modules/applications/syncthing.nix
 
       # Networking related
@@ -88,6 +88,9 @@
         ./nixos/modules/networking/stevenblack.nix
         ./nixos/modules/networking/stevenblack-unblacklist.nix
         ./nixos/modules/networking/tailscale.nix
+
+      # Nixvim
+        # ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
 
       # Observability
         ./nixos/modules/observability/observability.nix
