@@ -179,6 +179,7 @@ let
       qrscan
       ripgrep
       strace-analyzer
+      terminal-parrot
       tesseract
       tmux
       translate-shell
@@ -187,8 +188,10 @@ let
       usbutils
       vulkan-tools
       wayland-utils
+      wiki-tui
       wl-clipboard
       xfsprogs
+      yazi-unwrapped
 
     # VCS
       # Git
