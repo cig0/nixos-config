@@ -76,8 +76,10 @@
           nixpkgs.overlays = [ rust-overlay.overlays.default ];
           environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
         })
-        ./nixos/modules/applications/assemble.nix
         ./nixos/modules/applications/current-system-packages.nix
+
+      # Assembly
+        ./nixos/modules/assembly/assemble.nix
 
       # Data
         # ./nixos/modules/applications/syncthing.nix
