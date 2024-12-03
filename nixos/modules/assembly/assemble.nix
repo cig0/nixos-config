@@ -44,7 +44,7 @@ in
     # Applications
       mtrConfig
     # Nix and NixOS
-      rnix-lspConfig
+      # rnix-lspConfig
     # Observability
       grafanaAlloyConfig
   ];
