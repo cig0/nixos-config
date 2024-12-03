@@ -8,12 +8,17 @@
     enable = true;
     configPath = "/etc/alloy";
     extraFlags = [
-      "--server.http.listen-addr=127.0.0.1:12346"
-      "--disable-reporting"
+      # "--server.http.listen-addr=127.0.0.1:12346"
+      # "--disable-reporting"
     ];
   };
 
   environment.etc."alloy/config.alloy" = {
+    # Optional permissions
+    mode = "0644";
+    user = "root";
+    group = "root";
+
     text = ''
       # Alloy configuration
       prometheus.remote_write "metrics_service" {
@@ -121,10 +126,5 @@
         forward_to = [loki.write.grafana_cloud_loki.receiver]
       }
     '';
-
-    # Optional permissions
-    mode = "0600";  # File permissions
-    user = "root"; # File owner
-    group = "root"; # File group
   };
 }

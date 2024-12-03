@@ -18,7 +18,7 @@ let
     grafanaAlloyConfig = import ../observability/grafana-alloy.nix { inherit config; };
 
   # Packages Lists
-  packages = import ./packages.nix { inherit pkgs; };
+  packages = import ../applications/packages.nix { inherit pkgs; };
     commonPackages = packages.lists.commonPackages;
     userSidePackages = packages.lists.userSidePackages;
 
