@@ -21,7 +21,7 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     createHome = true;
-    home = "/home/apollo";
+    home = "/home/doomguy";
     homeMode = "700";
     group = "users";
     extraGroups = [ "incus-admin" "libvirtd" "networkmanager" "wheel" ];
