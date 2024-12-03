@@ -14,8 +14,6 @@ let
     kasmwebConfig = import ../applications/kasmweb.nix { inherit config; };
     mtrConfig = import ../applications/mtr.nix { inherit config; };
     osqueryConfig = import ../applications/osquery.nix { inherit config; };
-  # Nix and NixOS
-    rnix-lspConfig = import ../applications/rnix-lsp.nix { inherit pkgs; };
   # Observability
     grafanaAlloyConfig = import ../observability/grafana-alloy.nix { inherit config; };
 
@@ -43,8 +41,6 @@ in
     #TODO: implement appropriate logic to correctly assemble the host's derivation
     # Applications
       mtrConfig
-    # Nix and NixOS
-      # rnix-lspConfig
     # Observability
       grafanaAlloyConfig
   ];
