@@ -89,6 +89,7 @@ let
       nix-diff
       nix-index
       nix-tree
+      nixd
       nixfmt-classic
       nixpkgs-fmt
       nixpkgs-review
