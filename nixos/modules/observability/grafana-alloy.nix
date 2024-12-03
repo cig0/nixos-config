@@ -5,7 +5,7 @@
 
 {
   services.alloy = {
-    enable = true;
+    enable = false;
     configPath = "/etc/alloy";
     extraFlags = [
       # "--server.http.listen-addr=127.0.0.1:12346"
