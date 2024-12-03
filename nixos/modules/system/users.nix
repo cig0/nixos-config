@@ -16,6 +16,19 @@
     description = "This is me";
   };
 
+  # User: doomguy
+  users.users.doomguy = {
+    shell = pkgs.zsh;
+    isNormalUser = true;
+    createHome = true;
+    home = "/home/apollo";
+    homeMode = "700";
+    group = "users";
+    extraGroups = [ "incus-admin" "libvirtd" "networkmanager" "wheel" ];
+    useDefaultShell = true;
+    description = "This is for testing";
+  };
+
   # User: fine
   users.users.fine = {
     isNormalUser = true;
