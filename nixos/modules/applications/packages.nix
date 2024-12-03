@@ -155,6 +155,7 @@ let
       cyme # https://github.com/tuna-f1sh/cyme :: List system USB buses and devices.
       difftastic
       delta
+      direnv
       dmidecode
       dotacat
       fastfetch
