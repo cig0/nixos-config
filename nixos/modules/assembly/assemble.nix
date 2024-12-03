@@ -10,12 +10,14 @@
 let
   hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
 
-  # Apps configurations
-  kasmwebConfig = import ./kasmweb.nix { inherit config; };
-  mtrConfig = import ./mtr.nix { inherit config; };
-  osqueryConfig = import ./osquery.nix { inherit config; };
+  # Applications
+    kasmwebConfig = import ../applications/kasmweb.nix { inherit config; };
+    mtrConfig = import ../applications/mtr.nix { inherit config; };
+    osqueryConfig = import ../applications/osquery.nix { inherit config; };
+  # Observability
+    grafanaAlloyConfig = import ../observability/grafana-alloy.nix { inherit config; };
 
-  # Packages lists
+  # Packages Lists
   packages = import ./packages.nix { inherit pkgs; };
     commonPackages = packages.lists.commonPackages;
     userSidePackages = packages.lists.userSidePackages;
@@ -36,7 +38,11 @@ in
 {
   imports = builtins.filter (x: x != null) [
     # ./systemPackages-overrides.nix
-    mtrConfig
+    #TODO: implement appropriate logic to correctly assemble the host's derivation
+    # Applications
+      mtrConfig
+    # Observability
+      grafanaAlloyConfig
   ];
 
   # Allow lincense-burdened packages
