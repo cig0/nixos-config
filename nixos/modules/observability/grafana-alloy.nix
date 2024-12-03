@@ -123,8 +123,8 @@
     '';
 
     # Optional permissions
-    mode = "0644";  # File permissions
-    owner = "root"; # File owner
+    mode = "0600";  # File permissions
+    user = "root"; # File owner
     group = "root"; # File group
   };
 }
