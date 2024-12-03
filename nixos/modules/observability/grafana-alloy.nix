@@ -20,7 +20,6 @@
     group = "root";
 
     text = ''
-      # Alloy configuration
       prometheus.remote_write "metrics_service" {
         receiver = "https://fleet-management-prod-008.grafana.net"
       }
