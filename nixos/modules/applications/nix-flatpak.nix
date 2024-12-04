@@ -36,6 +36,7 @@
       "org.kde.krename"
       "org.kde.ksudoku"
       "org.kde.ktimetracker"
+      "org.kde.ktorrent"
       "org.kde.neochat"
       "org.kde.tokodon"
 
@@ -75,6 +76,7 @@
       "org.wireshark.Wireshark"
 
       # Productivity
+      "org.fedoraproject.MediaWriter"
       "md.obsidian.Obsidian"
       "com.todoist.Todoist"
 
