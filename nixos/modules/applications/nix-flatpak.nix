@@ -91,6 +91,7 @@
       # Sharing-is-caring
       "org.nicotine_plus.Nicotine"
       "org.onionshare.OnionShare"
+      "com.transmissionbt.Transmission"
 
       # Storage
       "com.borgbase.Vorta"
