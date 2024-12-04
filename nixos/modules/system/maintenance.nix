@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ ... }:
 
 {
   # Automatic system cleanup
@@ -22,7 +22,8 @@
 #   - https://search.nixos.org/options?channel=24.05&from=0&size=50&sort=relevance&type=packages&query=nh.
 #   - https://github.com/viperML/nh (don't forget to star it!)
   system.autoUpgrade = {
-    enable = false;
+    enable = true;
+    allowReboot = false;
     dates = "daily";
     flags = [
       "--update-input"
@@ -33,10 +34,10 @@
       "--no-build-nix"
       "--print-build-logs"
     ];
-    flake = inputs.self.outPath;
+    # flake = inputs.self.outPath;
+    flake = "/etc/nixos/nixos-config";
     operation = "boot";
     randomizedDelaySec = "720min";
     persistent = false; # Do not try to upgrade early to compensate a missed reboot
-    allowReboot = false; # Do not allow reboots, we are not switching anyway
   };
 }
