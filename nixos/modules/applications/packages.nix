@@ -80,6 +80,9 @@ let
       whois
 
     # Nix
+      # LSP
+        nil
+        nixd
       devpod
       fh # fh, the official FlakeHub CLI :: https://github.com/DeterminateSystems/fh
       hydra-check
@@ -89,7 +92,6 @@ let
       nix-diff
       nix-index
       nix-tree
-      nixd
       nixfmt-classic
       nixpkgs-fmt
       nixpkgs-review
