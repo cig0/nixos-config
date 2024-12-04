@@ -77,6 +77,7 @@
 
       # Productivity
       "org.fedoraproject.MediaWriter"
+      "com.notesnook.Notesnook"
       "md.obsidian.Obsidian"
       "com.todoist.Todoist"
 
