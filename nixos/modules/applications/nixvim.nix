@@ -14,7 +14,7 @@
     plugins.lualine.enable = true;
 
     extraPlugins = with pkgs.vimPlugins; [
-E      vim-nix
+      vim-nix
     ];
   };
 }
