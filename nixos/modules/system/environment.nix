@@ -43,10 +43,9 @@ let
   };
 in
 {
-  environment = {
-    homeBinInPath = true;
-    localBinInPath = true;
-  };
+  # TODO: `nil` language server was nagging me to "Flatten AttrSet RHS into outer level bindings.". Learn what this means.
+  environment.homeBinInPath = true;
+  environment.localBinInPath = true;
 
   environment.sessionVariables =
     if hostnameLogic.isIntelGPUHost then commonEnvSessionVars // intelEnvSessionVars
