@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 
 {
   # Automatic system cleanup
@@ -26,16 +26,12 @@
     allowReboot = false;
     dates = "daily";
     flags = [
-      "--update-input"
-      "nixpkgs"
-      "--update-input"
-      "nixpkgs-unstable"
       "--commit-lock-file"
       "--no-build-nix"
       "--print-build-logs"
     ];
-    # flake = inputs.self.outPath;
-    flake = "/etc/nixos/nixos-config";
+    flake = inputs.self.outPath;
+    # flake = "github:cig0/nixos-config";
     operation = "boot";
     randomizedDelaySec = "720min";
     persistent = false; # Do not try to upgrade early to compensate a missed reboot
