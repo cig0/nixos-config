@@ -2,13 +2,13 @@
 # This file contains the lists of packages to be installed on a host.
 #
 # TODO:
-# [ ] Unriddle the current lists, e.g. commonPackages should contain only the same base packages for every system, userSidePackages all the packages a human user would need, and so on.
+# [x] Unriddle the current lists, e.g. commonPackages should contain only the same base packages for every system, userSidePackages all the packages a human user would need, and so on.
 # [ ] Create as much lists as needed to provide enough flexibility when assembling a host.
 
 { pkgs, ... }:
 
 let
-  commonPackages = with pkgs; [ # Packages common to all hosts, only from the stable release channel!
+  nonGUIApps = with pkgs; [ # Packages common to all hosts, only from the stable release channel!
     # Comms
       iamb
       weechat
@@ -55,9 +55,6 @@ let
       powertop
       s-tui
       vdpauinfo
-
-    # Multimedia
-      glaxnimate # Kdenlive dependency
 
     # Networking
       aria2
@@ -193,6 +190,7 @@ let
       tmux
       translate-shell
       tree
+      tty-clock
       ugrep
       usbutils
       vulkan-tools
@@ -222,7 +220,7 @@ let
       elinks
   ];
 
-  userSidePackages = with pkgs; [ # Only packages from the stable release channel.
+  graphicalUIApps = with pkgs; [ # Only packages from the stable release channel.
     # Meant to run in a [role]client device, as opposite on a [role]server device.
     # It's preferable to manage KDE applications here to keep them in sync with the base system and avoid pulling the necessary libraries and frameworks
 
@@ -240,6 +238,8 @@ let
     kdePackages.yakuake
     krita
     krita-plugin-gmic
+      # Multimedia
+        glaxnimate # Kdenlive dependency
 
     # Security
     pinentry-qt
@@ -248,7 +248,7 @@ let
 in
 {
   lists = {
-    commonPackages = commonPackages;
-    userSidePackages = userSidePackages;
+    nonGUIApps = nonGUIApps;
+    graphicalUIApps = graphicalUIApps;
   };
 }
