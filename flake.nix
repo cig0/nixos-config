@@ -31,10 +31,10 @@
 
     nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
-    nixos-cosmic = {
-      inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
-      url = "github:lilyinstarlight/nixos-cosmic";
-    };
+    # nixos-cosmic = {
+    #   inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
+    #   url = "github:lilyinstarlight/nixos-cosmic";
+    # };
 
     nix-index.url = "github:nix-community/nix-index";
 
@@ -45,10 +45,10 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # Hardware-specific optimizations
 
-    nixvim = { # The intended way to configure Neovim?
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/nixvim";
-    };
+    # nixvim = { # The intended way to configure Neovim?
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   url = "github:nix-community/nixvim";
+    # };
 
     rust-overlay.url = "github:oxalica/rust-overlay"; # A happy crabby dancing sideways
 
@@ -62,9 +62,9 @@
     nix-flatpak,              # Enhanced Flatpak support.
     nix-index,                # A files database for nixpkgs.
     # nix-index-database,       # A files database for nixpkgs - pre-baked.
-    nixos-cosmic,             # COSMIC Desktop Environment.
+    # nixos-cosmic,             # COSMIC Desktop Environment.
     nixos-hardware,           # Additional hardware configuration.
-    nixvim,                   # WIP Neovim configuration (rocking on LunarVim ATM).
+    # nixvim,                   # WIP Neovim configuration (rocking on LunarVim ATM).
     rust-overlay,             # Oxalica's Rust toolchain overlay.
     # sops-nix,                 # Mic92 NixOS' Mozilla SOPS implementation.
   ... }:
@@ -142,7 +142,7 @@
         ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
       # Display Managers / Desktop Environments / Window Managers
-        ./nixos/modules/desktop/cosmic.nix nixos-cosmic.nixosModules.default
+        # ./nixos/modules/desktop/cosmic.nix nixos-cosmic.nixosModules.default
         ./nixos/modules/desktop/gnome.nix
         ./nixos/modules/desktop/kde.nix
         ./nixos/modules/desktop/ly.nix
@@ -174,7 +174,7 @@
 
         {
           services.desktopManager = {
-            cosmic.enable = false; # COSMIC Desktop Environment
+            # cosmic.enable = false; # COSMIC Desktop Environment
             plasma6.enable = true; # KDE Plasma Desktop Environment
           };
 
@@ -185,7 +185,7 @@
             autoLogin = {
               enable = false;
             };
-            cosmic-greeter.enable = false; # COSMIC Desktop Greeter
+            # cosmic-greeter.enable = false; # COSMIC Desktop Greeter
             ly.enable = false; # Ly Display Manager
             sddm.enable = true; # SDDM / KDE Display Manager
           };
