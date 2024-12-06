@@ -19,21 +19,21 @@ let
 
   # Packages Lists
   packages = import ../applications/packages.nix { inherit pkgs; };
-    commonPackages = packages.lists.commonPackages;
-    userSidePackages = packages.lists.userSidePackages;
+    nonGUIApps = packages.lists.nonGUIApps;
+    graphicalUIApps = packages.lists.graphicalUIApps;
 
   pkgsList =
     let
-      basePackages = if hostnameLogic.isRoleUser then commonPackages ++ userSidePackages
-        else if hostnameLogic.isRoleServer then commonPackages ++ [
+      pkgsList = if hostnameLogic.isRoleUser then nonGUIApps ++ graphicalUIApps
+        else if hostnameLogic.isRoleServer then nonGUIApps ++ [
           pkgs.cockpit
           pkgs.pinentry-curses
         ]
         else [ ];
     in
-      if hostnameLogic.isNvidiaGPUHost then basePackages ++ [ pkgs.nvtop ]
+      if hostnameLogic.isNvidiaGPUHost then pkgsList ++ [ pkgs.nvtop ]
       else
-        basePackages;
+        pkgsList;
 in
 {
   imports = builtins.filter (x: x != null) [
