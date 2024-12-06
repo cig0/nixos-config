@@ -45,10 +45,10 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # Hardware-specific optimizations
 
-    # nixvim = { # The intended way to configure Neovim?
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   url = "github:nix-community/nixvim";
-    # };
+    nixvim = { # The intended way to configure Neovim?
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
+    };
 
     rust-overlay.url = "github:oxalica/rust-overlay"; # A happy crabby dancing sideways
 
@@ -64,7 +64,7 @@
     # nix-index-database,       # A files database for nixpkgs - pre-baked.
     # nixos-cosmic,             # COSMIC Desktop Environment.
     nixos-hardware,           # Additional hardware configuration.
-    # nixvim,                   # WIP Neovim configuration (rocking on LunarVim ATM).
+    nixvim,                   # WIP Neovim configuration (rocking on LunarVim ATM).
     rust-overlay,             # Oxalica's Rust toolchain overlay.
     # sops-nix,                 # Mic92 NixOS' Mozilla SOPS implementation.
   ... }:
@@ -92,7 +92,7 @@
         ./nixos/modules/networking/tailscale.nix
 
       # Nixvim
-        # ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
+        ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
 
       # Observability
         ./nixos/modules/observability/observability.nix
