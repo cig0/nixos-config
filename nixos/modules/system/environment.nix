@@ -43,12 +43,14 @@ let
   };
 in
 {
-  # TODO: `nil` language server was nagging me to "Flatten AttrSet RHS into outer level bindings.". Learn what this means.
-  environment.homeBinInPath = true;
-  environment.localBinInPath = true;
+  # TODO: `nil` language server nags me to "Flatten AttrSet RHS into outer level bindings.". Learn what this means.
+  environment = {
+    homeBinInPath = true;
+    localBinInPath = true;
 
-  environment.sessionVariables =
-    if hosts.isIntelGPUHost then commonEnvSessionVars // intelEnvSessionVars
-    else if hosts.isNvidiaGPUHost then commonEnvSessionVars
-    else {};
+    sessionVariables =
+      if hosts.isIntelGPUHost then commonEnvSessionVars // intelEnvSessionVars
+      else if hosts.isNvidiaGPUHost then commonEnvSessionVars
+      else {};
+  };
 }
