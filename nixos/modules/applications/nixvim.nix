@@ -13,8 +13,8 @@
     };
     plugins.lualine.enable = true;
 
-    # extraPlugins = with pkgs.vimPlugins; [
-    #   vim-nix
-    # ];
+    extraPlugins = with pkgs.vimPlugins; [
+      vim-nix
+    ];
   };
 }
