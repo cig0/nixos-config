@@ -26,6 +26,7 @@ rec {
       # Arbitrary groupings
       isIntelGPUHost = isChuweiMiniPC || isTuxedoInfinityBook;  # Combined condition for Intel iGPU hosts.
       isNvidiaGPUHost = isVittusaatana;
+      isRoleLaptop = isTuxedoInfinityBook;
       isRoleServer = isChuweiMiniPC;
       isRoleUser = isDesktop || isTuxedoInfinityBook;  # Combined condition for user-side hosts.
 }
