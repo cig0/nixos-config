@@ -26,7 +26,7 @@
     group = "users";
     extraGroups = [ "incus-admin" "libvirtd" "networkmanager" "wheel" ];
     useDefaultShell = true;
-    description = "This is for testing";
+    description = "This is testing";
   };
 
   # User: fine
