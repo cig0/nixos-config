@@ -313,7 +313,7 @@ rec {
     surs = "sudo rsync -Pav";
     tt = "oathtool --totp -b $(wl-paste -n -p) | wl-copy -n";
     sw3m = "s -b w3m";
-    v = "lvim";
+    v = "nvim";
 
     # GitHub CLI
     ghrw = "gh run watch";
