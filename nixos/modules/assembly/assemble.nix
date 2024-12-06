@@ -9,7 +9,7 @@
 
 let
   # Host name logic. Loads a map of possible hostnames and their associated roles.
-  host = import ../../helpers/hostnames.nix { inherit config lib; };
+  hosts = import ../../helpers/hostnames.nix { inherit config lib; };
 
   # Applications
     kasmwebConfig = import ../applications/kasmweb.nix { inherit config; };
@@ -28,13 +28,13 @@ let
 
   pkgsList =
     let
-      pkgsList = if host.isRoleLaptop then roleLaptop
-        else if host.isRoleServer then roleServer ++ [
+      pkgsList = if hosts.isRoleLaptop then roleLaptop
+        else if hosts.isRoleServer then roleServer ++ [
           pkgs.pinentry-curses
         ]
         else [ ];
     in
-      if host.isNvidiaGPUHost then pkgsList ++ [ pkgs.nvtop ]
+      if hosts.isNvidiaGPUHost then pkgsList ++ [ pkgs.nvtop ]
       else
         pkgsList;
 in
@@ -66,7 +66,7 @@ in
 
   # TODO: move to its own file
   #===  Chromium options
-  security.chromiumSuidSandbox.enable = host.isRoleUser;
+  security.chromiumSuidSandbox.enable = hosts.isRoleUser;
 
   # TODO: move to its own file
   programs = {
@@ -78,7 +78,7 @@ in
 
   services = {
     kasmweb = kasmwebConfig.services.kasmweb // {
-      enable = host.isRoleServer;
+      enable = hosts.isRoleServer;
     };
     osquery = osqueryConfig.services.osquery;
   };
