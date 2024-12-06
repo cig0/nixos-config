@@ -196,9 +196,11 @@ rec {
   shellInit = ''
     # Preferred editor for local and remote sessions
     if [[ -n $SSH_CONNECTION ]]; then
-      export EDITOR="vim"
+      export EDITOR="nvim"
+      export VISUAL="code"
     else
-      export EDITOR="lvim"
+      export EDITOR="nvim"
+      export VISUAL="code"
     fi
 
     # Uncomment the following line to display red dots whilst waiting for completion.
