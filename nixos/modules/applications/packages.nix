@@ -137,10 +137,8 @@ let
       just # https://github.com/casey/just :: A handy way to save and run project-specific commands
       libva-utils
       lsof
-      lunarvim
       lurk # A simple and pretty alternative to strace
       mc
-      neovim
       nushell
       p7zip
       pciutils
