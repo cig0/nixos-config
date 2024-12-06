@@ -8,7 +8,8 @@
 { config, lib, pkgs, ... }:
 
 let
-  hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
+  # Host name logic. Loads a map of possible hostnames and their associated roles.
+  host = import ../../helpers/hostnames.nix { inherit config lib; };
 
   # Applications
     kasmwebConfig = import ../applications/kasmweb.nix { inherit config; };
@@ -19,19 +20,21 @@ let
 
   # Packages Lists
   packages = import ../applications/packages.nix { inherit pkgs; };
-    nonGUIApps = packages.lists.nonGUIApps;
-    graphicalUIApps = packages.lists.graphicalUIApps;
+    # appsBaseline = packages.lists.appsBaseline;
+    # appsNonGUI = packages.lists.appsNonGUI;
+    # appsGUI = packages.lists.appsGUI;
+    roleLaptop = packages.lists.roleLaptop;
+    roleServer = packages.lists.roleServer;
 
   pkgsList =
     let
-      pkgsList = if hostnameLogic.isRoleUser then nonGUIApps ++ graphicalUIApps
-        else if hostnameLogic.isRoleServer then nonGUIApps ++ [
-          pkgs.cockpit
+      pkgsList = if host.isRoleLaptop then roleLaptop
+        else if host.isRoleServer then roleServer ++ [
           pkgs.pinentry-curses
         ]
         else [ ];
     in
-      if hostnameLogic.isNvidiaGPUHost then pkgsList ++ [ pkgs.nvtop ]
+      if host.isNvidiaGPUHost then pkgsList ++ [ pkgs.nvtop ]
       else
         pkgsList;
 in
@@ -63,7 +66,7 @@ in
 
   # TODO: move to its own file
   #===  Chromium options
-  security.chromiumSuidSandbox.enable = hostnameLogic.isRoleUser;
+  security.chromiumSuidSandbox.enable = host.isRoleUser;
 
   # TODO: move to its own file
   programs = {
@@ -75,7 +78,7 @@ in
 
   services = {
     kasmweb = kasmwebConfig.services.kasmweb // {
-      enable = hostnameLogic.isRoleServer;
+      enable = host.isRoleServer;
     };
     osquery = osqueryConfig.services.osquery;
   };

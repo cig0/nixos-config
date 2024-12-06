@@ -2,49 +2,12 @@
 # This file contains the lists of packages to be installed on a host.
 #
 # TODO:
-# [x] Unriddle the current lists, e.g. commonPackages should contain only the same base packages for every system, userSidePackages all the packages a human user would need, and so on.
-# [ ] Create as much lists as needed to provide enough flexibility when assembling a host.
+# [ ] Create as much lists as needed to provide enough flexibility to assemble hosts with different roles.
 
 { pkgs, ... }:
 
 let
-  nonGUIApps = with pkgs; [ # Packages common to all hosts, only from the stable release channel!
-    # Comms
-      iamb
-      weechat
-
-    # IaaS / PaaS / SaaS
-      awscli2
-      eksctl
-
-    # Infrastructure: CNCF / K8s / OCI / virtualization
-      argocd
-      cosign
-      crc
-      distrobox
-      k3d
-      k9s
-      kind
-      krew
-      kube-bench
-      kubecolor
-      kubectl
-      kubernetes-helm
-      kubeswitch
-      minikube
-      odo # odo is a CLI tool for fast iterative application development deployed immediately to your kubernetes cluster :: https://odo.dev
-      opentofu
-      packer
-      podman-compose
-      podman-tui
-      telepresence2
-      terraformer
-      tf-summarize
-      tflint
-      tfsec
-      tfswitch
-      # vagrant
-
+  appsBaseline = with pkgs; [
     # Monitoring & Observability
       btop
       glances
@@ -52,9 +15,7 @@ let
       inxi
       iotop
       lm_sensors
-      powertop
       s-tui
-      vdpauinfo
 
     # Networking
       aria2
@@ -95,55 +56,58 @@ let
       rippkgs
       vulnix
 
-    # Programming
-      # Go
-        go # Needed to install individual apps
-        # golangci-lint
-        # golangci-lint-langserver
-        # gopls
-
-      # JS
-        # nodejs_latest
-
-      # Python
-        python312
-        python312Packages.ipython
-        uv
-
-      # Rust
-        cargo-binstall
-        cargo-cache
-        chit
-
-      # Everything else...
-        devbox
-        gcc
-        mold
-        shellcheck
-        tokei
-        yamlfmt
-        zig
-
-    # Security
-      age
-      chkrootkit
-      gpg-tui
-      kpcli
-      lynis
-      oath-toolkit
-      protonvpn-cli
-      rustscan
-      sops
-      vt-cli
+    # Python
+      python312
+      python312Packages.ipython
 
     # Storage
-      borgbackup
       du-dust
       duf
       dysk
       ncdu
+  ];
 
-    # Terminal utilities
+  appsNonGUI = with pkgs; [ # Packages common to all hosts, only from the stable release channel!
+    # Backup software
+      borgbackup
+
+    # Comms
+      iamb
+      weechat
+
+    # IaaS / PaaS / SaaS
+      awscli2
+      eksctl
+
+    # Infrastructure: CNCF / K8s / OCI / virtualization
+      argocd
+      cosign
+      crc
+      distrobox
+      k3d
+      k9s
+      kind
+      krew
+      kube-bench
+      kubecolor
+      kubectl
+      kubernetes-helm
+      kubeswitch
+      minikube
+      odo # odo is a CLI tool for fast iterative application development deployed immediately to your kubernetes cluster :: https://odo.dev
+      opentofu
+      packer
+      podman-compose
+      podman-tui
+      telepresence2
+      terraformer
+      tf-summarize
+      tflint
+      tfsec
+      tfswitch
+      # vagrant
+
+    # Other utilities
       antora
       at
       atuin
@@ -199,6 +163,45 @@ let
       xfsprogs
       yazi-unwrapped
 
+    # Programming
+      # Go
+        go # Needed to install individual apps
+        # golangci-lint
+        # golangci-lint-langserver
+        # gopls
+
+      # JS
+        # nodejs_latest
+
+      # Python
+        uv
+
+      # Rust
+        cargo-binstall
+        cargo-cache
+        chit
+        rustscan
+
+      # Everything else...
+        devbox
+        gcc
+        mold
+        shellcheck
+        tokei
+        yamlfmt
+        zig
+
+    # Security
+      age
+      chkrootkit
+      gpg-tui
+      kpcli
+      lynis
+      oath-toolkit
+      protonvpn-cli
+      sops
+      vt-cli
+
     # VCS
       # Git
         ggshield # GitGuardian
@@ -220,7 +223,7 @@ let
       elinks
   ];
 
-  graphicalUIApps = with pkgs; [ # Only packages from the stable release channel.
+  appsGUI = with pkgs; [ # Only packages from the stable release channel.
     # Meant to run in a [role]client device, as opposite on a [role]server device.
     # It's preferable to manage KDE applications here to keep them in sync with the base system and avoid pulling the necessary libraries and frameworks
 
@@ -248,7 +251,13 @@ let
 in
 {
   lists = {
-    nonGUIApps = nonGUIApps;
-    graphicalUIApps = graphicalUIApps;
+    # appsBaseline = appsBaseline;
+    # appsNonGUI = appsNonGUI;
+    # appsNvidia = appsNvidia;
+    # appsGUI = appsGUI;
+
+    # roleDesktopGaming = roleDesktopGaming;
+    roleLaptop = appsBaseline ++ appsNonGUI ++ appsGUI;
+    roleServer = appsBaseline;
   };
 }
