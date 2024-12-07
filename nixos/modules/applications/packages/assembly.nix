@@ -6,10 +6,10 @@
 
 let
   # Host name logic. Loads a map of possible hostnames and their associated roles.
-  hosts = import ../../helpers/hostnames.nix { inherit config lib; };
+  hosts = import ../../../helpers/hostnames.nix { inherit config lib; };
 
   # Packages Lists
-  packages = import ../applications/packages.nix { inherit pkgs; };
+  packages = import ./packages.nix { inherit pkgs; };
     appsBaseline = packages.lists.appsBaseline;
     appsNonGUI = packages.lists.appsNonGUI;
     appsGUI = packages.lists.appsGUI;

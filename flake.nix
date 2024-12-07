@@ -79,10 +79,10 @@
         ./nixos/modules/applications/current-system-packages.nix
 
       # Assembly
-        ./nixos/modules/assembly/assemble.nix
+        ./nixos/modules/applications/packages/assembly.nix
 
       # Data
-        ./nixos/modules/applications/syncthing.nix # TODO: move logic to the assemble file.
+        # ./nixos/modules/applications/syncthing.nix # TODO: move logic to the assemble file.
 
       # Networking
         ./nixos/modules/networking/dns.nix
