@@ -3,7 +3,8 @@
 
 {
   services.syncthing = {
-    enable = true;
+    enable = false;
+    openDefaultPorts = true;
     user = "cig0";
     group = "users";
     dataDir = "/home/cig0";
