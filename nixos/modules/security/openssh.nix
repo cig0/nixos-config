@@ -3,6 +3,7 @@
 {
   services.openssh = {
     enable = true;
+    openFirewall = true;
     listenAddresses = [
       {
         addr = "127.0.0.1";
