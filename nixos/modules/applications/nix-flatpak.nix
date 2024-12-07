@@ -35,7 +35,7 @@
       "org.kde.kget"
       "org.kde.kigo"
       "org.kde.kleopatra"
-      "org.kde.kontact"
+      # "org.kde.kontact" # Managed by NixOS: nixos/modules/applications/kde/kde-pim.nix
       "org.kde.krename"
       "org.kde.ksudoku"
       "org.kde.ktimetracker"
