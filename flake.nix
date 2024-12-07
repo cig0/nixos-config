@@ -82,7 +82,7 @@
         ./nixos/modules/assembly/assemble.nix
 
       # Data
-        # ./nixos/modules/applications/syncthing.nix
+        ./nixos/modules/applications/syncthing.nix # TODO: move logic to the assemble file.
 
       # Networking related
         ./nixos/modules/networking/dns.nix
@@ -143,7 +143,7 @@
 
       # Display Managers / Desktop Environments / Window Managers
         # ./nixos/modules/desktop/cosmic.nix nixos-cosmic.nixosModules.default
-        ./nixos/modules/desktop/gnome.nix
+        # ./nixos/modules/desktop/gnome.nix
         ./nixos/modules/desktop/kde.nix
         ./nixos/modules/desktop/ly.nix
         ./nixos/modules/desktop/sddm.nix
