@@ -13,8 +13,11 @@ let
 
   # Applications
     kasmwebConfig = import ../applications/kasmweb.nix { inherit config; };
-    mtrConfig = import ../applications/mtr.nix { inherit config; };
+    kde-pimConfig = import ../applications/kde/kde-pim.nix { inherit config; };
+    kdeconnectConfig = import ../applications/kde/kdeconnect.nix { inherit config; };
     osqueryConfig = import ../applications/osquery.nix { inherit config; };
+  # Networking
+    mtrConfig = import ../networking/mtr.nix { inherit config; };
   # Observability
     grafanaAlloyConfig = import ../observability/grafana-alloy.nix { inherit config; };
 
@@ -39,10 +42,16 @@ let
         pkgsList;
 in
 {
-  imports = builtins.filter (x: x != null) [
+  # imports = builtins.filter (x: x != null) [
+  imports = [
     # ./systemPackages-overrides.nix
     #TODO: implement appropriate logic to correctly assemble the host's derivation
     # Applications
+      kasmwebConfig
+      kde-pimConfig
+      kdeconnectConfig
+      osqueryConfig
+    # Networking
       mtrConfig
     # Observability
       grafanaAlloyConfig
@@ -54,16 +63,6 @@ in
     permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
   };
 
-  ## GNOME Desktop
-  environment.gnome.excludePackages = (with pkgs; [ # for packages that are pkgs.***
-    gnome-tour
-    gnome-connections
-      ]) ++ (with pkgs.gnome; [ # for packages that are pkgs.gnome.***
-      epiphany # web browser
-      geary # email reader
-      evince # document viewer
-  ]);
-
   # TODO: move to its own file
   #===  Chromium options
   security.chromiumSuidSandbox.enable = hosts.isRoleUser;
@@ -74,13 +73,6 @@ in
       enable = true;
       preferences = { "widget.use-xdg-desktop-portal.file-picker" = "1"; };
     };
-  };
-
-  services = {
-    kasmweb = kasmwebConfig.services.kasmweb // {
-      enable = hosts.isRoleServer;
-    };
-    osquery = osqueryConfig.services.osquery;
   };
 
   # =====  systemPackages  =====
