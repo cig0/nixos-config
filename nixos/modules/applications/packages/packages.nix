@@ -1,8 +1,6 @@
 # packages.nix
 # This file contains lists of packages ready to be installed on a host.
-#
-# TODO:
-# [ ] Create as much lists as needed to provide enough flexibility to assemble hosts with different roles.
+# Create as much lists as needed to provide enough flexibility to assemble hosts with different roles.
 
 { pkgs, ... }:
 
@@ -254,8 +252,8 @@ in
 {
   lists = {
     appsBaseline = appsBaseline;
+    appsGUI = appsGUI;
     appsNonGUI = appsNonGUI;
     appsNvidia = appsNvidia;
-    appsGUI = appsGUI;
   };
 }

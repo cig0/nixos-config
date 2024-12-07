@@ -45,7 +45,6 @@ in
   # Allow lincense-burdened packages
   nixpkgs.config = {
     allowUnfree = true;
-    # permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
   };
 
   # =====  systemPackages  =====

@@ -167,7 +167,6 @@
       inherit system;
       config = {
         allowUnfree = true;
-        permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
       };
     };
 
@@ -212,11 +211,11 @@
     #   ];
     # };
 
-    # nixosConfigurations.vittusaatana = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
+    # nixosConfigurations.koira = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
     #   inherit system;
     #   specialArgs = { inherit inputs system unstablePkgs; };
     #   modules = commonModules ++ userModules ++ [
-    #     ./nixos/hosts/vittusaatana/configuration.nix
+    #     ./nixos/hosts/koira/configuration.nix
 
     #     {
     #       services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
