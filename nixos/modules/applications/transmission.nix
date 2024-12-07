@@ -6,7 +6,7 @@
 
 {
   services.transmission = {
-    enable = true;
+    enable = false;
     group = "users";
     settings = {
       download-dir = "${config.services.transmission.home}/Downloads";
