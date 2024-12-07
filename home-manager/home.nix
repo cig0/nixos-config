@@ -65,7 +65,6 @@
 
           # Programming
             sublime-merge
-            sublime4
             vscode-fhs
 
           # Security
