@@ -246,16 +246,16 @@ let
     pinentry-qt
   ];
 
+  appsNvidia = with pkgs; [
+      nvtop
+  ];
+
 in
 {
   lists = {
-    # appsBaseline = appsBaseline;
-    # appsNonGUI = appsNonGUI;
-    # appsNvidia = appsNvidia;
-    # appsGUI = appsGUI;
-
-    # roleDesktopGaming = roleDesktopGaming;
-    roleLaptop = appsBaseline ++ appsNonGUI ++ appsGUI;
-    roleServer = appsBaseline;
+    appsBaseline = appsBaseline;
+    appsNonGUI = appsNonGUI;
+    appsNvidia = appsNvidia;
+    appsGUI = appsGUI;
   };
 }

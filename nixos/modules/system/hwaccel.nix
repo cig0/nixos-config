@@ -3,17 +3,17 @@
 { config, lib, pkgs, ... }:
 
 let
-  hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
+  hosts = import ../../helpers/hostnames.nix { inherit config lib; };
 in
 {
   # Intel iGPU hosts
-  nixpkgs.config = hostnameLogic.mkIf hostnameLogic.isIntelGPUHost {
+  nixpkgs.config = hosts.mkIf hosts.isIntelGPUHost {
     packageOverrides = pkgs: {
       intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
     };
   };
 
-   hardware.graphics = hostnameLogic.mkIf hostnameLogic.isIntelGPUHost {
+   hardware.graphics = hosts.mkIf hosts.isIntelGPUHost {
     enable = true;
     extraPackages = with pkgs; [
       intel-compute-runtime
@@ -32,11 +32,11 @@ in
   };
 
   services.xserver.videoDrivers =
-    if hostnameLogic.isIntelGPUHost then [ "modesetting" "fbdev" ]
-    else if hostnameLogic.isNvidiaGPUHost then [ "nvidia" ]
+    if hosts.isIntelGPUHost then [ "modesetting" "fbdev" ]
+    else if hosts.isNvidiaGPUHost then [ "nvidia" ]
     else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 
   # ===== FOR WHEN MIGRATING VITTU
   # Nvidia GPU host
-  hardware.nvidia.modesetting.enable = hostnameLogic.mkIf hostnameLogic.isNvidiaGPUHost true;
+  hardware.nvidia.modesetting.enable = hosts.mkIf hosts.isNvidiaGPUHost true;
 }
