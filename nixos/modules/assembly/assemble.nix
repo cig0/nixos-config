@@ -73,4 +73,5 @@ in
   # =====  systemPackages  =====
   # Install packages system-wide based on the host
   environment.systemPackages = pkgsList;
+  # environment.systemPackages = if hosts.isRoleLaptop then roleLaptop;
 }

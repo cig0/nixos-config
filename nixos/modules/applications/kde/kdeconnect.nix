@@ -4,7 +4,7 @@
 
 {
   programs.kdeconnect = {
-    enable = true;
+    enable = false;
     settings = {
       General = {
         DiscoveryTimeout = 10;
