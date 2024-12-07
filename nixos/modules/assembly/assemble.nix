@@ -11,13 +11,6 @@ let
   # Host name logic. Loads a map of possible hostnames and their associated roles.
   hosts = import ../../helpers/hostnames.nix { inherit config lib; };
 
-  # Applications
-    # kasmwebConfig = import ../applications/kasmweb.nix { inherit config; };
-    # mtrConfig = import ../applications/mtr.nix { inherit config; };
-    # osqueryConfig = import ../system/osquery.nix { inherit config; };
-  # Observability
-    # grafanaAlloyConfig = import ../observability/grafana-alloy.nix { inherit config; };
-
   # Packages Lists
   packages = import ../applications/packages.nix { inherit pkgs; };
     # appsBaseline = packages.lists.appsBaseline;
@@ -57,10 +50,6 @@ in
     allowUnfree = true;
     permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
   };
-
-  # TODO: move to its own file
-  #===  Chromium options
-  security.chromiumSuidSandbox.enable = hosts.isRoleUser;
 
   # TODO: move to its own file
   programs = {
