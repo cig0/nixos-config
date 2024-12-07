@@ -1,5 +1,5 @@
 # packages.nix
-# This file contains the lists of packages to be installed on a host.
+# This file contains lists of packages ready to be installed on a host.
 #
 # TODO:
 # [ ] Create as much lists as needed to provide enough flexibility to assemble hosts with different roles.

@@ -150,7 +150,7 @@
         ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
       # Display Managers / Desktop Environments / Window Managers
-        # ./nixos/modules/desktop/cosmic.nix nixos-cosmic.nixosModules.default
+        # ./nixos/modules/desktop/y.nix nixos-cosmic.nixosModules.default
         # ./nixos/modules/desktop/gnome.nix
         ./nixos/modules/desktop/kde.nix
         ./nixos/modules/desktop/ly.nix

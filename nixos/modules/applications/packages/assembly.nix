@@ -1,6 +1,6 @@
 # assemble.nix
-# This file assembles the lists of packages to be installed on a host.
-#
+# This file assembles the lists of packages to be installed on a host according to the host's role.
+
 
 { config, lib, pkgs, ... }:
 
@@ -45,7 +45,7 @@ in
   # Allow lincense-burdened packages
   nixpkgs.config = {
     allowUnfree = true;
-    permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
+    # permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
   };
 
   # =====  systemPackages  =====
