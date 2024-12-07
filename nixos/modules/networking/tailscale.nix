@@ -6,8 +6,8 @@
 
 {
   services.tailscale = {
+    openFirewall = true;
     enable = true;
     extraUpFlags = [ "--ssh" ];
-    tailscale.openFirewall = true;
   };
 }
