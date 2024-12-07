@@ -19,7 +19,9 @@
 
       # KDE
       "org.kde.akregator"
+      "org.kde.amarok"
       "org.kde.arianna"
+      "org.kde.calligra"
       "org.kde.digikam"
       "org.kde.francis"
       "org.kde.itinerary"
@@ -33,11 +35,13 @@
       "org.kde.kget"
       "org.kde.kigo"
       "org.kde.kleopatra"
+      "org.kde.kontact"
       "org.kde.krename"
       "org.kde.ksudoku"
       "org.kde.ktimetracker"
       "org.kde.ktorrent"
       "org.kde.neochat"
+      "org.kde.plasmatube"
       "org.kde.tokodon"
 
       # ASCII fun
