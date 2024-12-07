@@ -84,17 +84,20 @@
       # Data
         ./nixos/modules/applications/syncthing.nix # TODO: move logic to the assemble file.
 
-      # Networking related
+      # Networking
         ./nixos/modules/networking/dns.nix
+        ./nixos/modules/networking/mtr.nix
         ./nixos/modules/networking/nftables.nix
         ./nixos/modules/networking/stevenblack.nix
         ./nixos/modules/networking/stevenblack-unblacklist.nix
         ./nixos/modules/networking/tailscale.nix
 
-      # Nixvim
+      # NixVim
         ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
 
       # Observability
+        # ./nixos/modules/observability/grafana-alloy.nix
+        # ./nixos/modules/observability/netdata.nix
         ./nixos/modules/observability/observability.nix
 
       # Power management
@@ -121,6 +124,7 @@
         ./nixos/modules/system/kernel.nix
         ./nixos/modules/system/keyd.nix
         ./nixos/modules/system/maintenance.nix
+        # ./nixos/modules/system/osquery.nix
         # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index
         ./nixos/modules/system/time.nix
         ./nixos/modules/system/ucode.nix
@@ -136,9 +140,13 @@
         ./nixos/overlays/overlays.nix
     ];
 
-    userSideModules = [
+    userModules = [
       # Applications - Flatpak
         ./home-manager/home.nix home-manager.nixosModules.home-manager
+        ./nixos/modules/applications/chromium.nix
+        ./nixos/modules/applications/firefox.nix
+        ./nixos/modules/applications/kde/kde-pim.nix
+        ./nixos/modules/applications/kde/kdeconnect.nix
         ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
       # Display Managers / Desktop Environments / Window Managers
@@ -168,7 +176,7 @@
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
       inherit system;
       specialArgs = { inherit inputs system unstablePkgs; };
-      modules = commonModules ++ userSideModules ++ [
+      modules = commonModules ++ userModules ++ [
         nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
         ./nixos/hosts/perrrkele/configuration.nix
 
@@ -207,7 +215,7 @@
     # nixosConfigurations.vittusaatana = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
     #   inherit system;
     #   specialArgs = { inherit inputs system unstablePkgs; };
-    #   modules = commonModules ++ userSideModules ++ [
+    #   modules = commonModules ++ userModules ++ [
     #     ./nixos/hosts/vittusaatana/configuration.nix
 
     #     {

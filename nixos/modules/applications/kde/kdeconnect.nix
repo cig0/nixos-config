@@ -4,6 +4,6 @@
 
 {
   programs.kdeconnect = {
-    enable = false;
+    enable = true;
   };
 }

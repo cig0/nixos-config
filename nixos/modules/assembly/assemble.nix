@@ -1,9 +1,6 @@
 # assemble.nix
 # This file assembles the lists of packages to be installed on a host.
 #
-# TODO: clean up this mess! The plan would be:
-# [x] Create a new install.nix or assemble.nix file to assemble all the groups of packages depending on the role of the host(s)
-# [ ] Move all the configurations for individual applications/tools to a separate file.
 
 { config, lib, pkgs, ... }:
 
@@ -13,40 +10,36 @@ let
 
   # Packages Lists
   packages = import ../applications/packages.nix { inherit pkgs; };
-    # appsBaseline = packages.lists.appsBaseline;
-    # appsNonGUI = packages.lists.appsNonGUI;
-    # appsGUI = packages.lists.appsGUI;
-    roleLaptop = packages.lists.roleLaptop;
-    roleServer = packages.lists.roleServer;
+    appsBaseline = packages.lists.appsBaseline;
+    appsNonGUI = packages.lists.appsNonGUI;
+    appsGUI = packages.lists.appsGUI;
+    appsNvidia = appsNvidia;
 
+  # Build list of packages to be installed on the host
   pkgsList =
     let
-      pkgsList = if hosts.isRoleLaptop then roleLaptop
-        else if hosts.isRoleServer then roleServer ++ [
-          pkgs.pinentry-curses
-        ]
-        else [ ];
+      pkgsList =
+        if hosts.isRoleLaptop then
+          appsBaseline ++
+          appsNonGUI ++
+          appsGUI
+
+        else if hosts.isRoleServer then
+          appsBaseline ++
+          appsNonGUI ++
+          [
+            pkgs.pinentry-curses
+          ]
+        else [];
     in
-      if hosts.isNvidiaGPUHost then pkgsList ++ [ pkgs.nvtop ]
+      if hosts.isNvidiaGPUHost then pkgsList ++ appsNvidia
       else
         pkgsList;
+
 in
 {
   imports = builtins.filter (x: x != null) [
     # ./systemPackages-overrides.nix
-    #TODO: implement appropriate logic to correctly assemble the host's derivation
-    # Applications
-      ../applications/kde/kde-pim.nix
-      ../applications/kde/kdeconnect.nix
-      # Web Browsers
-        ../applications/chromium.nix
-        ../applications/firefox.nix
-    # Networking
-      ../networking/mtr.nix
-    # Observability
-      # ../observability/grafana-alloy.nix
-    # System
-      # ../system/osquery.nix
   ];
 
   # Allow lincense-burdened packages
@@ -58,5 +51,4 @@ in
   # =====  systemPackages  =====
   # Install packages system-wide based on the host
   environment.systemPackages = pkgsList;
-  # environment.systemPackages = if hosts.isRoleLaptop then roleLaptop;
 }
