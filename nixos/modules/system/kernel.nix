@@ -54,7 +54,7 @@ in
     kernel.sysctl =
       # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
 
-      if hostnameLogic.isVittusaatana || hostnameLogic.isRoleServer
+      if hostnameLogic.isKoira || hostnameLogic.isRoleServer
         then commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "bbr"; }
         # bbr: A newer algorithm designed for higher throughput and lower latency.
       else if hostnameLogic.isTuxedoInfinityBook

@@ -37,7 +37,7 @@ in
     else if hostnameLogic.isSatama then
       "America/Argentina/Buenos_Aires"
 
-    else if hostnameLogic.isVittusaatana then
+    else if hostnameLogic.isKoira then
       "America/Argentina/Buenos_Aires"
 
     else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
