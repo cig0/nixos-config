@@ -1,7 +1,7 @@
 # gnome.nix
 # This file contains the configurations for the GNOME Desktop Environment.
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Define packages to exclude from the GNOME Desktop Environment
