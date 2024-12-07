@@ -16,17 +16,17 @@ in
     # Individual hosts definition by name.
     isPerrrkele = myHostName == "perrrkele";
     isSatama = myHostName == "satama";
-    isVittusaatana = myHostName == "vittusaatana";
+    isKoira = myHostName == "koira";
 
     # Logical groupings
       # By hardware
       isChuweiMiniPC = isSatama;
-      isDesktop = isVittusaatana;
+      isDesktop = isKoira;
       isTuxedoInfinityBook = isPerrrkele;
 
       # By GPU
       isIntelGPUHost = isChuweiMiniPC || isTuxedoInfinityBook;  # Combined condition for Intel iGPU hosts.
-      isNvidiaGPUHost = isVittusaatana;
+      isNvidiaGPUHost = isKoira;
 
       # By role
       isRoleLaptop = isTuxedoInfinityBook;
