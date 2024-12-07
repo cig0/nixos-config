@@ -36,6 +36,7 @@ in
     # ./systemPackages-overrides.nix
     #TODO: implement appropriate logic to correctly assemble the host's derivation
     # Applications
+      ../applications/chromium.nix
       ../applications/kde/kde-pim.nix
       ../applications/kde/kdeconnect.nix
       ../networking/mtr.nix
