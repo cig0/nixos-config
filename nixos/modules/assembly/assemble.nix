@@ -12,14 +12,11 @@ let
   hosts = import ../../helpers/hostnames.nix { inherit config lib; };
 
   # Applications
-    kasmwebConfig = import ../applications/kasmweb.nix { inherit config; };
-    kde-pimConfig = import ../applications/kde/kde-pim.nix { inherit config; };
-    kdeconnectConfig = import ../applications/kde/kdeconnect.nix { inherit config; };
-    osqueryConfig = import ../applications/osquery.nix { inherit config; };
-  # Networking
-    mtrConfig = import ../networking/mtr.nix { inherit config; };
+    # kasmwebConfig = import ../applications/kasmweb.nix { inherit config; };
+    # mtrConfig = import ../applications/mtr.nix { inherit config; };
+    # osqueryConfig = import ../system/osquery.nix { inherit config; };
   # Observability
-    grafanaAlloyConfig = import ../observability/grafana-alloy.nix { inherit config; };
+    # grafanaAlloyConfig = import ../observability/grafana-alloy.nix { inherit config; };
 
   # Packages Lists
   packages = import ../applications/packages.nix { inherit pkgs; };
@@ -42,19 +39,17 @@ let
         pkgsList;
 in
 {
-  # imports = builtins.filter (x: x != null) [
-  imports = [
+  imports = builtins.filter (x: x != null) [
     # ./systemPackages-overrides.nix
     #TODO: implement appropriate logic to correctly assemble the host's derivation
     # Applications
-      kasmwebConfig
-      kde-pimConfig
-      kdeconnectConfig
-      osqueryConfig
-    # Networking
-      mtrConfig
+      ../applications/kde/kde-pim.nix
+      ../applications/kde/kdeconnect.nix
+      ../networking/mtr.nix
     # Observability
-      grafanaAlloyConfig
+      # ../observability/grafana-alloy.nix
+    # System
+      # ../system/osquery.nix
   ];
 
   # Allow lincense-burdened packages
