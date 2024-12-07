@@ -22,10 +22,10 @@
     };
   };
 
-  programs.kdeconnect.enable = true;
   services = {
-    openssh.openFirewall = false;
-    syncthing.openDefaultPorts = true;
-    tailscale.openFirewall = false;
+    # KDE Connect: nixos/modules/applications/kde/kdeconnect.nix
+    # Syncthing: nixos/modules/applications/syncthing.nix
+    # OpenSSH server: nixos/modules/security/openssh.nix
+    # Tailscale: nixos/modules/networking/tailscale.nix
   };
 }
