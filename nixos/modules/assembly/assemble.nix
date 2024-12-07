@@ -36,9 +36,12 @@ in
     # ./systemPackages-overrides.nix
     #TODO: implement appropriate logic to correctly assemble the host's derivation
     # Applications
-      ../applications/chromium.nix
       ../applications/kde/kde-pim.nix
       ../applications/kde/kdeconnect.nix
+      # Web Browsers
+        ../applications/chromium.nix
+        ../applications/firefox.nix
+    # Networking
       ../networking/mtr.nix
     # Observability
       # ../observability/grafana-alloy.nix
@@ -50,14 +53,6 @@ in
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Sublime 4
-  };
-
-  # TODO: move to its own file
-  programs = {
-    firefox = { # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
-      enable = true;
-      preferences = { "widget.use-xdg-desktop-portal.file-picker" = "1"; };
-    };
   };
 
   # =====  systemPackages  =====
