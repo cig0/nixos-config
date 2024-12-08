@@ -1,7 +1,6 @@
 # assemble.nix
 # This file assembles the lists of packages to be installed on a host according to the host's role.
 
-
 { config, lib, pkgs, unstablePkgs, ... }:
 
 let
