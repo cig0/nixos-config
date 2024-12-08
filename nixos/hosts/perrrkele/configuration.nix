@@ -13,7 +13,6 @@
   # Complementary options for hardware-configuration.nix. Hint: run nixos-generate-config --dir ~/tmp to create a fresh set of configuration.nix and hardware-configuration.nix.
   # Bootloader
     boot = {
-      # initrd.luks.devices."luks-edf43523-db06-4b35-9868-170c2a8ff06c".device = "/dev/disk/by-uuid/edf43523-db06-4b35-9868-170c2a8ff06c"; # Encrypted swap partition.
       initrd = {
         luks.devices."swap".device = "/dev/disk/by-uuid/edf43523-db06-4b35-9868-170c2a8ff06c"; # Encrypted swap partition.
       };
