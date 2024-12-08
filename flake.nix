@@ -70,7 +70,7 @@
   ... }:
 
   let
-    commonModules = [
+    coreModules = [
       # Applications
         ({ pkgs, ... }: { # Rust
           nixpkgs.overlays = [ rust-overlay.overlays.default ];
@@ -175,7 +175,7 @@
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
       inherit system;
       specialArgs = { inherit inputs system unstablePkgs; };
-      modules = commonModules ++ userModules ++ [
+      modules = coreModules ++ userModules ++ [
         nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
         ./nixos/hosts/perrrkele/configuration.nix
 
@@ -203,7 +203,7 @@
     # nixosConfigurations.satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
     #   inherit system;
     #   specialArgs = { inherit inputs system unstablePkgs; };
-    #   modules = commonModules ++ [
+    #   modules = coreModules ++ [
     #     ./nixos/hosts/satama/configuration.nix
 
     #     {
@@ -214,7 +214,7 @@
     # nixosConfigurations.koira = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
     #   inherit system;
     #   specialArgs = { inherit inputs system unstablePkgs; };
-    #   modules = commonModules ++ userModules ++ [
+    #   modules = coreModules ++ userModules ++ [
     #     ./nixos/hosts/koira/configuration.nix
 
     #     {
