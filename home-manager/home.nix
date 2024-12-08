@@ -1,8 +1,10 @@
-# https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
- # Note!!! Home Manageer is configured to use the unstable release channel, defined in the flake.
+# home.nix - https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-nixos-module
+# This file contains the configuration for Home Manager.
+#
+# The unstablePkgs argument is defined in ../flake.nix
 
 # { modulesPath, unstablePkgs, ... }:
-{ unstablePkgs, ... }:
+{ pkgs, unstablePkgs, ... }:
 
 {
   # imports = [
@@ -16,7 +18,10 @@
     users = {
       cig0 = { ... }: {
         # Define user-specific packages and configurations
-        home.packages = with unstablePkgs; [
+        home.packages =
+          with pkgs; [
+          ] ++
+          (with unstablePkgs; [
           # AI
             aichat
             (lmstudio.override {
@@ -31,6 +36,7 @@
             oterm
 
           # Comms
+            discordo
             zoom-us
 
           # KDE Apps
@@ -82,19 +88,32 @@
 
           # Everything else
               wiki-tui
-        ];
+        ]);
 
         # The state version is required and should stay at the version you
         # originally installed.
         home.stateVersion = "24.11";
       };
 
-      fine = { ... }: {
-        home.packages = with unstablePkgs; [
-        ];
+      # doomguy = { ... }: {
+      #   home.packages =
+      #     with pkgs; [
+      #     ] ++
+      #     (with unstablePkgs; [
+      #   ]);
 
-        home.stateVersion = "24.11";
-      };
+      #   home.stateVersion = "24.11";
+      # };
+
+      # fine = { ... }: {
+      #   home.packages =
+      #     with pkgs; [
+      #     ] ++
+      #     (with unstablePkgs; [
+      #   ]);
+
+      #   home.stateVersion = "24.11";
+      # };
     };
   };
 }
