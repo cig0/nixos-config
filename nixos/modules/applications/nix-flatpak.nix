@@ -49,6 +49,7 @@
       "io.gitlab.gregorni.Letterpress"
 
       # Comms
+      "com.discordapp.Discord"
       "io.github.milkshiift.GoofCord" # https://flathub.org/apps/io.github.milkshiift.GoofCord
       "im.riot.Riot" # Element - Matrix client
       "org.telegram.desktop"
