@@ -109,6 +109,7 @@
       "com.google.Chrome"
       "com.google.EarthPro"
       "io.gitlab.librewolf-community"
+      "org.torproject.torbrowser-launcher"
     ];
   };
 
