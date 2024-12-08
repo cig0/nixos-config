@@ -70,6 +70,7 @@
       };
     };
 
+  # TODO: attempting to change the priority creates a duplicate /etc/fstab entry
   # swapDevices = [{
   #   device = "/dev/disk/by-uuid/30cda3d5-cc88-4c4a-a7c5-71b12963f7e4";
   #   priority = 1; # Set the lowest priority to allow zRAM to kick in before swapping to disk.
