@@ -239,6 +239,7 @@ let
       kdePackages.kio-zeroconf
       kdePackages.kjournald
       kdePackages.krohnkite
+      kdePackages.kup
       qtcreator
       kdePackages.plasma-browser-integration
       kdePackages.yakuake
@@ -249,7 +250,9 @@ let
 
       # Security
       pinentry-qt
-    ];
+    ] ++
+    (with unstablePkgs; [
+    ]);
 
   appsNvidia =
     with pkgs; [
