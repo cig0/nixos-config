@@ -241,6 +241,7 @@ let
       kdePackages.kjournald
       kdePackages.krohnkite
       kdePackages.kup
+      kdePackages.kwallet-pam
       qtcreator
       kdePackages.plasma-browser-integration
       kdePackages.yakuake
