@@ -60,7 +60,8 @@
         device = "/dev/mapper/internalData";
         fsType = "xfs";
         label = "internalData";
-        options = [ "allocsize=64m" "defaults" "discard" "inode64" "logbsize=256k" "logbufs=8" "noatime" "nodiratime" "nofail" "users" ];
+        # Temporarily disable "discard": Dec 08 22:33:42 perrrkele kernel: XFS (dm-2): mounting with "discard" option, but the device does not support discard
+        options = [ "allocsize=64m" "defaults" "inode64" "logbsize=256k" "logbufs=8" "noatime" "nodiratime" "nofail" "users" ];
       };
       "/home/cig0/media" = {
         device = "/run/media";
@@ -69,12 +70,6 @@
         options = [ "bind" ];
       };
     };
-
-  # TODO: attempting to change the priority creates a duplicate /etc/fstab entry
-  # swapDevices = [{
-  #   device = "/dev/disk/by-uuid/30cda3d5-cc88-4c4a-a7c5-71b12963f7e4";
-  #   priority = 1; # Set the lowest priority to allow zRAM to kick in before swapping to disk.
-  # }];
 
 
   # Periodic SSD TRIM of mounted partitions in background
