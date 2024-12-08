@@ -51,6 +51,7 @@ let
         httpie
         inetutils
         iperf
+        iw
         lftp
         nfstrace
         nmap
