@@ -178,7 +178,6 @@
       specialArgs = { inherit inputs system unstablePkgs; };
       modules = coreModules ++ userModules ++ [
         nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
-        nixos-hardware.nixosModules.tuxedo-infinitybook-v4
         ./nixos/hosts/perrrkele/configuration.nix
 
         {
