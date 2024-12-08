@@ -145,14 +145,15 @@
         ./home-manager/home.nix home-manager.nixosModules.home-manager
         ./nixos/modules/applications/chromium.nix
         ./nixos/modules/applications/firefox.nix
-        ./nixos/modules/applications/kde/kde-pim.nix
-        ./nixos/modules/applications/kde/kdeconnect.nix
         ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
       # Display Managers / Desktop Environments / Window Managers
         # ./nixos/modules/desktop/y.nix nixos-cosmic.nixosModules.default
         # ./nixos/modules/desktop/gnome.nix
-        ./nixos/modules/desktop/kde.nix
+          # KDE
+          ./nixos/modules/applications/kde/kde-pim.nix
+          ./nixos/modules/applications/kde/kdeconnect.nix
+          ./nixos/modules/desktop/kde.nix
         ./nixos/modules/desktop/ly.nix
         ./nixos/modules/desktop/sddm.nix
         ./nixos/modules/desktop/xdg-desktop-portal.nix
