@@ -1,5 +1,6 @@
 # packages.nix
 # This file contains lists of packages ready to be installed on a host.
+#
 # Create as much lists as needed to provide enough flexibility to assemble hosts with different roles.
 
 { pkgs, ... }:
