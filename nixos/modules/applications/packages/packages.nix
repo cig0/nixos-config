@@ -8,6 +8,31 @@
 let
   appsBaseline =
     with pkgs; [
+      # Nix
+        # LSP
+          nil
+          nixd
+        comma
+        devpod
+        fh # fh, the official FlakeHub CLI :: https://github.com/DeterminateSystems/fh
+        hydra-check
+        nh
+        nickel
+        niv
+        nix-diff
+        nix-index
+        nix-tree
+        nixfmt-classic
+        nixpkgs-fmt
+        nixpkgs-review
+        rippkgs
+        vulnix
+
+      # Python
+        python312
+        python312Packages.ipython
+    ] ++
+    (with unstablePkgs; [
       # Monitoring & Observability
         btop
         glances
@@ -37,38 +62,50 @@ let
         traceroute
         whois
 
-      # Nix
-        # LSP
-          nil
-          nixd
-        devpod
-        fh # fh, the official FlakeHub CLI :: https://github.com/DeterminateSystems/fh
-        hydra-check
-        nh
-        nickel
-        niv
-        nix-diff
-        nix-index
-        nix-tree
-        nixfmt-classic
-        nixpkgs-fmt
-        nixpkgs-review
-        rippkgs
-        vulnix
-
-      # Python
-        python312
-        python312Packages.ipython
+      # Other utilities
+        at
+        atuin
+        bat
+        chezmoi
+        cyme # https://github.com/tuna-f1sh/cyme :: List system USB buses and devices.
+        difftastic
+        delta
+        direnv
+        dmidecode
+        fd
+        fdupes
+        file
+        fx
+        fzf
+        getent
+        goaccess
+        joshuto
+        jq
+        just # https://github.com/casey/just :: A handy way to save and run project-specific commands
+        libva-utils
+        lsof
+        lurk # A simple and pretty alternative to strace
+        mc
+        p7zip
+        pciutils
+        ripgrep
+        strace-analyzer
+        tmux
+        tree
+        ugrep
+        usbutils
+        xfsprogs
+        yazi-unwrapped
 
       # Storage
         du-dust
         duf
         dysk
         ncdu
-    ];
+    ]);
 
   appsNonGUI =
-    with pkgs; [ # Packages common to all hosts, only from the stable release channel!
+    with unstablePkgs; [ # Packages common to all hosts, only from the stable release channel!
       # Backup software
         borgbackup
 
@@ -110,57 +147,23 @@ let
 
       # Other utilities
         antora
-        at
-        atuin
-        bat
-        chezmoi
         clinfo
         cmatrix
-        comma
-        cyme # https://github.com/tuna-f1sh/cyme :: List system USB buses and devices.
-        difftastic
-        delta
-        direnv
-        dmidecode
         dotacat
         fastfetch
-        fd
-        fdupes
-        file
-        fx
-        fzf
-        getent
         glxinfo
-        goaccess
         gum
-        joshuto
-        jq
-        just # https://github.com/casey/just :: A handy way to save and run project-specific commands
-        libva-utils
-        lsof
-        lurk # A simple and pretty alternative to strace
-        mc
         nushell
-        p7zip
-        pciutils
         pipe-rename
         rust-petname
         qrscan
-        ripgrep
-        strace-analyzer
         terminal-parrot
         tesseract
-        tmux
         translate-shell
-        tree
         tty-clock
-        ugrep
-        usbutils
         vulkan-tools
         wayland-utils
         wl-clipboard
-        xfsprogs
-        yazi-unwrapped
 
       # Programming
         # Go
