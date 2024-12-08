@@ -157,8 +157,9 @@
         ./nixos/modules/desktop/sddm.nix
         ./nixos/modules/desktop/xdg-desktop-portal.nix
 
-      # System - GUI
+      # System
         ./nixos/modules/system/fonts.nix
+        ./nixos/modules/system/speech-synthesis.nix
     ];
 
     system = "x86_64-linux";
