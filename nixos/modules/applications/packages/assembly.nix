@@ -2,18 +2,18 @@
 # This file assembles the lists of packages to be installed on a host according to the host's role.
 
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, unstablePkgs, ... }:
 
 let
   # Host name logic. Loads a map of possible hostnames and their associated roles.
   hosts = import ../../../helpers/hostnames.nix { inherit config lib; };
 
   # Packages Lists
-  packages = import ./packages.nix { inherit pkgs; };
+  packages = import ./packages.nix { inherit pkgs unstablePkgs; };
     appsBaseline = packages.lists.appsBaseline;
     appsNonGUI = packages.lists.appsNonGUI;
     appsGUI = packages.lists.appsGUI;
-    appsNvidia = appsNvidia;
+    appsNvidia = packages.lists.appsNvidia;
 
   # Build list of packages to be installed on the host
   pkgsList =
