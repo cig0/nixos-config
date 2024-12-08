@@ -51,10 +51,13 @@
 
     fileSystems = { # /etc/fstab mount options.
       "/" = {
-        options = [ "commit=15" "data=journal" "discard" "errors=remount-ro" "noatime"  ];
+        # TODO: temporarily disabled due to kernel boot messages (in testing):
+        # Dec 08 21:32:53 perrrkele kernel: EXT4-fs: Warning: mounting with data=journal disables delayed allocation, dioread_nolock, O_DIRECT and fast_commit support!
+        # Dec 08 21:32:53 perrrkele kernel: EXT4-fs (dm-0): mounting with "discard" option, but the device does not support discard
+        # options = [ "commit=15" "data=journal" "discard" "errors=remount-ro" "noatime"  ];
+        options = [ "commit=15" "errors=remount-ro" "noatime" ];
       };
       "/run/media/internalData" = {
-        # device = "/dev/disk/by-label/inernalData";
         device = "/dev/mapper/internalData";
         fsType = "xfs";
         label = "internalData";
@@ -68,10 +71,10 @@
       };
     };
 
-  swapDevices = [{
-    device = "/dev/disk/by-uuid/30cda3d5-cc88-4c4a-a7c5-71b12963f7e4";
-    priority = 1; # Set the lowest priority to allow zRAM to kick in before swapping to disk.
-  }];
+  # swapDevices = [{
+  #   device = "/dev/disk/by-uuid/30cda3d5-cc88-4c4a-a7c5-71b12963f7e4";
+  #   priority = 1; # Set the lowest priority to allow zRAM to kick in before swapping to disk.
+  # }];
 
 
   # Periodic SSD TRIM of mounted partitions in background
