@@ -75,6 +75,7 @@ in
         "init_on_free=1"
         "intel_iommu=sm_on"
         "iommu=pt"
+        "mitigations=off" # Turns off certain CPU security mitigations. It might enhance performance
         # "quiet"
       ]
       else {};
