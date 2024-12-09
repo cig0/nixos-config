@@ -419,6 +419,10 @@ rec {
       T = "cd ~/tmp";
       W = "cd ~/w";
 
+    # Observability
+    bt = "btop";
+    t = "top";
+
     # Podman
     # docker = "podman";
     p = "podman";
