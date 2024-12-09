@@ -33,8 +33,8 @@ let
     "randomize_kstack_offset=on"
     "rd.driver.pre=vfio_pci"
     "rd.luks.options=discard"
-    "rd.udev.log_level=2"                 # Print warnings and errors.
-    "udev.log_level=1"                    # Print only error messages.
+    "rd.udev.log_level=2"                 # Print warnings and errors during early boot.
+    "udev.log_level=1"                    # Print only error messages--we don't want to spam the system journal.
   ];
 in
 {
