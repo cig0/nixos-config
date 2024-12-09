@@ -3,7 +3,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
+  hosts = import ../../helpers/hostnames.nix { inherit config lib; };
 
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`.
   kernelPackages_isRoleServer = pkgs.linuxPackages_hardened;
@@ -44,26 +44,23 @@ in
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ]; # Override parameter in hardware-configuration.nix
     kernelModules = [ "kvm-intel" "i915" ]; # Override parameter in hardware-configuration.nix
     kernelPackages =
-        # Example:
-        # if hostnameLogic.isRoleUser then isRoleUser
-
-      if hostnameLogic.isRoleServer then kernelPackages_isRoleServer
-      else if hostnameLogic.isTuxedoInfinityBook then kernelPackages_isTuxedoInfinityBook
+      if hosts.isRoleServer then kernelPackages_isRoleServer
+      else if hosts.isTuxedoInfinityBook then kernelPackages_isTuxedoInfinityBook
       else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
 
     kernel.sysctl =
       # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
 
-      if hostnameLogic.isKoira || hostnameLogic.isRoleServer
+      if hosts.isKoira || hosts.isRoleServer
         then commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "bbr"; }
         # bbr: A newer algorithm designed for higher throughput and lower latency.
-      else if hostnameLogic.isTuxedoInfinityBook
+      else if hosts.isTuxedoInfinityBook
         then commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "westwood"; }
         # westwood: Aimed at improving performance over wireless networks and other lossy links by using end-to-end bandwidth estimation.
       else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 
     kernelParams =
-      if hostnameLogic.isTuxedoInfinityBook || hostnameLogic.isChuweiMiniPC
+      if hosts.isTuxedoInfinityBook || hosts.isChuweiMiniPC
         then commonKernelParams ++ [
         "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
         "intel_pstate=disable"
