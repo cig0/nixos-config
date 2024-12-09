@@ -98,7 +98,7 @@
       networkmanager = {
         enable = true;
         dns = "systemd-resolved";
-        wifi.powersave = false;
+        wifi.powersave = false; # Had to disable this feature bc it was causing issues with my wifi card (crashing randomly, mostly while the CPU was under heavy load)
       };
     };
 
