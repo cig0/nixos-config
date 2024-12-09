@@ -53,6 +53,7 @@
       "io.github.milkshiift.GoofCord" # https://flathub.org/apps/io.github.milkshiift.GoofCord
       "im.riot.Riot" # Element - Matrix client
       "org.telegram.desktop"
+      "com.rtosta.zapzap" # https://flathub.org/apps/com.rtosta.zapzap
 
       # Games
       "org.naev.Naev"
