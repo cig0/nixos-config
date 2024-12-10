@@ -5,7 +5,7 @@
 {
   programs.nixvim = {
     enable = true;
-    colorschemes.catppuccin.enable = true;
+    colorschemes.vscode.enable = true;
     opts = {
       number = true;          # Show line numbers
       relativenumber = true;  # Show relative line numbers
