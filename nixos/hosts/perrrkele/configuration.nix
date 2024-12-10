@@ -30,7 +30,7 @@
       description = "Ensure /run/media/internalData directory exists";
       wantedBy = [ "multi-user.target" ];
       serviceConfig.ExecStart = [
-        "${pkgs.coreutils}/bin/mkdir -p /run/media/internalData && ${pkgs.coreutils}/bin/chown -R root:users /run/media"
+            "${pkgs.bash}/bin/bash -c 'if [ ! -d /run/media/internalData ]; then ${pkgs.coreutils}/bin/mkdir -p /run/media/internalData && ${pkgs.coreutils}/bin/chown -R root:users /run/media; fi'"
       ];
       # Ensure the service runs as root
       serviceConfig.User = "root";
