@@ -2,7 +2,6 @@
 #   - KDE Connect: 1714 to 1764 TCP/UDP
 #   - Syncthing: 22000/TCP 21027,22000/UDP
 
-
 { ... }:
 
 {
@@ -23,9 +22,9 @@
   };
 
   services = {
-    # KDE Connect: nixos/modules/applications/kde/kdeconnect.nix
-    # Syncthing: nixos/modules/applications/syncthing.nix
-    # OpenSSH server: nixos/modules/security/openssh.nix
-    # Tailscale: nixos/modules/networking/tailscale.nix
+    # KDE Connect: ../applications/kde/kdeconnect.nix
+    # Syncthing: ../applications/syncthing.nix
+    # OpenSSH server: ../security/openssh.nix
+    # Tailscale: ../networking/tailscale.nix
   };
 }

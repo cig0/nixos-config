@@ -248,6 +248,17 @@ rec {
       # Flakes
       nixfc = "nix flake check";
 
+      # nh - Yet another nix helper
+        # Maintenance
+        nhcak5 = "nh clean all --keep 5";
+        nhcuk5 = "nh clean user --keep 5";
+
+        # Upadate NixOS
+        nhosb = "nh os boot /etc/nixos/nixos-config";
+        nhosbu = "nh os boot --update /etc/nixos/nixos-config";
+        nhoss = "nh os switch /etc/nixos/nixos-config";
+        nhossu = "nh os switch --update /etc/nixos/nixos-config";
+
       # Searching
       nixse = "nix search nixpkgs";
       nixseu = "nix search nixpkgs/nixos-unstable#";

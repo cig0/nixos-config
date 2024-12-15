@@ -1,0 +1,7 @@
+# Nix & NixOS shell aliases.
+
+{ ... }:
+
+{
+
+}
