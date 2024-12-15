@@ -1,0 +1,7 @@
+# Distrobox shell aliases.
+
+{ ... }:
+
+{
+
+}

@@ -1,0 +1,7 @@
+# Git shell aliases.
+
+{ ... }:
+
+{
+
+}

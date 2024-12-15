@@ -1,0 +1,7 @@
+# Flatpak shell aliases.
+
+{ ... }:
+
+{
+
+}

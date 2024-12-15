@@ -14,17 +14,17 @@
     nixpkgs.url = "nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
-    auto-cpufreq = { # Energy efficiency
-      inputs.nixpkgs.follows = "nixpkgs"; # Commented out since we track the NixOS stable branch, not unstable.
+    auto-cpufreq = { # Energy efficiency: https://github.com/AdnanHodzic/auto-cpufreq
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
-    home-manager = { # Maybe in the future
+    home-manager = { # User-specific settings and packages: https://github.com/nix-community/home-manager
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/home-manager?ref=release-24.11";
     };
 
-    lanzaboote = {
+    lanzaboote = { # Enable Secure Boot: https://github.com/nix-community/lanzaboote
       inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of your system closure.
       url = "github:nix-community/lanzaboote/v0.4.1";
     };
@@ -70,7 +70,7 @@
   ... }:
 
   let
-    coreModules = [
+    coreModules = [ # Modules shared by all hosts.
       # Applications
         ({ pkgs, ... }: { # Rust
           nixpkgs.overlays = [ rust-overlay.overlays.default ];
@@ -140,23 +140,25 @@
         ./nixos/overlays/overlays.nix
     ];
 
-    userModules = [
-      # Applications - Flatpak
+    userModules = [ # Modules specific to the user, e.g. GUI apps.
+      # Applications
         ./home-manager/home.nix home-manager.nixosModules.home-manager
         ./nixos/modules/applications/chromium.nix
         ./nixos/modules/applications/firefox.nix
         ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
-      # Display Managers / Desktop Environments / Window Managers
-        # ./nixos/modules/desktop/y.nix nixos-cosmic.nixosModules.default
+      # Display Managers
+        ./nixos/modules/desktop/ly.nix
+        ./nixos/modules/desktop/sddm.nix
+
+       # Desktop Environments / Window Managers
+        # ./nixos/modules/desktop/cosmic.nix nixos-cosmic.nixosModules.default
         # ./nixos/modules/desktop/gnome.nix
-          # KDE
+        # KDE
           ./nixos/modules/applications/kde/kde-pim.nix
           ./nixos/modules/applications/kde/kdeconnect.nix
           ./nixos/modules/desktop/kde.nix
-        ./nixos/modules/desktop/ly.nix
-        ./nixos/modules/desktop/sddm.nix
-        ./nixos/modules/desktop/xdg-desktop-portal.nix
+          ./nixos/modules/desktop/xdg-desktop-portal.nix
 
       # System
         ./nixos/modules/system/fonts.nix
