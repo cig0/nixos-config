@@ -529,8 +529,8 @@
       },
       "original": {
         "owner": "nix-community",
+        "ref": "nixos-24.11",
         "repo": "nixvim",
-        "rev": "958f653dd56161640760c73ada779315070b1293",
         "type": "github"
       }
     },
