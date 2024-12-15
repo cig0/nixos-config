@@ -47,7 +47,8 @@
 
     nixvim = { # The intended way to configure Neovim?
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/nixvim";
+      # url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/85b990286d391cce9a41d72cf4303637a7b43a10?narHash=sha256-JNHYMdWwuX3J/VHCFUNJ8ZhKPdgAvWF9jPa6u72Pvec%3D";
     };
 
     rust-overlay.url = "github:oxalica/rust-overlay"; # A happy crabby dancing sideways
