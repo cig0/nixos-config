@@ -95,7 +95,6 @@ let
         tree
         ugrep
         usbutils
-        xfsprogs
         yazi-unwrapped
 
       # Storage
