@@ -1,3 +1,5 @@
+# Automatic system cleanup and auto-upgrade.
+
 { inputs, ... }:
 
 {
