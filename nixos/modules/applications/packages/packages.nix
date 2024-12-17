@@ -104,12 +104,23 @@ let
         ncdu
     ]);
 
+  # TODO appsNonGUI: should we further split appsNonGUI into separate lists to better accommodate for different roles? Or should we just handle the non-server related tools with Home Manager?
   appsNonGUI =
-    with unstablePkgs; [ # Packages common to all hosts, only from the stable release channel!
+    with pkgs; [
+      # KDE
+        aha # Required for "About this System".
+
+    ] ++
+    (with unstablePkgs; [
+      # AI
+        aichat
+        oterm
+
       # Backup software
         borgbackup
 
       # Comms
+        discordo
         iamb
         weechat
 
@@ -145,6 +156,16 @@ let
         tfswitch
         # vagrant
 
+      # Multimedia
+        exiftool
+        imagemagick
+        jp2a
+        libheif
+        mediainfo
+        mpv
+        pngcrush
+        yt-dlp
+
       # Other utilities
         antora
         clinfo
@@ -163,6 +184,7 @@ let
         tty-clock
         vulkan-tools
         wayland-utils
+        wiki-tui
         wl-clipboard
 
       # Programming
@@ -199,6 +221,8 @@ let
         gpg-tui
         kpcli
         lynis
+        mitmproxy
+        nikto
         oath-toolkit
         protonvpn-cli
         sops
@@ -223,36 +247,65 @@ let
 
       # Web
         elinks
-    ];
+    ]);
 
   appsGUI =
-    with pkgs; [ # Only packages from the stable release channel.
+    with pkgs; [
       # Meant to run in a [role]client device, as opposite on a [role]server device.
-      # It's preferable to manage KDE applications here to keep them in sync with the base system and avoid pulling the necessary libraries and frameworks
+
+      # AI
+        (lmstudio.override {
+          commandLineArgs = [
+            "--enable-features=VaapiVideoDecodeLinuxGL"
+            "--ignore-gpu-blocklist"
+            "--enable-zero-copy"
+            "--enable-features=UseOzonePlatform"
+            "--ozone-platform=wayland"
+          ];
+        })
+
+      # Comms
+        zoom-us
 
       # KDE
-      aha # Required by KDE's About this System
-      # amarok
-      kdePackages.alpaka
-      kdePackages.discover
-      kdePackages.kdenlive
-      kdePackages.kio-zeroconf
-      kdePackages.kjournald
-      kdePackages.krohnkite
-      kdePackages.kup
-      kdePackages.kwallet-pam
-      qtcreator
-      kdePackages.plasma-browser-integration
-      kdePackages.yakuake
-      krita
-      krita-plugin-gmic
-        # Multimedia
-          glaxnimate # Kdenlive dependency
+      # aha helper installed from appsNonGUI
+        kdePackages.alpaka
+        kdePackages.discover
+        kdePackages.kdenlive
+        kdePackages.kio-zeroconf
+        kdePackages.kjournald
+        kdePackages.krohnkite
+        kdePackages.kup
+        kdePackages.kwallet-pam
+        qtcreator
+        kdePackages.plasma-browser-integration
+        kdePackages.yakuake
+        krita
+        krita-plugin-gmic
+
+      # Multimedia
+        # cinelerra
+        # davinci-resolve
+        gimp-with-plugins
+        glaxnimate # Kdenlive dependency
+        lightworks
+        # olive-editor
 
       # Security
-      pinentry-qt
+        keepassxc
+        pinentry-qt
+
+      # Virtualization
+        virt-viewer
     ] ++
     (with unstablePkgs; [
+      # Programming
+        sublime-merge
+        vscode-fhs
+
+      # Security
+        # Web
+          burpsuite
     ]);
 
   appsNvidia =
