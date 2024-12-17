@@ -1,7 +1,5 @@
-# packages.nix
-# This file contains lists of packages ready to be installed on a host.
-#
-# Create as much lists as needed to provide enough flexibility to assemble hosts with different roles.
+# This file deines lists and sets of packages to be installed on a host.
+# Create as much lists and sets as needed to provide enough flexibility to assemble hosts with different roles.
 
 { pkgs, unstablePkgs, ... }:
 
@@ -104,155 +102,8 @@ let
         ncdu
     ]);
 
-  # TODO appsNonGUI: should we further split appsNonGUI into separate lists to better accommodate for different roles? Or should we just handle the non-server related tools with Home Manager?
-  appsNonGUI =
-    with pkgs; [
-      # KDE
-        aha # Required for "About this System".
-
-    ] ++
-    (with unstablePkgs; [
-      # AI
-        aichat
-        oterm
-
-      # Backup software
-        borgbackup
-
-      # Comms
-        discordo
-        iamb
-        weechat
-
-      # IaaS / PaaS / SaaS
-        awscli2
-        eksctl
-
-      # Infrastructure: CNCF / K8s / OCI / virtualization
-        argocd
-        cosign
-        crc
-        distrobox
-        k3d
-        k9s
-        kind
-        krew
-        kube-bench
-        kubecolor
-        kubectl
-        kubernetes-helm
-        kubeswitch
-        minikube
-        odo # odo is a CLI tool for fast iterative application development deployed immediately to your kubernetes cluster :: https://odo.dev
-        opentofu
-        packer
-        podman-compose
-        podman-tui
-        telepresence2
-        terraformer
-        tf-summarize
-        tflint
-        tfsec
-        tfswitch
-        # vagrant
-
-      # Multimedia
-        exiftool
-        imagemagick
-        jp2a
-        libheif
-        mediainfo
-        mpv
-        pngcrush
-        yt-dlp
-
-      # Other utilities
-        antora
-        clinfo
-        cmatrix
-        dotacat
-        fastfetch
-        glxinfo
-        gum
-        nushell
-        pipe-rename
-        rust-petname
-        qrscan
-        terminal-parrot
-        tesseract
-        translate-shell
-        tty-clock
-        vulkan-tools
-        wayland-utils
-        wiki-tui
-        wl-clipboard
-
-      # Programming
-        # Go
-          go # Needed to install individual apps
-          # golangci-lint
-          # golangci-lint-langserver
-          # gopls
-
-        # JS
-          # nodejs_latest
-
-        # Python
-          uv
-
-        # Rust
-          cargo-binstall
-          cargo-cache
-          chit
-          rustscan
-
-        # Everything else...
-          devbox
-          gcc
-          mold
-          shellcheck
-          tokei
-          yamlfmt
-          zig
-
-      # Security
-        age
-        chkrootkit
-        gpg-tui
-        kpcli
-        lynis
-        mitmproxy
-        nikto
-        oath-toolkit
-        protonvpn-cli
-        sops
-        vt-cli
-
-      # VCS
-        # Git
-          ggshield # GitGuardian
-          gh # GitHub CLI client.
-          git
-          git-lfs
-          gitmoji-cli # https://github.com/carloscuesta/gitmoji-cli
-          gitty # https://github.com/muesli/gitty/?tab=readme-ov-file
-          gitu # It's Gitu! - A Git porcelain outside of Emacs - https://github.com/altsem/gitu
-          gitui
-          glab # GitLab CLI client.
-          # jujutsu
-          tig
-
-        # Radicle
-          radicle-node
-
-      # Web
-        elinks
-    ]);
-
   appsGUI =
-    with pkgs; [
-      # Meant to run in a [role]client device, as opposite on a [role]server device.
-
+    with pkgs; [ # Meant to run in a [role]client device, as opposite on a [role]server device.
       # AI
         (lmstudio.override {
           commandLineArgs = [
@@ -308,6 +159,146 @@ let
           burpsuite
     ]);
 
+  appsNonGUI = {
+    ai = with unstablePkgs; [
+      aichat
+      oterm
+    ];
+    backup = with unstablePkgs; [
+      borgbackup
+    ];
+    comms = with unstablePkgs; [
+      discordo
+      iamb
+      weechat
+    ];
+    infrastructure = with unstablePkgs; [
+      argocd
+      awscli2
+      cosign
+      crc
+      distrobox
+      eksctl
+      k3d
+      k9s
+      kind
+      krew
+      kube-bench
+      kubecolor
+      kubectl
+      kubernetes-helm
+      kubeswitch
+      minikube
+      odo # odo is a CLI tool for fast iterative application development deployed immediately to your kubernetes cluster :: https://odo.dev
+      opentofu
+      packer
+      podman-compose
+      podman-tui
+      telepresence2
+      terraformer
+      tf-summarize
+      tflint
+      tfsec
+      tfswitch
+      # vagrant
+    ];
+    multimedia = with unstablePkgs; [
+      exiftool
+      imagemagick
+      jp2a
+      libheif
+      mediainfo
+      mpv
+      pngcrush
+      yt-dlp
+    ];
+    KDE = with pkgs; [
+      aha # Required for "About this System".
+    ];
+    utilities = with unstablePkgs; [
+      antora
+      clinfo
+      cmatrix
+      dotacat
+      fastfetch
+      glxinfo
+      gum
+      nushell
+      pipe-rename
+      rust-petname
+      qrscan
+      terminal-parrot
+      tesseract
+      translate-shell
+      tty-clock
+      vulkan-tools
+      wayland-utils
+      wiki-tui
+      wl-clipboard
+    ];
+    programming = with unstablePkgs; [
+      # Go
+        go # Needed to install individual apps
+        # golangci-lint
+        # golangci-lint-langserver
+        # gopls
+
+      # JS
+        # nodejs_latest
+
+      # Python
+        uv
+
+      # Rust
+        cargo-binstall
+        cargo-cache
+        chit
+        rustscan
+
+      # Everything else...
+        devbox
+        gcc
+        mold
+        shellcheck
+        tokei
+        yamlfmt
+        zig
+    ];
+    security = with unstablePkgs; [
+      age
+      chkrootkit
+      gpg-tui
+      kpcli
+      lynis
+      mitmproxy
+      nikto
+      oath-toolkit
+      protonvpn-cli
+      sops
+      vt-cli
+    ];
+    vcs = with unstablePkgs; [
+      # Git
+        ggshield # GitGuardian
+        gh # GitHub CLI client.
+        git
+        git-lfs
+        gitmoji-cli # https://github.com/carloscuesta/gitmoji-cli
+        gitty # https://github.com/muesli/gitty/?tab=readme-ov-file
+        gitu # It's Gitu! - A Git porcelain outside of Emacs - https://github.com/altsem/gitu
+        gitui
+        glab # GitLab CLI client.
+        # jujutsu
+        tig
+
+      # Radicle
+        radicle-node
+    ];
+    web = with unstablePkgs; [
+      elinks
+    ];
+  };
+
   appsNvidia =
     with pkgs; [
     ] ++
@@ -320,7 +311,11 @@ in
   lists = {
     appsBaseline = appsBaseline;
     appsGUI = appsGUI;
-    appsNonGUI = appsNonGUI;
+    appsNonGUI = builtins.concatLists (builtins.attrValues appsNonGUI);  # Flatten entire set.
     appsNvidia = appsNvidia;
+  };
+
+  sets = {
+    appsNonGUI = appsNonGUI; # The whole set
   };
 }
