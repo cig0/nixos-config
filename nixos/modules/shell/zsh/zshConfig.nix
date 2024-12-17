@@ -1,6 +1,7 @@
 # TODO:
-#   - Split interactiveShellInit
-#   - Split shellAliases
+# - Split interactiveShellInit
+# - Split shellAliases
+# - Evaluate configuring Zsh with Home Manager
 
 { pkgs }:
 
@@ -242,40 +243,43 @@ rec {
   shellAliases = {
     # Nix and NixOS aliases
       # Cleaning
-      nhc = "nh clean all --keep 3";
-      nixc = "nix-collect-garbage -d 3";
+        nhc = "nh clean all --keep 3";
+        nixc = "nix-collect-garbage -d 3";
 
       # Flakes
-      nixfc = "nix flake check";
+        nixfc = "nix flake check";
 
       # nh - Yet another nix helper
-        # Maintenance
         nhcak5 = "nh clean all --keep 5";
         nhcuk5 = "nh clean user --keep 5";
 
         # Upadate NixOS
         nhosb = "nh os boot /etc/nixos/nixos-config";
+        nhosbd = "nh os boot --dry /etc/nixos/nixos-config";
         nhosbu = "nh os boot --update /etc/nixos/nixos-config";
+        nhosbud = "nh os boot --update --dry /etc/nixos/nixos-config";
         nhoss = "nh os switch /etc/nixos/nixos-config";
+        nhossd = "nh os switch --dry /etc/nixos/nixos-config";
         nhossu = "nh os switch --update /etc/nixos/nixos-config";
+        nhossud = "nh os switch --update --dry /etc/nixos/nixos-config";
 
       # Searching
-      nixse = "nix search nixpkgs";
-      nixseu = "nix search nixpkgs/nixos-unstable#";
-      nhs = "nh search --channel nixos-24.11";
+        nixse = "nix search nixpkgs";
+        nixseu = "nix search nixpkgs/nixos-unstable#";
+        nhs = "nh search --channel nixos-24.11";
 
       # System
-      nixinfo = "nix-info --host-os -m";
-      nixlg = "nixos-rebuild list-generations";
+        nixinfo = "nix-info --host-os -m";
+        nixlg = "nixos-rebuild list-generations";
 
 
     # Other aliases
     # AIChat
       # Google Gemini
-      aG = "aichat -m gemini";
-      aGc = "aichat -m gemini --code";
-      aGl = "aichat -m gemini --list-sessions";
-      aGs = "aichat -m gemini --session";
+        aG = "aichat -m gemini";
+        aGc = "aichat -m gemini --code";
+        aGl = "aichat -m gemini --list-sessions";
+        aGs = "aichat -m gemini --session";
 
     # Bat - A cat(1) clone with syntax highlighting and Git integration.
     # https://github.com/sharkdp/bat
