@@ -9,29 +9,34 @@ let
 
   # Packages Lists
   packages = import ./packages.nix { inherit pkgs unstablePkgs; };
-    appsBaseline = packages.lists.appsBaseline;
-    appsNonGUI = packages.lists.appsNonGUI;
-    appsGUI = packages.lists.appsGUI;
-    appsNvidia = packages.lists.appsNvidia;
+    appsBaselineSet = packages.sets.appsBaseline;
+    appsNonGUISet = packages.sets.appsNonGUI;
+    appsGUISet = packages.sets.appsGUI;
+    appsNvidiaSet = packages.sets.appsNvidia;
 
   # Build list of packages to be installed on the host
   pkgsList =
     let
+      appsBaselineList = builtins.concatLists (builtins.attrValues appsBaselineSet);
+      appsNonGUIList = builtins.concatLists (builtins.attrValues appsNonGUISet);
+      appsGUIList = builtins.concatLists (builtins.attrValues appsGUISet);
+      appsNvidiaList = builtins.concatLists (builtins.attrValues appsNvidiaSet);
+
       pkgsList =
         if hosts.isRoleLaptop then
-          appsBaseline ++
-          appsNonGUI ++
-          appsGUI
+          appsBaselineList ++
+          appsNonGUIList ++
+          appsGUIList
 
         else if hosts.isRoleServer then
-          appsBaseline ++
-          appsNonGUI ++
+          appsBaselineList ++
+          appsNonGUIList ++
           [
             pkgs.pinentry-curses
           ]
         else [];
     in
-      if hosts.isNvidiaGPUHost then pkgsList ++ appsNvidia
+      if hosts.isNvidiaGPUHost then pkgsList ++ appsNvidiaList
       else
         pkgsList;
 
