@@ -22,73 +22,9 @@
           with pkgs; [
           ] ++
           (with unstablePkgs; [
-          # AI
-            aichat
-            (lmstudio.override {
-              commandLineArgs = [
-                "--enable-features=VaapiVideoDecodeLinuxGL"
-                "--ignore-gpu-blocklist"
-                "--enable-zero-copy"
-                "--enable-features=UseOzonePlatform"
-                "--ozone-platform=wayland"
-              ];
-            })
-            oterm
-
-          # Comms
-            discordo
-            zoom-us
-
-          # KDE Apps
-            # calligra
-
-          # Multimedia
-            # cinelerra
-            # davinci-resolve
-            exiftool
-            gimp-with-plugins
-            imagemagick
-            jp2a
-            libheif
-            lightworks
-            mediainfo
-            mpv
-            # olive-editor
-            pngcrush
-            yt-dlp
-
-          # Productivity
-            # (obsidian.override {
-            #   commandLineArgs = [
-            #     "--enable-features=VaapiVideoDecodeLinuxGL"
-            #     "--ignore-gpu-blocklist"
-            #     "--enable-zero-copy"
-            #     "--enable-features=UseOzonePlatform"
-            #     "--ozone-platform=wayland"
-            #   ];
-            # })
-            # todoist-electron
-
-          # Programming
-            sublime-merge
-            vscode-fhs
-
-          # Security
-            keepassxc
-              # Web
-              burpsuite
-              mitmproxy
-              nikto
-
-          # Virtualization
-            virt-viewer
-
-          # Web
-            # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
-
-          # Everything else
-              wiki-tui
-        ]);
+            # Web
+              # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
+          ]);
 
         # The state version is required and should stay at the version you
         # originally installed.
@@ -100,7 +36,7 @@
       #     with pkgs; [
       #     ] ++
       #     (with unstablePkgs; [
-      #   ]);
+      #     ]);
 
       #   home.stateVersion = "24.11";
       # };
@@ -110,7 +46,7 @@
       #     with pkgs; [
       #     ] ++
       #     (with unstablePkgs; [
-      #   ]);
+      #     ]);
 
       #   home.stateVersion = "24.11";
       # };
