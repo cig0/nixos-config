@@ -3,7 +3,7 @@
 let
   hosts = import ../../helpers/hostnames.nix { inherit config lib; };
 
-  commonEnvSessionVars =  rec {
+  commonEnvSessionVars = {
     EGL_PLATFORM = "wayland";
     EGL_LOG_LEVEL = "fatal";
 
