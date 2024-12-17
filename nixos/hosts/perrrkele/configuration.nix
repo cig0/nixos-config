@@ -131,6 +131,9 @@
     LC_TELEPHONE = "es_AR.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+  environment.sessionVariables = {
+    LANGUAGE="en:es"; # Useful for GNU gettext library
+  };
 
 
   # Enable the X11 windowing system.
