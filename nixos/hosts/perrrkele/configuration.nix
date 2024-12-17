@@ -132,7 +132,7 @@
     LC_TIME = "en_US.UTF-8";
   };
   environment.sessionVariables = {
-    LANGUAGE="en:es"; # Useful for GNU gettext library
+    LANGUAGE="en"; # Useful for GNU gettext library
   };
 
 
