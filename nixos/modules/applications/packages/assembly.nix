@@ -1,5 +1,4 @@
-# assemble.nix
-# This file assembles the lists of packages to be installed on a host according to the host's role.
+# Assemble the lists and sets of packages to be installed on a host according to the host's role.
 
 { config, lib, pkgs, unstablePkgs, ... }:
 
@@ -7,38 +6,62 @@ let
   # Host name logic. Loads a map of possible hostnames and their associated roles.
   hosts = import ../../../helpers/hostnames.nix { inherit config lib; };
 
-  # Packages Lists
+  # Packages to install
   packages = import ./packages.nix { inherit pkgs unstablePkgs; };
-    appsBaselineSet = packages.sets.appsBaseline;
-    appsNonGUISet = packages.sets.appsNonGUI;
-    appsGUISet = packages.sets.appsGUI;
-    appsNvidiaSet = packages.sets.appsNvidia;
+
+  baselinePackages = packages.lists.appsBaseline;
+
+  # Function to create package lists based on host roles
+  rolePackages = role:
+    baselinePackages ++
+    (lib.optionals (role == "Laptop") (
+      packages.lists.appsGUI ++
+      packages.lists.appsNonGUI
+    )) ++
+    (lib.optionals (role == "Server") (
+      packages.sets.appsNonGUI.infrastructure ++
+      packages.sets.appsNonGUI.vcs ++
+      [
+        pkgs.pinentry-curses
+      ]));
 
   # Build list of packages to be installed on the host
   pkgsList =
     let
-      appsBaselineList = builtins.concatLists (builtins.attrValues appsBaselineSet);
-      appsNonGUIList = builtins.concatLists (builtins.attrValues appsNonGUISet);
-      appsGUIList = builtins.concatLists (builtins.attrValues appsGUISet);
-      appsNvidiaList = builtins.concatLists (builtins.attrValues appsNvidiaSet);
-
-      pkgsList =
-        if hosts.isRoleLaptop then
-          appsBaselineList ++
-          appsNonGUIList ++
-          appsGUIList
-
-        else if hosts.isRoleServer then
-          appsBaselineList ++
-          appsNonGUIList ++
-          [
-            pkgs.pinentry-curses
-          ]
-        else [];
+      assembly = if hosts.isRoleLaptop then rolePackages "Laptop"
+                 else if hosts.isRoleServer then rolePackages "Server"
+                 else [];
     in
-      if hosts.isNvidiaGPUHost then pkgsList ++ appsNvidiaList
-      else
-        pkgsList;
+      assembly ++ lib.optionals hosts.isNvidiaGPUHost packages.lists.appsNvidia;
+
+
+  #   appsBaseline = packages.lists.appsBaseline;
+  #   appsGUI = packages.lists.appsGUI;
+  #   appsNonGUI = packages.lists.appsNonGUI;  # Access the whole appsNonGUI list
+  #   appsNonGUISets = packages.sets.appsNonGUI;  # Access the entire appsNonGUI set
+  #   appsNvidia = packages.lists.appsNvidia;
+
+  # # Build list of packages to be installed on the host
+  # pkgsList =
+  #   let
+  #     pkgsList =
+  #       if hosts.isRoleLaptop then
+  #         appsBaseline ++
+  #         appsGUI ++
+  #         appsNonGUI
+
+  #       else if hosts.isRoleServer then
+  #         appsBaseline ++
+  #         appsNonGUISets.insfrastructure ++
+  #         appsNonGUISets.vcs ++
+          # [
+          #   pkgs.pinentry-curses
+          # ]
+  #       else [];
+  #   in
+  #     if hosts.isNvidiaGPUHost then pkgsList ++ appsNvidia
+  #     else
+  #       pkgsList;
 
 in
 {
