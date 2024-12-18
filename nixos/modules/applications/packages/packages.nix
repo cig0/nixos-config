@@ -118,22 +118,6 @@ let
       # Comms
         zoom-us
 
-      # KDE
-      # aha helper installed from appsNonGUI
-        kdePackages.alpaka
-        kdePackages.discover
-        kdePackages.kdenlive
-        kdePackages.kio-zeroconf
-        kdePackages.kjournald
-        kdePackages.krohnkite
-        kdePackages.kup
-        kdePackages.kwallet-pam
-        qtcreator
-        kdePackages.plasma-browser-integration
-        kdePackages.yakuake
-        krita
-        krita-plugin-gmic
-
       # Multimedia
         # cinelerra
         # davinci-resolve
@@ -158,6 +142,31 @@ let
         # Web
           burpsuite
     ]);
+
+  appsGUIshell = {
+    COSMIC = with pkgs; [
+    ];
+    Hyprland = with pkgs; [
+    ];
+    KDE = with pkgs; [
+        aha  # Required for "About this System" in System Settings.
+        kdePackages.alpaka
+        kdePackages.discover
+        kdePackages.kdenlive
+        kdePackages.kio-zeroconf
+        kdePackages.kjournald
+        kdePackages.krohnkite
+        kdePackages.kup
+        kdePackages.kwallet-pam
+        qtcreator
+        kdePackages.plasma-browser-integration
+        kdePackages.yakuake
+        krita
+        krita-plugin-gmic
+    ];
+    XFCE = with pkgs; [
+    ];
+  };
 
   appsNonGUI = {
     ai = with unstablePkgs; [
@@ -211,9 +220,6 @@ let
       mpv
       pngcrush
       yt-dlp
-    ];
-    KDE = with pkgs; [
-      aha # Required for "About this System".
     ];
     utilities = with unstablePkgs; [
       antora
@@ -305,7 +311,6 @@ let
     (with unstablePkgs; [
       nvtop
     ]);
-
 in
 {
   lists = {
@@ -316,6 +321,7 @@ in
   };
 
   sets = {
-    appsNonGUI = appsNonGUI; # The whole set
+    appsGUIshell = appsGUIshell;
+    appsNonGUI = appsNonGUI; # The whole set.
   };
 }
