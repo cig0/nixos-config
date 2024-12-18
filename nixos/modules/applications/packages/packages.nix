@@ -103,7 +103,7 @@ let
     ]);
 
   appsGUI =
-    with pkgs; [ # Meant to run in a [role]client device, as opposite on a [role]server device.
+    with pkgs; [  # Meant to run in a [role]client device, as opposite on a [role]server device.
       # AI
         (lmstudio.override {
           commandLineArgs = [
@@ -316,12 +316,12 @@ in
   lists = {
     appsBaseline = appsBaseline;
     appsGUI = appsGUI;
-    appsNonGUI = builtins.concatLists (builtins.attrValues appsNonGUI);  # Flatten entire set.
+    appsNonGUI = builtins.concatLists (builtins.attrValues appsNonGUI);  # Flatten entire set; useful when installing everything-and-the-kitchen-sink.
     appsNvidia = appsNvidia;
   };
 
   sets = {
     appsGUIshell = appsGUIshell;
-    appsNonGUI = appsNonGUI; # The whole set.
+    appsNonGUI = appsNonGUI;  # Useful when installing only specific concerns.
   };
 }
