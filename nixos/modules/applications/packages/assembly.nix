@@ -1,4 +1,4 @@
-# Assemble the lists and sets of packages to be installed on a host according to the host's role.
+# Assemble the lists and sets of packages to be installed on a host according to the host's role and the GUI shell in use when applicable.
 
 { config, lib, pkgs, unstablePkgs, ... }:
 
