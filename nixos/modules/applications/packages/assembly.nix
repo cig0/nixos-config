@@ -6,33 +6,42 @@ let
   # Host name logic. Loads a map of possible hostnames and their associated roles.
   hosts = import ../../../helpers/hostnames.nix { inherit config lib; };
 
-  # Packages to install.
+  # Import packages lists and sets.
   packages = import ./packages.nix { inherit pkgs unstablePkgs; };
-
-  appsBaseline = packages.lists.appsBaseline;
 
   # Function to create package lists based on host roles.
   rolePackages = role:
-    appsBaseline ++
-    (lib.optionals (role == "Laptop") (
-      packages.lists.appsGUI ++
-      packages.lists.appsNonGUI
-    )) ++
-    (lib.optionals (role == "Server") (
-      packages.sets.appsNonGUI.infrastructure ++
-      packages.sets.appsNonGUI.vcs ++
-      [
-        pkgs.pinentry-curses
-      ]));
+    let
+      appsGUIshell =  # Dynamically add packages based on the enabled GUI shell.
+        lib.optionals (config.services.desktopManager.cosmic.enable or false) packages.sets.appsGUIshell.COSMIC ++
+        lib.optionals (config.services.desktopManager.hyprland.enable or false) packages.sets.appsGUIshell.Hyprland ++
+        lib.optionals (config.services.desktopManager.plasma6.enable or false) packages.sets.appsGUIshell.KDE ++
+        lib.optionals (config.services.desktopManager.xfce.enable or false) packages.sets.appsGUIshell.XFCE
+      ;
+    in
+      (lib.optionals (role == "Laptop") (
+        packages.lists.appsBaseline ++
+        packages.lists.appsGUI ++
+        packages.lists.appsNonGUI ++
+        appsGUIshell
+      )) ++
+     (lib.optionals (role == "Server") (
+        packages.lists.appsBaseline ++
+        packages.sets.appsNonGUI.infrastructure ++
+        packages.sets.appsNonGUI.vcs ++
+        [
+          pkgs.pinentry-curses
+        ]
+     ));
 
-  # Build list of packages to be installed on the host.
-  pkgsList =
+  # Assemble the list of packages to be installed on the host.
+  assembledList =
     let
       assembly = if hosts.isRoleLaptop then rolePackages "Laptop"
                  else if hosts.isRoleServer then rolePackages "Server"
                  else [];
     in
-      assembly ++ lib.optionals hosts.isNvidiaGPUHost packages.lists.appsNvidia;  # Add Nvidia packages if the host is a GPU host.
+      assembly ++ lib.optionals hosts.isNvidiaGPUHost packages.lists.appsNvidia;  # Add Nvidia packages as needed.
 
 in
 {
@@ -46,5 +55,5 @@ in
   };
 
   # Install packages system-wide based on the host role.
-  environment.systemPackages = pkgsList;
+  environment.systemPackages = assembledList;
 }
