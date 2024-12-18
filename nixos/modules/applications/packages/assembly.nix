@@ -34,7 +34,7 @@ let
         ]
      ));
 
-  # Assemble the list of packages to be installed on the host.
+  # 👨‍🏭🤖🔩🔧 Assembly line.
   assembledList =
     let
       assembly = if hosts.isRoleLaptop then rolePackages "Laptop"
