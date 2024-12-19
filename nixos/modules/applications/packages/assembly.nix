@@ -7,28 +7,28 @@ let
   hosts = import ../../../helpers/hostnames.nix { inherit config lib; };
 
   # Import packages lists and sets.
-  packages = import ./packages.nix { inherit pkgs unstablePkgs; };
+  p = import ./packages.nix { inherit pkgs unstablePkgs; };
 
   # Function to create package lists based on host roles.
   rolePackages = role:
     let
       appsGUIshell =  # Dynamically add packages based on the enabled GUI shell.
-        lib.optionals (config.services.desktopManager.cosmic.enable or false) packages.sets.appsGUIshell.COSMIC ++
-        lib.optionals (config.services.desktopManager.hyprland.enable or false) packages.sets.appsGUIshell.Hyprland ++
-        lib.optionals (config.services.desktopManager.plasma6.enable or false) packages.sets.appsGUIshell.KDE ++
-        lib.optionals (config.services.desktopManager.xfce.enable or false) packages.sets.appsGUIshell.XFCE
+        lib.optionals (config.services.desktopManager.cosmic.enable or false) p.sets.appsGUIshell.COSMIC ++
+        lib.optionals (config.services.desktopManager.hyprland.enable or false) p.sets.appsGUIshell.Hyprland ++
+        lib.optionals (config.services.desktopManager.plasma6.enable or false) p.sets.appsGUIshell.KDE ++
+        lib.optionals (config.services.desktopManager.xfce.enable or false) p.sets.appsGUIshell.XFCE
       ;
     in
       (lib.optionals (role == "Laptop") (
-        packages.lists.appsBaseline ++
-        packages.lists.appsGUI ++
-        packages.lists.appsNonGUI ++
+        p.lists.appsBaseline ++
+        p.lists.appsGUI ++
+        p.lists.appsNonGUI ++
         appsGUIshell
       )) ++
      (lib.optionals (role == "Server") (
-        packages.lists.appsBaseline ++
-        packages.sets.appsNonGUI.infrastructure ++
-        packages.sets.appsNonGUI.vcs ++
+        p.lists.appsBaseline ++
+        p.sets.appsNonGUI.infrastructure ++
+        p.sets.appsNonGUI.vcs ++
         [
           pkgs.pinentry-curses
         ]
@@ -41,7 +41,7 @@ let
                  else if hosts.isRoleServer then rolePackages "Server"
                  else [];
     in
-      assembly ++ lib.optionals hosts.isNvidiaGPUHost packages.lists.appsNvidia;  # Add Nvidia packages as needed.
+      assembly ++ lib.optionals hosts.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
 
 in
 {
