@@ -151,7 +151,7 @@
         ./nixos/modules/guishell/ly.nix
         ./nixos/modules/guishell/sddm.nix
 
-       # Desktop Environments / Window Managers
+       # GUI shells (Desktop Environments / Window Managers)
         # ./nixos/modules/guishell/cosmic.nix nixos-cosmic.nixosModules.default
         # ./nixos/modules/guishell/gnome.nix
         # KDE
