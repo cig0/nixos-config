@@ -33,3 +33,16 @@ toc::[]
 - With link:https://github.com/viperML/nh[nh].
 
 image::.repo_assets/wip.webp[alt="Frosted Flakes", align="center"]
+
+==== TODO
+
+[ ] Implement dynamic NTP pool depending on timezone/region.
+[ ] Implement dynamic module loading depending on host role.
+[ ] Implement dynamic module loading depending on GUI shell.
+[ ] Implement dynamic module loading depending on host's hardware.
+[ ] Implement dynamic module loading depending on host's CPU architecture.
+[X] Implement dynamic module loading depending on host's GPU vendor.
+
+==== 📝 License
+
+This project is licensed under the AGPLv3 License - see the link:LICENSE[LICENSE] file for details.
