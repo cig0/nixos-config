@@ -3,7 +3,7 @@
 { config, lib, ... }:
 
 let
-  hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
+  hosts = import ../../helpers/hostnames.nix { inherit config lib; };
 
   commonNTPPool = [
     "0.nixos.pool.ntp.org"
@@ -31,13 +31,13 @@ in
   networking.timeServers = commonNTPPool;
 
   time.timeZone =
-    if hostnameLogic.isPerrrkele then
-      "Europe/Tallinn"
+    if hosts.isPerrrkele then
+      "Europe/Stockholm"
 
-    else if hostnameLogic.isSatama then
+    else if hosts.isSatama then
       "America/Argentina/Buenos_Aires"
 
-    else if hostnameLogic.isKoira then
+    else if hosts.isKoira then
       "America/Argentina/Buenos_Aires"
 
     else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
