@@ -151,11 +151,11 @@
           ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
         # GUI shells
-          ./nixos/modules/guishell/by-gui-shell.nix  # New unified GUI shells handling
+          ./nixos/modules/gui-shells/by-gui-shell.nix  # New unified GUI shells handling
 
         # Display Managers
-          ./nixos/modules/guishell/ly.nix
-          ./nixos/modules/guishell/sddm.nix
+          ./nixos/modules/gui-shells/ly.nix
+          ./nixos/modules/gui-shells/sddm.nix
 
         # System
           ./nixos/modules/system/fonts.nix
@@ -166,16 +166,16 @@
       # enableGUIshellModules = guiShellEnv:  # Function to get desktop-specific modules.
       #   [
       #     # Common modules for all GUI shells
-      #     ./nixos/modules/guishell/xdg-desktop-portal.nix
+      #     ./nixos/modules/gui-shells/xdg-desktop-portal.nix
       #   ] ++
       #   (if guiShellEnv == "plasma6" then [  # KDE Plasma Desktop Environment specific modules.
       #     ./nixos/modules/applications/kde/kde-pim.nix
       #     ./nixos/modules/applications/kde/kdeconnect.nix
-      #     ./nixos/modules/guishell/kde.nix
+      #     ./nixos/modules/gui-shells/kde.nix
       #   ]
       #   else if guiShellEnv == "cosmic" then [  # COSMIC Desktop Environment specific modules.
-      #     # ./nixos/modules/guishell/cosmic.nix nixos-cosmic.nixosModules.default
-      #     # ./nixos/modules/guishell/gnome.nix
+      #     # ./nixos/modules/gui-shells/cosmic.nix nixos-cosmic.nixosModules.default
+      #     # ./nixos/modules/gui-shells/gnome.nix
       #   ]
       #   else []
       #   );
@@ -215,7 +215,7 @@
 
           # ===== DISPLAY MANAGERS =====
           # Only one at a time can be active.
-          # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/guishell/
+          # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shells/
           services.displayManager = {
             autoLogin = {
               enable = false;
