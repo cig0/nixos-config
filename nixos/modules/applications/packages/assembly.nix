@@ -1,4 +1,4 @@
-# Assemble the lists and sets of packages to be installed on a host according to the host's role and the GUI shell in use when applicable.
+# Assemble the lists and sets of packages to be installed on a host according to the host's role and the GUI shell in use.
 
 { config, lib, pkgs, unstablePkgs, ... }:
 
@@ -34,7 +34,6 @@ let
         ]
      ));
 
-  # 👨‍🏭🤖🔩🔧 Assembly line.
   assembledList =
     let
       assembly = if hosts.isRoleLaptop then rolePackages "Laptop"
