@@ -157,24 +157,27 @@
         # System
           ./nixos/modules/system/fonts.nix
           ./nixos/modules/system/speech-synthesis.nix
+
+        # Desktop Environments
+        ./nixos/modules/guishell/desktop-environments.nix  # New unified DE handling
       ];
 
-      enableGUIshellModules = guiShellEnv:  # Function to get desktop-specific modules.
-        [
-          # Common modules for all GUI shells
-          ./nixos/modules/guishell/xdg-desktop-portal.nix
-        ] ++
-        (if guiShellEnv == "plasma6" then [  # KDE Plasma Desktop Environment specific modules.
-          ./nixos/modules/applications/kde/kde-pim.nix
-          ./nixos/modules/applications/kde/kdeconnect.nix
-          ./nixos/modules/guishell/kde.nix
-        ]
-        else if guiShellEnv == "cosmic" then [  # COSMIC Desktop Environment specific modules.
-          # ./nixos/modules/guishell/cosmic.nix nixos-cosmic.nixosModules.default
-          # ./nixos/modules/guishell/gnome.nix
-        ]
-        else []
-        );
+      # enableGUIshellModules = guiShellEnv:  # Function to get desktop-specific modules.
+      #   [
+      #     # Common modules for all GUI shells
+      #     ./nixos/modules/guishell/xdg-desktop-portal.nix
+      #   ] ++
+      #   (if guiShellEnv == "plasma6" then [  # KDE Plasma Desktop Environment specific modules.
+      #     ./nixos/modules/applications/kde/kde-pim.nix
+      #     ./nixos/modules/applications/kde/kdeconnect.nix
+      #     ./nixos/modules/guishell/kde.nix
+      #   ]
+      #   else if guiShellEnv == "cosmic" then [  # COSMIC Desktop Environment specific modules.
+      #     # ./nixos/modules/guishell/cosmic.nix nixos-cosmic.nixosModules.default
+      #     # ./nixos/modules/guishell/gnome.nix
+      #   ]
+      #   else []
+      #   );
 
     system = "x86_64-linux";
     unstablePkgs = import "${nixpkgs-unstable}" {
@@ -192,16 +195,19 @@
       modules =
         coreModules ++
         userModules ++
-        enableGUIshellModules "plasma6" ++
+        # enableGUIshellModules "plasma6" ++
         [
         nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
         ./nixos/hosts/perrrkele/configuration.nix
 
         {
-          services.desktopManager = {
-            # cosmic.enable = false;  # COSMIC Desktop Environment
-            plasma6.enable = true;  # KDE Plasma Desktop Environment
-          };
+          # services.desktopManager = {
+          #   # cosmic.enable = false;  # COSMIC Desktop Environment
+          #   plasma6.enable = true;  # KDE Plasma Desktop Environment
+          # };
+
+         # Just set the desktop environment, the modules will handle the rest
+          mySystem.guiShellEnv = "plasma6";
 
           # ===== DISPLAY MANAGERS =====
           # Only one at a time can be active.
