@@ -98,7 +98,7 @@
       # Observability
         # ./nixos/modules/observability/grafana-alloy.nix
         # ./nixos/modules/observability/netdata.nix
-        ./nixos/modules/observability/observability.nix
+        ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
 
       # Power management
         ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
@@ -109,7 +109,7 @@
         ./nixos/modules/security/gnupg.nix
         ./nixos/modules/security/lanzaboote.nix lanzaboote.nixosModules.lanzaboote
         ./nixos/modules/security/openssh.nix
-        # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops
+        # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
         ./nixos/modules/security/sudo.nix
 
       # Shell
@@ -124,8 +124,8 @@
         ./nixos/modules/system/kernel.nix
         ./nixos/modules/system/keyd.nix
         ./nixos/modules/system/maintenance.nix
-        # ./nixos/modules/system/osquery.nix
-        # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index
+        # ./nixos/modules/system/osquery.nix  # TODO: needs implementation.
+        # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
         ./nixos/modules/system/time.nix
         ./nixos/modules/system/ucode.nix
         ./nixos/modules/system/users.nix
@@ -176,7 +176,7 @@
 
   in
   {
-    nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem { # laptop: Intel CPU & GPU
+    nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
       inherit system;
       specialArgs = { inherit inputs system unstablePkgs; };
       modules = coreModules ++ userModules ++ [
@@ -185,8 +185,8 @@
 
         {
           services.desktopManager = {
-            # cosmic.enable = false; # COSMIC Desktop Environment
-            plasma6.enable = true; # KDE Plasma Desktop Environment
+            # cosmic.enable = false;  # COSMIC Desktop Environment
+            plasma6.enable = true;  # KDE Plasma Desktop Environment
           };
 
           # ===== DISPLAY MANAGERS =====
@@ -196,9 +196,9 @@
             autoLogin = {
               enable = false;
             };
-            # cosmic-greeter.enable = false; # COSMIC Desktop Greeter
-            ly.enable = false; # Ly Display Manager
-            sddm.enable = true; # SDDM / KDE Display Manager
+            # cosmic-greeter.enable = false;  # COSMIC Desktop Greeter
+            ly.enable = false;  # Ly Display Manager
+            sddm.enable = true;  # SDDM / KDE Display Manager
           };
         }
       ];
