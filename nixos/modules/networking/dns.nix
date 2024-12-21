@@ -32,15 +32,3 @@
   # https://prism-break.org/en/all/#dns
   # https://www.privacyguides.org/en/dns/
   # https://www.privacytools.io/encrypted-dns
-
-
-# Q & A
-# -----
-  # Q: Why {foobar} provider isn't listed here?
-  # A: Probably I don't know about them, most likely I don't like them.
-  # Q: But they are a big a55 corpo!
-  # A: That could be one of the reasons.
-  # Q: But you already have some big a55 corpos here!
-  # A: You're annoying -- go away.
-  # Q: That's not fair! You have Google's DNS here! <rage_crying_meme_here>
-  # A: Your tears are delightful, you can stay as long as you keep crying.
