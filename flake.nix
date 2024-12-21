@@ -79,7 +79,6 @@
             nixpkgs.overlays = [ rust-overlay.overlays.default ];
             environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
           })
-          ./nixos/modules/applications/current-system-packages.nix
 
         # Assembly
           ./nixos/modules/applications/packages/assembly.nix
@@ -89,7 +88,7 @@
           ./nixos/modules/cli-shell/zsh/zsh.nix
 
         # Data
-          ./nixos/modules/applications/syncthing.nix  # TODO: move logic to the assemble file.
+          ./nixos/modules/applications/syncthing.nix
 
         # Networking
           ./nixos/modules/networking/dns.nix
@@ -121,6 +120,7 @@
 
         # System
           ./nixos/modules/system/cups.nix
+          ./nixos/modules/system/current-system-packages.nix
           ./nixos/modules/system/environment.nix
           ./nixos/modules/system/fwupd.nix
           ./nixos/modules/system/hwaccel.nix
@@ -261,3 +261,7 @@
   # Is predictable because it follows established patterns
   # Avoids edge cases and timing issues in module evaluation
   # Is maintainable because it's simple (if inefficient)
+
+
+  #  Changelog
+  # 2024-12-21 [x] Syncthing: move activation logic to the module file.
