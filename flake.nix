@@ -151,14 +151,14 @@
           ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
         # Display Managers
-          ./nixos/modules/gui-shells/ly.nix
-          ./nixos/modules/gui-shells/sddm.nix
+          ./nixos/modules/gui-shell/ly.nix
+          ./nixos/modules/gui-shell/sddm.nix
 
         # GUI shells
           # New unified GUI shells handling!
           # Just set the GUI shell to use in the host definition, the modules will handle the rest :)
           # The only valid values so far are "plasma6" or "none".
-          ./nixos/modules/gui-shells/by-gui-shell.nix
+          ./nixos/modules/gui-shell/by-gui-shell.nix
 
         # System
           ./nixos/modules/system/fonts.nix
@@ -188,7 +188,7 @@
           # Host configutation
             # ===== DISPLAY MANAGERS =====
             # Only one at a time can be active.
-            # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shells/
+            # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shell/
             services.displayManager = {
               autoLogin = {
                 enable = false;
