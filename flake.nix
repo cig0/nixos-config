@@ -202,6 +202,7 @@
             mySystem.guiShellEnv = "plasma6";
 
             # ===== SERVICES =====
+            mySystem.services.printing = "false";  # CUPS
             mySystem.services.syncthing = "false";
         }
       ];
