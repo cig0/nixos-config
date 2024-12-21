@@ -4,6 +4,8 @@
 # May 1st, 2024
 #
 # My personal NixOS configuration flake ¯\_(ツ)_/¯
+#
+# Check at the end of the file for an abridged file README.
 #---------------------------------------------------------------------
 
 
@@ -70,103 +72,111 @@
   ... }:
 
   let
-    coreModules = [ # Modules shared by all hosts.
-      # Applications
-        ({ pkgs, ... }: { # Rust
-          nixpkgs.overlays = [ rust-overlay.overlays.default ];
-          environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
-        })
-        ./nixos/modules/applications/current-system-packages.nix
+    # Modules definitions and handling.
+      coreModules = [ # Modules shared by all hosts.
+        # Applications
+          ({ pkgs, ... }: { # Rust
+            nixpkgs.overlays = [ rust-overlay.overlays.default ];
+            environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
+          })
+          ./nixos/modules/applications/current-system-packages.nix
 
-      # Assembly
-        ./nixos/modules/applications/packages/assembly.nix
+        # Assembly
+          ./nixos/modules/applications/packages/assembly.nix
 
-      # Data
-        # ./nixos/modules/applications/syncthing.nix # TODO: move logic to the assemble file.
+        # Data
+          # ./nixos/modules/applications/syncthing.nix # TODO: move logic to the assemble file.
 
-      # Networking
-        ./nixos/modules/networking/dns.nix
-        ./nixos/modules/networking/mtr.nix
-        ./nixos/modules/networking/nftables.nix
-        ./nixos/modules/networking/stevenblack.nix
-        ./nixos/modules/networking/stevenblack-unblacklist.nix
-        ./nixos/modules/networking/tailscale.nix
+        # Networking
+          ./nixos/modules/networking/dns.nix
+          ./nixos/modules/networking/mtr.nix
+          ./nixos/modules/networking/nftables.nix
+          ./nixos/modules/networking/stevenblack.nix
+          ./nixos/modules/networking/stevenblack-unblacklist.nix
+          ./nixos/modules/networking/tailscale.nix
 
-      # NixVim
-        ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
+        # NixVim
+          ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
 
-      # Observability
-        # ./nixos/modules/observability/grafana-alloy.nix
-        # ./nixos/modules/observability/netdata.nix
-        ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
+        # Observability
+          # ./nixos/modules/observability/grafana-alloy.nix
+          # ./nixos/modules/observability/netdata.nix
+          ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
 
-      # Power management
-        ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
-        ./nixos/modules/power-management/power-management.nix
+        # Power management
+          ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
+          ./nixos/modules/power-management/power-management.nix
 
-      # Security
-        ./nixos/modules/security/firewall.nix
-        ./nixos/modules/security/gnupg.nix
-        ./nixos/modules/security/lanzaboote.nix lanzaboote.nixosModules.lanzaboote
-        ./nixos/modules/security/openssh.nix
-        # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
-        ./nixos/modules/security/sudo.nix
+        # Security
+          ./nixos/modules/security/firewall.nix
+          ./nixos/modules/security/gnupg.nix
+          ./nixos/modules/security/lanzaboote.nix lanzaboote.nixosModules.lanzaboote
+          ./nixos/modules/security/openssh.nix
+          # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
+          ./nixos/modules/security/sudo.nix
 
-      # Shell
-        ./nixos/modules/shell/starship.nix
-        ./nixos/modules/shell/zsh/zsh.nix
+        # Shell
+          ./nixos/modules/shell/starship.nix
+          ./nixos/modules/shell/zsh/zsh.nix
 
-      # System
-        ./nixos/modules/system/cups.nix
-        ./nixos/modules/system/environment.nix
-        ./nixos/modules/system/fwupd.nix
-        ./nixos/modules/system/hwaccel.nix
-        ./nixos/modules/system/kernel.nix
-        ./nixos/modules/system/keyd.nix
-        ./nixos/modules/system/maintenance.nix
-        # ./nixos/modules/system/osquery.nix  # TODO: needs implementation.
-        # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
-        ./nixos/modules/system/time.nix
-        ./nixos/modules/system/ucode.nix
-        ./nixos/modules/system/users.nix
-        ./nixos/modules/system/zram.nix
+        # System
+          ./nixos/modules/system/cups.nix
+          ./nixos/modules/system/environment.nix
+          ./nixos/modules/system/fwupd.nix
+          ./nixos/modules/system/hwaccel.nix
+          ./nixos/modules/system/kernel.nix
+          ./nixos/modules/system/keyd.nix
+          ./nixos/modules/system/maintenance.nix
+          # ./nixos/modules/system/osquery.nix  # TODO: needs implementation.
+          # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
+          ./nixos/modules/system/time.nix
+          ./nixos/modules/system/ucode.nix
+          ./nixos/modules/system/users.nix
+          ./nixos/modules/system/zram.nix
 
-      # Virtualization
-        ./nixos/modules/virtualisation/containerization.nix
-        ./nixos/modules/virtualisation/incus.nix
-        ./nixos/modules/virtualisation/libvirt.nix
+        # Virtualization
+          ./nixos/modules/virtualisation/containerization.nix
+          ./nixos/modules/virtualisation/incus.nix
+          ./nixos/modules/virtualisation/libvirt.nix
 
-      # Import Overlays
-        ./nixos/overlays/overlays.nix
-    ];
+        # Import Overlays
+          ./nixos/overlays/overlays.nix
+      ];
 
-    userModules = [ # Modules specific to the user, e.g. GUI apps.
-      # Applications
-        ./home-manager/home.nix home-manager.nixosModules.home-manager
-        ./nixos/modules/applications/chromium.nix
-        ./nixos/modules/applications/firefox.nix
-        ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
+      userModules = [ # Modules specific to the user, e.g. GUI apps.
+        # Applications
+          ./home-manager/home.nix home-manager.nixosModules.home-manager
+          ./nixos/modules/applications/chromium.nix
+          ./nixos/modules/applications/firefox.nix
+          ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
-      # Display Managers
-        ./nixos/modules/guishell/ly.nix
-        ./nixos/modules/guishell/sddm.nix
+        # Display Managers
+          ./nixos/modules/guishell/ly.nix
+          ./nixos/modules/guishell/sddm.nix
 
-       # GUI shells (Desktop Environments / Window Managers)
-        # ./nixos/modules/guishell/cosmic.nix nixos-cosmic.nixosModules.default
-        # ./nixos/modules/guishell/gnome.nix
-        # KDE
+        # System
+          ./nixos/modules/system/fonts.nix
+          ./nixos/modules/system/speech-synthesis.nix
+      ];
+
+      enableGUIshellModules = guiShellEnv:  # Function to get desktop-specific modules.
+        [
+          # Common modules for all GUI shells
+          ./nixos/modules/guishell/xdg-desktop-portal.nix
+        ] ++
+        (if guiShellEnv == "plasma6" then [  # KDE Plasma Desktop Environment specific modules.
           ./nixos/modules/applications/kde/kde-pim.nix
           ./nixos/modules/applications/kde/kdeconnect.nix
           ./nixos/modules/guishell/kde.nix
-          ./nixos/modules/guishell/xdg-desktop-portal.nix
-
-      # System
-        ./nixos/modules/system/fonts.nix
-        ./nixos/modules/system/speech-synthesis.nix
-    ];
+        ]
+        else if guiShellEnv == "cosmic" then [  # COSMIC Desktop Environment specific modules.
+          # ./nixos/modules/guishell/cosmic.nix nixos-cosmic.nixosModules.default
+          # ./nixos/modules/guishell/gnome.nix
+        ]
+        else []
+        );
 
     system = "x86_64-linux";
-
     unstablePkgs = import "${nixpkgs-unstable}" {
       inherit system;
       config = {
@@ -179,7 +189,11 @@
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
       inherit system;
       specialArgs = { inherit inputs system unstablePkgs; };
-      modules = coreModules ++ userModules ++ [
+      modules =
+        coreModules ++
+        userModules ++
+        enableGUIshellModules "plasma6" ++
+        [
         nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
         ./nixos/hosts/perrrkele/configuration.nix
 
@@ -236,3 +250,21 @@
     # };
   };
 }
+
+
+# File README
+# ===========
+
+# Importing everything and having each module self-check is inefficient and inelegant. It goes against the goal of having a lean, dynamic configuration where only what's needed gets included.
+
+# The fundamental problem we're facing stems from NixOS's module system design:
+  # imports must be determined before configuration evaluation
+  # We want imports to be determined by configuration values
+  # This creates an inherent circular dependency
+  # This is probably why NixOS itself often uses the "import everything and let modules self-activate" pattern, even though it's not ideal.
+
+# This touches on an interesting aspect of real-world systems: sometimes we have to choose between theoretical elegance and practical functionality. The "import everything and self-activate" pattern, while not ideal from a design perspective:
+  # Is proven to work within NixOS's constraints
+  # Is predictable because it follows established patterns
+  # Avoids edge cases and timing issues in module evaluation
+  # Is maintainable because it's simple (if inefficient)
