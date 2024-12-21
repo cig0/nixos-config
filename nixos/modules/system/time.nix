@@ -5,30 +5,30 @@
 let
   hosts = import ../../helpers/hostnames.nix { inherit config lib; };
 
-  nixosNTPPool = [
+  nixosNTPpool = [
     "0.nixos.pool.ntp.org"
     "1.nixos.pool.ntp.org"
     "2.nixos.pool.ntp.org"
     "3.nixos.pool.ntp.org"
   ];
 
-  argentinaNTPPool = [
+  argentinaNTPpool = [
     "1.ar.pool.ntp.org"
     "0.south-america.pool.ntp.org"
   ];
 
-  naNTPPool = [
+  naNTPpool = [
     "0.north-america.pool.ntp.org"
   ];
 
-  euNTPPool = [
+  euNTPpool = [
     "0.europe.pool.ntp.org"
   ];
 in
 {
   # Set NTP servers pool
-  # networking.timeServers = argentinaNTPPool ++ nixosNTPPool;
-  networking.timeServers = nixosNTPPool;
+  # networking.timeServers = argentinaNTPpool ++ nixosNTPpool;
+  networking.timeServers = nixosNTPpool;
 
   time.timeZone =
     if hosts.isPerrrkele then
