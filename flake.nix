@@ -186,24 +186,23 @@
 
         {
           # Host configutation
-            # ===== DISPLAY MANAGERS =====
-            # Only one at a time can be active.
-            # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shell/
-            services.displayManager = {
-              autoLogin = {
-                enable = false;
-              };
-              # cosmic-greeter.enable = false;  # COSMIC Desktop Greeter
-              ly.enable = false;  # Ly Display Manager
-              sddm.enable = true;  # SDDM / KDE Display Manager
+          # ===== DISPLAY MANAGERS =====
+          # Only one at a time can be active.
+          # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shell/
+          services.displayManager = {
+            autoLogin = {
+              enable = false;
             };
+            # cosmic-greeter.enable = false;  # COSMIC Desktop Greeter
+            ly.enable = false;  # Ly Display Manager
+            sddm.enable = true;  # SDDM / KDE Display Manager
+          };
 
-            # ===== GUI SHELL =====
-            mySystem.guiShellEnv = "plasma6";
-
-            # ===== SERVICES =====
-            mySystem.services.printing = "false";  # CUPS
-            mySystem.services.syncthing = "false";
+          # mySystem Options
+          mySystem.guiShellEnv = "plasma6";
+          mySystem.services.printing = "false";  # CUPS
+          mySystem.services.syncthing = "false";
+          mySystem.services.tailscale = "true";
         }
       ];
     };
@@ -264,4 +263,7 @@
 
 
   #  Changelog
+  # 2024-12-21 [x] KDE Plasma: move activation logic to the module file.
   # 2024-12-21 [x] Syncthing: move activation logic to the module file.
+  # 2024-12-21 [x] CUPS: move activation logic to the module file.
+  # 2024-12-21 [x] Tailscale: move activation logic to the module file.
