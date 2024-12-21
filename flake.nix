@@ -150,35 +150,20 @@
           ./nixos/modules/applications/firefox.nix
           ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
-        # GUI shells
-          ./nixos/modules/gui-shells/by-gui-shell.nix  # New unified GUI shells handling
-
         # Display Managers
           ./nixos/modules/gui-shells/ly.nix
           ./nixos/modules/gui-shells/sddm.nix
+
+        # GUI shells
+          # New unified GUI shells handling!
+          # Just set the GUI shell to use in the host definition, the modules will handle the rest :)
+          # The only valid values so far are "plasma6" or "none".
+          ./nixos/modules/gui-shells/by-gui-shell.nix
 
         # System
           ./nixos/modules/system/fonts.nix
           ./nixos/modules/system/speech-synthesis.nix
       ];
-
-      # Temporarily commented out to try out a different approach: we load every GUI shell module, but leave the activation to them based on the desired GUI shell.
-      # enableGUIshellModules = guiShellEnv:  # Function to get desktop-specific modules.
-      #   [
-      #     # Common modules for all GUI shells
-      #     ./nixos/modules/gui-shells/xdg-desktop-portal.nix
-      #   ] ++
-      #   (if guiShellEnv == "plasma6" then [  # KDE Plasma Desktop Environment specific modules.
-      #     ./nixos/modules/applications/kde/kde-pim.nix
-      #     ./nixos/modules/applications/kde/kdeconnect.nix
-      #     ./nixos/modules/gui-shells/kde.nix
-      #   ]
-      #   else if guiShellEnv == "cosmic" then [  # COSMIC Desktop Environment specific modules.
-      #     # ./nixos/modules/gui-shells/cosmic.nix nixos-cosmic.nixosModules.default
-      #     # ./nixos/modules/gui-shells/gnome.nix
-      #   ]
-      #   else []
-      #   );
 
     system = "x86_64-linux";
     unstablePkgs = import "${nixpkgs-unstable}" {
@@ -195,23 +180,13 @@
       modules =
         coreModules ++
         userModules ++
-
-        # enableGUIshellModules "plasma6" ++  # Temporarily commented out to try out a different approach: we load every GUI shell module, but leave the activation to them based on the desired GUI shell.
-
         [
         nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
         ./nixos/hosts/perrrkele/configuration.nix
 
         {
-          # Temporarily commented out to try out a different approach: we load every GUI shell module, but leave the activation to them based on the desired GUI shell.
-          # services.desktopManager = {
-          #   # cosmic.enable = false;  # COSMIC Desktop Environment
-          #   plasma6.enable = true;  # KDE Plasma Desktop Environment
-          # };
-
           # ===== GUI SHELLS =====
-          # New way to select what GUI shell to use!
-          mySystem.guiShellEnv = "plasma6";  # Just set the desktop environment, the modules will handle the rest
+          mySystem.guiShellEnv = "plasma6";
 
           # ===== DISPLAY MANAGERS =====
           # Only one at a time can be active.
@@ -265,6 +240,9 @@
 # File README
 # ===========
 
+# - The COSMIC desktop environment options are disabled to avoid sourcing the flake when building the system configuration.
+
+# About the design of the configuration:
 # Importing everything and having each module self-check is inefficient and inelegant. It goes against the goal of having a lean, dynamic configuration where only what's needed gets included.
 
 # The fundamental problem we're facing stems from NixOS's module system design:
