@@ -17,6 +17,9 @@
       ../applications/kde/kde-pim.nix
       ../applications/kde/kdeconnect.nix
 
+    # COSMIC Desktop Environment
+      ./cosmic.nix
+
     # ... other GUI shells modules
   ];
 }
