@@ -5,7 +5,7 @@
 let
   hosts = import ../../helpers/hostnames.nix { inherit config lib; };
 
-  commonNTPPool = [
+  nixosNTPPool = [
     "0.nixos.pool.ntp.org"
     "1.nixos.pool.ntp.org"
     "2.nixos.pool.ntp.org"
@@ -27,8 +27,8 @@ let
 in
 {
   # Set NTP servers pool
-  # networking.timeServers = argentinaNTPPool ++ commonNTPPool;
-  networking.timeServers = commonNTPPool;
+  # networking.timeServers = argentinaNTPPool ++ nixosNTPPool;
+  networking.timeServers = nixosNTPPool;
 
   time.timeZone =
     if hosts.isPerrrkele then
