@@ -11,9 +11,12 @@
     # Always import base modules
     ./xdg-desktop-portal.nix
 
-    # Import all DE-specific modules - they'll activate themselves based on the configuration
-    ../applications/kde/kde-pim.nix
-    ./kde.nix
-    # ... other DE modules
+    # Import all GUI shell-specific modules - they'll activate themselves based on the configuration
+    # KDE Plasma Desktop Environment
+      ./kde-plasma.nix
+      ../applications/kde/kde-pim.nix
+      ../applications/kde/kdeconnect.nix
+
+    # ... other GUI shells modules
   ];
 }

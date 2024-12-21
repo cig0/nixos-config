@@ -1,9 +1,12 @@
-# kdeconnect.nix - KDE Connect
+ { config, lib, ... }:
 
-{ ... }:
+let
+  cfg = config.mySystem.guiShellEnv;
 
-{
-  programs.kdeconnect = {
-    enable = true;
+in {
+  config = lib.mkIf (cfg == "plasma6") {
+    programs.kdeconnect = {
+      enable = true;
+    };
   };
 }
