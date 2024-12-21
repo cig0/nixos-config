@@ -33,10 +33,10 @@
 
     nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
-    # nixos-cosmic = {
-    #   inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
-    #   url = "github:lilyinstarlight/nixos-cosmic";
-    # };
+    nixos-cosmic = {
+      inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
+      url = "github:lilyinstarlight/nixos-cosmic";
+    };
 
     nix-index.url = "github:nix-community/nix-index";
 
@@ -155,9 +155,8 @@
           ./nixos/modules/gui-shell/sddm.nix
 
         # GUI shells
-          # New unified GUI shells handling!
-          # Just set the GUI shell to use in the host definition, the modules will handle the rest :)
-          # The only valid values so far are "plasma6" or "none".
+          # New unified GUI shells handling! Just set the GUI shell to use in the host definition, the modules will handle the rest.
+          # The valid values so far are "cosmic", "plasma6" or "none".
           ./nixos/modules/gui-shell/by-gui-shell.nix
 
         # System
@@ -193,7 +192,7 @@
             autoLogin = {
               enable = false;
             };
-            # cosmic-greeter.enable = false;  # COSMIC Desktop Greeter
+            # cosmic.enable = false;  # COSMIC Desktop Greeter
             ly.enable = false;  # Ly Display Manager
             sddm.enable = true;  # SDDM / KDE Display Manager
           };
