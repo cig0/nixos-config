@@ -84,6 +84,10 @@
         # Assembly
           ./nixos/modules/applications/packages/assembly.nix
 
+        # CLI Shell
+          ./nixos/modules/cli-shell/starship.nix
+          ./nixos/modules/cli-shell/zsh/zsh.nix
+
         # Data
           # ./nixos/modules/applications/syncthing.nix # TODO: move logic to the assemble file.
 
@@ -114,10 +118,6 @@
           ./nixos/modules/security/openssh.nix
           # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
           ./nixos/modules/security/sudo.nix
-
-        # Shell
-          ./nixos/modules/shell/starship.nix
-          ./nixos/modules/shell/zsh/zsh.nix
 
         # System
           ./nixos/modules/system/cups.nix
