@@ -21,6 +21,8 @@
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
+    flake-compat.url = "github:edolstra/flake-compat";  # Make nixos-option work with flakes.
+
     home-manager = { # User-specific settings and packages: https://github.com/nix-community/home-manager
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/home-manager?ref=release-24.11";
@@ -59,6 +61,7 @@
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable,
     auto-cpufreq,             # Energy efficiency.
+    flake-compat,             # Make nixos-option work with flakes.
     home-manager,             # User-specific settings and packages.
     lanzaboote,               # Secure Boot for NixOS.
     nix-flatpak,              # Enhanced Flatpak support.
@@ -74,12 +77,6 @@
   let
     # Modules definitions and handling.
       coreModules = [ # Modules shared by all hosts.
-        # Applications
-          ({ pkgs, ... }: { # Rust
-            nixpkgs.overlays = [ rust-overlay.overlays.default ];
-            environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
-          })
-
         # Assembly
           ./nixos/modules/applications/packages/assembly.nix
 
@@ -110,6 +107,12 @@
           ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
           ./nixos/modules/power-management/power-management.nix
 
+        # Rust
+          ({ pkgs, ... }: {
+            nixpkgs.overlays = [ rust-overlay.overlays.default ];
+            environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
+          })
+
         # Security
           ./nixos/modules/security/firewall.nix
           ./nixos/modules/security/gnupg.nix
@@ -138,12 +141,9 @@
           ./nixos/modules/virtualisation/containerization.nix
           ./nixos/modules/virtualisation/incus.nix
           ./nixos/modules/virtualisation/libvirt.nix
-
-        # Import Overlays
-          ./nixos/overlays/overlays.nix
       ];
 
-      userModules = [ # Modules specific to the user, e.g. GUI apps.
+      userModules = [  # Modules specific to the user, e.g. (GUI) apps and GUI shells.
         # Applications
           ./home-manager/home.nix home-manager.nixosModules.home-manager
           ./nixos/modules/applications/chromium.nix
@@ -164,13 +164,14 @@
           ./nixos/modules/system/speech-synthesis.nix
       ];
 
-    system = "x86_64-linux";
-    unstablePkgs = import "${nixpkgs-unstable}" {  # Leverage NixOS mighty by allowing to mix packages from both the stable and unstable release channels.
+    nixos-option = import ./nixos/overlays/nixos-option.nix;
+    unstablePkgs = import "${nixpkgs-unstable}" {  # Leverage NixOS mighty by later allowing to mix packages from both the stable and unstable release channels.
       inherit system;
       config = {
         allowUnfree = true;
       };
     };
+    system = "x86_64-linux";
 
   in {
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
@@ -184,6 +185,8 @@
         ./nixos/hosts/perrrkele/configuration.nix
 
         {
+          nixpkgs.overlays = [ nixos-option ];
+
           # Host configutation
           # ===== DISPLAY MANAGERS =====
           # Only one at a time can be active.
@@ -262,7 +265,7 @@
 
 
   #  Changelog
-  # 2024-12-21 [x] KDE Plasma: move activation logic to the module file.
-  # 2024-12-21 [x] Syncthing: move activation logic to the module file.
-  # 2024-12-21 [x] CUPS: move activation logic to the module file.
-  # 2024-12-21 [x] Tailscale: move activation logic to the module file.
+  # 2024-12-21  KDE Plasma: move activation logic to the module file.
+  # 2024-12-21  Syncthing: move activation logic to the module file.
+  # 2024-12-21  CUPS: move activation logic to the module file.
+  # 2024-12-21  Tailscale: move activation logic to the module file.
