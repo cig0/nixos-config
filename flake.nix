@@ -166,7 +166,7 @@
       ];
 
     system = "x86_64-linux";
-    unstablePkgs = import "${nixpkgs-unstable}" {
+    unstablePkgs = import "${nixpkgs-unstable}" {  # Leverage NixOS mighty by allowing to mix packages from both the stable and unstable release channels.
       inherit system;
       config = {
         allowUnfree = true;
@@ -185,20 +185,24 @@
         ./nixos/hosts/perrrkele/configuration.nix
 
         {
-          # ===== GUI SHELLS =====
-          mySystem.guiShellEnv = "plasma6";
-
-          # ===== DISPLAY MANAGERS =====
-          # Only one at a time can be active.
-          # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shells/
-          services.displayManager = {
-            autoLogin = {
-              enable = false;
+          # Host configutation
+            # ===== DISPLAY MANAGERS =====
+            # Only one at a time can be active.
+            # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shells/
+            services.displayManager = {
+              autoLogin = {
+                enable = false;
+              };
+              # cosmic-greeter.enable = false;  # COSMIC Desktop Greeter
+              ly.enable = false;  # Ly Display Manager
+              sddm.enable = true;  # SDDM / KDE Display Manager
             };
-            # cosmic-greeter.enable = false;  # COSMIC Desktop Greeter
-            ly.enable = false;  # Ly Display Manager
-            sddm.enable = true;  # SDDM / KDE Display Manager
-          };
+
+            # ===== GUI SHELL =====
+            mySystem.guiShellEnv = "plasma6";
+
+            # ===== SERVICES =====
+            # mySystem.syncthing = "enable";  # TODO: refactor to allow module-decision logic.
         }
       ];
     };
