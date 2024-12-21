@@ -89,7 +89,7 @@
           ./nixos/modules/cli-shell/zsh/zsh.nix
 
         # Data
-          # ./nixos/modules/applications/syncthing.nix # TODO: move logic to the assemble file.
+          ./nixos/modules/applications/syncthing.nix  # TODO: move logic to the assemble file.
 
         # Networking
           ./nixos/modules/networking/dns.nix
@@ -202,7 +202,7 @@
             mySystem.guiShellEnv = "plasma6";
 
             # ===== SERVICES =====
-            # mySystem.syncthing = "enable";  # TODO: refactor to allow module-decision logic.
+            mySystem.services.syncthing = "false";
         }
       ];
     };
