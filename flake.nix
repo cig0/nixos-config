@@ -150,6 +150,9 @@
           ./nixos/modules/applications/firefox.nix
           ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
+        # GUI shells
+          ./nixos/modules/guishell/by-gui-shell.nix  # New unified GUI shells handling
+
         # Display Managers
           ./nixos/modules/guishell/ly.nix
           ./nixos/modules/guishell/sddm.nix
@@ -157,11 +160,9 @@
         # System
           ./nixos/modules/system/fonts.nix
           ./nixos/modules/system/speech-synthesis.nix
-
-        # Desktop Environments
-        ./nixos/modules/guishell/desktop-environments.nix  # New unified DE handling
       ];
 
+      # Temporarily commented out to try out a different approach: we load every GUI shell module, but leave the activation to them based on the desired GUI shell.
       # enableGUIshellModules = guiShellEnv:  # Function to get desktop-specific modules.
       #   [
       #     # Common modules for all GUI shells
@@ -187,27 +188,30 @@
       };
     };
 
-  in
-  {
+  in {
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
       inherit system;
       specialArgs = { inherit inputs system unstablePkgs; };
       modules =
         coreModules ++
         userModules ++
-        # enableGUIshellModules "plasma6" ++
+
+        # enableGUIshellModules "plasma6" ++  # Temporarily commented out to try out a different approach: we load every GUI shell module, but leave the activation to them based on the desired GUI shell.
+
         [
         nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
         ./nixos/hosts/perrrkele/configuration.nix
 
         {
+          # Temporarily commented out to try out a different approach: we load every GUI shell module, but leave the activation to them based on the desired GUI shell.
           # services.desktopManager = {
           #   # cosmic.enable = false;  # COSMIC Desktop Environment
           #   plasma6.enable = true;  # KDE Plasma Desktop Environment
           # };
 
-         # Just set the desktop environment, the modules will handle the rest
-          mySystem.guiShellEnv = "plasma6";
+          # ===== GUI SHELLS =====
+          # New way to select what GUI shell to use!
+          mySystem.guiShellEnv = "plasma6";  # Just set the desktop environment, the modules will handle the rest
 
           # ===== DISPLAY MANAGERS =====
           # Only one at a time can be active.
