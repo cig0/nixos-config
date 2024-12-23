@@ -443,6 +443,26 @@
         "type": "github"
       }
     },
+    "nix-ld": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1734338723,
+        "narHash": "sha256-BpJs2QnVwdE4Btsx2BcBmdsq86H7QJYv2GmoOkr1ii4=",
+        "owner": "Mic92",
+        "repo": "nix-ld",
+        "rev": "911665df070e3d6c970e5a248fc4a38550bd5689",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "nix-ld",
+        "type": "github"
+      }
+    },
     "nixos-cosmic": {
       "inputs": {
         "flake-compat": "flake-compat_4",
@@ -663,6 +683,7 @@
         "lanzaboote": "lanzaboote",
         "nix-flatpak": "nix-flatpak",
         "nix-index": "nix-index",
+        "nix-ld": "nix-ld",
         "nixos-cosmic": "nixos-cosmic",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
