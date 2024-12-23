@@ -48,7 +48,7 @@
     isNormalUser = true;
     createHome = true;
     home = "/home/doomguy";
-    homeMode = "755";
+    homeMode = "775";  # This is a test account, we want full access to it.
     group = "users";
     extraGroups = [
       "adbusers"
