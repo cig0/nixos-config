@@ -4,7 +4,7 @@
 
 let
   # Host name logic. Loads a map of possible hostnames and their associated roles.
-  hosts = import ../../../helpers/hostnames.nix { inherit config lib; };
+  hosts = import ../../../lib/hosts.nix { inherit config lib; };
 
   # Import packages lists and sets.
   p = import ./packages.nix { inherit pkgs unstablePkgs; };

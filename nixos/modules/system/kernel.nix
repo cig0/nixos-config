@@ -3,7 +3,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  hosts = import ../../helpers/hostnames.nix { inherit config lib; };
+  hosts = import ../../lib/hosts.nix { inherit config lib; };
 
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`.
   kernelPackages_isRoleServer = pkgs.linuxPackages_hardened;

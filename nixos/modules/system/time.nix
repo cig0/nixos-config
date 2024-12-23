@@ -3,7 +3,7 @@
 { config, lib, ... }:
 
 let
-  hosts = import ../../helpers/hostnames.nix { inherit config lib; };
+  hosts = import ../../lib/hosts.nix { inherit config lib; };
 
   nixosNTPpool = [
     "0.nixos.pool.ntp.org"
