@@ -43,7 +43,7 @@ in
 
 
 # let
-#   hostnameLogic = import ../../helpers/hostnames.nix { inherit config lib; };
+#   hosts = import ../../lib/hosts.nix { inherit config lib; };
 # in
 #
 # {
