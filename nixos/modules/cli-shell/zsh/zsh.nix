@@ -1,9 +1,10 @@
 { pkgs, ... }:
 
 let
+  allAliases = (import ./aliases.nix {}).allAliases;
   zshConfig = import ./zshConfig.nix { inherit pkgs; };
-in
-{
+
+in {
   programs.command-not-found.enable = false;
 
   programs.zsh = {
@@ -13,7 +14,7 @@ in
     loginShellInit = zshConfig.loginShellInit;
     shellInit = zshConfig.shellInit;
     setOptions = zshConfig.setOptions;
-    shellAliases = zshConfig.shellAliases;
+    shellAliases = allAliases // zshConfig.shellAliases;
     syntaxHighlighting.enable = true;
 
     # History is managed by Atuin.

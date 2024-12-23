@@ -15,33 +15,6 @@ let
     italic = "\\033[3m";
     reset = "\\e[0m"; # ANSI escape code for resetting text attributes
 
-    # Check if first line matches criteria
-    hasValidHeader = file:
-    let
-      content = builtins.readFile file;
-      firstLine = builtins.head (builtins.split "\n" content);
-    in firstLine == "# Don't remove this line! programs.zsh.shellAliases";
-
-    # Get all values from an attrset, ignoring the names
-    getAllValues = attrs: builtins.foldl' (acc: name:
-      acc // (builtins.getAttr name attrs)
-    ) {} (builtins.attrNames attrs);
-
-    importAliasFiles = dir:
-      let
-        files = builtins.attrNames (builtins.readDir dir);
-        nixFiles = builtins.filter (n: builtins.match ".*\\.nix" n != null) files;
-        fullPaths = map (f: dir + "/${f}") nixFiles;
-        validFiles = builtins.filter hasValidHeader fullPaths;
-        contents = map (file: getAllValues (import file {})) validFiles;
-        merged = builtins.foldl' (a: b: a // b) {} contents;
-      in merged;
-
-    # Import aliases
-      # aichat = (import ./aliases/aichat.nix { }).aichat;
-      allAliases = importAliasFiles ./aliases;
-
-
 in rec {
   setOptions = [
     # https://superuser.com/questions/519596/share-history-in-multiple-zsh-shell
@@ -268,7 +241,6 @@ in rec {
 
 
   shellAliases =
-    allAliases //
     {
     # AWS
     aws_account_describe = "aws organizations describe-account --account-id $(aws_account_id)";
