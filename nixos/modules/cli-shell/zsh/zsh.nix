@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  allAliases = (import ./aliases.nix {}).allAliases;
+  allAliases = (import ./aliases.nix {}).allAliases;  # Optional: import individual aliases files, e.g.: aichat = (import ./aliases/aichat.nix { }).aichat;
   # allFunctions = (import ./functions.nix {}).allFunctions;
   zshConfig = import ./zshConfig.nix { inherit pkgs; };
 

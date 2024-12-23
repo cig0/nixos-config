@@ -29,7 +29,4 @@ let
 in {
   inherit hasValidHeader getAllValues importAliasFiles;
   allAliases = importAliasFiles ./aliases;
-
-  # Optional: import individual aliases files.
-    # aichat = (import ./aliases/aichat.nix { }).aichat;
 }
