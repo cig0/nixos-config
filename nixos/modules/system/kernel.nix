@@ -43,8 +43,10 @@ let
   };
 
   commonKernelParams = [
+    "fbcon=nodefer"                       # Prevent the kernel from blanking plymouth out of the fb
     "kvm.ignore_msrs=1"
     "kvm.report_ignored_msrs=0"
+    # "logo.nologo"                         # Disable boot logo if any
     "mem_sleep_default=deep"
     "mitigations=auto"
     "page_alloc.shuffle=1"
@@ -52,8 +54,10 @@ let
     "randomize_kstack_offset=on"
     "rd.driver.pre=vfio_pci"
     "rd.luks.options=discard"
+    # "rd.systemd.show_status=auto"         # Disable systemd status messages
     "rd.udev.log_level=2"                 # Print warnings and errors during early boot.
-    "udev.log_level=1"                    # Print only error messages--we don't want to spam the system journal.
+    "udev.log_level=1"                    # Print error messages. Change to 2, 3 or 4 for Warning, Info and Debug messages respectively.
+    # "quiet"
   ];
 in
 {
@@ -79,21 +83,26 @@ in
       else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 
     kernelParams =
-      if hostSelector.isTuxedoInfinityBook || hostSelector.isChuweiMiniPC
-        then commonKernelParams ++ [
-        "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
-        "intel_pstate=disable"
-        "i915.enable_fbc=1"
-        "i915.enable_guc=2"
-        "i915.enable_psr=1"
-        "logo.nologo=0"
-        "init_on_alloc=1"
-        "init_on_free=1"
-        "intel_iommu=sm_on"
-        "iommu=pt"
-        "mitigations=off" # Turns off certain CPU security mitigations. It might enhance performance
-        # "quiet"
-      ]
+      if hostSelector.isTuxedoInfinityBook || hostSelector.isChuweiMiniPC then
+        commonKernelParams ++
+        [
+          "fbcon=nodefer"                 # Prevent the kernel from blanking plymouth out of the framebuffer.
+          "intel_pstate=disable"
+          "i915.enable_fbc=1"
+          "i915.enable_guc=2"
+          "i915.enable_psr=1"
+          "logo.nologo=0"
+          "init_on_alloc=1"
+          "init_on_free=1"
+          "intel_iommu=sm_on"
+          "iommu=pt"
+          "mitigations=off"               # Turns off certain CPU security mitigations. It might enhance performance
+        ]
+      else if hostSelector.isNvidiaGPUHost then
+        commonKernelParams ++
+        [
+          "nvidia_drm.modeset=1"         # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
+        ]
       else {};
 
     kernelPatches =
