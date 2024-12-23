@@ -16,6 +16,7 @@ let
       gaA = "git add --all";
       gaf = "git add --force";
       gb = "git branch";
+      gba = "git branch --all";
       gca = "git commit -am";
       gch = "git checkout";
       gcl = "git clone";
