@@ -4,7 +4,7 @@
 { config, lib, ... }:
 
 let
-  hosts = import ../../../helpers/hostnames.nix { inherit config lib; };
+  hosts = import ../../../lib/hosts.nix { inherit config lib; };
 
   # Build list of packages to be installed on the host
   backupJob =
