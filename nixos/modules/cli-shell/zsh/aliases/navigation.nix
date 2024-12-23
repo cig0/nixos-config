@@ -1,6 +1,6 @@
 # Don't remove this line! programs.zsh.shellAliases
 
-{ config, ... }:
+{ ... }:
 
 let
   # Description
@@ -17,7 +17,7 @@ let
       DAr = "cd /run/media/data";
       DE = "cd ~/Desktop";
       DOC = "cd ~/Documents";
-      F = "cd ${config.flake.root}";  # Flake directory.
+      F = "cd /etc/nixos/nixos-config";  # Flake directory.
       Ff = "cd ~/w/cig0/nixos/nixos-config-public";  # Public flake.
       P = "cd ~/Pictures";
       S = "cd ~/Sync";
