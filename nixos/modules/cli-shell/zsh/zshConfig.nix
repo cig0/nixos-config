@@ -15,11 +15,34 @@ let
     italic = "\\033[3m";
     reset = "\\e[0m"; # ANSI escape code for resetting text attributes
 
-in rec {
-  import = [
-    ./aliases/aichat.nix
-  ];
+    # Check if first line matches criteria
+    hasValidHeader = file:
+    let
+      content = builtins.readFile file;
+      firstLine = builtins.head (builtins.split "\n" content);
+    in firstLine == "# Don't remove this line! programs.zsh.shellAliases";
 
+    # Get all values from an attrset, ignoring the names
+    getAllValues = attrs: builtins.foldl' (acc: name:
+      acc // (builtins.getAttr name attrs)
+    ) {} (builtins.attrNames attrs);
+
+    importAliasFiles = dir:
+      let
+        files = builtins.attrNames (builtins.readDir dir);
+        nixFiles = builtins.filter (n: builtins.match ".*\\.nix" n != null) files;
+        fullPaths = map (f: dir + "/${f}") nixFiles;
+        validFiles = builtins.filter hasValidHeader fullPaths;
+        contents = map (file: getAllValues (import file {})) validFiles;
+        merged = builtins.foldl' (a: b: a // b) {} contents;
+      in merged;
+
+    # Import aliases
+      # aichat = (import ./aliases/aichat.nix { }).aichat;
+      allAliases = importAliasFiles ./aliases;
+
+
+in rec {
   setOptions = [
     # https://superuser.com/questions/519596/share-history-in-multiple-zsh-shell
     # https://unix.stackexchange.com/questions/669971/zsh-can-i-have-a-combined-history-for-all-of-my-shells
@@ -244,39 +267,9 @@ in rec {
   };
 
 
-  shellAliases = {
-    # Nix and NixOS aliases
-      # Cleaning
-        nhc = "nh clean all --keep 3";
-        nixc = "nix-collect-garbage -d 3";
-
-      # Flakes
-        nixfc = "nix flake check";
-
-      # nh - Yet another nix helper
-        nhcak5 = "nh clean all --keep 5";
-        nhcuk5 = "nh clean user --keep 5";
-
-        # Upadate NixOS
-        nhosb = "nh os boot /etc/nixos/nixos-config";
-        nhosbd = "nh os boot --dry /etc/nixos/nixos-config";
-        nhosbu = "nh os boot --update /etc/nixos/nixos-config";
-        nhosbud = "nh os boot --update --dry /etc/nixos/nixos-config";
-        nhoss = "nh os switch /etc/nixos/nixos-config";
-        nhossd = "nh os switch --dry /etc/nixos/nixos-config";
-        nhossu = "nh os switch --update /etc/nixos/nixos-config";
-        nhossud = "nh os switch --update --dry /etc/nixos/nixos-config";
-
-      # Searching
-        nixse = "nix search nixpkgs";
-        nixseu = "nix search nixpkgs/nixos-unstable#";
-        nhs = "nh search --channel nixos-24.11";
-
-      # System
-        nixinfo = "nix-info --host-os -m";
-        nixlg = "nixos-rebuild list-generations";
-
-
+  shellAliases =
+    allAliases //
+    {
     # Other aliases
     # Bat - A cat(1) clone with syntax highlighting and Git integration.
     # https://github.com/sharkdp/bat
@@ -289,12 +282,6 @@ in rec {
     aws_account_id = "aws sts get-caller-identity --query Account --output text";
     aws_account_region = "aws configure get region";
     aws-central-poc = "export AWS_PROFILE=481635650710_AWS-rw-All";
-
-    # Diff
-    codif = "colordiff -y -W 212";
-    d = "delta --paging=never";
-    dp = "delta --paging=auto";
-    dt = "difft";
 
     # Distrobox :: https://github.com/89luca89/distrobox :: https://distrobox.it/
     db = "distrobox";

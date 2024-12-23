@@ -1,3 +1,5 @@
+# Don't remove this line! programs.zsh.shellAliases
+
 { ... }:
 
 let
