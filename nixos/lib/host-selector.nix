@@ -25,13 +25,13 @@ in
       isTuxedoInfinityBook = isPerrrkele;
 
       # By GPU
-      isIntelGPUHost = isChuweiMiniPC || isTuxedoInfinityBook;  # Combined condition for Intel iGPU hosts.
+      isIntelGPUHost = isChuweiMiniPC || isTuxedoInfinityBook;  # Combined condition for Intel iGPU hostSelector
       isNvidiaGPUHost = isKoira;
 
       # By role
       isRoleLaptop = isTuxedoInfinityBook;
       isRoleServer = isChuweiMiniPC;
-      isRoleUser = isDesktop || isTuxedoInfinityBook;  # Combined condition for user-side hosts.
+      isRoleUser = isDesktop || isTuxedoInfinityBook;  # Combined condition for user-side hostSelector
 }
 
 
@@ -43,7 +43,7 @@ in
 
 
 # let
-#   hosts = import ../../lib/hosts.nix { inherit config lib; };
+#   hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
 # in
 #
 # {

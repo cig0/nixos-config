@@ -3,7 +3,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  hosts = import ../../lib/hosts.nix { inherit config lib; };
+  hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
 
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`.
   kernelPackages_isRoleServer = pkgs.linuxPackages_hardened;
@@ -63,23 +63,23 @@ in
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ]; # Override parameter in hardware-configuration.nix
     kernelModules = [ "kvm-intel" "i915" ]; # Override parameter in hardware-configuration.nix
     kernelPackages =
-      if hosts.isRoleServer then kernelPackages_isRoleServer
-      else if hosts.isTuxedoInfinityBook then kernelPackages_isTuxedoInfinityBook
+      if hostSelector.isRoleServer then kernelPackages_isRoleServer
+      else if hostSelector.isTuxedoInfinityBook then kernelPackages_isTuxedoInfinityBook
       else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
 
     kernel.sysctl =
       # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
 
-      if hosts.isKoira || hosts.isRoleServer
+      if hostSelector.isKoira || hostSelector.isRoleServer
         then commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "bbr"; }
         # bbr: A newer algorithm designed for higher throughput and lower latency.
-      else if hosts.isTuxedoInfinityBook
+      else if hostSelector.isTuxedoInfinityBook
         then commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "westwood"; }
         # westwood: Aimed at improving performance over wireless networks and other lossy links by using end-to-end bandwidth estimation.
       else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 
     kernelParams =
-      if hosts.isTuxedoInfinityBook || hosts.isChuweiMiniPC
+      if hostSelector.isTuxedoInfinityBook || hostSelector.isChuweiMiniPC
         then commonKernelParams ++ [
         "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
         "intel_pstate=disable"

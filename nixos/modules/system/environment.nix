@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  hosts = import ../../lib/hosts.nix { inherit config lib; };
+  hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
 
   commonEnvSessionVars = {
     EGL_PLATFORM = "wayland";
@@ -49,8 +49,8 @@ in
     localBinInPath = true;
 
     sessionVariables =
-      if hosts.isIntelGPUHost then commonEnvSessionVars // intelEnvSessionVars
-      else if hosts.isNvidiaGPUHost then commonEnvSessionVars
+      if hostSelector.isIntelGPUHost then commonEnvSessionVars // intelEnvSessionVars
+      else if hostSelector.isNvidiaGPUHost then commonEnvSessionVars
       else {};
   };
 }
