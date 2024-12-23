@@ -35,17 +35,22 @@
 
     nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
 
-    nixos-cosmic = {
-      inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
-      url = "github:lilyinstarlight/nixos-cosmic";
-    };
-
     nix-index.url = "github:nix-community/nix-index";
 
     # nix-index-database = {
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   url = "github:nix-community/nix-index-database"; # TODO: learn how to implement it properly.
     # };
+
+    nix-ld = {  # https://github.com/nix-community/nix-ld
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/nix-ld";
+    };
+
+    nixos-cosmic = {
+      inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
+      url = "github:lilyinstarlight/nixos-cosmic";
+    };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # Hardware-specific optimizations
 
@@ -67,9 +72,10 @@
     nix-flatpak,              # Enhanced Flatpak support.
     nix-index,                # A files database for nixpkgs.
     # nix-index-database,       # A files database for nixpkgs - pre-baked.
-    # nixos-cosmic,             # COSMIC Desktop Environment.
+    nix-ld,                   # Run unpatched dynamic binaries on NixOS.
+    nixos-cosmic,             # COSMIC Desktop Environment.
     nixos-hardware,           # Additional hardware configuration.
-    nixvim,
+    nixvim,                   # A Neovim configuration system for nix.
     rust-overlay,             # Oxalica's Rust toolchain overlay.
     # sops-nix,                 # Mic92 NixOS' Mozilla SOPS implementation.
   ... }:
@@ -181,31 +187,32 @@
         coreModules ++
         userModules ++
         [
-        nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
-        ./nixos/hosts/perrrkele/configuration.nix
+          nix-ld.nixosModules.nix-ld
+          nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
+          ./nixos/hosts/perrrkele/configuration.nix
 
-        {
-          nixpkgs.overlays = [ nixos-option ];
+          {
+            nixpkgs.overlays = [ nixos-option ];
 
-          # Host configutation
-          # ===== DISPLAY MANAGERS =====
-          # Only one at a time can be active.
-          # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shell/
-          services.displayManager = {
-            autoLogin = {
-              enable = false;
+            # Host configutation
+            # ===== DISPLAY MANAGERS =====
+            # Only one at a time can be active.
+            # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shell/
+            services.displayManager = {
+              autoLogin = {
+                enable = false;
+              };
+              # cosmic-greeter.enable = false;  # COSMIC Desktop Greeter
+              ly.enable = false;  # Ly Display Manager
+              sddm.enable = true;  # SDDM / KDE Display Manager
             };
-            # cosmic.enable = false;  # COSMIC Desktop Greeter
-            ly.enable = false;  # Ly Display Manager
-            sddm.enable = true;  # SDDM / KDE Display Manager
-          };
 
-          # mySystem Options
-          mySystem.guiShellEnv = "plasma6";
-          mySystem.services.printing = "false";  # CUPS
-          mySystem.services.syncthing = "false";
-          mySystem.services.tailscale = "true";
-        }
+            # mySystem Options
+            mySystem.guiShellEnv = "plasma6";
+            mySystem.services.printing = "false";  # CUPS
+            mySystem.services.syncthing = "false";
+            mySystem.services.tailscale = "true";
+          }
       ];
     };
 
