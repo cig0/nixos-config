@@ -6,7 +6,6 @@ in
 {
   programs.command-not-found.enable = false;
 
-  # Zsh
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
@@ -17,7 +16,7 @@ in
     shellAliases = zshConfig.shellAliases;
     syntaxHighlighting.enable = true;
 
-    # History is managed by Atuin
+    # History is managed by Atuin.
     histSize = 20000;
     histFile = "$HOME/.zsh_history";
 
