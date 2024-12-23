@@ -14,8 +14,12 @@ let
     bold_white = "\\e[1;97m";
     italic = "\\033[3m";
     reset = "\\e[0m"; # ANSI escape code for resetting text attributes
-in
-rec {
+
+in rec {
+  import = [
+    ./aliases/aichat.nix
+  ];
+
   setOptions = [
     # https://superuser.com/questions/519596/share-history-in-multiple-zsh-shell
     # https://unix.stackexchange.com/questions/669971/zsh-can-i-have-a-combined-history-for-all-of-my-shells
@@ -274,13 +278,6 @@ rec {
 
 
     # Other aliases
-    # AIChat
-      # Google Gemini
-        aG = "aichat -m gemini";
-        aGc = "aichat -m gemini --code";
-        aGl = "aichat -m gemini --list-sessions";
-        aGs = "aichat -m gemini --session";
-
     # Bat - A cat(1) clone with syntax highlighting and Git integration.
     # https://github.com/sharkdp/bat
     b = "bat --paging=always --style=plain --theme='Dracula' --wrap=auto"; # Plain + paging=always
