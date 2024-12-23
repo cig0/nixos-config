@@ -339,6 +339,7 @@ rec {
     # https://git-scm.com/docs/pretty-formats.
     glols = "git log --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
     ga = "git add";
+    gaA = "git add --all";
     gaf = "git add --force";
     gb = "git branch";
     gca = "git commit -am";
