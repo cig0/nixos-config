@@ -4,24 +4,24 @@
 { config, lib, ... }:
 
 let
-  hosts = import ../../../lib/hosts.nix { inherit config lib; };
+  hostSelector = import ../../../lib/host-selector.nix { inherit config lib; };
 
   # Build list of packages to be installed on the host
   backupJob =
     let
       backupJob =
-        if hosts.isRoleLaptop then
+        if hostSelector.isRoleLaptop then
 
 
-        else if hosts.isRoleServer then
+        else if hostSelector.isRoleServer then
 
 
-        else if hosts.isDesktop then
+        else if hostSelector.isDesktop then
 
 
         else [];
     in
-      if hosts.isNvidiaGPUHost then pkgsList ++ appsNvidia
+      if hostSelector.isNvidiaGPUHost then pkgsList ++ appsNvidia
       else
         pkgsList;
 

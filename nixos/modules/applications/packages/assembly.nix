@@ -4,7 +4,7 @@
 
 let
   # Host name logic. Loads a map of possible hostnames and their associated roles.
-  hosts = import ../../../lib/hosts.nix { inherit config lib; };
+  hostSelector = import ../../../lib/host-selector.nix { inherit config lib; };
 
   # Import packages lists and sets.
   p = import ./packages.nix { inherit pkgs unstablePkgs; };
@@ -36,11 +36,11 @@ let
 
   assembledList =
     let
-      assembly = if hosts.isRoleLaptop then rolePackages "Laptop"
-                 else if hosts.isRoleServer then rolePackages "Server"
+      assembly = if hostSelector.isRoleLaptop then rolePackages "Laptop"
+                 else if hostSelector.isRoleServer then rolePackages "Server"
                  else [];
     in
-      assembly ++ lib.optionals hosts.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
+      assembly ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
 
 in
 {
