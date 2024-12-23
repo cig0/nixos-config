@@ -2,6 +2,7 @@
 
 let
   allAliases = (import ./aliases.nix {}).allAliases;
+  # allFunctions = (import ./functions.nix {}).allFunctions;
   zshConfig = import ./zshConfig.nix { inherit pkgs; };
 
 in {
