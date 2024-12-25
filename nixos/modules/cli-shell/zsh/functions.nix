@@ -3,7 +3,7 @@
 { ... }:
 
 let
-  ansiColors = import ./ansiColors.nix;
+  ansiColors = import ./ansi-colors.nix;
 
   # Check if first line matches criteria
   hasValidHeader = file:
