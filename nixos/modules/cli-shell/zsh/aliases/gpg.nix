@@ -3,8 +3,7 @@
 { ... }:
 
 let
-  # GnuGPG
-  gpg = {
+  aliases = {
     gpgc = "gpg -c --cipher-algo aes256";
     gpgd = "gpg -d";
 
@@ -13,5 +12,5 @@ let
   };
 
 in {
-  gpg = gpg;
+  aliases = aliases;
 }

@@ -3,8 +3,7 @@
 { ... }:
 
 let
-  # ls
-  ls = {
+  aliases = {
     l = "ls -lh --group-directories-first";
     l1 = "ls -1 --group-directories-first";
     l11 = "ls -1rt";
@@ -18,5 +17,5 @@ let
   };
 
 in {
-  ls = ls;
+  aliases = aliases;
 }

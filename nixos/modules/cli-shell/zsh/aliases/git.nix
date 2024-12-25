@@ -3,7 +3,7 @@
 { ... }:
 
 let
-  git = {
+  aliases = {
     # GitHub CLI
       ghrw = "gh run watch";
       ghwv = "gh workflow view";
@@ -55,5 +55,5 @@ let
   };
 
 in {
-  git = git;
+  aliases = aliases;
 }

@@ -3,13 +3,12 @@
 { ... }:
 
 let
-  # Flatpak
-  flatpak = {
+  aliases = {
     fll = "flatpak list";
     flp = "flatpak ps";
     fls = "flatpak search";
   };
 
 in {
-  flatpak = flatpak;
+  aliases = aliases;
 }

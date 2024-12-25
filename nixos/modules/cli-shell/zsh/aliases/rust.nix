@@ -4,10 +4,10 @@
 
 let
   # Rust's Cargo package manager
-  rust = {
+  aliases = {
     cargoApps = "$EDITOR ~/.config/Cargo.apps";
   };
 
 in {
-  rust = rust;
+  aliases = aliases;
 }

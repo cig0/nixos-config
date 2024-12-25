@@ -3,8 +3,7 @@
 { ... }:
 
 let
-  # General
-  misc = {
+  aliases = {
     _h = "history | grep -i";
     ___ = "_h";
     _fi = "find . -maxdepth 1 -iname";
@@ -25,5 +24,5 @@ let
   };
 
 in {
-  misc = misc;
+  aliases = aliases;
 }

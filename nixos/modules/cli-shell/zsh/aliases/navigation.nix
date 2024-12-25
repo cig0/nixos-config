@@ -3,8 +3,7 @@
 { ... }:
 
 let
-  # Description
-  navigation = {
+  aliases = {
     # Navigation (CLI)
       e = "exit";
       jo = "joshuto";
@@ -26,5 +25,5 @@ let
   };
 
 in {
-  navigation = navigation;
+  aliases = aliases;
 }

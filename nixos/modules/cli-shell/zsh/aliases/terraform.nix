@@ -4,11 +4,11 @@
 
 let
   # Terraform / OpenTofu
-  terraform = {
+  aliases = {
     ot = "opentofu";
     tf = "terraform";
   };
 
 in {
-  terraform = terraform;
+  aliases = aliases;
 }

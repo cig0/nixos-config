@@ -3,8 +3,7 @@
 { ... }:
 
 let
-  # Kubernetes
-  k8s = {
+  aliases = {
     h = "helm";
     k = "kubectl";
     k9s = "k9s --headless";
@@ -18,5 +17,5 @@ let
   };
 
 in {
-  k8s = k8s;
+  aliases = aliases;
 }

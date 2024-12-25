@@ -3,12 +3,11 @@
 { ... }:
 
 let
-  # Observability
-  observability = {
+  aliases = {
     bt = "btop";
     t = "top";
   };
 
 in {
-  observability = observability;
+  aliases = aliases;
 }

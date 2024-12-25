@@ -4,7 +4,7 @@
 
 let
   # Trasher - https://crates.io/crates/trasher
-  trasher = {
+  aliases = {
     rm = "trasher --exclude /var rm";
     rmp = "trasher --exclude /var rm -p";
     te = "trasher --exclude /var empty";
@@ -13,5 +13,5 @@ let
   };
 
 in {
-  trasher = trasher;
+  aliases = aliases;
 }

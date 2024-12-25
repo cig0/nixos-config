@@ -3,8 +3,7 @@
 { ... }:
 
 let
-  # Hosts
-  hosts = {
+  aliases = {
     sperrrkele = "ssh perrrkele";
     ssatama = "ssh satama";
     sterasbetoni = "ssh terasbetoni";
@@ -16,5 +15,5 @@ let
   };
 
 in {
-  hosts = hosts;
+  aliases = aliases;
 }
