@@ -250,9 +250,8 @@
 }
 
 
-# File README
-# ===========
-
+# README!
+# =======
 # - The COSMIC desktop environment options are disabled to avoid sourcing the flake when building the system configuration.
 
 # About the design of the configuration:
@@ -270,8 +269,9 @@
   # Avoids edge cases and timing issues in module evaluation
   # Is maintainable because it's simple (if inefficient)
 
-
-  #  Changelog
+  # Changelog
+  # =========
+  # 2024-12-25  Finished splitting the Zsh shell aliases and functions into modules 🎉
   # 2024-12-21  KDE Plasma: move activation logic to the module file.
   # 2024-12-21  Syncthing: move activation logic to the module file.
   # 2024-12-21  CUPS: move activation logic to the module file.
