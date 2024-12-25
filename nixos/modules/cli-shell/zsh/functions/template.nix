@@ -4,8 +4,8 @@
 
 let
   # Description
-  functions = {
-  };
+  functions = ''
+  '';
 
 in {
   functions = functions;

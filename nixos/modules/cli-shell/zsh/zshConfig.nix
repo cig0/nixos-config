@@ -47,96 +47,23 @@ in rec {
 
 
   interactiveShellInit = ''
-    umask 0077
-    fpath+=~/.zfunc
-
-    # Needs https://github.com/nix-community/nix-index
-    source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
-
     # ANSI escape codes for colors
     local bold_green="\e[1;32m"
     local bold_white="\e[1;97m"
     # ANSI escape code for resetting text attributes
     local reset="\e[0m"
 
-    # Nix and NixOS
-      # Hydra
-        hc() {
-          # hydra-check example: `hydra-check --arch x86_64-linux --channel unstable starship`
-          hydra-check --arch x86_64-linux --channel 24.05 "$1"
-        }
-
-        hcs() {
-          # hydra-check example: `hydra-check --arch x86_64-linux --channel unstable starship`
-          hydra-check --arch x86_64-linux --channel staging "$1"
-        }
-
-        hcu() {
-          # hydra-check example: `hydra-check --arch x86_64-linux --channel unstable starship`
-          hydra-check --arch x86_64-linux --channel unstable "$1"
-        }
-
-      # Shell
-        # `nix shell` packages from nixpkgs
-        nixsh() {
-          local p
-          for p in "$@"; do
-            NIXPKGS_ALLOW_UNFREE=1 nix shell --impure nixpkgs#$p
-          done
-        }
-
-        # `nix shell` packages from nixpkgs/nixos-unstable
-        nixshu() {
-          local p
-          for p in "$@"; do
-            NIXPKGS_ALLOW_UNFREE=1 nix shell --impure nixpkgs/nixos-unstable#$p
-          done
-        }
-
-      # System
-        nixcv() {
-          local channel_version="$(nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version')"
-          echo -e "\n$bold_greenNix channel version: $bold_white$channel_version$reset"
-        }
-
-
     # Other functions
       # TODO: understand why this command isn't being evaluated
       # Atuin - bind ctrl-r but not up arrow
       # [ -x "$(command -v atuin)" ] && source "$HOME/.config/atuin/init.zsh"
 
-    # 7za9() {
-    #   [[ -z $1 ]] || [[ -z $2 ]] && \
-    #   echo -e "\n${bold_white}Missing arguments!${reset}\n\nSyntax: ${bold_green}7za9 ${bold_white}${italic}output_file.${bold_green}7z ${bold_white}input_file_or_dir${reset}" && \
-    #     return 1
-    #   7z a -mx=9 -m0=lzma2 -mmt=on "$1".7z "$2"
-    # }
     alse() {
       [[ -z $1 ]] && \
         echo -e "\n${bold_white}Missing alias to search!${reset}\n\nSyntax: ${bold_green}alse ${italic}alias_to_search${reset}" && \
           return 1
       alias | grep --color=always --ignore-case "$1"
     }
-
-    # ls
-    # a() {
-    #   setopt null_glob
-    #   hidden_found=false
-    #   for entry in .*; do
-    #     [[ $entry != "." && $entry != ".." ]] && hidden_found=true && break
-    #   done
-    #   $hidden_found && ls -dl --color=always --group-directories-first .??* || echo -e '\nNo hidden files found.\e[0m'
-    #   unsetopt null_glob
-    # }
-    # la() {
-    #   setopt null_glob
-    #   hidden_found=false
-    #   for entry in .*; do
-    #     [[ $entry != "." && $entry != ".." ]] && hidden_found=true && break
-    #   done
-    #   $hidden_found && ls -dl --color=always --group-directories-first .??* || echo -e '\nNo hidden files found.\e[0m'
-    #   unsetopt null_glob
-    # }
 
     # Diff
     diffstring() {
@@ -195,6 +122,12 @@ in rec {
 
 
   shellInit = ''
+    umask 0077
+    fpath+=~/.zfunc
+
+    # Needs https://github.com/nix-community/nix-index
+    source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+
     # Preferred editor for local and remote sessions
     if [[ -n $SSH_CONNECTION ]]; then
       export EDITOR="nvim"
