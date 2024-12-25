@@ -13,7 +13,7 @@ let
   reset = "\\e[0m"; # ANSI escape code for resetting text attributes
 
   # Description
-  function = ''
+  functions = ''
     7za9() {
       [[ -z $1 ]] || [[ -z $2 ]] && \
       echo -e "\n${bold_white}Missing arguments!${reset}\n\nSyntax: ${bold_green}7za9 ${bold_white}${italic}output_file.${bold_green}7z ${bold_white}input_file_or_dir${reset}" && \
@@ -23,5 +23,5 @@ let
   '';
 
 in {
-  function = function;
+  functions = functions;
 }

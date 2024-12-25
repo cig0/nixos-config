@@ -105,12 +105,12 @@ in rec {
       # Atuin - bind ctrl-r but not up arrow
       # [ -x "$(command -v atuin)" ] && source "$HOME/.config/atuin/init.zsh"
 
-    7za9() {
-      [[ -z $1 ]] || [[ -z $2 ]] && \
-      echo -e "\n${bold_white}Missing arguments!${reset}\n\nSyntax: ${bold_green}7za9 ${bold_white}${italic}output_file.${bold_green}7z ${bold_white}input_file_or_dir${reset}" && \
-        return 1
-      7z a -mx=9 -m0=lzma2 -mmt=on "$1".7z "$2"
-    }
+    # 7za9() {
+    #   [[ -z $1 ]] || [[ -z $2 ]] && \
+    #   echo -e "\n${bold_white}Missing arguments!${reset}\n\nSyntax: ${bold_green}7za9 ${bold_white}${italic}output_file.${bold_green}7z ${bold_white}input_file_or_dir${reset}" && \
+    #     return 1
+    #   7z a -mx=9 -m0=lzma2 -mmt=on "$1".7z "$2"
+    # }
     alse() {
       [[ -z $1 ]] && \
         echo -e "\n${bold_white}Missing alias to search!${reset}\n\nSyntax: ${bold_green}alse ${italic}alias_to_search${reset}" && \
@@ -119,24 +119,24 @@ in rec {
     }
 
     # ls
-    a() {
-      setopt null_glob
-      hidden_found=false
-      for entry in .*; do
-        [[ $entry != "." && $entry != ".." ]] && hidden_found=true && break
-      done
-      $hidden_found && ls -dl --color=always --group-directories-first .??* || echo -e '\nNo hidden files found.\e[0m'
-      unsetopt null_glob
-    }
-    la() {
-      setopt null_glob
-      hidden_found=false
-      for entry in .*; do
-        [[ $entry != "." && $entry != ".." ]] && hidden_found=true && break
-      done
-      $hidden_found && ls -dl --color=always --group-directories-first .??* || echo -e '\nNo hidden files found.\e[0m'
-      unsetopt null_glob
-    }
+    # a() {
+    #   setopt null_glob
+    #   hidden_found=false
+    #   for entry in .*; do
+    #     [[ $entry != "." && $entry != ".." ]] && hidden_found=true && break
+    #   done
+    #   $hidden_found && ls -dl --color=always --group-directories-first .??* || echo -e '\nNo hidden files found.\e[0m'
+    #   unsetopt null_glob
+    # }
+    # la() {
+    #   setopt null_glob
+    #   hidden_found=false
+    #   for entry in .*; do
+    #     [[ $entry != "." && $entry != ".." ]] && hidden_found=true && break
+    #   done
+    #   $hidden_found && ls -dl --color=always --group-directories-first .??* || echo -e '\nNo hidden files found.\e[0m'
+    #   unsetopt null_glob
+    # }
 
     # Diff
     diffstring() {

@@ -4,7 +4,7 @@
 
 let
   # Cloud Infrastructure
-  cloud = {
+  aliases = {
     # AWS
       aws_account_describe = "aws organizations describe-account --account-id $(aws_account_id)";
       aws_account_id = "aws sts get-caller-identity --query Account --output text";
@@ -13,5 +13,5 @@ let
   };
 
 in {
-  cloud = cloud;
+  aliases = aliases;
 }

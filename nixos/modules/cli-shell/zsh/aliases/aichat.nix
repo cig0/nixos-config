@@ -3,7 +3,7 @@
 { ... }:
 
 let
-  aichat = {
+  aliases = {
     # Google Gemini
     aG = "aichat -m gemini";
     aGc = "aichat -m gemini --code";
@@ -12,5 +12,5 @@ let
   };
 
 in {
-  aichat = aichat;
+  aliases = aliases;
 }
