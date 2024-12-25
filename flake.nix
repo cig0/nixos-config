@@ -1,3 +1,5 @@
+# TODO: migrate 'nixosConfigurations' to specialisations.
+
 #---------------------------------------------------------------------
 # Martín Cigorraga
 # https://github.com/cig0/nixos-config-public
@@ -207,11 +209,11 @@
               sddm.enable = true;  # SDDM / KDE Display Manager
             };
 
-            # mySystem Options
-            mySystem.guiShellEnv = "plasma6";
-            mySystem.services.printing = "false";  # CUPS
-            mySystem.services.syncthing = "false";
-            mySystem.services.tailscale = "true";
+            # mySystem Options, and where they are defined.
+            mySystem.guiShellEnv = "plasma6";  # /etc/nixos/nixos-config/nixos/modules/gui-shell/gui-shell-selector.nix
+            mySystem.services.printing = "false";  # /etc/nixos/nixos-config/nixos/modules/system/cups.nix
+            mySystem.services.syncthing = "false";  # /etc/nixos/nixos-config/nixos/modules/applications/syncthing.nix
+            mySystem.services.tailscale = "true";  # /etc/nixos/nixos-config/nixos/modules/networking/tailscale.nix
           }
       ];
     };
