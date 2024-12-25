@@ -3,6 +3,7 @@
 let
   allAliases = (import ./aliases.nix {}).allAliases;  # Optional: import individual aliases files, e.g.: aichat = (import ./aliases/aichat.nix { }).aichat;
   # allFunctions = (import ./functions.nix {}).allFunctions;
+   allFunctions = builtins.concatStringsSep "\n" (builtins.attrValues ((import ./functions.nix {}).allFunctions));
   zshConfig = import ./zshConfig.nix { inherit pkgs; };
 
 in {
@@ -13,7 +14,7 @@ in {
     autosuggestions.enable = true;
     interactiveShellInit = zshConfig.interactiveShellInit;
     loginShellInit = zshConfig.loginShellInit;
-    shellInit = zshConfig.shellInit;
+    shellInit = allFunctions // zshConfig.shellInit;
     setOptions = zshConfig.setOptions;
     shellAliases = allAliases // zshConfig.shellAliases;
     syntaxHighlighting.enable = true;
