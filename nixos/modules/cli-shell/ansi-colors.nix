@@ -9,5 +9,5 @@
   bold_green = "\\e[1;32m";
   bold_white = "\\e[1;97m";
   italic = "\\033[3m";
-  reset = "\\e[0m"; # ANSI escape code for resetting text attributes
+  reset = "\\e[0m";  # Useful to reset text attributes.
 }
