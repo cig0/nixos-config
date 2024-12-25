@@ -3,7 +3,7 @@
 { ... }:
 
 let
-  git = ''
+  functions = ''
     lg() {
       local repo_path="${1:-$(pwd)}"
       local git_dir="${repo_path%/}/.git"
@@ -19,5 +19,5 @@ let
   '';
 
 in {
-  git = git;
+  functions = functions;
 }
