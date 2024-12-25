@@ -3,7 +3,7 @@
 { ... }:
 
 let
-  diff = {
+  aliases = {
     codif = "colordiff -y -W 212";
     d = "delta --paging=never";
     dp = "delta --paging=auto";
@@ -11,5 +11,5 @@ let
   };
 
 in {
-  diff = diff;
+  aliases = aliases;
 }

@@ -4,7 +4,7 @@
 
 let
   # Distrobox :: https://github.com/89luca89/distrobox :: https://distrobox.it/
-  distrobox = {
+  aliases = {
     db = "distrobox";
     dbc = "distrobox create";
     dbe = "db enter";
@@ -13,5 +13,5 @@ let
   };
 
 in {
-  distrobox = distrobox;
+  aliases = aliases;
 }

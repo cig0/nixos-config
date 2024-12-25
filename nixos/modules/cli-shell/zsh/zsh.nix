@@ -1,8 +1,9 @@
 { pkgs, ... }:
 
 let
-  allAliases = (import ./aliases.nix {}).allAliases;  # Optional: import individual aliases files, e.g.: aichat = (import ./aliases/aichat.nix { }).aichat;
-  allFunctions = (import ./functions.nix {}).allFunctions;
+  # Optionaly, you can import individual aliases and functions files
+    allAliases = (import ./aliases.nix {}).allAliases;
+    allFunctions = (import ./functions.nix {}).allFunctions;
   zshConfig = import ./zshConfig.nix { inherit pkgs; };
 
 in {
@@ -14,7 +15,10 @@ in {
     interactiveShellInit = zshConfig.interactiveShellInit;
     loginShellInit = zshConfig.loginShellInit;
     shellAliases = allAliases // zshConfig.shellAliases;
-    shellInit = zshConfig.shellInit;
+    shellInit = ''
+      ${allFunctions}
+      ${zshConfig.shellInit}
+    '';
     setOptions = zshConfig.setOptions;
     syntaxHighlighting.enable = true;
 

@@ -4,9 +4,9 @@
 
 let
   # Description
-  template = {
+  aliases = {
   };
 
 in {
-  template = template;
+  aliases = aliases;
 }
