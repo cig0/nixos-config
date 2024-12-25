@@ -3,7 +3,7 @@
 { ... }:
 
 let
-  nixos = {
+  aliases = {
     # Nix and NixOS aliases
       # Cleaning
         nhc = "nh clean all --keep 3";
@@ -37,5 +37,5 @@ let
   };
 
 in {
-  nixos = nixos;
+  aliases = aliases;
 }

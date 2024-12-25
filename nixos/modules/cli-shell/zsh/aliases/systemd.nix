@@ -3,11 +3,10 @@
 { ... }:
 
 let
-  # systemd
-  systemd = {
+  aliases = {
     journalctl_boot_err = "journalctl -xep err -b";
   };
 
 in {
-  systemd = systemd;
+  aliases = aliases;
 }

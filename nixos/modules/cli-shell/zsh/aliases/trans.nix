@@ -4,7 +4,7 @@
 
 let
   # Trans - CLI client for Goolge Translator
-  trans = {
+  aliases = {
     # English
     tenes = "trans en:es";
     tesen = "trans es:en";
@@ -14,5 +14,5 @@ let
   };
 
 in {
-  trans = trans;
+  aliases = aliases;
 }

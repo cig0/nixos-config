@@ -3,8 +3,7 @@
 { ... }:
 
 let
-  # Podman
-  podman = {
+  aliases = {
     docker = "podman";
     p = "podman";
     pi = "podman images";
@@ -13,5 +12,5 @@ let
   };
 
 in {
-  podman = podman;
+  aliases = aliases;
 }
