@@ -12,23 +12,22 @@ let
     firstLine = builtins.head (builtins.split "\n" content);
   in firstLine == "# Don't remove this line! programs.zsh.shellAliases";
 
-  # Get all values from an attrset, ignoring the names
-  getAllValues = attrs: builtins.foldl' (acc: name:
-    acc // (builtins.getAttr name attrs)
-  ) {} (builtins.attrNames attrs);
-
   importAliasFiles = dir:
     let
       files = builtins.attrNames (builtins.readDir dir);
       nixFiles = builtins.filter (n: builtins.match ".*\\.nix" n != null) files;
       fullPaths = map (f: dir + "/${f}") nixFiles;
       validFiles = builtins.filter hasValidHeader fullPaths;
-      contents = map (file: getAllValues (import file {})) validFiles;
+      contents = map (file:
+        let
+          imported = import file { inherit ansiColors; };
+        in
+          if builtins.hasAttr "aliases" imported
+          then imported.aliases
+          else "") validFiles;
       merged = builtins.foldl' (a: b: a // b) {} contents;
     in merged;
 
-
 in {
-  inherit hasValidHeader getAllValues importAliasFiles;
   allAliases = importAliasFiles ./aliases;
 }
