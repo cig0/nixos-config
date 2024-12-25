@@ -3,6 +3,8 @@
 { ... }:
 
 let
+  ansiColors = import ./ansiColors.nix;
+
   # Check if first line matches criteria
   hasValidHeader = file:
     let
@@ -16,10 +18,11 @@ let
       nixFiles = builtins.filter (n: builtins.match ".*\\.nix" n != null) files;
       fullPaths = map (f: dir + "/${f}") nixFiles;
       validFiles = builtins.filter hasValidHeader fullPaths;
-      contents = map (file: let imported = import file {}; in if builtins.hasAttr "functions" imported then imported.function else "") validFiles;
+      contents = map (file: let imported = import file {}; in if builtins.hasAttr "functions" imported then imported.functions else "") validFiles;
       merged = builtins.concatStringsSep "\n" contents;
     in merged;
 
 in {
   allFunctions = importFunctionFiles ./functions;
+  ansiColors = ansiColors;
 }

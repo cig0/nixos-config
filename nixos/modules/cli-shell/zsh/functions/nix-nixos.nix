@@ -8,7 +8,7 @@ let
     # Hydra
     hc() {
       # hydra-check example: `hydra-check --arch x86_64-linux --channel unstable starship`
-      hydra-check --arch x86_64-linux --channel 24.05 "$1"
+      hydra-check --arch x86_64-linux --channel 24.11 "$1"
     }
 
     hcs() {
