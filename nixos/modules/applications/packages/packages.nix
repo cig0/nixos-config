@@ -264,6 +264,7 @@ let
       # Everything else...
         devbox
         gcc
+        guix
         mold
         shellcheck
         tokei
