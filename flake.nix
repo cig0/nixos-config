@@ -210,10 +210,14 @@
             };
 
             # mySystem Options, and where they are defined.
-            mySystem.guiShellEnv = "plasma6";  # /etc/nixos/nixos-config/nixos/modules/gui-shell/gui-shell-selector.nix
-            mySystem.services.printing = "false";  # /etc/nixos/nixos-config/nixos/modules/system/cups.nix
-            mySystem.services.syncthing = "false";  # /etc/nixos/nixos-config/nixos/modules/applications/syncthing.nix
-            mySystem.services.tailscale = "true";  # /etc/nixos/nixos-config/nixos/modules/networking/tailscale.nix
+            mySystem = {
+              guiShellEnv = "plasma6";  # /etc/nixos/nixos-config/nixos/modules/gui-shell/gui-shell-selector.nix
+              services = {
+                printing = "false";  # /etc/nixos/nixos-config/nixos/modules/system/cups.nix
+                syncthing = "false";  # /etc/nixos/nixos-config/nixos/modules/applications/syncthing.nix
+                tailscale = "true";  # /etc/nixos/nixos-config/nixos/modules/networking/tailscale.nix
+              };
+            };
           }
       ];
     };
