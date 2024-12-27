@@ -14,7 +14,7 @@
   # Bootloader
     boot = {
       initrd = {
-        luks.devices."swap".device = "/dev/disk/by-uuid/edf43523-db06-4b35-9868-170c2a8ff06c"; # Encrypted swap partition.
+        luks.devices."swap".device = "/dev/disk/by-uuid/edf43523-db06-4b35-9868-170c2a8ff06c";  # Encrypted swap partition.
       };
 
       loader = {
@@ -24,12 +24,11 @@
         # systemd-boot.configurationLimit = 5;
         systemd-boot = {
           enable = true;
-          consoleMode = "auto";
+          consoleMode = "max";
         };
 
         # GRUB bootloader
         grub = {
-          # enableCryptodisk = true;
           enable = false;
           device = "nodev";
           efiSupport = true;
