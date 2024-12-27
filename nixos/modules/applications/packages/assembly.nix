@@ -25,7 +25,7 @@ let
         p.lists.appsNonGUI ++
         appsGUIshell
       )) ++
-     (lib.optionals (role == "Server") (
+     (lib.optionals (role == "HomeLab") (
         p.lists.appsBaseline ++
         p.sets.appsNonGUI.backup ++
         p.sets.appsNonGUI.cloudNativeTools ++
@@ -39,7 +39,8 @@ let
   assembledList =
     let
       assembly = if hostSelector.isRoleLaptop then rolePackages "Laptop"
-                 else if hostSelector.isRoleServer then rolePackages "Server"
+                 else if hostSelector.isRoleDesktop then rolePackages "Desktop"
+                 else if hostSelector.isRoleServer then rolePackages "HomeLab"
                  else [];
     in
       assembly ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
