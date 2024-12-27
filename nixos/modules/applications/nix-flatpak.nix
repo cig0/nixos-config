@@ -110,6 +110,7 @@
       "com.google.Chrome"
       "com.google.EarthPro"
       "io.gitlab.librewolf-community"
+      "com.opera.Opera"
       "org.torproject.torbrowser-launcher"
     ];
   };
