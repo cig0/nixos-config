@@ -19,7 +19,7 @@ let
         lib.optionals (config.services.desktopManager.xfce.enable or false) p.sets.appsGUIshell.XFCE
       ;
     in
-      (lib.optionals (role == "Laptop") (
+      (lib.optionals (role == "Laptop" || role == "Desktop") (
         p.lists.appsBaseline ++
         p.lists.appsGUI ++
         p.lists.appsNonGUI ++
@@ -27,8 +27,10 @@ let
       )) ++
      (lib.optionals (role == "Server") (
         p.lists.appsBaseline ++
-        p.sets.appsNonGUI.infrastructure ++
-        p.sets.appsNonGUI.vcs ++
+        p.sets.appsNonGUI.backup ++
+        p.sets.appsNonGUI.cloudNativeTools ++
+        p.sets.appsNonGUI.security ++
+        p.sets.appsNonGUI.vcs
         [
           pkgs.pinentry-curses
         ]
