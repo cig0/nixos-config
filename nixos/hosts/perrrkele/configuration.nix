@@ -18,11 +18,27 @@
       };
 
       loader = {
-        # systemd-boot.configurationLimit = 5;
-        systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
+
+        # Systemd-boot bootloader.
+        # systemd-boot.configurationLimit = 5;
+        systemd-boot = {
+          enable = true;
+          consoleMode = "auto";
+        };
+
+        # GRUB bootloader
+        grub = {
+          # enableCryptodisk = true;
+          enable = false;
+          device = "nodev";
+          efiSupport = true;
+          # gfxmodeEfi= "text";
+          # gfxmodeBios= "text";
+        };
       };
-        tmp.cleanOnBoot = true;
+
+      tmp.cleanOnBoot = true;
     };
 
   # Automatically mount the LUKS-encrypted internal data storage
