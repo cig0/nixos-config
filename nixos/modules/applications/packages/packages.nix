@@ -181,9 +181,11 @@ let
       iamb
       weechat
     ];
-    infrastructure = with unstablePkgs; [
+    cloudNativeTools = with pkgs; [
+      awscli2  # Temporarily revert to the stable channel: ⚠ awscli2-2.22.13 failed with exit code 1 after ⏱ 0s in configurePhase
+      vagrant  # Fails to build on unstable channel.
+    ] ++ (with unstablePkgs; [
       argocd
-      awscli2
       cosign
       crc
       distrobox
@@ -198,7 +200,7 @@ let
       kubernetes-helm
       kubeswitch
       minikube
-      odo # odo is a CLI tool for fast iterative application development deployed immediately to your kubernetes cluster :: https://odo.dev
+      odo  # odo is a CLI tool for fast iterative application development deployed immediately to your kubernetes cluster :: https://odo.dev
       opentofu
       packer
       podman-compose
@@ -209,8 +211,7 @@ let
       tflint
       tfsec
       tfswitch
-      # vagrant
-    ];
+    ]);
     multimedia = with unstablePkgs; [
       exiftool
       imagemagick
@@ -242,9 +243,11 @@ let
       wiki-tui
       wl-clipboard
     ];
-    programming = with unstablePkgs; [
+    programming = with pkgs; [
+      guix
+    ] ++ (with unstablePkgs; [
       # Go
-        go # Needed to install individual apps
+        go  # Needed to install individual apps
         # golangci-lint
         # golangci-lint-langserver
         # gopls
@@ -264,13 +267,13 @@ let
       # Everything else...
         devbox
         gcc
-        guix
+        # guix  # Temporarily revert to the stable channel: guile-lzlib-0.3.0 failed with exit code 2 after ⏱ 9s in checkPhase
         mold
         shellcheck
         tokei
         yamlfmt
         zig
-    ];
+    ]);
     security = with unstablePkgs; [
       age
       chkrootkit
@@ -326,3 +329,26 @@ in
     appsNonGUI = appsNonGUI;  # Useful when installing only specific concerns.
   };
 }
+
+
+# READ ME!
+# =======
+
+# To pin a package to a specific version, use the following syntax:
+#  (Your_Package_Name.overrideAttrs (oldAttrs: {
+#     src = fetchFromGitHub {
+#       owner = "NixOS";
+#       repo = "nixpkgs";
+#       rev = "the commit hash";
+#       hash = "the sha265 hash of the tarball";
+#     };
+#   }))
+
+# To get the commit hash check the packages repository and look for the package in the correct channel branch, e.g. nixpkgs-unstable:
+# https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/by-name/aw/awscli2/package.nix => https://github.com/NixOS/nixpkgs/commit/62fcc798988975fab297b87345d93919cd6f6389
+
+# To get the sha256 hash of a package, run the following command:
+# nix-prefetch-github NixOS nixpkgs --no-deep-clone -v --rev The_Commit_Hash
+
+# Nix-prefetch-github can be installed as a normal package, or invoked on-demand if using `comma` (https://github.com/nix-community/comma, available in the official repositories.
+# Of course it can also be installed with `nix-env -iA nixpkgs.nix-prefetch-github`, or temporarily with nix-shell.
