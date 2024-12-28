@@ -8,14 +8,11 @@
   };
 
   imports = [
-    # Always import base modules
-    ./xdg-desktop-portal.nix
-
     # Import all GUI shell-specific modules - they'll activate themselves based on the configuration
     # KDE Plasma Desktop Environment
       ./kde-plasma.nix
-      ../applications/kde/kde-pim.nix
-      ../applications/kde/kdeconnect.nix
+      ../programs/kde/kde-pim.nix
+      ../programs/kde/kdeconnect.nix
 
     # COSMIC Desktop Environment
       ./cosmic.nix
