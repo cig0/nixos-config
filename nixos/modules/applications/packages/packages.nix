@@ -184,7 +184,7 @@ let
     ];
     cloudNativeTools = with pkgs; [
       awscli2  # Temporarily revert to the stable channel: ⚠ awscli2-2.22.13 failed with exit code 1 after ⏱ 0s in configurePhase
-      vagrant  # Fails to build on unstable channel.
+      vagrant  # Should always follow the main channel.
     ] ++ (with unstablePkgs; [
       argocd
       cosign
