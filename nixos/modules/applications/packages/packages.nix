@@ -43,7 +43,7 @@ let
 
       # Networking
         aria2
-        bind
+        # bind
         dnstracer
         gping # Ping, but with a graph :: https://github.com/orf/gping
         grpcurl
