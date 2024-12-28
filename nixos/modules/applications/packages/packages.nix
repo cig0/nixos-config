@@ -14,6 +14,7 @@ let
         devpod
         fh # fh, the official FlakeHub CLI :: https://github.com/DeterminateSystems/fh
         hydra-check
+        nh
         nickel
         niv
         nix-diff
