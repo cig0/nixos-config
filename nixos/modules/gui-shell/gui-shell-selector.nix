@@ -11,8 +11,8 @@
     # Import all GUI shell-specific modules - they'll activate themselves based on the configuration
     # KDE Plasma Desktop Environment
       ./kde-plasma.nix
-      ../programs/kde/kde-pim.nix
-      ../programs/kde/kdeconnect.nix
+      ../applications/kde/kde-pim.nix
+      ../applications/kde/kdeconnect.nix
 
     # COSMIC Desktop Environment
       ./cosmic.nix

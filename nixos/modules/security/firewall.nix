@@ -22,8 +22,8 @@
   };
 
   services = {
-    # KDE Connect: ../programs/kde/kdeconnect.nix
-    # Syncthing: ../programs/syncthing.nix
+    # KDE Connect: ../applications/kde/kdeconnect.nix
+    # Syncthing: ../applications/syncthing.nix
     # OpenSSH server: ../security/openssh.nix
     # Tailscale: ../networking/tailscale.nix
   };
