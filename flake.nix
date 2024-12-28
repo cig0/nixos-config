@@ -86,14 +86,14 @@
     # Modules definitions and handling.
       coreModules = [ # Modules shared by all hosts.
         # Assembly
-          ./nixos/modules/applications/packages/assembly.nix
+          ./nixos/modules/programs/packages/assembly.nix
 
         # CLI Shell
           ./nixos/modules/cli-shell/starship.nix
           ./nixos/modules/cli-shell/zsh/zsh.nix
 
         # Data
-          ./nixos/modules/applications/syncthing.nix
+          ./nixos/modules/programs/syncthing.nix
 
         # Networking
           ./nixos/modules/networking/dns.nix
@@ -104,10 +104,10 @@
           ./nixos/modules/networking/tailscale.nix
 
         # NixOS
-          ./nixos/modules/applications/nix-ld.nix
+          ./nixos/modules/programs/nix-ld.nix
 
         # NixVim
-          ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
+          ./nixos/modules/programs/nixvim.nix nixvim.nixosModules.nixvim
 
         # Observability
           # ./nixos/modules/observability/grafana-alloy.nix
@@ -157,9 +157,9 @@
       userModules = [  # Modules specific to the user, e.g. (GUI) apps and GUI shells.
         # Applications
           ./home-manager/home.nix home-manager.nixosModules.home-manager
-          ./nixos/modules/applications/chromium.nix
-          ./nixos/modules/applications/firefox.nix
-          ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
+          ./nixos/modules/programs/chromium.nix
+          ./nixos/modules/programs/firefox.nix
+          ./nixos/modules/programs/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
 
         # Display Managers
           ./nixos/modules/gui-shell/ly.nix
@@ -173,6 +173,9 @@
         # System
           ./nixos/modules/system/fonts.nix
           ./nixos/modules/system/speech-synthesis.nix
+
+        # XDG Desktop Portal
+          ./nixos/modules/gui-shell/xdg-desktop-portal.nix
       ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
@@ -217,7 +220,7 @@
               guiShellEnv = "plasma6";  # /etc/nixos/nixos-config/nixos/modules/gui-shell/gui-shell-selector.nix
               services = {
                 printing = "false";  # /etc/nixos/nixos-config/nixos/modules/system/cups.nix
-                syncthing = "false";  # /etc/nixos/nixos-config/nixos/modules/applications/syncthing.nix
+                syncthing = "false";  # /etc/nixos/nixos-config/nixos/modules/programs/syncthing.nix
                 tailscale = "true";  # /etc/nixos/nixos-config/nixos/modules/networking/tailscale.nix
               };
             };
