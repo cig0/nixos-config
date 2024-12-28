@@ -23,6 +23,7 @@ let
         nixfmt-classic
         nixpkgs-fmt
         nixpkgs-review
+        nvd
         rippkgs
         vulnix
 
