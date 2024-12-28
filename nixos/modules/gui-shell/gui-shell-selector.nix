@@ -8,9 +8,6 @@
   };
 
   imports = [
-    # Always import base modules
-    ./xdg-desktop-portal.nix
-
     # Import all GUI shell-specific modules - they'll activate themselves based on the configuration
     # KDE Plasma Desktop Environment
       ./kde-plasma.nix
