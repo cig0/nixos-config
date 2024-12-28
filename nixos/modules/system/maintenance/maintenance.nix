@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ./modules/nh.nix  # Disabled.
-    ./modules/nix-settings.nix  # Enabled.
-    ./modules/system-auto_upgrade.nix  # Enabled.
+    ./nh.nix  # Disabled.
+    ./nix-settings.nix  # Enabled.
+    ./system-auto_upgrade.nix  # Enabled.
   ];
 }
 

@@ -3,6 +3,18 @@
 let
   hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
 
+  # TODO: Investigate while I can't dynamically assign to the GITHUB_USERNAME variable the content of primaryUser.
+  # primaryUser = builtins.getEnv "USER";
+  # primaryUser = builtins.head (builtins.attrNames (lib.filterAttrs (n: v: v.isNormalUser or false) config.users.users));
+  # Debug statement to verify primaryUser
+  # _ = builtins.trace "Primary user: ${primaryUser}" primaryUser;
+
+  githubVars = {
+    GITHUB_TOKEN = "";  # TODO: Implement SOPS.
+    # GITHUB_USERNAME = primaryUser;
+    GITHUB_USERNAME = "cig0";
+  };
+
   commonEnvSessionVars = {
     EGL_PLATFORM = "wayland";
     EGL_LOG_LEVEL = "fatal";
@@ -11,11 +23,10 @@ let
     MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
 
-    FZF_DEFAULT_OPTS = "--height 40% --layout=reverse --border"; # Fuzzy finder.
+    FZF_DEFAULT_OPTS = "--height 40% --layout=reverse --border";  # Fuzzy finder.
     GDK_DPI_SCALE = "1.13"; # Flatpak applications display scaling.
-    GITHUB_TOKEN=""; # I need to find a way to dynamically feed this variable for when GitHub complains of too many calls to its API.
-    LD_BIND_NOW = "1"; # Linker.
-    PAGER = "${pkgs.less}/bin/less"; # CLI pager.
+    LD_BIND_NOW = "1";  # Linker.
+    PAGER = "${pkgs.less}/bin/less";  # CLI pager.
 
     # https://specifications.freedesktop.org/basedir-spec/latest/
     # Publication Date: 08th May 2021, Version: Version 0.8
@@ -38,19 +49,23 @@ let
   };
 
   intelEnvSessionVars = {
-    LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver
+    LIBVA_DRIVER_NAME = "iHD";  # Force intel-media-driver.
     EGL_DRIVER = "mesa";
   };
-in
-{
-  # TODO: `nil` language server nags me to "Flatten AttrSet RHS into outer level bindings.". Learn what this means.
+
+in {
+  imports = [
+    ./i18n.nix  # Internationalisation
+    ./keyboard.nix  # Configure console keymap
+  ];
+
   environment = {
     homeBinInPath = true;
     localBinInPath = true;
 
     sessionVariables =
-      if hostSelector.isIntelGPUHost then commonEnvSessionVars // intelEnvSessionVars
+      (if hostSelector.isIntelGPUHost then commonEnvSessionVars // intelEnvSessionVars
       else if hostSelector.isNvidiaGPUHost then commonEnvSessionVars
-      else {};
+      else {}) // githubVars;
   };
 }
