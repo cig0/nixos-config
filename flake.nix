@@ -140,7 +140,7 @@
           ./nixos/modules/system/hwaccel.nix
           ./nixos/modules/system/kernel.nix
           ./nixos/modules/system/keyd.nix
-          ./nixos/modules/system/maintenance.nix
+          ./nixos/modules/system/maintenance/maintenance.nix
           # ./nixos/modules/system/osquery.nix  # TODO: needs implementation.
           # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
           ./nixos/modules/system/time.nix
