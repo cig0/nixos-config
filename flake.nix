@@ -7,7 +7,7 @@
 #
 # My personal NixOS configuration flake ¯\_(ツ)_/¯
 #
-# Check at the end of the file for an abridged file README.
+# Check at the end of the file for an abridged READ ME! and CHANGELOG.
 #---------------------------------------------------------------------
 
 
@@ -133,14 +133,14 @@
           ./nixos/modules/security/sudo.nix
 
         # System
+          ./nixos/modules/system/environment/environment.nix
+          ./nixos/modules/system/maintenance/maintenance.nix
           ./nixos/modules/system/cups.nix
           ./nixos/modules/system/current-system-packages.nix
-          ./nixos/modules/system/environment.nix
           ./nixos/modules/system/fwupd.nix
           ./nixos/modules/system/hwaccel.nix
           ./nixos/modules/system/kernel.nix
           ./nixos/modules/system/keyd.nix
-          ./nixos/modules/system/maintenance/maintenance.nix
           # ./nixos/modules/system/osquery.nix  # TODO: needs implementation.
           # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
           ./nixos/modules/system/time.nix
