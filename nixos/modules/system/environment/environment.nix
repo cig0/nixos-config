@@ -55,8 +55,8 @@ let
 
 in {
   imports = [
-    ./i18n.nix  # Internationalisation
     ./console-keymap.nix  # Configure console keymap
+    ./i18n.nix  # Internationalisation
   ];
 
   environment = {
