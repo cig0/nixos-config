@@ -6,9 +6,11 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    [
+      ./hardware-configuration.nix  # Include the results of the hardware scan.
+      ./modules/time.nix  # Time settings
     ];
+
 
   # Complementary options for hardware-configuration.nix. Hint: run nixos-generate-config --dir ~/tmp to create a fresh set of configuration.nix and hardware-configuration.nix.
   # Bootloader
