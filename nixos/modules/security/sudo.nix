@@ -1,5 +1,12 @@
-{ ... }:
-
 {
-  security.sudo.extraConfig = "Defaults timestamp_timeout=1440"; # Don't timeout for the next 24hs
+  security.sudo = {
+    enable = true;
+    execWheelOnly = true;
+  };
 }
+
+
+# READ ME!
+# ========
+
+# Hardening tips: https://xeiaso.net/blog/paranoid-nixos-2021-07-18/
