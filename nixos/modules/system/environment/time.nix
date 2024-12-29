@@ -5,7 +5,7 @@
 { config, lib, ... }:
 
 let
-  hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
+  hostSelector = import ../../../lib/host-selector.nix { inherit config lib; };
 
   nixosNTPpool = [
     "0.nixos.pool.ntp.org"
