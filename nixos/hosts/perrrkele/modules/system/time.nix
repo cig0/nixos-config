@@ -1,7 +1,7 @@
 { ... }:
 
 let
-  ntpPools =  import ../../../modules/system/ntp.nix;
+  ntpPools =  import ../../../../modules/system/ntp.nix;
 
 in {
   networking.timeServers = ntpPools.nixosPool;

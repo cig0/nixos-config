@@ -7,9 +7,9 @@
 {
   imports =
     [
+      ./modules/security/sudo.nix  # Sudo host settings.
+      ./modules/system/time.nix  # Timezone settings.
       ./hardware-configuration.nix  # Include the results of the hardware scan.
-      ./modules/system/time.nix  # Timezone settings
-      ./modules/security/sudo.nix
     ];
 
 
