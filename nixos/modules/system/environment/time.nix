@@ -1,4 +1,6 @@
-# TODO dynamically configure NTP pool depending on timezonne/region
+# TODO:
+# - Dynamically configure NTP pool depending on timezonne/region
+# - Move the 'let' block to a separate file (💡: rename this file to ntp.nix or ntp-pools.nix), and the in block to a separate file in the corrsponding ./nixos/hosts/$YOUR_HOST/modules directory.
 
 { config, lib, ... }:
 
@@ -32,7 +34,7 @@ in
 
   time.timeZone =
     if hostSelector.isPerrrkele then
-      "Europe/Stockholm"
+      "Europe/Warsaw"
 
     else if hostSelector.isSatama then
       "America/Argentina/Buenos_Aires"
