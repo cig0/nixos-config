@@ -8,7 +8,8 @@
   imports =
     [
       ./hardware-configuration.nix  # Include the results of the hardware scan.
-      ./modules/time.nix  # Time settings
+      ./modules/system/time.nix  # Timezone settings
+      ./modules/security/sudo.nix
     ];
 
 
@@ -126,13 +127,6 @@
       enable = true; # enables support for Bluetooth
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
     };
-  };
-
-
-  # Hardening - https://xeiaso.net/blog/paranoid-nixos-2021-07-18/
-  security.sudo = {
-    execWheelOnly = true;
-    enable = true;
   };
 
 
