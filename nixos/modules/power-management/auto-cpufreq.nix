@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   programs.auto-cpufreq = {
     enable = true;
@@ -14,5 +12,6 @@
       };
     };
   };
-  services.power-profiles-daemon.enable = false; # Needs to be disable as it interferes with auto-cpufreq.
+
+  services.power-profiles-daemon.enable = false;  # Used by GUI shells, like KDE. Needs to be disable as it interferes with auto-cpufreq.
 }
