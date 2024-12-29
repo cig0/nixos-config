@@ -3,7 +3,7 @@
 {
   environment.sessionVariables.LIBVIRT_DEFAULT_URI = [ "qemu:///system" ];
   programs.virt-manager.enable = true;
-  services.spice-vdagentd.enable = true;
+  services.spice-vdagentd.enable = false;
 
   virtualisation = {
     libvirtd = {

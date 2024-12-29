@@ -1,7 +1,3 @@
-# Services:
-#   - KDE Connect: 1714 to 1764 TCP/UDP
-#   - Syncthing: 22000/TCP 21027,22000/UDP
-
 { ... }:
 
 {
@@ -22,9 +18,20 @@
   };
 
   services = {
-    # KDE Connect: ../applications/kde/kdeconnect.nix
-    # Syncthing: ../applications/syncthing.nix
-    # OpenSSH server: ../security/openssh.nix
-    # Tailscale: ../networking/tailscale.nix
+    # KDE Connect:
+      # Ports: 1714 to 1764 TCP/UDP
+      # Module: ../applications/kde/kdeconnect.nix
+
+    # OpenSSH server:
+      # Ports: 22, 22222 (for Tailscale)
+      # Module: ../security/openssh.nix
+
+    # Syncthing:
+      # Ports: 22000/TCP 21027,22000/UDP
+      # Module: ../applications/syncthing.nix
+
+    # Tailscale:
+      # Ports:
+      # Module: ../networking/tailscale.nix
   };
 }

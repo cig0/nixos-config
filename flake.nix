@@ -135,7 +135,6 @@
         # System
           ./nixos/modules/system/environment/environment.nix
           ./nixos/modules/system/maintenance/maintenance.nix
-          ./nixos/modules/system/environment/time.nix
           ./nixos/modules/system/cups.nix
           ./nixos/modules/system/current-system-packages.nix
           ./nixos/modules/system/fwupd.nix
