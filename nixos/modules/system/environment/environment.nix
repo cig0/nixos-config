@@ -68,4 +68,9 @@ in {
       else if hostSelector.isNvidiaGPUHost then commonEnvSessionVars
       else {}) // githubVars;
   };
+
+  # Export variables for other modules
+  _module.args.commonEnvSessionVars = {
+    xdgConfigHome = "${commonEnvSessionVars.XDG_CONFIG_HOME}";
+  };
 }
