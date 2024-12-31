@@ -9,6 +9,4 @@ let
     tf = "terraform";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

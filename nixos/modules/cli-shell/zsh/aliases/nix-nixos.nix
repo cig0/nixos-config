@@ -35,6 +35,4 @@ let
       nhossud = "nh os switch --update --dry /etc/nixos/nixos-config";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

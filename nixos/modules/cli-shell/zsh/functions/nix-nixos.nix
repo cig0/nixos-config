@@ -3,7 +3,6 @@
 { ... }:
 
 let
-  # Description
   functions = ''
     # Hydra
       hc() {  # 'hydra-check' with the `nixos-24.11` channel
@@ -18,7 +17,7 @@ let
         hydra-check --arch x86_64-linux --channel unstable "$1"
       }
 
-    # nix-shell
+    # Nix shell
       # `nix shell` packages from nixpkgs
       nixsh() {  # `nix shell` packages from nixpkgs
         local p
@@ -35,29 +34,23 @@ let
         done
       }
 
-      # Search (options and packages)
-        manix() {
-          case "$#" in
-            0)
-              # No arguments: run the fuzzy-finder-based command
-              manix "" | \
-                grep '^# ' | \
-                sed 's/^# \(.*\) (.*)/\1/;s/ (.*//;s/^# //' | \
-                fzf --preview="command manix '{}'" | \
-                xargs manix
-              # No arguments: run the fuzzy-finder-based command
-              # command manix "" | \
-              #   grep '^# ' | \
-              #   sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | \
-              #   fzf --preview="command manix '{}'" | \
-              #   xargs command manix
-              ;;
-            *)
-              # With arguments: pass them to the manix binary
-              command manix "$@"
-              ;;
-          esac
-        }
+    # Search (options and packages)
+      manix() {
+        case "$#" in
+          0)
+            # No arguments: run the fuzzy-finder-based command
+            manix "" | \
+              grep '^# ' | \
+              sed 's/^# \(.*\) (.*)/\1/;s/ (.*//;s/^# //' | \
+              fzf --preview="command manix '{}'" | \
+              xargs manix
+            ;;
+          *)
+            # With arguments: pass them to the manix binary
+            command manix "$@"
+            ;;
+        esac
+      }
 
     # System
       nixcv() {  # Outputs the Nix channel version.
@@ -66,6 +59,4 @@ let
       }
   '';
 
-in {
-  functions = functions;
-}
+in { functions = functions; }

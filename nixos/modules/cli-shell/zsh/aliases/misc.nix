@@ -23,6 +23,4 @@ let
     v = "nvim";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

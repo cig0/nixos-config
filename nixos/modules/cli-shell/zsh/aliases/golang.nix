@@ -8,6 +8,4 @@ let
     go_clean_vcs_cache = "rm -rf $GOPATH/pkg/mod/cache/vcs";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

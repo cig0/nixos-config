@@ -11,6 +11,4 @@ let
     aGs = "aichat -m gemini --session";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

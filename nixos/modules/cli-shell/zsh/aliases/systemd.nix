@@ -7,6 +7,4 @@ let
     journalctl_boot_err = "journalctl -xep err -b";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

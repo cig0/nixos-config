@@ -8,6 +8,4 @@ let
     t = "top";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

@@ -54,6 +54,4 @@ let
       ggssr = "ggshield --no-check-for-updates secret scan repo";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }
