@@ -9,6 +9,4 @@ let
     fls = "flatpak search";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

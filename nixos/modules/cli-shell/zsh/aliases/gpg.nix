@@ -11,6 +11,4 @@ let
       gpgtare = "gpgtar --encrypt --symmetric --gpg-args --cipher-algo aes256 --output"; # input_folder/output_file input_folder.
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

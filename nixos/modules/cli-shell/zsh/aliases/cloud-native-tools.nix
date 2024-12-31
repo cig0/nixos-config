@@ -23,6 +23,4 @@ let
       ptui = "podman-tui";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

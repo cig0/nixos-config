@@ -14,6 +14,4 @@ let
     tkoira = "ssh koira -t 'tmux attach-session -t'";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

@@ -11,6 +11,4 @@ let
     bnp = "bat --paging=always --style=numbers --theme='Dracula' --wrap=auto"; # Numbers + paging=always
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

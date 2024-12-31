@@ -7,6 +7,4 @@ let
   aliases = {
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

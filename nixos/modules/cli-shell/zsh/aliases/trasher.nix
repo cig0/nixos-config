@@ -12,6 +12,4 @@ let
     tp = "trasher --exclude /var path-of";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

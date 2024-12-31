@@ -7,6 +7,4 @@ let
   functions = ''
   '';
 
-in {
-  functions = functions;
-}
+in { functions = functions; }
