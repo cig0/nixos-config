@@ -1,9 +1,11 @@
-{ pkgs, ... }:
+{ commonEnvSessionVars, pkgs, ... }:
 
 let
   # Optionaly, you can import individual aliases and functions files
     allAliases = (import ./aliases.nix {}).allAliases;
-    allFunctions = (import ./functions.nix {}).allFunctions;
+    allFunctions = (import ./functions.nix {
+      inherit commonEnvSessionVars;
+    }).allFunctions;
   zshConfig = import ./zshConfig.nix { inherit pkgs; };
 
 in {
