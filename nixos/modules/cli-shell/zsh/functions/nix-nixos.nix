@@ -6,24 +6,21 @@ let
   # Description
   functions = ''
     # Hydra
-    hc() {
-      # hydra-check example: `hydra-check --arch x86_64-linux --channel unstable starship`
-      hydra-check --arch x86_64-linux --channel 24.11 "$1"
-    }
+      hc() {  # 'hydra-check' with the `nixos-24.11` channel
+        hydra-check --arch x86_64-linux --channel 24.11 "$1"
+      }
 
-    hcs() {
-      # hydra-check example: `hydra-check --arch x86_64-linux --channel unstable starship`
-      hydra-check --arch x86_64-linux --channel staging "$1"
-    }
+      hcs() {  # `hydra-check` with the `staging` channel
+        hydra-check --arch x86_64-linux --channel staging "$1"
+      }
 
-    hcu() {
-      # hydra-check example: `hydra-check --arch x86_64-linux --channel unstable starship`
-      hydra-check --arch x86_64-linux --channel unstable "$1"
-    }
+      hcu() {  # `hydra-check` with the `unstable` channel
+        hydra-check --arch x86_64-linux --channel unstable "$1"
+      }
 
-    # Shell
+    # nix-shell
       # `nix shell` packages from nixpkgs
-      nixsh() {
+      nixsh() {  # `nix shell` packages from nixpkgs
         local p
         for p in "$@"; do
           NIXPKGS_ALLOW_UNFREE=1 nix shell --impure nixpkgs#$p
@@ -31,7 +28,7 @@ let
       }
 
       # `nix shell` packages from nixpkgs/nixos-unstable
-      nixshu() {
+      nixshu() {  # `nix shell` packages from nixpkgs/nixos-unstable
         local p
         for p in "$@"; do
           NIXPKGS_ALLOW_UNFREE=1 nix shell --impure nixpkgs/nixos-unstable#$p
@@ -39,7 +36,7 @@ let
       }
 
     # System
-      nixcv() {
+      nixcv() {  # Outputs the Nix channel version.
         local channel_version="$(nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version')"
         echo -e "\n$bold_greenNix channel version: $bold_white$channel_version$reset"
       }
