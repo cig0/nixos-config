@@ -104,7 +104,7 @@ let
         ncdu
     ]);
 
-  appsGUI =
+  appsGui =
     with pkgs; [  # Meant to run in a [role]client device, as opposite on a [role]server device.
       # AI
         (lmstudio.override {
@@ -147,7 +147,7 @@ let
         wezterm
     ]);
 
-  appsGUIshell = {
+  appsGuiShell = {
     COSMIC = with pkgs; [
     ];
     Hyprland = with pkgs; [
@@ -174,7 +174,7 @@ let
     ];
   };
 
-  appsNonGUI = {
+  appsNonGui = {
     ai = with unstablePkgs; [
       aichat
       oterm
@@ -325,14 +325,14 @@ in
 {
   lists = {
     appsBaseline = appsBaseline;
-    appsGUI = appsGUI;
-    appsNonGUI = builtins.concatLists (builtins.attrValues appsNonGUI);  # Flatten entire set; useful when installing everything-and-the-kitchen-sink.
+    appsGui = appsGui;
+    appsNonGui = builtins.concatLists (builtins.attrValues appsNonGui);  # Flatten entire set; useful when installing everything-and-the-kitchen-sink.
     appsNvidia = appsNvidia;
   };
 
   sets = {
-    appsGUIshell = appsGUIshell;
-    appsNonGUI = appsNonGUI;  # Useful when installing only specific concerns.
+    appsGuiShell = appsGuiShell;
+    appsNonGui = appsNonGui;  # Useful when installing only specific concerns.
   };
 }
 
