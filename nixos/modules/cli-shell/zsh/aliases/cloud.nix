@@ -12,6 +12,4 @@ let
       aws-central-poc = "export AWS_PROFILE=481635650710_AWS-rw-All";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

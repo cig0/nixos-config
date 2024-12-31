@@ -24,6 +24,4 @@ let
       W = "cd ~/w";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

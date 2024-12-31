@@ -10,6 +10,4 @@ let
     dt = "difft";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

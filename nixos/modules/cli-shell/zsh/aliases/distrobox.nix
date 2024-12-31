@@ -12,6 +12,4 @@ let
     dbr = "db run";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

@@ -13,6 +13,4 @@ let
     tfien = "trans fi:en";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }
