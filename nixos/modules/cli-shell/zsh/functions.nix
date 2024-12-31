@@ -1,6 +1,6 @@
 # Import all function modules found in the functions directory.
 
-{ ... }:
+{ commonEnvSessionVars, ... }:
 
 let
   ansiColors = import ./../ansi-colors.nix;
@@ -20,7 +20,7 @@ let
       validFiles = builtins.filter hasValidHeader fullPaths;
       contents = map (file:
         let
-          imported = import file { inherit ansiColors; };
+          imported = import file { inherit ansiColors commonEnvSessionVars; };
         in
           if builtins.hasAttr "functions" imported
           then imported.functions
