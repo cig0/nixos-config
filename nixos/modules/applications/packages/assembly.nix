@@ -12,25 +12,25 @@ let
   # Function to create package lists based on host roles.
   rolePackages = role:
     let
-      appsGUIshell =  # Dynamically add packages based on the enabled GUI shell.
-        lib.optionals (config.services.desktopManager.cosmic.enable or false) p.sets.appsGUIshell.COSMIC ++
-        lib.optionals (config.services.desktopManager.hyprland.enable or false) p.sets.appsGUIshell.Hyprland ++
-        lib.optionals (config.services.desktopManager.plasma6.enable or false) p.sets.appsGUIshell.KDE ++
-        lib.optionals (config.services.desktopManager.xfce.enable or false) p.sets.appsGUIshell.XFCE
+      appsGuiShell =  # Dynamically add packages based on the enabled GUI shell.
+        lib.optionals (config.services.desktopManager.cosmic.enable or false) p.sets.appsGuiShell.COSMIC ++
+        lib.optionals (config.services.desktopManager.hyprland.enable or false) p.sets.appsGuiShell.Hyprland ++
+        lib.optionals (config.services.desktopManager.plasma6.enable or false) p.sets.appsGuiShell.KDE ++
+        lib.optionals (config.services.desktopManager.xfce.enable or false) p.sets.appsGuiShell.XFCE
       ;
     in
       (lib.optionals (role == "Laptop" || role == "Desktop") (
         p.lists.appsBaseline ++
-        p.lists.appsGUI ++
-        p.lists.appsNonGUI ++
-        appsGUIshell
+        p.lists.appsGui ++
+        p.lists.appsNonGui ++
+        appsGuiShell
       )) ++
      (lib.optionals (role == "HomeLab") (
         p.lists.appsBaseline ++
-        p.sets.appsNonGUI.backup ++
-        p.sets.appsNonGUI.cloudNativeTools ++
-        p.sets.appsNonGUI.security ++
-        p.sets.appsNonGUI.vcs
+        p.sets.appsNonGui.backup ++
+        p.sets.appsNonGui.cloudNativeTools ++
+        p.sets.appsNonGui.security ++
+        p.sets.appsNonGui.vcs
         [
           pkgs.pinentry-curses
         ]
