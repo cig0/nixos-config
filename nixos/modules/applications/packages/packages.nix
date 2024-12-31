@@ -14,6 +14,7 @@ let
         devpod
         fh # fh, the official FlakeHub CLI :: https://github.com/DeterminateSystems/fh
         hydra-check
+        manix
         nh
         nickel
         niv
@@ -123,7 +124,6 @@ let
         # cinelerra
         # davinci-resolve
         gimp-with-plugins
-        glaxnimate # Kdenlive dependency
         lightworks
         # olive-editor
 
@@ -142,6 +142,9 @@ let
       # Security
         # Web
           burpsuite
+
+      # Utilities
+        wezterm
     ]);
 
   appsGUIshell = {
@@ -151,6 +154,8 @@ let
     ];
     KDE = with pkgs; [
         aha  # Required for "About this System" in System Settings.
+        glaxnimate  # Kdenlive dependency
+
         kdePackages.alpaka
         kdePackages.discover
         kdePackages.kdenlive
