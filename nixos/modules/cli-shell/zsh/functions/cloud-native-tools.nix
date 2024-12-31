@@ -38,6 +38,4 @@ let
     }
   '';
 
-in {
-  functions = functions;
-}
+in { functions = functions; }

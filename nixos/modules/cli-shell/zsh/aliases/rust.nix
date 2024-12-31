@@ -8,6 +8,4 @@ let
     cargoApps = "$EDITOR ~/.config/Cargo.apps";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }

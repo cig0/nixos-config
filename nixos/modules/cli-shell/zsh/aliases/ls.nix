@@ -16,6 +16,4 @@ let
     lsrt = "ls -rt";
   };
 
-in {
-  aliases = aliases;
-}
+in { aliases = aliases; }
