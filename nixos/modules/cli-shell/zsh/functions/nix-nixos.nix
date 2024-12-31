@@ -35,6 +35,30 @@ let
         done
       }
 
+      # Search (options and packages)
+        manix() {
+          case "$#" in
+            0)
+              # No arguments: run the fuzzy-finder-based command
+              manix "" | \
+                grep '^# ' | \
+                sed 's/^# \(.*\) (.*)/\1/;s/ (.*//;s/^# //' | \
+                fzf --preview="command manix '{}'" | \
+                xargs manix
+              # No arguments: run the fuzzy-finder-based command
+              # command manix "" | \
+              #   grep '^# ' | \
+              #   sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | \
+              #   fzf --preview="command manix '{}'" | \
+              #   xargs command manix
+              ;;
+            *)
+              # With arguments: pass them to the manix binary
+              command manix "$@"
+              ;;
+          esac
+        }
+
     # System
       nixcv() {  # Outputs the Nix channel version.
         local channel_version="$(nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version')"

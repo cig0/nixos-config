@@ -16,8 +16,6 @@ let
       nhcuk5 = "nh clean user --keep 5";
 
     # Search (options and packages)
-      manix = "manix \"\" | grep '^# ' | sed 's/^# \\(.*\\) (.*/\\1/;s/ (.*//;s/^# //' | fzf --preview=\"manix '{}'\" | xargs manix";
-
       nixs = "nix search nixpkgs";
       nixsu = "nix search nixpkgs/nixos-unstable#";
       nhs = "nh search --channel nixos-24.11";
