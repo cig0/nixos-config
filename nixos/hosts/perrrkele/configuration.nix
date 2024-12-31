@@ -25,10 +25,10 @@
       efi.canTouchEfiVariables = true;
 
       # Systemd-boot bootloader.
-      # systemd-boot.configurationLimit = 5;
       systemd-boot = {
         enable = true;
         consoleMode = "max";
+        # configurationLimit = 10;
       };
 
       # GRUB bootloader
@@ -70,9 +70,6 @@
 
   fileSystems = { # /etc/fstab mount options.
     "/" = {
-      # TODO: temporarily disabled due to kernel boot messages (in testing):
-      # Dec 08 21:32:53 perrrkele kernel: EXT4-fs: Warning: mounting with data=journal disables delayed allocation, dioread_nolock, O_DIRECT and fast_commit support!
-      # Dec 08 21:32:53 perrrkele kernel: EXT4-fs (dm-0): mounting with "discard" option, but the device does not support discard
       # options = [ "commit=15" "data=journal" "discard" "errors=remount-ro" "noatime"  ];
       options = [ "commit=15" "errors=remount-ro" "noatime" ];
     };
