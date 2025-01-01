@@ -268,6 +268,7 @@ let
         cargo-binstall
         cargo-cache
         chit
+        rust-bin.stable.latest.default  # rust-overlay
         rustscan
 
       # Everything else...
