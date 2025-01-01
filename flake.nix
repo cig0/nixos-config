@@ -159,7 +159,7 @@
         coreModules.system ++
         coreModules.virtualization;
 
-      userModules = {  # Modules specific to the user, e.g. (GUI) apps and GUI shells.
+      userModules = {  # Modules specific to the user, e.g. apps and GUI shells.
         applications = [
           ./home-manager/home.nix home-manager.nixosModules.home-manager
           ./nixos/modules/applications/chromium.nix
@@ -192,8 +192,6 @@
         userModules.xdgDesktopPortal;
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
-    specialArgs = { inherit inputs system unstablePkgs; };
-    system = "x86_64-linux";
     unstablePkgs = import "${nixpkgs-unstable}" {  # Leverage NixOS mighty by later allowing to mix packages from both the stable and unstable release channels.
       inherit system;
       config = {
@@ -201,10 +199,13 @@
       };
     };
 
+    specialArgs = { inherit inputs system unstablePkgs; };
+    system = "x86_64-linux";
+
   in {
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
+      inherit specialArgs;
       inherit system;
-      specialArgs = specialArgs;
       modules =
         coreModulesAll ++
         userModulesAll ++
