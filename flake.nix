@@ -3,7 +3,7 @@
 #---------------------------------------------------------------------
 # Martín Cigorraga
 # https://github.com/cig0/nixos-config-public
-# May 1st, 2024
+# Firs released on May 1st, 2024
 #
 # My personal NixOS configuration flake ¯\_(ツ)_/¯
 #
@@ -213,13 +213,13 @@
           nix-ld.nixosModules.nix-ld
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           ./nixos/hosts/perrrkele/configuration.nix
-
           {
             nixpkgs.overlays = [
               nixos-option
               rust-overlay.overlays.default
             ];
-
+          }
+          {
             # Host configutation
             # ===== DISPLAY MANAGERS =====
             # Only one at a time can be active.
@@ -301,6 +301,7 @@
 
   # Changelog
   # =========
+  # 2024-12-31  Lots of refactoring and improvements. Check the commit history for details.
   # 2024-12-25  Finished splitting the Zsh shell aliases and functions into modules 🎉
   # 2024-12-21  KDE Plasma: move activation logic to the module file.
   # 2024-12-21  Syncthing: move activation logic to the module file.
