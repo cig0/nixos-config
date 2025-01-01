@@ -208,9 +208,15 @@
         coreModulesAll ++
         userModulesAll ++
         [
+          ./nixos/hosts/perrrkele/configuration.nix
           nix-ld.nixosModules.nix-ld
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
-          ./nixos/hosts/perrrkele/configuration.nix
+          {
+            hardware = {  #  Hardware-specific optimizations.
+              tuxedo-drivers.enable = true;
+              tuxedo-rs.tailor-gui.enable = true;
+            };
+          }
           {
             nixpkgs.overlays = [
               nixos-option
@@ -231,6 +237,7 @@
               sddm.enable = true;  # SDDM / KDE Display Manager
             };
 
+            # TODO: consolidate options in a single place, then import it from the modules that need it
             # mySystem Options, and where they are defined.
             mySystem = {
               guiShellEnv = "plasma6";  # /etc/nixos/nixos-config/nixos/modules/gui-shell/gui-shell-selector.nix
