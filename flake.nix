@@ -1,5 +1,3 @@
-# TODO: migrate 'nixosConfigurations' to specialisations.
-
 #---------------------------------------------------------------------
 # Martín Cigorraga
 # https://github.com/cig0/nixos-config-public
