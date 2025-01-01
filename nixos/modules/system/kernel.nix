@@ -61,15 +61,13 @@ let
   ];
 in
 {
-  hardware.tuxedo-drivers.enable = false; # Tuxedo kernel parameters
-
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ]; # Override parameter in hardware-configuration.nix
-    kernelModules = [ "kvm-intel" "i915" ]; # Override parameter in hardware-configuration.nix
+    kernelModules = [ "kvm-intel" "i915" ];  # Override parameter in hardware-configuration.nix
     kernelPackages =
       if hostSelector.isRoleServer then kernelPackages_isRoleServer
       else if hostSelector.isTuxedoInfinityBook then kernelPackages_isTuxedoInfinityBook
-      else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
+      else kernelPackages_fallback;  # If no specific kernel package is selected, default to NixOS latest kernel.
 
     kernel.sysctl =
       # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
