@@ -18,30 +18,30 @@
     nixpkgs.url = "nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
-    auto-cpufreq = { # Energy efficiency: https://github.com/AdnanHodzic/auto-cpufreq
+    auto-cpufreq = {  # Energy efficiency: https://github.com/AdnanHodzic/auto-cpufreq
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
     flake-compat.url = "github:edolstra/flake-compat";  # Make nixos-option work with flakes.
 
-    home-manager = { # User-specific settings and packages: https://github.com/nix-community/home-manager
+    home-manager = {  # User-specific settings and packages: https://github.com/nix-community/home-manager
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:nix-community/home-manager?ref=release-24.11";
     };
 
     lanzaboote = { # Enable Secure Boot: https://github.com/nix-community/lanzaboote
-      inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of your system closure.
+      inputs.nixpkgs.follows = "nixpkgs";  # Optional but recommended to limit the size of your system closure.
       url = "github:nix-community/lanzaboote/v0.4.1";
     };
 
-    nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz"; # Declarative Flatpak management
+    nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz";  # Declarative Flatpak management
 
     nix-index.url = "github:nix-community/nix-index";
 
     # nix-index-database = {
     #   inputs.nixpkgs.follows = "nixpkgs";
-    #   url = "github:nix-community/nix-index-database"; # TODO: learn how to implement it properly.
+    #   url = "github:nix-community/nix-index-database";  # TODO: learn how to implement it properly.
     # };
 
     nix-ld = {  # https://github.com/nix-community/nix-ld
@@ -54,14 +54,14 @@
       url = "github:lilyinstarlight/nixos-cosmic";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # Hardware-specific optimizations
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";  # Hardware-specific optimizations
 
     nixvim = { # The intended way to configure Neovim.
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixvim/nixos-24.11";
     };
 
-    rust-overlay.url = "github:oxalica/rust-overlay"; # A happy crabby dancing sideways
+    rust-overlay.url = "github:oxalica/rust-overlay";
 
     # sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
   };
@@ -118,12 +118,6 @@
           ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
           ./nixos/modules/power-management/power-management.nix
 
-        # Rust
-          ({ pkgs, ... }: {
-            nixpkgs.overlays = [ rust-overlay.overlays.default ];
-            environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
-          })
-
         # Security
           ./nixos/modules/security/firewall.nix
           ./nixos/modules/security/gnupg.nix
@@ -178,18 +172,19 @@
       ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
+    specialArgs = { inherit inputs system unstablePkgs; };
+    system = "x86_64-linux";
     unstablePkgs = import "${nixpkgs-unstable}" {  # Leverage NixOS mighty by later allowing to mix packages from both the stable and unstable release channels.
       inherit system;
       config = {
         allowUnfree = true;
       };
     };
-    system = "x86_64-linux";
 
   in {
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
       inherit system;
-      specialArgs = { inherit inputs system unstablePkgs; };
+      specialArgs = specialArgs;
       modules =
         coreModules ++
         userModules ++
@@ -199,7 +194,10 @@
           ./nixos/hosts/perrrkele/configuration.nix
 
           {
-            nixpkgs.overlays = [ nixos-option ];
+            nixpkgs.overlays = [
+              nixos-option
+              rust-overlay.overlays.default
+            ];
 
             # Host configutation
             # ===== DISPLAY MANAGERS =====
