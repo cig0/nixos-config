@@ -10,7 +10,6 @@
 # Check at the end of the file for an abridged READ ME! and CHANGELOG.
 #---------------------------------------------------------------------
 
-
 {
   description = "cig0's NixOS flake";
 
@@ -84,49 +83,49 @@
 
   let
     # Modules definitions and handling.
-      coreModules = [ # Modules shared by all hosts.
-        # Assembly
-          ./nixos/modules/applications/packages/assembly.nix
-
-        # CLI Shell
+      coreModules = {  # Modules shared by all hosts.
+        cliShell = [
           ./nixos/modules/cli-shell/starship.nix
           ./nixos/modules/cli-shell/zsh/zsh.nix
-
-        # Data
+        ];
+        data = [
           ./nixos/modules/applications/syncthing.nix
-
-        # Networking
+        ];
+        networking = [
           ./nixos/modules/networking/dns.nix
           ./nixos/modules/networking/mtr.nix
           ./nixos/modules/networking/nftables.nix
           ./nixos/modules/networking/stevenblack.nix
           ./nixos/modules/networking/stevenblack-unblacklist.nix
           ./nixos/modules/networking/tailscale.nix
-
-        # NixOS
+        ];
+        nixos = [
           ./nixos/modules/applications/nix-ld.nix
-
-        # NixVim
+        ];
+        nixVim = [
           ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
-
-        # Observability
+        ];
+        observability = [
           # ./nixos/modules/observability/grafana-alloy.nix
           # ./nixos/modules/observability/netdata.nix
           ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
-
-        # Power management
+        ];
+        packages = [
+          ./nixos/modules/applications/packages/assembly.nix
+        ];
+        powerManagement = [
           ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
           ./nixos/modules/power-management/power-management.nix
-
-        # Security
+        ];
+        security = [
           ./nixos/modules/security/firewall.nix
           ./nixos/modules/security/gnupg.nix
           ./nixos/modules/security/lanzaboote.nix lanzaboote.nixosModules.lanzaboote
           ./nixos/modules/security/openssh.nix
           # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
           ./nixos/modules/security/sudo.nix
-
-        # System
+        ];
+        system = [
           ./nixos/modules/system/environment/environment.nix
           ./nixos/modules/system/maintenance/maintenance.nix
           ./nixos/modules/system/cups.nix
@@ -140,36 +139,57 @@
           ./nixos/modules/system/ucode.nix
           ./nixos/modules/system/users.nix
           ./nixos/modules/system/zram.nix
-
-        # Virtualization
+        ];
+        virtualization = [
           ./nixos/modules/virtualisation/containerization.nix
           ./nixos/modules/virtualisation/incus.nix
           ./nixos/modules/virtualisation/libvirt.nix
-      ];
+        ];
+      };
+      coreModulesAll =
+        coreModules.cliShell ++
+        coreModules.data ++
+        coreModules.networking ++
+        coreModules.nixos ++
+        coreModules.nixVim ++
+        coreModules.observability ++
+        coreModules.packages ++
+        coreModules.powerManagement ++
+        coreModules.security ++
+        coreModules.system ++
+        coreModules.virtualization;
 
-      userModules = [  # Modules specific to the user, e.g. (GUI) apps and GUI shells.
-        # Applications
+      userModules = {  # Modules specific to the user, e.g. (GUI) apps and GUI shells.
+        applications = [
           ./home-manager/home.nix home-manager.nixosModules.home-manager
           ./nixos/modules/applications/chromium.nix
           ./nixos/modules/applications/firefox.nix
           ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
-
-        # Display Managers
+        ];
+        displayManagers = [
           ./nixos/modules/gui-shell/ly.nix
           ./nixos/modules/gui-shell/sddm.nix
-
-        # GUI shells
-          # New unified GUI shells handling! Just set the GUI shell to use in the host definition, the modules will handle the rest.
-          # The valid values so far are "cosmic", "plasma6" or "none".
+        ];
+        guiShells = [
+          # New unified GUI shells handling!
+          # Set the GUI shell to use in the host definition and the module will handle the rest.
+          # The valid values so far are "cosmic","none" and "plasma6".
           ./nixos/modules/gui-shell/gui-shell-selector.nix
-
-        # System
+        ];
+        system = [
           ./nixos/modules/system/fonts.nix
           ./nixos/modules/system/speech-synthesis.nix
-
-        # XDG Desktop Portal
+        ];
+        xdgDesktopPortal = [
           ./nixos/modules/gui-shell/xdg-desktop-portal.nix
-      ];
+        ];
+      };
+      userModulesAll =
+        userModules.applications ++
+        userModules.displayManagers ++
+        userModules.guiShells ++
+        userModules.system ++
+        userModules.xdgDesktopPortal;
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
     specialArgs = { inherit inputs system unstablePkgs; };
@@ -186,8 +206,8 @@
       inherit system;
       specialArgs = specialArgs;
       modules =
-        coreModules ++
-        userModules ++
+        coreModulesAll ++
+        userModulesAll ++
         [
           nix-ld.nixosModules.nix-ld
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
