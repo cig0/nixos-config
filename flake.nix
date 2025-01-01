@@ -212,9 +212,9 @@
           nix-ld.nixosModules.nix-ld
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           {
-            hardware = {  #  Hardware-specific optimizations.
+            hardware = {  # TUXEDO hardware-specific optimizations.
               tuxedo-drivers.enable = true;
-              tuxedo-rs.tailor-gui.enable = true;
+              tuxedo-rs.enable = true;
             };
           }
           {
