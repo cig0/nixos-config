@@ -178,6 +178,9 @@
           ./nixos/modules/system/fonts.nix
           ./nixos/modules/system/speech-synthesis.nix
         ];
+        wayfire = [
+          ./nixos/modules/gui-shell/wayfire.nix
+        ];
         xdgDesktopPortal = [
           ./nixos/modules/gui-shell/xdg-desktop-portal.nix
         ];
@@ -187,6 +190,7 @@
         userModules.displayManagers ++
         userModules.guiShells ++
         userModules.system ++
+        userModules.wayfire ++
         userModules.xdgDesktopPortal;
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
