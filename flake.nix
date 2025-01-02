@@ -212,12 +212,6 @@
           nix-ld.nixosModules.nix-ld
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           {
-            hardware = {  # TUXEDO hardware-specific optimizations.
-              tuxedo-drivers.enable = true;
-              tuxedo-rs.enable = true;
-            };
-          }
-          {
             nixpkgs.overlays = [
               nixos-option
               rust-overlay.overlays.default
