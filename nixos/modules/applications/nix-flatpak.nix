@@ -73,6 +73,7 @@
       "fr.handbrake.ghb"
       "org.inkscape.Inkscape"
       "org.openshot.OpenShot"
+      "org.kde.optiimage"
       "com.rawtherapee.RawTherapee"
       "org.shotcut.Shotcut"
       "org.nickvision.tubeconverter"
