@@ -6,6 +6,7 @@
 {
   fonts = {
     enableDefaultPackages = true;
+    fontconfig.useEmbeddedBitmaps = true;  # Should ensure a clear and crisp text rendering.
     fontDir.enable = true;  # Helps Flatpak applications find system fonts.
     packages = with pkgs; [
       (nerdfonts.override {fonts = [
