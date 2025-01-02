@@ -13,10 +13,11 @@ let
   rolePackages = role:
     let
       appsGuiShell =  # Dynamically add packages based on the enabled GUI shell.
-        lib.optionals (config.services.desktopManager.cosmic.enable or false) p.sets.appsGuiShell.COSMIC ++
-        lib.optionals (config.services.desktopManager.hyprland.enable or false) p.sets.appsGuiShell.Hyprland ++
-        lib.optionals (config.services.desktopManager.plasma6.enable or false) p.sets.appsGuiShell.KDE ++
-        lib.optionals (config.services.desktopManager.xfce.enable or false) p.sets.appsGuiShell.XFCE
+        lib.optionals (config.services.desktopManager.cosmic.enable or false) p.sets.appsGuiShell.cosmic ++
+        lib.optionals (config.programs.hyprland.enable or false) p.sets.appsGuiShell.hyprland ++
+        lib.optionals (config.services.desktopManager.plasma6.enable or false) p.sets.appsGuiShell.kde ++
+        lib.optionals (config.programs.wayfire.enable or false) p.sets.appsGuiShell.wayfire ++
+        lib.optionals (config.services.desktopManager.xfce.enable or false) p.sets.appsGuiShell.xfce
       ;
     in
       (lib.optionals (role == "Laptop" || role == "Desktop") (

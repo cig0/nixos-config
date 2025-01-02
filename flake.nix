@@ -80,6 +80,10 @@
   ... }:
 
   let
+    # Function role: assemble the list of options from the imported modules.
+    # It's a cleaner approach (arguably) to manually concatenating the list of modules with ++.
+    composeModules = components: builtins.concatLists components;
+
     # Modules definitions and handling.
       coreModules = {  # Modules shared by all hosts.
         cliShell = [
@@ -144,18 +148,19 @@
           ./nixos/modules/virtualisation/libvirt.nix
         ];
       };
-      coreModulesAll =
-        coreModules.cliShell ++
-        coreModules.data ++
-        coreModules.networking ++
-        coreModules.nixos ++
-        coreModules.nixVim ++
-        coreModules.observability ++
-        coreModules.packages ++
-        coreModules.powerManagement ++
-        coreModules.security ++
-        coreModules.system ++
-        coreModules.virtualization;
+      coreModulesAll = composeModules [
+        coreModules.cliShell
+        coreModules.data
+        coreModules.networking
+        coreModules.nixos
+        coreModules.nixVim
+        coreModules.observability
+        coreModules.packages
+        coreModules.powerManagement
+        coreModules.security
+        coreModules.system
+        coreModules.virtualization
+      ];
 
       userModules = {  # Modules specific to the user, e.g. apps and GUI shells.
         applications = [
@@ -168,12 +173,28 @@
           ./nixos/modules/gui-shell/ly.nix
           ./nixos/modules/gui-shell/sddm.nix
         ];
-        guiShells = [
-          # New unified GUI shells handling!
-          # Set the GUI shell to use in the host definition and the module will handle the rest.
-          # The valid values so far are "cosmic","none" and "plasma6".
-          ./nixos/modules/gui-shell/gui-shell-selector.nix
-        ];
+        guiShells = {  # In place to avoid system breakage. Will be removed after refactoring the configuration.
+          selector = [
+            ./nixos/modules/gui-shell/gui-shell-selector.nix
+          ];
+          cosmic = [
+            ./nixos/modules/gui-shell/cosmic.nix
+          ];
+          hyprland = [
+            ./nixos/modules/gui-shell/hyprland.nix
+          ];
+          kde = [
+            ./nixos/modules/gui-shell/kde-plasma.nix
+            ./nixos/modules/applications/kde/kde-pim.nix
+            ./nixos/modules/applications/kde/kdeconnect.nix
+          ];
+          wayfire = [
+            ./nixos/modules/gui-shell/wayfire.nix
+          ];
+          xfce = [
+            # ./nixos/modules/gui-shell/xfce.nix
+          ];
+        };
         system = [
           ./nixos/modules/system/fonts.nix
           ./nixos/modules/system/speech-synthesis.nix
@@ -182,12 +203,12 @@
           ./nixos/modules/gui-shell/xdg-desktop-portal.nix
         ];
       };
-      userModulesAll =
-        userModules.applications ++
-        userModules.displayManagers ++
-        userModules.guiShells ++
-        userModules.system ++
-        userModules.xdgDesktopPortal;
+      userModulesShared = composeModules [
+        userModules.applications
+        userModules.displayManagers
+        userModules.system
+        userModules.xdgDesktopPortal
+      ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
     unstablePkgs = import "${nixpkgs-unstable}" {  # Leverage NixOS mighty by later allowing to mix packages from both the stable and unstable release channels.
@@ -206,7 +227,8 @@
       inherit system;
       modules =
         coreModulesAll ++
-        userModulesAll ++
+        userModulesShared ++
+        userModules.guiShells.selector ++
         [
           ./nixos/hosts/perrrkele/configuration.nix
           nix-ld.nixosModules.nix-ld

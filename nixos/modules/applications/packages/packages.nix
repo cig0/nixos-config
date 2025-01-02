@@ -148,14 +148,11 @@ let
     ]);
 
   appsGuiShell = {
-    COSMIC = with pkgs; [
+    cosmic = with pkgs; [
     ];
-    Hyprland = with pkgs; [
+    hyprland = with pkgs; [
     ];
-    KDE = with pkgs; [
-        aha  # Required for "About this System" in System Settings.
-        glaxnimate  # Kdenlive dependency
-
+    kde = with pkgs; [
         kdePackages.alpaka
         kdePackages.discover
         kdePackages.kdenlive
@@ -169,8 +166,14 @@ let
         kdePackages.yakuake
         krita
         krita-plugin-gmic
+
+        # Dependencies / helpers
+          aha  # Required for "About this System" in System Settings.
+          glaxnimate  # Kdenlive dependency
     ];
-    XFCE = with pkgs; [
+    wayfire = with pkgs; [
+    ];
+    xfce = with pkgs; [
     ];
   };
 
@@ -322,8 +325,8 @@ let
     (with unstablePkgs; [
       nvtop
     ]);
-in
-{
+
+in {
   lists = {
     appsBaseline = appsBaseline;
     appsGui = appsGui;
@@ -333,7 +336,7 @@ in
 
   sets = {
     appsGuiShell = appsGuiShell;
-    appsNonGui = appsNonGui;  # Useful when installing only specific concerns.
+    appsNonGui = appsNonGui;  # Useful when installing only specific sets.
   };
 }
 
