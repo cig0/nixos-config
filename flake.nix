@@ -85,130 +85,136 @@
     composeModules = components: builtins.concatLists components;
 
     # Modules definitions and handling.
-      coreModules = {  # Modules shared by all hosts.
-        cliShell = [
-          ./nixos/modules/cli-shell/starship.nix
-          ./nixos/modules/cli-shell/zsh/zsh.nix
-        ];
-        data = [
-          ./nixos/modules/applications/syncthing.nix
-        ];
-        networking = [
-          ./nixos/modules/networking/dns.nix
-          ./nixos/modules/networking/mtr.nix
-          ./nixos/modules/networking/nftables.nix
-          ./nixos/modules/networking/stevenblack.nix
-          ./nixos/modules/networking/stevenblack-unblacklist.nix
-          ./nixos/modules/networking/tailscale.nix
-        ];
-        nixos = [
-          ./nixos/modules/applications/nix-ld.nix
-        ];
-        nixVim = [
-          ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
-        ];
-        observability = [
-          # ./nixos/modules/observability/grafana-alloy.nix
-          # ./nixos/modules/observability/netdata.nix
-          ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
-        ];
-        packages = [
-          ./nixos/modules/applications/packages/assembly.nix
-        ];
-        powerManagement = [
-          ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
-          ./nixos/modules/power-management/power-management.nix
-        ];
-        security = [
-          ./nixos/modules/security/firewall.nix
-          ./nixos/modules/security/gnupg.nix
-          ./nixos/modules/security/lanzaboote.nix lanzaboote.nixosModules.lanzaboote
-          ./nixos/modules/security/openssh.nix
-          # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
-          ./nixos/modules/security/sudo.nix
-        ];
-        system = [
-          ./nixos/modules/system/environment/environment.nix
-          ./nixos/modules/system/maintenance/maintenance.nix
-          ./nixos/modules/system/cups.nix
-          ./nixos/modules/system/current-system-packages.nix
-          ./nixos/modules/system/fwupd.nix
-          ./nixos/modules/system/hwaccel.nix
-          ./nixos/modules/system/kernel.nix
-          ./nixos/modules/system/keyd.nix
-          # ./nixos/modules/system/osquery.nix  # TODO: needs implementation.
-          # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
-          ./nixos/modules/system/ucode.nix
-          ./nixos/modules/system/users.nix
-          ./nixos/modules/system/zram.nix
-        ];
-        virtualization = [
-          ./nixos/modules/virtualisation/containerization.nix
-          ./nixos/modules/virtualisation/incus.nix
-          ./nixos/modules/virtualisation/libvirt.nix
-        ];
-      };
-      coreModulesAll = composeModules [
-        coreModules.cliShell
-        coreModules.data
-        coreModules.networking
-        coreModules.nixos
-        coreModules.nixVim
-        coreModules.observability
-        coreModules.packages
-        coreModules.powerManagement
-        coreModules.security
-        coreModules.system
-        coreModules.virtualization
-      ];
+      systemModules = rec {
+        # Collections.
+          all = composeModules [
+            systemModules.cliShell
+            systemModules.data
+            systemModules.networking
+            systemModules.nixos
+            systemModules.nixVim
+            systemModules.observability
+            systemModules.packages
+            systemModules.powerManagement
+            systemModules.security
+            systemModules.system
+            systemModules.virtualization
+          ];
 
-      userModules = {  # Modules specific to the user, e.g. apps and GUI shells.
-        applications = [
-          ./home-manager/home.nix home-manager.nixosModules.home-manager
-          ./nixos/modules/applications/chromium.nix
-          ./nixos/modules/applications/firefox.nix
-          ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
-        ];
-        displayManagers = [
-          ./nixos/modules/gui-shell/ly.nix
-          ./nixos/modules/gui-shell/sddm.nix
-        ];
-        guiShells = {  # In place to avoid system breakage. Will be removed after refactoring the configuration.
-          selector = [
-            ./nixos/modules/gui-shell/gui-shell-selector.nix
+        # Imported modules.
+          cliShell = [
+            ./nixos/modules/cli-shell/starship.nix
+            ./nixos/modules/cli-shell/zsh/zsh.nix
           ];
-          cosmic = [
-            ./nixos/modules/gui-shell/cosmic.nix
+          data = [
+            ./nixos/modules/applications/syncthing.nix
           ];
-          hyprland = [
-            ./nixos/modules/gui-shell/hyprland.nix
+          networking = [
+            ./nixos/modules/networking/dns.nix
+            ./nixos/modules/networking/mtr.nix
+            ./nixos/modules/networking/nftables.nix
+            ./nixos/modules/networking/stevenblack.nix
+            ./nixos/modules/networking/stevenblack-unblacklist.nix
+            ./nixos/modules/networking/tailscale.nix
           ];
-          kde = [
-            ./nixos/modules/gui-shell/kde-plasma.nix
-            ./nixos/modules/applications/kde/kde-pim.nix
-            ./nixos/modules/applications/kde/kdeconnect.nix
+          nixos = [
+            ./nixos/modules/applications/nix-ld.nix
           ];
-          wayfire = [
-            ./nixos/modules/gui-shell/wayfire.nix
+          nixVim = [
+            ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
           ];
-          xfce = [
-            # ./nixos/modules/gui-shell/xfce.nix
+          observability = [
+            # ./nixos/modules/observability/grafana-alloy.nix
+            # ./nixos/modules/observability/netdata.nix
+            ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
           ];
-        };
-        system = [
-          ./nixos/modules/system/fonts.nix
-          ./nixos/modules/system/speech-synthesis.nix
-        ];
-        xdgDesktopPortal = [
-          ./nixos/modules/gui-shell/xdg-desktop-portal.nix
-        ];
+          packages = [
+            ./nixos/modules/applications/packages/assembly.nix
+          ];
+          powerManagement = [
+            ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
+            ./nixos/modules/power-management/power-management.nix
+          ];
+          security = [
+            ./nixos/modules/security/firewall.nix
+            ./nixos/modules/security/gnupg.nix
+            ./nixos/modules/security/lanzaboote.nix lanzaboote.nixosModules.lanzaboote
+            ./nixos/modules/security/openssh.nix
+            # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
+            ./nixos/modules/security/sudo.nix
+          ];
+          system = [
+            ./nixos/modules/system/environment/environment.nix
+            ./nixos/modules/system/maintenance/maintenance.nix
+            ./nixos/modules/system/cups.nix
+            ./nixos/modules/system/current-system-packages.nix
+            ./nixos/modules/system/fwupd.nix
+            ./nixos/modules/system/hwaccel.nix
+            ./nixos/modules/system/kernel.nix
+            ./nixos/modules/system/keyd.nix
+            # ./nixos/modules/system/osquery.nix  # TODO: needs implementation.
+            # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
+            ./nixos/modules/system/ucode.nix
+            ./nixos/modules/system/users.nix
+            ./nixos/modules/system/zram.nix
+          ];
+          virtualization = [
+            ./nixos/modules/virtualisation/containerization.nix
+            ./nixos/modules/virtualisation/incus.nix
+            ./nixos/modules/virtualisation/libvirt.nix
+          ];
       };
-      userModulesShared = composeModules [
-        userModules.applications
-        userModules.displayManagers
-        userModules.system
-        userModules.xdgDesktopPortal
-      ];
+
+      userModules = rec {
+        # Collections.
+          core = composeModules [  # Core modules shared by all hosts.
+            userModules.applications
+            userModules.displayManagers
+            userModules.system
+            userModules.xdgDesktopPortal
+          ];
+
+        # Imported modules.
+          applications = [
+            ./home-manager/home.nix home-manager.nixosModules.home-manager
+            ./nixos/modules/applications/chromium.nix
+            ./nixos/modules/applications/firefox.nix
+            ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
+          ];
+          displayManagers = [
+            ./nixos/modules/gui-shell/ly.nix
+            ./nixos/modules/gui-shell/sddm.nix
+          ];
+          guiShells = {  # In place to avoid system breakage. Will be removed after refactoring the configuration.
+            selector = [
+              ./nixos/modules/gui-shell/gui-shell-selector.nix
+            ];
+            cosmic = [
+              ./nixos/modules/gui-shell/cosmic.nix
+            ];
+            hyprland = [
+              ./nixos/modules/gui-shell/hyprland.nix
+            ];
+            kde = [
+              ./nixos/modules/gui-shell/kde-plasma.nix
+              ./nixos/modules/applications/kde/kde-pim.nix
+              ./nixos/modules/applications/kde/kdeconnect.nix
+            ];
+            wayfire = [
+              ./nixos/modules/gui-shell/wayfire.nix
+            ];
+            xfce = [
+              # ./nixos/modules/gui-shell/xfce.nix
+            ];
+          };
+          system = [
+            ./nixos/modules/system/fonts.nix
+            ./nixos/modules/system/speech-synthesis.nix
+          ];
+          xdgDesktopPortal = [
+            ./nixos/modules/gui-shell/xdg-desktop-portal.nix
+          ];
+      };
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
     unstablePkgs = import "${nixpkgs-unstable}" {  # Leverage NixOS mighty by later allowing to mix packages from both the stable and unstable release channels.
@@ -225,11 +231,11 @@
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
       inherit specialArgs;
       inherit system;
-      modules =
-        coreModulesAll ++
-        userModulesShared ++
-        userModules.guiShells.selector ++
-        [
+      modules = composeModules [
+        systemModules.all
+        userModules.core
+        userModules.guiShells.selector
+        ] ++ [
           ./nixos/hosts/perrrkele/configuration.nix
           nix-ld.nixosModules.nix-ld
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
