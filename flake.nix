@@ -171,25 +171,23 @@
 
       userModules = {
         # Collections.
-          applications.all = mergeAttributes [
-            userModules.applications.chromium
-            userModules.applications.firefox
-            userModules.applications.nix-flatpak
+          all = mergeAttributes [  # Default group.
+            userModules.audio
+            userModules.displayManagers
+            userModules.fonts
+            userModules.home-manager
+            userModules.nix-flatpak
+            userModules.xdgDesktopPortal
           ];
           core = mergeAttributes [  # Core modules shared by all hosts.
-            userModules.applications.all
             userModules.displayManagers
+            userModules.fonts
             userModules.home-manager
-            userModules.system
             userModules.xdgDesktopPortal
           ];
 
         # Imported modules.
-          applications = {
-            chromium = [ ./nixos/modules/applications/chromium.nix ];
-            firefox = [ ./nixos/modules/applications/firefox.nix ];
-            nix-flatpak = [ ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak ];
-          };
+          audio = [ ./nixos/modules/system/speech-synthesis.nix ];
           data = [
             ./nixos/modules/applications/syncthing.nix  # TODO: evaluate how to properly manage Syncthing since it requires hard-coding the hosts' IDs.
           ];
@@ -197,6 +195,7 @@
             ./nixos/modules/gui-shell/ly.nix
             ./nixos/modules/gui-shell/sddm.nix
           ];
+          fonts = [ ./nixos/modules/system/fonts.nix ];
           guiShells = {  # In place to avoid system breakage. Will be removed after refactoring the configuration.
             selector = [
               ./nixos/modules/gui-shell/gui-shell-selector.nix
@@ -220,10 +219,7 @@
             ];
           };
           home-manager = [ ./home-manager/home.nix home-manager.nixosModules.home-manager ];
-          system = [
-            ./nixos/modules/system/fonts.nix
-            ./nixos/modules/system/speech-synthesis.nix
-          ];
+          nix-flatpak = [ ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak ];
           xdgDesktopPortal = [ ./nixos/modules/gui-shell/xdg-desktop-portal.nix ];
       };
 
@@ -244,7 +240,7 @@
       inherit system;
       modules = mergeAttributes [
         systemModules.all
-        userModules.core
+        userModules.all
         userModules.guiShells.selector  # TODO: remove after refactoring the configuration.
         ] ++ [
           ./nixos/hosts/perrrkele/configuration.nix
