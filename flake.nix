@@ -80,8 +80,7 @@
   ... }:
 
   let
-    # Function role: assemble the list of options from the imported modules.
-    # It's a cleaner approach (arguably) to manually concatenating the list of modules with ++.
+    # Function role: assemble the list of options from the imported modules. It's (arguably) a visually cleaner approach to concatenating the list of modules with ++.
     composeModules = components: builtins.concatLists components;
 
     # Modules definitions and handling.
@@ -89,7 +88,6 @@
         # Collections.
           all = composeModules [
             systemModules.cliShell
-            systemModules.data
             systemModules.networking
             systemModules.nixos
             systemModules.nixVim
@@ -105,9 +103,6 @@
           cliShell = [
             ./nixos/modules/cli-shell/starship.nix
             ./nixos/modules/cli-shell/zsh/zsh.nix
-          ];
-          data = [
-            ./nixos/modules/applications/syncthing.nix
           ];
           networking = [
             ./nixos/modules/networking/dns.nix
@@ -181,6 +176,9 @@
             ./nixos/modules/applications/firefox.nix
             ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
           ];
+          data = [
+            ./nixos/modules/applications/syncthing.nix  # TODO: evaluate how to properly manage Syncthing since it requires hard-coding the hosts' IDs.
+          ];
           displayManagers = [
             ./nixos/modules/gui-shell/ly.nix
             ./nixos/modules/gui-shell/sddm.nix
@@ -234,7 +232,7 @@
       modules = composeModules [
         systemModules.all
         userModules.core
-        userModules.guiShells.selector
+        userModules.guiShells.selector  # TODO: remove after refactoring the configuration.
         ] ++ [
           ./nixos/hosts/perrrkele/configuration.nix
           nix-ld.nixosModules.nix-ld
@@ -265,7 +263,7 @@
               guiShellEnv = "plasma6";  # /etc/nixos/nixos-config/nixos/modules/gui-shell/gui-shell-selector.nix
               services = {
                 printing = "false";  # /etc/nixos/nixos-config/nixos/modules/system/cups.nix
-                syncthing = "false";  # /etc/nixos/nixos-config/nixos/modules/applications/syncthing.nix
+                # syncthing = "false";  # /etc/nixos/nixos-config/nixos/modules/applications/syncthing.nix  # TODO: commented out to avoid breaking the build. I will remove this option anyway.
                 tailscale = "true";  # /etc/nixos/nixos-config/nixos/modules/networking/tailscale.nix
               };
             };
