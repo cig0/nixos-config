@@ -93,11 +93,24 @@
   services.fstrim.enable = true;
 
 
+  # Set up hostname.
+  networking = {  # Enable networking
+    hostName = "perrrkele";  # Define your hostname.
+    # proxy.default = "http://user:password@proxy:port/";
+    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    networkmanager = {
+      enable = true;
+      dns = "systemd-resolved";  # TODO: consolidate in nixos/modules/networking/dns.nix
+    };
+  };
+
+
   # Nix settings
+  # auto-optimise-store: the option is managed by the module nixos/modules/system/maintenance.nix
   nix = {
     settings = {
       allowed-users = [ "@builders" "@wheel" ];
-      # auto-optimise-store = true; # Managed by nixos/modules/system/maintenance.nix
       cores = 4;
       experimental-features = [ "nix-command" "flakes" ];
       max-jobs = 4;
@@ -106,66 +119,9 @@
   };
 
 
-  # Enable networking
-  networking = { # Enable networking
-    hostName = "perrrkele"; # Define your hostname.
-    # proxy.default = "http://user:password@proxy:port/";
-    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    networkmanager = {
-      enable = true;
-      dns = "systemd-resolved";
-      wifi.powersave = false; # Had to disable this feature bc it was causing issues with my wifi card (crashing randomly, mostly while the CPU was under heavy load)
-    };
-  };
-
-
-  hardware = { # Enable bluetooth
-    bluetooth = {
-      enable = true; # enables support for Bluetooth
-      powerOnBoot = true; # powers up the default Bluetooth controller on boot
-    };
-  };
-
-
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = false;
-
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-    extraConfig.pipewire."92-low-latency" = {
-      context.properties = {
-        default.clock.rate = 48000;
-        default.clock.quantum = 32;
-        default.clock.min-quantum = 32;
-        default.clock.max-quantum = 32;
-      };
-    };
-    wireplumber.configPackages = [
-      (pkgs.writeTextDir "share/wireplumber/bluetooth.lua.d/51-bluez-config.lua" ''
-          bluez_monitor.properties = {
-            ["bluez5.enable-sbc-xq"] = true,
-            ["bluez5.enable-msbc"] = true,
-            ["bluez5.enable-hw-volume"] = true,
-            ["bluez5.headset-roles"] = "[ hsp_hs hsp_ag hfp_hf hfp_ag ]"
-          }
-      '')
-    ];
-  };
 
 
   # This value determines the NixOS release from which the default
