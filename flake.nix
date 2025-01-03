@@ -92,18 +92,19 @@
             systemModules.substratum.virtualization
           ];
           core = mergeAttributes [
+            systemModules.applications
             systemModules.cliShell
             systemModules.networking
             systemModules.nixos
             systemModules.nixVim
             systemModules.observability
-            systemModules.packages
             systemModules.powerManagement
             systemModules.security
             systemModules.system
           ];
 
         # Imported modules.
+          applications  = [ ./nixos/modules/applications/applications.nix ];
           cliShell = [
             ./nixos/modules/cli-shell/starship.nix
             ./nixos/modules/cli-shell/zsh/zsh.nix
@@ -126,7 +127,6 @@
             # ./nixos/modules/observability/netdata.nix
             ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
           ];
-          packages = [ ./nixos/modules/applications/packages/assembly.nix ];
           powerManagement = [
             ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
             ./nixos/modules/power-management/power-management.nix

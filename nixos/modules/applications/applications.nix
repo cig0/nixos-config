@@ -4,7 +4,7 @@
 
 let
   # Host name logic. Loads a map of possible hostnames and their associated roles.
-  hostSelector = import ../../../lib/host-selector.nix { inherit config lib; };
+  hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
 
   # Import packages lists and sets.
   p = import ./packages.nix { inherit pkgs unstablePkgs; };
@@ -50,7 +50,7 @@ in {
   # The application modules installed with NixOS options are imported here.
   imports = builtins.filter (x: x != null) [
     # ../systemPackages-overrides.nix
-    ../chromium.nix
+    ../chromium.nix  # TODO: add option to enable/disable
     ../firefox.nix
   ];
 
