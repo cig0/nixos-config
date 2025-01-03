@@ -47,8 +47,11 @@ let
       assembly ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
 
 in {
+  # The application modules installed with NixOS options are imported here.
   imports = builtins.filter (x: x != null) [
-    # ./systemPackages-overrides.nix
+    # ../systemPackages-overrides.nix
+    ../chromium.nix
+    ../firefox.nix
   ];
 
   # Allow lincense-burdened packages.
