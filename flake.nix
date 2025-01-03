@@ -96,7 +96,19 @@
             systemModules.powerManagement
             systemModules.security
             systemModules.system
-            systemModules.virtualization
+            systemModules.substratum.containerization
+            systemModules.substratum.virtualization
+          ];
+          core = mergeAttributes [
+            systemModules.cliShell
+            systemModules.networking
+            systemModules.nixos
+            systemModules.nixVim
+            systemModules.observability
+            systemModules.packages
+            systemModules.powerManagement
+            systemModules.security
+            systemModules.system
           ];
 
         # Imported modules.
@@ -138,6 +150,15 @@
             # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
             ./nixos/modules/security/sudo.nix
           ];
+          substratum = {
+            containerization = [
+              ./nixos/modules/virtualisation/containerization.nix
+              ./nixos/modules/virtualisation/incus.nix
+            ];
+            virtualization = [
+              ./nixos/modules/virtualisation/libvirt.nix
+            ];
+          };
           system = [
             ./nixos/modules/system/environment/environment.nix
             ./nixos/modules/system/maintenance/maintenance.nix
@@ -152,11 +173,6 @@
             ./nixos/modules/system/ucode.nix
             ./nixos/modules/system/users.nix
             ./nixos/modules/system/zram.nix
-          ];
-          virtualization = [
-            ./nixos/modules/virtualisation/containerization.nix
-            ./nixos/modules/virtualisation/incus.nix
-            ./nixos/modules/virtualisation/libvirt.nix
           ];
       };
 
