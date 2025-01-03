@@ -81,12 +81,12 @@
 
   let
     # Function role: assemble the list of options from the imported modules. It's (arguably) a visually cleaner approach to concatenating the list of modules with ++.
-    composeModules = components: builtins.concatLists components;
+    mergeAttributes = components: builtins.concatLists components;
 
     # Modules definitions and handling.
       systemModules = rec {
         # Collections.
-          all = composeModules [
+          all = mergeAttributes [
             systemModules.cliShell
             systemModules.networking
             systemModules.nixos
@@ -162,7 +162,7 @@
 
       userModules = rec {
         # Collections.
-          core = composeModules [  # Core modules shared by all hosts.
+          core = mergeAttributes [  # Core modules shared by all hosts.
             userModules.applications
             userModules.displayManagers
             userModules.system
@@ -229,7 +229,7 @@
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
       inherit specialArgs;
       inherit system;
-      modules = composeModules [
+      modules = mergeAttributes [
         systemModules.all
         userModules.core
         userModules.guiShells.selector  # TODO: remove after refactoring the configuration.
