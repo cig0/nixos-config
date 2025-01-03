@@ -80,7 +80,7 @@
   ... }:
 
   let
-    # Function role: assemble the list of options from the imported modules. It's (arguably) a visually cleaner approach to concatenating the list of modules with ++.
+    # Function role: assemble a list of attributes. It's (arguably) a visually cleaner approach to concatenating a list than using ++.
     mergeAttributes = components: builtins.concatLists components;
 
     # Modules definitions and handling.
