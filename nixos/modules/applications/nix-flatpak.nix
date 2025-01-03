@@ -8,7 +8,7 @@
     update = {
       auto = {
         enable = true;
-        onCalendar = "weekly"; # Default value
+        onCalendar = "weekly";  # Default value
       };
       onActivation = false;
     };
@@ -35,7 +35,7 @@
       "org.kde.kget"
       "org.kde.kigo"
       "org.kde.kleopatra"
-      # "org.kde.kontact" # Managed by NixOS: nixos/modules/applications/kde/kde-pim.nix
+      # "org.kde.kontact"  # Managed with NixOS: nixos/modules/applications/kde/kde-pim.nix
       "org.kde.krename"
       "org.kde.ksudoku"
       "org.kde.ktimetracker"
@@ -50,10 +50,10 @@
 
       # Comms
       "com.discordapp.Discord"
-      "io.github.milkshiift.GoofCord" # https://flathub.org/apps/io.github.milkshiift.GoofCord
-      "im.riot.Riot" # Element - Matrix client
+      "io.github.milkshiift.GoofCord"  # https://flathub.org/apps/io.github.milkshiift.GoofCord
+      "im.riot.Riot"  # Element - Matrix client
       "org.telegram.desktop"
-      "com.rtosta.zapzap" # https://flathub.org/apps/com.rtosta.zapzap
+      "com.rtosta.zapzap"  # https://flathub.org/apps/com.rtosta.zapzap
 
       # Games
       "org.naev.Naev"
