@@ -4,8 +4,11 @@
 
 let
   functions = ''
-    _Update.apps.cargo() {
-      echo -e "\\n\\n${ansiColors.bold_white}====  Running ${ansiColors.bold_green}_Update.apps.cargo${ansiColors.reset} ${ansiColors.bold_white}update target...${ansiColors.reset}\\n"
+    _upgrade.apps.cargo() {
+      local action='Upgrading:'
+      local payload='Cargo packages'
+      echo -e "\\n\\n${ansiColors.bold_white}====  $action${ansiColors.reset} ${ansiColors.bold_green}$payload${ansiColors.reset}\\n"
+
 
       # Set the update execution bit:
       # 0 successful
