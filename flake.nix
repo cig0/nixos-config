@@ -181,7 +181,6 @@
           ];
           core = mergeAttributes [  # Core modules shared by all hosts.
             userModules.displayManagers
-            userModules.fonts
             userModules.home-manager
             userModules.xdgDesktopPortal
           ];
