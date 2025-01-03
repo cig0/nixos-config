@@ -39,3 +39,6 @@ in {
 # I allow only one updater enabled at a time.
 
 # I added a safety measure to prevent enabling this configuration if `programs.nh` is already enabled.
+
+# TODO
+# [ ] Add a systemd-timer to periodically update the Cargo packages: nixos/modules/cli-shell/zsh/functions/cargo.nix
