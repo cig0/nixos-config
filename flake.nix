@@ -152,8 +152,8 @@
           ];
           substratum = {
             containerization = [
-              ./nixos/modules/virtualisation/containerization.nix
-              ./nixos/modules/virtualisation/incus.nix
+              ./nixos/modules/substratum/containerization.nix
+              ./nixos/modules/substratum/incus.nix
             ];
             virtualization = [
               ./nixos/modules/virtualisation/libvirt.nix
