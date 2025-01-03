@@ -46,8 +46,7 @@ let
     in
       assembly ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
 
-in
-{
+in {
   imports = builtins.filter (x: x != null) [
     # ./systemPackages-overrides.nix
   ];
