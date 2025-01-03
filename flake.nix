@@ -124,20 +124,17 @@
             ./nixos/modules/networking/stevenblack-unblacklist.nix
             ./nixos/modules/networking/tailscale.nix
           ];
-          nixos = [
-            ./nixos/modules/applications/nix-ld.nix
-          ];
+          nixos = [ ./nixos/modules/applications/nix-ld.nix ];
           nixVim = [
             ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
+            # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
           ];
           observability = [
             # ./nixos/modules/observability/grafana-alloy.nix
             # ./nixos/modules/observability/netdata.nix
             ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
           ];
-          packages = [
-            ./nixos/modules/applications/packages/assembly.nix
-          ];
+          packages = [ ./nixos/modules/applications/packages/assembly.nix ];
           powerManagement = [
             ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
             ./nixos/modules/power-management/power-management.nix
@@ -155,9 +152,7 @@
               ./nixos/modules/substratum/containerization.nix
               ./nixos/modules/substratum/incus.nix
             ];
-            virtualization = [
-              ./nixos/modules/substratum/libvirt.nix
-            ];
+            virtualization = [ ./nixos/modules/substratum/libvirt.nix ];
           };
           system = [
             ./nixos/modules/system/environment/environment.nix
@@ -168,8 +163,6 @@
             ./nixos/modules/system/hwaccel.nix
             ./nixos/modules/system/kernel.nix
             ./nixos/modules/system/keyd.nix
-            # ./nixos/modules/system/osquery.nix  # TODO: needs implementation.
-            # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
             ./nixos/modules/system/ucode.nix
             ./nixos/modules/system/users.nix
             ./nixos/modules/system/zram.nix
@@ -178,20 +171,25 @@
 
       userModules = {
         # Collections.
+          applications.all = mergeAttributes [
+            userModules.applications.chromium
+            userModules.applications.firefox
+            userModules.applications.nix-flatpak
+          ];
           core = mergeAttributes [  # Core modules shared by all hosts.
-            userModules.applications
+            userModules.applications.all
             userModules.displayManagers
+            userModules.home-manager
             userModules.system
             userModules.xdgDesktopPortal
           ];
 
         # Imported modules.
-          applications = [
-            ./home-manager/home.nix home-manager.nixosModules.home-manager
-            ./nixos/modules/applications/chromium.nix
-            ./nixos/modules/applications/firefox.nix
-            ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak
-          ];
+          applications = {
+            chromium = [ ./nixos/modules/applications/chromium.nix ];
+            firefox = [ ./nixos/modules/applications/firefox.nix ];
+            nix-flatpak = [ ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak ];
+          };
           data = [
             ./nixos/modules/applications/syncthing.nix  # TODO: evaluate how to properly manage Syncthing since it requires hard-coding the hosts' IDs.
           ];
@@ -221,13 +219,12 @@
               # ./nixos/modules/gui-shell/xfce.nix
             ];
           };
+          home-manager = [ ./home-manager/home.nix home-manager.nixosModules.home-manager ];
           system = [
             ./nixos/modules/system/fonts.nix
             ./nixos/modules/system/speech-synthesis.nix
           ];
-          xdgDesktopPortal = [
-            ./nixos/modules/gui-shell/xdg-desktop-portal.nix
-          ];
+          xdgDesktopPortal = [ ./nixos/modules/gui-shell/xdg-desktop-portal.nix ];
       };
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
