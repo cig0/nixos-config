@@ -80,18 +80,21 @@
   ... }:
 
   let
-    # Function role: assemble a list of attributes. It's (arguably) a visually cleaner approach to concatenating a list than using ++.
-    mergeAttributes = components: builtins.concatLists components;
+    mergeLists = components: builtins.concatLists components;  # Assemble a list of lists. It's (arguably) a visually cleaner approach for concatenating lists than using ++.
+    # mergeSets = components: builtins.foldl' (acc: set: acc // set) {} components;
 
     # Modules definitions and handling.
       systemModules = {
         # Collections.
-          all = mergeAttributes [
+        # Collections should be defioned with roles in mind. Any specific host configuration should be done in the host's configuration section of the flake, or within a specialisations block.
+          all = mergeLists [  # Collection role scope: laptop and workstation.
             systemModules.core
+            systemModules.hardware.bluetooth
+            systemModules.hardware.wifi
             systemModules.virtualization.containerization
             systemModules.virtualization.hypervisor
           ];
-          core = mergeAttributes [
+          core = mergeLists [
             systemModules.applications
             systemModules.cliShell
             systemModules.networking
@@ -102,13 +105,23 @@
             systemModules.security
             systemModules.system
           ];
+          home-lab = mergeLists [
+            systemModules.all
+          ];
+          home-nas = mergeLists [
+            systemModules.core
+          ];
 
         # Imported modules.
-          applications  = [ ./nixos/modules/applications/applications.nix ];
+          applications  = [ ./nixos/modules/applications/applications.nix ];  # Install applications.
           cliShell = [
             ./nixos/modules/cli-shell/starship.nix
             ./nixos/modules/cli-shell/zsh/zsh.nix
           ];
+          hardware = {
+            bluetooth = [ ./nixos/modules/hardware/bluetooth.nix ];
+            wifi = [ ./nixos/modules/hardware/wifi.nix ];
+          };
           networking = [
             ./nixos/modules/networking/dns.nix
             ./nixos/modules/networking/mtr.nix
@@ -163,20 +176,25 @@
 
       userModules = {
         # Collections.
-          all = mergeAttributes [  # Default group.
-            userModules.audio
+        # Collections should be defioned with roles in mind. Any specific host configuration should be done in the host's configuration section of the flake, or within a specialisations block.
+          all = mergeLists [  # Default collection.
+            userModules.audio.audio-subsystem
+            userModules.audio.speech-synthesis
             userModules.core
             userModules.fonts
             userModules.home-manager
             userModules.nix-flatpak
           ];
-          core = mergeAttributes [  # Core modules shared by all hosts.
+          core = mergeLists [  # Core modules shared by all hosts.
             userModules.displayManagers
             userModules.xdgDesktopPortal
           ];
 
         # Imported modules.
-          audio = [ ./nixos/modules/system/speech-synthesis.nix ];
+          audio = {
+            audio-subsystem = [ ./nixos/modules/system/audio/audio-subsystem.nix ];
+            speech-synthesis = [ ./nixos/modules/system/audio/speech-synthesis.nix ];
+          };
           data = [
             ./nixos/modules/applications/syncthing.nix  # TODO: evaluate how to properly manage Syncthing since it requires hard-coding the hosts' IDs.
           ];
@@ -213,7 +231,7 @@
       };
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
-    unstablePkgs = import "${nixpkgs-unstable}" {  # Leverage NixOS mighty by later allowing to mix packages from both the stable and unstable release channels.
+    unstablePkgs = import "${nixpkgs-unstable}" {  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels.
       inherit system;
       config = {
         allowUnfree = true;
@@ -227,7 +245,7 @@
     nixosConfigurations.perrrkele = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
       inherit specialArgs;
       inherit system;
-      modules = mergeAttributes [
+      modules = mergeLists [
         systemModules.all
         userModules.all
         userModules.guiShells.selector  # TODO: remove after refactoring the configuration.
