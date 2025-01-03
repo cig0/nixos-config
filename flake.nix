@@ -87,15 +87,7 @@
       systemModules = {
         # Collections.
           all = mergeAttributes [
-            systemModules.cliShell
-            systemModules.networking
-            systemModules.nixos
-            systemModules.nixVim
-            systemModules.observability
-            systemModules.packages
-            systemModules.powerManagement
-            systemModules.security
-            systemModules.system
+            systemModules.core
             systemModules.substratum.containerization
             systemModules.substratum.virtualization
           ];
@@ -173,15 +165,13 @@
         # Collections.
           all = mergeAttributes [  # Default group.
             userModules.audio
-            userModules.displayManagers
+            userModules.core
             userModules.fonts
             userModules.home-manager
             userModules.nix-flatpak
-            userModules.xdgDesktopPortal
           ];
           core = mergeAttributes [  # Core modules shared by all hosts.
             userModules.displayManagers
-            userModules.home-manager
             userModules.xdgDesktopPortal
           ];
 
