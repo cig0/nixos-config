@@ -84,7 +84,7 @@
     mergeAttributes = components: builtins.concatLists components;
 
     # Modules definitions and handling.
-      systemModules = rec {
+      systemModules = {
         # Collections.
           all = mergeAttributes [
             systemModules.cliShell
@@ -160,7 +160,7 @@
           ];
       };
 
-      userModules = rec {
+      userModules = {
         # Collections.
           core = mergeAttributes [  # Core modules shared by all hosts.
             userModules.applications
