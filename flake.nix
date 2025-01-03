@@ -156,7 +156,7 @@
               ./nixos/modules/substratum/incus.nix
             ];
             virtualization = [
-              ./nixos/modules/virtualisation/libvirt.nix
+              ./nixos/modules/substratum/libvirt.nix
             ];
           };
           system = [
