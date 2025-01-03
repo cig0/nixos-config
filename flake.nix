@@ -141,10 +141,10 @@
           ];
           substratum = {
             containerization = [
-              ./nixos/modules/substratum/containerization.nix
-              ./nixos/modules/substratum/incus.nix
+              ./nixos/modules/compute-substrate/containerization.nix
+              ./nixos/modules/compute-substrate/incus.nix
             ];
-            virtualization = [ ./nixos/modules/substratum/libvirt.nix ];
+            virtualization = [ ./nixos/modules/compute-substrate/libvirt.nix ];
           };
           system = [
             ./nixos/modules/system/environment/environment.nix
