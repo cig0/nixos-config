@@ -88,8 +88,8 @@
         # Collections.
           all = mergeAttributes [
             systemModules.core
-            systemModules.substratum.containerization
-            systemModules.substratum.virtualization
+            systemModules.workloads.containerization
+            systemModules.workloads.virtualization
           ];
           core = mergeAttributes [
             systemModules.applications
@@ -139,13 +139,6 @@
             # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
             ./nixos/modules/security/sudo.nix
           ];
-          substratum = {
-            containerization = [
-              ./nixos/modules/compute-substrate/containerization.nix
-              ./nixos/modules/compute-substrate/incus.nix
-            ];
-            virtualization = [ ./nixos/modules/compute-substrate/libvirt.nix ];
-          };
           system = [
             ./nixos/modules/system/environment/environment.nix
             ./nixos/modules/system/maintenance/maintenance.nix
@@ -159,6 +152,13 @@
             ./nixos/modules/system/users.nix
             ./nixos/modules/system/zram.nix
           ];
+          workloads = {
+            containerization = [
+              ./nixos/modules/workloads/containerization.nix
+              ./nixos/modules/workloads/incus.nix
+            ];
+            virtualization = [ ./nixos/modules/workloads/libvirt.nix ];
+          };
       };
 
       userModules = {
