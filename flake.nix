@@ -88,8 +88,8 @@
         # Collections.
           all = mergeAttributes [
             systemModules.core
-            systemModules.workloads.containerization
-            systemModules.workloads.virtualization
+            systemModules.virtualization.containerization
+            systemModules.virtualization.hypervisor
           ];
           core = mergeAttributes [
             systemModules.applications
@@ -152,12 +152,12 @@
             ./nixos/modules/system/users.nix
             ./nixos/modules/system/zram.nix
           ];
-          workloads = {
+          virtualization = {
             containerization = [
-              ./nixos/modules/workloads/containerization.nix
-              ./nixos/modules/workloads/incus.nix
+              ./nixos/modules/virtualization/containerization.nix
+              ./nixos/modules/virtualization/incus.nix
             ];
-            virtualization = [ ./nixos/modules/workloads/libvirt.nix ];
+            hypervisor = [ ./nixos/modules/virtualization/libvirt.nix ];
           };
       };
 
