@@ -50,8 +50,8 @@ in {
   # The application modules installed with NixOS options are imported here.
   imports = builtins.filter (x: x != null) [
     # ../systemPackages-overrides.nix
-    ../chromium.nix  # TODO: add option to enable/disable
-    ../firefox.nix
+    ./chromium.nix  # TODO: add option to enable/disable.
+    ./firefox.nix  # TODO: add option to enable/disable.
   ];
 
   # Allow lincense-burdened packages.
