@@ -36,9 +36,9 @@
 
     nix-index.url = "github:nix-community/nix-index";
 
-    # nix-index-database = {
+    # nix-index-database = {  # TODO: learn how to implement it properly.
     #   inputs.nixpkgs.follows = "nixpkgs";
-    #   url = "github:nix-community/nix-index-database";  # TODO: learn how to implement it properly.
+    #   url = "github:nix-community/nix-index-database";
     # };
 
     nix-ld = {  # https://github.com/nix-community/nix-ld
