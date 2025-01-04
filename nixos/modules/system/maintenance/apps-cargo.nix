@@ -1,9 +1,9 @@
 # Systemd timer that runs a service to upgrade Cargo packages defined in $HOME/.config/apps.cargo weekly.
 
-{ pkgs, ... }:
+{ unstablePkgs, ... }:
 
 {
-  systemd.services.cargo-upgrade = {
+  systemd.user.services.cargo-upgrade = {
     description = "Upgrade Cargo packages";
 
     # Ensure network is available
@@ -12,7 +12,6 @@
 
     # Environment setup
     environment = {
-      HOME = "%h";
       XDG_CONFIG_HOME = "%h/.config";
     };
 
@@ -21,10 +20,10 @@
       User = "cig0";
       # Ensure cargo binary is available
       Path = [
-        "${pkgs.cargo}/bin"
-        "${pkgs.cargo-binstall}/bin"
+        "${unstablePkgs.cargo}/bin"
+        "${unstablePkgs.cargo-binstall}/bin"
       ];
-      ExecStart = "${pkgs.zsh}/bin/zsh -c 'source /etc/zshrc && _upgrade.apps.cargo'";
+      ExecStart = "${unstablePkgs.zsh}/bin/zsh -c 'source /etc/zshrc && _upgrade.apps.cargo'";
 
       # Safety measures
       RuntimeMaxSec = "10m";
