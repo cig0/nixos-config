@@ -1,6 +1,6 @@
 # Systemd timer that runs a service to upgrade Cargo packages defined in $HOME/.config/apps.cargo weekly.
 
-{ unstablePkgs, ... }:
+{ pkgs, unstablePkgs, ... }:
 
 {
   systemd.user.services.cargo-upgrade = {
@@ -19,14 +19,9 @@
       Type = "oneshot";
       User = "cig0";
       # Ensure cargo binary is available
-      Path = [
-        "${unstablePkgs.cargo}/bin"
-        "${unstablePkgs.cargo-binstall}/bin"
-      ];
-      ExecStart = "${unstablePkgs.zsh}/bin/zsh -c 'source /etc/zshrc && _upgrade.apps.cargo'";
+      ExecStart = "${pkgs.zsh}/bin/zsh -c 'source /etc/zshrc && _upgrade.apps.cargo'";  # We run Zsh from the stable channel because it is installed and managed using NixOS options (which we run from the stable channel).
 
       # Safety measures
-      RuntimeMaxSec = "10m";
       Restart = "no";
       ProtectSystem = "strict";
       ProtectHome = "no";
