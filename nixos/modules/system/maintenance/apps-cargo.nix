@@ -1,6 +1,6 @@
 # Systemd timer that runs a service to upgrade Cargo packages defined in $HOME/.config/apps.cargo weekly.
 
-{ pkgs, unstablePkgs, ... }:
+{ pkgs, ... }:
 
 {
   systemd.user.services.cargo-upgrade = {
