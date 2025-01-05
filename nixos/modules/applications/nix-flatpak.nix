@@ -54,6 +54,7 @@
       "im.riot.Riot"  # Element - Matrix client
       "org.telegram.desktop"
       "com.rtosta.zapzap"  # https://flathub.org/apps/com.rtosta.zapzap
+      "us.zoom.Zoom"
 
       # Games
       "org.naev.Naev"
