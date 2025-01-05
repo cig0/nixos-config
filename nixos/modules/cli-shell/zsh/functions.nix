@@ -10,7 +10,7 @@ let
     let
       content = builtins.readFile file;
       firstLine = builtins.head (builtins.split "\n" content);
-    in firstLine == "# Don't remove this line! programs.zsh.shellFunctions";
+    in firstLine == "# Don't remove this line! programs.zsh.shellInit";
 
   importFunctionFiles = dir:
     let
