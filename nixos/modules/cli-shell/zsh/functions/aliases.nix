@@ -1,4 +1,4 @@
-# Don't remove this line! programs.zsh.shellFunctions
+# Don't remove this line! programs.zsh.shellInit
 
 { ansiColors, ... }:
 
