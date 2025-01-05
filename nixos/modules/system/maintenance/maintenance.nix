@@ -2,11 +2,11 @@
 
 {
   imports = [
-    ./apps-cargo.nix
-    ./nix-settings.nix
+    ./apps-cargo.nix  # Update apps defined in $HOME/apps.cargo
+    ./nix-settings.nix  # Garbage collection and Nix store optimization.
 
     # System upgrade.
-      ./nh.nix  # Disabled.
+      ./nh.nix  # Disabled in favor of NixOS built-in upgrade option.
       ./system-auto_upgrade.nix  # Enabled.
   ];
 }
