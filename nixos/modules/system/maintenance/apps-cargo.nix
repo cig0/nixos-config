@@ -29,7 +29,7 @@
     };
   };
 
-  systemd.timers.cargo-upgrade = {
+  systemd.user.timers.cargo-upgrade = {
     description = "Timer for Cargo packages upgrade";
     wantedBy = [ "timers.target" ];
 
