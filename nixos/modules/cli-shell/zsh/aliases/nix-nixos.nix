@@ -18,7 +18,8 @@ let
     # Search (options and packages)
       nixs = "nix search nixpkgs";
       nixsu = "nix search nixpkgs/nixos-unstable#";
-      nhs = "nh search --channel nixos-24.11";
+      nhs = "nh search";
+      nhsu = "nh search  --channel nixos-unstable";
 
     # System
       nixinfo = "nix-info --host-os -m";
