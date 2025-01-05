@@ -105,7 +105,21 @@ let
     ]);
 
   appsGui =
-    with pkgs; [  # Meant to run in a [role]client device, as opposite on a [role]server device.
+    with pkgs; [
+      # Multimedia
+        gimp-with-plugins  # Fails to build from unstable because of some plugins.
+
+      # Security
+        keepassxc
+        pinentry-qt  # Move to the unstablePkgs if you're using NixOS from the unstable channel.
+
+      # Utilities
+        cool-retro-term  # Let's avoid pulling unnecessary dependencies, as the app last release date was at the end of January 2022.
+
+      # Virtualization
+        virt-viewer
+    ] ++
+    (with unstablePkgs; [
       # AI
         (lmstudio.override {
           commandLineArgs = [
@@ -117,31 +131,19 @@ let
           ];
         })
 
-      # Comms
-        zoom-us
-
       # Multimedia
         # cinelerra
         # davinci-resolve
-        gimp-with-plugins
         lightworks
         # olive-editor
 
-      # Security
-        keepassxc
-        pinentry-qt
-
-      # Virtualization
-        virt-viewer
-    ] ++
-    (with unstablePkgs; [
       # Programming
         sublime-merge
         vscode-fhs
 
       # Security
         # Web
-          burpsuite
+        burpsuite
 
       # Utilities
         wezterm
@@ -152,6 +154,7 @@ let
     ];
     hyprland = with pkgs; [
     ];
+      # Virtualization
     kde = with pkgs; [
         kdePackages.alpaka
         kdePackages.discover
