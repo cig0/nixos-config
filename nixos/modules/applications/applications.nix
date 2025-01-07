@@ -10,9 +10,8 @@ let
   p = import ./packages.nix { inherit pkgs unstablePkgs; };
 
   # Function to create package lists based on host roles.
-  rolePackages = role:
-    let
-      appsGuiShell =  # Dynamically add packages based on the enabled GUI shell.
+  hostPackages = packages:
+    let appsGuiShell =  # Dynamically add packages based on the enabled GUI shell.
         lib.optionals (config.services.desktopManager.cosmic.enable or false) p.sets.appsGuiShell.cosmic ++
         lib.optionals (config.programs.hyprland.enable or false) p.sets.appsGuiShell.hyprland ++
         lib.optionals (config.services.desktopManager.plasma6.enable or false) p.sets.appsGuiShell.kde ++
@@ -20,13 +19,13 @@ let
         lib.optionals (config.services.desktopManager.xfce.enable or false) p.sets.appsGuiShell.xfce
       ;
     in
-      (lib.optionals (role == "Laptop" || role == "Desktop") (
+      (lib.optionals (packages == "Graphical") (
         p.lists.appsBaseline ++
         p.lists.appsGui ++
         p.lists.appsCli ++
         appsGuiShell
       )) ++
-     (lib.optionals (role == "HomeLab") (
+     (lib.optionals (packages == "HomeLab") (
         p.lists.appsBaseline ++
         p.sets.appsCli.backup ++
         p.sets.appsCli.cloudNativeTools ++
@@ -37,21 +36,27 @@ let
         ]
      ));
 
-  pacakgesList =
-    let
-      roleAssembly = if hostSelector.isRoleLaptop then rolePackages "Laptop"
-                 else if hostSelector.isRoleDesktop then rolePackages "Desktop"
-                 else if hostSelector.isRoleServer then rolePackages "HomeLab"
-                 else [];
-    in
-      roleAssembly ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
+  systemPackages =  let sP = if hostSelector.isRoleGraphical then hostPackages "Graphical"
+                      else if hostSelector.isChuweiMiniPC then hostPackages "HomeLab"
+                      else [];
+                    in
+                      sP ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
 
 in {
-  # The application modules installed with NixOS options are imported here.
+  # The NixOS community generally recommends keeping the enabling/disabling logic in the individual module files rather than in the importing module.
+  # This follows the principle of separation of concerns and makes modules more self-contained.
+  # Benefits of this approach:
+  #   - Each module controls its own destiny
+  #   - Modules are self-contained
+  #   - Easier to maintain and understand
+  #   - Follows the NixOS convention of modules managing their own conditional activation
+  #   - Makes it easier to override in specific cases if needed
+  #   - This is the more idiomatic NixOS way of handling conditional module activation.
   imports = builtins.filter (x: x != null) [
     # ../systemPackages-overrides.nix
-    ./chromium.nix  # TODO: add option to enable/disable.
-    ./firefox.nix  # TODO: add option to enable/disable.
+    ./chromium.nix
+    ./emacs.nix
+    ./firefox.nix
   ];
 
   # Allow lincense-burdened packages.
@@ -60,5 +65,5 @@ in {
   };
 
   # Install packages system-wide based on the host role.
-  environment.systemPackages = pacakgesList;
+  environment.systemPackages = systemPackages;
 }

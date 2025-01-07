@@ -19,18 +19,19 @@ let
   # Hardware mappings.
   isChuweiMiniPC = isSatama;
   isDesktop = isKoira;
+  isLaptop = isTuxedoInfinityBook;
   isTuxedoInfinityBook = isPerrrkele;
+
+  # Role groupings
+  isRoleGraphical = isDesktop || isLaptop;  # Combined condition for user-side hostSelector
+
+  # GPU grpupings
+  isIntelGPUHost = isChuweiMiniPC || isTuxedoInfinityBook;  # Combined condition for Intel iGPU hostSelector
+  isNvidiaGPUHost = isKoira;
 
 in {
     inherit isPerrrkele isSatama isKoira;
-    inherit isChuweiMiniPC isDesktop isTuxedoInfinityBook;
-
-    # GPU grpupings
-    isIntelGPUHost = isChuweiMiniPC || isTuxedoInfinityBook;  # Combined condition for Intel iGPU hostSelector
-    isNvidiaGPUHost = isKoira;
-
-    # Role groupings
-    isRoleLaptop = isTuxedoInfinityBook;
-    isRoleServer = isChuweiMiniPC;
-    isRoleUser = isDesktop || isTuxedoInfinityBook;  # Combined condition for user-side hostSelector
+    inherit isChuweiMiniPC isDesktop isLaptop isTuxedoInfinityBook;
+    inherit isRoleGraphical;
+    inherit isIntelGPUHost isNvidiaGPUHost;
 }

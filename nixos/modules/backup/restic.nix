@@ -13,7 +13,7 @@ let
         if hostSelector.isRoleLaptop then
 
 
-        else if hostSelector.isRoleServer then
+        else if hostSelector.isChuweiMiniPC then
 
 
         else if hostSelector.isDesktop then
