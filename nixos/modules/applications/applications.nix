@@ -58,7 +58,6 @@ in {
     ./chromium.nix  # Hardening
     ./emacs.nix
     ./firefox.nix
-    ./nh.nix  # Yet another nix helper
   ];
 
   # Allow lincense-burdened packages.
