@@ -37,14 +37,14 @@ let
         ]
      ));
 
-  assembledList =
+  pacakgesList =
     let
-      assembly = if hostSelector.isRoleLaptop then rolePackages "Laptop"
+      roleAssembly = if hostSelector.isRoleLaptop then rolePackages "Laptop"
                  else if hostSelector.isRoleDesktop then rolePackages "Desktop"
                  else if hostSelector.isRoleServer then rolePackages "HomeLab"
                  else [];
     in
-      assembly ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
+      roleAssembly ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
 
 in {
   # The application modules installed with NixOS options are imported here.
@@ -60,5 +60,5 @@ in {
   };
 
   # Install packages system-wide based on the host role.
-  environment.systemPackages = assembledList;
+  environment.systemPackages = pacakgesList;
 }
