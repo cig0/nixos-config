@@ -6,7 +6,7 @@ let
   hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
 
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`.
-  kernelPackages_isRoleServer = pkgs.linuxPackages_hardened;
+  kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
   kernelPackages_isTuxedoInfinityBook = pkgs.linuxPackages_latest;
   kernelPackages_fallback = pkgs.linuxPackages_latest;
 
@@ -65,14 +65,14 @@ in
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ]; # Override parameter in hardware-configuration.nix
     kernelModules = [ "kvm-intel" "i915" ];  # Override parameter in hardware-configuration.nix
     kernelPackages =
-      if hostSelector.isRoleServer then kernelPackages_isRoleServer
+      if hostSelector.isChuweiMiniPC then kernelPackages_isChuweiMiniPC
       else if hostSelector.isTuxedoInfinityBook then kernelPackages_isTuxedoInfinityBook
       else kernelPackages_fallback;  # If no specific kernel package is selected, default to NixOS latest kernel.
 
     kernel.sysctl =
       # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
 
-      if hostSelector.isKoira || hostSelector.isRoleServer
+      if hostSelector.isKoira || hostSelector.isChuweiMiniPC
         then commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "bbr"; }
         # bbr: A newer algorithm designed for higher throughput and lower latency.
       else if hostSelector.isTuxedoInfinityBook

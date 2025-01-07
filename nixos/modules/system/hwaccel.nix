@@ -1,5 +1,3 @@
-# Hardware acceleration
-
 { config, pkgs, ... }:
 
 let
@@ -35,7 +33,6 @@ in {
     else if hostSelector.isNvidiaGPUHost then [ "nvidia" ]
     else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 
-  # ===== FOR WHEN MIGRATING VITTU
   # Nvidia GPU host
   hardware.nvidia.modesetting.enable = hostSelector.mkIf hostSelector.isNvidiaGPUHost true;
 }
