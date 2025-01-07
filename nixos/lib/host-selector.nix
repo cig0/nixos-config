@@ -5,62 +5,32 @@
 
 # Hosts mapping.
 
-{ config, lib, ... }:
+{ config, ... }:
 
 let
   # TODO: I'm keeping this mkIf around for now as a reminder of how to implement this.
-  inherit (lib) mkIf;
-  myHostName = config.networking.hostName; # Extra fail-check.
+  myHostName = config.networking.hostName;
 
-in
-  rec {
-    # Export mkIf for reuse.
-    mkIf = lib.mkIf;
+  # Hosts definition by name.
+  isPerrrkele = myHostName == "perrrkele";
+  isSatama = myHostName == "satama";
+  isKoira = myHostName == "koira";
 
-    # ====  Define truthiness for the hosts and logical groupings
-    # Individual hosts definition by name.
-    isPerrrkele = myHostName == "perrrkele";
-    isSatama = myHostName == "satama";
-    isKoira = myHostName == "koira";
+  # Hardware mappings.
+  isChuweiMiniPC = isSatama;
+  isDesktop = isKoira;
+  isTuxedoInfinityBook = isPerrrkele;
 
-    # Logical groupings
-      # By hardware
-      isChuweiMiniPC = isSatama;
-      isDesktop = isKoira;
-      isTuxedoInfinityBook = isPerrrkele;
+in {
+    inherit isPerrrkele isSatama isKoira;
+    inherit isChuweiMiniPC isDesktop isTuxedoInfinityBook;
 
-      # By GPU
-      isIntelGPUHost = isChuweiMiniPC || isTuxedoInfinityBook;  # Combined condition for Intel iGPU hostSelector
-      isNvidiaGPUHost = isKoira;
+    # GPU grpupings
+    isIntelGPUHost = isChuweiMiniPC || isTuxedoInfinityBook;  # Combined condition for Intel iGPU hostSelector
+    isNvidiaGPUHost = isKoira;
 
-      # By role
-      isRoleLaptop = isTuxedoInfinityBook;
-      isRoleServer = isChuweiMiniPC;
-      isRoleUser = isDesktop || isTuxedoInfinityBook;  # Combined condition for user-side hostSelector
+    # Role groupings
+    isRoleLaptop = isTuxedoInfinityBook;
+    isRoleServer = isChuweiMiniPC;
+    isRoleUser = isDesktop || isTuxedoInfinityBook;  # Combined condition for user-side hostSelector
 }
-
-
-# Notes & examples
-# ----------------
-#
-# - Don't forget to add `config, lib,` to the module you will be importing this module from
-# - MYHOST -> proper hostname
-
-
-# let
-#   hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
-# in
-#
-# {
-#   myFunction = hostnameLogic.mkIf hostnameLogic.isMYHOST {
-#     ...
-#   };
-# }
-# {
-#  myFunction =
-#    if hostnameLogic.isPerrrkele then
-#      something
-#    else if hostnameLogic.isSatama then
-#      "something else"
-#    else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
-# }
