@@ -23,15 +23,15 @@ let
       (lib.optionals (role == "Laptop" || role == "Desktop") (
         p.lists.appsBaseline ++
         p.lists.appsGui ++
-        p.lists.appsNonGui ++
+        p.lists.appsCli ++
         appsGuiShell
       )) ++
      (lib.optionals (role == "HomeLab") (
         p.lists.appsBaseline ++
-        p.sets.appsNonGui.backup ++
-        p.sets.appsNonGui.cloudNativeTools ++
-        p.sets.appsNonGui.security ++
-        p.sets.appsNonGui.vcs
+        p.sets.appsCli.backup ++
+        p.sets.appsCli.cloudNativeTools ++
+        p.sets.appsCli.security ++
+        p.sets.appsCli.vcs
         [
           pkgs.pinentry-curses
         ]

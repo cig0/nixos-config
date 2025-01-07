@@ -180,7 +180,7 @@ let
     ];
   };
 
-  appsNonGui = {
+  appsCli = {
     ai = with unstablePkgs; [
       aichat
       oterm
@@ -333,13 +333,13 @@ in {
   lists = {
     appsBaseline = appsBaseline;
     appsGui = appsGui;
-    appsNonGui = builtins.concatLists (builtins.attrValues appsNonGui);  # Flatten entire set; useful when installing everything-and-the-kitchen-sink.
+    appsCli = builtins.concatLists (builtins.attrValues appsCli);  # Flatten entire set; useful when installing everything-and-the-kitchen-sink.
     appsNvidia = appsNvidia;
   };
 
   sets = {
     appsGuiShell = appsGuiShell;
-    appsNonGui = appsNonGui;  # Useful when installing only specific sets.
+    appsCli = appsCli;  # Useful when installing only specific sets.
   };
 }
 
