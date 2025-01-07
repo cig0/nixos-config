@@ -1,5 +1,5 @@
 {
-  xdg.configFile."apps.cargo".text = ''
+  xdg.configFile."apps-cargo".text = ''
     # Hola desde NixOS!
 
     # List of applications and tools managed by Rust's package manager Cargo

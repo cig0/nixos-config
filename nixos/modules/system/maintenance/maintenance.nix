@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./apps-cargo.nix  # Update apps defined in $HOME/apps.cargo
+    # ./apps-cargo.nix  # Update apps defined in $HOME/apps.cargo
     ./nix-settings.nix  # Garbage collection and Nix store optimization.
 
     # System upgrade.

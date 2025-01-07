@@ -11,13 +11,18 @@
   #   (modulesPath + "/profiles/minimal.nix")
   # ];
 
-  home-manager = {
+  home-manager = {  # Define user-specific packages and configurations
     backupFileExtension = "backup";
     useGlobalPkgs = false;
     useUserPackages = true;
     users = {
       cig0 = { ... }: {
-        # Define user-specific packages and configurations
+        imports = [
+          # Install additional apps with Cargo.
+          ./modules/applications/apps-cargo.nix
+          ./modules/user/maintenance/apps-cargo.nix
+        ];
+
         home.packages =
           with pkgs; [
           ] ++

@@ -4,7 +4,7 @@
 
 let
   functions = ''
-    _upgrade.apps.cargo() {
+    _upgrade-apps-cargo() {
       local action='Upgrading:'
       local payload='Cargo packages'
       echo -e "\\n\\n${ansiColors.bold_white}====  $action${ansiColors.reset} ${ansiColors.bold_green}$payload${ansiColors.reset}\\n"
@@ -17,7 +17,7 @@ let
 
       # Use shell evaluation of $XDG_CONFIG_HOME
       # file="$XDG_CONFIG_HOME/apps.cargo"
-      file="${commonEnvSessionVars.xdgConfigHome}/apps.cargo"
+      file="${commonEnvSessionVars.xdgConfigHome}/apps-cargo"
 
       if [ ! -f "$file" ]; then
         echo "Error: $file not found"

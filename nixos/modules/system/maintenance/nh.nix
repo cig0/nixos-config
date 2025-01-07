@@ -23,7 +23,6 @@ in {
   ];
 
   programs.nh = {
-    enable = false;
     flake = inputs.self.outPath;  # Use the flake of the current system.
     clean = {
       enable = false;

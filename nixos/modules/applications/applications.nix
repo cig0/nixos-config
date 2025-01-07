@@ -54,10 +54,11 @@ in {
   #   - This is the more idiomatic NixOS way of handling conditional module activation.
   imports = builtins.filter (x: x != null) [
     # ../systemPackages-overrides.nix
-    ./atop.nix
-    ./chromium.nix
+    ./atop.nix  # System usage monitoring
+    ./chromium.nix  # Hardening
     ./emacs.nix
     ./firefox.nix
+    ./nh.nix  # Yet another nix helper
   ];
 
   # Allow lincense-burdened packages.
