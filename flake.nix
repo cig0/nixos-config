@@ -32,14 +32,9 @@
       url = "github:nix-community/lanzaboote/v0.4.1";
     };
 
-    nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.4.1.tar.gz";  # Declarative Flatpak management
+    nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.5.2.tar.gz";  # Declarative Flatpak management
 
-    nix-index.url = "github:nix-community/nix-index";
-
-    # nix-index-database = {  # TODO: learn how to implement it properly.
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   url = "github:nix-community/nix-index-database";
-    # };
+    nix-index.url = "github:nix-community/nix-index";  # https://github.com/nix-community/nix-index
 
     nix-ld = {  # https://github.com/nix-community/nix-ld
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -70,7 +65,6 @@
     lanzaboote,               # Secure Boot for NixOS.
     nix-flatpak,              # Enhanced Flatpak support.
     nix-index,                # A files database for nixpkgs.
-    # nix-index-database,       # A files database for nixpkgs - pre-baked.
     nix-ld,                   # Run unpatched dynamic binaries on NixOS.
     nixos-cosmic,             # COSMIC Desktop Environment.
     nixos-hardware,           # Additional hardware configuration.
