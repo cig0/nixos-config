@@ -1,5 +1,3 @@
-# Systemd timer that runs a service to upgrade Cargo packages defined in $HOME/.config/apps.cargo weekly.
-
 # home-manager/modules/maintenance/apps-cargo.nix
 { pkgs, ... }:
 

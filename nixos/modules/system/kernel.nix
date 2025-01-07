@@ -63,9 +63,8 @@ in
 {
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ]; # Override parameter in hardware-configuration.nix
-    kernelModules = [ "kvm-intel" "i915" ];  # Override parameter in hardware-configuration.nix
-    kernelPackages =
-      if hostSelector.isChuweiMiniPC then kernelPackages_isChuweiMiniPC
+    kernelModules = if hostSelector.isIntelGPUHost then [ "kvm-intel" "i915" ] else [];  # Override parameter in hardware-configuration.nix
+    kernelPackages = if hostSelector.isChuweiMiniPC then kernelPackages_isChuweiMiniPC
       else if hostSelector.isTuxedoInfinityBook then kernelPackages_isTuxedoInfinityBook
       else kernelPackages_fallback;  # If no specific kernel package is selected, default to NixOS latest kernel.
 
@@ -80,8 +79,7 @@ in
         # westwood: Aimed at improving performance over wireless networks and other lossy links by using end-to-end bandwidth estimation.
       else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 
-    kernelParams =
-      if hostSelector.isTuxedoInfinityBook || hostSelector.isChuweiMiniPC then
+    kernelParams = if hostSelector.isIntelGPUHost then
         commonKernelParams ++
         [
           "fbcon=nodefer"                 # Prevent the kernel from blanking plymouth out of the framebuffer.
@@ -103,11 +101,7 @@ in
         ]
       else {};
 
-    kernelPatches =
-        # Patches could be configured by host role or hardware, kernel type and so on.
-
-      # All kernel types/roles/hardware
-      if kernelPatches_enable == "true" then
+    kernelPatches = if kernelPatches_enable == "true" then
         [{
           name = "tux-logo";
           patch = null;
