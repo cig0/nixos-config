@@ -124,7 +124,7 @@
             ./nixos/modules/networking/stevenblack-unblacklist.nix
             ./nixos/modules/networking/tailscale.nix
           ];
-          nixos = [ ./nixos/modules/applications/nix-ld.nix ];
+          nixos = [ ./nixos/modules/system/nix-ld.nix ];
           nixVim = [
             ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
             # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
