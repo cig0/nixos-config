@@ -1,19 +1,19 @@
 # Hardware acceleration
 
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
-  hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
-in
-{
+  hostSelector = import ../../lib/host-selector.nix { inherit config; };
+
+in {
   # Intel iGPU hosts
-  nixpkgs.config = hostSelector.mkIf hostSelector.isIntelGPUHost {
+  nixpkgs.config = if hostSelector.isIntelGPUHost then {
     packageOverrides = pkgs: {
       intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
     };
-  };
+  } else {};
 
-   hardware.graphics = hostSelector.mkIf hostSelector.isIntelGPUHost {
+   hardware.graphics = if hostSelector.isIntelGPUHost then {
     enable = true;
     extraPackages = with pkgs; [
       intel-compute-runtime
@@ -28,7 +28,7 @@ in
       intel-media-driver
       #intel-vaapi-driver
     ];
-  };
+  } else {};
 
   services.xserver.videoDrivers =
     if hostSelector.isIntelGPUHost then [ "modesetting" "fbdev" ]
