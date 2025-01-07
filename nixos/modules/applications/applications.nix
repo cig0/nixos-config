@@ -54,6 +54,7 @@ in {
   #   - This is the more idiomatic NixOS way of handling conditional module activation.
   imports = builtins.filter (x: x != null) [
     # ../systemPackages-overrides.nix
+    ./atop.nix
     ./chromium.nix
     ./emacs.nix
     ./firefox.nix
