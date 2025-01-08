@@ -10,9 +10,10 @@ let
         # LSP
           nil
           nixd
+        alejandra  # The Uncompromising Nix Code Formatter :: https://github.com/kamadorueda/alejandra
         comma
         devpod
-        fh # fh, the official FlakeHub CLI :: https://github.com/DeterminateSystems/fh
+        fh  # fh, the official FlakeHub CLI :: https://github.com/DeterminateSystems/fh
         hydra-check
         manix
         nh
@@ -104,82 +105,6 @@ let
         dysk
         ncdu
     ]);
-
-  appsGui =
-    with pkgs; [
-      # Multimedia
-        gimp-with-plugins  # Fails to build from unstable because of some plugins.
-
-      # Security
-        keepassxc
-        pinentry-qt  # Move to the unstablePkgs if you're using NixOS from the unstable channel.
-
-      # Utilities
-        cool-retro-term  # Let's avoid pulling unnecessary dependencies, as the app last release date was at the end of January 2022.
-
-      # Virtualization
-        virt-viewer
-    ] ++
-    (with unstablePkgs; [
-      # AI
-        (lmstudio.override {
-          commandLineArgs = [
-            "--enable-features=VaapiVideoDecodeLinuxGL"
-            "--ignore-gpu-blocklist"
-            "--enable-zero-copy"
-            "--enable-features=UseOzonePlatform"
-            "--ozone-platform=wayland"
-          ];
-        })
-
-      # Multimedia
-        # cinelerra
-        # davinci-resolve
-        lightworks
-        # olive-editor
-
-      # Programming
-        sublime-merge
-        vscode-fhs
-
-      # Security
-        # Web
-        burpsuite
-
-      # Utilities
-        wezterm
-    ]);
-
-  appsGuiShell = {
-    cosmic = with pkgs; [
-    ];
-    hyprland = with pkgs; [
-    ];
-      # Virtualization
-    kde = with pkgs; [
-        kdePackages.alpaka
-        kdePackages.discover
-        kdePackages.kdenlive
-        kdePackages.kio-zeroconf
-        kdePackages.kjournald
-        kdePackages.krohnkite
-        kdePackages.kup
-        kdePackages.kwallet-pam
-        qtcreator
-        kdePackages.plasma-browser-integration
-        kdePackages.yakuake
-        krita
-        krita-plugin-gmic
-
-        # Dependencies / helpers
-          aha  # Required for "About this System" in System Settings.
-          glaxnimate  # Kdenlive dependency
-    ];
-    wayfire = with pkgs; [
-    ];
-    xfce = with pkgs; [
-    ];
-  };
 
   appsCli = {
     ai = with unstablePkgs; [
@@ -323,6 +248,82 @@ let
     ];
   };
 
+  appsGui =
+    with pkgs; [
+      # Multimedia
+        gimp-with-plugins  # Fails to build from unstable because of some plugins.
+
+      # Security
+        keepassxc
+        pinentry-qt  # Move to the unstablePkgs if you're using NixOS from the unstable channel.
+
+      # Utilities
+        cool-retro-term  # Let's avoid pulling unnecessary dependencies, as the app last release date was at the end of January 2022.
+
+      # Virtualization
+        virt-viewer
+    ] ++
+    (with unstablePkgs; [
+      # AI
+        (lmstudio.override {
+          commandLineArgs = [
+            "--enable-features=VaapiVideoDecodeLinuxGL"
+            "--ignore-gpu-blocklist"
+            "--enable-zero-copy"
+            "--enable-features=UseOzonePlatform"
+            "--ozone-platform=wayland"
+          ];
+        })
+
+      # Multimedia
+        # cinelerra
+        # davinci-resolve
+        lightworks
+        # olive-editor
+
+      # Programming
+        sublime-merge
+        vscode-fhs
+
+      # Security
+        # Web
+        burpsuite
+
+      # Utilities
+        wezterm
+    ]);
+
+  appsGuiShell = {
+    cosmic = with pkgs; [
+    ];
+    hyprland = with pkgs; [
+    ];
+      # Virtualization
+    kde = with pkgs; [
+        kdePackages.alpaka
+        kdePackages.discover
+        kdePackages.kdenlive
+        kdePackages.kio-zeroconf
+        kdePackages.kjournald
+        kdePackages.krohnkite
+        kdePackages.kup
+        kdePackages.kwallet-pam
+        qtcreator
+        kdePackages.plasma-browser-integration
+        kdePackages.yakuake
+        krita
+        krita-plugin-gmic
+
+        # Dependencies / helpers
+          aha  # Required for "About this System" in System Settings.
+          glaxnimate  # Kdenlive dependency
+    ];
+    wayfire = with pkgs; [
+    ];
+    xfce = with pkgs; [
+    ];
+  };
+
   appsNvidia =
     with pkgs; [
     ] ++
@@ -333,14 +334,14 @@ let
 in {
   lists = {
     appsBaseline = appsBaseline;
-    appsGui = appsGui;
     appsCli = builtins.concatLists (builtins.attrValues appsCli);  # Flatten entire set; useful when installing everything-and-the-kitchen-sink.
+    appsGui = appsGui;
     appsNvidia = appsNvidia;
   };
 
   sets = {
-    appsGuiShell = appsGuiShell;
     appsCli = appsCli;  # Useful when installing only specific sets.
+    appsGuiShell = appsGuiShell;
   };
 }
 
