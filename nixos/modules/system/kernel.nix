@@ -5,7 +5,7 @@
 let
   hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
 
-  # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`.
+  # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isTuxedoInfinityBook = "pkgs.linuxPackages_xanmod_latest";`.
   kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
   kernelPackages_isTuxedoInfinityBook = pkgs.linuxPackages_latest;
   kernelPackages_fallback = pkgs.linuxPackages_latest;
@@ -71,7 +71,7 @@ in
     kernel.sysctl =
       # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
 
-      if hostSelector.isKoira || hostSelector.isChuweiMiniPC
+      if hostSelector.isDesktop || hostSelector.isChuweiMiniPC
         then commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "bbr"; }
         # bbr: A newer algorithm designed for higher throughput and lower latency.
       else if hostSelector.isTuxedoInfinityBook
