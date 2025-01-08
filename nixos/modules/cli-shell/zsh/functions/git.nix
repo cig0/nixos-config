@@ -5,13 +5,17 @@
 let
   functions = ''
     gd() {  # git diff
-      local message="Skipping"
+      # TODO: create a proper lobrary to handle printing messages.
+      local message=(
+        "(git diff)"
+        "Skipping"
+      )
       local payload=(
         "flake.lock"
         ""
       )
 
-      [[ -e flake.lock ]] && echo -e "\\n${ansiColors.bold_white}====  $message${ansiColors.reset} ${ansiColors.bold_green}$payload${ansiColors.reset}"
+      [[ -e flake.lock ]] && echo -e "\\n${ansiColors.bold_white}==== ${ansiColors.reset}(git diff) ${ansiColors.bold_white}Skipping${ansiColors.reset} ${ansiColors.bold_green}''${payload[@]}${ansiColors.reset}"
 
       git diff -- . ':!flake.lock';
     }
