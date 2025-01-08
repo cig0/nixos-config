@@ -37,7 +37,7 @@ let
      ));
 
   systemPackages =  let sP = if hostSelector.isRoleGraphical then hostPackages "Graphical"
-                      else if hostSelector.isChuweiMiniPC then hostPackages "HomeLab"
+                      else if hostSelector.isHomeLab then hostPackages "HomeLab"
                       else [];
                     in
                       sP ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
