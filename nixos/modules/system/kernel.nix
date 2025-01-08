@@ -5,9 +5,9 @@
 let
   hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
 
-  # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isTuxedoInfinityBook = "pkgs.linuxPackages_xanmod_latest";`.
+  # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isTUXEDOInfinityBookPro = "pkgs.linuxPackages_xanmod_latest";`.
   kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
-  kernelPackages_isTuxedoInfinityBook = pkgs.linuxPackages_latest;
+  kernelPackages_isTUXEDOInfinityBookPro = pkgs.linuxPackages_latest;
   kernelPackages_fallback = pkgs.linuxPackages_latest;
 
   kernelPatches_enable = "false"; # Enable/disable applying kernel patches.
@@ -65,7 +65,7 @@ in
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ]; # Override parameter in hardware-configuration.nix
     kernelModules = if hostSelector.isIntelGPUHost then [ "kvm-intel" "i915" ] else [];  # Override parameter in hardware-configuration.nix
     kernelPackages = if hostSelector.isChuweiMiniPC then kernelPackages_isChuweiMiniPC
-      else if hostSelector.isTuxedoInfinityBook then kernelPackages_isTuxedoInfinityBook
+      else if hostSelector.isTUXEDOInfinityBookPro then kernelPackages_isTUXEDOInfinityBookPro
       else kernelPackages_fallback;  # If no specific kernel package is selected, default to NixOS latest kernel.
 
     kernel.sysctl =
@@ -74,7 +74,7 @@ in
       if hostSelector.isDesktop || hostSelector.isChuweiMiniPC
         then commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "bbr"; }
         # bbr: A newer algorithm designed for higher throughput and lower latency.
-      else if hostSelector.isTuxedoInfinityBook
+      else if hostSelector.isTUXEDOInfinityBookPro
         then commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "westwood"; }
         # westwood: Aimed at improving performance over wireless networks and other lossy links by using end-to-end bandwidth estimation.
       else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";

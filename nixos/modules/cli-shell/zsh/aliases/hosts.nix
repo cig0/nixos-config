@@ -4,11 +4,11 @@
 
 let
   aliases = {
-    sTuxedoInfinityBook = "ssh TuxedoInfinityBook";
+    sTUXEDOInfinityBookPro = "ssh TUXEDOInfinityBookPro";
     ssatama = "ssh satama";
     sterasbetoni = "ssh terasbetoni";
     skoira = "ssh koira";
-    tTuxedoInfinityBook = "ssh TuxedoInfinityBook -t 'tmux attach-session -t'";
+    tTUXEDOInfinityBookPro = "ssh TUXEDOInfinityBookPro -t 'tmux attach-session -t'";
     tsatama = "ssh satama -t 'tmux attach-session -t'";
     tterasbetoni = "ssh terasbetoni -t 'tmux attach-session -t'";
     tkoira = "ssh koira -t 'tmux attach-session -t'";
