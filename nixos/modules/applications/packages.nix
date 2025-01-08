@@ -20,6 +20,7 @@ let
         niv
         nix-diff
         nix-index
+        nix-melt
         nix-tree
         nixfmt-classic
         nixpkgs-fmt
