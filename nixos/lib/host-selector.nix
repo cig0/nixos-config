@@ -11,26 +11,23 @@ let
   # TODO: I'm keeping this mkIf around for now as a reminder of how to implement this.
   myHostName = config.networking.hostName;
 
-  # Hosts definition by name.
-  isPerrrkele = myHostName == "perrrkele";
-  isSatama = myHostName == "satama";
-  isKoira = myHostName == "koira";
-
-  # Hardware mappings.
-  isChuweiMiniPC = isSatama;
-  isDesktop = isKoira;
-  isLaptop = isTuxedoInfinityBook;
-  isTuxedoInfinityBook = isPerrrkele;
+  # Hosts definition by kind.
+  # I'm moving away from giving proper names to hosts, and instead using the hostname as a reference.
+  # With NixOS I can finally treat hosts as cattle, not as a pet.
+  isTuxedoInfinityBook = myHostName == "TuxedoInfinityBook";
+  isChuweiMiniPC = myHostName == "ChuweiMiniPC";
+  isDesktop = myHostName == "desktop";
+  # Aliases
+    isLaptop = isTuxedoInfinityBook;
 
   # Role groupings
   isRoleGraphical = isDesktop || isLaptop;  # Combined condition for user-side hostSelector
 
   # GPU grpupings
   isIntelGPUHost = isChuweiMiniPC || isTuxedoInfinityBook;  # Combined condition for Intel iGPU hostSelector
-  isNvidiaGPUHost = isKoira;
+  isNvidiaGPUHost = isDesktop;
 
 in {
-    inherit isPerrrkele isSatama isKoira;
     inherit isChuweiMiniPC isDesktop isLaptop isTuxedoInfinityBook;
     inherit isRoleGraphical;
     inherit isIntelGPUHost isNvidiaGPUHost;
