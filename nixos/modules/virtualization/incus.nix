@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   virtualisation.incus = {
     enable = true;
