@@ -79,16 +79,14 @@
 
     # Modules definitions and handling.
       systemModules = {
-        # Collections.
         # Collections should be defioned with roles in mind. Any specific host configuration should be done in the host's configuration section of the flake, or within a specialisations block.
-          all = mergeLists [  # Collection role scope: laptop and workstation.
-            systemModules.core
-            systemModules.hardware.bluetooth
-            systemModules.hardware.wifi
+          _all = mergeLists [  # Collection role scope: laptop and workstation.
+            systemModules._core
+            systemModules._radio
             systemModules.virtualization.containerization
             systemModules.virtualization.hypervisor
           ];
-          core = mergeLists [
+          _core = mergeLists [
             systemModules.applications
             systemModules.cliShell
             systemModules.networking
@@ -99,11 +97,9 @@
             systemModules.security
             systemModules.system
           ];
-          home-lab = mergeLists [
-            systemModules.all
-          ];
-          home-nas = mergeLists [
-            systemModules.core
+          _radio = mergeLists [
+            systemModules.radio.bluetooth
+            systemModules.radio.wifi
           ];
 
         # Imported modules.
@@ -112,10 +108,6 @@
             ./nixos/modules/cli-shell/starship.nix
             ./nixos/modules/cli-shell/zsh/zsh.nix
           ];
-          hardware = {
-            bluetooth = [ ./nixos/modules/hardware/bluetooth.nix ];
-            wifi = [ ./nixos/modules/hardware/wifi.nix ];
-          };
           networking = [
             ./nixos/modules/networking/dns.nix
             ./nixos/modules/networking/mtr.nix
@@ -138,6 +130,10 @@
             ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
             ./nixos/modules/power-management/power-management.nix
           ];
+          radio = {
+            bluetooth = [ ./nixos/modules/hardware/bluetooth.nix ];
+            wifi = [ ./nixos/modules/hardware/wifi.nix ];
+          };
           security = [
             ./nixos/modules/security/firewall.nix
             ./nixos/modules/security/gnupg.nix
@@ -169,17 +165,16 @@
       };
 
       userModules = {
-        # Collections.
         # Collections should be defioned with roles in mind. Any specific host configuration should be done in the host's configuration section of the flake, or within a specialisations block.
-          all = mergeLists [  # Default collection.
+          _all = mergeLists [  # Default collection.
             userModules.audio.audio-subsystem
             userModules.audio.speech-synthesis
-            userModules.core
+            userModules._core
             userModules.fonts
             userModules.home-manager
             userModules.nix-flatpak
           ];
-          core = mergeLists [  # Core modules shared by all hosts.
+          _core = mergeLists [  # Core modules shared by all hosts.
             userModules.displayManagers
             userModules.xdgDesktopPortal
           ];
@@ -240,8 +235,8 @@
       inherit specialArgs;
       inherit system;
       modules = mergeLists [
-        systemModules.all
-        userModules.all
+        systemModules._all
+        userModules._all
         userModules.guiShells.selector  # TODO: remove after refactoring the configuration.
         ] ++ [
           ./nixos/hosts/TuxedoInfinityBook/configuration.nix
