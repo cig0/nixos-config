@@ -10,8 +10,8 @@ in {
     priority = 5;
     memoryPercent =
       if hostSelector.isChuweiMiniPC then 5
-      else if hostSelector.isWorkstation then 25
       else if hostSelector.isTuxedoInfinityBook then 15
+      else if hostSelector.isWorkstation then 25
       else {};
   };
 }
