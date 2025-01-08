@@ -90,7 +90,6 @@
             systemModules.applications
             systemModules.cliShell
             systemModules.networking
-            systemModules.nixos
             systemModules.nixVim
             systemModules.observability
             systemModules.powerManagement
