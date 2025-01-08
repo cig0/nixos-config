@@ -27,8 +27,3 @@ in {
     inherit isDesktop isHomeLab isLaptop isRoleGraphical;
     inherit isIntelGPUHost isNvidiaGPUHost;
 }
-
-
-# TODO:
-# [x] Drop hand-picked hostnames; treat hosts as cattle, not as a pet. The only important thing is the flake. The flake rule us. We obey the flake. The flake is the only source of authotority. All praises to the flake!
-# [x] Replace all references to "Server" for "HomeLab" as it's more accurate.
