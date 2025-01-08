@@ -56,7 +56,7 @@ in {
     # ../systemPackages-overrides.nix
     ./atop.nix  # System usage monitoring
     ./chromium.nix  # Hardening
-    ./emacs.nix
+    # ./emacs.nix
     ./firefox.nix
   ];
 
