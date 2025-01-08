@@ -10,7 +10,7 @@ let
   p = import ./packages.nix { inherit pkgs unstablePkgs; };
 
   # Function to create package lists based on host roles.
-  hostPackages = packages:
+  hostPackages = hP:
     let appsGuiShell =  # Dynamically add packages based on the enabled GUI shell.
         lib.optionals (config.services.desktopManager.cosmic.enable or false) p.sets.appsGuiShell.cosmic ++
         lib.optionals (config.programs.hyprland.enable or false) p.sets.appsGuiShell.hyprland ++
@@ -19,13 +19,13 @@ let
         lib.optionals (config.services.desktopManager.xfce.enable or false) p.sets.appsGuiShell.xfce
       ;
     in
-      (lib.optionals (packages == "Graphical") (
+      (lib.optionals (hP == "Graphical") (
         p.lists.appsBaseline ++
         p.lists.appsGui ++
         p.lists.appsCli ++
         appsGuiShell
       )) ++
-     (lib.optionals (packages == "HomeLab") (
+     (lib.optionals (hP == "HomeLab") (
         p.lists.appsBaseline ++
         p.sets.appsCli.backup ++
         p.sets.appsCli.cloudNativeTools ++
