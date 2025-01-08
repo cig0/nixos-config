@@ -3,9 +3,9 @@
 { ... }:
 
 let
-  # Rust's Cargo package manager
+  # Edit the list of packages managed outside of NixOS.
   aliases = {
-    cargoApps = "$EDITOR ~/.config/Cargo.apps";
+    apps-cargo = "$EDITOR ~/.config/apps-cargo";
   };
 
 in { aliases = aliases; }
