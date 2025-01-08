@@ -23,7 +23,7 @@ let
   isNvidiaGPUHost = isWorkstation;
 
 in {
-    inherit isChuweiMiniPC isTuxedoInfinityBook;
+    inherit isChuweiMiniPC isTuxedoInfinityBook isWorkstation;
     inherit isDesktop isHomeLab isLaptop isRoleGraphical;
     inherit isIntelGPUHost isNvidiaGPUHost;
 }
