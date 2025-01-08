@@ -1,4 +1,4 @@
-# grafana-alloy.nix - https://TuxedoInfinityBook.grafana.net/connections/add-new-connection/linux-node?page=alloy
+# grafana-alloy.nix - https://TUXEDOInfinityBookPro.grafana.net/connections/add-new-connection/linux-node?page=alloy
 # Enables Grafana Alloy for monitoring
 
 { ... }:

@@ -35,7 +35,7 @@ in {
           urAccepted = 2; # Send telemetry
         };
         devices = {
-          TuxedoInfinityBook ={
+          TUXEDOInfinityBookPro ={
             id = "I7UYHKV-NU5RSCD-LSZHJ47-LFZY2JE-QKWUTB5-LAZRA7S-S6ZZS3S-2QNVLAA";
           };
           satama = {
@@ -50,91 +50,91 @@ in {
             id = "m3q6z-itat6";
             label = ".aws";
             path = "/home/cig0/.aws";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           ".krew" = {
             id = "zo6vm-ycvnv";
             label = ".krew";
             path = "/home/cig0/.krew";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           ".kube" = {
             id = "cbvut-r9kxc";
             label = ".kube";
             path = "/home/cig0/.kube";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           ".ssh" = {
             id = "7cgim-4pyuc";
             label = ".ssh";
             path = "/home/cig0/.ssh";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           ".terraform.versions" = {
             id = "uoocx-gswyo";
             label = ".terraform.versions";
             path = "/home/cig0/.terraform.versions";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           "Default Folder" = {
             id = "default";
             label = "Default Folder";
             path = "/home/cig0/Sync";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           "Desktop" = {
             id = "bevao-ecdck";
             label = "Desktop";
             path = "/home/cig0/Desktop";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           "Documents" = {
             id = "4plzj-q9hjx";
             label = "Documents";
             path = "/home/cig0/Documents";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           "Downloads" = {
             id = "v72dy-fzjsf";
             label = "Downloads";
             path = "/home/cig0/Downloads";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           "KeePassXC" = {
             id = "nsqaf-gequ7";
             label = "KeePassXC";
             path = "/home/cig0/KeePassXC";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           "Pictures" = {
             id = "zhepz-tkl9u";
             label = "Pictures";
             path = "/home/cig0/Pictures";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           "stash" = {
             id = "inznp-cjdxe";
             label = "stash";
             path = "/home/cig0/stash";
-            devices = [ "TuxedoInfinityBook" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "koira" ];
           };
           "Videos" = {
             id = "g7amc-cstmt";
             label = "Videos";
             path = "/home/cig0/Videos";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           "bin" = {
             id = "mtzdy-xgvcf";
             label = "bin";
             path = "/home/cig0/bin";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
           };
           "w" = {
             id = "rn6um-4btcp";
             label = "w";
             path = "/home/cig0/w";
-            devices = [ "TuxedoInfinityBook" "satama" "koira" ];
+            devices = [ "TUXEDOInfinityBookPro" "satama" "koira" ];
             versioning.type = "simple";
           };
         };

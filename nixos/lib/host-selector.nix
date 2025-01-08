@@ -7,7 +7,7 @@ let
   # With NixOS I can finally treat hosts as cattle, not as a pet.
 
   # Hosts definitions.
-  isTuxedoInfinityBook = myHostName == "TuxedoInfinityBook";
+  isTUXEDOInfinityBookPro = myHostName == "TUXEDOInfinityBookPro";
   isChuweiMiniPC = myHostName == "ChuweiMiniPC";
   isWorkstation = myHostName == "workstation";
 
@@ -15,15 +15,15 @@ let
     isDesktop = isWorkstation;
     isHomeLab = isChuweiMiniPC;
     # isHomeNAS =  # TBD
-    isLaptop = isTuxedoInfinityBook;
+    isLaptop = isTUXEDOInfinityBookPro;
     isRoleGraphical = isDesktop || isLaptop;  # Combined condition for user-side hostSelector
 
   # GPU grpupings.
-  isIntelGPUHost = isChuweiMiniPC || isTuxedoInfinityBook;  # Combined condition for Intel iGPU hostSelector
+  isIntelGPUHost = isChuweiMiniPC || isTUXEDOInfinityBookPro;  # Combined condition for Intel iGPU hostSelector
   isNvidiaGPUHost = isWorkstation;
 
 in {
-    inherit isChuweiMiniPC isTuxedoInfinityBook isWorkstation;
+    inherit isChuweiMiniPC isTUXEDOInfinityBookPro isWorkstation;
     inherit isDesktop isHomeLab isLaptop isRoleGraphical;
     inherit isIntelGPUHost isNvidiaGPUHost;
 }

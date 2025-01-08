@@ -231,7 +231,7 @@
     system = "x86_64-linux";
 
   in {
-    nixosConfigurations.TuxedoInfinityBook = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
+    nixosConfigurations.TUXEDOInfinityBookPro = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
       inherit specialArgs;
       inherit system;
       modules = mergeLists [
@@ -239,7 +239,7 @@
         userModules._all
         userModules.guiShells.selector  # TODO: remove after refactoring the configuration.
         ] ++ [
-          ./nixos/hosts/TuxedoInfinityBook/configuration.nix
+          ./nixos/hosts/TUXEDOInfinityBookPro/configuration.nix
           nix-ld.nixosModules.nix-ld
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           {

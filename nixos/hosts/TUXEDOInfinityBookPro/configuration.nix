@@ -77,7 +77,7 @@
       device = "/dev/mapper/internalData";
       fsType = "xfs";
       label = "internalData";
-      # Temporarily disable "discard": Dec 08 22:33:42 TuxedoInfinityBook kernel: XFS (dm-2): mounting with "discard" option, but the device does not support discard
+      # Temporarily disable "discard": Dec 08 22:33:42 TUXEDOInfinityBookPro kernel: XFS (dm-2): mounting with "discard" option, but the device does not support discard
       options = [ "allocsize=64m" "defaults" "inode64" "logbsize=256k" "logbufs=8" "noatime" "nodiratime" "nofail" "users" ];
     };
     "/home/cig0/media" = {
@@ -95,7 +95,7 @@
 
   # Set up hostname.
   networking = {  # Enable networking
-    hostName = "TuxedoInfinityBook";  # Define your hostname.
+    hostName = "TUXEDOInfinityBookPro";  # Define your hostname.
     # proxy.default = "http://user:password@proxy:port/";
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
