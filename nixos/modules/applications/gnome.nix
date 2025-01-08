@@ -1,6 +1,3 @@
-# gnome.nix
-# This file contains the configurations for the GNOME Desktop Environment.
-
 { pkgs, ... }:
 
 {

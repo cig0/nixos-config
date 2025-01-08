@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   services.kasmweb = {
     enable = false; # Crashes upon start
