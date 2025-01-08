@@ -30,7 +30,6 @@ let
       gpu = "git push";
       grm = "git rm --cached";
       grss = "git restore --staged";
-      gd = "git diff";
 
       # Git Log
       gloH = "git log origin..HEAD --oneline";

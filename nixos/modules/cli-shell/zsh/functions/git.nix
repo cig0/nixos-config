@@ -1,10 +1,22 @@
 # Don't remove this line! programs.zsh.shellInit
 
-{ ... }:
+{ ansiColors, ... }:
 
 let
   functions = ''
-    lg() {
+    gd() {  # git diff
+      local message="Skipping"
+      local payload=(
+        "flake.lock"
+        ""
+      )
+
+      [[ -e flake.lock ]] && echo -e "\\n${ansiColors.bold_white}====  $message${ansiColors.reset} ${ansiColors.bold_green}$payload${ansiColors.reset}"
+
+      git diff -- . ':!flake.lock';
+    }
+
+    lg() {  # git log
       local repo_path="''${1:-$(pwd)}"
       local git_dir="''${repo_path%/}/.git"
       local work_tree="''${repo_path%/}"
