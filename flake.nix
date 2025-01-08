@@ -103,7 +103,10 @@
           ];
 
         # Imported modules.
-          applications  = [ ./nixos/modules/applications/applications.nix ];  # Install applications.
+          applications  = [  # Install applications systemwide for all hosts.
+            ./nixos/modules/applications/applications.nix
+            ./nixos/modules/applications/nix-ld.nix
+          ];
           cliShell = [
             ./nixos/modules/cli-shell/starship.nix
             ./nixos/modules/cli-shell/zsh/zsh.nix
@@ -112,11 +115,10 @@
             ./nixos/modules/networking/dns.nix
             ./nixos/modules/networking/mtr.nix
             ./nixos/modules/networking/nftables.nix
-            ./nixos/modules/networking/stevenblack.nix
             ./nixos/modules/networking/stevenblack-unblacklist.nix
+            ./nixos/modules/networking/stevenblack.nix
             ./nixos/modules/networking/tailscale.nix
           ];
-          nixos = [ ./nixos/modules/system/nix-ld.nix ];
           nixVim = [
             ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
             # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
