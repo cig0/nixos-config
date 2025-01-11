@@ -290,6 +290,8 @@ let
         burpsuite
 
       # Utilities
+        kitti3
+        kitty
         wezterm
     ]);
 
