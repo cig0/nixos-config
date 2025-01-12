@@ -81,7 +81,7 @@
       # Shell editing Emacs' style
       bindkey -e
 
-      source ./completions/atuin.zsh
+      eval "$(atuin init --disable-up-arrow zsh)"
     '';
 
     # Shell script code called during zsh login shell initialisation.
