@@ -14,6 +14,7 @@ in {
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
+    enableCompletion = true;
     interactiveShellInit = zshConfig.interactiveShellInit;
     loginShellInit = zshConfig.loginShellInit;
     shellAliases = allAliases // zshConfig.shellAliases;
