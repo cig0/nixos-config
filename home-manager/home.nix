@@ -18,9 +18,9 @@
     users = {
       cig0 = { ... }: {
         imports = [
-          ./modules/applications/apps-cargo.nix
+          ./modules/applications/apps-cargo.nix ./modules/user/maintenance/apps-cargo.nix
           ./modules/applications/atuin.nix
-          ./modules/user/maintenance/apps-cargo.nix
+          ./modules/config-files/aws.nix
         ];
 
         home.packages =
