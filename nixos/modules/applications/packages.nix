@@ -282,6 +282,7 @@ let
         # olive-editor
 
       # Programming
+        neovide
         sublime-merge
         vscode-fhs
 
@@ -290,16 +291,15 @@ let
         burpsuite
 
       # Utilities
-        kitti3
         kitty
         wezterm
     ]);
 
   appsGuiShell = {
-    cosmic = with pkgs; [
-    ];
-    hyprland = with pkgs; [
-    ];
+    # cosmic = with pkgs; [
+    # ];
+    # hyprland = with pkgs; [
+    # ];
       # Virtualization
     kde = with pkgs; [
         kdePackages.alpaka
@@ -320,10 +320,10 @@ let
           aha  # Required for "About this System" in System Settings.
           glaxnimate  # Kdenlive dependency
     ];
-    wayfire = with pkgs; [
-    ];
-    xfce = with pkgs; [
-    ];
+    # wayfire = with pkgs; [
+    # ];
+    # xfce = with pkgs; [
+    # ];
   };
 
   appsNvidia =
