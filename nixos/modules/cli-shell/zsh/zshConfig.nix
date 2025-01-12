@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 
 {
   # Oh My Zsh Plugins
@@ -81,7 +81,7 @@
       # Shell editing Emacs' style
       bindkey -e
 
-      . completions/atuin.zsh
+      . $XDG_HOME/.config/atuin/init.zsh
     '';
 
     # Shell script code called during zsh login shell initialisation.
