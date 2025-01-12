@@ -4,7 +4,6 @@
 
   # TODO: add support for different color themes.
 
-
   # Nushell colors.
   bold_green = "\\e[1;32m";
   bold_white = "\\e[1;97m";

@@ -1,8 +1,7 @@
-{ ... }:
-
 {
   programs.starship = {
     enable = true;
+    enableZshIntegration = true;
     settings = {
       format = "$aws\$gcloud\$kubernetes\$helm\$docker_context\$terraform\$package\$rust\$golang\$nodejs\$python\$env_var\$line_break\$username\$hostname\$nix_shell\$shlvl\$directory\$git_branch\$git_commit\$git_state\$git_status\$cmd_duration\$time\$status\$jobs\$character";
 

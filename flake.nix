@@ -107,8 +107,7 @@
             ./nixos/modules/applications/nix-ld.nix
           ];
           cliShell = [
-            ./nixos/modules/cli-shell/starship.nix
-            ./nixos/modules/cli-shell/zsh/zsh.nix
+            # ./nixos/modules/cli-shell/zsh/zsh.nix
           ];
           networking = [
             ./nixos/modules/networking/dns.nix

@@ -1,6 +1,6 @@
 # Don't remove this line! This is a NixOS Zsh function module.
 
-{ ansiColors, commonEnvSessionVars, ... }:
+{ ansiColors, config, ... }:
 
 let
   functions = ''
@@ -15,9 +15,7 @@ let
       # 1 failed
       local update_state=0
 
-      # Use shell evaluation of $XDG_CONFIG_HOME
-      # file="$XDG_CONFIG_HOME/apps.cargo"
-      file="${commonEnvSessionVars.xdgConfigHome}/apps-cargo"
+      file="$HOME/${config.xdg.configFile."apps-cargo".target}"
 
       if [ ! -f "$file" ]; then
         echo "Error: $file not found"
