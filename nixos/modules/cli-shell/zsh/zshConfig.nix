@@ -54,7 +54,6 @@
     # Shell script code called during zsh shell initialisation.
     shellInit = ''
       umask 0077
-      fpath+=~/.zfunc
 
       # Needs https://github.com/nix-community/nix-index
       source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
