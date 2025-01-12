@@ -16,8 +16,8 @@ in {
     autosuggestions.enable = true;
     enableCompletion = true;
     interactiveShellInit = ''
-      ${allFunctions}
       ${zshConfig.interactiveShellInit};
+      ${allFunctions}
     '';
     loginShellInit = zshConfig.loginShellInit;
     shellAliases = allAliases // zshConfig.shellAliases;
