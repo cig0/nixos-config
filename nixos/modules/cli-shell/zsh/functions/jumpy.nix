@@ -26,3 +26,10 @@ let
   '';
 
 in { functions = functions; }
+
+
+# READ ME!
+# =======
+
+# For reference, here's the original implementation of chpwd_functions:
+# chpwd_functions=(${chpwd_functions[@]} "jumpy_handler")
