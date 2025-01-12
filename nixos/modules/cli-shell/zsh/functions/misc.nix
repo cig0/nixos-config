@@ -1,4 +1,4 @@
-# Don't remove this line! programs.zsh.shellInit
+# Don't remove this line! This is a NixOS Zsh function module.
 
 { ... }:
 

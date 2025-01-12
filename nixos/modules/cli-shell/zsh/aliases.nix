@@ -10,7 +10,7 @@ let
   let
     content = builtins.readFile file;
     firstLine = builtins.head (builtins.split "\n" content);
-  in firstLine == "# Don't remove this line! programs.zsh.shellAliases";
+  in firstLine == "# Don't remove this line! This is a NixOS Zsh alias module.";
 
   importAliasFiles = dir:
     let
