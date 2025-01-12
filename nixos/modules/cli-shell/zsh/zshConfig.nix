@@ -80,6 +80,8 @@
 
       # Shell editing Emacs' style
       bindkey -e
+
+      source ./completions/atuin.zsh
     '';
 
     # Shell script code called during zsh login shell initialisation.
