@@ -55,6 +55,27 @@
     shellInit = ''
       umask 0077
 
+      # Completion
+        # Zsh completions configuration file: https://thevaluable.dev/zsh-completion-guide-examples/
+
+        autoload -Uz compinit
+        compinit -C
+
+        unsetopt no_complete_aliases
+        zstyle ':completion:*:*:aliases' command 'compdef _command'
+        zstyle ':completion:*' completer _expand_alias _extensions _complete _approximate
+        # zstyle ':completion:*' completer _expand _complete _ignored _correct _path_files _approximate _prefix _camel_case
+        zstyle ':completion:*' expand prefix suffix
+        zstyle ':completion:*' squeeze-slashes true
+        zstyle ':completion:*' matcher-list 'r:[^A-Z0-9]||[A-Z0-9]=** r:|=*'
+        zstyle ':completion:*' list-dirs-first true
+        zstyle ':completion:*' menu select
+
+        # Caching completions
+        zstyle ':completion:*' use-cache on
+        zstyle ':completion:*' cache-path "$HOME/.cache/zcompcache"
+        zstyle ':completion:*' group-name "${null}"
+
       # Needs https://github.com/nix-community/nix-index
       source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
 
@@ -84,15 +105,5 @@
 
       # Shell editing Emacs' style
       bindkey -e
-
-      # zsh_reload
-      zr() {
-        if [ -n "$(jobs)" ]; then
-          print -P "Error: %j job(s) in background"
-        else
-          [[ -n "$ORIGINAL_PATH" ]] && export PATH="$ORIGINAL_PATH"
-          exec zsh
-        fi
-      }
     '';
 }
