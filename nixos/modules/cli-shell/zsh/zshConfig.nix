@@ -3,7 +3,8 @@
 {
   # Oh My Zsh Plugins
   ohMyZsh = {
-    plugins = [ "fzf" "history-substring-search" ];
+    # plugins = [ "fzf" "history-substring-search" ];
+    plugins = [ "history-substring-search" ];
   };
 
 
@@ -81,7 +82,8 @@
       # Shell editing Emacs' style
       bindkey -e
 
-      . $XDG_HOME/.config/atuin/init.zsh
+      # TODO: Home Manager
+      . "$XDG_HOME/.aws/env"
     '';
 
     # Shell script code called during zsh login shell initialisation.
