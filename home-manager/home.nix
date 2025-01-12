@@ -20,6 +20,7 @@
         imports = [
           # Install additional apps with Cargo.
           ./modules/applications/apps-cargo.nix
+          ./modules/applications/atuin.nix
           ./modules/user/maintenance/apps-cargo.nix
         ];
 
