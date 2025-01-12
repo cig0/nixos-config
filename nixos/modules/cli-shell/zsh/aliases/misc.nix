@@ -8,7 +8,6 @@ let
     ___ = "_h";
     _fi = "find . -maxdepth 1 -iname";
     _t = "tmux -f $HOME/.config/tmux/tmux-zsh.conf new-session -s $(hostnamectl hostname)";
-    cm = "chezmoi --color true --progress true";
     cp = "cp -i";
     dudir = "du -sh ./"; # Use */ for all dirs in the target directory.
     g = "gwenview";
