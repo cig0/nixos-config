@@ -18,10 +18,17 @@
     users = {
       cig0 = { ... }: {
         imports = [
-          ./modules/applications/apps-cargo.nix ./modules/user/maintenance/apps-cargo.nix
           ./modules/applications/atuin.nix
+          ./modules/applications/starship.nix
+          ./modules/applications/zsh/zsh.nix
+          ./modules/config-files/apps-cargo.nix ./modules/user/maintenance/apps-cargo.nix
           ./modules/config-files/aws.nix
         ];
+
+        home.sessionVariables = {
+          EDITOR = "nvim";
+          VISUAL = "code";
+        };
 
         home.packages =
           with pkgs; [

@@ -63,6 +63,8 @@ in {
     homeBinInPath = true;
     localBinInPath = true;
 
+    pathsToLink = [ "/share/zsh" ];  # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
+
     sessionVariables =
       (if hostSelector.isIntelGPUHost then commonEnvSessionVars // intelEnvSessionVars
       else if hostSelector.isNvidiaGPUHost then commonEnvSessionVars
