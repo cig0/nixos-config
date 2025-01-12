@@ -67,7 +67,6 @@ let
 
       # Other utilities
         at
-        atuin
         bat
         chezmoi
         cyme # https://github.com/tuna-f1sh/cyme :: List system USB buses and devices.
