@@ -1,6 +1,6 @@
 # TODO: Finish implementation, add description and instructions.
 
-# Don't remove this line! programs.zsh.shellAliases
+# Don't remove this line! This is a NixOS Zsh alias module.
 
 { ... }:
 
@@ -19,7 +19,7 @@ hasValidHeader = file:
 let
   content = builtins.readFile file;
   firstLine = builtins.head (builtins.split "\n" content);
-in firstLine == "# Don't remove this line! programs.zsh.shellAliases";
+in firstLine == "# Don't remove this line! This is a NixOS Zsh alias module.";
 
 # Import all valid alias files recursively
 importAliasFiles = dir:

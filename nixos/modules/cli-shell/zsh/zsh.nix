@@ -15,13 +15,13 @@ in {
     enable = true;
     autosuggestions.enable = true;
     enableCompletion = true;
-    interactiveShellInit = zshConfig.interactiveShellInit;
+    interactiveShellInit = ''
+      ${allFunctions}
+      ${zshConfig.interactiveShellInit};
+    '';
     loginShellInit = zshConfig.loginShellInit;
     shellAliases = allAliases // zshConfig.shellAliases;
-    shellInit = ''
-      ${allFunctions}
-      ${zshConfig.shellInit}
-    '';
+    shellInit = zshConfig.shellInit;
     setOptions = zshConfig.setOptions;
     syntaxHighlighting.enable = true;
 
