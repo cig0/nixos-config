@@ -1,13 +1,13 @@
 # Assemble the lists and sets of packages to be installed on a host according to the host's role and the GUI shell in use.
 
-{ config, lib, pkgs, unstablePkgs, ... }:
+{ config, lib, pkgs, pkgsUnstable, ... }:
 
 let
   # Host name logic. Loads a map of possible hostnames and their associated roles.
   hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
 
   # Import packages lists and sets.
-  p = import ./packages.nix { inherit pkgs unstablePkgs; };
+  p = import ./packages.nix { inherit pkgs pkgsUnstable; };
 
   # Function to create package lists based on host roles.
   hostPackages = hP:
