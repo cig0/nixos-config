@@ -2,7 +2,7 @@
 
 {
   programs.hyprland = {
-    enable = true;
+    enable = false;
     withUWSM = true; # recommended for most users
   };
 }
