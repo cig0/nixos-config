@@ -210,7 +210,8 @@
       };
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
-    pkgsUnstable = import "${nixpkgs-unstable}" {  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels.
+    # pkgsUnstable = import "${nixpkgs-unstable}" {  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels.
+    pkgsUnstable = import nixpkgs-unstable {  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels.
       inherit system;
       config = {
         allowUnfree = true;
