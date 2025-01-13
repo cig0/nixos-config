@@ -1,5 +1,5 @@
 # Check these modules for additional options:
-#   - ./dns.nix
+#   - ../networking/dns.nix
 #   - ../security/firewall.nix
 
 { config, lib, ... }:
@@ -16,8 +16,8 @@ in {
 
   config = lib.mkIf (cfg == "true") {
     services.tailscale = {
-      openFirewall = true;
       enable = true;
+      openFirewall = true;
       extraUpFlags = [ "--ssh" ];
     };
   };
