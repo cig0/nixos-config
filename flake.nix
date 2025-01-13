@@ -197,7 +197,7 @@
               # ./nixos/modules/gui-shell/cosmic.nix
             ];
             hyprland = [
-              ./nixos/modules/gui-shell/hyprland.nix
+              # ./nixos/modules/gui-shell/hyprland.nix
             ];
             kde = [
               ./nixos/modules/gui-shell/kde-plasma.nix
@@ -205,7 +205,7 @@
               ./nixos/modules/applications/kde/kdeconnect.nix
             ];
             wayfire = [
-              ./nixos/modules/gui-shell/wayfire.nix
+              # ./nixos/modules/gui-shell/wayfire.nix
             ];
             xfce = [
               # ./nixos/modules/gui-shell/xfce.nix
