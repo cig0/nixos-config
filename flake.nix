@@ -78,9 +78,9 @@
     # mergeSets = components: builtins.foldl' (acc: set: acc // set) {} components;
 
     # Modules definitions and handling.
+    # Collections start with an underscore. They can be used, for example, to represent roles.
+    # Any specific host configurations should be done in the host's configuration section of the flake.
       systemModules = {
-        # Collections start with an underscore. They should be defined with roles in mind.
-        # Any specific host configuration should be done in the host's configuration section of the flake, or within a specialisations block.
           _all = mergeLists [  # Collection role scope: laptop and workstation.
             systemModules._core
             systemModules._radio
@@ -162,8 +162,6 @@
       };
 
       userModules = {
-        # Collections start with an underscore. They should be defined with roles in mind.
-        # Any specific host configuration should be done in the host's configuration section of the flake, or within a specialisations block.
           _all = mergeLists [  # Default collection for human users.
             userModules._core
             userModules.audio.audio-subsystem
