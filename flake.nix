@@ -181,7 +181,8 @@
             speech-synthesis = [ ./nixos/modules/system/audio/speech-synthesis.nix ];
           };
           data = [
-            ./nixos/modules/applications/syncthing.nix  # TODO: evaluate how to properly manage Syncthing since it requires hard-coding the hosts' IDs.
+            # TODO: move to Home Manager and remove this entry.
+            # ./nixos/modules/applications/syncthing.nix  # TODO: evaluate how to properly manage Syncthing since it requires hard-coding the hosts' IDs.
           ];
           displayManagers = [
             ./nixos/modules/gui-shell/ly.nix
@@ -193,7 +194,7 @@
               ./nixos/modules/gui-shell/gui-shell-selector.nix
             ];
             cosmic = [
-              ./nixos/modules/gui-shell/cosmic.nix
+              # ./nixos/modules/gui-shell/cosmic.nix
             ];
             hyprland = [
               ./nixos/modules/gui-shell/hyprland.nix
