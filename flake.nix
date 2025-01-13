@@ -23,7 +23,7 @@
     flake-compat.url = "github:edolstra/flake-compat";  # Make nixos-option work with flakes.
 
     home-manager = {  # User-specific settings and packages: https://github.com/nix-community/home-manager
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager?ref=release-24.11";
     };
 
