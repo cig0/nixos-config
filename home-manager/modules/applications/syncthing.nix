@@ -1,4 +1,4 @@
-# Syncthing shares
+# TODO: I need options only available in 25.05 (unstable). When the moment comes to configure Syncthing through Home Manager, I will need to switch the flake input to 'nixpkgs-unstable'.
 
 { config, lib, ... }:
 
