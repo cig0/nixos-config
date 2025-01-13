@@ -65,26 +65,36 @@
       # };
 
 
-      # fine = { ... }: {
-      #   home = {
-      #     homeDirectory = "/home/fine";
+      fine = { ... }: {
+        imports = [
+          ./modules/applications/atuin.nix
+          ./modules/applications/starship.nix
+          ./modules/applications/zsh/zsh.nix
+          ./modules/config-files/apps-cargo.nix ./modules/user/maintenance/apps-cargo.nix
+          ./modules/config-files/aws.nix
+          ./modules/config-files/git.nix
+        ];
 
-      #     sessionVariables = {
-      #       EDITOR = "nvim";
-      #       VISUAL = "code";
-      #     };
+        home = {
+          homeDirectory = "/home/fine";
 
-      #     packages = with pkgs; [
-      #       ] ++
-      #       (with unstablePkgs; [
-      #       # Web
-      #         # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
-      #     ]);
+          sessionVariables = {
+            EDITOR = "nvim";
+            VISUAL = "code";
+          };
 
-      # # The state version is required and should stay at the version you
-      # # originally installed.
-      #   stateVersion = "24.11";
-      # };
+          packages = with pkgs; [
+            ] ++
+            (with unstablePkgs; [
+            # Web
+              # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
+          ]);
+
+        # The state version is required and should stay at the version you
+        # originally installed.
+          stateVersion = "24.11";
+        };
+      };
     };
   };
 }
