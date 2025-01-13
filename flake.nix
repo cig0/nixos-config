@@ -88,7 +88,6 @@
           ];
           _core = mergeLists [
             systemModules.applications
-            systemModules.cliShell
             systemModules.networking
             systemModules.nixVim
             systemModules.observability
@@ -105,9 +104,6 @@
           applications  = [  # Install applications systemwide for all hosts.
             ./nixos/modules/applications/applications.nix
             ./nixos/modules/applications/nix-ld.nix
-          ];
-          cliShell = [
-            # ./nixos/modules/cli-shell/zsh/zsh.nix
           ];
           networking = [
             ./nixos/modules/networking/dns.nix
