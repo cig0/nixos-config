@@ -123,6 +123,8 @@ let
       vagrant  # Should always follow the main channel.
     ] ++ (with pkgsUnstable; [
       argocd
+      bootc
+      buildah
       cosign
       crc
       distrobox
@@ -181,7 +183,6 @@ let
       wl-clipboard
     ];
     programming = with pkgs; [
-      guix
     ] ++ (with pkgsUnstable; [
       # Go
         go  # Needed to install individual apps
@@ -206,7 +207,7 @@ let
       # Everything else...
         devbox
         gcc
-        # guix  # Temporarily revert to the stable channel: guile-lzlib-0.3.0 failed with exit code 2 after ⏱ 9s in checkPhase
+        guix
         mold
         shellcheck
         tokei
