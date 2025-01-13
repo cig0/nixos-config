@@ -79,7 +79,8 @@
 
     # Modules definitions and handling.
       systemModules = {
-        # Collections should be defined with roles in mind. Any specific host configuration should be done in the host's configuration section of the flake, or within a specialisations block.
+        # Collections start with an underscore. They should be defined with roles in mind.
+        # Any specific host configuration should be done in the host's configuration section of the flake, or within a specialisations block.
           _all = mergeLists [  # Collection role scope: laptop and workstation.
             systemModules._core
             systemModules._radio
@@ -161,8 +162,9 @@
       };
 
       userModules = {
-        # Collections should be defined with roles in mind. Any specific host configuration should be done in the host's configuration section of the flake, or within a specialisations block.
-          _all = mergeLists [  # Default collection.
+        # Collections start with an underscore. They should be defined with roles in mind.
+        # Any specific host configuration should be done in the host's configuration section of the flake, or within a specialisations block.
+          _all = mergeLists [  # Default collection for human users.
             userModules._core
             userModules.audio.audio-subsystem
             userModules.audio.speech-synthesis
