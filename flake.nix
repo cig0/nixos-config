@@ -101,7 +101,6 @@
             systemModules.radio.wifi
           ];
 
-        # Imported modules.
           applications  = [  # Install applications systemwide for all hosts.
             ./nixos/modules/applications/applications.nix
             ./nixos/modules/applications/nix-ld.nix
@@ -175,7 +174,6 @@
             userModules.xdgDesktopPortal
           ];
 
-        # Imported modules.
           audio = {
             audio-subsystem = [ ./nixos/modules/system/audio/audio-subsystem.nix ];
             speech-synthesis = [ ./nixos/modules/system/audio/speech-synthesis.nix ];
