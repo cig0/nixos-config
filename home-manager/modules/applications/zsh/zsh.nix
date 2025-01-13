@@ -33,9 +33,6 @@ in {
         # Completion setup
         # Zsh completions configuration file: https://thevaluable.dev/zsh-completion-guide-examples/
 
-        autoload -Uz compinit
-        compinit -C
-
         unsetopt no_complete_aliases
         zstyle ':completion:*' completer _expand_alias _extensions _complete _approximate
         # zstyle ':completion:*' completer _expand _complete _ignored _correct _path_files _approximate _prefix _camel_case
@@ -65,13 +62,10 @@ in {
       # Shell editing Emacs' style
       bindkey -e
 
-      eval "$(atuin init --disable-up-arrow zsh)"
-      eval "$(starship init zsh)"
       . "$XDG_HOME/.aws/env"
 
       # Import functions
-      unalias la
-      ${allFunctions}
+      unalias la && ${allFunctions}
     '';
 
     oh-my-zsh = {
@@ -85,3 +79,12 @@ in {
     };
   };
 }
+
+
+# READ ME!
+# ========
+
+# Refs:
+  # https://superuser.com/questions/519596/share-history-in-multiple-zsh-shell
+  # https://unix.stackexchange.com/questions/669971/zsh-can-i-have-a-combined-history-for-all-of-my-shells
+  # https://github.com/cig0/Phantas0s-dotfiles/blob/master/zsh/zshrc
