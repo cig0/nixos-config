@@ -105,6 +105,7 @@
           applications  = [  # Install applications systemwide for all hosts.
             ./nixos/modules/applications/applications.nix
             ./nixos/modules/applications/nix-ld.nix
+            ./nixos/modules/applications/tailscale.nix
           ];
           networking = [
             ./nixos/modules/networking/dns.nix
@@ -112,7 +113,6 @@
             ./nixos/modules/networking/nftables.nix
             ./nixos/modules/networking/stevenblack-unblacklist.nix
             ./nixos/modules/networking/stevenblack.nix
-            ./nixos/modules/networking/tailscale.nix
           ];
           nixVim = [
             ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
