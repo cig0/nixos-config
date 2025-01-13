@@ -245,7 +245,6 @@
             ];
           }
           {
-            # Host configutation
             # ===== DISPLAY MANAGERS =====
             # Only one at a time can be active.
             # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shell/
@@ -257,8 +256,8 @@
               ly.enable = false;  # Ly Display Manager
               sddm.enable = true;  # SDDM / KDE Display Manager
             };
-
-            # TODO: consolidate options in a single place, then import it from the modules that need it
+          }
+          {
             # mySystem Options, and where they are defined.
             mySystem = {
               guiShellEnv = "plasma6";  # /etc/nixos/nixos-config/nixos/modules/gui-shell/gui-shell-selector.nix
