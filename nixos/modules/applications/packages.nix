@@ -200,7 +200,6 @@ let
         cargo-binstall
         cargo-cache
         chit
-        clippy
         rust-bin.stable.latest.default  # https://github.com/oxalica/rust-overlay
         rustscan
 
