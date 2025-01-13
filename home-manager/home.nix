@@ -1,5 +1,5 @@
-# { modulesPath, unstablePkgs, ... }:
-{ pkgs, unstablePkgs, ... }:
+# { modulesPath, pkgsUnstable, ... }:
+{ pkgs, pkgsUnstable, ... }:
 
 {
   # imports = [
@@ -31,9 +31,9 @@
 
           packages = with pkgs; [
             ] ++
-            (with unstablePkgs; [
+            (with pkgsUnstable; [
             # Web
-              # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
+              # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
           ]);
 
         # The state version is required and should stay at the version you
@@ -54,9 +54,9 @@
 
       #     packages = with pkgs; [
       #       ] ++
-      #       (with unstablePkgs; [
+      #       (with pkgsUnstable; [
       #       # Web
-      #         # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
+      #         # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
       #     ]);
 
       # # The state version is required and should stay at the version you
@@ -85,9 +85,9 @@
 
           packages = with pkgs; [
             ] ++
-            (with unstablePkgs; [
+            (with pkgsUnstable; [
             # Web
-              # (unstablePkgs.wrapFirefox (unstablePkgs.firefox-unwrapped.override { pipewireSupport = true;}) {})
+              # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
           ]);
 
         # The state version is required and should stay at the version you

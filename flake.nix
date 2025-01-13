@@ -115,7 +115,6 @@
           ];
           nixVim = [
             ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
-            # ./nixos/modules/system/nix-index-database.nix nix-index-database.nixosModules.nix-index  # TODO: needs more research.
           ];
           observability = [
             # ./nixos/modules/observability/grafana-alloy.nix
@@ -178,10 +177,6 @@
             audio-subsystem = [ ./nixos/modules/system/audio/audio-subsystem.nix ];
             speech-synthesis = [ ./nixos/modules/system/audio/speech-synthesis.nix ];
           };
-          data = [
-            # TODO: move to Home Manager and remove this entry.
-            # ./nixos/modules/applications/syncthing.nix  # TODO: evaluate how to properly manage Syncthing since it requires hard-coding the hosts' IDs.
-          ];
           displayManagers = [
             ./nixos/modules/gui-shell/ly.nix
             ./nixos/modules/gui-shell/sddm.nix
@@ -215,14 +210,14 @@
       };
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
-    unstablePkgs = import "${nixpkgs-unstable}" {  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels.
+    pkgsUnstable = import "${nixpkgs-unstable}" {  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels.
       inherit system;
       config = {
         allowUnfree = true;
       };
     };
 
-    specialArgs = { inherit inputs system unstablePkgs; };
+    specialArgs = { inherit inputs system pkgsUnstable; };
     system = "x86_64-linux";
 
   in {
@@ -272,7 +267,7 @@
 
     # nixosConfigurations.satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
     #   inherit system;
-    #   specialArgs = { inherit inputs system unstablePkgs; };
+    #   specialArgs = { inherit inputs system pkgsUnstable; };
     #   modules = coreModules ++ [
     #     ./nixos/hosts/satama/configuration.nix
 
@@ -283,7 +278,7 @@
 
     # nixosConfigurations.koira = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
     #   inherit system;
-    #   specialArgs = { inherit inputs system unstablePkgs; };
+    #   specialArgs = { inherit inputs system pkgsUnstable; };
     #   modules = coreModules ++ userModules ++ [
     #     ./nixos/hosts/koira/configuration.nix
 
