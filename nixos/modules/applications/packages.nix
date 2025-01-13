@@ -1,7 +1,7 @@
 # This file deines lists and sets of packages to be installed on a host.
 # Create as much lists and sets as needed to provide enough flexibility to assemble hosts with different roles.
 
-{ pkgs, unstablePkgs, ... }:
+{ pkgs, pkgsUnstable, ... }:
 
 let
   appsBaseline =
@@ -34,7 +34,7 @@ let
         python312
         python312Packages.ipython
     ] ++
-    (with unstablePkgs; [
+    (with pkgsUnstable; [
       # Monitoring & Observability
         btop
         glances
@@ -106,14 +106,14 @@ let
     ]);
 
   appsCli = {
-    ai = with unstablePkgs; [
+    ai = with pkgsUnstable; [
       aichat
       oterm
     ];
-    backup = with unstablePkgs; [
+    backup = with pkgsUnstable; [
       borgbackup
     ];
-    comms = with unstablePkgs; [
+    comms = with pkgsUnstable; [
       discordo
       iamb
       weechat
@@ -121,7 +121,7 @@ let
     cloudNativeTools = with pkgs; [
       awscli2  # Temporarily revert to the stable channel: ⚠ awscli2-2.22.13 failed with exit code 1 after ⏱ 0s in configurePhase
       vagrant  # Should always follow the main channel.
-    ] ++ (with unstablePkgs; [
+    ] ++ (with pkgsUnstable; [
       argocd
       cosign
       crc
@@ -149,7 +149,7 @@ let
       tfsec
       tfswitch
     ]);
-    multimedia = with unstablePkgs; [
+    multimedia = with pkgsUnstable; [
       exiftool
       imagemagick
       jp2a
@@ -159,7 +159,7 @@ let
       pngcrush
       yt-dlp
     ];
-    utilities = with unstablePkgs; [
+    utilities = with pkgsUnstable; [
       antora
       clinfo
       cmatrix
@@ -182,7 +182,7 @@ let
     ];
     programming = with pkgs; [
       guix
-    ] ++ (with unstablePkgs; [
+    ] ++ (with pkgsUnstable; [
       # Go
         go  # Needed to install individual apps
         # golangci-lint
@@ -199,7 +199,8 @@ let
         cargo-binstall
         cargo-cache
         chit
-        rust-bin.stable.latest.default  # rust-overlay
+        clippy
+        rust-bin.stable.latest.default  # https://github.com/oxalica/rust-overlay
         rustscan
 
       # Everything else...
@@ -212,7 +213,7 @@ let
         yamlfmt
         zig
     ]);
-    security = with unstablePkgs; [
+    security = with pkgsUnstable; [
       age
       chkrootkit
       gpg-tui
@@ -225,7 +226,7 @@ let
       sops
       vt-cli
     ];
-    vcs = with unstablePkgs; [
+    vcs = with pkgsUnstable; [
       # Git
         ggshield # GitGuardian
         gh # GitHub CLI client.
@@ -242,7 +243,7 @@ let
       # Radicle
         radicle-node
     ];
-    web = with unstablePkgs; [
+    web = with pkgsUnstable; [
       elinks
     ];
   };
@@ -254,7 +255,7 @@ let
 
       # Security
         keepassxc
-        pinentry-qt  # Move to the unstablePkgs if you're using NixOS from the unstable channel.
+        pinentry-qt  # Move to the pkgsUnstable if you're using NixOS from the unstable channel.
 
       # Utilities
         cool-retro-term  # Let's avoid pulling unnecessary dependencies, as the app last release date was at the end of January 2022.
@@ -262,7 +263,7 @@ let
       # Virtualization
         virt-viewer
     ] ++
-    (with unstablePkgs; [
+    (with pkgsUnstable; [
       # AI
         (lmstudio.override {
           commandLineArgs = [
@@ -328,7 +329,7 @@ let
   appsNvidia =
     with pkgs; [
     ] ++
-    (with unstablePkgs; [
+    (with pkgsUnstable; [
       nvtop
     ]);
 
