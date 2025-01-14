@@ -248,17 +248,17 @@
           {
             # mySystem Options, and where they are defined
             mySystem = {
-              guiShellEnv = "plasma6";
+              guiShellEnv       = "plasma6";
 
-              appsBaseline = "true";
-              appsCli._all = "true";
-              appsGui = "true";
-              appsGuiShell.kde ="true";
-              firefox = "true";
-              flatpak = "true";
-              nix-ld = "true";
-              tailscale = "true";
-              zsh = "true";
+              appsBaseline      = "true";
+              appsCli._all      = "true";
+              appsGui           = "true";
+              appsGuiShell.kde  = "true";
+              firefox           = "true";
+              flatpak           = "true";
+              nix-ld            = "true";
+              tailscale         = "true";
+              zsh               = "true";
             };
           }
       ];
