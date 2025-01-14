@@ -104,7 +104,6 @@
           applications  = [  # Systemwide applications installation.
             ./nixos/modules/applications/applications.nix
             ./nixos/modules/applications/nix-ld.nix
-            ./nixos/modules/applications/tailscale.nix
           ];
           networking = [
             ./nixos/modules/networking/dns.nix
@@ -256,8 +255,6 @@
             mySystem = {
               guiShellEnv = "plasma6";  # /etc/nixos/nixos-config/nixos/modules/gui-shell/gui-shell-selector.nix
               services = {
-                printing = "false";  # /etc/nixos/nixos-config/nixos/modules/system/cups.nix
-                # syncthing = "false";  # /etc/nixos/nixos-config/nixos/modules/applications/syncthing.nix  # TODO: commented out to avoid breaking the build. I will remove this option anyway.
                 tailscale = "true";  # /etc/nixos/nixos-config/nixos/modules/networking/tailscale.nix
               };
             };

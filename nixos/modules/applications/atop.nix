@@ -1,10 +1,16 @@
 { config, lib, ... }:
 
 let
-  hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
+  enabled = config.mySystem.programs.atop;
 
 in {
-  config = lib.mkIf (hostSelector.isHomeLab) {
+  options.mySystem.programs.atop = lib.mkOption {
+    type = lib.types.enum [ "true" "false" ];
+    default = "false";
+    description = "Whether to enable atop, the console system performance monitor";
+  };
+
+  config = lib.mkIf (enabled == "true") {
     programs.atop = {
       enable = true;
     };

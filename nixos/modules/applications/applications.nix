@@ -43,29 +43,36 @@ let
                       sP ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
 
 in {
-  # The NixOS community generally recommends keeping the enabling/disabling logic in the individual module files rather than in the importing module.
-  # This follows the principle of separation of concerns and makes modules more self-contained.
-  # Benefits of this approach:
-  #   - Each module controls its own destiny
-  #   - Modules are self-contained
-  #   - Easier to maintain and understand
-  #   - Follows the NixOS convention of modules managing their own conditional activation
-  #   - Makes it easier to override in specific cases if needed
-  #   - This is the more idiomatic NixOS way of handling conditional module activation.
   imports = builtins.filter (x: x != null) [
-    # ../systemPackages-overrides.nix
-    ./atop.nix  # System usage monitoring
+    # Always-enabled modules
     ./chromium.nix  # Hardening
-    # ./emacs.nix
     ./firefox.nix
     ./zsh.nix
+
+    # Optionally-enabled modules.
+    ./atop.nix  # System usage monitoring.
+    ./tailscale.nix
   ];
 
-  # Allow lincense-burdened packages.
+  # Allow lincense-burdened packages
   nixpkgs.config = {
     allowUnfree = true;
   };
 
-  # Install packages system-wide based on the host role.
+  # Install packages system-wide based on the host role
   environment.systemPackages = systemPackages;
 }
+
+
+# READ ME!
+# ========
+
+# The NixOS community generally recommends keeping the enabling/disabling logic in the individual module files rather than in the importing module.
+# This follows the principle of separation of concerns and makes modules more self-contained.
+# Benefits of this approach:
+#   - Each module controls its own destiny
+#   - Modules are self-contained
+#   - Easier to maintain and understand
+#   - Follows the NixOS convention of modules managing their own conditional activation
+#   - Makes it easier to override in specific cases if needed
+#   - This is the more idiomatic NixOS way of handling conditional module activation.
