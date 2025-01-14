@@ -36,6 +36,7 @@
       "org.kde.kigo"
       "org.kde.kleopatra"
       # "org.kde.kontact"  # Managed with NixOS: nixos/modules/applications/kde/kde-pim.nix
+      "org.kde.kmymoney"
       "org.kde.krename"
       "org.kde.ksudoku"
       "org.kde.ktimetracker"
@@ -43,6 +44,7 @@
       "org.kde.neochat"
       "org.kde.plasmatube"
       "org.kde.tokodon"
+      "org.kde.skrooge"
 
       # ASCII fun
       "io.github.nokse22.asciidraw"
