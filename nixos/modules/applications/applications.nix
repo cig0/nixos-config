@@ -4,6 +4,7 @@
     ./firefox.nix
     ./nix-flatpak.nix
     ./nix-ld.nix
+    ./ollama.nix
     ./packages.nix
     ./tailscale.nix
     ./zsh.nix
