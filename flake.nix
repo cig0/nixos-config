@@ -249,11 +249,15 @@
             # mySystem Options, and where they are defined
             mySystem = {
               guiShellEnv = "plasma6";
-              # chromium = "true";
-              # firefox = "true";
-              flatpak = "true";  # ./nixos/modules/applications/nix-flatpak.nix
+
+              appsBaseline = "true";
+              appsCli._all = "true";
+              appsGui = "true";
+              appsGuiShell.kde ="true";
+              firefox = "true";
+              flatpak = "true";
               nix-ld = "true";
-              tailscale = "true";  # ./nixos/modules/applications/tailscale.nix
+              tailscale = "true";
               zsh = "true";
             };
           }
