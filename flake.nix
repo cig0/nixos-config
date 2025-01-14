@@ -250,13 +250,13 @@
             mySystem = {
               guiShellEnv       = "plasma6";
 
-              appsBaseline      = "true";
-              appsCli._all      = "true";
-              appsGui           = "true";
-              appsGuiShell.kde  = "true";
               firefox           = "true";
               flatpak           = "true";
               nix-ld            = "true";
+              pkgsBaseline      = "true";
+              pkgsCli._all      = "true";
+              pkgsGui           = "true";
+              pkgsGuiShell.kde  = "true";
               tailscale         = "true";
               zsh               = "true";
             };
