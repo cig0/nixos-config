@@ -354,7 +354,7 @@ in {
     };
 
     pkgsCli = {
-      _all = lib.mkOption {  # Collection
+      _all = lib.mkOption {  # Collection. Includes the whole set.
         type = lib.types.enum [ "true" "false" ];
         default = "false";
       description = "Whether to install all the CLI applications packages";
