@@ -47,11 +47,13 @@ in {
     # Always-enabled modules
     ./chromium.nix  # Hardening
     ./firefox.nix
-    ./zsh.nix
 
     # Optionally-enabled modules.
     ./atop.nix  # System usage monitoring.
+    ./nix-flatpak.nix
+    ./nix-ld.nix
     ./tailscale.nix
+    ./zsh.nix
   ];
 
   # Allow lincense-burdened packages

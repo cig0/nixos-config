@@ -101,9 +101,8 @@
             systemModules.radio.wifi
           ];
 
-          applications  = [  # Systemwide applications installation.
+          applications  = [  # Systemwide applications installation
             ./nixos/modules/applications/applications.nix
-            ./nixos/modules/applications/nix-ld.nix
           ];
           networking = [
             ./nixos/modules/networking/dns.nix
@@ -113,7 +112,7 @@
             ./nixos/modules/networking/stevenblack.nix
           ];
           nixVim = [
-            ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim
+            ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
           ];
           observability = [
             # ./nixos/modules/observability/grafana-alloy.nix
@@ -165,7 +164,6 @@
             userModules.audio.speech-synthesis
             userModules.fonts
             userModules.home-manager
-            userModules.nix-flatpak
           ];
           _core = mergeLists [  # Core modules shared by all hosts.
             userModules.displayManagers
@@ -204,12 +202,11 @@
             ];
           };
           home-manager = [ ./home-manager/home.nix home-manager.nixosModules.home-manager ];
-          nix-flatpak = [ ./nixos/modules/applications/nix-flatpak.nix nix-flatpak.nixosModules.nix-flatpak ];
           xdgDesktopPortal = [ ./nixos/modules/gui-shell/xdg-desktop-portal.nix ];
       };
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
-    pkgsUnstable = import nixpkgs-unstable {  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels.
+    pkgsUnstable = import nixpkgs-unstable {  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
       inherit system;
       config = {
         allowUnfree = true;
@@ -226,11 +223,9 @@
       modules = mergeLists [
         systemModules._all
         userModules._all
-        userModules.guiShells.selector  # TODO: remove after refactoring the configuration.
+        userModules.guiShells.selector  # TODO: remove after refactoring the configuration
         ] ++ [
           ./nixos/hosts/TUXEDOInfinityBookPro/configuration.nix
-          nix-ld.nixosModules.nix-ld
-          nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           {
             nixpkgs.overlays = [
               nixos-option
@@ -239,7 +234,7 @@
           }
           {
             # ===== DISPLAY MANAGERS =====
-            # Only one at a time can be active.
+            # Only one at a time can be active
             # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shell/
             services.displayManager = {
               autoLogin = {
@@ -251,12 +246,15 @@
             };
           }
           {
-            # mySystem Options, and where they are defined.
+            # mySystem Options, and where they are defined
             mySystem = {
-              guiShellEnv = "plasma6";  # /etc/nixos/nixos-config/nixos/modules/gui-shell/gui-shell-selector.nix
-              services = {
-                tailscale = "true";  # /etc/nixos/nixos-config/nixos/modules/networking/tailscale.nix
-              };
+              guiShellEnv = "plasma6";
+              # chromium = "true";
+              # firefox = "true";
+              flatpak = "true";  # ./nixos/modules/applications/nix-flatpak.nix
+              nix-ld = "true";
+              tailscale = "true";  # ./nixos/modules/applications/tailscale.nix
+              zsh = "true";
             };
           }
       ];

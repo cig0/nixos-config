@@ -7,10 +7,11 @@
 {
   imports =
     [
-      ./modules/security/sudo.nix  # Sudo host settings.
-      ./modules/system/keyd.nix  # Keyboard mapping. Useful to re-map keys in keyboards with missing keys, e.g. the Insert key.
-      ./modules/system/time.nix  # Timezone settings.
-      ./hardware-configuration.nix  # Include the results of the hardware scan.
+      ./modules/hardware/nixos-hardware.nix
+      ./modules/security/sudo.nix  # Sudo host settings
+      ./modules/system/keyd.nix  # Keyboard mapping. Useful to re-map keys in keyboards with missing keys, e.g. the Insert key
+      ./modules/system/time.nix  # Timezone settings
+      ./hardware-configuration.nix  # Include the results of the hardware scan
     ];
 
 

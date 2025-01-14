@@ -5,16 +5,16 @@
 { config, lib, ... }:
 
 let
-  enabled = config.mySystem.services.tailscale;
+  cfg = config.mySystem.tailscale;
 
 in {
-  options.mySystem.services.tailscale = lib.mkOption {
+  options.mySystem.tailscale = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to enable Tailscale service";
   };
 
-  config = lib.mkIf (enabled == "true") {
+  config = lib.mkIf (cfg == "true") {
     services.tailscale = {
       enable = true;
       openFirewall = true;
