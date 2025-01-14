@@ -1,5 +1,5 @@
 {
-  home.file.".gitignore_global".text = ''
+  xdg.configFile."git/gitignore_global".text = ''
     *~
     myvars.tf
     .cache_ggshield
