@@ -93,7 +93,7 @@
       "net.werwolv.ImHex"
 
       # Radio
-      "de.haeckerfelix.Shortwave"
+      "com.github.louis77.tuner"
 
       # Security
       "com.bitwarden.desktop"
