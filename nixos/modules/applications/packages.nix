@@ -1,9 +1,22 @@
-# This file deines lists and sets of packages to be installed on a host.
-# Create as much lists and sets as needed to provide enough flexibility to assemble hosts with different roles.
-
-{ pkgs, pkgsUnstable, ... }:
+{ config, lib, pkgs, pkgsUnstable, ... }:
 
 let
+  cfgAppsBaseline = config.mySystem.appsBaseline;
+  cfgAppsCli_all = config.mySystem.appsCli._all;
+  cfgAppsCliAi = config.mySystem.appsCli.ai;
+  cfgAppsCliBackup = config.mySystem.appsCli.backup;
+  cfgAppsCliComms = config.mySystem.appsCli.comms;
+  cfgAppsCliCloudNativeTools = config.mySystem.appsCli.cloudNativeTools;
+  cfgAppsCliMultimedia = config.mySystem.appsCli.multimedia;
+  cfgAppsCliProgramming = config.mySystem.appsCli.programming;
+  cfgAppsCliSecurity = config.mySystem.appsCli.security;
+  cfgAppsCliUtilities = config.mySystem.appsCli.utilities;
+  cfgAppsCliVcs = config.mySystem.appsCli.vcs;
+  cfgAppsCliWeb = config.mySystem.appsCli.web;
+  cfgAppsGui = config.mySystem.appsGui;
+  cfgAppsGuiShellKde = config.mySystem.appsGuiShell.kde;
+  cfgAppsNvidia = config.mySystem.appsNvidia;
+
   appsBaseline =
     with pkgs; [
       # Nix
@@ -161,27 +174,6 @@ let
       pngcrush
       yt-dlp
     ];
-    utilities = with pkgsUnstable; [
-      antora
-      clinfo
-      cmatrix
-      dotacat
-      fastfetch
-      glxinfo
-      gum
-      nushell
-      pipe-rename
-      rust-petname
-      qrscan
-      terminal-parrot
-      tesseract
-      translate-shell
-      tty-clock
-      vulkan-tools
-      wayland-utils
-      wiki-tui
-      wl-clipboard
-    ];
     programming = with pkgs; [
     ] ++ (with pkgsUnstable; [
       # Go
@@ -225,6 +217,27 @@ let
       protonvpn-cli
       sops
       vt-cli
+    ];
+    utilities = with pkgsUnstable; [
+      antora
+      clinfo
+      cmatrix
+      dotacat
+      fastfetch
+      glxinfo
+      gum
+      nushell
+      pipe-rename
+      rust-petname
+      qrscan
+      terminal-parrot
+      tesseract
+      translate-shell
+      tty-clock
+      vulkan-tools
+      wayland-utils
+      wiki-tui
+      wl-clipboard
     ];
     vcs = with pkgsUnstable; [
       # Git
@@ -302,22 +315,22 @@ let
     # ];
       # Virtualization
     kde = with pkgs; [
-        kdePackages.alpaka
-        kdePackages.discover
-        kdePackages.kdenlive
-        kdePackages.kio-zeroconf
-        kdePackages.kjournald
-        kdePackages.krohnkite
-        kdePackages.kup
-        kdePackages.kwallet-pam
-        kdePackages.plasma-browser-integration
-        kdePackages.yakuake
-        krita
-        krita-plugin-gmic
+      kdePackages.alpaka
+      kdePackages.discover
+      kdePackages.kdenlive
+      kdePackages.kio-zeroconf
+      kdePackages.kjournald
+      kdePackages.krohnkite
+      kdePackages.kup
+      kdePackages.kwallet-pam
+      kdePackages.plasma-browser-integration
+      kdePackages.yakuake
+      krita
+      krita-plugin-gmic
 
-        # Dependencies / helpers
-          aha  # Required for "About this System" in System Settings.
-          glaxnimate  # Kdenlive dependency
+      # Dependencies / helpers
+        aha  # Required for "About this System" in System Settings.
+        glaxnimate  # Kdenlive dependency
     ];
     # wayfire = with pkgs; [
     # ];
@@ -333,16 +346,121 @@ let
     ]);
 
 in {
-  lists = {
-    appsBaseline = appsBaseline;
-    appsCli = builtins.concatLists (builtins.attrValues appsCli);  # Flatten entire set; useful when installing everything-and-the-kitchen-sink.
-    appsGui = appsGui;
-    appsNvidia = appsNvidia;
+  options.mySystem = {
+    appsBaseline = lib.mkOption {
+      type = lib.types.enum [ "true" "false" ];
+      default = "false";
+      description = "Whether to install a baseline set of applications packages";
+    };
+
+    appsCli = {
+      _all = lib.mkOption {  # Collection
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install all the CLI applications packages";
+      };
+
+      ai = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install CLI related applications packages";
+      };
+
+      backup = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install CLI related applications packages";
+      };
+
+      comms = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install CLI related applications packages";
+      };
+
+      cloudNativeTools = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install CLI related applications packages";
+      };
+
+      multimedia = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install CLI related applications packages";
+      };
+
+      programming = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install CLI related applications packages";
+      };
+
+      security = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install CLI related applications packages";
+      };
+
+      utilities = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install CLI related applications packages";
+      };
+
+      vcs = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install CLI related applications packages";
+      };
+
+      web = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+      description = "Whether to install CLI related applications packages";
+      };
+    };
+
+    appsGui = lib.mkOption {
+      type = lib.types.enum [ "true" "false" ];
+      default = "false";
+      description = "Whether to install GUI applications packages";
+    };
+
+    appsGuiShell = {
+      kde = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
+        description = "Whether to install DE/WM complementary applications packages";
+      };
+    };
+
+    appsNvidia = lib.mkOption {  # Set to true if running on an Nvidia host
+      type = lib.types.enum [ "true" "false" ];
+      default = "false";
+      description = "Whether to install Nvidia-releated applications packages";
+    };
   };
 
-  sets = {
-    appsCli = appsCli;  # Useful when installing only specific sets.
-    appsGuiShell = appsGuiShell;
+  config = {
+    environment.systemPackages = []  # Start with empty list or your base packages
+      ++ (lib.optionals (cfgAppsBaseline == "true") appsBaseline)
+      ++ (lib.optionals (cfgAppsCli_all == "true") (builtins.concatLists (builtins.attrValues appsCli)))
+      ++ (lib.optionals (cfgAppsCliAi == "true") appsCli.ai)
+      ++ (lib.optionals (cfgAppsCliBackup == "true") appsCli.backup)
+      ++ (lib.optionals (cfgAppsCliComms == "true") appsCli.comms)
+      ++ (lib.optionals (cfgAppsCliCloudNativeTools == "true") appsCli.cloudNativeTools)
+      ++ (lib.optionals (cfgAppsCliMultimedia == "true") appsCli.multimedia)
+      ++ (lib.optionals (cfgAppsCliProgramming == "true") appsCli.programming)
+      ++ (lib.optionals (cfgAppsCliSecurity == "true") appsCli.security)
+      ++ (lib.optionals (cfgAppsCliUtilities == "true") appsCli.utilities)
+      ++ (lib.optionals (cfgAppsCliVcs == "true") appsCli.vcs)
+      ++ (lib.optionals (cfgAppsCliWeb == "true") appsCli.web)
+      ++ (lib.optionals (cfgAppsGui == "true") appsGui)
+      ++ (lib.optionals (cfgAppsGuiShellKde == "true") appsGuiShell.kde)
+      ++ (lib.optionals (cfgAppsNvidia == "true") appsNvidia);
+
+    nixpkgs.config.allowUnfree = true;  # Allow lincense-burdened packages
   };
 }
 

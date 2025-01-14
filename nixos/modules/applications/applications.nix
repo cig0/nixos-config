@@ -1,68 +1,13 @@
-# Assemble the lists and sets of packages to be installed on a host according to the host's role and the GUI shell in use.
-
-{ config, lib, pkgs, pkgsUnstable, ... }:
-
-let
-  # Host name logic. Loads a map of possible hostnames and their associated roles.
-  hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
-
-  # Import packages lists and sets.
-  p = import ./packages.nix { inherit pkgs pkgsUnstable; };
-
-  # Function to create package lists based on host roles.
-  hostPackages = hP:
-    let appsGuiShell =  # Dynamically add packages based on the enabled GUI shell.
-        lib.optionals (config.services.desktopManager.cosmic.enable or false) p.sets.appsGuiShell.cosmic ++
-        lib.optionals (config.programs.hyprland.enable or false) p.sets.appsGuiShell.hyprland ++
-        lib.optionals (config.services.desktopManager.plasma6.enable or false) p.sets.appsGuiShell.kde ++
-        lib.optionals (config.programs.wayfire.enable or false) p.sets.appsGuiShell.wayfire ++
-        lib.optionals (config.services.desktopManager.xfce.enable or false) p.sets.appsGuiShell.xfce
-      ;
-    in
-      (lib.optionals (hP == "Graphical") (
-        p.lists.appsBaseline ++
-        p.lists.appsGui ++
-        p.lists.appsCli ++
-        appsGuiShell
-      )) ++
-     (lib.optionals (hP == "HomeLab") (
-        p.lists.appsBaseline ++
-        p.sets.appsCli.backup ++
-        p.sets.appsCli.cloudNativeTools ++
-        p.sets.appsCli.security ++
-        p.sets.appsCli.vcs
-        [
-          pkgs.pinentry-curses
-        ]
-     ));
-
-  systemPackages =  let sP = if hostSelector.isRoleGraphical then hostPackages "Graphical"
-                      else if hostSelector.isHomeLab then hostPackages "HomeLab"
-                      else [];
-                    in
-                      sP ++ lib.optionals hostSelector.isNvidiaGPUHost p.lists.appsNvidia;  # Add Nvidia packages as needed.
-
-in {
+{
   imports = builtins.filter (x: x != null) [
-    # Always-enabled modules
-    ./chromium.nix  # Hardening
+    ./atop.nix
     ./firefox.nix
-
-    # Optionally-enabled modules.
-    ./atop.nix  # System usage monitoring.
     ./nix-flatpak.nix
     ./nix-ld.nix
+    ./packages.nix
     ./tailscale.nix
     ./zsh.nix
   ];
-
-  # Allow lincense-burdened packages
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
-
-  # Install packages system-wide based on the host role
-  environment.systemPackages = systemPackages;
 }
 
 

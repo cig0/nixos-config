@@ -1,10 +1,16 @@
 { config, lib, ... }:
 
 let
-    hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
+    cfg = config.mySystem.firefox;
 
 in {
-  config = lib.mkIf (hostSelector.isRoleGraphical) {
+  options.mySystem.firefox = lib.mkOption {
+    type = lib.types.enum [ "true" "false" ];
+    default = "false";
+    description = "The web browser";
+  };
+
+  config = lib.mkIf (cfg == "true") {
     programs = {
       firefox = {
         enable = true;
