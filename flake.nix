@@ -101,7 +101,7 @@
             systemModules.radio.wifi
           ];
 
-          applications  = [  # Install applications systemwide for all hosts.
+          applications  = [  # Systemwide applications installation.
             ./nixos/modules/applications/applications.nix
             ./nixos/modules/applications/nix-ld.nix
             ./nixos/modules/applications/tailscale.nix
