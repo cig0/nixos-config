@@ -5,14 +5,14 @@ let
 
 in {
   options.mySystem.programs.nix-ld = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
-    description = "Run unpatched dynamic binaries on NixOS";
+    type = lib.types.bool;
+    default = false;
+    description = "Run unpatched dynamic binaries on NixOS.";
   };
 
   imports = [ inputs.nix-ld.nixosModules.nix-ld ];
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     programs.nix-ld = {
       dev.enable = false;
       enable = true;

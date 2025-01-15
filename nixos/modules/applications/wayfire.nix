@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.wayfire = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to enable Wayfire WM";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     programs.wayfire = {
       enable = false;
       plugins = with pkgs.wayfirePlugins; [

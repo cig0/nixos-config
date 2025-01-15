@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.services.openssh = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to enable the OpenSSH server";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     services.openssh = {
       enable = true;
       openFirewall = true;

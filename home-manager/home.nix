@@ -11,12 +11,12 @@ in {
   ];
 
   options.mySystem.home-manager = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to enable atop, the console system performance monitor";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     home-manager = {
       backupFileExtension = "backup";
       useGlobalPkgs = true;
@@ -24,12 +24,8 @@ in {
       users = {
         cig0 = { ... }: {
           imports = [
-            ./modules/applications/atuin.nix
-            ./modules/applications/starship.nix
-            ./modules/applications/zsh/zsh.nix
-            ./modules/config-files/apps-cargo.nix
-            ./modules/config-files/aws.nix
-            ./modules/config-files/git.nix
+            ./modules/applications/main.nix
+            ./modules/config-files/main.nix
             ./modules/user/maintenance/apps-cargo.nix
           ];
 
@@ -79,12 +75,8 @@ in {
 
         fine = { ... }: {
           imports = [
-            ./modules/applications/atuin.nix
-            ./modules/applications/starship.nix
-            ./modules/applications/zsh/zsh.nix
-            ./modules/config-files/apps-cargo.nix
-            ./modules/config-files/aws.nix
-            ./modules/config-files/git.nix
+            ./modules/applications/main.nix
+            ./modules/config-files/main.nix
             ./modules/user/maintenance/apps-cargo.nix
           ];
 

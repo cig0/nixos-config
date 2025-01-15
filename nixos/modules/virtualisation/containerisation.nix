@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.virtualisation.podman = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to enable Podman and containerization support";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     virtualisation = {  # https://wiki.nixos.org/wiki/Podman
       oci-containers.backend = "podman";  # Enable running Podman containers as systemd services.
       containers.enable = true;  # Enable common container config files in /etc/containers.

@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.networking.firewall = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to enable and manage firewall";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     networking = {
       firewall = {
         enable = true;

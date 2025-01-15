@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.programs.firefox = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "The web browser";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     programs = {
       firefox = {
         enable = true;

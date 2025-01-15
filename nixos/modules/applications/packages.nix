@@ -351,117 +351,117 @@ in {
   options.mySystem = {
     packages = {
       baseline = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-      description = "Whether to install a baseline set of applications packages";
+        type = lib.types.bool;
+        default = false;
+      description = "Whether to install a baseline set of applications packages.";
       };
       cli = {
         _all = lib.mkOption {  # Collection. Includes the whole set.
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install all the CLI applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install all the CLI applications packages.";
         };
 
         ai = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install CLI related applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install CLI related applications packages.";
         };
 
         backup = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install CLI related applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install CLI related applications packages.";
         };
 
         comms = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install CLI related applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install CLI related applications packages.";
         };
 
         cloudNativeTools = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install CLI related applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install CLI related applications packages.";
         };
 
         multimedia = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install CLI related applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install CLI related applications packages.";
         };
 
         programming = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install CLI related applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install CLI related applications packages.";
         };
 
         security = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install CLI related applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install CLI related applications packages.";
         };
 
         utilities = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install CLI related applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install CLI related applications packages.";
         };
 
         vcs = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install CLI related applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install CLI related applications packages.";
         };
 
         web = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-        description = "Whether to install CLI related applications packages";
+          type = lib.types.bool;
+          default = false;
+        description = "Whether to install CLI related applications packages.";
         };
       };
 
       gui = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-        description = "Whether to install GUI applications packages";
+        type = lib.types.bool;
+        default = false;
+        description = "Whether to install GUI applications packages.";
       };
 
       guiShell = {
         kde = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
-          description = "Whether to install DE/WM complementary applications packages";
+          type = lib.types.bool;
+          default = false;
+          description = "Whether to install DE/WM complementary applications packages.";
         };
       };
 
       nvidia = lib.mkOption {  # Set to true if running on an Nvidia host
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-        description = "Whether to install Nvidia-releated applications packages";
+        type = lib.types.bool;
+        default = false;
+        description = "Whether to install Nvidia-releated applications packages.";
       };
     };
   };
 
   config = {
     environment.systemPackages = []  # Start with empty list or your base packages
-      ++ (lib.optionals (cfg.packagesBaseline == "true") packagesBaseline)
-      ++ (lib.optionals (cfg.packagesCli_all == "true") (builtins.concatLists (builtins.attrValues packagesCli)))
-      ++ (lib.optionals (cfg.packagesCliAi == "true") packagesCli.ai)
-      ++ (lib.optionals (cfg.packagesCliBackup == "true") packagesCli.backup)
-      ++ (lib.optionals (cfg.packagesCliComms == "true") packagesCli.comms)
-      ++ (lib.optionals (cfg.packagesCliCloudNativeTools == "true") packagesCli.cloudNativeTools)
-      ++ (lib.optionals (cfg.packagesCliMultimedia == "true") packagesCli.multimedia)
-      ++ (lib.optionals (cfg.packagesCliProgramming == "true") packagesCli.programming)
-      ++ (lib.optionals (cfg.packagesCliSecurity == "true") packagesCli.security)
-      ++ (lib.optionals (cfg.packagesCliUtilities == "true") packagesCli.utilities)
-      ++ (lib.optionals (cfg.packagesCliVcs == "true") packagesCli.vcs)
-      ++ (lib.optionals (cfg.packagesCliWeb == "true") packagesCli.web)
-      ++ (lib.optionals (cfg.packagesGui == "true") packagesGui)
-      ++ (lib.optionals (cfg.packagesGuiShellKde == "true") packagesGuiShell.kde)
-      ++ (lib.optionals (cfg.packagesNvidia == "true") packagesNvidia);
+      ++ (lib.optionals (cfg.packagesBaseline == true) packagesBaseline)
+      ++ (lib.optionals (cfg.packagesCli_all == true) (builtins.concatLists (builtins.attrValues packagesCli)))
+      ++ (lib.optionals (cfg.packagesCliAi == true) packagesCli.ai)
+      ++ (lib.optionals (cfg.packagesCliBackup == true) packagesCli.backup)
+      ++ (lib.optionals (cfg.packagesCliComms == true) packagesCli.comms)
+      ++ (lib.optionals (cfg.packagesCliCloudNativeTools == true) packagesCli.cloudNativeTools)
+      ++ (lib.optionals (cfg.packagesCliMultimedia == true) packagesCli.multimedia)
+      ++ (lib.optionals (cfg.packagesCliProgramming == true) packagesCli.programming)
+      ++ (lib.optionals (cfg.packagesCliSecurity == true) packagesCli.security)
+      ++ (lib.optionals (cfg.packagesCliUtilities == true) packagesCli.utilities)
+      ++ (lib.optionals (cfg.packagesCliVcs == true) packagesCli.vcs)
+      ++ (lib.optionals (cfg.packagesCliWeb == true) packagesCli.web)
+      ++ (lib.optionals (cfg.packagesGui == true) packagesGui)
+      ++ (lib.optionals (cfg.packagesGuiShellKde == true) packagesGuiShell.kde)
+      ++ (lib.optionals (cfg.packagesNvidia == true) packagesNvidia);
 
     nixpkgs.config.allowUnfree = true;  # Allow lincense-burdened packages
   };

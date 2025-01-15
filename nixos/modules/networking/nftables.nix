@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.networking.nftables = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to enable use of nftables";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     networking.nftables.enable = true;  # Required by Incus.
   };
 }

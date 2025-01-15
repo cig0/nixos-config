@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.programs.nix-index-database.comma = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to enable using comma for nix-index-database";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     programs.nix-index-database.comma.enable = true;
   };
 }

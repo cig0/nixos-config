@@ -7,12 +7,12 @@ let
 
 in {
   options.mySystem.services.syncthing = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types;
+    default = false;
     description = "Whether to enable Syncthing service";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     services.syncthing = {
       enable = true;
       openDefaultPorts = true;

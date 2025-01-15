@@ -119,68 +119,69 @@
             # mySystem Options
             mySystem = {
               # Applications (from ./nixos/modules/applications/packages.nix)
-              packages.baseline                     = "true";
-              packages.cli._all                     = "true";
-              packages.gui                          = "true";
-              packages.guiShell.kde                 = "true";
+              packages.baseline                     = true;
+              packages.cli._all                     = true;
+              packages.gui                          = true;
+              packages.guiShell.kde                 = true;
 
               # Applications (from options)
-              programs.firefox                      = "true";
-              services.flatpak                      = "true";
-              services.tailscale                    = "true";
+              programs.firefox                      = true;
+              services.flatpak                      = true;
+              services.tailscale                    = true;
 
               # CLI shell
-              programs.zsh                          = "true";
+              programs.zsh                          = true;
 
               # GUI shell
               services.displayManager.ly            = false;
               services.displayManager.sddm          = true;
-              programs.kdeconnect                   = "true";
-              programs.kde-pim                      = "true";
-              services.desktopManager.plasma6       = "true";
-              xdg.portal                            = "true";
+              programs.kdeconnect                   = true;
+              programs.kde-pim                      = true;
+              services.desktopManager.plasma6       = true;
+              xdg.portal                            = true;
 
               # Home Manager
-              home-manager                          = "true";
+              home-manager                          = true;
 
               # Networking
-              programs.mtr                          = "true";
-              networking.nameservers                = "true";
-              networking.nftables                   = "true";
-              services.resolved                     = "true";
-              networking.stevenblack                = "true";
-              systemd.services.stevenblack-unblock  = "true";
+              programs.mtr                          = true;
+              networking.nameservers                = true;
+              networking.nftables                   = true;
+              services.resolved                     = true;
+              networking.stevenblack                = true;
+              systemd.services.stevenblack-unblock  = true;
 
               # Nix and NixOS support
-              # programs.nix-index-database.comma     = "true";  # TODO: add nix-index-database flake input!
-              programs.nix-ld                       = "true";
+              # programs.nix-index-database.comma     = true;  # TODO: add nix-index-database flake input!
+              programs.nix-ld                       = true;
 
               # Power Management
-              programs.auto-cpufreq                 = "true";
-              power-management                      = "true";
-              services.thermald                     = "true";
+              programs.auto-cpufreq                 = true;
+              power-management                      = true;
+              services.thermald                     = true;
 
               # Radio
-              hardware.bluetooth                    = "true";
+              hardware.bluetooth                    = true;
 
               # Security
-              networking.firewall                   = "true";
-              programs.gnupg                        = "true";
-              boot.lanzaboote                       = "true";
-              services.openssh                      = "true";
-              security.sudo                         = "true";
+              networking.firewall                   = true;
+              programs.gnupg                        = true;
+              boot.lanzaboote                       = true;
+              services.openssh                      = true;
+              security.sudo                         = true;
 
               # System
-              services.fwupd                        = "true";
+              current-system-packages-list          = true;
+              services.fwupd                        = true;
                 # Audio
-                audio-subsystem                     = "true";
-                services.speech-synthesis           = "true";
+                audio-subsystem                     = true;
+                services.speech-synthesis           = true;
 
 
               # Virtualisation
-              virtualisation.incus                  = "true";
-              virtualisation.libvirt                = "true";
-              virtualisation.podman                 = "true";
+              virtualisation.incus                  = true;
+              virtualisation.libvirt                = true;
+              virtualisation.podman                 = true;
             };
           }
       ];
