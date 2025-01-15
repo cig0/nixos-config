@@ -1,6 +1,5 @@
 {
   imports = builtins.filter (x: x != null) [
-    ./atop.nix
     ./display-manager.nix
     ./firefox.nix
     ./kde/main.nix
