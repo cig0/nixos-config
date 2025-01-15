@@ -1,3 +1,5 @@
+# TODO: add option to easilt change kernels
+
 # https://wiki.nixos.org/wiki/Linux_kernel
 
 { config, lib, pkgs, ... }:
@@ -5,12 +7,12 @@
 let
   hostSelector = import ../../lib/host-selector.nix { inherit config lib; };
 
-  # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isTUXEDOInfinityBookPro = "pkgs.linuxPackages_xanmod_latest";`.
+  # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isTUXEDOInfinityBookPro = "pkgs.linuxPackages_xanmod_latest";`
   kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
   kernelPackages_isTUXEDOInfinityBookPro = pkgs.linuxPackages_latest;
   kernelPackages_fallback = pkgs.linuxPackages_latest;
 
-  kernelPatches_enable = "false"; # Enable/disable applying kernel patches.
+  kernelPatches_enable = "false";  # Enable/disable applying kernel patches
 
   commonKernelSysctl = {
     # ref: https://wiki.archlinux.org/title/Gaming

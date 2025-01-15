@@ -88,15 +88,7 @@
           ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
 
           ./nixos/modules/system/maintenance/main.nix
-          ./nixos/modules/system/cups.nix
           ./nixos/modules/system/current-system-packages.nix
-          ./nixos/modules/system/fwupd.nix
-          ./nixos/modules/system/hwaccel.nix
-          ./nixos/modules/system/kernel.nix
-          ./nixos/modules/system/keyd.nix
-          ./nixos/modules/system/ucode.nix
-          ./nixos/modules/system/users.nix
-          ./nixos/modules/system/zram.nix
         ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
@@ -140,12 +132,9 @@
               # CLI shell
               programs.zsh                          = "true";
 
-              # Environment
-              
-
               # GUI shell
-              services.displayManager.ly            = "false";
-              services.displayManager.sddm          = "true";
+              services.displayManager.ly            = false;
+              services.displayManager.sddm          = true;
               programs.kdeconnect                   = "true";
               programs.kde-pim                      = "true";
               services.desktopManager.plasma6       = "true";
@@ -182,9 +171,11 @@
               security.sudo                         = "true";
 
               # System
+              services.fwupd                        = "true";
                 # Audio
                 audio-subsystem                     = "true";
                 services.speech-synthesis           = "true";
+
 
               # Virtualisation
               virtualisation.incus                  = "true";

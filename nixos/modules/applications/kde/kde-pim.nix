@@ -6,7 +6,7 @@ let
 in {
   options.mySystem.programs.kde-pim = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    default = false;
     description = "KDE Personal Information Management suite";
   };
 
