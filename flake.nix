@@ -77,15 +77,11 @@
       modules = [
           ./home-manager/home.nix
           ./nixos/modules/applications/main.nix
-          ./nixos/modules/hardware/power-management/main.nix
-          ./nixos/modules/hardware/radio/main.nix
+          ./nixos/modules/hardware/main.nix
           ./nixos/modules/observability/main.nix
-          ./nixos/modules/networking/dns/main.nix
           ./nixos/modules/networking/main.nix
           ./nixos/modules/security/main.nix
-          ./nixos/modules/system/audio/main.nix
-          ./nixos/modules/system/nixos/main.nix
-          ./nixos/modules/system/fonts.nix
+          ./nixos/modules/system/main.nix
           ./nixos/modules/virtualisation/main.nix
 
           # <----------------  TO GO  ------------------>
