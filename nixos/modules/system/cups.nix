@@ -1,21 +1,30 @@
-# Printing services.
-
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.services.printing;
-
-in {
-  options.mySystem.services.printing = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
-    description = "Whether to enable CUPS printing service";
+  cfg = {
+    printingEnable = config.mySystem.services.printing.enable;
+    cupsPdfEnable = config.mySystem.services.printing.cups-pdf;
   };
 
-  config = lib.mkIf (cfg == "true") {
-    services.printing  = {
-      enable = true;
+in {
+  options.mySystem.services.printing = {
+    enable = lib.mkOption {
+      type = lib.types.bool;  # lib.types.bool doesn't take arguments
+      default = false;
+      description = "Whether to enable printing support through the CUPS daemon.";
+    };
+    cups-pdf = lib.mkOption {
+      type = lib.types.bool;  # lib.types.bool doesn't take arguments
+      default = false;
+      description = "Whether to enable the cups-pdf virtual PDF printer backend.";
+    };
+  };
+
+  config = {
+    services.printing = {
+      enable = cfg.printingEnable;
       # drivers = [ "brlaser" "foomatic-db" "gutenprint" "hpcups" "hplip" "ipp" "papi3" "pnm2ppa" "pstotext" "rawtoaces" "splix" "ufraw" ];
+      cups-pdf.enable = cfg.cupsPdfEnable;
     };
   };
 }

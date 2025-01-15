@@ -1,3 +1,5 @@
+# TODO: add option for string hostname to manage this from flake.nix
+
 { config, ... }:
 
 let

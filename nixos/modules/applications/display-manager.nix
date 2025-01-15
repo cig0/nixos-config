@@ -1,18 +1,20 @@
 { config, lib, ... }:
 
 let
-  cfgAutoLoginEnable = config.mySystem.services.displayManager.autoLogin.enable;
-  cfgAutoLoginUser = config.mySystem.services.displayManager.autoLogin.user;
-  cfgLy = config.mySystem.services.displayManager.ly;
-  cfgSddm = config.mySystem.services.displayManager.sddm;
+  cfg = {
+    autoLoginEnable = config.mySystem.services.displayManager.autoLogin.enable;
+    autoLoginUser = config.mySystem.services.displayManager.autoLogin.user;
+    ly = config.mySystem.services.displayManager.ly;
+    sddm = config.mySystem.services.displayManager.sddm;
+  };
 
 in {
   options.mySystem = {
     services.displayManager = {
       autoLogin = {
         enable = lib.mkOption {
-          type = lib.types.enum [ "true" "false" ];
-          default = "false";
+          type = lib.types.bool;
+          default = false;
           description = "Automatic login on boot";
         };
         user = lib.mkOption {
@@ -22,14 +24,14 @@ in {
         };
       };
       ly = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
+        type = lib.types.bool;
+        default = false;
         description = "Ly Display Manager";
       };
 
       sddm = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
+        type = lib.types.bool;
+        default = false;
         description = "SDDM Display Manager (KDE default option)";
       };
     };
@@ -38,18 +40,18 @@ in {
   config = {
     services.displayManager = {
       autoLogin= {
-        enable = cfgAutoLoginEnable == "true";
-        user = cfgAutoLoginUser;
+        enable = cfg.autoLoginEnable;
+        user = cfg.autoLoginUser;
       };
       ly = {
-        enable = cfgLy == "true";
+        enable = cfg.ly;
         settings = {
           animation = "doom";
           hide_borders = true;
         };
       };
       sddm = {
-        enable = cfgSddm == "true";
+        enable = cfg.sddm;
         enableHidpi = true;
         wayland = {
           enable = true;

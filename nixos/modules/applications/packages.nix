@@ -1,21 +1,23 @@
 { config, lib, pkgs, pkgsUnstable, ... }:
 
 let
-  cfg.packagesBaseline = config.mySystem.packages.baseline;
-  cfg.packagesCli_all = config.mySystem.packages.cli._all;
-  cfg.packagesCliAi = config.mySystem.packages.cli.ai;
-  cfg.packagesCliBackup = config.mySystem.packages.cli.backup;
-  cfg.packagesCliComms = config.mySystem.packages.cli.comms;
-  cfg.packagesCliCloudNativeTools = config.mySystem.packages.cli.cloudNativeTools;
-  cfg.packagesCliMultimedia = config.mySystem.packages.cli.multimedia;
-  cfg.packagesCliProgramming = config.mySystem.packages.cli.programming;
-  cfg.packagesCliSecurity = config.mySystem.packages.cli.security;
-  cfg.packagesCliUtilities = config.mySystem.packages.cli.utilities;
-  cfg.packagesCliVcs = config.mySystem.packages.cli.vcs;
-  cfg.packagesCliWeb = config.mySystem.packages.cli.web;
-  cfg.packagesGui = config.mySystem.packages.gui;
-  cfg.packagesGuiShellKde = config.mySystem.packages.guiShell.kde;
-  cfg.packagesNvidia = config.mySystem.packages.nvidia;
+  cfg = {
+    packagesBaseline = config.mySystem.packages.baseline;
+    packagesCli_all = config.mySystem.packages.cli._all;
+    packagesCliAi = config.mySystem.packages.cli.ai;
+    packagesCliBackup = config.mySystem.packages.cli.backup;
+    packagesCliComms = config.mySystem.packages.cli.comms;
+    packagesCliCloudNativeTools = config.mySystem.packages.cli.cloudNativeTools;
+    packagesCliMultimedia = config.mySystem.packages.cli.multimedia;
+    packagesCliProgramming = config.mySystem.packages.cli.programming;
+    packagesCliSecurity = config.mySystem.packages.cli.security;
+    packagesCliUtilities = config.mySystem.packages.cli.utilities;
+    packagesCliVcs = config.mySystem.packages.cli.vcs;
+    packagesCliWeb = config.mySystem.packages.cli.web;
+    packagesGui = config.mySystem.packages.gui;
+    packagesGuiShellKde = config.mySystem.packages.guiShell.kde;
+    packagesNvidia = config.mySystem.packages.nvidia;
+  };
 
   packagesBaseline =
     with pkgs; [
