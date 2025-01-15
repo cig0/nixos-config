@@ -87,7 +87,6 @@
           # <----------------  TO GO  ------------------>
           ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
 
-          ./nixos/modules/system/environment/main.nix
           ./nixos/modules/system/maintenance/main.nix
           ./nixos/modules/system/cups.nix
           ./nixos/modules/system/current-system-packages.nix
@@ -140,6 +139,9 @@
 
               # CLI shell
               programs.zsh                          = "true";
+
+              # Environment
+              
 
               # GUI shell
               services.displayManager.ly            = "false";
