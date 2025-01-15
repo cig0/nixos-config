@@ -1,98 +1,110 @@
 # { modulesPath, pkgsUnstable, ... }:
-{ pkgs, pkgsUnstable, ... }:
+{ config, inputs, lib, pkgs, pkgsUnstable, ... }:
 
-{
-  # imports = [
-  #   (modulesPath + "/profiles/minimal.nix")
-  # ];
+let
+  cfg = config.mySystem.home-manager;
 
-  home-manager = {
-    backupFileExtension = "backup";
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users = {
-      cig0 = { ... }: {
-        imports = [
-          ./modules/applications/atuin.nix
-          ./modules/applications/starship.nix
-          ./modules/applications/zsh/zsh.nix
-          ./modules/config-files/apps-cargo.nix ./modules/user/maintenance/apps-cargo.nix
-          ./modules/config-files/aws.nix
-          ./modules/config-files/git.nix
-        ];
+in {
+  imports = [
+    # (modulesPath + "/profiles/minimal.nix")
+    inputs.home-manager.nixosModules.home-manager
+  ];
 
-        home = {
-          homeDirectory = "/home/cig0";
+options.mySystem.home-manager = lib.mkOption {
+    type = lib.types.enum [ "true" "false" ];
+    default = "false";
+    description = "Whether to enable atop, the console system performance monitor";
+  };
 
-          sessionVariables = {
-            EDITOR = "nvim";
-            VISUAL = "code";
+  config = lib.mkIf (cfg == "true") {
+    home-manager = {
+      backupFileExtension = "backup";
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      users = {
+        cig0 = { ... }: {
+          imports = [
+            ./modules/applications/atuin.nix
+            ./modules/applications/starship.nix
+            ./modules/applications/zsh/zsh.nix
+            ./modules/config-files/apps-cargo.nix ./modules/user/maintenance/apps-cargo.nix
+            ./modules/config-files/aws.nix
+            ./modules/config-files/git.nix
+          ];
+
+          home = {
+            homeDirectory = "/home/cig0";
+
+            sessionVariables = {
+              EDITOR = "nvim";
+              VISUAL = "code";
+            };
+
+            packages = with pkgs; [
+              ] ++
+              (with pkgsUnstable; [
+              # Web
+                # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+            ]);
+
+          # The state version is required and should stay at the version you
+          # originally installed.
+            stateVersion = "24.11";
           };
-
-          packages = with pkgs; [
-            ] ++
-            (with pkgsUnstable; [
-            # Web
-              # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-          ]);
-
-        # The state version is required and should stay at the version you
-        # originally installed.
-          stateVersion = "24.11";
         };
-      };
 
 
-      # doomguy = { ... }: {
-      #   home = {
-      #     homeDirectory = "/home/doomguy";
+        # doomguy = { ... }: {
+        #   home = {
+        #     homeDirectory = "/home/doomguy";
 
-      #     sessionVariables = {
-      #       EDITOR = "nvim";
-      #       VISUAL = "code";
-      #     };
+        #     sessionVariables = {
+        #       EDITOR = "nvim";
+        #       VISUAL = "code";
+        #     };
 
-      #     packages = with pkgs; [
-      #       ] ++
-      #       (with pkgsUnstable; [
-      #       # Web
-      #         # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-      #     ]);
+        #     packages = with pkgs; [
+        #       ] ++
+        #       (with pkgsUnstable; [
+        #       # Web
+        #         # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+        #     ]);
 
-      # # The state version is required and should stay at the version you
-      # # originally installed.
-      #   stateVersion = "24.11";
-      # };
+        # # The state version is required and should stay at the version you
+        # # originally installed.
+        #   stateVersion = "24.11";
+        # };
 
 
-      fine = { ... }: {
-        imports = [
-          ./modules/applications/atuin.nix
-          ./modules/applications/starship.nix
-          ./modules/applications/zsh/zsh.nix
-          ./modules/config-files/apps-cargo.nix ./modules/user/maintenance/apps-cargo.nix
-          ./modules/config-files/aws.nix
-          ./modules/config-files/git.nix
-        ];
+        fine = { ... }: {
+          imports = [
+            ./modules/applications/atuin.nix
+            ./modules/applications/starship.nix
+            ./modules/applications/zsh/zsh.nix
+            ./modules/config-files/apps-cargo.nix ./modules/user/maintenance/apps-cargo.nix
+            ./modules/config-files/aws.nix
+            ./modules/config-files/git.nix
+          ];
 
-        home = {
-          homeDirectory = "/home/fine";
+          home = {
+            homeDirectory = "/home/fine";
 
-          sessionVariables = {
-            EDITOR = "nvim";
-            VISUAL = "code";
+            sessionVariables = {
+              EDITOR = "nvim";
+              VISUAL = "code";
+            };
+
+            packages = with pkgs; [
+              ] ++
+              (with pkgsUnstable; [
+              # Web
+                # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+            ]);
+
+          # The state version is required and should stay at the version you
+          # originally installed.
+            stateVersion = "24.11";
           };
-
-          packages = with pkgs; [
-            ] ++
-            (with pkgsUnstable; [
-            # Web
-              # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-          ]);
-
-        # The state version is required and should stay at the version you
-        # originally installed.
-          stateVersion = "24.11";
         };
       };
     };

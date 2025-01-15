@@ -148,20 +148,11 @@
         virtualization = [ ./nixos/modules/virtualization/main.nix ];
       };
 
-      userModules = {
-        _all = mergeLists [  # Default collection for human users.
-          userModules._core
-          userModules.audio
-          userModules.fonts
+      userModules = [
+          ./nixos/modules/system/audio/main.nix
+          ./nixos/modules/system/fonts.nix
+          ./home-manager/home.nix
         ];
-        _core = mergeLists [  # Core modules shared by all hosts.
-          userModules.home-manager
-
-        ];
-        audio = [ ./nixos/modules/system/audio/main.nix ];
-        fonts = [ ./nixos/modules/system/fonts.nix ];
-        home-manager = [ ./home-manager/home.nix home-manager.nixosModules.home-manager ];
-      };
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
     pkgsUnstable = import nixpkgs-unstable {  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
@@ -180,7 +171,7 @@
       inherit system;
       modules = mergeLists [
         systemModules._all
-        userModules._all
+        userModules
         ] ++ [
           ./nixos/hosts/TUXEDOInfinityBookPro/configuration.nix
           {
@@ -211,6 +202,9 @@
               kde.pim                   = "true";
               kde.plasma                = "true";
               xdg-desktop-portal        = "true";
+
+              # Home Manager
+              home-manager              = "true";
 
               # Nix and NixOS support
               nix-ld                    = "true";
