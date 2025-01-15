@@ -2,6 +2,7 @@
   imports = builtins.filter (x: x != null) [
     ./audio/main.nix
     ./cups.nix
+    ./current-system-packages-list.nix
     ./environment/main.nix
     ./nixos/main.nix
     ./fonts.nix
