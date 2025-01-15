@@ -80,59 +80,37 @@
     # Modules definitions and handling.
     # Collections start with an underscore. They can be used, for example, to represent roles.
     # Any specific host configurations should be done in the host's configuration section of the flake.
-      systemModules = {
-        _all = mergeLists [  # Collection role scope: laptop and workstation.
-          systemModules._core
-          systemModules._radio
-          systemModules.virtualization
-        ];
-        _core = mergeLists [
-          systemModules.applications
-          systemModules.networking
-          systemModules.nixVim
-          systemModules.observability
-          systemModules.powerManagement
-          systemModules.security
-          systemModules.system
-        ];
-        _radio = mergeLists [
-          systemModules.radio.bluetooth
-          systemModules.radio.wifi
-        ];
+      modules = [  # Collection role scope: laptop and workstation.
+          ./home-manager/home.nix
+          ./nixos/modules/applications/main.nix
+          ./nixos/modules/system/audio/main.nix
+          ./nixos/modules/system/fonts.nix
+          ./nixos/modules/virtualization/main.nix
 
-        applications  = [ ./nixos/modules/applications/main.nix  ];
-        networking = [
+          # <----------------  TO GO  ------------------>
           ./nixos/modules/networking/dns.nix
           ./nixos/modules/networking/mtr.nix
           ./nixos/modules/networking/nftables.nix
           ./nixos/modules/networking/stevenblack-unblacklist.nix
           ./nixos/modules/networking/stevenblack.nix
-        ];
-        nixVim = [
+
           ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
-        ];
-        observability = [
-          # ./nixos/modules/observability/grafana-alloy.nix
-          # ./nixos/modules/observability/netdata.nix
-          ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
-        ];
-        powerManagement = [
+
+          ./nixos/modules/observability/main.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
+
           ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
           ./nixos/modules/power-management/power-management.nix
-        ];
-        radio = {
-          bluetooth = [ ./nixos/modules/hardware/bluetooth.nix ];  # TODO: add options to enable or disable
-          wifi = [ ./nixos/modules/hardware/wifi.nix ];  # TODO: add options to enable or disable
-        };
-        security = [
+
+          ./nixos/modules/hardware/bluetooth.nix  # TODO: add options to enable or disable
+          ./nixos/modules/hardware/wifi.nix  # TODO: add options to enable or disable
+
           ./nixos/modules/security/firewall.nix
           ./nixos/modules/security/gnupg.nix
           ./nixos/modules/security/lanzaboote.nix lanzaboote.nixosModules.lanzaboote
           ./nixos/modules/security/openssh.nix
           # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
           ./nixos/modules/security/sudo.nix
-        ];
-        system = [
+
           ./nixos/modules/system/environment/main.nix
           ./nixos/modules/system/maintenance/main.nix
           ./nixos/modules/system/cups.nix
@@ -144,14 +122,6 @@
           ./nixos/modules/system/ucode.nix
           ./nixos/modules/system/users.nix
           ./nixos/modules/system/zram.nix
-        ];
-        virtualization = [ ./nixos/modules/virtualization/main.nix ];
-      };
-
-      userModules = [
-          ./nixos/modules/system/audio/main.nix
-          ./nixos/modules/system/fonts.nix
-          ./home-manager/home.nix
         ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
@@ -169,12 +139,10 @@
     nixosConfigurations.TUXEDOInfinityBookPro = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
       inherit specialArgs;
       inherit system;
-      modules = mergeLists [
-        systemModules._all
-        userModules
-        ] ++ [
+      modules = modules ++ [
           ./nixos/hosts/TUXEDOInfinityBookPro/configuration.nix
           {
+            # Overlays
             nixpkgs.overlays = [
               nixos-option
               rust-overlay.overlays.default
