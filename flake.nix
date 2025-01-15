@@ -79,18 +79,13 @@
           ./nixos/modules/applications/main.nix
           ./nixos/modules/hardware/radio/main.nix
           ./nixos/modules/observability/main.nix
+          ./nixos/modules/networking/main.nix
           ./nixos/modules/security/main.nix
           ./nixos/modules/system/audio/main.nix
           ./nixos/modules/system/fonts.nix
           ./nixos/modules/virtualization/main.nix
 
           # <----------------  TO GO  ------------------>
-          ./nixos/modules/networking/dns.nix
-          ./nixos/modules/networking/mtr.nix
-          ./nixos/modules/networking/nftables.nix
-          ./nixos/modules/networking/stevenblack-unblacklist.nix
-          ./nixos/modules/networking/stevenblack.nix
-
           ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
 
           ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
@@ -158,6 +153,13 @@
 
               # Home Manager
               home-manager              = "true";
+
+              # Networking
+              mtr                       = "true";
+              nftables                  = "true";
+              resolved                  = "true";
+              stevenblack               = "true";
+              stevenblack-unblock       = "true";
 
               # Nix and NixOS support
               nix-ld                    = "true";

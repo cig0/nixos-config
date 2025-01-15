@@ -1,15 +1,27 @@
-{ ... }:
+{ config, lib,  ... }:
 
-{
-  networking = {
-    nameservers = [ "100.100.100.100" "95.85.95.85" "94.140.14.14" ];
-    search = [ "tuxedo-goanna.ts.net" ];
+let
+  cfg = config.mySystem.resolved;
+
+in {
+  options.mySystem.resolved = lib.mkOption {
+    type = lib.types.enum [ "true" "false" ];
+    default = "false";
+    description = "Wheteher to use the resolved systemd service";
   };
-  services.resolved = {
-    enable = true;
-    fallbackDns = [ "1.1.1.1" "208.67.222.123" "8.8.8.8" ];
+
+  config = lib.mkIf (cfg == "true") {
+    networking = {
+      nameservers = [ "100.100.100.100" "95.85.95.85" "94.140.14.14" ];
+      search = [ "tuxedo-goanna.ts.net" ];
+    };
+    services.resolved = {
+      enable = true;
+      fallbackDns = [ "1.1.1.1" "208.67.222.123" "8.8.8.8" ];
+    };
   };
 }
+
 
 
 # DNS providers sorted alphabetically (pick your poison)
