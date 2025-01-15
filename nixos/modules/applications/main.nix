@@ -1,8 +1,8 @@
 {
   imports = builtins.filter (x: x != null) [
+    ./kde/main.nix
     ./display-manager.nix
     ./firefox.nix
-    ./kde/main.nix
     ./nix-flatpak.nix
     ./nix-ld.nix
     ./ollama.nix
