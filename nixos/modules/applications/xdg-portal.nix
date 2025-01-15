@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.mySystem.xdg-desktop-portal;
+  cfg = config.mySystem.xdg.portal;
 
 in {
-  options.mySystem.xdg-desktop-portal = lib.mkOption {
+  options.mySystem.xdg.portal = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Enable XDG desktop integration for other desktop toolkits";

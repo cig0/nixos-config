@@ -7,7 +7,7 @@
     ./ollama.nix
     ./packages.nix
     ./tailscale.nix
-    ./xdg-desktop-portal.nix
+    ./xdg-portal.nix
     ./zsh.nix
   ];
 }
