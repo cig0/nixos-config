@@ -1,15 +1,19 @@
 {
   imports = builtins.filter (x: x != null) [
     ./atop.nix
+    ./display-manager.nix
     ./firefox.nix
+    ./kde/main.nix
     ./nix-flatpak.nix
     ./nix-ld.nix
     ./ollama.nix
     ./packages.nix
     ./tailscale.nix
+    ./xdg-desktop-portal.nix
     ./zsh.nix
   ];
 }
+
 
 
 # READ ME!

@@ -1,21 +1,21 @@
 { config, lib, pkgs, pkgsUnstable, ... }:
 
 let
-  cfgPkgsBaseline = config.mySystem.pkgsBaseline;
-  cfgPkgsCli_all = config.mySystem.pkgsCli._all;
-  cfgPkgsCliAi = config.mySystem.pkgsCli.ai;
-  cfgPkgsCliBackup = config.mySystem.pkgsCli.backup;
-  cfgPkgsCliComms = config.mySystem.pkgsCli.comms;
-  cfgPkgsCliCloudNativeTools = config.mySystem.pkgsCli.cloudNativeTools;
-  cfgPkgsCliMultimedia = config.mySystem.pkgsCli.multimedia;
-  cfgPkgsCliProgramming = config.mySystem.pkgsCli.programming;
-  cfgPkgsCliSecurity = config.mySystem.pkgsCli.security;
-  cfgPkgsCliUtilities = config.mySystem.pkgsCli.utilities;
-  cfgPkgsCliVcs = config.mySystem.pkgsCli.vcs;
-  cfgPkgsCliWeb = config.mySystem.pkgsCli.web;
-  cfgPkgsGui = config.mySystem.pkgsGui;
-  cfgPkgsGuiShellKde = config.mySystem.pkgsGuiShell.kde;
-  cfgPkgsNvidia = config.mySystem.pkgsNvidia;
+  cfg.pkgsBaseline = config.mySystem.pkgs.baseline;
+  cfg.pkgsCli_all = config.mySystem.pkgs.cli._all;
+  cfg.pkgsCliAi = config.mySystem.pkgs.cli.ai;
+  cfg.pkgsCliBackup = config.mySystem.pkgs.cli.backup;
+  cfg.pkgsCliComms = config.mySystem.pkgs.cli.comms;
+  cfg.pkgsCliCloudNativeTools = config.mySystem.pkgs.cli.cloudNativeTools;
+  cfg.pkgsCliMultimedia = config.mySystem.pkgs.cli.multimedia;
+  cfg.pkgsCliProgramming = config.mySystem.pkgs.cli.programming;
+  cfg.pkgsCliSecurity = config.mySystem.pkgs.cli.security;
+  cfg.pkgsCliUtilities = config.mySystem.pkgs.cli.utilities;
+  cfg.pkgsCliVcs = config.mySystem.pkgs.cli.vcs;
+  cfg.pkgsCliWeb = config.mySystem.pkgs.cli.web;
+  cfg.pkgsGui = config.mySystem.pkgs.gui;
+  cfg.pkgsGuiShellKde = config.mySystem.pkgs.guiShell.kde;
+  cfg.pkgsNvidia = config.mySystem.pkgs.nvidia;
 
   pkgsBaseline =
     with pkgs; [
@@ -347,118 +347,119 @@ let
 
 in {
   options.mySystem = {
-    pkgsBaseline = lib.mkOption {
-      type = lib.types.enum [ "true" "false" ];
-      default = "false";
+    pkgs = {
+      baseline = lib.mkOption {
+        type = lib.types.enum [ "true" "false" ];
+        default = "false";
       description = "Whether to install a baseline set of applications packages";
-    };
+      };
+      cli = {
+        _all = lib.mkOption {  # Collection. Includes the whole set.
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install all the CLI applications packages";
+        };
 
-    pkgsCli = {
-      _all = lib.mkOption {  # Collection. Includes the whole set.
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-      description = "Whether to install all the CLI applications packages";
+        ai = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install CLI related applications packages";
+        };
+
+        backup = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install CLI related applications packages";
+        };
+
+        comms = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install CLI related applications packages";
+        };
+
+        cloudNativeTools = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install CLI related applications packages";
+        };
+
+        multimedia = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install CLI related applications packages";
+        };
+
+        programming = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install CLI related applications packages";
+        };
+
+        security = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install CLI related applications packages";
+        };
+
+        utilities = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install CLI related applications packages";
+        };
+
+        vcs = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install CLI related applications packages";
+        };
+
+        web = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+        description = "Whether to install CLI related applications packages";
+        };
       };
 
-      ai = lib.mkOption {
+      gui = lib.mkOption {
         type = lib.types.enum [ "true" "false" ];
         default = "false";
-      description = "Whether to install CLI related applications packages";
+        description = "Whether to install GUI applications packages";
       };
 
-      backup = lib.mkOption {
+      guiShell = {
+        kde = lib.mkOption {
+          type = lib.types.enum [ "true" "false" ];
+          default = "false";
+          description = "Whether to install DE/WM complementary applications packages";
+        };
+      };
+
+      nvidia = lib.mkOption {  # Set to true if running on an Nvidia host
         type = lib.types.enum [ "true" "false" ];
         default = "false";
-      description = "Whether to install CLI related applications packages";
+        description = "Whether to install Nvidia-releated applications packages";
       };
-
-      comms = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-      description = "Whether to install CLI related applications packages";
-      };
-
-      cloudNativeTools = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-      description = "Whether to install CLI related applications packages";
-      };
-
-      multimedia = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-      description = "Whether to install CLI related applications packages";
-      };
-
-      programming = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-      description = "Whether to install CLI related applications packages";
-      };
-
-      security = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-      description = "Whether to install CLI related applications packages";
-      };
-
-      utilities = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-      description = "Whether to install CLI related applications packages";
-      };
-
-      vcs = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-      description = "Whether to install CLI related applications packages";
-      };
-
-      web = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-      description = "Whether to install CLI related applications packages";
-      };
-    };
-
-    pkgsGui = lib.mkOption {
-      type = lib.types.enum [ "true" "false" ];
-      default = "false";
-      description = "Whether to install GUI applications packages";
-    };
-
-    pkgsGuiShell = {
-      kde = lib.mkOption {
-        type = lib.types.enum [ "true" "false" ];
-        default = "false";
-        description = "Whether to install DE/WM complementary applications packages";
-      };
-    };
-
-    pkgsNvidia = lib.mkOption {  # Set to true if running on an Nvidia host
-      type = lib.types.enum [ "true" "false" ];
-      default = "false";
-      description = "Whether to install Nvidia-releated applications packages";
     };
   };
 
   config = {
     environment.systemPackages = []  # Start with empty list or your base packages
-      ++ (lib.optionals (cfgPkgsBaseline == "true") pkgsBaseline)
-      ++ (lib.optionals (cfgPkgsCli_all == "true") (builtins.concatLists (builtins.attrValues pkgsCli)))
-      ++ (lib.optionals (cfgPkgsCliAi == "true") pkgsCli.ai)
-      ++ (lib.optionals (cfgPkgsCliBackup == "true") pkgsCli.backup)
-      ++ (lib.optionals (cfgPkgsCliComms == "true") pkgsCli.comms)
-      ++ (lib.optionals (cfgPkgsCliCloudNativeTools == "true") pkgsCli.cloudNativeTools)
-      ++ (lib.optionals (cfgPkgsCliMultimedia == "true") pkgsCli.multimedia)
-      ++ (lib.optionals (cfgPkgsCliProgramming == "true") pkgsCli.programming)
-      ++ (lib.optionals (cfgPkgsCliSecurity == "true") pkgsCli.security)
-      ++ (lib.optionals (cfgPkgsCliUtilities == "true") pkgsCli.utilities)
-      ++ (lib.optionals (cfgPkgsCliVcs == "true") pkgsCli.vcs)
-      ++ (lib.optionals (cfgPkgsCliWeb == "true") pkgsCli.web)
-      ++ (lib.optionals (cfgPkgsGui == "true") pkgsGui)
-      ++ (lib.optionals (cfgPkgsGuiShellKde == "true") pkgsGuiShell.kde)
-      ++ (lib.optionals (cfgPkgsNvidia == "true") pkgsNvidia);
+      ++ (lib.optionals (cfg.pkgsBaseline == "true") pkgsBaseline)
+      ++ (lib.optionals (cfg.pkgsCli_all == "true") (builtins.concatLists (builtins.attrValues pkgsCli)))
+      ++ (lib.optionals (cfg.pkgsCliAi == "true") pkgsCli.ai)
+      ++ (lib.optionals (cfg.pkgsCliBackup == "true") pkgsCli.backup)
+      ++ (lib.optionals (cfg.pkgsCliComms == "true") pkgsCli.comms)
+      ++ (lib.optionals (cfg.pkgsCliCloudNativeTools == "true") pkgsCli.cloudNativeTools)
+      ++ (lib.optionals (cfg.pkgsCliMultimedia == "true") pkgsCli.multimedia)
+      ++ (lib.optionals (cfg.pkgsCliProgramming == "true") pkgsCli.programming)
+      ++ (lib.optionals (cfg.pkgsCliSecurity == "true") pkgsCli.security)
+      ++ (lib.optionals (cfg.pkgsCliUtilities == "true") pkgsCli.utilities)
+      ++ (lib.optionals (cfg.pkgsCliVcs == "true") pkgsCli.vcs)
+      ++ (lib.optionals (cfg.pkgsCliWeb == "true") pkgsCli.web)
+      ++ (lib.optionals (cfg.pkgsGui == "true") pkgsGui)
+      ++ (lib.optionals (cfg.pkgsGuiShellKde == "true") pkgsGuiShell.kde)
+      ++ (lib.optionals (cfg.pkgsNvidia == "true") pkgsNvidia);
 
     nixpkgs.config.allowUnfree = true;  # Allow lincense-burdened packages
   };

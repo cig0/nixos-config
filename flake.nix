@@ -81,128 +81,96 @@
     # Collections start with an underscore. They can be used, for example, to represent roles.
     # Any specific host configurations should be done in the host's configuration section of the flake.
       systemModules = {
-          _all = mergeLists [  # Collection role scope: laptop and workstation.
-            systemModules._core
-            systemModules._radio
-            systemModules.virtualization.containerization
-            systemModules.virtualization.hypervisor
-          ];
-          _core = mergeLists [
-            systemModules.applications
-            systemModules.networking
-            systemModules.nixVim
-            systemModules.observability
-            systemModules.powerManagement
-            systemModules.security
-            systemModules.system
-          ];
-          _radio = mergeLists [
-            systemModules.radio.bluetooth
-            systemModules.radio.wifi
-          ];
+        _all = mergeLists [  # Collection role scope: laptop and workstation.
+          systemModules._core
+          systemModules._radio
+          systemModules.virtualization.containerization
+          systemModules.virtualization.hypervisor
+        ];
+        _core = mergeLists [
+          systemModules.applications
+          systemModules.networking
+          systemModules.nixVim
+          systemModules.observability
+          systemModules.powerManagement
+          systemModules.security
+          systemModules.system
+        ];
+        _radio = mergeLists [
+          systemModules.radio.bluetooth
+          systemModules.radio.wifi
+        ];
 
-          applications  = [  # Systemwide applications installation
-            ./nixos/modules/applications/applications.nix
+        applications  = [ ./nixos/modules/applications/main.nix  ];
+        networking = [
+          ./nixos/modules/networking/dns.nix
+          ./nixos/modules/networking/mtr.nix
+          ./nixos/modules/networking/nftables.nix
+          ./nixos/modules/networking/stevenblack-unblacklist.nix
+          ./nixos/modules/networking/stevenblack.nix
+        ];
+        nixVim = [
+          ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
+        ];
+        observability = [
+          # ./nixos/modules/observability/grafana-alloy.nix
+          # ./nixos/modules/observability/netdata.nix
+          ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
+        ];
+        powerManagement = [
+          ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
+          ./nixos/modules/power-management/power-management.nix
+        ];
+        radio = {
+          bluetooth = [ ./nixos/modules/hardware/bluetooth.nix ];  # TODO: add options to enable or disable
+          wifi = [ ./nixos/modules/hardware/wifi.nix ];  # TODO: add options to enable or disable
+        };
+        security = [
+          ./nixos/modules/security/firewall.nix
+          ./nixos/modules/security/gnupg.nix
+          ./nixos/modules/security/lanzaboote.nix lanzaboote.nixosModules.lanzaboote
+          ./nixos/modules/security/openssh.nix
+          # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
+          ./nixos/modules/security/sudo.nix
+        ];
+        system = [
+          ./nixos/modules/system/environment/environment.nix
+          ./nixos/modules/system/maintenance/maintenance.nix
+          ./nixos/modules/system/cups.nix
+          ./nixos/modules/system/current-system-packages.nix
+          ./nixos/modules/system/fwupd.nix
+          ./nixos/modules/system/hwaccel.nix
+          ./nixos/modules/system/kernel.nix
+          ./nixos/modules/system/keyd.nix
+          ./nixos/modules/system/ucode.nix
+          ./nixos/modules/system/users.nix
+          ./nixos/modules/system/zram.nix
+        ];
+        virtualization = {
+          containerization = [
+            ./nixos/modules/virtualization/containerization.nix
+            ./nixos/modules/virtualization/incus.nix
           ];
-          networking = [
-            ./nixos/modules/networking/dns.nix
-            ./nixos/modules/networking/mtr.nix
-            ./nixos/modules/networking/nftables.nix
-            ./nixos/modules/networking/stevenblack-unblacklist.nix
-            ./nixos/modules/networking/stevenblack.nix
-          ];
-          nixVim = [
-            ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
-          ];
-          observability = [
-            # ./nixos/modules/observability/grafana-alloy.nix
-            # ./nixos/modules/observability/netdata.nix
-            ./nixos/modules/observability/observability.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
-          ];
-          powerManagement = [
-            ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
-            ./nixos/modules/power-management/power-management.nix
-          ];
-          radio = {
-            bluetooth = [ ./nixos/modules/hardware/bluetooth.nix ];
-            wifi = [ ./nixos/modules/hardware/wifi.nix ];
-          };
-          security = [
-            ./nixos/modules/security/firewall.nix
-            ./nixos/modules/security/gnupg.nix
-            ./nixos/modules/security/lanzaboote.nix lanzaboote.nixosModules.lanzaboote
-            ./nixos/modules/security/openssh.nix
-            # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
-            ./nixos/modules/security/sudo.nix
-          ];
-          system = [
-            ./nixos/modules/system/environment/environment.nix
-            ./nixos/modules/system/maintenance/maintenance.nix
-            ./nixos/modules/system/cups.nix
-            ./nixos/modules/system/current-system-packages.nix
-            ./nixos/modules/system/fwupd.nix
-            ./nixos/modules/system/hwaccel.nix
-            ./nixos/modules/system/kernel.nix
-            ./nixos/modules/system/keyd.nix
-            ./nixos/modules/system/ucode.nix
-            ./nixos/modules/system/users.nix
-            ./nixos/modules/system/zram.nix
-          ];
-          virtualization = {
-            containerization = [
-              ./nixos/modules/virtualization/containerization.nix
-              ./nixos/modules/virtualization/incus.nix
-            ];
-            hypervisor = [ ./nixos/modules/virtualization/libvirt.nix ];
-          };
+          hypervisor = [ ./nixos/modules/virtualization/libvirt.nix ];
+        };
       };
 
       userModules = {
-          _all = mergeLists [  # Default collection for human users.
-            userModules._core
-            userModules.audio.audio-subsystem
-            userModules.audio.speech-synthesis
-            userModules.fonts
-            userModules.home-manager
-          ];
-          _core = mergeLists [  # Core modules shared by all hosts.
-            userModules.displayManagers
-            userModules.xdgDesktopPortal
-          ];
-
-          audio = {
-            audio-subsystem = [ ./nixos/modules/system/audio/audio-subsystem.nix ];
-            speech-synthesis = [ ./nixos/modules/system/audio/speech-synthesis.nix ];
-          };
-          displayManagers = [
-            ./nixos/modules/gui-shell/ly.nix
-            ./nixos/modules/gui-shell/sddm.nix
-          ];
-          fonts = [ ./nixos/modules/system/fonts.nix ];
-          guiShells = {  # In place to avoid system breakage. Will be removed after refactoring the configuration.
-            selector = [
-              ./nixos/modules/gui-shell/gui-shell-selector.nix
-            ];
-            cosmic = [
-              # ./nixos/modules/gui-shell/cosmic.nix
-            ];
-            hyprland = [
-              # ./nixos/modules/gui-shell/hyprland.nix
-            ];
-            kde = [
-              ./nixos/modules/gui-shell/kde-plasma.nix
-              ./nixos/modules/applications/kde/kde-pim.nix
-              ./nixos/modules/applications/kde/kdeconnect.nix
-            ];
-            wayfire = [
-              # ./nixos/modules/gui-shell/wayfire.nix
-            ];
-            xfce = [
-              # ./nixos/modules/gui-shell/xfce.nix
-            ];
-          };
-          home-manager = [ ./home-manager/home.nix home-manager.nixosModules.home-manager ];
-          xdgDesktopPortal = [ ./nixos/modules/gui-shell/xdg-desktop-portal.nix ];
+        _all = mergeLists [  # Default collection for human users.
+          userModules._core
+          userModules.audio.audio-subsystem
+          userModules.audio.speech-synthesis
+          userModules.fonts
+          userModules.home-manager
+        ];
+        _core = mergeLists [  # Core modules shared by all hosts.
+        ];
+        audio = {
+          audio-subsystem = [ ./nixos/modules/system/audio/audio-subsystem.nix ];
+          speech-synthesis = [ ./nixos/modules/system/audio/speech-synthesis.nix ];
+        };
+        fonts = [ ./nixos/modules/system/fonts.nix ];
+        home-manager = [ ./home-manager/home.nix home-manager.nixosModules.home-manager ];
       };
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
@@ -223,7 +191,6 @@
       modules = mergeLists [
         systemModules._all
         userModules._all
-        userModules.guiShells.selector  # TODO: remove after refactoring the configuration
         ] ++ [
           ./nixos/hosts/TUXEDOInfinityBookPro/configuration.nix
           {
@@ -233,32 +200,23 @@
             ];
           }
           {
-            # ===== DISPLAY MANAGERS =====
-            # Only one at a time can be active
-            # Settings for each Display Manager are managed in the respective modules in ./nixos/modules/gui-shell/
-            services.displayManager = {
-              autoLogin = {
-                enable = false;
-              };
-              # cosmic-greeter.enable = false;  # COSMIC Desktop Greeter
-              ly.enable = false;  # Ly Display Manager
-              sddm.enable = true;  # SDDM / KDE Display Manager
-            };
-          }
-          {
-            # mySystem Options, and where they are defined
+            # mySystem Options
             mySystem = {
-              guiShellEnv       = "plasma6";
-
-              firefox           = "true";
-              flatpak           = "true";
-              nix-ld            = "true";
-              pkgsBaseline      = "true";
-              pkgsCli._all      = "true";
-              pkgsGui           = "true";
-              pkgsGuiShell.kde  = "true";
-              tailscale         = "true";
-              zsh               = "true";
+              displayManager.ly         = "false";
+              displayManager.sddm       = "true";
+              firefox                   = "true";
+              flatpak                   = "true";
+              kde.connect               = "true";
+              kde.pim                   = "true";
+              kde.plasma                = "true";
+              nix-ld                    = "true";
+              pkgs.baseline             = "true";
+              pkgs.cli._all             = "true";
+              pkgs.gui                  = "true";
+              pkgs.guiShell.kde         = "true";
+              tailscale                 = "true";
+              xdg-desktop-portal        = "true";
+              zsh                       = "true";
             };
           }
       ];
@@ -296,6 +254,7 @@
     # };
   };
 }
+
 
 
 # README!
