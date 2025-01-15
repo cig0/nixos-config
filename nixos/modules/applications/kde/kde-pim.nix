@@ -1,10 +1,16 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.guiShellEnv;
+  cfg = config.mySystem.kde.pim;
 
 in {
-  config = lib.mkIf (cfg == "plasma6") {
+  options.mySystem.kde.pim = lib.mkOption {
+    type = lib.types.enum [ "true" "false" ];
+    default = "false";
+    description = "KDE Personal Information Management suite";
+  };
+
+  config = lib.mkIf (cfg == "true") {
     programs.kde-pim = {
       enable = true;
       kmail = true;
