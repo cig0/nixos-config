@@ -77,6 +77,7 @@
       modules = [  # Collection role scope: laptop and workstation.
           ./home-manager/home.nix
           ./nixos/modules/applications/main.nix
+          ./nixos/modules/hardware/radio/main.nix
           ./nixos/modules/observability/main.nix
           ./nixos/modules/security/main.nix
           ./nixos/modules/system/audio/main.nix
@@ -94,9 +95,6 @@
 
           ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
           ./nixos/modules/power-management/power-management.nix
-
-          ./nixos/modules/hardware/bluetooth.nix  # TODO: add options to enable or disable
-          ./nixos/modules/hardware/wifi.nix  # TODO: add options to enable or disable
 
           ./nixos/modules/system/environment/main.nix
           ./nixos/modules/system/maintenance/main.nix
@@ -164,8 +162,15 @@
               # Nix and NixOS support
               nix-ld                    = "true";
 
+              # Radio
+              bluetooth                 = "true";
+
               # Security
+              firewall                  = "true";
+              gnupg                     = "true";
               lanzaboote                = "true";
+              openssh                   = "true";
+              sudo                      = "true";
 
               # System
               pipewire                  = "true";
