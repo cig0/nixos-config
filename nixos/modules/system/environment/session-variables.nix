@@ -9,10 +9,10 @@ let
   # Debug statement to verify primaryUser
   # _ = builtins.trace "Primary user: ${primaryUser}" primaryUser;
 
-  # githubVars = {
-  #   GITHUB_TOKEN = "";  # TODO: Implement SOPS.
-  #   GITHUB_USERNAME = "cig0";
-  # };
+  githubVars = {
+    GITHUB_TOKEN = "";  # TODO: Implement SOPS.
+    GITHUB_USERNAME = "cig0";
+  };
 
   commonEnvSessionVars = {
     EGL_PLATFORM = "wayland";
@@ -67,7 +67,6 @@ in {
     sessionVariables =
       (if hostSelector.isIntelGPUHost then commonEnvSessionVars // intelEnvSessionVars
       else if hostSelector.isNvidiaGPUHost then commonEnvSessionVars
-      else {});
-      # else {}) // githubVars;
+      else {}) // githubVars;
   };
 }
