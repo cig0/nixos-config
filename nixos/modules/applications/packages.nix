@@ -1,23 +1,23 @@
 { config, lib, pkgs, pkgsUnstable, ... }:
 
 let
-  cfg.pkgsBaseline = config.mySystem.pkgs.baseline;
-  cfg.pkgsCli_all = config.mySystem.pkgs.cli._all;
-  cfg.pkgsCliAi = config.mySystem.pkgs.cli.ai;
-  cfg.pkgsCliBackup = config.mySystem.pkgs.cli.backup;
-  cfg.pkgsCliComms = config.mySystem.pkgs.cli.comms;
-  cfg.pkgsCliCloudNativeTools = config.mySystem.pkgs.cli.cloudNativeTools;
-  cfg.pkgsCliMultimedia = config.mySystem.pkgs.cli.multimedia;
-  cfg.pkgsCliProgramming = config.mySystem.pkgs.cli.programming;
-  cfg.pkgsCliSecurity = config.mySystem.pkgs.cli.security;
-  cfg.pkgsCliUtilities = config.mySystem.pkgs.cli.utilities;
-  cfg.pkgsCliVcs = config.mySystem.pkgs.cli.vcs;
-  cfg.pkgsCliWeb = config.mySystem.pkgs.cli.web;
-  cfg.pkgsGui = config.mySystem.pkgs.gui;
-  cfg.pkgsGuiShellKde = config.mySystem.pkgs.guiShell.kde;
-  cfg.pkgsNvidia = config.mySystem.pkgs.nvidia;
+  cfg.packagesBaseline = config.mySystem.packages.baseline;
+  cfg.packagesCli_all = config.mySystem.packages.cli._all;
+  cfg.packagesCliAi = config.mySystem.packages.cli.ai;
+  cfg.packagesCliBackup = config.mySystem.packages.cli.backup;
+  cfg.packagesCliComms = config.mySystem.packages.cli.comms;
+  cfg.packagesCliCloudNativeTools = config.mySystem.packages.cli.cloudNativeTools;
+  cfg.packagesCliMultimedia = config.mySystem.packages.cli.multimedia;
+  cfg.packagesCliProgramming = config.mySystem.packages.cli.programming;
+  cfg.packagesCliSecurity = config.mySystem.packages.cli.security;
+  cfg.packagesCliUtilities = config.mySystem.packages.cli.utilities;
+  cfg.packagesCliVcs = config.mySystem.packages.cli.vcs;
+  cfg.packagesCliWeb = config.mySystem.packages.cli.web;
+  cfg.packagesGui = config.mySystem.packages.gui;
+  cfg.packagesGuiShellKde = config.mySystem.packages.guiShell.kde;
+  cfg.packagesNvidia = config.mySystem.packages.nvidia;
 
-  pkgsBaseline =
+  packagesBaseline =
     with pkgs; [
       # Nix
         # LSP
@@ -118,7 +118,7 @@ let
         ncdu
     ]);
 
-  pkgsCli = {
+  packagesCli = {
     ai = with pkgsUnstable; [
       aichat
       oterm
@@ -261,7 +261,7 @@ let
     ];
   };
 
-  pkgsGui =
+  packagesGui =
     with pkgs; [
       # Multimedia
         gimp-with-plugins  # Fails to build from unstable because of some plugins.
@@ -308,7 +308,7 @@ let
         wezterm
     ]);
 
-  pkgsGuiShell = {
+  packagesGuiShell = {
     # cosmic = with pkgs; [
     # ];
     # hyprland = with pkgs; [
@@ -338,7 +338,7 @@ let
     # ];
   };
 
-  pkgsNvidia =
+  packagesNvidia =
     with pkgs; [
     ] ++
     (with pkgsUnstable; [
@@ -347,7 +347,7 @@ let
 
 in {
   options.mySystem = {
-    pkgs = {
+    packages = {
       baseline = lib.mkOption {
         type = lib.types.enum [ "true" "false" ];
         default = "false";
@@ -445,21 +445,21 @@ in {
 
   config = {
     environment.systemPackages = []  # Start with empty list or your base packages
-      ++ (lib.optionals (cfg.pkgsBaseline == "true") pkgsBaseline)
-      ++ (lib.optionals (cfg.pkgsCli_all == "true") (builtins.concatLists (builtins.attrValues pkgsCli)))
-      ++ (lib.optionals (cfg.pkgsCliAi == "true") pkgsCli.ai)
-      ++ (lib.optionals (cfg.pkgsCliBackup == "true") pkgsCli.backup)
-      ++ (lib.optionals (cfg.pkgsCliComms == "true") pkgsCli.comms)
-      ++ (lib.optionals (cfg.pkgsCliCloudNativeTools == "true") pkgsCli.cloudNativeTools)
-      ++ (lib.optionals (cfg.pkgsCliMultimedia == "true") pkgsCli.multimedia)
-      ++ (lib.optionals (cfg.pkgsCliProgramming == "true") pkgsCli.programming)
-      ++ (lib.optionals (cfg.pkgsCliSecurity == "true") pkgsCli.security)
-      ++ (lib.optionals (cfg.pkgsCliUtilities == "true") pkgsCli.utilities)
-      ++ (lib.optionals (cfg.pkgsCliVcs == "true") pkgsCli.vcs)
-      ++ (lib.optionals (cfg.pkgsCliWeb == "true") pkgsCli.web)
-      ++ (lib.optionals (cfg.pkgsGui == "true") pkgsGui)
-      ++ (lib.optionals (cfg.pkgsGuiShellKde == "true") pkgsGuiShell.kde)
-      ++ (lib.optionals (cfg.pkgsNvidia == "true") pkgsNvidia);
+      ++ (lib.optionals (cfg.packagesBaseline == "true") packagesBaseline)
+      ++ (lib.optionals (cfg.packagesCli_all == "true") (builtins.concatLists (builtins.attrValues packagesCli)))
+      ++ (lib.optionals (cfg.packagesCliAi == "true") packagesCli.ai)
+      ++ (lib.optionals (cfg.packagesCliBackup == "true") packagesCli.backup)
+      ++ (lib.optionals (cfg.packagesCliComms == "true") packagesCli.comms)
+      ++ (lib.optionals (cfg.packagesCliCloudNativeTools == "true") packagesCli.cloudNativeTools)
+      ++ (lib.optionals (cfg.packagesCliMultimedia == "true") packagesCli.multimedia)
+      ++ (lib.optionals (cfg.packagesCliProgramming == "true") packagesCli.programming)
+      ++ (lib.optionals (cfg.packagesCliSecurity == "true") packagesCli.security)
+      ++ (lib.optionals (cfg.packagesCliUtilities == "true") packagesCli.utilities)
+      ++ (lib.optionals (cfg.packagesCliVcs == "true") packagesCli.vcs)
+      ++ (lib.optionals (cfg.packagesCliWeb == "true") packagesCli.web)
+      ++ (lib.optionals (cfg.packagesGui == "true") packagesGui)
+      ++ (lib.optionals (cfg.packagesGuiShellKde == "true") packagesGuiShell.kde)
+      ++ (lib.optionals (cfg.packagesNvidia == "true") packagesNvidia);
 
     nixpkgs.config.allowUnfree = true;  # Allow lincense-burdened packages
   };

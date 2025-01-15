@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.firewall;
+  cfg = config.mySystem.networking.firewall;
 
 in {
-  options.mySystem.firewall = lib.mkOption {
+  options.mySystem.networking.firewall = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to enable and manage firewall";

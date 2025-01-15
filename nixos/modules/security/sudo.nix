@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.sudo;
+  cfg = config.mySystem.security.sudo;
 
 in {
-  options.mySystem.sudo = lib.mkOption {
+  options.mySystem.security.sudo = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to enable sudo";

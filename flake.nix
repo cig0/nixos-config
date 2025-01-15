@@ -80,11 +80,13 @@
           ./nixos/modules/hardware/power-management/main.nix
           ./nixos/modules/hardware/radio/main.nix
           ./nixos/modules/observability/main.nix
+          ./nixos/modules/networking/dns/main.nix
           ./nixos/modules/networking/main.nix
           ./nixos/modules/security/main.nix
           ./nixos/modules/system/audio/main.nix
+          ./nixos/modules/system/nixos/main.nix
           ./nixos/modules/system/fonts.nix
-          ./nixos/modules/virtualization/main.nix
+          ./nixos/modules/virtualisation/main.nix
 
           # <----------------  TO GO  ------------------>
           ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
@@ -129,61 +131,67 @@
           {
             # mySystem Options
             mySystem = {
-              # Applications
-              firefox                   = "true";
-              flatpak                   = "true";
-              pkgs.baseline             = "true";
-              pkgs.cli._all             = "true";
-              pkgs.gui                  = "true";
-              pkgs.guiShell.kde         = "true";
-              tailscale                 = "true";
+              # Applications (from ./nixos/modules/applications/packages.nix)
+              packages.baseline                     = "true";
+              packages.cli._all                     = "true";
+              packages.gui                          = "true";
+              packages.guiShell.kde                 = "true";
+
+              # Applications (from options)
+              programs.firefox                      = "true";
+              services.flatpak                      = "true";
+              services.tailscale                    = "true";
 
               # CLI shell
-              zsh                       = "true";
+              programs.zsh                          = "true";
 
               # GUI shell
-              displayManager.ly         = "false";
-              displayManager.sddm       = "true";
-              kde.connect               = "true";
-              kde.pim                   = "true";
-              kde.plasma                = "true";
-              xdg-desktop-portal        = "true";
+              displayManager.ly                     = "false";
+              displayManager.sddm                   = "true";
+              kde.connect                           = "true";
+              kde.pim                               = "true";
+              kde.plasma                            = "true";
+              xdg-desktop-portal                    = "true";
 
               # Home Manager
-              home-manager              = "true";
+              home-manager                          = "true";
 
               # Networking
-              mtr                       = "true";
-              nftables                  = "true";
-              resolved                  = "true";
-              stevenblack               = "true";
-              stevenblack-unblock       = "true";
+              programs.mtr                          = "true";
+              networking.nameservers                = "true";
+              networking.nftables                   = "true";
+              services.resolved                     = "true";
+              networking.stevenblack                = "true";
+              systemd.services.stevenblack-unblock  = "true";
 
               # Nix and NixOS support
-              nix-ld                    = "true";
+              # programs.nix-index-database.comma     = "true";  # TODO: add nix-index-database flake input!
+              programs.nix-ld                       = "true";
 
               # Power Management
-              auto-cpufreq              = "true";
-              power-management          = "true";
+              programs.auto-cpufreq                 = "true";
+              power-management                      = "true";
+              services.thermald                     = "true";
 
               # Radio
-              bluetooth                 = "true";
+              hardware.bluetooth                    = "true";
 
               # Security
-              firewall                  = "true";
-              gnupg                     = "true";
-              lanzaboote                = "true";
-              openssh                   = "true";
-              sudo                      = "true";
+              networking.firewall                   = "true";
+              programs.gnupg                        = "true";
+              boot.lanzaboote                       = "true";
+              services.openssh                      = "true";
+              security.sudo                         = "true";
 
               # System
-              pipewire                  = "true";
-              speech-synthesis          = "true";
+                # Audio
+                audio-subsystem                     = "true";
+                services.speech-synthesis           = "true";
 
-              # Virtualization
-              incus                     = "true";
-              libvirt                   = "true";
-              podman                    = "true";
+              # Virtualisation
+              virtualisation.incus                  = "true";
+              virtualisation.libvirt                = "true";
+              virtualisation.podman                 = "true";
             };
           }
       ];

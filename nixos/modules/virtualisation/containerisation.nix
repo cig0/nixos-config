@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.podman;
+  cfg = config.mySystem.virtualisation.podman;
 
 in {
-  options.mySystem.podman = lib.mkOption {
+  options.mySystem.virtualisation.podman = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to enable Podman and containerization support";

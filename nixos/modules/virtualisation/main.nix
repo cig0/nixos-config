@@ -1,6 +1,6 @@
 {
   imports = builtins.filter (x: x != null) [
-    ./containerization.nix
+    ./containerisation.nix
     ./incus.nix
     ./libvirt.nix
   ];

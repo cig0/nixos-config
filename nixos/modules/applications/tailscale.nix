@@ -1,14 +1,10 @@
-# Check these modules for additional options:
-#   - ../networking/dns.nix
-#   - ../security/firewall.nix
-
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.tailscale;
+  cfg = config.mySystem.services.tailscale;
 
 in {
-  options.mySystem.tailscale = lib.mkOption {
+  options.mySystem.services.tailscale = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to enable Tailscale service";
@@ -22,3 +18,12 @@ in {
     };
   };
 }
+
+
+
+# READ ME!
+# ========
+
+# Check these modules for additional options:
+#   - ../networking/dns.nix
+#   - ../security/firewall.nix
