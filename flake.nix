@@ -74,7 +74,7 @@
   ... }:
 
   let
-      modules = [  # Collection role scope: laptop and workstation.
+      modules = [
           ./home-manager/home.nix
           ./nixos/modules/applications/main.nix
           ./nixos/modules/hardware/power-management/main.nix
