@@ -151,17 +151,14 @@
       userModules = {
         _all = mergeLists [  # Default collection for human users.
           userModules._core
-          userModules.audio.audio-subsystem
-          userModules.audio.speech-synthesis
+          userModules.audio
           userModules.fonts
-          userModules.home-manager
         ];
         _core = mergeLists [  # Core modules shared by all hosts.
+          userModules.home-manager
+
         ];
-        audio = {
-          audio-subsystem = [ ./nixos/modules/system/audio/audio-subsystem.nix ];
-          speech-synthesis = [ ./nixos/modules/system/audio/speech-synthesis.nix ];
-        };
+        audio = [ ./nixos/modules/system/audio/main.nix ];
         fonts = [ ./nixos/modules/system/fonts.nix ];
         home-manager = [ ./home-manager/home.nix home-manager.nixosModules.home-manager ];
       };
@@ -217,6 +214,10 @@
 
               # Nix and NixOS support
               nix-ld                    = "true";
+
+              # System
+              pipewire                  = "true";
+              speech-synthesis          = "true";
 
               # Virtualization
               incus                     = "true";

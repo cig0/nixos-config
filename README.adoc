@@ -15,14 +15,16 @@ image::.repo_assets/frostedflakes.jpg[alt="Frosted Flakes", align="center"]
 </p>
 </div>
 ++++
-
 This flake under heavy development!
 
-Flake features:
-- It allows for managing NixOS and applications using both the stable and unstable release channels; the way I use it is by pulling NixOS, KDE and a bunch of apps I want to forget about updating for a while from the stable release channel, and applications I want to use in their latest possible versions pulled from the unstable release channel with Home Manager, in my main user isolated environment. Symlinks are note shared with the system packages to avoid any possible issues (I already had to deal with a serious one!).
-- It also allows fancy hosts definition in `nixos/helpers/hostnames.nix` so you can manage several heterogenic hosts with a single codebase.
+v0.4 The great refactor.
 
-I hope you find it useful in the same way I found many similar resources that helped me quickly start building my system configuration 🤓
+Most notable changes in this version
+- Deprecating of former nixos/modules/applications/applications.nix file
+- Bake options for module enablement into each module
+
+Flake features:
+- WIP
 
 toc::[]
 
