@@ -78,6 +78,7 @@
           ./home-manager/home.nix
           ./nixos/modules/applications/main.nix
           ./nixos/modules/observability/main.nix
+          ./nixos/modules/security/main.nix
           ./nixos/modules/system/audio/main.nix
           ./nixos/modules/system/fonts.nix
           ./nixos/modules/virtualization/main.nix
@@ -91,19 +92,11 @@
 
           ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
 
-
           ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
           ./nixos/modules/power-management/power-management.nix
 
           ./nixos/modules/hardware/bluetooth.nix  # TODO: add options to enable or disable
           ./nixos/modules/hardware/wifi.nix  # TODO: add options to enable or disable
-
-          ./nixos/modules/security/firewall.nix
-          ./nixos/modules/security/gnupg.nix
-          ./nixos/modules/security/lanzaboote.nix lanzaboote.nixosModules.lanzaboote
-          ./nixos/modules/security/openssh.nix
-          # ./nixos/modules/security/sops.nix sops-nix.nixosModules.sops  # TODO: needs implementation.
-          ./nixos/modules/security/sudo.nix
 
           ./nixos/modules/system/environment/main.nix
           ./nixos/modules/system/maintenance/main.nix
@@ -170,6 +163,9 @@
 
               # Nix and NixOS support
               nix-ld                    = "true";
+
+              # Security
+              lanzaboote                = "true";
 
               # System
               pipewire                  = "true";

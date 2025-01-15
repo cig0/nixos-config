@@ -10,7 +10,7 @@ in {
     inputs.home-manager.nixosModules.home-manager
   ];
 
-options.mySystem.home-manager = lib.mkOption {
+  options.mySystem.home-manager = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to enable atop, the console system performance monitor";
@@ -27,9 +27,10 @@ options.mySystem.home-manager = lib.mkOption {
             ./modules/applications/atuin.nix
             ./modules/applications/starship.nix
             ./modules/applications/zsh/zsh.nix
-            ./modules/config-files/apps-cargo.nix ./modules/user/maintenance/apps-cargo.nix
+            ./modules/config-files/apps-cargo.nix
             ./modules/config-files/aws.nix
             ./modules/config-files/git.nix
+            ./modules/user/maintenance/apps-cargo.nix
           ];
 
           home = {
@@ -81,9 +82,10 @@ options.mySystem.home-manager = lib.mkOption {
             ./modules/applications/atuin.nix
             ./modules/applications/starship.nix
             ./modules/applications/zsh/zsh.nix
-            ./modules/config-files/apps-cargo.nix ./modules/user/maintenance/apps-cargo.nix
+            ./modules/config-files/apps-cargo.nix
             ./modules/config-files/aws.nix
             ./modules/config-files/git.nix
+            ./modules/user/maintenance/apps-cargo.nix
           ];
 
           home = {
