@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.xdg.portal = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Enable XDG desktop integration for other desktop toolkits";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [

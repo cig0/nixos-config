@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.networking.nameservers = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Wheteher to use these nameservers";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     networking = {
       nameservers = [ "100.100.100.100" "95.85.95.85" "94.140.14.14" ];  # TODO: make Tailscale module check for its 100.100.100.100 nameserver and add it if missing
       search = [ "tuxedo-goanna.ts.net" ];  # TODO: make Tailscale module check for this option and add it if missing

@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.networking.stevenblack = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to enable Steven Black's hosts block lists";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     networking.stevenblack = {
       enable = true;
       block = [

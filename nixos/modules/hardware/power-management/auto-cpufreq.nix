@@ -7,12 +7,12 @@ in {
   imports = [ inputs.auto-cpufreq.nixosModules.default ];
 
   options.mySystem.programs.auto-cpufreq = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to enable auto-cpufreq";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     programs.auto-cpufreq = {
       enable = true;
       settings = {

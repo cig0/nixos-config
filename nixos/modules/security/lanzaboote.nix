@@ -7,12 +7,12 @@ in {
   imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
   options.mySystem.boot.lanzaboote = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Secure boot for NixOS";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     # Refs:
     # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
     # https://wiki.nixos.org/wiki/Secure_Boot

@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.programs.mtr = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to enable the mtr network diagnostic tool";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     programs.mtr.enable = true; # Network diagnostic tool
     # services.mtr-exporter.enable = hostnameLogic.isChuweiMiniPC; # Prometheus-ready exporter.
     services.mtr-exporter.enable = false; # Prometheus-ready exporter.

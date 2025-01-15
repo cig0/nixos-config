@@ -5,12 +5,12 @@ let
 
 in {
   options.mySystem.systemd.services.stevenblack-unblock = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "Whether to unblock defined hosts";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = lib.mkIf (cfg == true) {
     systemd.services.stevenblack-unblock = {
       description = "Unblock a few domains from the StevenBlack block lists";
       after = ["multi-user.target"];

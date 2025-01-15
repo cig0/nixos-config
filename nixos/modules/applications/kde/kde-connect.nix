@@ -5,14 +5,14 @@ let
 
 in {
   options.mySystem.programs.kdeconnect = lib.mkOption {
-    type = lib.types.enum [ "true" "false" ];
-    default = "false";
+    type = lib.types.bool;
+    default = false;
     description = "KDE Connect";
   };
 
-  config = lib.mkIf (cfg == "true") {
+  config = {
     programs.kdeconnect = {
-      enable = true;
+      enable = cfg;
     };
   };
 }
