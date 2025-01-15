@@ -1,14 +1,14 @@
 { config, lib, ... }:
 
 let
-  cfgAutoLoginEnable = config.mySystem.displayManager.autoLogin.enable;
-  cfgAutoLoginUser = config.mySystem.displayManager.autoLogin.user;
-  cfgLy = config.mySystem.displayManager.ly;
-  cfgSddm = config.mySystem.displayManager.sddm;
+  cfgAutoLoginEnable = config.mySystem.services.displayManager.autoLogin.enable;
+  cfgAutoLoginUser = config.mySystem.services.displayManager.autoLogin.user;
+  cfgLy = config.mySystem.services.displayManager.ly;
+  cfgSddm = config.mySystem.services.displayManager.sddm;
 
 in {
   options.mySystem = {
-    displayManager = {
+    services.displayManager = {
       autoLogin = {
         enable = lib.mkOption {
           type = lib.types.enum [ "true" "false" ];

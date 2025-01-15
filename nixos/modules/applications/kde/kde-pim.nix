@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.kde.pim;
+  cfg = config.mySystem.programs.kde-pim;
 
 in {
-  options.mySystem.kde.pim = lib.mkOption {
+  options.mySystem.programs.kde-pim = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "KDE Personal Information Management suite";

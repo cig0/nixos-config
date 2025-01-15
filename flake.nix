@@ -146,12 +146,12 @@
               programs.zsh                          = "true";
 
               # GUI shell
-              displayManager.ly                     = "false";
-              displayManager.sddm                   = "true";
-              kde.connect                           = "true";
-              kde.pim                               = "true";
-              kde.plasma                            = "true";
-              xdg-desktop-portal                    = "true";
+              services.displayManager.ly            = "false";
+              services.displayManager.sddm          = "true";
+              programs.kdeconnect                   = "true";
+              programs.kde-pim                      = "true";
+              services.desktopManager.plasma6       = "true";
+              xdg.portal                            = "true";
 
               # Home Manager
               home-manager                          = "true";
