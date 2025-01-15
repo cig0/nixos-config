@@ -74,15 +74,10 @@
   ... }:
 
   let
-    mergeLists = components: builtins.concatLists components;  # Assemble a list of lists. It's (arguably) a visually cleaner approach for concatenating lists than using ++.
-    # mergeSets = components: builtins.foldl' (acc: set: acc // set) {} components;
-
-    # Modules definitions and handling.
-    # Collections start with an underscore. They can be used, for example, to represent roles.
-    # Any specific host configurations should be done in the host's configuration section of the flake.
       modules = [  # Collection role scope: laptop and workstation.
           ./home-manager/home.nix
           ./nixos/modules/applications/main.nix
+          ./nixos/modules/observability/main.nix
           ./nixos/modules/system/audio/main.nix
           ./nixos/modules/system/fonts.nix
           ./nixos/modules/virtualization/main.nix
@@ -96,7 +91,6 @@
 
           ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
 
-          ./nixos/modules/observability/main.nix  # TODO: evaluate moving logic to the obsevervation module to decide what other modules to enable depending on the host's role.
 
           ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
           ./nixos/modules/power-management/power-management.nix
