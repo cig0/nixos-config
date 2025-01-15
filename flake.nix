@@ -78,8 +78,8 @@
           ./home-manager/home.nix
           ./nixos/modules/applications/main.nix
           ./nixos/modules/hardware/main.nix
-          ./nixos/modules/observability/main.nix
           ./nixos/modules/networking/main.nix
+          ./nixos/modules/observability/main.nix
           ./nixos/modules/security/main.nix
           ./nixos/modules/system/main.nix
           ./nixos/modules/virtualisation/main.nix
@@ -112,7 +112,7 @@
     system = "x86_64-linux";
 
   in {
-    nixosConfigurations.TUXEDOInfinityBookPro = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU
+    nixosConfigurations.TUXEDOInfinityBookPro = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU + KDE
       inherit specialArgs;
       inherit system;
       modules = modules ++ [
