@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.mySystem.pipewire;
+  cfg = config.mySystem.audio-subsystem;
 
 in {
-  options.mySystem.pipewire = lib.mkOption {
+  options.mySystem.audio-subsystem = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to enable the audio subsystem with Pipewire";

@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.mySystem.stevenblack-unblock;
+  cfg = config.mySystem.systemd.services.stevenblack-unblock;
 
 in {
-  options.mySystem.stevenblack-unblock = lib.mkOption {
+  options.mySystem.systemd.services.stevenblack-unblock = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to unblock defined hosts";

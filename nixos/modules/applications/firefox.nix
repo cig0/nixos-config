@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-    cfg = config.mySystem.firefox;
+    cfg = config.mySystem.programs.firefox;
 
 in {
-  options.mySystem.firefox = lib.mkOption {
+  options.mySystem.programs.firefox = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "The web browser";

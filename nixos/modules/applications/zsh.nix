@@ -1,12 +1,10 @@
-# Bare configuration, as we're using the Home Manager to fully configure Zsh.
-
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.zsh;
+  cfg = config.mySystem.programs.zsh;
 
 in {
-  options.mySystem.zsh = lib.mkOption {
+  options.mySystem.programs.zsh = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to set Zsh as the default system shell";
@@ -16,3 +14,10 @@ in {
     programs.zsh.enable = true;
   };
 }
+
+
+
+# READ ME!
+# ========
+
+# Bare configuration, as we're using the Home Manager to fully configure Zsh.

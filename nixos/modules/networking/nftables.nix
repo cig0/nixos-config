@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.nftables;
+  cfg = config.mySystem.networking.nftables;
 
 in {
-  options.mySystem.nftables = lib.mkOption {
+  options.mySystem.networking.nftables = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to enable use of nftables";

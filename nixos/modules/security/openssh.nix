@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.openssh;
+  cfg = config.mySystem.services.openssh;
 
 in {
-  options.mySystem.openssh = lib.mkOption {
+  options.mySystem.services.openssh = lib.mkOption {
     type = lib.types.enum [ "true" "false" ];
     default = "false";
     description = "Whether to enable the OpenSSH server";
