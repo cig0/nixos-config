@@ -77,6 +77,7 @@
       modules = [  # Collection role scope: laptop and workstation.
           ./home-manager/home.nix
           ./nixos/modules/applications/main.nix
+          ./nixos/modules/hardware/power-management/main.nix
           ./nixos/modules/hardware/radio/main.nix
           ./nixos/modules/observability/main.nix
           ./nixos/modules/networking/main.nix
@@ -87,9 +88,6 @@
 
           # <----------------  TO GO  ------------------>
           ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
-
-          ./nixos/modules/power-management/auto-cpufreq.nix auto-cpufreq.nixosModules.default
-          ./nixos/modules/power-management/power-management.nix
 
           ./nixos/modules/system/environment/main.nix
           ./nixos/modules/system/maintenance/main.nix
@@ -163,6 +161,10 @@
 
               # Nix and NixOS support
               nix-ld                    = "true";
+
+              # Power Management
+              auto-cpufreq              = "true";
+              power-management          = "true";
 
               # Radio
               bluetooth                 = "true";
