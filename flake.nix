@@ -177,7 +177,6 @@
                 audio-subsystem                     = true;
                 services.speech-synthesis           = true;
 
-
               # Virtualisation
               virtualisation.incus                  = true;
               virtualisation.libvirt                = true;
