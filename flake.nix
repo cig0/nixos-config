@@ -84,8 +84,7 @@
         _all = mergeLists [  # Collection role scope: laptop and workstation.
           systemModules._core
           systemModules._radio
-          systemModules.virtualization.containerization
-          systemModules.virtualization.hypervisor
+          systemModules.virtualization
         ];
         _core = mergeLists [
           systemModules.applications
@@ -146,13 +145,7 @@
           ./nixos/modules/system/users.nix
           ./nixos/modules/system/zram.nix
         ];
-        virtualization = {
-          containerization = [
-            ./nixos/modules/virtualization/containerization.nix
-            ./nixos/modules/virtualization/incus.nix
-          ];
-          hypervisor = [ ./nixos/modules/virtualization/libvirt.nix ];
-        };
+        virtualization = [ ./nixos/modules/virtualization/main.nix ];
       };
 
       userModules = {
@@ -202,21 +195,33 @@
           {
             # mySystem Options
             mySystem = {
-              displayManager.ly         = "false";
-              displayManager.sddm       = "true";
+              # Applications
               firefox                   = "true";
               flatpak                   = "true";
-              kde.connect               = "true";
-              kde.pim                   = "true";
-              kde.plasma                = "true";
-              nix-ld                    = "true";
               pkgs.baseline             = "true";
               pkgs.cli._all             = "true";
               pkgs.gui                  = "true";
               pkgs.guiShell.kde         = "true";
               tailscale                 = "true";
-              xdg-desktop-portal        = "true";
+
+              # CLI shell
               zsh                       = "true";
+
+              # GUI shell
+              displayManager.ly         = "false";
+              displayManager.sddm       = "true";
+              kde.connect               = "true";
+              kde.pim                   = "true";
+              kde.plasma                = "true";
+              xdg-desktop-portal        = "true";
+
+              # Nix and NixOS support
+              nix-ld                    = "true";
+
+              # Virtualization
+              incus                     = "true";
+              libvirt                   = "true";
+              podman                    = "true";
             };
           }
       ];
