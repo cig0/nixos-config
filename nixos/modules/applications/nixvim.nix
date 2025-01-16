@@ -16,5 +16,10 @@
     extraPlugins = with pkgs.vimPlugins; [
       vim-nix
     ];
+
+    extraConfigLua = ''
+      -- Print a little welcome message when nvim is opened!
+      print("Ready to code!")
+    '';
   };
 }
