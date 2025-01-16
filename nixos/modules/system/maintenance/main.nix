@@ -1,10 +1,8 @@
 {
   imports = [
-    ./nix-settings.nix  # Garbage collection and Nix store optimization.
-
-    # System upgrade.
-      ./nh.nix  # Disabled in favor of NixOS built-in upgrade option.
-      ./system-auto_upgrade.nix  # Enabled.
+    ./clean-and-optimise.nix
+    ./nh.nix
+    ./system-auto-upgrade.nix
   ];
 }
 

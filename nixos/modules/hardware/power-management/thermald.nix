@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.services.thermald;
+  cfg = config.mySystem.services.thermald.enable;
 
 in {
-  options.mySystem.services.thermald = lib.mkOption {
+  options.mySystem.services.thermald.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Whether to enable thermald";

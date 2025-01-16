@@ -1,10 +1,10 @@
 { config, lib,  ... }:
 
 let
-  cfg = config.mySystem.services.resolved;
+  cfg = config.mySystem.services.resolved.enable;
 
 in {
-  options.mySystem.services.resolved = lib.mkOption {
+  options.mySystem.services.resolved.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Wheteher to use the resolved systemd service";

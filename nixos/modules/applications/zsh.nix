@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.programs.zsh;
+  cfg = config.mySystem.programs.zsh.enable;
 
 in {
-  options.mySystem.programs.zsh = lib.mkOption {
+  options.mySystem.programs.zsh.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Whether to set Zsh as the default system shell.";

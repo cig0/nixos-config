@@ -4,8 +4,8 @@ let
   cfg = {
     autoLoginEnable = config.mySystem.services.displayManager.autoLogin.enable;
     autoLoginUser = config.mySystem.services.displayManager.autoLogin.user;
-    ly = config.mySystem.services.displayManager.ly;
-    sddm = config.mySystem.services.displayManager.sddm;
+    ly = config.mySystem.services.displayManager.ly.enable;
+    sddm = config.mySystem.services.displayManager.sddm.enable;
   };
 
 in {
@@ -23,13 +23,13 @@ in {
           description = "Username for automatic login on boot. Set to null to disable.";
         };
       };
-      ly = lib.mkOption {
+      ly.enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
         description = "Ly Display Manager";
       };
 
-      sddm = lib.mkOption {
+      sddm.enable = lib.mkOption {
         type = lib.types.bool;
         default = false;
         description = "SDDM Display Manager (KDE default option)";

@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-    cfg = config.mySystem.programs.firefox;
+    cfg = config.mySystem.programs.firefox.enable;
 
 in {
-  options.mySystem.programs.firefox = lib.mkOption {
+  options.mySystem.programs.firefox.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "The web browser";

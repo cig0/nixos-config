@@ -1,12 +1,12 @@
 { config, lib, inputs, ... }:
 
 let
-  cfg = config.mySystem.programs.auto-cpufreq;
+  cfg = config.mySystem.programs.auto-cpufreq.enable;
 
 in {
   imports = [ inputs.auto-cpufreq.nixosModules.default ];
 
-  options.mySystem.programs.auto-cpufreq = lib.mkOption {
+  options.mySystem.programs.auto-cpufreq.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Whether to enable auto-cpufreq";

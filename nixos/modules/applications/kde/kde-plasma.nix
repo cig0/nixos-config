@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.services.desktopManager.plasma6;
+  cfg = config.mySystem.services.desktopManager.plasma6.enable;
 
 in {
-  options.mySystem.services.desktopManager.plasma6 = lib.mkOption {
+  options.mySystem.services.desktopManager.plasma6.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "KDE 6 Plasma Desktop Environment.";
