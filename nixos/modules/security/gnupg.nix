@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.programs.gnupg;
+  cfg = config.mySystem.programs.gnupg.enable;
 
 in {
-  options.mySystem.programs.gnupg = lib.mkOption {
+  options.mySystem.programs.gnupg.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Whether to enable the GNU GPG agent";

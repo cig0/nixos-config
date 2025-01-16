@@ -1,10 +1,10 @@
 { config, lib,  ... }:
 
 let
-  cfg = config.mySystem.programs.mtr;
+  cfg = config.mySystem.programs.mtr.enable;
 
 in {
-  options.mySystem.programs.mtr = lib.mkOption {
+  options.mySystem.programs.mtr.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Whether to enable the mtr network diagnostic tool";

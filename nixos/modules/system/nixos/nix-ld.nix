@@ -1,10 +1,10 @@
 { config, inputs, lib, pkgs, ... }:
 
 let
-  cfg = config.mySystem.programs.nix-ld;
+  cfg = config.mySystem.programs.nix-ld.enable;
 
 in {
-  options.mySystem.programs.nix-ld = lib.mkOption {
+  options.mySystem.programs.nix-ld.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Run unpatched dynamic binaries on NixOS.";

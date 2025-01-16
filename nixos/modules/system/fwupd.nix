@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.services.fwupd;
+  cfg = config.mySystem.services.fwupd.enable;
 
 in {
-  options.mySystem.services.fwupd = lib.mkOption {
+  options.mySystem.services.fwupd.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Whether to enable fwupd, a DBus service that allows

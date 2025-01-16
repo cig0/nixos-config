@@ -1,10 +1,10 @@
  { config, lib, ... }:
 
 let
-  cfg = config.mySystem.programs.kdeconnect;
+  cfg = config.mySystem.programs.kdeconnect.enable;
 
 in {
-  options.mySystem.programs.kdeconnect = lib.mkOption {
+  options.mySystem.programs.kdeconnect.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "KDE Connect";

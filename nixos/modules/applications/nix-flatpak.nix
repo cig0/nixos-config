@@ -1,10 +1,10 @@
 { config, inputs, lib, pkgs, ... }:
 
 let
-  cfg = config.mySystem.services.flatpak;
+  cfg = config.mySystem.services.flatpak.enable;
 
 in {
-  options.mySystem.services.flatpak = lib.mkOption {
+  options.mySystem.services.flatpak.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Whether to automatically manage flatpaks";

@@ -1,36 +1,38 @@
-{ config, inputs, ... }:
+{ config, inputs, lib, ... }:
 
 let
-  # === Assertions ===
-    # System upgrade assertions.
-    conditionUpgrade1 = config.programs.nh.enable;
-    conditionUpgrade2 = config.system.autoUpgrade.enable;
-
-    # Garbage collector assertions.
-    conditionGc1 = config.programs.nh.clean.enable;
-    conditionGc2 = config.nix.gc.automatic;
+  cfg = {
+    nh.enable = config.mySystem.programs.nh.enable;
+    nh.clean.enable = config.mySystem.programs.nh.clean.enable;
+  };
 
 in {
-  assertions = [
-    {
-      assertion = !(conditionUpgrade1 && conditionUpgrade2);  # Negated AND condition.
-      message = "Error: Both 'programs.nh' and 'system.autoUpgrade' cannot be enabled at the same time.";
-    }
-    {
-      assertion = !(conditionGc1 && conditionGc2);  # Negated AND condition.
-      message = "Error: Both 'programs.nh.clean' and 'nix.gc.automatic' cannot be enabled at a time.";
-    }
-  ];
+  options.mySystem.programs.nh = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Whether to enable nh, yet another Nix CLI helper.";
+    };
+    clean.enable =lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Whether to enable periodic garbage collection with nh clean all.";
+    };
+  };
 
-  programs.nh = {
-    flake = inputs.self.outPath;  # Use the flake of the current system.
-    clean = {
-      enable = false;
-      dates = "weekly";
-      extraArgs = "--keep 5";
+  config = lib.mkIf (cfg.nh.enable == true) {
+    programs.nh = {
+      enable = true;
+      clean = {
+        enable = cfg.nh.clean.enable;
+        dates = "weekly";
+        extraArgs = "--keep 5";
+      };
+      flake = inputs.self.outPath;  # Use as input the flake of the current system.
     };
   };
 }
+
 
 
 # READ ME!
@@ -41,5 +43,3 @@ in {
 
 # This configuration is an alternative way to keep a system updated.
 # You should have only one updater enabled at a time.
-
-# I added a safety measure to prevent enabling this configuration if `config.system.autoUpgrade` is already enabled.

@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.virtualisation.incus;
+  cfg = config.mySystem.virtualisation.incus.enable;
 
 in {
-  options.mySystem.virtualisation.incus = lib.mkOption {
+  options.mySystem.virtualisation.incus.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Whether to enable LXD fork (Linux containers)";

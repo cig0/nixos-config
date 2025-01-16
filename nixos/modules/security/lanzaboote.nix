@@ -1,12 +1,12 @@
 { config, inputs, lib, ... }:
 
 let
-  cfg = config.mySystem.boot.lanzaboote;
+  cfg = config.mySystem.boot.lanzaboote.enable;
 
 in {
   imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
-  options.mySystem.boot.lanzaboote = lib.mkOption {
+  options.mySystem.boot.lanzaboote.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Secure boot for NixOS";

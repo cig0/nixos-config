@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.mySystem.virtualisation.libvirt;
+  cfg = config.mySystem.virtualisation.libvirt.enable;
 
 in {
-  options.mySystem.virtualisation.libvirt = lib.mkOption {
+  options.mySystem.virtualisation.libvirt.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Whether to enable atop, the console system performance monitor";

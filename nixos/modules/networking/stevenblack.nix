@@ -1,10 +1,10 @@
 { config, lib, ... }:
 
 let
-  cfg = config.mySystem.networking.stevenblack;
+  cfg = config.mySystem.networking.stevenblack.enable;
 
 in {
-  options.mySystem.networking.stevenblack = lib.mkOption {
+  options.mySystem.networking.stevenblack.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
     description = "Whether to enable Steven Black's hosts block lists";
