@@ -126,16 +126,14 @@
               programs.nh.enable                      = true;
               programs.firefox.enable                 = true;
               services.flatpak.enable                 = true;
+              programs.kdeconnect.enable              = true;
+              programs.kde-pim.enable                 = true;
               services.tailscale.enable               = true;
-
-              # CLI shell
               programs.zsh.enable                     = true;
 
               # GUI shell
               services.displayManager.ly.enable       = false;
               services.displayManager.sddm.enable     = true;
-              programs.kdeconnect.enable              = true;
-              programs.kde-pim.enable                 = true;
               services.desktopManager.plasma6.enable  = true;
               xdg.portal.enable                       = true;
 
@@ -149,7 +147,6 @@
               services.resolved.enable                = true;
               networking.stevenblack.enable           = true;
               systemd.services.stevenblack-unblock    = true;
-
 
               # Power Management
               programs.auto-cpufreq.enable            = true;
