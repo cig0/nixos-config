@@ -87,7 +87,6 @@
           # <----------------  TO GO  ------------------>
           ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
 
-          ./nixos/modules/system/maintenance/main.nix
         ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;

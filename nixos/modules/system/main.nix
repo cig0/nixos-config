@@ -4,6 +4,7 @@
     ./cups.nix
     ./current-system-packages-list.nix
     ./environment/main.nix
+    ./maintenance/main.nix
     ./nixos/main.nix
     ./fonts.nix
     ./fwupd.nix
