@@ -19,8 +19,6 @@ in {
       libvirtd = {
         enable = true;
         onBoot = "ignore";
-        # qemu.ovmf = {
-        #   packages = [ pkgs.OVMF.fd ];
         qemu = {
           swtpm.enable = true;
           ovmf.enable = true;
