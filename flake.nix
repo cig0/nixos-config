@@ -85,7 +85,7 @@
           ./nixos/modules/virtualisation/main.nix
 
           # <----------------  TO GO  ------------------>
-          ./nixos/modules/applications/nixvim.nix nixvim.nixosModules.nixvim  # TODO: investigate moving to Home Manager
+          ./nixos/modules/applications/nixvim.nix  # TODO: investigate moving to Home Manager
 
         ];
 

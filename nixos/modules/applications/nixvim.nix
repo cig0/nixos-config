@@ -1,8 +1,10 @@
 # TODO: configure this module
 
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
+  imports = [ inputs.nixvim.nixosModules.nixvim ];
+
   programs.nixvim = {
     enable = true;
     colorschemes.vscode.enable = true;
