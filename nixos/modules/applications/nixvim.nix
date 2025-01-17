@@ -19,7 +19,7 @@
 
     extraConfigLua = ''
       -- Print a little welcome message when nvim is opened!
-      print("Ready to code!")
+      print("Ready!")
     '';
   };
 }

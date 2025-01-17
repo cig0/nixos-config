@@ -48,7 +48,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";  # Hardware-specific optimizations
 
-    nixvim = {  # The intended way to configure Neovim.
+    nixvim = {  # The intended way to configure Neovim
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixvim/nixos-24.11";
     };
