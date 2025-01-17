@@ -27,7 +27,7 @@
       url = "github:nix-community/home-manager?ref=release-24.11";
     };
 
-    lanzaboote = { # Enable Secure Boot: https://github.com/nix-community/lanzaboote
+    lanzaboote = {  # Enable Secure Boot: https://github.com/nix-community/lanzaboote
       inputs.nixpkgs.follows = "nixpkgs";  # Optional but recommended to limit the size of your system closure.
       url = "github:nix-community/lanzaboote/v0.4.1";
     };
@@ -48,14 +48,14 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";  # Hardware-specific optimizations
 
-    nixvim = { # The intended way to configure Neovim.
+    nixvim = {  # The intended way to configure Neovim.
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixvim/nixos-24.11";
     };
 
     rust-overlay.url = "github:oxalica/rust-overlay";
 
-    # sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
+    # sops-nix.url = "github:Mic92/sops-nix";  # Secure secrets
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable,
