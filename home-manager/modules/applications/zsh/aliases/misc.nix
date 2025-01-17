@@ -14,6 +14,7 @@ let
     gi = "grep -i --color=always";
     glow = "glow --pager -";
     ic = "imgcat";
+    memusage="ps -eo comm,%mem,rss --sort=comm | awk 'NR > 1 {a[\$1]+=\$2; b[\$1]+=\$3} END {for (i in a) printf \"%-20s %5.2f%% %10.2f MB\n\", i, a[i], b[i]/1024}' | sort -k2 -nr | head -n 20";
     mv = "mv -i";
     rs = "rsync -Pav";
     surs = "sudo rsync -Pav";
