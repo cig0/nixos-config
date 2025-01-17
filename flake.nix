@@ -127,7 +127,7 @@
               programs.firefox.enable                 = true;
               services.flatpak.enable                 = true;
               programs.kdeconnect.enable              = true;
-              programs.kde-pim.enable                 = true;
+              programs.kde-pim.enable                 = false;
               services.tailscale.enable               = true;
               programs.zsh.enable                     = true;
 
