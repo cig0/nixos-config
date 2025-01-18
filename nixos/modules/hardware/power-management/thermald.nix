@@ -1,16 +1,13 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.mySystem.services.thermald.enable;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "services" "thermald"] config;
 in {
-  options.mySystem.services.thermald.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable thermald";
-  };
+  options.mySystem.services.thermald = {enable = lib.mkEnableOption "Whether to enable thermald";};
 
-  config = lib.mkIf (cfg == true) {
-    services.thermald.enable = true;
+  config = {
+    services.thermald.enable = cfg.enable;
   };
 }

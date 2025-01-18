@@ -1,16 +1,13 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.mySystem.virtualisation.incus.enable;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "virtualisation" "incus"] config;
 in {
-  options.mySystem.virtualisation.incus.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable LXD fork (Linux containers)";
-  };
+  options.mySystem.virtualisation.incus.enable = lib.mkEnableOption "Whether to enable LXD fork (Linux containers)";
 
-  config = lib.mkIf (cfg == true) {
+  config = lib.mkIf cfg.enable {
     virtualisation.incus = {
       enable = true;
       socketActivation = true;
