@@ -68,7 +68,7 @@
 in {
   options.mySystem.boot.kernelPackages = lib.mkOption {
     type = lib.types.enum ["latest" "latest_hardened" "lqx" "stable" "xanmod_latest" "xanmod_stable"];
-    default = "latest";
+    default = "stable";
     description = "What kernel package to use.";
   };
 
