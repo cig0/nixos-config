@@ -200,7 +200,7 @@
               # System
               current-system-packages-list.enable = true;
               services.fwupd.enable = true;
-              boot.kernelPackages = "xanmod_latest";
+              boot.kernelPackages = "latest";
               programs.nix-ld.enable = true;
               # System - Audio
               audio-subsystem.enable = true;
