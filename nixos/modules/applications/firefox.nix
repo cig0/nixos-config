@@ -1,20 +1,17 @@
-{ config, lib, ... }:
-
-let
-    cfg = config.mySystem.programs.firefox.enable;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "programs" "firefox"] config;
 in {
-  options.mySystem.programs.firefox.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "The web browser";
-  };
+  options.mySystem.programs.firefox.enable = lib.mkEnableOption "Whether to enable the Firefox web browser.";
 
-  config = lib.mkIf (cfg == true) {
+  config = {
     programs = {
       firefox = {
-        enable = true;
-        preferences = { "widget.use-xdg-desktop-portal.file-picker" = "1"; };  # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
+        enable = cfg.enable;
+        preferences = {"widget.use-xdg-desktop-portal.file-picker" = "1";}; # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
       };
     };
   };

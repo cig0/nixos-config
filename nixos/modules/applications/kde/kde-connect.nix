@@ -1,18 +1,15 @@
- { config, lib, ... }:
-
-let
-  cfg = config.mySystem.programs.kdeconnect.enable;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "programs" "kdeconnect"] config;
 in {
-  options.mySystem.programs.kdeconnect.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "KDE Connect";
-  };
+  options.mySystem.programs.kdeconnect.enable = lib.mkEnableOption "Whether to enable kdeconnect.";
 
   config = {
     programs.kdeconnect = {
-      enable = cfg;
+      enable = cfg.enable;
     };
   };
 }

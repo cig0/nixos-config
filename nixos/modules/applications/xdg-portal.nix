@@ -1,16 +1,14 @@
-{ config, lib, pkgs, ... }:
-
-let
-  cfg = config.mySystem.xdg.portal.enable;
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "xdg" "portal"] config;
 in {
-  options.mySystem.xdg.portal.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Enable XDG desktop integration for other desktop toolkits";
-  };
+  options.mySystem.xdg.portal.enable = lib.mkEnableOption "Whether to enable [xdg desktop integration](https://github.com/flatpak/xdg-desktop-portal).";
 
-  config = lib.mkIf (cfg == true) {
+  config = lib.mkIf cfg.enable {
     xdg.portal = {
       enable = true;
       extraPortals = with pkgs; [

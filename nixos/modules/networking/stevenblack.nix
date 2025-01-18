@@ -1,16 +1,13 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.mySystem.networking.stevenblack.enable;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "networking" "stevenblack" "enable"] config;
 in {
-  options.mySystem.networking.stevenblack.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable Steven Black's hosts block lists";
-  };
+  options.mySystem.networking.stevenblack.enable = lib.mkEnableOption "Whether to enable the stevenblack hosts file blocklist.";
 
-  config = lib.mkIf (cfg == true) {
+  config = lib.mkIf cfg {
     networking.stevenblack = {
       enable = true;
       block = [
@@ -21,10 +18,7 @@ in {
     };
   };
 }
-
-
-
 # READ ME!
 # ========
-
 # https://github.com/StevenBlack/hosts
+
