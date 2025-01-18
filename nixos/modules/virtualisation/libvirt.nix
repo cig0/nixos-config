@@ -1,17 +1,18 @@
-{ config, lib, pkgs, ... }:
-
-let
-  cfg = config.mySystem.virtualisation.libvirt.enable;
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "virtualisation" "libvirtd"] config;
 in {
-  options.mySystem.virtualisation.libvirt.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable atop, the console system performance monitor";
-  };
+  options.mySystem.virtualisation.libvirtd.enable = lib.mkEnableOption "This option enables libvirtd, a daemon that manages
+virtual machines. Users in the \"libvirtd\" group can interact with
+the daemon (e.g. to start or stop VMs) using the
+{command}`virsh` command line tool, among others.";
 
-  config = lib.mkIf (cfg == true) {
-    environment.sessionVariables.LIBVIRT_DEFAULT_URI = [ "qemu:///system" ];
+  config = lib.mkIf cfg.enable {
+    environment.sessionVariables.LIBVIRT_DEFAULT_URI = ["qemu:///system"];
     programs.virt-manager.enable = true;
     services.spice-vdagentd.enable = false;
 
@@ -22,7 +23,7 @@ in {
         qemu = {
           swtpm.enable = true;
           ovmf.enable = true;
-          ovmf.packages = [ pkgs.OVMFFull.fd ];
+          ovmf.packages = [pkgs.OVMFFull.fd];
           runAsRoot = false;
         };
       };

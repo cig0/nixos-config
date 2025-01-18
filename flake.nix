@@ -100,6 +100,9 @@
     ...
   }: let
     modules = [
+      # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░
+      # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░
+      # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░
       ./home-manager/home.nix
       ./nixos/modules/applications/main.nix
       ./nixos/modules/hardware/main.nix
@@ -108,9 +111,6 @@
       ./nixos/modules/security/main.nix
       ./nixos/modules/system/main.nix
       ./nixos/modules/virtualisation/main.nix
-
-      # <----------------  TO GO  ------------------>
-      ./nixos/modules/applications/nixvim.nix # TODO: investigate moving to Home Manager
     ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
@@ -149,14 +149,13 @@
             # ░░░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░░
 
             mySystem = {
-              # Applications (from ./nixos/modules/applications/packages.nix)
+              # Applications
               packages.baseline = true;
               packages.cli._all = true;
               packages.gui = true;
               packages.guiShell.kde = true;
-
-              # Applications (from options)
               programs.nh.enable = true;
+              programs.nixvim.enable = true;
               programs.firefox.enable = true;
               services.flatpak.enable = true;
               programs.kdeconnect.enable = true;
@@ -183,34 +182,36 @@
 
               # Power Management
               programs.auto-cpufreq.enable = true;
-              power-management.enable = true;
+              powerManagement.enable = true;
               services.thermald.enable = true;
 
               # Radio
               hardware.bluetooth.enable = true;
 
               # Security
-              networking.firewall.enable = true;
               programs.gnupg.enable = true;
               boot.lanzaboote.enable = true;
               services.openssh.enable = true;
               security.sudo.enable = true;
+              # Security - Firewall
+              networking.firewall.enable = true;
+              networking.firewall.allowPing = false;
 
               # System
-              current-system-packages-list = true;
+              current-system-packages-list.enable = true;
               services.fwupd.enable = true;
               programs.nix-ld.enable = true;
-              # Audio
-              audio-subsystem = true;
-              services.speech-synthesis.enable = true;
-              # Maintenance
+              # System - Audio
+              audio-subsystem.enable = true;
+              services.speechd.enable = true;
+              # System - Maintenance
               nix.settings.auto-optimise-store = true;
               nix.gc.automatic = true;
               system.autoUpgrade.enable = true;
 
               # Virtualisation
               virtualisation.incus.enable = true;
-              virtualisation.libvirt.enable = true;
+              virtualisation.libvirtd.enable = true;
               virtualisation.podman.enable = true;
             };
           }

@@ -1,18 +1,16 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.mySystem.power-management.enable;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "powerManagement"] config;
 in {
-  options.mySystem.power-management.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable Power Management";
-  };
+  options.mySystem.powerManagement.enable = lib.mkEnableOption "Whether to enable power management.  This includes support
+for suspend-to-RAM and powersave features on laptops.";
 
-  config = lib.mkIf (cfg == true) {
+  config = {
     powerManagement = {
-      enable = true;
+      enable = cfg.enable;
     };
   };
 }
