@@ -1,8 +1,12 @@
+# Home Manager's
+# ░░░░░░░█▀█░█▀█░█▀█░█░░░▀█▀░█▀▀░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░
+# ░░░░░░░█▀█░█▀▀░█▀▀░█░░░░█░░█░░░█▀█░░█░░░█░░█░█░█░█░▀▀█░░░░░░
+# ░░░░░░░▀░▀░▀░░░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░
 {
   imports = builtins.filter (x: x != null) [
-  ./zsh/main.nix
-  ./atuin.nix
-  ./starship.nix
-  # ./syncthing.nix
+    ./zsh/zsh.nix
+    ./atuin.nix
+    ./starship.nix
+    # ./syncthing.nix
   ];
 }

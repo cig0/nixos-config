@@ -1,3 +1,6 @@
+# ░░░░░░░█▀█░█▀█░█▀█░█░░░▀█▀░█▀▀░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░
+# ░░░░░░░█▀█░█▀▀░█▀▀░█░░░░█░░█░░░█▀█░░█░░░█░░█░█░█░█░▀▀█░░░░░░
+# ░░░░░░░▀░▀░▀░░░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░
 {
   imports = builtins.filter (x: x != null) [
     ./kde/main.nix
@@ -11,12 +14,8 @@
     ./zsh.nix
   ];
 }
-
-
-
 # READ ME!
 # ========
-
 # The NixOS community generally recommends keeping the enabling/disabling logic in the individual module files rather than in the importing module.
 # This follows the principle of separation of concerns and makes modules more self-contained.
 # Benefits of this approach:
@@ -26,3 +25,4 @@
 #   - Follows the NixOS convention of modules managing their own conditional activation
 #   - Makes it easier to override in specific cases if needed
 #   - This is the more idiomatic NixOS way of handling conditional module activation.
+
