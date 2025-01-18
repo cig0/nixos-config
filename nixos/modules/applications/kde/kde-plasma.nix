@@ -1,17 +1,14 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.mySystem.services.desktopManager.plasma6.enable;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "services" "desktopManager" "plasma6"] config;
 in {
-  options.mySystem.services.desktopManager.plasma6.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "KDE 6 Plasma Desktop Environment.";
-  };
+  options.mySystem.services.desktopManager.plasma6.enable = lib.mkEnableOption "Enable the Plasma 6 (KDE 6) desktop environment.";
 
-  config = lib.mkIf (cfg == true) {
-    programs.dconf.enable = true;  # https://wiki.nixos.org/wiki/KDE#Installation
+  config = lib.mkIf cfg.enable {
+    programs.dconf.enable = true; # https://wiki.nixos.org/wiki/KDE#Installation
     services.desktopManager.plasma6.enable = true;
   };
 }

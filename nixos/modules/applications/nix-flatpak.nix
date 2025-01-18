@@ -1,24 +1,23 @@
-{ config, inputs, lib, pkgs, ... }:
-
-let
-  cfg = config.mySystem.services.flatpak.enable;
-
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "services" "flatpak"] config;
 in {
-  options.mySystem.services.flatpak.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to automatically manage flatpaks";
-  };
+  options.mySystem.services.flatpak.enable = lib.mkEnableOption "Whether to automatically manage flatpaks";
 
-  imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
+  imports = [inputs.nix-flatpak.nixosModules.nix-flatpak];
 
-  config = lib.mkIf (cfg == true) {
-    services.flatpak ={
-      enable = true;
+  config = {
+    services.flatpak = {
+      enable = cfg.enable;
       update = {
         auto = {
           enable = true;
-          onCalendar = "weekly";  # Default value
+          onCalendar = "weekly"; # Default value
         };
         onActivation = false;
       };
@@ -62,10 +61,10 @@ in {
 
         # Comms
         "com.discordapp.Discord"
-        "io.github.milkshiift.GoofCord"  # https://flathub.org/apps/io.github.milkshiift.GoofCord
-        "im.riot.Riot"  # Element - Matrix client
+        "io.github.milkshiift.GoofCord" # https://flathub.org/apps/io.github.milkshiift.GoofCord
+        "im.riot.Riot" # Element - Matrix client
         "org.telegram.desktop"
-        "com.rtosta.zapzap"  # https://flathub.org/apps/com.rtosta.zapzap
+        "com.rtosta.zapzap" # https://flathub.org/apps/com.rtosta.zapzap
         "us.zoom.Zoom"
 
         # Games
@@ -135,10 +134,7 @@ in {
     };
   };
 }
-
-
-
 # READE ME!
 # =========
-
 # https://github.com/gmodena/nix-flatpak?tab=readme-ov-file
+

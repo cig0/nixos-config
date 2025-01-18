@@ -1,29 +1,23 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.mySystem.services.tailscale.enable;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "services" "tailscale"] config;
 in {
-  options.mySystem.services.tailscale.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable Tailscale service";
-  };
+  options.mySystem.services.tailscale.enable = lib.mkEnableOption "Whether to enable Tailscale client daemon.";
 
-  config = lib.mkIf (cfg == true) {
+  config = {
     services.tailscale = {
-      enable = true;
+      enable = cfg.enable;
       openFirewall = true;
-      extraUpFlags = [ "--ssh" ];
+      extraUpFlags = ["--ssh"];
     };
   };
 }
-
-
-
 # READ ME!
 # ========
-
 # Check these modules for additional options:
 #   - ../networking/dns.nix
 #   - ../security/firewall.nix
+

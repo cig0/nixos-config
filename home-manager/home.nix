@@ -1,28 +1,28 @@
 # { modulesPath, pkgsUnstable, ... }:
-{ config, inputs, lib, pkgs, pkgsUnstable, ... }:
-
-let
-  cfg = config.mySystem.home-manager;
-
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  pkgsUnstable,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "home-manager" "enable"] config;
 in {
   imports = [
     # (modulesPath + "/profiles/minimal.nix")
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  options.mySystem.home-manager = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable atop, the console system performance monitor";
-  };
+  options.mySystem.home-manager.enable = lib.mkEnableOption "Whether to enable Home Manager.";
 
-  config = lib.mkIf (cfg == true) {
+  config = lib.mkIf cfg {
     home-manager = {
       backupFileExtension = "backup";
       useGlobalPkgs = true;
       useUserPackages = true;
       users = {
-        cig0 = { ... }: {
+        cig0 = {...}: {
           imports = [
             ./modules/applications/main.nix
             ./modules/config-files/main.nix
@@ -37,19 +37,19 @@ in {
               VISUAL = "code";
             };
 
-            packages = with pkgs; [
-              ] ++
-              (with pkgsUnstable; [
-              # Web
+            packages = with pkgs;
+              [
+              ]
+              ++ (with pkgsUnstable; [
+                # Web
                 # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-            ]);
+              ]);
 
-          # The state version is required and should stay at the version you
-          # originally installed.
+            # The state version is required and should stay at the version you
+            # originally installed.
             stateVersion = "24.11";
           };
         };
-
 
         # doomguy = { ... }: {
         #   home = {
@@ -72,8 +72,7 @@ in {
         #   stateVersion = "24.11";
         # };
 
-
-        fine = { ... }: {
+        fine = {...}: {
           imports = [
             ./modules/applications/main.nix
             ./modules/config-files/main.nix
@@ -88,15 +87,16 @@ in {
               VISUAL = "code";
             };
 
-            packages = with pkgs; [
-              ] ++
-              (with pkgsUnstable; [
-              # Web
+            packages = with pkgs;
+              [
+              ]
+              ++ (with pkgsUnstable; [
+                # Web
                 # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-            ]);
+              ]);
 
-          # The state version is required and should stay at the version you
-          # originally installed.
+            # The state version is required and should stay at the version you
+            # originally installed.
             stateVersion = "24.11";
           };
         };

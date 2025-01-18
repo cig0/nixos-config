@@ -1,18 +1,15 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.mySystem.programs.kde-pim.enable;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "programs" "kde-pim"] config;
 in {
-  options.mySystem.programs.kde-pim.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "KDE Personal Information Management suite";
-  };
+  options.mySystem.programs.kde-pim.enable = lib.mkEnableOption "Whether to enable KDE PIM base packages.";
 
-  config = lib.mkIf (cfg == true) {
+  config = {
     programs.kde-pim = {
-      enable = true;
+      enable = cfg.enable;
       kmail = true;
       kontact = true;
       merkuro = true;

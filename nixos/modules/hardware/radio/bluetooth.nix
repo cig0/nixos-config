@@ -1,16 +1,13 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.mySystem.hardware.bluetooth.enable;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "hardware" "bluetooth" "enable"] config;
 in {
-  options.mySystem.hardware.bluetooth.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable the Bluetooth radio";
-  };
+  options.mySystem.hardware.bluetooth.enable = lib.mkEnableOption "Whether to enable the Bluetooth radio";
 
-  config = lib.mkIf (cfg == true) {
+  config = lib.mkIf cfg {
     hardware = {
       bluetooth = {
         enable = true;

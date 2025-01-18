@@ -7,7 +7,38 @@
 #
 # Check at the end of the file for an abridged READ ME! and CHANGELOG.
 #---------------------------------------------------------------------
-
+#            ===.
+#        =====.==`.               __,------._
+#           ===`.8=);   _/)    .-'           ``-.
+#           _ (G^ @@__ / '.  .'    By Toutatis,  `.
+#     ,._,-'_`-/,-^( _).__: .'    this flake is   :
+#    (    / .MMm.Y_)/      ,'     looking great!  |
+#     `'(|.oMMMM       __,',-'`._               ,'
+#     d88:'mOom        `--'      `-..______,--''
+#     88::(::\d88b
+#     Y88  ':88888
+#  _________888P__________________________________________________osfa
+#                                                                                       _------__--___.__.
+#                                                                                     /            `  `    \
+#                                                                                    |                      \
+#                                                                                    |                       |
+#                                                                                     \                      |
+#                                                                                       ~/ --`-`-`-\         |
+#                                                                                       |            |       |
+#                                                                                       |            |       |
+#                                                                                        |   _--    |       |
+#                                                                     Hey Butthead,      _| =-.    |.-.    |
+#                                                                                        o|/o/       _.   |
+#                                                                    does this suck?     /  ~          \ |
+#                                                                                      (____@)  ___~    |
+#                                                                                         |_===~~~.`    |
+#                                                                                      _______.--~     |
+#                                                                                      \________       |
+#                                                                                               \      |
+#                                                                                             __/-___-- -__
+#                                                                                            /            __\
+#                                                                                           /-| Metallica|| |
+#                                                                                          / /|          || |
 {
   description = "cig0's NixOS flake";
 
@@ -15,28 +46,32 @@
     nixpkgs.url = "nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
-    auto-cpufreq = {  # Energy efficiency: https://github.com/AdnanHodzic/auto-cpufreq
+    auto-cpufreq = {
+      # Energy efficiency: https://github.com/AdnanHodzic/auto-cpufreq
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
-    flake-compat.url = "github:edolstra/flake-compat";  # Make nixos-option work with flakes.
+    flake-compat.url = "github:edolstra/flake-compat"; # Make nixos-option work with flakes.
 
-    home-manager = {  # User-specific settings and packages: https://github.com/nix-community/home-manager
+    home-manager = {
+      # User-specific settings and packages: https://github.com/nix-community/home-manager
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager?ref=release-24.11";
     };
 
-    lanzaboote = {  # Enable Secure Boot: https://github.com/nix-community/lanzaboote
-      inputs.nixpkgs.follows = "nixpkgs";  # Optional but recommended to limit the size of your system closure.
+    lanzaboote = {
+      # Enable Secure Boot: https://github.com/nix-community/lanzaboote
+      inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of your system closure.
       url = "github:nix-community/lanzaboote/v0.4.1";
     };
 
-    nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.5.2.tar.gz";  # Declarative Flatpak management
+    nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.5.2.tar.gz"; # Declarative Flatpak management
 
-    nix-index.url = "github:nix-community/nix-index";  # https://github.com/nix-community/nix-index
+    nix-index.url = "github:nix-community/nix-index"; # https://github.com/nix-community/nix-index
 
-    nix-ld = {  # https://github.com/nix-community/nix-ld
+    nix-ld = {
+      # https://github.com/nix-community/nix-ld
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:Mic92/nix-ld";
     };
@@ -46,9 +81,10 @@
       url = "github:lilyinstarlight/nixos-cosmic";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";  # Hardware-specific optimizations
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # Hardware-specific optimizations
 
-    nixvim = {  # The intended way to configure Neovim
+    nixvim = {
+      # The intended way to configure Neovim
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixvim/nixos-24.11";
     };
@@ -58,53 +94,57 @@
     # sops-nix.url = "github:Mic92/sops-nix";  # Secure secrets
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable,
-    auto-cpufreq,             # Energy efficiency.
-    flake-compat,             # Make nixos-option work with flakes.
-    home-manager,             # User-specific settings and packages.
-    lanzaboote,               # Secure Boot for NixOS.
-    nix-flatpak,              # Enhanced Flatpak support.
-    nix-index,                # A files database for nixpkgs.
-    nix-ld,                   # Run unpatched dynamic binaries on NixOS.
-    nixos-cosmic,             # COSMIC Desktop Environment.
-    nixos-hardware,           # Additional hardware configuration.
-    nixvim,                   # A Neovim configuration system for nix.
-    rust-overlay,             # Oxalica's Rust toolchain overlay.
-    # sops-nix,                 # Mic92 NixOS' Mozilla SOPS implementation.
-  ... }:
+  outputs = inputs @ {
+    auto-cpufreq, # Energy efficiency.
+    flake-compat, # Make nixos-option work with flakes.
+    home-manager, # User-specific settings and packages.
+    lanzaboote, # Secure Boot for NixOS.
+    nix-flatpak, # Enhanced Flatpak support.
+    nix-index, # A files database for nixpkgs.
+    nix-ld, # Run unpatched dynamic binaries on NixOS.
+    nixos-cosmic, # COSMIC Desktop Environment.
+    nixos-hardware, # Additional hardware configuration.
+    nixpkgs,
+    nixpkgs-unstable,
+    nixvim, # A Neovim configuration system for nix.
+    rust-overlay, # Oxalica's Rust toolchain overlay.
+    self,
+    # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation.  # TODO: to implement.
+    ...
+  }: let
+    modules = [
+      ./home-manager/home.nix
+      ./nixos/modules/applications/main.nix
+      ./nixos/modules/hardware/main.nix
+      ./nixos/modules/networking/main.nix
+      ./nixos/modules/observability/main.nix
+      ./nixos/modules/security/main.nix
+      ./nixos/modules/system/main.nix
+      ./nixos/modules/virtualisation/main.nix
 
-  let
-      modules = [
-          ./home-manager/home.nix
-          ./nixos/modules/applications/main.nix
-          ./nixos/modules/hardware/main.nix
-          ./nixos/modules/networking/main.nix
-          ./nixos/modules/observability/main.nix
-          ./nixos/modules/security/main.nix
-          ./nixos/modules/system/main.nix
-          ./nixos/modules/virtualisation/main.nix
-
-          # <----------------  TO GO  ------------------>
-          ./nixos/modules/applications/nixvim.nix  # TODO: investigate moving to Home Manager
-
-        ];
+      # <----------------  TO GO  ------------------>
+      ./nixos/modules/applications/nixvim.nix # TODO: investigate moving to Home Manager
+    ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
-    pkgsUnstable = import nixpkgs-unstable {  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
+    pkgsUnstable = import nixpkgs-unstable {
+      # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
       inherit system;
       config = {
         allowUnfree = true;
       };
     };
 
-    specialArgs = { inherit inputs system pkgsUnstable; };
+    specialArgs = {inherit inputs system pkgsUnstable;};
     system = "x86_64-linux";
-
   in {
-    nixosConfigurations.TUXEDOInfinityBookPro = nixpkgs.lib.nixosSystem {  # Laptop: Intel CPU & GPU + KDE
+    nixosConfigurations.TUXEDOInfinityBookPro = nixpkgs.lib.nixosSystem {
+      # Laptop: Intel CPU & GPU + KDE
       inherit specialArgs;
       inherit system;
-      modules = modules ++ [
+      modules =
+        modules
+        ++ [
           ./nixos/hosts/TUXEDOInfinityBookPro/configuration.nix
           {
             # Overlays
@@ -114,74 +154,80 @@
             ];
           }
           {
-            # mySystem Options
+            #        ██████╗ ██████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗
+            #       ██╔═══██╗██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+            #       ██║   ██║██████╔╝   ██║   ██║██║   ██║██╔██╗ ██║███████╗
+            #       ██║   ██║██╔═══╝    ██║   ██║██║   ██║██║╚██╗██║╚════██║
+            #       ╚██████╔╝██║        ██║   ██║╚██████╔╝██║ ╚████║███████║
+            #        ╚═════╝ ╚═╝        ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+
             mySystem = {
               # Applications (from ./nixos/modules/applications/packages.nix)
-              packages.baseline                       = true;
-              packages.cli._all                       = true;
-              packages.gui                            = true;
-              packages.guiShell.kde                   = true;
+              packages.baseline = true;
+              packages.cli._all = true;
+              packages.gui = true;
+              packages.guiShell.kde = true;
 
               # Applications (from options)
-              programs.nh.enable                      = true;
-              programs.firefox.enable                 = true;
-              services.flatpak.enable                 = true;
-              programs.kdeconnect.enable              = true;
-              programs.kde-pim.enable                 = false;
-              services.tailscale.enable               = true;
-              programs.zsh.enable                     = true;
+              programs.nh.enable = true;
+              programs.firefox.enable = true;
+              services.flatpak.enable = true;
+              programs.kdeconnect.enable = true;
+              programs.kde-pim.enable = false;
+              services.tailscale.enable = true;
+              programs.zsh.enable = true;
 
               # GUI shell
-              services.displayManager.ly.enable       = false;
-              services.displayManager.sddm.enable     = true;
-              services.desktopManager.plasma6.enable  = true;
-              xdg.portal.enable                       = true;
+              services.displayManager.ly.enable = false;
+              services.displayManager.sddm.enable = true;
+              services.desktopManager.plasma6.enable = true;
+              xdg.portal.enable = true;
 
               # Home Manager
-              home-manager                            = true;
+              home-manager.enable = true;
 
               # Networking
-              programs.mtr.enable                     = true;
-              networking.nameservers                  = true;
-              networking.nftables.enable              = true;
-              services.resolved.enable                = true;
-              networking.stevenblack.enable           = true;
-              systemd.services.stevenblack-unblock    = true;
+              programs.mtr.enable = true;
+              networking.nameservers = true;
+              networking.nftables.enable = true;
+              services.resolved.enable = true;
+              networking.stevenblack.enable = true;
+              systemd.services.stevenblack-unblock.enable = true;
 
               # Power Management
-              programs.auto-cpufreq.enable            = true;
-              power-management.enable                 = true;
-              services.thermald.enable                = true;
+              programs.auto-cpufreq.enable = true;
+              power-management.enable = true;
+              services.thermald.enable = true;
 
               # Radio
-              hardware.bluetooth.enable               = true;
+              hardware.bluetooth.enable = true;
 
               # Security
-              networking.firewall.enable              = true;
-              programs.gnupg.enable                   = true;
-              boot.lanzaboote.enable                  = true;
-              services.openssh.enable                 = true;
-              security.sudo.enable                    = true;
+              networking.firewall.enable = true;
+              programs.gnupg.enable = true;
+              boot.lanzaboote.enable = true;
+              services.openssh.enable = true;
+              security.sudo.enable = true;
 
               # System
-              current-system-packages-list            = true;
-              services.fwupd.enable                   = true;
-              programs.nix-ld.enable                  = true;
-                # Audio
-                audio-subsystem                       = true;
-                services.speech-synthesis.enable      = true;
-                # Maintenance
-                nix.settings.auto-optimise-store      = true;
-                nix.gc.automatic                      = true;
-                system.autoUpgrade.enable             = true;
+              current-system-packages-list = true;
+              services.fwupd.enable = true;
+              programs.nix-ld.enable = true;
+              # Audio
+              audio-subsystem = true;
+              services.speech-synthesis.enable = true;
+              # Maintenance
+              nix.settings.auto-optimise-store = true;
+              nix.gc.automatic = true;
+              system.autoUpgrade.enable = true;
 
               # Virtualisation
-              virtualisation.incus.enable             = true;
-              virtualisation.libvirt.enable           = true;
-              virtualisation.podman.enable            = true;
+              virtualisation.incus.enable = true;
+              virtualisation.libvirt.enable = true;
+              virtualisation.podman.enable = true;
             };
           }
-      ];
+        ];
     };
 
     # nixosConfigurations.satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
@@ -211,38 +257,7 @@
     #         # services.displayManager.cosmic-greeter.enable = false; # COSMIC Greeter
     #       services.displayManager.sddm.enable = true; # SDDM / KDE Display Manager
     #     }
-    #     # TODO: Nvidia drivers
     #   ];
     # };
   };
 }
-
-
-
-# README!
-# =======
-# - The COSMIC desktop environment options are disabled to avoid sourcing the flake when building the system configuration.
-
-# About the design of the configuration:
-# Importing everything and having each module self-check is inefficient and inelegant. It goes against the goal of having a lean, dynamic configuration where only what's needed gets included.
-
-# The fundamental problem we're facing stems from NixOS's module system design:
-  # imports must be determined before configuration evaluation
-  # We want imports to be determined by configuration values
-  # This creates an inherent circular dependency
-  # This is probably why NixOS itself often uses the "import everything and let modules self-activate" pattern, even though it's not ideal.
-
-# This touches on an interesting aspect of real-world systems: sometimes we have to choose between theoretical elegance and practical functionality. The "import everything and self-activate" pattern, while not ideal from a design perspective:
-  # Is proven to work within NixOS's constraints
-  # Is predictable because it follows established patterns
-  # Avoids edge cases and timing issues in module evaluation
-  # Is maintainable because it's simple (if inefficient)
-
-  # Changelog
-  # =========
-  # 2024-12-31  Lots of refactoring and improvements. Check the commit history for details.
-  # 2024-12-25  Finished splitting the Zsh shell aliases and functions into modules 🎉
-  # 2024-12-21  KDE Plasma: move activation logic to the module file.
-  # 2024-12-21  Syncthing: move activation logic to the module file.
-  # 2024-12-21  CUPS: move activation logic to the module file.
-  # 2024-12-21  Tailscale: move activation logic to the module file.
