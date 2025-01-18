@@ -8,10 +8,14 @@
 }: let
   hostSelector = import ../../lib/host-selector.nix {inherit config lib;};
 
+  cfg = lib.getAttrFromPath ["mySystem" "boot"] config;
+  kernelPackageName = "linuxPackages_" + cfg.kernelPackages;
+  kernelPackagesSet = {kernelPackages = builtins.getAttr kernelPackageName pkgs;};
+
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isTUXEDOInfinityBookPro = "pkgs.linuxPackages_xanmod_latest";`
-  kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
-  kernelPackages_isTUXEDOInfinityBookPro = pkgs.linuxPackages_latest;
-  kernelPackages_fallback = pkgs.linuxPackages_latest;
+  # kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
+  # kernelPackages_isTUXEDOInfinityBookPro = pkgs.linuxPackages_latest;
+  # kernelPackages_fallback = pkgs.linuxPackages_latest;
 
   kernelPatches_enable = "false"; # Enable/disable applying kernel patches
 
@@ -63,70 +67,79 @@
     # "quiet"
   ];
 in {
-  boot = {
-    initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod"]; # Override parameter in hardware-configuration.nix
-    kernelModules =
-      if hostSelector.isIntelGPUHost
-      then ["kvm-intel" "i915"]
-      else []; # Override parameter in hardware-configuration.nix
-    kernelPackages =
-      if hostSelector.isChuweiMiniPC
-      then kernelPackages_isChuweiMiniPC
-      else if hostSelector.isTUXEDOInfinityBookPro
-      then kernelPackages_isTUXEDOInfinityBookPro
-      else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
+  options.mySystem.boot.kernelPackages = lib.mkOption {
+    type = lib.types.enum ["latest" "latest_hardened" "lqx" "stable" "xanmod_latest" "xanmod_stable"];
+    default = "latest";
+    description = "What kernel package to use.";
+  };
 
-    kernel.sysctl =
-      # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
-      if hostSelector.isDesktop || hostSelector.isChuweiMiniPC
-      then commonKernelSysctl // {"net.ipv4.tcp_congestion_control" = "bbr";}
-      # bbr: A newer algorithm designed for higher throughput and lower latency.
-      else if hostSelector.isTUXEDOInfinityBookPro
-      then commonKernelSysctl // {"net.ipv4.tcp_congestion_control" = "westwood";}
-      # westwood: Aimed at improving performance over wireless networks and other lossy links by using end-to-end bandwidth estimation.
-      else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
+  config = {
+    boot = {
+      initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod"]; # Override parameter in hardware-configuration.nix
+      kernelModules =
+        if hostSelector.isIntelGPUHost
+        then ["kvm-intel" "i915"]
+        else []; # Override parameter in hardware-configuration.nix
+      kernelPackages = kernelPackagesSet.kernelPackages;
+      # kernelPackages =
+      #   if hostSelector.isChuweiMiniPC
+      #   then kernelPackages_isChuweiMiniPC
+      #   else if hostSelector.isTUXEDOInfinityBookPro
+      #   then kernelPackages_isTUXEDOInfinityBookPro
+      #   else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
 
-    kernelParams =
-      if hostSelector.isIntelGPUHost
-      then
-        commonKernelParams
-        ++ [
-          "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
-          "intel_pstate=disable"
-          "i915.enable_fbc=1"
-          "i915.enable_guc=2"
-          "i915.enable_psr=1"
-          "logo.nologo=0"
-          "init_on_alloc=1"
-          "init_on_free=1"
-          "intel_iommu=sm_on"
-          "iommu=pt"
-          "mitigations=off" # Turns off certain CPU security mitigations. It might enhance performance
+      kernel.sysctl =
+        # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
+        if hostSelector.isDesktop || hostSelector.isChuweiMiniPC
+        then commonKernelSysctl // {"net.ipv4.tcp_congestion_control" = "bbr";}
+        # bbr: A newer algorithm designed for higher throughput and lower latency.
+        else if hostSelector.isTUXEDOInfinityBookPro
+        then commonKernelSysctl // {"net.ipv4.tcp_congestion_control" = "westwood";}
+        # westwood: Aimed at improving performance over wireless networks and other lossy links by using end-to-end bandwidth estimation.
+        else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
+
+      kernelParams =
+        if hostSelector.isIntelGPUHost
+        then
+          commonKernelParams
+          ++ [
+            "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
+            "intel_pstate=disable"
+            "i915.enable_fbc=1"
+            "i915.enable_guc=2"
+            "i915.enable_psr=1"
+            "logo.nologo=0"
+            "init_on_alloc=1"
+            "init_on_free=1"
+            "intel_iommu=sm_on"
+            "iommu=pt"
+            "mitigations=off" # Turns off certain CPU security mitigations. It might enhance performance
+          ]
+        else if hostSelector.isNvidiaGPUHost
+        then
+          commonKernelParams
+          ++ [
+            "nvidia_drm.modeset=1" # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
+          ]
+        else {};
+
+      kernelPatches =
+        if kernelPatches_enable == "true"
+        then [
+          {
+            name = "tux-logo";
+            patch = null;
+            extraConfig = ''
+              FRAMEBUFFER_CONSOLE y
+              LOGO y
+              LOGO_LINUX_MONO y
+              LOGO_LINUX_VGA16 y
+              LOGO_LINUX_CLUT224 y
+            '';
+          }
         ]
-      else if hostSelector.isNvidiaGPUHost
-      then
-        commonKernelParams
-        ++ [
-          "nvidia_drm.modeset=1" # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
-        ]
-      else {};
-
-    kernelPatches =
-      if kernelPatches_enable == "true"
-      then [
-        {
-          name = "tux-logo";
-          patch = null;
-          extraConfig = ''
-            FRAMEBUFFER_CONSOLE y
-            LOGO y
-            LOGO_LINUX_MONO y
-            LOGO_LINUX_VGA16 y
-            LOGO_LINUX_CLUT224 y
-          '';
-        }
-      ]
-      else [];
+        else [];
+    };
   };
 }
 #===== REFERENCE
