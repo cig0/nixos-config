@@ -10,7 +10,6 @@
 
   cfg = lib.getAttrFromPath ["mySystem" "boot"] config;
   kernelPackageName = "linuxPackages_" + cfg.kernelPackages;
-  kernelPackagesSet = {kernelPackages = builtins.getAttr kernelPackageName pkgs;};
 
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isTUXEDOInfinityBookPro = "pkgs.linuxPackages_xanmod_latest";`
   # kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
@@ -80,7 +79,7 @@ in {
         if hostSelector.isIntelGPUHost
         then ["kvm-intel" "i915"]
         else []; # Override parameter in hardware-configuration.nix
-      kernelPackages = kernelPackagesSet.kernelPackages;
+      kernelPackages = builtins.getAttr kernelPackageName pkgs;
       # kernelPackages =
       #   if hostSelector.isChuweiMiniPC
       #   then kernelPackages_isChuweiMiniPC
