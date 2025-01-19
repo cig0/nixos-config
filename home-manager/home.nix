@@ -62,26 +62,27 @@ in {
           };
         };
 
-        # doomguy = { ... }: {
-        #   home = {
-        #     homeDirectory = "/home/doomguy";
+        doomguy = {...}: {
+          home = {
+            homeDirectory = "/home/doomguy";
 
-        #     sessionVariables = {
-        #       EDITOR = "nvim";
-        #       VISUAL = "code";
-        #     };
+            sessionVariables = {
+              EDITOR = "nvim";
+              VISUAL = "code";
+            };
 
-        #     packages = with pkgs; [
-        #       ] ++
-        #       (with pkgsUnstable; [
-        #       # Web
-        #         # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-        #     ]);
+            # packages = with pkgs; [
+            #   ] ++
+            #   (with pkgsUnstable; [
+            #   # Web
+            #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+            # ]);
 
-        # # The state version is required and should stay at the version you
-        # # originally installed.
-        #   stateVersion = "24.11";
-        # };
+            # The state version is required and should stay at the version you
+            # originally installed.
+            stateVersion = "24.11";
+          };
+        };
 
         fine = {...}: {
           imports = [
@@ -101,13 +102,13 @@ in {
               VISUAL = "code";
             };
 
-            packages = with pkgs;
-              [
-              ]
-              ++ (with pkgsUnstable; [
-                # Web
-                # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-              ]);
+            # packages = with pkgs;
+            #   [
+            #   ]
+            #   ++ (with pkgsUnstable; [
+            #     # Web
+            #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+            #   ]);
 
             # The state version is required and should stay at the version you
             # originally installed.
