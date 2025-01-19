@@ -88,6 +88,7 @@ in {
       }
       (lib.mkIf cfg.doomguy {
         doomguy = {
+          name = "doomguy";
           description = "This is testing";
           useDefaultShell = true;
           isNormalUser = true;
