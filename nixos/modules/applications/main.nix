@@ -11,6 +11,8 @@
     ./kde/main.nix
     ./display-manager.nix
     ./firefox.nix
+    ./git.nix
+    ./lazygit.nix
     ./nix-flatpak.nix
     ./nixvim.nix
     ./ollama.nix
