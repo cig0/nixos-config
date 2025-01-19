@@ -21,101 +21,105 @@ in {
       backupFileExtension = "backup";
       useGlobalPkgs = true;
       useUserPackages = true;
-      users = {
-        cig0 = {...}: {
-          imports = [
-            # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
-            # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
-            # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
-            ./modules/applications/main.nix
-            ./modules/config-files/main.nix
-            ./modules/user/maintenance/apps-cargo.nix
-          ];
+      users = lib.mkMerge [
+        {
+          cig0 = {...}: {
+            imports = [
+              # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
+              # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
+              # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
+              ./modules/applications/main.nix
+              ./modules/config-files/main.nix
+              ./modules/user/maintenance/apps-cargo.nix
+            ];
 
-          home = {
-            homeDirectory = "/home/cig0";
+            home = {
+              homeDirectory = "/home/cig0";
 
-            sessionVariables = {
-              EDITOR = "nvim";
-              VISUAL = "code";
+              sessionVariables = {
+                EDITOR = "nvim";
+                VISUAL = "code";
+              };
+
+              # packages = with pkgs;
+              #   [
+              #   ]
+              #   ++ (with pkgsUnstable; [
+              #     # Web
+              #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+              #   ]);
+
+              # The state version is required and should stay at the version you
+              # originally installed.
+              stateVersion = "24.11";
             };
 
-            # packages = with pkgs;
-            #   [
-            #   ]
-            #   ++ (with pkgsUnstable; [
-            #     # Web
-            #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-            #   ]);
-
-            # The state version is required and should stay at the version you
-            # originally installed.
-            stateVersion = "24.11";
-          };
-
-          # ░░░░░░░█▄█░█░█░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-          # ░░░░░░░█░█░░█░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-          # ░░░░░░░▀░▀░░▀░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-          myHM = {
-            # Config-files
-            xdg.configFile."git/config".enable = false; # We're using programs.git.config
-          };
-        };
-
-        doomguy = {...}: {
-          home = {
-            homeDirectory = "/home/doomguy";
-
-            sessionVariables = {
-              EDITOR = "nvim";
-              VISUAL = "code";
+            # ░░░░░░░█▄█░█░█░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
+            # ░░░░░░░█░█░░█░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
+            # ░░░░░░░▀░▀░░▀░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+            myHM = {
+              # Config-files
+              xdg.configFile."git/config".enable = false; # We're using programs.git.config
             };
-
-            # packages = with pkgs; [
-            #   ] ++
-            #   (with pkgsUnstable; [
-            #   # Web
-            #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-            # ]);
-
-            # The state version is required and should stay at the version you
-            # originally installed.
-            stateVersion = "24.11";
           };
-        };
+        }
+        {
+          fine = {...}: {
+            imports = [
+              # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
+              # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
+              # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
+              ./modules/applications/main.nix
+              ./modules/config-files/main.nix
+              ./modules/user/maintenance/apps-cargo.nix
+            ];
 
-        fine = {...}: {
-          imports = [
-            # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
-            # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
-            # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
-            ./modules/applications/main.nix
-            ./modules/config-files/main.nix
-            ./modules/user/maintenance/apps-cargo.nix
-          ];
+            home = {
+              homeDirectory = "/home/fine";
 
-          home = {
-            homeDirectory = "/home/fine";
+              sessionVariables = {
+                EDITOR = "nvim";
+                VISUAL = "code";
+              };
 
-            sessionVariables = {
-              EDITOR = "nvim";
-              VISUAL = "code";
+              # packages = with pkgs;
+              #   [
+              #   ]
+              #   ++ (with pkgsUnstable; [
+              #     # Web
+              #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+              #   ]);
+
+              # The state version is required and should stay at the version you
+              # originally installed.
+              stateVersion = "24.11";
             };
-
-            # packages = with pkgs;
-            #   [
-            #   ]
-            #   ++ (with pkgsUnstable; [
-            #     # Web
-            #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-            #   ]);
-
-            # The state version is required and should stay at the version you
-            # originally installed.
-            stateVersion = "24.11";
           };
-        };
-      };
+        }
+        (lib.mkIf config.mySystem.users.users.doomguy {
+          doomguy = {...}: {
+            home = {
+              homeDirectory = "/home/doomguy";
+
+              sessionVariables = {
+                EDITOR = "nvim";
+                VISUAL = "code";
+              };
+
+              # packages = with pkgs; [
+              #   ] ++
+              #   (with pkgsUnstable; [
+              #   # Web
+              #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+              # ]);
+
+              # The state version is required and should stay at the version you
+              # originally installed.
+              stateVersion = "24.11";
+            };
+          };
+        })
+      ];
     };
   };
 }
