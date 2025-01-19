@@ -62,6 +62,7 @@ in {
           extraGroups = [
             "adbusers"
             "audio"
+            # "corectrl" # Enable a tool to overclock amd graphics cards and processors.
             "disk"
             "incus-admin"
             "input"
@@ -85,19 +86,6 @@ in {
           ];
         };
       }
-      {
-        # anotherUser
-        # users.users.anotherUser = {
-        #   isNormalUser = true;
-        #   home = "/home/fine";
-        #   description = "Fine";
-        #   extraGroups = [ "incus-admin" "libvirtd" "networkmanager" "wheel" ];
-        #   shell = "zsh";
-        #   packages = with pkgs; [
-        #     some_pckage
-        #   ];
-        # };
-      }
       (lib.mkIf cfg.doomguy {
         doomguy = {
           description = "This is testing";
@@ -110,7 +98,7 @@ in {
           extraGroups = [
             "adbusers"
             "audio"
-            "corectrl" # Enable a tool to overclock amd graphics cards and processors.
+            # "corectrl" # Enable a tool to overclock amd graphics cards and processors.
             "disk"
             "incus-admin"
             "input"
