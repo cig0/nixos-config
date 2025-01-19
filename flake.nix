@@ -201,17 +201,19 @@
               # System
               current-system-packages-list.enable = true;
               services.fwupd.enable = true;
-              boot.kernelPackages = "latest";
               programs.nix-ld.enable = true;
               # System - Audio
               audio-subsystem.enable = true;
               services.speechd.enable = true;
+              # System - Kernel
+              boot.kernelPackages = "latest";
               # System - Maintenance
               nix.settings.auto-optimise-store = true;
               nix.gc.automatic = true;
               system.autoUpgrade.enable = true;
-              # System - Users management
+              # System - User management
               users.users.doomguy = true;
+
               # Virtualisation
               virtualisation.incus.enable = true;
               virtualisation.libvirtd.enable = true;
