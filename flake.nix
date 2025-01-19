@@ -109,10 +109,10 @@
       ./nixos/modules/hardware/main.nix
       ./nixos/modules/networking/main.nix
       ./nixos/modules/observability/main.nix
-      ./nixos/profiles/main.nix
       ./nixos/modules/security/main.nix
       ./nixos/modules/system/main.nix
       ./nixos/modules/virtualisation/main.nix
+      # ./nixos/profiles/main.nix
     ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
@@ -148,80 +148,80 @@
             # ░░░░░░░█▄█░█░█░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
             # ░░░░░░░█░█░░█░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
             # ░░░░░░░▀░▀░░▀░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-            # mySystem = {
-            #   # Applications
-            #   packages.baseline = true;
-            #   packages.cli._all = true;
-            #   packages.gui = true;
-            #   packages.guiShell.kde = true;
-            #   programs.git.enable = true;
-            #   programs.git.lfs.enable = true;
-            #   programs.lazygit.enable = true;
-            #   programs.nh.enable = true;
-            #   programs.nixvim.enable = true;
-            #   programs.firefox.enable = true;
-            #   services.flatpak.enable = true;
-            #   programs.kdeconnect.enable = true;
-            #   programs.kde-pim.enable = false;
-            #   services.tailscale.enable = true;
-            #   programs.zsh.enable = true;
+            mySystem = {
+              # Applications
+              packages.baseline = true;
+              packages.cli._all = true;
+              packages.gui = true;
+              packages.guiShell.kde = true;
+              programs.git.enable = true;
+              programs.git.lfs.enable = true;
+              programs.lazygit.enable = true;
+              programs.nh.enable = true;
+              programs.nixvim.enable = true;
+              programs.firefox.enable = true;
+              services.flatpak.enable = true;
+              programs.kdeconnect.enable = true;
+              programs.kde-pim.enable = false;
+              services.tailscale.enable = true;
+              programs.zsh.enable = true;
 
-            #   # GUI shell
-            #   services.displayManager.ly.enable = false;
-            #   services.displayManager.sddm.enable = true;
-            #   services.desktopManager.plasma6.enable = true;
-            #   xdg.portal.enable = true;
+              # GUI shell
+              services.displayManager.ly.enable = false;
+              services.displayManager.sddm.enable = true;
+              services.desktopManager.plasma6.enable = true;
+              xdg.portal.enable = true;
 
-            #   # Home Manager
-            #   home-manager.enable = true;
+              # Home Manager
+              home-manager.enable = true;
 
-            #   # Networking
-            #   programs.mtr.enable = true;
-            #   networking.nameservers = true;
-            #   networking.nftables.enable = true;
-            #   services.resolved.enable = true;
-            #   networking.stevenblack.enable = true;
-            #   systemd.services.stevenblack-unblock.enable = true;
+              # Networking
+              programs.mtr.enable = true;
+              networking.nameservers = true;
+              networking.nftables.enable = true;
+              services.resolved.enable = true;
+              networking.stevenblack.enable = true;
+              systemd.services.stevenblack-unblock.enable = true;
 
-            #   # Power Management
-            #   programs.auto-cpufreq.enable = true;
-            #   powerManagement.enable = true;
-            #   services.thermald.enable = true;
+              # Power Management
+              programs.auto-cpufreq.enable = true;
+              powerManagement.enable = true;
+              services.thermald.enable = true;
 
-            #   # Radio
-            #   hardware.bluetooth.enable = true;
+              # Radio
+              hardware.bluetooth.enable = true;
 
-            #   # Security
-            #   programs.gnupg.enable = true;
-            #   boot.lanzaboote.enable = true;
-            #   services.openssh.enable = true;
-            #   security.sudo.enable = true;
-            #   # Security - Firewall
-            #   networking.firewall.enable = true;
-            #   networking.firewall.allowPing = false;
+              # Security
+              programs.gnupg.enable = true;
+              boot.lanzaboote.enable = true;
+              services.openssh.enable = true;
+              security.sudo.enable = true;
+              # Security - Firewall
+              networking.firewall.enable = true;
+              networking.firewall.allowPing = false;
 
-            #   # System
-            #   current-system-packages-list.enable = true;
-            #   services.fwupd.enable = true;
-            #   programs.nix-ld.enable = true;
-            #   # System - Audio
-            #   audio-subsystem.enable = true;
-            #   services.speechd.enable = true;
-            #   # System - Kernel
-            #   boot.kernelPackages = "latest";
-            #   # System - Maintenance
-            #   nix.settings.auto-optimise-store = true;
-            #   nix.gc.automatic = true;
-            #   system.autoUpgrade.enable = true;
-            #   # System - User management
-            #   users.users.doomguy = true;
+              # System
+              current-system-packages-list.enable = true;
+              services.fwupd.enable = true;
+              programs.nix-ld.enable = true;
+              # System - Audio
+              audio-subsystem.enable = true;
+              services.speechd.enable = true;
+              # System - Kernel
+              boot.kernelPackages = "latest";
+              # System - Maintenance
+              nix.settings.auto-optimise-store = true;
+              nix.gc.automatic = true;
+              system.autoUpgrade.enable = true;
+              # System - User management
+              users.users.doomguy = true;
 
-            #   # Virtualisation
-            #   virtualisation.incus.enable = true;
-            #   virtualisation.libvirtd.enable = true;
-            #   virtualisation.podman.enable = true;
-            # };
-            mySystem.selector = "laptop";
+              # Virtualisation
+              virtualisation.incus.enable = true;
+              virtualisation.libvirtd.enable = true;
+              virtualisation.podman.enable = true;
+            };
+            # mySystem.selector = "laptop";
           }
         ];
     };
