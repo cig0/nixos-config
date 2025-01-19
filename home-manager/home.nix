@@ -3,8 +3,8 @@
   config,
   inputs,
   lib,
-  pkgs,
-  pkgsUnstable,
+  # pkgs,
+  # pkgsUnstable,
   ...
 }: let
   cfg = lib.getAttrFromPath ["mySystem" "home-manager" "enable"] config;
