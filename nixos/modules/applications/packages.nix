@@ -5,7 +5,7 @@
   pkgsUnstable,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "packages"] config;
+  cfg = config.mySystem.packages;
 
   packagesBaseline = with pkgs;
     [

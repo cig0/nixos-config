@@ -6,7 +6,7 @@
   pkgs,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "programs" "nixvim"] config;
+  cfg = config.mySystem.programs.nixvim;
 in {
   imports = [inputs.nixvim.nixosModules.nixvim];
 

@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "programs" "nix-ld"] config;
+  cfg = config.mySystem.programs.nix-ld;
 in {
   options.mySystem.programs.nix-ld.enable = lib.mkEnableOption "Run unpatched dynamic binaries on NixOS.";
 

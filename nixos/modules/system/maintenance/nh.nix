@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "programs" "nh"] config;
+  cfg = config.mySystem.programs.nh;
 in {
   options.mySystem.programs.nh = {
     enable = lib.mkEnableOption "Whether to enable nh, yet another Nix CLI helper.";
