@@ -32,14 +32,6 @@ in {
             ./modules/user/maintenance/apps-cargo.nix
           ];
 
-          # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-          # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-          # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-          myHM = {
-            # Config-files
-            xdg.configFile."git/config".enable = false; # We're using programs.git.config
-          };
-
           home = {
             homeDirectory = "/home/cig0";
 
@@ -59,6 +51,14 @@ in {
             # The state version is required and should stay at the version you
             # originally installed.
             stateVersion = "24.11";
+          };
+
+          # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
+          # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
+          # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+          myHM = {
+            # Config-files
+            xdg.configFile."git/config".enable = false; # We're using programs.git.config
           };
         };
 
