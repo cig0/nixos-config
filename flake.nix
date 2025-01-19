@@ -210,7 +210,8 @@
               nix.settings.auto-optimise-store = true;
               nix.gc.automatic = true;
               system.autoUpgrade.enable = true;
-
+              # System - Users management
+              users.users.doomguy = true;
               # Virtualisation
               virtualisation.incus.enable = true;
               virtualisation.libvirtd.enable = true;
