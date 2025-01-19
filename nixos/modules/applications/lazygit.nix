@@ -1,0 +1,15 @@
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "programs" "lazygit"] config;
+in {
+  options.mySystem.programs.lazygit = {
+    enable = lib.mkEnableOption "Whether to enable lazygit, a simple terminal UI for git commands.";
+  };
+
+  config = {
+    programs.lazygit.enable = cfg.enable;
+  };
+}

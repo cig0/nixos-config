@@ -1,192 +1,192 @@
 {
-  xdg.configFile."git/gitignore_global".text = ''
-    *~
-    myvars.tf
-    .cache_ggshield
-    .DS_Store
-    .favorites.json
-    .vscode/
-  '';
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.myHM.xdg.configFile."git/config".enable;
+in {
+  options.myHM.xdg.configFile."git/config".enable = lib.mkEnableOption "Whether to write Git's configuration file to the user's $XDG_HOME_CONFIG/git/config.";
 
-  xdg.configFile."git/config".text = ''
-    [color]
-      diff = true
-      status = true
-      branch = true
-      interactive = true
-      ui = true
-      pager = false
-      log = true
+  config = lib.mkIf cfg {
+    xdg.configFile."git/config".text = ''
+      [color]
+        diff = true
+        status = true
+        branch = true
+        interactive = true
+        ui = true
+        pager = false
+        log = true
 
-    # color.branch
-    #     A boolean to enable/disable color in the output of git-branch(1). May be set to always, false (or
-    #     never) or auto (or true), in which case colors are used only when the output is to a terminal.
-    #     Defaults to false.
+      # color.branch
+      #     A boolean to enable/disable color in the output of git-branch(1). May be set to always, false (or
+      #     never) or auto (or true), in which case colors are used only when the output is to a terminal.
+      #     Defaults to false.
 
-    # color.interactive
-    #     When set to always, always use colors for interactive prompts and displays (such as those used by
-    #     "git-add --interactive"). When false (or never), never. When set to true or auto, use colors only
-    #     when the output is to the terminal. Defaults to false.
+      # color.interactive
+      #     When set to always, always use colors for interactive prompts and displays (such as those used by
+      #     "git-add --interactive"). When false (or never), never. When set to true or auto, use colors only
+      #     when the output is to the terminal. Defaults to false.
 
-    # color.diff
-    #     Whether to use ANSI escape sequences to add color to patches. If this is set to always, git-
-    #     diff(1), git-log(1), and git-show(1) will use color for all patches. If it is set to true or
-    #     auto, those commands will only use color when output is to the terminal. Defaults to false.
+      # color.diff
+      #     Whether to use ANSI escape sequences to add color to patches. If this is set to always, git-
+      #     diff(1), git-log(1), and git-show(1) will use color for all patches. If it is set to true or
+      #     auto, those commands will only use color when output is to the terminal. Defaults to false.
 
-    #     This does not affect git-format-patch(1) nor the git-diff-* plumbing commands. Can be overridden
-    #     on the command line with the --color[=<when>] option.
+      #     This does not affect git-format-patch(1) nor the git-diff-* plumbing commands. Can be overridden
+      #     on the command line with the --color[=<when>] option.
 
-    # color.pager
-    #     A boolean to enable/disable colored output when the pager is in use (default is true).
+      # color.pager
+      #     A boolean to enable/disable colored output when the pager is in use (default is true).
 
-    # color.showbranch
-    #     A boolean to enable/disable color in the output of git-show-branch(1). May be set to always,
-    #     false (or never) or auto (or true), in which case colors are used only when the output is to a
-    #     terminal. Defaults to false.
+      # color.showbranch
+      #     A boolean to enable/disable color in the output of git-show-branch(1). May be set to always,
+      #     false (or never) or auto (or true), in which case colors are used only when the output is to a
+      #     terminal. Defaults to false.
 
-    # color.status
-    #     A boolean to enable/disable color in the output of git-status(1). May be set to always, false (or
-    #     never) or auto (or true), in which case colors are used only when the output is to a terminal.
-    #     Defaults to false.
+      # color.status
+      #     A boolean to enable/disable color in the output of git-status(1). May be set to always, false (or
+      #     never) or auto (or true), in which case colors are used only when the output is to a terminal.
+      #     Defaults to false.
 
-    # color.ui
-    #     This variable determines the default value for variables such as color.diff and color.grep that
-    #     control the use of color per command family. Its scope will expand as more commands learn
-    #     configuration to set a default for the --color option. Set it to always if you want all output
-    #     not intended for machine consumption to use color, to true or auto if you want such output to use
-    #     color when written to the terminal, or to false or never if you prefer git commands not to use
-    #     color unless enabled explicitly with some other configuration or the --color option.
+      # color.ui
+      #     This variable determines the default value for variables such as color.diff and color.grep that
+      #     control the use of color per command family. Its scope will expand as more commands learn
+      #     configuration to set a default for the --color option. Set it to always if you want all output
+      #     not intended for machine consumption to use color, to true or auto if you want such output to use
+      #     color when written to the terminal, or to false or never if you prefer git commands not to use
+      #     color unless enabled explicitly with some other configuration or the --color option.
 
+      # color.branch.<slot>
+      #     Use customized color for branch coloration.  <slot> is one of current (the current branch), local
+      #     (a local branch), remote (a remote-tracking branch in refs/remotes/), plain (other refs).
 
-    # color.branch.<slot>
-    #     Use customized color for branch coloration.  <slot> is one of current (the current branch), local
-    #     (a local branch), remote (a remote-tracking branch in refs/remotes/), plain (other refs).
+      #     The value for these configuration variables is a list of colors (at most two) and attributes (at
+      #     most one), separated by spaces. The colors accepted are:
+      #       normal, black, red, green, yellow, blue, magenta, cyan and white;
+      #     the attributes are:
+      #       bold, dim, ul, blink and reverse.
+      #
+      #     The first color given is the foreground; the second is the background.
+      #     The position of the attribute, if any, doesn't matter.
 
-    #     The value for these configuration variables is a list of colors (at most two) and attributes (at
-    #     most one), separated by spaces. The colors accepted are:
-    #       normal, black, red, green, yellow, blue, magenta, cyan and white;
-    #     the attributes are:
-    #       bold, dim, ul, blink and reverse.
-    #
-    #     The first color given is the foreground; the second is the background.
-    #     The position of the attribute, if any, doesn't matter.
+      # [color "branch"]
+      # 	current = yellow reverse
+      # 	local = yellow
+      # 	remote = green
 
-    # [color "branch"]
-    # 	current = yellow reverse
-    # 	local = yellow
-    # 	remote = green
+      # color.diff.<slot>
+      #     Use customized color for diff colorization.  <slot> specifies which part of the patch to use the
+      #     specified color, and is one of plain (context text), meta (metainformation), frag (hunk header),
+      #     func (function in hunk header), old (removed lines), new (added lines), commit (commit headers),
+      #     or whitespace (highlighting whitespace errors). The values of these variables may be specified as
+      #     in color.branch.<slot>.
 
-    # color.diff.<slot>
-    #     Use customized color for diff colorization.  <slot> specifies which part of the patch to use the
-    #     specified color, and is one of plain (context text), meta (metainformation), frag (hunk header),
-    #     func (function in hunk header), old (removed lines), new (added lines), commit (commit headers),
-    #     or whitespace (highlighting whitespace errors). The values of these variables may be specified as
-    #     in color.branch.<slot>.
+      # [color "diff"]
+      # 	meta = yellow bold
+      # 	frag = magenta bold
+      # 	old = red bold
+      # 	new = green bold
 
-    # [color "diff"]
-    # 	meta = yellow bold
-    # 	frag = magenta bold
-    # 	old = red bold
-    # 	new = green bold
+      # color.decorate.<slot>
+      #     Use customized color for git log --decorate output.  <slot> is one of branch, remoteBranch, tag,
+      #     stash or HEAD for local branches, remote-tracking branches, tags, stash and HEAD, respectively.
 
-    # color.decorate.<slot>
-    #     Use customized color for git log --decorate output.  <slot> is one of branch, remoteBranch, tag,
-    #     stash or HEAD for local branches, remote-tracking branches, tags, stash and HEAD, respectively.
+      # color.interactive.<slot>
+      #     Use customized color for git add --interactive output.  <slot> may be prompt, header, help or
+      #     error, for four distinct types of normal output from interactive commands. The values of these
+      #     variables may be specified as in color.branch.<slot>.
 
-    # color.interactive.<slot>
-    #     Use customized color for git add --interactive output.  <slot> may be prompt, header, help or
-    #     error, for four distinct types of normal output from interactive commands. The values of these
-    #     variables may be specified as in color.branch.<slot>.
+      # color.status.<slot>
+      #     Use customized color for status colorization.  <slot> is one of header (the header text of the
+      #     status message), added or updated (files which are added but not committed), changed (files which
+      #     are changed but not added in the index), untracked (files which are not tracked by git), branch
+      #     (the current branch), or nobranch (the color the no branch warning is shown in, defaulting to
+      #     red). The values of these variables may be specified as in color.branch.<slot>.
 
-    # color.status.<slot>
-    #     Use customized color for status colorization.  <slot> is one of header (the header text of the
-    #     status message), added or updated (files which are added but not committed), changed (files which
-    #     are changed but not added in the index), untracked (files which are not tracked by git), branch
-    #     (the current branch), or nobranch (the color the no branch warning is shown in, defaulting to
-    #     red). The values of these variables may be specified as in color.branch.<slot>.
+      # [color "status"]
+      #   added = yellow
+      #   changed = green
+      #   untracked = cyan
 
-    # [color "status"]
-    #   added = yellow
-    #   changed = green
-    #   untracked = cyan
+      [alias]
+        dft = difftool
+        reset = !sh -c 'echo -n "Are you sure you want to reset? ALL CURRENT CHANGES WILL BE LOST! [YES/n/ctrl+c] " && read ans && [ $ans = YES ] && git reset $@ || echo "Reset aborted"' -
 
-    [alias]
-      dft = difftool
-      reset = !sh -c 'echo -n "Are you sure you want to reset? ALL CURRENT CHANGES WILL BE LOST! [YES/n/ctrl+c] " && read ans && [ $ans = YES ] && git reset $@ || echo "Reset aborted"' -
+      [commit]
+        template = ~/cig0/.config/git/stCommitMsg
+        gpgsign = true
 
-    [commit]
-      template = ~/cig0/.config/git/stCommitMsg
-      gpgsign = true
+      [core]
+        excludesfile = ~/.config/git/gitignore_global
+        #pager = less -F -X
+        pager = delta
+        hooksPath = /home/cig0/.git/hooks
+        editor = nvim
 
-    [core]
-      excludesfile = ~/.config/git/gitignore_global
-      #pager = less -F -X
-      pager = delta
-      hooksPath = /home/cig0/.git/hooks
-      editor = nvim
+      [credential]
+        # helper = osxkeychain
 
-    [credential]
-      # helper = osxkeychain
+      [credential "https://github.com"]
+        helper = !/run/current-system/sw/bin/gh auth git-credential
+      [credential "https://gist.github.com"]
+        helper = !/run/current-system/sw/bin/gh auth git-credential
 
-    [credential "https://github.com"]
-      helper = !/run/current-system/sw/bin/gh auth git-credential
-    [credential "https://gist.github.com"]
-      helper = !/run/current-system/sw/bin/gh auth git-credential
+      [delta]
+        light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+        navigate = true    # use n and N to move between diff sections
+        side-by-side = true
+        tabs = 2
+        true-color = auto
 
-    [delta]
-      light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
-      navigate = true    # use n and N to move between diff sections
-      side-by-side = true
-      tabs = 2
-      true-color = auto
+      [diff]
+        colorMoved = default
+        tool = difftastic
 
-    [diff]
-      colorMoved = default
-      tool = difftastic
+      [difftool]
+        prompt = false
 
-    [difftool]
-      prompt = false
+      [difftool "difftastic"]
+        cmd = difft "$LOCAL" "$REMOTE"
 
-    [difftool "difftastic"]
-      cmd = difft "$LOCAL" "$REMOTE"
+      [filter "lfs"]
+        process = git-lfs filter-process
+        required = true
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
 
-    [filter "lfs"]
-      process = git-lfs filter-process
-      required = true
-      clean = git-lfs clean -- %f
-      smudge = git-lfs smudge -- %f
+      [gpg]
+        # program = /usr/local/bin/gpg
 
-    [gpg]
-      # program = /usr/local/bin/gpg
+      [init]
+        defaultBranch = main
 
-    [init]
-      defaultBranch = main
+      [interactive]
+        diffFilter = delta --color-only --tabs 2 --true-color auto
+        # diffFilter = difft --color auto --tab-width 2
+      [add.interactive]
+        useBuiltin = false # required for git 2.37.0
 
-    [interactive]
-      diffFilter = delta --color-only --tabs 2 --true-color auto
-      # diffFilter = difft --color auto --tab-width 2
-    [add.interactive]
-      useBuiltin = false # required for git 2.37.0
+      [maintenance]
+        # repo = /var/home/cig0/.confeegs
 
-    [maintenance]
-      # repo = /var/home/cig0/.confeegs
+      [merge]
+        conflictstyle = diff3
 
-    [merge]
-      conflictstyle = diff3
+      [pager]
+        branch = false
+        difftool = true
 
-    [pager]
-      branch = false
-      difftool = true
+      [tag]
+        gpgsign = true
 
-    [tag]
-      gpgsign = true
+      [url "git@github.com:"]
+        insteadOf = https://github.com/
 
-    [url "git@github.com:"]
-      insteadOf = https://github.com/
-
-    [user]
-      signingkey = "BB81CA1B11628BF9929C7F733663FC5D6230F078"
-      name = Martin Cigorraga
-      email = cig0.github@tutanota.com
-  '';
+      [user]
+        signingkey = "BB81CA1B11628BF9929C7F733663FC5D6230F078"
+        name = Martin Cigorraga
+        email = cig0.github@tutanota.com
+    '';
+  };
 }

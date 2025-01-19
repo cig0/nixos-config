@@ -137,7 +137,6 @@
             # ░░░░░░░█▀█░█░█░█▀▀░█▀▄░█░░░█▀█░█░█░█▀▀░░░░░░
             # ░░░░░░░█░█░▀▄▀░█▀▀░█▀▄░█░░░█▀█░░█░░▀▀█░░░░░░
             # ░░░░░░░▀▀▀░░▀░░▀▀▀░▀░▀░▀▀▀░▀░▀░░▀░░▀▀▀░░░░░░
-
             nixpkgs.overlays = [
               nixos-option
               rust-overlay.overlays.default
@@ -147,13 +146,15 @@
             # ░░░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░░
             # ░░░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░░
             # ░░░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░░
-
             mySystem = {
               # Applications
               packages.baseline = true;
               packages.cli._all = true;
               packages.gui = true;
               packages.guiShell.kde = true;
+              programs.git.enable = true;
+              programs.git.lfs.enable = true;
+              programs.lazygit.enable = true;
               programs.nh.enable = true;
               programs.nixvim.enable = true;
               programs.firefox.enable = true;

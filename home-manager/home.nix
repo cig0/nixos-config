@@ -24,10 +24,21 @@ in {
       users = {
         cig0 = {...}: {
           imports = [
+            # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░
+            # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░
+            # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░
             ./modules/applications/main.nix
             ./modules/config-files/main.nix
             ./modules/user/maintenance/apps-cargo.nix
           ];
+
+          # ░░░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░░
+          # ░░░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░░
+          # ░░░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░░
+          myHM = {
+            # Config-files
+            xdg.configFile."git/config".enable = false; # We're using programs.git.config
+          };
 
           home = {
             homeDirectory = "/home/cig0";
@@ -74,6 +85,9 @@ in {
 
         fine = {...}: {
           imports = [
+            # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░
+            # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░
+            # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░
             ./modules/applications/main.nix
             ./modules/config-files/main.nix
             ./modules/user/maintenance/apps-cargo.nix
