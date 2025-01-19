@@ -1,18 +1,15 @@
-{ config, lib, ... }:
-
-let
-  cfg = config.mySystem.atop;
-
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = lib.getAttrFromPath ["mySystem" "atop"] config;
 in {
-  options.mySystem.atop = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable atop, the console system performance monitor";
-  };
+  options.mySystem.atop.enable = lib.mkEnableOption "Whether to enable Atop, a tool for monitoring system resources.";
 
-  config = lib.mkIf (cfg == true) {
+  config = {
     programs.atop = {
-      enable = true;
+      enable = cfg.enable;
     };
   };
 }
