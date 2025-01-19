@@ -30,7 +30,7 @@ in {
         };
 
         commit = {
-          template = "~/cig0/.config/git/stCommitMsg";
+          template = "~/.config/git/stCommitMsg";
           gpgsign = true;
         };
 
