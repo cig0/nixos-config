@@ -8,8 +8,8 @@
 # (_____)                                            (_____)
 {
   imports = builtins.filter (x: x != null) [
-    ./power-management/main.nix
-    ./radio/main.nix
+    ./power-management/default.nix
+    ./radio/default.nix
     ./nvidia.nix
   ];
 }
