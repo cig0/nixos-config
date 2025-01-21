@@ -8,7 +8,7 @@
 # (_____)                                                            (_____)
 {
   imports = builtins.filter (x: x != null) [
-    ./kde/main.nix
+    ./kde/default.nix
     ./display-manager.nix
     ./firefox.nix
     ./git.nix

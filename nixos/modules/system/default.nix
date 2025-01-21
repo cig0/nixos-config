@@ -8,12 +8,12 @@
 # (_____)                                    (_____)
 {
   imports = builtins.filter (x: x != null) [
-    ./audio/main.nix
+    ./audio/default.nix
     ./cups.nix
     ./current-system-packages-list.nix
-    ./environment/main.nix
-    ./maintenance/main.nix
-    ./nixos/main.nix
+    ./environment/default.nix
+    ./maintenance/default.nix
+    ./nixos/default.nix
     ./fonts.nix
     ./fwupd.nix
     ./hwaccel.nix

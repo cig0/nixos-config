@@ -28,8 +28,8 @@ in {
               # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
               # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
               # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
-              ./modules/applications/main.nix
-              ./modules/config-files/main.nix
+              ./modules/applications/default.nix
+              ./modules/config-files/default.nix
               ./modules/user/maintenance/apps-cargo.nix
             ];
 
@@ -69,8 +69,8 @@ in {
               # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
               # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
               # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
-              ./modules/applications/main.nix
-              ./modules/config-files/main.nix
+              ./modules/applications/default.nix
+              ./modules/config-files/default.nix
               ./modules/user/maintenance/apps-cargo.nix
             ];
 
