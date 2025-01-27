@@ -50,7 +50,7 @@
     lanzaboote = {
       # Enable Secure Boot: https://github.com/nix-community/lanzaboote
       inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of your system closure.
-      url = "github:nix-community/lanzaboote/v0.4.1";
+      url = "github:nix-community/lanzaboote/v0.4.2";
     };
 
     nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.5.2.tar.gz"; # Declarative Flatpak management
