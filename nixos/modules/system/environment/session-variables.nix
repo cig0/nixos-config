@@ -1,7 +1,10 @@
-{ config, lib, pkgs, ... }:
-
-let
-  hostSelector = import ../../../lib/host-selector.nix { inherit config lib; };
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  hostSelector = import ../../../lib/host-selector.nix {inherit config lib;};
 
   # TODO: Investigate why I can't dynamically assign to the GITHUB_USERNAME variable the content of primaryUser.
   # primaryUser = builtins.getEnv "USER";
@@ -10,7 +13,7 @@ let
   # _ = builtins.trace "Primary user: ${primaryUser}" primaryUser;
 
   githubVars = {
-    GITHUB_TOKEN = "";  # TODO: Implement SOPS.
+    GITHUB_TOKEN = ""; # TODO: Implement SOPS.
     GITHUB_USERNAME = "cig0";
   };
 
@@ -22,18 +25,18 @@ let
     MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
 
-    FZF_DEFAULT_OPTS = "--height 40% --layout=reverse --border";  # Fuzzy finder.
+    FZF_DEFAULT_OPTS = "--height 50% --layout=reverse --border"; # Fuzzy finder.
     GDK_DPI_SCALE = "1.13"; # Flatpak applications display scaling.
-    LD_BIND_NOW = "1";  # Linker.
-    PAGER = "${pkgs.less}/bin/less";  # CLI pager.
+    LD_BIND_NOW = "1"; # Linker.
+    PAGER = "${pkgs.less}/bin/less"; # CLI pager.
 
     # https://specifications.freedesktop.org/basedir-spec/latest/
     # Publication Date: 08th May 2021, Version: Version 0.8
-    XDG_CACHE_HOME  = "$HOME/.cache";
+    XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME   = "$HOME/.local/share";
-    XDG_HOME        = "$HOME";
-    XDG_STATE_HOME  = "$HOME/.local/state";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_HOME = "$HOME";
+    XDG_STATE_HOME = "$HOME/.local/state";
 
     PATH = [
       "$HOME/.cargo/bin"
@@ -48,25 +51,29 @@ let
   };
 
   intelEnvSessionVars = {
-    LIBVA_DRIVER_NAME = "iHD";  # Force intel-media-driver.
+    LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver.
     EGL_DRIVER = "mesa";
   };
-
 in {
   imports = [
-    ./console-keymap.nix  # Configure console keymap
-    ./i18n.nix  # Internationalisation
+    ./console-keymap.nix # Configure console keymap
+    ./i18n.nix # Internationalisation
   ];
 
   environment = {
     homeBinInPath = true;
     localBinInPath = true;
 
-    pathsToLink = [ "/share/zsh" ];  # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
+    pathsToLink = ["/share/zsh"]; # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
 
     sessionVariables =
-      (if hostSelector.isIntelGPUHost then commonEnvSessionVars // intelEnvSessionVars
-      else if hostSelector.isNvidiaGPUHost then commonEnvSessionVars
-      else {}) // githubVars;
+      (
+        if hostSelector.isIntelGPUHost
+        then commonEnvSessionVars // intelEnvSessionVars
+        else if hostSelector.isNvidiaGPUHost
+        then commonEnvSessionVars
+        else {}
+      )
+      // githubVars;
   };
 }
