@@ -217,8 +217,13 @@
       cmatrix
       dotacat
       fastfetch
+      genact # Nonsense activity generator :: https://github.com/svenstaro/genact
       glxinfo
+      gping # Ping, but with a graph :: https://github.com/orf/gping
       gum
+      httping # Ping with HTTP requests :: https://vanheusden.com/httping
+      hollywood # Fill your console with Hollywood melodrama technobabble :: https://a.hollywood.computer
+      nms # A command line tool that recreates the famous data decryption effect seen in the 1992 movie Sneakers :: https://github.com/bartobri/no-more-secrets
       nushell
       pipe-rename
       rust-petname
