@@ -208,7 +208,7 @@
               audio-subsystem.enable = true;
               services.speechd.enable = true;
               # System - Kernel
-              boot.kernelPackages = "latest";
+              boot.kernelPackages = "xanmod_stable";
               # System - Maintenance
               nix.settings.auto-optimise-store = true;
               nix.gc.automatic = true;

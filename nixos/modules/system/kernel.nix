@@ -9,7 +9,11 @@
   hostSelector = import ../../lib/host-selector.nix {inherit config lib;};
 
   cfg = lib.getAttrFromPath ["mySystem" "boot"] config;
-  kernelPackageName = "linuxPackages_" + cfg.kernelPackages;
+
+  kernelPackageName =
+    if cfg.kernelPackages == "stable"
+    then "linuxPackages"
+    else "linuxPackages_" + cfg.kernelPackages;
 
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isTUXEDOInfinityBookPro = "pkgs.linuxPackages_xanmod_latest";`
   # kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
