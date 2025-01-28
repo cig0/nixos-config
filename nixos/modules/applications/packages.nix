@@ -211,32 +211,35 @@
       sops
       vt-cli
     ];
-    utilities = with pkgsUnstable; [
-      antora
-      clinfo
-      cmatrix
-      dotacat
-      fastfetch
-      genact # Nonsense activity generator :: https://github.com/svenstaro/genact
-      glxinfo
-      gping # Ping, but with a graph :: https://github.com/orf/gping
-      gum
-      httping # Ping with HTTP requests :: https://vanheusden.com/httping
-      hollywood # Fill your console with Hollywood melodrama technobabble :: https://a.hollywood.computer
-      nms # A command line tool that recreates the famous data decryption effect seen in the 1992 movie Sneakers :: https://github.com/bartobri/no-more-secrets
-      nushell
-      pipe-rename
-      rust-petname
-      qrscan
-      terminal-parrot
-      tesseract
-      translate-shell
-      tty-clock
-      vulkan-tools
-      wayland-utils
-      wiki-tui
-      wl-clipboard
-    ];
+    utilities = with pkgs;
+      [
+        httping # Ping with HTTP requests :: https://vanheusden.com/httping
+      ]
+      ++ (with pkgsUnstable; [
+        antora
+        clinfo
+        cmatrix
+        dotacat
+        fastfetch
+        genact # Nonsense activity generator :: https://github.com/svenstaro/genact
+        glxinfo
+        gping # Ping, but with a graph :: https://github.com/orf/gping
+        gum
+        hollywood # Fill your console with Hollywood melodrama technobabble :: https://a.hollywood.computer
+        nms # A command line tool that recreates the famous data decryption effect seen in the 1992 movie Sneakers :: https://github.com/bartobri/no-more-secrets
+        nushell
+        pipe-rename
+        rust-petname
+        qrscan
+        terminal-parrot
+        tesseract
+        translate-shell
+        tty-clock
+        vulkan-tools
+        wayland-utils
+        wiki-tui
+        wl-clipboard
+      ]);
     vcs = with pkgsUnstable; [
       # Git
       ggshield # GitGuardian
