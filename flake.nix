@@ -145,9 +145,13 @@
             ];
           }
           {
-            # ░░░░░░░█▄█░█░█░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-            # ░░░░░░░█░█░░█░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-            # ░░░░░░░▀░▀░░▀░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+            # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
+            # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
+            # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+
+            # NixOS - System
+            programs.fuse.userAllowOther = true;
+
             mySystem = {
               # Applications
               packages.baseline = true;
@@ -221,7 +225,6 @@
               virtualisation.libvirtd.enable = true;
               virtualisation.podman.enable = true;
             };
-            # mySystem.selector = "laptop";
           }
         ];
     };
