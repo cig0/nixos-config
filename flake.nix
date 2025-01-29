@@ -150,7 +150,14 @@
             # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
 
             # NixOS - System
-            programs.fuse.userAllowOther = true;
+            programs = {
+              appimage = {
+                # https://wiki.nixos.org/wiki/Appimage
+                enable = true;
+                binfmt = true;
+              };
+              fuse.userAllowOther = true;
+            };
 
             mySystem = {
               # Applications
