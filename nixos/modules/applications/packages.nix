@@ -9,6 +9,9 @@
 
   packagesBaseline = with pkgs;
     [
+      # Networking
+      httping # Ping with HTTP requests :: https://vanheusden.com/httping
+
       # Nix
       # LSP
       nil
@@ -17,6 +20,7 @@
       comma
       devpod
       fh # fh, the official FlakeHub CLI :: https://github.com/DeterminateSystems/fh
+      fuse3
       hydra-check
       manix
       nickel
@@ -37,37 +41,7 @@
       python312Packages.ipython
     ]
     ++ (with pkgsUnstable; [
-      # Monitoring & Observability
-      btop
-      glances
-      hyperfine
-      inxi
-      iotop
-      lm_sensors
-      s-tui
-
-      # Networking
-      aria2
-      # bind
-      dnstracer
-      gping # Ping, but with a graph :: https://github.com/orf/gping
-      grpcurl
-      httpie
-      inetutils
-      iperf
-      iw
-      lftp
-      nfstrace
-      nmap
-      ookla-speedtest
-      prettyping # prettyping is a wrapper around the standard ping tool, making the output prettier, more colorful, more compact, and easier to read :: https://github.com/deniconfig, lib,lsonsa/prettyping
-      socat
-      sshfs-fuse
-      tcpdump
-      traceroute
-      whois
-
-      # Other utilities
+      # Misc
       at
       bat
       chezmoi
@@ -83,6 +57,7 @@
       fzf
       getent
       goaccess
+      gum
       joshuto
       jq
       just # https://github.com/casey/just :: A handy way to save and run project-specific commands
@@ -99,6 +74,39 @@
       ugrep
       usbutils
       yazi-unwrapped
+
+      # Monitoring & Observability
+      btop
+      glances
+      hyperfine
+      inxi
+      iotop
+      lm_sensors
+      s-tui
+
+      # Networking
+      aria2
+      # bind
+      dnstracer
+      doggo
+      gping # Ping, but with a graph :: https://github.com/orf/gping
+      grpcurl
+      httpie
+      inetutils
+      iperf
+      iw
+      lftp
+      nfstrace
+      nmap
+      ookla-speedtest
+      rust-petname
+      pipe-rename
+      prettyping # prettyping is a wrapper around the standard ping tool, making the output prettier, more colorful, more compact, and easier to read :: https://github.com/deniconfig, lib,lsonsa/prettyping
+      socat
+      sshfs-fuse
+      tcpdump
+      traceroute
+      whois
 
       # Storage
       du-dust
@@ -131,7 +139,9 @@
         buildah
         cosign
         crc
+        ctop
         distrobox
+        dive
         eksctl
         k3d
         k9s
@@ -141,7 +151,9 @@
         kubecolor
         kubectl
         kubernetes-helm
+        kubescape
         kubeswitch
+        lazydocker
         minikube
         odo # odo is a CLI tool for fast iterative application development deployed immediately to your kubernetes cluster :: https://odo.dev
         opentofu
@@ -211,35 +223,30 @@
       sops
       vt-cli
     ];
-    utilities = with pkgs;
-      [
-        httping # Ping with HTTP requests :: https://vanheusden.com/httping
-      ]
-      ++ (with pkgsUnstable; [
-        antora
-        clinfo
-        cmatrix
-        dotacat
-        fastfetch
-        genact # Nonsense activity generator :: https://github.com/svenstaro/genact
-        glxinfo
-        gping # Ping, but with a graph :: https://github.com/orf/gping
-        gum
-        hollywood # Fill your console with Hollywood melodrama technobabble :: https://a.hollywood.computer
-        nms # A command line tool that recreates the famous data decryption effect seen in the 1992 movie Sneakers :: https://github.com/bartobri/no-more-secrets
-        nushell
-        pipe-rename
-        rust-petname
-        qrscan
-        terminal-parrot
-        tesseract
-        translate-shell
-        tty-clock
-        vulkan-tools
-        wayland-utils
-        wiki-tui
-        wl-clipboard
-      ]);
+    misc = with pkgsUnstable; [
+      antora
+      asciinema # Terminal session recorder and the best companion of asciinema.org :: https://asciinema.org/
+      atac # A simple API client (Postman-like) in your terminal :: https://github.com/Julien-cpsn/ATAC
+      clinfo
+      cmatrix
+      dotacat
+      fastfetch
+      genact # Nonsense activity generator :: https://github.com/svenstaro/genact
+      glxinfo
+      hollywood # Fill your console with Hollywood melodrama technobabble :: https://a.hollywood.computer
+      k6 # A modern load testing tool, using Go and JavaScript :: https://github.com/grafana/k6
+      nms # A command line tool that recreates the famous data decryption effect seen in the 1992 movie Sneakers :: https://github.com/bartobri/no-more-secrets
+      nushell
+      qrscan
+      terminal-parrot
+      tesseract
+      translate-shell
+      tty-clock
+      vulkan-tools
+      wayland-utils
+      wiki-tui
+      wl-clipboard
+    ];
     vcs = with pkgsUnstable; [
       # Git
       ggshield # GitGuardian
@@ -263,15 +270,15 @@
 
   packagesGui = with pkgs;
     [
+      # Misc
+      cool-retro-term # Let's avoid pulling unnecessary dependencies, as the app last release date was at the end of January 2022.
+
       # Multimedia
       gimp-with-plugins # Fails to build from unstable because of some plugins.
 
       # Security
       keepassxc
       pinentry-qt # Move to the pkgsUnstable if you're using NixOS from the unstable channel.
-
-      # Utilities
-      cool-retro-term # Let's avoid pulling unnecessary dependencies, as the app last release date was at the end of January 2022.
 
       # Virtualization
       virt-viewer
@@ -288,6 +295,12 @@
         ];
       })
 
+      # Misc
+      kitty
+      warp-terminal
+      waveterm
+      wezterm
+
       # Multimedia
       # cinelerra
       # davinci-resolve
@@ -302,10 +315,6 @@
       # Security
       # Web
       burpsuite
-
-      # Utilities
-      kitty
-      wezterm
     ]);
 
   packagesGuiShell = {
@@ -352,12 +361,12 @@ in {
         _all = lib.mkEnableOption "Whether to install all the CLI applications packages.";
         ai = lib.mkEnableOption "Whether to install CLI related applications packages.";
         backup = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        comms = lib.mkEnableOption "Whether to install CLI related applications packages.";
         cloudNativeTools = lib.mkEnableOption "Whether to install CLI related applications packages.";
+        comms = lib.mkEnableOption "Whether to install CLI related applications packages.";
+        misc = lib.mkEnableOption "Whether to install CLI related applications packages.";
         multimedia = lib.mkEnableOption "Whether to install CLI related applications packages.";
         programming = lib.mkEnableOption "Whether to install CLI related applications packages.";
         security = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        utilities = lib.mkEnableOption "Whether to install CLI related applications packages.";
         vcs = lib.mkEnableOption "Whether to install CLI related applications packages.";
         web = lib.mkEnableOption "Whether to install CLI related applications packages.";
       };
@@ -378,10 +387,10 @@ in {
       ++ (lib.optionals (cfg.cli.backup == true) packagesCli.backup)
       ++ (lib.optionals (cfg.cli.comms == true) packagesCli.comms)
       ++ (lib.optionals (cfg.cli.cloudNativeTools == true) packagesCli.cloudNativeTools)
+      ++ (lib.optionals (cfg.cli.misc == true) packagesCli.misc)
       ++ (lib.optionals (cfg.cli.multimedia == true) packagesCli.multimedia)
       ++ (lib.optionals (cfg.cli.programming == true) packagesCli.programming)
       ++ (lib.optionals (cfg.cli.security == true) packagesCli.security)
-      ++ (lib.optionals (cfg.cli.utilities == true) packagesCli.utilities)
       ++ (lib.optionals (cfg.cli.vcs == true) packagesCli.vcs)
       ++ (lib.optionals (cfg.cli.web == true) packagesCli.web)
       ++ (lib.optionals (cfg.gui == true) packagesGui)
