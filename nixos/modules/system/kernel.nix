@@ -107,6 +107,7 @@ in {
           commonKernelParams
           ++ [
             "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
+            "fuse"
             "intel_pstate=disable"
             "i915.enable_fbc=1"
             "i915.enable_guc=2"

@@ -29,6 +29,7 @@ in {
             "audio"
             # "corectrl"  # Enable a tool to overclock amd graphics cards and processors.
             "disk"
+            "fuse"
             "incus-admin"
             "input"
             "libvirtd"
@@ -101,6 +102,7 @@ in {
             "audio"
             # "corectrl" # Enable a tool to overclock amd graphics cards and processors.
             "disk"
+            "fuse"
             "incus-admin"
             "input"
             "libvirtd"
