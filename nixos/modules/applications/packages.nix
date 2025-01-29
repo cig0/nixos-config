@@ -106,6 +106,7 @@
       sshfs-fuse
       tcpdump
       traceroute
+      wavemon
       whois
 
       # Storage
