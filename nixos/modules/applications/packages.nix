@@ -147,6 +147,7 @@
         eksctl
         k3d
         k9s
+        kdash
         kind
         krew
         kube-bench
