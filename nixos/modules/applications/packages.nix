@@ -135,6 +135,7 @@
         vagrant # Should always follow the main channel.
       ]
       ++ (with pkgsUnstable; [
+        aiac # Artificial Intelligence Infrastructure-as-Code Generator :: https://github.com/gofireflyio/aiac/
         argocd
         bootc
         buildah
