@@ -86,7 +86,6 @@
 
       # Networking
       aria2
-      # bind
       dnstracer
       doggo
       gping # Ping, but with a graph :: https://github.com/orf/gping
@@ -108,6 +107,7 @@
       traceroute
       wavemon
       whois
+      xh # Friendly and fast tool for sending HTTP requests :: https://github.com/ducaale/xh
 
       # Storage
       du-dust
