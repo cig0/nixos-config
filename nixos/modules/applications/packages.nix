@@ -163,6 +163,12 @@
         packer
         podman-compose
         podman-tui
+        pulumi # Pulumi is a cloud development platform that makes creating cloud programs easy and productive :: https://pulumi.io/
+        pulumi-esc # Pulumi ESC (Environments, Secrets, and Configuration) for cloud applications and infrastructure :: https://github.com/pulumi/esc/tree/main
+        pulumictl # Swiss Army Knife for Pulumi Development :: https://github.com/pulumi/pulumictl
+        pulumiPackages.pulumi-aws-native
+        pulumiPackages.pulumi-language-python
+        pulumiPackages.pulumi-random
         telepresence2
         terraformer
         tf-summarize
