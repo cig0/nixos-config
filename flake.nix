@@ -96,7 +96,7 @@
     nixvim, # A Neovim configuration system for nix.
     rust-overlay, # Oxalica's Rust toolchain overlay.
     self,
-    # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation.  # TODO: to implement.
+    # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation. # TODO: to implement.
     ...
   }: let
     # mySystem = import [];
