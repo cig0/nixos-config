@@ -160,11 +160,7 @@
             };
 
             mySystem = {
-              # Applications
-              packages.baseline = true;
-              packages.cli._all = true;
-              packages.gui = true;
-              packages.guiShell.kde = true;
+              # Applications - From NixOS options
               programs.git.enable = true;
               programs.git.lfs.enable = true;
               programs.lazygit.enable = true;
@@ -176,6 +172,11 @@
               programs.kde-pim.enable = false;
               services.tailscale.enable = true;
               programs.zsh.enable = true;
+              # Applications - From packages
+              packages.baseline = true;
+              packages.cli._all = true;
+              packages.gui = true;
+              packages.guiShell.kde = true;
 
               # GUI shell
               services.displayManager.ly.enable = false;
