@@ -36,6 +36,18 @@ toc::[]
 
 image::.repo_assets/wip.webp[alt="Frosted Flakes", align="center"]
 
+# READ ME!
+# ========
+# The NixOS community generally recommends keeping the enabling/disabling logic in the individual module files rather than in the importing module.
+# This follows the principle of separation of concerns and makes modules more self-contained.
+# Benefits of this approach:
+#   - Each module controls its own destiny
+#   - Modules are self-contained
+#   - Easier to maintain and understand
+#   - Follows the NixOS convention of modules managing their own conditional activation
+#   - Makes it easier to override in specific cases if needed
+#   - This is the more idiomatic NixOS way of handling conditional module activation.
+
 ==== TODO
 
 [ ] Implement dynamic NTP pool depending on timezone/region.
