@@ -27,6 +27,8 @@ in {
   };
 
   config = {
+    services.xserver.enable = false; # Disable X11 as we are cool kidz only using the Wayland session.
+
     services.displayManager = {
       autoLogin = {
         enable = cfg.autoLogin.enable;
