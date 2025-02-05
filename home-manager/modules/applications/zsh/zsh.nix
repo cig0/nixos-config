@@ -1,10 +1,11 @@
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   # Optionaly, you can import individual aliases and functions.
-    allAliases = (import ./aliases.nix {}).allAliases;
-    allFunctions = (import ./functions.nix { inherit config; }).allFunctions;
-
+  allAliases = (import ./aliases.nix {}).allAliases;
+  allFunctions = (import ./functions.nix {inherit config;}).allFunctions;
 in {
   programs.command-not-found.enable = false;
 
@@ -71,7 +72,7 @@ in {
     oh-my-zsh = {
       enable = true;
       extraConfig = ''
-          zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa2 id_github
+        zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa2 id_github
       '';
       plugins = [
         "history-substring-search"
@@ -79,12 +80,10 @@ in {
     };
   };
 }
-
-
 # READ ME!
 # ========
-
 # Refs:
-  # https://superuser.com/questions/519596/share-history-in-multiple-zsh-shell
-  # https://unix.stackexchange.com/questions/669971/zsh-can-i-have-a-combined-history-for-all-of-my-shells
-  # https://github.com/cig0/Phantas0s-dotfiles/blob/master/zsh/zshrc
+# https://superuser.com/questions/519596/share-history-in-multiple-zsh-shell
+# https://unix.stackexchange.com/questions/669971/zsh-can-i-have-a-combined-history-for-all-of-my-shells
+# https://github.com/cig0/Phantas0s-dotfiles/blob/master/zsh/zshrc
+
