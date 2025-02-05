@@ -86,6 +86,7 @@
 
       # Networking
       aria2
+      baddns # Check subdomains for subdomain takeovers and other DNS tomfoolery :: https://github.com/blacklanternsecurity/baddns
       dnstracer
       doggo
       gping # Ping, but with a graph :: https://github.com/orf/gping
