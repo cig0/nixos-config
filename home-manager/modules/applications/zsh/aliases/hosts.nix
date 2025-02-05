@@ -1,17 +1,13 @@
 # Don't remove this line! This is a NixOS Zsh alias module.
-
-{ ... }:
-
-let
+{...}: let
   aliases = {
     sTUXEDOInfinityBookPro = "ssh TUXEDOInfinityBookPro";
-    ssatama = "ssh satama";
+    shomelabnas = "ssh homelabnas";
     sterasbetoni = "ssh terasbetoni";
-    skoira = "ssh koira";
+    sdesktop = "ssh desktop";
     tTUXEDOInfinityBookPro = "ssh TUXEDOInfinityBookPro -t 'tmux attach-session -t'";
-    tsatama = "ssh satama -t 'tmux attach-session -t'";
+    thomelabnas = "ssh homelabnas -t 'tmux attach-session -t'";
     tterasbetoni = "ssh terasbetoni -t 'tmux attach-session -t'";
-    tkoira = "ssh koira -t 'tmux attach-session -t'";
+    tdesktop = "ssh desktop -t 'tmux attach-session -t'";
   };
-
-in { aliases = aliases; }
+in {aliases = aliases;}

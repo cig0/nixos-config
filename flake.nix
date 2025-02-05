@@ -249,22 +249,22 @@
         ];
     };
 
-    # nixosConfigurations.satama = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
+    # nixosConfigurations.homelabnas = nixpkgs.lib.nixosSystem { # headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
     #   inherit system;
     #   specialArgs = { inherit inputs system pkgsUnstable; };
     #   modules = coreModules ++ [
-    #     ./nixos/hosts/satama/configuration.nix
+    #     ./nixos/hosts/homelabnas/configuration.nix
 
     #     {
     #     }
     #   ];
     # };
 
-    # nixosConfigurations.koira = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
+    # nixosConfigurations.desktop = nixpkgs.lib.nixosSystem { # desktop: Intel CPU, Nvidia GPU
     #   inherit system;
     #   specialArgs = { inherit inputs system pkgsUnstable; };
     #   modules = coreModules ++ userModules ++ [
-    #     ./nixos/hosts/koira/configuration.nix
+    #     ./nixos/hosts/desktop/configuration.nix
 
     #     {
     #       services.desktopManager.plasma6.enable = true; # KDE Plasma Desktop Environment
