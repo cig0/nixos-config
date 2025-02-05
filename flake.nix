@@ -52,11 +52,11 @@
 
     lanzaboote = {
       # Enable Secure Boot: https://github.com/nix-community/lanzaboote
-      inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of your system closure.
+      inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of your system closure
       url = "github:nix-community/lanzaboote/v0.4.2";
     };
 
-    nix-flatpak.url = "https://flakehub.com/f/gmodena/nix-flatpak/0.5.2.tar.gz"; # Declarative Flatpak management
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest"; # Declarative Flatpak management for NixOS
 
     nix-index.url = "github:nix-community/nix-index"; # https://github.com/nix-community/nix-index
 
@@ -81,7 +81,7 @@
 
     rust-overlay.url = "github:oxalica/rust-overlay";
 
-    # sops-nix.url = "github:Mic92/sops-nix";  # Secure secrets
+    # sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
   };
 
   outputs = {
