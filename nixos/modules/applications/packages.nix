@@ -88,7 +88,7 @@
       aria2
       baddns # Check subdomains for subdomain takeovers and other DNS tomfoolery :: https://github.com/blacklanternsecurity/baddns
       dnstracer
-      doggo
+      doggo # Command-line DNS Client for Humans. Written in Golang. :: https://github.com/mr-karan/doggo
       gping # Ping, but with a graph :: https://github.com/orf/gping
       grpcurl
       httpie
