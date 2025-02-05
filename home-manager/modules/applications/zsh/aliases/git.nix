@@ -22,7 +22,6 @@
     gco = "git commit -m";
     gf = "git fetch";
     gf1 = "git fetch --depth=1";
-    gid = "git diff";
     gls = "git ls-tree --full-tree --name-only -r HEAD | lines";
     gp = "git pull";
     gpu = "git push";
