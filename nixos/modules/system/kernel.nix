@@ -1,4 +1,3 @@
-# TODO: add option to easily switch kernels
 # https://wiki.nixos.org/wiki/Linux_kernel
 {
   config,
