@@ -1,59 +1,46 @@
 # Don't remove this line! This is a NixOS Zsh function module.
-{ansiColors, ...}: let
+{...}: let
+  ansiColors = import ../ansi-colors.nix {};
   functions = ''
-    gd() {  # git diff
-      # TODO: create a proper library to handle printing messages.
-      local message=(
-        "(git diff)"
-        "Skipping"
-      )
-      local payload=(
-        "flake.lock"
-        ""
-      )
+    gd() {
+      # TL;DR: git diff
+      # Description:
+      #   By default, provides a `git diff` of all modified files, skipping `flake.lock` if it exists (notifying the user).
+      #   Also allows for `git diff` of individual files.
+      payload=("flake.lock")
 
-      [[ -e flake.lock ]] && echo -e "\\n${ansiColors.bold_white}==== ${ansiColors.reset}(git diff) ${ansiColors.bold_white}Skipping${ansiColors.reset} ${ansiColors.bold_green}''${payload[@]}${ansiColors.reset}"
+      # Check if files in payload are modified and notify
+      skipped=()
+      for file in ''${payload[@]}; do
+        if git diff --quiet "$file" 2>/dev/null; then
+          : # File is not modified, do nothing
+        else
+          skipped+=("$file")
+        fi
+      done
 
-      git diff -- . ':!flake.lock';
-    }
-
-    lg() {  # git log
-      local repo_path="''${1:-$(pwd)}"
-      local git_dir="''${repo_path%/}/.git"
-      local work_tree="''${repo_path%/}"
-
-      if [[ ! -d "$git_dir" ]]; then
-        echo "Error: '$repo_path' is not a Git repository"
-        return 1
+      if [ ''${#skipped[@]} -gt 0 ]; then
+        echo -e "\\n${ansiColors.bold_white}=== ${ansiColors.bold_white}Skipping${ansiColors.reset} modified file(s): ${ansiColors.bold_green}$(printf "%s " ''${skipped[@]})${ansiColors.reset}"
       fi
 
-      git --git-dir="$git_dir" --work-tree="$work_tree" status --short --branch
+      # Perform git diff based on arguments
+      if [ $# -eq 0 ]; then
+        # Default behavior: diff all modified files except those in payload
+        git diff -- $(git ls-files --modified | grep -vxFf <(printf "%s\n" ''${payload[@]}))
+      else
+        # Diff only the specified files, excluding those in payload
+        to_diff=()
+        for file in "$@"; do
+          if [[ " ''${payload[@]} " =~ " $file " ]]; then
+            echo -e "${ansiColors.bold_white}=== Skipping file: ${ansiColors.bold_green}$file${ansiColors.reset}"
+          else
+            to_diff+=("$file")
+          fi
+        done
+        if [ ''${#to_diff[@]} -gt 0 ]; then
+          git diff -- ''${to_diff[@]}
+        fi
+      fi
     }
   '';
 in {functions = functions;}
-# README!
-# =======
-# 1. **The Problem**
-#    - In shell scripts, `${var}` is used for variable expansion
-#    - In Nix strings, `${expr}` is used for interpolation
-#    - This creates a conflict when writing shell scripts inside Nix
-# 2. **The Solution**
-#    - Nix uses `''` for multi-line strings
-#    - Inside these strings, `''${...}` escapes shell variables
-#    - The first `''` is interpreted by Nix as string start
-#    - The second `'` combines with the first to escape `${`
-#    - This prevents Nix from trying to interpolate shell variables
-# 3. **Example Breakdown**
-# ```nix
-# # Normal shell:
-# local repo_path="${1:-$(pwd)}"
-# # In Nix string:
-# local repo_path="''${1:-$(pwd)}"
-# #              ^^-- escape sequence
-# ```
-# 4. **Why It Works**
-#    - When Nix evaluates the string, it removes one `'`
-#    - The resulting shell script sees: `${1:-$(pwd)}`
-#    - Shell then properly interprets the variable expansion
-# This is a common pattern when writing shell scripts in Nix configuration files.
-
