@@ -1,11 +1,7 @@
 # Don't remove this line! This is a NixOS Zsh function module.
-
-{ ... }:
-
-let
+{...}: let
   functions = ''
-    CVS2JSON() {
-      # TODO: add proper parameterization, help message, etc. (lowest prio)
+    cvs2json() {
       # Credits: Veronica Explains https://youtu.be/uL7KvRskeog?si=VkM7rRQD7QE-IkiA
 
       # Flags:
@@ -18,5 +14,4 @@ let
       column -t -s ":" $1 -N USERNAME,PWD,UI,GUI,COMMENT,HOME,"SHELL INTERPRETER" -J -n myNewTable
     }
   '';
-
-in { functions = functions; }
+in {functions = functions;}
