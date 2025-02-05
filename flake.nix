@@ -150,6 +150,9 @@
             # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
             # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
 
+            # NixOS - Security
+            security.sudo.extraConfig = "Defaults timestamp_timeout=1440"; # From a security perspective, it isn't a good idea to extend the sudo timeout (let alone doing so on a server!). I keep this setting on my personal laptop and desktop for convenience.
+
             # NixOS - System
             programs = {
               appimage = {

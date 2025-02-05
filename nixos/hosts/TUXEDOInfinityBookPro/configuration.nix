@@ -4,7 +4,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {pkgs, ...}: {
   imports = [
-    ./modules/security/sudo.nix # Sudo host settings. #TODO: move to the sudo.nix module.
     ./modules/system/keyd.nix # Keyboard mapping. Useful to re-map keys in keyboards with missing keys, e.g. the Insert key
     ./hardware-configuration.nix # Include the results of the hardware scan
   ];
