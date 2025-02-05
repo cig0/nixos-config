@@ -193,6 +193,9 @@
               services.resolved.enable = true;
               networking.stevenblack.enable = true;
               systemd.services.stevenblack-unblock.enable = true;
+              # Networking - NetworkManager
+              networking.networkmanager.dns = "systemd-resolved";
+              networking.networkmanager.enable = true;
 
               # Power Management
               programs.auto-cpufreq.enable = true;

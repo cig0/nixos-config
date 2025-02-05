@@ -92,10 +92,6 @@
     # proxy.default = "http://user:password@proxy:port/";
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    networkmanager = {
-      enable = true;
-      dns = "systemd-resolved"; # TODO: consolidate in nixos/modules/networking/dns.nix
-    };
   };
 
   # Nix settings
