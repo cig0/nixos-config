@@ -1,9 +1,11 @@
 #------------------------------------------------------------------
-# My personal NixOS configuration flake ¯\_(ツ)_/¯
+# My personal NixOS multi-host configuration flake ¯\_(ツ)_/¯
 #
-# Martín Cigorraga
-# https://github.com/cig0/nixos-config-public
+# By Martín Cigorraga
+# https://github.com/cig0/nixos-config
 # Initial release on May 1st, 2024
+#
+# ASCII art credits: https://www.asciiart.eu/ 🙌
 #------------------------------------------------------------------
 #                                                                     _------__--___.__.
 #                                                                   /            `  `    \
@@ -81,7 +83,7 @@
     # sops-nix.url = "github:Mic92/sops-nix";  # Secure secrets
   };
 
-  outputs = inputs @ {
+  outputs = {
     auto-cpufreq, # Energy efficiency.
     flake-compat, # Make nixos-option work with flakes.
     home-manager, # User-specific settings and packages.
@@ -96,10 +98,9 @@
     nixvim, # A Neovim configuration system for nix.
     rust-overlay, # Oxalica's Rust toolchain overlay.
     self,
-    # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation. # TODO: to implement.
+    # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation. # TODO: pending implementation.
     ...
-  }: let
-    # mySystem = import [];
+  } @ inputs: let
     modules = [
       # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
       # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
@@ -112,7 +113,7 @@
       ./nixos/modules/security/default.nix
       ./nixos/modules/system/default.nix
       ./nixos/modules/virtualisation/default.nix
-      # ./nixos/profiles/default.nix
+      # ./nixos/profiles/default.nix # WIP
     ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix;
