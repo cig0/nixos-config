@@ -1,10 +1,10 @@
+# TODO: continue weeding out this file.
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {pkgs, ...}: {
   imports = [
-    ./modules/hardware/nixos-hardware.nix
-    ./modules/security/sudo.nix # Sudo host settings
+    ./modules/security/sudo.nix # Sudo host settings. #TODO: move to the sudo.nix module.
     ./modules/system/keyd.nix # Keyboard mapping. Useful to re-map keys in keyboards with missing keys, e.g. the Insert key
     ./hardware-configuration.nix # Include the results of the hardware scan
   ];

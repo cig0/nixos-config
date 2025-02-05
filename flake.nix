@@ -134,6 +134,7 @@
       modules =
         modules
         ++ [
+          inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           ./nixos/hosts/TUXEDOInfinityBookPro/configuration.nix
           {
             # ░░░░░░░█▀█░█░█░█▀▀░█▀▄░█░░░█▀█░█░█░█▀▀░░░░░░░
