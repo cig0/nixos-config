@@ -7,15 +7,16 @@
       # Description:
       #   By default, provides a `git diff` of all modified files, skipping `flake.lock` if it exists (notifying the user).
       #   Also allows for `git diff` of individual files.
+
       payload=("flake.lock")
 
       # Check if files in payload are modified and notify
       skipped=()
-      for file in ''${payload[@]}; do
-        if git diff --quiet "$file" 2>/dev/null; then
+      for fileName in ''${payload[@]}; do
+        if git diff --quiet "$fileName" 2>/dev/null; then
           : # File is not modified, do nothing
         else
-          skipped+=("$file")
+          skipped+=("$fileName")
         fi
       done
 
@@ -30,11 +31,11 @@
       else
         # Diff only the specified files, excluding those in payload
         to_diff=()
-        for file in "$@"; do
-          if [[ " ''${payload[@]} " =~ " $file " ]]; then
-            echo -e "${ansiColors.bold_white}=== Skipping file: ${ansiColors.bold_green}$file${ansiColors.reset}"
+        for fileName in "$@"; do
+          if [[ " ''${payload[@]} " =~ " $fileName " ]]; then
+            echo -e "${ansiColors.reset}=== ${ansiColors.bold_white}Skipping file: ${ansiColors.bold_green}$fileName${ansiColors.reset}"
           else
-            to_diff+=("$file")
+            to_diff+=("$fileName")
           fi
         done
         if [ ''${#to_diff[@]} -gt 0 ]; then
