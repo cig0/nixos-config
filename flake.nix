@@ -224,6 +224,9 @@
               nix.settings.auto-optimise-store = true;
               nix.gc.automatic = true;
               system.autoUpgrade.enable = true;
+              # System - Time
+              networking.timeServers = ["argentina"];
+              time.timeZone = "America/Buenos_Aires";
               # System - User management
               users.users.doomguy = true;
 

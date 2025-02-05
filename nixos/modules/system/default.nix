@@ -19,6 +19,7 @@
     ./hwaccel.nix
     ./kernel.nix
     ./keyd.nix
+    ./ntp.nix
     ./ucode.nix
     ./users.nix
     ./zram.nix
