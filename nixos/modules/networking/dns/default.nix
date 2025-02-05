@@ -9,6 +9,7 @@
 {
   imports = builtins.filter (x: x != null) [
     ./nameservers.nix
+    ./networkmanager.nix
     ./resolved.nix
   ];
 }
