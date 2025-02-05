@@ -150,13 +150,10 @@
             # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
             # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
 
-            # NixOS - Security
-            security.sudo.extraConfig = "Defaults timestamp_timeout=1440"; # From a security perspective, it isn't a good idea to extend the sudo timeout (let alone doing so on a server!). I keep this setting on my personal laptop and desktop for convenience.
-
             # NixOS - System
             programs = {
+              # https://wiki.nixos.org/wiki/Appimage
               appimage = {
-                # https://wiki.nixos.org/wiki/Appimage
                 enable = true;
                 binfmt = true;
               };
@@ -214,10 +211,14 @@
               programs.gnupg.enable = true;
               boot.lanzaboote.enable = true;
               services.openssh.enable = true;
-              security.sudo.enable = true;
               # Security - Firewall
               networking.firewall.enable = true;
               networking.firewall.allowPing = false;
+              # Security - Sudo
+              security.sudo.enable = true;
+              security.sudo.extraConfig = ''
+                Defaults passwd_timeout=1440, timestamp_timeout=1440
+              ''; # From a security perspective, it isn't a good idea to extend the sudo *_timeout (let alone doing so on a server!). I set this on my personal laptop and desktop for convenience.
 
               # System
               current-system-packages-list.enable = true;
