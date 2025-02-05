@@ -1,4 +1,4 @@
-# TODO: Finish implementation, add description and instructions.
+# wip - Finish implementation, add description and instructions.
 
 # Don't remove this line! This is a NixOS Zsh alias module.
 
