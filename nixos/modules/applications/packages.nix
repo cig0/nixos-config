@@ -12,33 +12,9 @@
       # Networking
       httping # Ping with HTTP requests :: https://vanheusden.com/httping
 
-      # Nix
-      # LSP
-      nil
-      nixd
-      alejandra # The Uncompromising Nix Code Formatter :: https://github.com/kamadorueda/alejandra
-      comma
-      devpod
-      fh # fh, the official FlakeHub CLI :: https://github.com/DeterminateSystems/fh
-      fuse3
-      hydra-check
-      manix
-      nickel
-      niv
-      nix-diff
-      nix-index
-      nix-melt
-      nix-tree
-      nixfmt-classic
-      nixpkgs-fmt
-      nixpkgs-review
-      nvd
-      rippkgs
-      vulnix
-
       # Python
-      python312
-      python312Packages.ipython
+      python312 # High-level dynamically-typed programming language :: https://www.python.org
+      python312Packages.ipython # IPython: Productive Interactive Computing :: https://ipython.org/
     ]
     ++ (with pkgsUnstable; [
       # Misc
@@ -53,7 +29,7 @@
       fd
       fdupes
       file
-      fx
+      fx #   Terminal JSON viewer :: https://github.com/antonmedv/fx
       fzf
       getent
       goaccess
@@ -77,7 +53,6 @@
 
       # Monitoring & Observability
       btop
-      glances
       hyperfine
       inxi
       iotop
@@ -99,8 +74,7 @@
       nfstrace
       nmap
       ookla-speedtest
-      rust-petname
-      pipe-rename
+      rustscan # Faster Nmap Scanning with Rust :: https://github.com/RustScan/RustScan
       prettyping # prettyping is a wrapper around the standard ping tool, making the output prettier, more colorful, more compact, and easier to read :: https://github.com/deniconfig, lib,lsonsa/prettyping
       socat
       sshfs-fuse
@@ -109,6 +83,28 @@
       wavemon
       whois
       xh # Friendly and fast tool for sending HTTP requests :: https://github.com/ducaale/xh
+
+      # Nix
+      comma # Runs programs without installing them :: https://github.com/nix-community/comma
+      fh # fh, the official FlakeHub CLI :: https://github.com/DeterminateSystems/fh
+      hydra-check # Check hydra for the build status of a package :: https://github.com/nix-community/hydra-check
+      manix # Fast CLI documentation searcher for Nix options :: https://github.com/nix-community/manix
+      nickel # Better configuration for less :: https://nickel-lang.org/
+      niv # Easy dependency management for Nix projects :: https://hackage.haskell.org/package/niv
+      nix-diff # Explain why two Nix derivations differ :: https://github.com/nix-community/nix-index
+      nix-index # Files database for nixpkgs :: https://github.com/nix-community/nix-index
+      nix-melt # Ranger-like flake.lock viewer :: https://github.com/nix-community/nix-melt
+      nix-tree # Interactively browse a Nix store paths dependencies :: https://hackage.haskell.org/package/nix-tree
+      nixpkgs-review # Review pull-requests on https://github.com/NixOS/nixpkgs :: https://github.com/Mic92/nixpkgs-review
+      nvd # Nix/NixOS package version diff tool :: https://khumba.net/projects/nvd
+      vulnix # NixOS vulnerability scanner :: https://github.com/nix-community/vulnix
+      # Nix - Development Environments
+      devbox # Instant, easy, predictable shells and containers :: https://www.jetpack.io/devbox
+      devenv # Fast, Declarative, Reproducible, and Composable Developer Environments :: https://github.com/cachix/devenv
+      # Nix - LSP
+      nil # Yet another language server for Nix :: https://github.com/oxalica/nil
+      nixd # Feature-rich Nix language server interoperating with C++ nix :: https://github.com/nix-community/nixd
+      alejandra # The Uncompromising Nix Code Formatter :: https://github.com/kamadorueda/alejandra
 
       # Storage
       du-dust
@@ -177,6 +173,31 @@
         tfsec
         tfswitch
       ]);
+    misc = with pkgsUnstable; [
+      antora
+      asciinema # Terminal session recorder and the best companion of asciinema.org :: https://asciinema.org/
+      atac # A simple API client (Postman-like) in your terminal :: https://github.com/Julien-cpsn/ATAC
+      clinfo
+      cmatrix
+      dotacat
+      fastfetch
+      genact # Nonsense activity generator :: https://github.com/svenstaro/genact
+      glxinfo
+      hollywood # Fill your console with Hollywood melodrama technobabble :: https://a.hollywood.computer
+      k6 # A modern load testing tool, using Go and JavaScript :: https://github.com/grafana/k6
+      nms # A command line tool that recreates the famous data decryption effect seen in the 1992 movie Sneakers :: https://github.com/bartobri/no-more-secrets
+      qrscan
+      rust-petname
+      pipe-rename
+      terminal-parrot
+      tesseract
+      translate-shell
+      tty-clock
+      vulkan-tools
+      wayland-utils
+      wiki-tui
+      wl-clipboard
+    ];
     multimedia = with pkgsUnstable; [
       exiftool
       imagemagick
@@ -191,6 +212,8 @@
       [
       ]
       ++ (with pkgsUnstable; [
+        devpod # Codespaces but open-source, client-only and unopinionated: Works with any IDE and lets you use any cloud, kubernetes or just localhost docker :: https://devpod.sh
+
         # Go
         go # Needed to install individual apps
         # golangci-lint
@@ -208,10 +231,8 @@
         cargo-cache
         chit
         rust-bin.stable.latest.default # https://github.com/oxalica/rust-overlay
-        rustscan
 
         # Everything else...
-        devbox
         gcc
         guix
         mold
@@ -232,30 +253,6 @@
       protonvpn-cli
       sops
       vt-cli
-    ];
-    misc = with pkgsUnstable; [
-      antora
-      asciinema # Terminal session recorder and the best companion of asciinema.org :: https://asciinema.org/
-      atac # A simple API client (Postman-like) in your terminal :: https://github.com/Julien-cpsn/ATAC
-      clinfo
-      cmatrix
-      dotacat
-      fastfetch
-      genact # Nonsense activity generator :: https://github.com/svenstaro/genact
-      glxinfo
-      hollywood # Fill your console with Hollywood melodrama technobabble :: https://a.hollywood.computer
-      k6 # A modern load testing tool, using Go and JavaScript :: https://github.com/grafana/k6
-      nms # A command line tool that recreates the famous data decryption effect seen in the 1992 movie Sneakers :: https://github.com/bartobri/no-more-secrets
-      nushell
-      qrscan
-      terminal-parrot
-      tesseract
-      translate-shell
-      tty-clock
-      vulkan-tools
-      wayland-utils
-      wiki-tui
-      wl-clipboard
     ];
     vcs = with pkgsUnstable; [
       # Git
