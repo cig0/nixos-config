@@ -102,10 +102,6 @@
     # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation. # TODO: pending implementation.
     ...
   } @ inputs: let
-    # env = {
-    #   cpuArch = builtins.getEnv "CPU_ARCH";
-    #   cpuVendor = builtins.getEnv "CPU_VENDOR";
-    # };
     modules = [
       # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
       # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
