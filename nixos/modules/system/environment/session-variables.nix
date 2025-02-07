@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  hostSelector = import ../../../lib/host-selector.nix {inherit config lib;};
+  hostSelector = import ../../../lib/host-selector.nix {inherit config lib;}; # TODO: remove this legacy selector
 
   # TODO: Investigate why I can't dynamically assign to the GITHUB_USERNAME variable the content of primaryUser.
   # primaryUser = builtins.getEnv "USER";

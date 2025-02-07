@@ -120,7 +120,7 @@
     nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: To be deprecated with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
   in {
     # Laptop: Intel CPU & GPU + KDE
-    nixosConfigurations.TUXEDOInfinityBookPro = let
+    nixosConfigurations.perrrkele = let
       # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
       pkgsUnstable = import nixpkgs-unstable {
         inherit system;
@@ -136,7 +136,7 @@
           modules
           ++ [
             inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
-            ./nixos/hosts/TUXEDOInfinityBookPro/default.nix
+            ./nixos/hosts/perrrkele/default.nix
             {
               # ░░░░░░░█▀█░█░█░█▀▀░█▀▄░█░░░█▀█░█░█░█▀▀░░░░░░░
               # ░░░░░░░█░█░▀▄▀░█▀▀░█▀▄░█░░░█▀█░░█░░▀▀█░░░░░░░
