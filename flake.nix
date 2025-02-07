@@ -151,6 +151,9 @@
               # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
               # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
 
+              # For Home Manager options, check home-manager/home.nix
+            }
+            {
               # NixOS - System
               hardware.cpu.intel.updateMicrocode = true;
               programs = {
@@ -161,7 +164,8 @@
                 };
                 fuse.userAllowOther = true;
               };
-
+            }
+            {
               mySystem = {
                 # Applications - From NixOS options
                 programs.git = {

@@ -1,3 +1,4 @@
+# TODO: think about adding toggle to enable/disable importing modules
 # { modulesPath, pkgsUnstable, ... }:
 {
   config,
@@ -33,6 +34,14 @@ in {
               ./modules/user/maintenance/apps-cargo.nix
             ];
 
+            # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
+            # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
+            # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+            myHM = {
+              # Config-files
+              xdg.configFile."git/config".enable = false; # We're using programs.git.config
+            };
+
             home = {
               homeDirectory = "/home/cig0";
 
@@ -53,14 +62,6 @@ in {
               # originally installed.
               stateVersion = "24.11";
             };
-
-            # ░░░░░░░█▄█░█░█░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-            # ░░░░░░░█░█░░█░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-            # ░░░░░░░▀░▀░░▀░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-            myHM = {
-              # Config-files
-              xdg.configFile."git/config".enable = false; # We're using programs.git.config
-            };
           };
         }
         {
@@ -73,6 +74,14 @@ in {
               ./modules/config-files/default.nix
               ./modules/user/maintenance/apps-cargo.nix
             ];
+
+            # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
+            # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
+            # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+            myHM = {
+              # Config-files
+              xdg.configFile."git/config".enable = false; # We're using programs.git.config now!
+            };
 
             home = {
               homeDirectory = "/home/fine";
@@ -98,6 +107,23 @@ in {
         }
         (lib.mkIf config.mySystem.users.users.doomguy {
           doomguy = {...}: {
+            imports = [
+              # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
+              # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
+              # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
+              # ./modules/applications/default.nix
+              # ./modules/config-files/default.nix
+              # ./modules/user/maintenance/apps-cargo.nix
+            ];
+
+            # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
+            # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
+            # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+            myHM = {
+              # Config-files
+              xdg.configFile."git/config".enable = false; # We're using programs.git.config
+            };
+
             home = {
               homeDirectory = "/home/doomguy";
 
