@@ -165,7 +165,6 @@
         modules =
           modules
           ++ [
-            inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
             ./nixos/hosts/desktop/configuration.nix
             {
               # ░░░░░░░█▀█░█░█░█▀▀░█▀▄░█░░░█▀█░█░█░█▀▀░░░░░░░
@@ -322,7 +321,6 @@
         modules =
           modules
           ++ [
-            inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
             ./nixos/hosts/homeLabNas/configuration.nix
             {
               # ░░░░░░░█▀█░█░█░█▀▀░█▀▄░█░░░█▀█░█░█░█▀▀░░░░░░░
@@ -424,12 +422,7 @@
                   allowPing = false;
                 };
                 # Security - Sudo
-                security.sudo = {
-                  enable = true;
-                  extraConfig = ''
-                    Defaults passwd_timeout=1440, timestamp_timeout=1440
-                  ''; # From a security perspective, it isn't a good idea to extend the sudo *_timeout (let alone doing so on a server!). I set this on my personal laptop and desktop for convenience.
-                };
+                security.sudo.enable = true;
 
                 # System
                 current-system-packages-list.enable = true;
