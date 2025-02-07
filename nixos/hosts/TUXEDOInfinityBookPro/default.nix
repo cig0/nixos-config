@@ -1,14 +1,28 @@
-#                                                               dMP dMP .aMMMb  .dMMMb dMMMMMMP
-#                                                              dMP dMP dMP"dMP dMP" VP   dMP
-#                                                             dMMMMMP dMP dMP  VMMMb    dMP
-#                                                            dMP dMP dMP.aMP dP .dMP   dMP
-#                                                           dMP dMP  VMMMP"  VMMMP"   dMP
+#       ______
+#      | |__| |                                   dP     dP                      dP
+#      |  ()  |              ______               88     88                      88
+#      |______|             | |__| |              88aaaaa88a .d8888b. .d8888b. d8888P
+#                 ______    |  ()  |              88     88  88'  `88 Y8ooooo.   88
+#                | |__| |   |______|              88     88  88.  .88       88   88
+#                |  ()  |                         dP     dP  `88888P' `88888P'   dP
+#                |______|
 #
-#      .aMMMb  .aMMMb  dMMMMb  dMMMMMP dMP .aMMMMP dMP dMP dMMMMb  .aMMMb dMMMMMMP dMP .aMMMb  dMMMMb
-#     dMP"VMP dMP"dMP dMP dMP dMP     amr dMP"    dMP dMP dMP.dMP dMP"dMP   dMP   amr dMP"dMP dMP dMP
-#    dMP     dMP dMP dMP dMP dMMMP   dMP dMP MMP"dMP dMP dMMMMK" dMMMMMP   dMP   dMP dMP dMP dMP dMP
-#   dMP.aMP dMP.aMP dMP dMP dMP     dMP dMP.dMP dMP.aMP dMP"AMF dMP dMP   dMP   dMP dMP.aMP dMP dMP
-#   VMMMP"  VMMMP" dMP dMP dMP     dMP  VMMMP"  VMMMP" dMP dMP dMP dMP   dMP   dMP  VMMMP" dMP dMP
+#
+#                                .8888b oo                                       dP
+#                                88   "                                          88
+#     .d8888b. .d8888b. 88d888b. 88aaa  dP .d8888b. dP    dP 88d888b. .d8888b. d8888P
+#     88'  `"" 88'  `88 88'  `88 88     88 88'  `88 88    88 88'  `88 88'  `88   88
+#     88.  ... 88.  .88 88    88 88     88 88.  .88 88.  .88 88       88.  .88   88
+#     `88888P' `88888P' dP    dP dP     dP `8888P88 `88888P' dP       `88888P8   dP
+#                                               .88
+#                                           d8888P                                        ______
+#     oo                                                                                 | |__| |
+#                                                                                        |  ()  |
+#     dP .d8888b. 88d888b.                                                               |______|
+#     88 88'  `88 88'  `88                                                       ______   ______
+#     88 88.  .88 88    88                                                      | |__| | | |__| |
+#     dP `88888P' dP    dP                                                      |  ()  | |  ()  |
+#                                                                               |______| |______|
 {
   imports = builtins.filter (x: x != null) [
     ./configuration.nix
