@@ -1,8 +1,5 @@
 # Don't remove this line! This is a NixOS Zsh alias module.
-
-{ ... }:
-
-let
+{...}: let
   # Trasher - https://crates.io/crates/trasher
   aliases = {
     rm = "trasher --exclude /var rm";
@@ -11,5 +8,4 @@ let
     tls = "trasher --exclude /var ls";
     tp = "trasher --exclude /var path-of";
   };
-
-in { aliases = aliases; }
+in {aliases = aliases;}
