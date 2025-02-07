@@ -183,6 +183,7 @@
       fastfetch
       genact # Nonsense activity generator :: https://github.com/svenstaro/genact
       glxinfo
+      helix
       hollywood # Fill your console with Hollywood melodrama technobabble :: https://a.hollywood.computer
       k6 # A modern load testing tool, using Go and JavaScript :: https://github.com/grafana/k6
       nms # A command line tool that recreates the famous data decryption effect seen in the 1992 movie Sneakers :: https://github.com/bartobri/no-more-secrets
