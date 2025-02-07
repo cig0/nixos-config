@@ -7,7 +7,7 @@
   cfg = config.mySystem.users.users;
 in {
   options.mySystem.users.users = {
-    doomguy = lib.mkEnableOption "Whether to create the testing account.";
+    doomguy = lib.mkEnableOption "Whether to create the test account.";
   };
 
   config = {
