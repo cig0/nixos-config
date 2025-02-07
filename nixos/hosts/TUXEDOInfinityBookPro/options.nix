@@ -6,6 +6,7 @@
 
   # NixOS
   hardware.cpu.intel.updateMicrocode = true;
+
   programs = {
     # https://wiki.nixos.org/wiki/Appimage
     appimage = {

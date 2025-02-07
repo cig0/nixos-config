@@ -35,7 +35,7 @@ in {
           urAccepted = 2; # Send telemetry
         };
         devices = {
-          TUXEDOInfinityBookPro = {
+          perrrkele = {
             id = "I7UYHKV-NU5RSCD-LSZHJ47-LFZY2JE-QKWUTB5-LAZRA7S-S6ZZS3S-2QNVLAA";
           };
           homelabnas = {
@@ -50,91 +50,91 @@ in {
             id = "m3q6z-itat6";
             label = ".aws";
             path = "/home/cig0/.aws";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           ".krew" = {
             id = "zo6vm-ycvnv";
             label = ".krew";
             path = "/home/cig0/.krew";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           ".kube" = {
             id = "cbvut-r9kxc";
             label = ".kube";
             path = "/home/cig0/.kube";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           ".ssh" = {
             id = "7cgim-4pyuc";
             label = ".ssh";
             path = "/home/cig0/.ssh";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           ".terraform.versions" = {
             id = "uoocx-gswyo";
             label = ".terraform.versions";
             path = "/home/cig0/.terraform.versions";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           "Default Folder" = {
             id = "default";
             label = "Default Folder";
             path = "/home/cig0/Sync";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           "Desktop" = {
             id = "bevao-ecdck";
             label = "Desktop";
             path = "/home/cig0/Desktop";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           "Documents" = {
             id = "4plzj-q9hjx";
             label = "Documents";
             path = "/home/cig0/Documents";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           "Downloads" = {
             id = "v72dy-fzjsf";
             label = "Downloads";
             path = "/home/cig0/Downloads";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           "KeePassXC" = {
             id = "nsqaf-gequ7";
             label = "KeePassXC";
             path = "/home/cig0/KeePassXC";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           "Pictures" = {
             id = "zhepz-tkl9u";
             label = "Pictures";
             path = "/home/cig0/Pictures";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           "stash" = {
             id = "inznp-cjdxe";
             label = "stash";
             path = "/home/cig0/stash";
-            devices = ["TUXEDOInfinityBookPro" "desktop"];
+            devices = ["perrrkele" "desktop"];
           };
           "Videos" = {
             id = "g7amc-cstmt";
             label = "Videos";
             path = "/home/cig0/Videos";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           "bin" = {
             id = "mtzdy-xgvcf";
             label = "bin";
             path = "/home/cig0/bin";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
           };
           "w" = {
             id = "rn6um-4btcp";
             label = "w";
             path = "/home/cig0/w";
-            devices = ["TUXEDOInfinityBookPro" "homelabnas" "desktop"];
+            devices = ["perrrkele" "homelabnas" "desktop"];
             versioning.type = "simple";
           };
         };

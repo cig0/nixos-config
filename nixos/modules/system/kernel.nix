@@ -5,7 +5,7 @@
   pkgs,
   ...
 }: let
-  hostSelector = import ../../lib/host-selector.nix {inherit config lib;};
+  hostSelector = import ../../lib/host-selector.nix {inherit config lib;}; # TODO: remove this legacy configuration
 
   cfg = lib.getAttrFromPath ["mySystem" "boot"] config;
 
@@ -14,9 +14,9 @@
     then "linuxPackages"
     else "linuxPackages_" + cfg.kernelPackages;
 
-  # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isTUXEDOInfinityBookPro = "pkgs.linuxPackages_xanmod_latest";`
+  # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`
   # kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
-  # kernelPackages_isTUXEDOInfinityBookPro = pkgs.linuxPackages_latest;
+  # kernelPackages_isPerrrkele = pkgs.linuxPackages_latest;
   # kernelPackages_fallback = pkgs.linuxPackages_latest;
 
   kernelPatches_enable = "false"; # Enable/disable applying kernel patches
@@ -86,8 +86,8 @@ in {
       # kernelPackages =
       #   if hostSelector.isChuweiMiniPC
       #   then kernelPackages_isChuweiMiniPC
-      #   else if hostSelector.isTUXEDOInfinityBookPro
-      #   then kernelPackages_isTUXEDOInfinityBookPro
+      #   else if hostSelector.isPerrrkele
+      #   then kernelPackages_isPerrrkele
       #   else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
 
       kernel.sysctl =
@@ -95,7 +95,7 @@ in {
         if hostSelector.isDesktop || hostSelector.isChuweiMiniPC
         then commonKernelSysctl // {"net.ipv4.tcp_congestion_control" = "bbr";}
         # bbr: A newer algorithm designed for higher throughput and lower latency.
-        else if hostSelector.isTUXEDOInfinityBookPro
+        else if hostSelector.isPerrrkele
         then commonKernelSysctl // {"net.ipv4.tcp_congestion_control" = "westwood";}
         # westwood: Aimed at improving performance over wireless networks and other lossy links by using end-to-end bandwidth estimation.
         else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
