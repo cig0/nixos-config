@@ -40,6 +40,7 @@ in {
             myHM = {
               # Config-files
               xdg.configFile."git/config".enable = false; # We're using programs.git.config
+              xdg.configFile."git/gitignore_global".enable = true;
             };
 
             home = {

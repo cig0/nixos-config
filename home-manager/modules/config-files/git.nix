@@ -3,11 +3,12 @@
   lib,
   ...
 }: let
-  cfg = config.myHM.xdg.configFile."git/config".enable;
-in {
-  options.myHM.xdg.configFile."git/config".enable = lib.mkEnableOption "Whether to write Git's configuration file to the user's $XDG_HOME_CONFIG/git/config.";
+  cfg = {
+    gitConfig = config.myHM.xdg.configFile."git/config".enable;
+    gitIgnoreGlobal = config.myHM.xdg.configFile."git/gitignore_global".enable;
+  };
 
-  config = lib.mkIf cfg {
+  conditionalGitConfig = lib.mkIf cfg.gitConfig {
     xdg.configFile."git/config".text = ''
       [color]
         diff = true
@@ -189,4 +190,23 @@ in {
         email = cig0.github@tutanota.com
     '';
   };
+
+  conditionalGitIgnoreGlobal = lib.mkIf cfg.gitIgnoreGlobal {
+    xdg.configFile."git/gitignore_global".text = ''
+      *~
+      myvars.tf
+      .cache_ggshield
+      .DS_Store
+      .favorites.json
+      .vscode/
+    '';
+  };
+in {
+  options.myHM.xdg.configFile = {
+    "git/config".enable = lib.mkEnableOption "Whether to write Git's configuration file to user's $XDG_HOME_CONFIG/git/config directory.";
+
+    "git/gitignore_global".enable = lib.mkEnableOption "Whether to write Git's ignore file to user's $XDG_HOME_CONFIG/git/config directory.";
+  };
+
+  config = lib.mkMerge [conditionalGitConfig conditionalGitIgnoreGlobal];
 }
