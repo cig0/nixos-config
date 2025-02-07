@@ -12,6 +12,5 @@
     ./apps-cargo.nix
     ./aws.nix
     ./git.nix
-    ./git-ignore.nix
   ];
 }
