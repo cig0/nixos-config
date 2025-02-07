@@ -7,9 +7,9 @@
 in {
   options.mySystem.services.tailscale.enable = lib.mkEnableOption "Whether to enable Tailscale client daemon.";
 
-  config = {
+  config = lib.mkIf cfg.enable {
     services.tailscale = {
-      enable = cfg.enable;
+      enable = true;
       openFirewall = true;
       extraUpFlags = ["--ssh"];
     };
