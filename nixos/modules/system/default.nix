@@ -21,6 +21,5 @@
     ./keyd.nix
     ./ntp.nix
     ./users.nix
-    ./zram.nix
   ];
 }

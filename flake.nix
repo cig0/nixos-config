@@ -155,6 +155,7 @@
             }
             {
               # NixOS - System
+              # System
               hardware.cpu.intel.updateMicrocode = true;
               programs = {
                 # https://wiki.nixos.org/wiki/Appimage
@@ -163,6 +164,13 @@
                   binfmt = true;
                 };
                 fuse.userAllowOther = true;
+              };
+              # System - ZRAM
+              services.zram-generator.enable = true;
+              zramSwap = {
+                enable = true;
+                priority = 5;
+                memoryPercent = 15;
               };
             }
             {
