@@ -315,7 +315,6 @@
       # olive-editor
 
       # Programming
-      neovide
       sublime-merge
       vscode-fhs
 
