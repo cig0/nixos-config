@@ -9,6 +9,9 @@
 
   packagesBaseline = with pkgs;
     [
+      # Nix - Security
+      vulnix # NixOS vulnerability scanner :: https://github.com/nix-community/vulnix
+
       # Networking
       httping # Ping with HTTP requests :: https://vanheusden.com/httping
 
@@ -97,7 +100,6 @@
       nix-tree # Interactively browse a Nix store paths dependencies :: https://hackage.haskell.org/package/nix-tree
       nixpkgs-review # Review pull-requests on https://github.com/NixOS/nixpkgs :: https://github.com/Mic92/nixpkgs-review
       nvd # Nix/NixOS package version diff tool :: https://khumba.net/projects/nvd
-      vulnix # NixOS vulnerability scanner :: https://github.com/nix-community/vulnix
       # Nix - Development Environments
       devbox # Instant, easy, predictable shells and containers :: https://www.jetpack.io/devbox
       devenv # Fast, Declarative, Reproducible, and Composable Developer Environments :: https://github.com/cachix/devenv
@@ -242,19 +244,22 @@
         yamlfmt
         zig
       ]);
-    security = with pkgsUnstable; [
-      age
-      chkrootkit
-      gpg-tui
-      kpcli
-      lynis
-      mitmproxy
-      nikto
-      oath-toolkit
-      protonvpn-cli
-      sops
-      vt-cli
-    ];
+    security = with pkgs;
+      [
+        mitmproxy
+      ]
+      ++ (with pkgsUnstable; [
+        age
+        chkrootkit
+        gpg-tui
+        kpcli
+        lynis
+        nikto
+        oath-toolkit
+        protonvpn-cli
+        sops
+        vt-cli
+      ]);
     vcs = with pkgsUnstable; [
       # Git
       ggshield # GitGuardian
