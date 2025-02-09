@@ -1,11 +1,9 @@
 #------------------------------------------------------------------
 # My personal NixOS multi-host configuration flake ¯\_(ツ)_/¯
-#
-# By Martín Cigorraga
 # https://github.com/cig0/nixos-config
 # Initial release on May 1st, 2024
 #
-# ASCII art credits: https://www.asciiart.eu/ 🙌
+# ASCII art credits: https://www.asciiart.eu/
 #------------------------------------------------------------------
 #                                                                     _------__--___.__.
 #                                                                   /            `  `    \
@@ -118,6 +116,7 @@
     ];
 
     nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: To be deprecated with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+    # "Syntax error to break the build"
   in {
     # Laptop: Intel CPU & GPU + KDE
     nixosConfigurations.perrrkele = let
