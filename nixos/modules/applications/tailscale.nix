@@ -12,14 +12,24 @@ in {
       firewall = {
         trustedInterfaces = lib.mkBefore ["tailscale0"];
       };
-      nameservers = lib.mkBefore ["100.100.100.100"]; # TODO: SOPS
-      search = lib.mkBefore ["tuxedo-goanna.ts.net"]; # TODO: SOPS
+      nameservers = lib.mkBefore ["100.100.100.100"]; # TODO: 1. SOPS/ 2. Get rid of lib.mkBefore
+      search = lib.mkBefore ["tuxedo-goanna.ts.net"]; # TODO: 1. SOPS/ 2. Get rid of lib.mkBefore
     };
 
-    services.tailscale = {
-      enable = true;
-      openFirewall = true;
-      extraUpFlags = ["--ssh"];
+    services = {
+      openssh = {
+        listenAddresses = lib.mkAfter [
+          {
+            addr = "100.0.0.0";
+            port = 22222;
+          }
+        ];
+      };
+      tailscale = {
+        enable = true;
+        openFirewall = true;
+        extraUpFlags = ["--ssh"];
+      };
     };
   };
 }
