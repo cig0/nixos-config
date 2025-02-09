@@ -7,7 +7,7 @@
 in {
   options.mySystem.services.openssh.enable = lib.mkEnableOption "Whether to enable the OpenSSH server";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg {
     services.openssh = {
       enable = true;
       openFirewall = true;
