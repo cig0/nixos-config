@@ -9,7 +9,12 @@ in {
     enable = lib.mkEnableOption "Whether to enable lazygit, a simple terminal UI for git commands.";
   };
 
-  config = {
-    programs.lazygit.enable = cfg.enable;
+  config = lib.mkIf cfg.enable {
+    programs.lazygit = {
+      enable = true;
+      settings = {
+        git.promptToReturnFromSubprocess = false;
+      };
+    };
   };
 }
