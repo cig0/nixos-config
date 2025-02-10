@@ -17,7 +17,7 @@ in {
 
       # TODO: check config.nix.gc.enable = false;
       clean = lib.mkIf cfg.clean.enable {
-        enable = true;
+        enable = false;
         dates = "weekly";
         extraArgs = "--keep 5";
       };
