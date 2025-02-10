@@ -14,6 +14,8 @@ in {
   config = {
     programs.nh = {
       enable = cfg.enable;
+
+      # TODO: check config.nix.gc.enable = false;
       clean = lib.mkIf cfg.clean.enable {
         enable = true;
         dates = "weekly";
