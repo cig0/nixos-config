@@ -13,7 +13,9 @@ in {
     programs.lazygit = {
       enable = true;
       settings = {
-        git.promptToReturnFromSubprocess = false;
+        git = {
+          promptToReturnFromSubprocess = false;
+        };
       };
     };
   };
