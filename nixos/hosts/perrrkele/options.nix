@@ -30,7 +30,6 @@
       lfs.enable = true;
     };
     programs.lazygit.enable = true;
-    programs.nh.enable = true;
     programs.nixvim.enable = true;
     programs.firefox.enable = true;
     programs.kdeconnect.enable = true;
@@ -109,6 +108,7 @@
       settings.auto-optimise-store = true;
       gc.automatic = true;
     };
+    programs.nh.enable = false;
     system.autoUpgrade.enable = true;
     # System - Time
     networking.timeServers = ["argentina"];
