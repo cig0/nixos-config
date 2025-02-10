@@ -110,7 +110,7 @@
     };
     programs.nh = {
       enable = false;
-      clean = false;
+      clean.enable = false;
     };
     system.autoUpgrade.enable = true;
     # System - Time
