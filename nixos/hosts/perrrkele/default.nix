@@ -27,5 +27,6 @@
   imports = builtins.filter (x: x != null) [
     ./configuration.nix
     ./options.nix
+    # ../../profiles/laptop
   ];
 }
