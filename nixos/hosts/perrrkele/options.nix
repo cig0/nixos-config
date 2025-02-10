@@ -108,7 +108,10 @@
       settings.auto-optimise-store = true;
       gc.automatic = true;
     };
-    programs.nh.enable = false;
+    programs.nh = {
+      enable = false;
+      clean = false;
+    };
     system.autoUpgrade.enable = true;
     # System - Time
     networking.timeServers = ["argentina"];
