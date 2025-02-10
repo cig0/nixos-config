@@ -11,12 +11,12 @@ in {
     clean.enable = lib.mkEnableOption "Whether to enable periodic garbage collection with nh clean all.";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     programs.nh = {
-      enable = cfg.enable;
+      enable = true;
 
       # TODO: check config.nix.gc.enable = false;
-      clean = lib.mkIf cfg.clean.enable {
+      clean = {
         enable = false;
         dates = "weekly";
         extraArgs = "--keep 5";
