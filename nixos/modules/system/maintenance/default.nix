@@ -8,8 +8,8 @@
 # (_____)                                                        (_____)
 {
   imports = [
+    ./auto-upgrade.nix
     ./clean-and-optimise.nix
     ./nh.nix
-    ./auto-upgrade.nix
   ];
 }
