@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  cfg = config.mySystem.programs.nh;
+  cfg = lib.getAttrFromPath ["mySystem" "programs" "nh"] config;
 in {
   options.mySystem.programs.nh = {
     enable = lib.mkEnableOption "Whether to enable nh, yet another Nix CLI helper.";
@@ -16,8 +16,8 @@ in {
       enable = true;
 
       # TODO: check config.nix.gc.enable = false;
-      clean = {
-        enable = false;
+      clean = lib.mkIf cfg.clean.enable {
+        enable = true;
         dates = "weekly";
         extraArgs = "--keep 5";
       };
