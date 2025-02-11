@@ -106,8 +106,8 @@
     boot.kernelPackages = "xanmod_latest";
     # System - Maintenance
     nix = {
-      settings.auto-optimise-store = true;
       gc.automatic = false;
+      settings.auto-optimise-store = true;
     };
     programs.nh = {
       enable = true;
