@@ -110,7 +110,7 @@
       gc.automatic = true;
     };
     programs.nh = {
-      enable = false;
+      enable = true;
       clean.enable = false;
     };
     system.autoUpgrade.enable = true;
