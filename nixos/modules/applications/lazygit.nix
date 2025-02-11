@@ -13,9 +13,7 @@ in {
     programs.lazygit = {
       enable = true;
       settings = {
-        git = {
-          promptToReturnFromSubprocess = false;
-        };
+        promptToReturnFromSubprocess = false;
       };
     };
   };
