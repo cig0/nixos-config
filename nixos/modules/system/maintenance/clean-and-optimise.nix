@@ -15,17 +15,17 @@ nix-store --optimise to get rid of duplicate files.";
 
   config = {
     nix = {
-      settings = {
-        # Nix store optimisation.
-        auto-optimise-store = cfg.settings.auto-optimise-store;
-      };
-
+      # Garbage collector. We do the truthiness evaluation at the beginning of the set to avoid polluting the environment with unused non-default options.
       gc = lib.mkIf cfg.gc.automatic {
-        # Garbage collector.
         automatic = true;
         dates = "weekly";
         options = "--delete-older-than 7d";
         randomizedDelaySec = "720min";
+      };
+
+      settings = {
+        # Nix store optimisation
+        auto-optimise-store = cfg.settings.auto-optimise-store;
       };
     };
   };
