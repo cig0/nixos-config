@@ -53,6 +53,7 @@
       ugrep
       usbutils
       yazi-unwrapped
+      yq-go
 
       # Monitoring & Observability
       btop
