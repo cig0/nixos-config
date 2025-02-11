@@ -107,11 +107,11 @@
     # System - Maintenance
     nix = {
       settings.auto-optimise-store = true;
-      gc.automatic = true;
+      gc.automatic = false;
     };
     programs.nh = {
       enable = true;
-      clean.enable = false;
+      clean.enable = true;
     };
     system.autoUpgrade.enable = true;
     # System - Time
