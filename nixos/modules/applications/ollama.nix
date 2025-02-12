@@ -1,16 +1,13 @@
-{ config, lib, ... }:
-
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.mySystem.ollama;
-
 in {
-  options.mySystem.ollama = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable Ollama local server";
-  };
+  options.mySystem.ollama.enable = lib.mkEnableOption "Whether to enable Ollama local server";
 
-  config = lib.mkIf (cfg == true) {
+  config = lib.mkIf cfg.enable {
     services.ollama = {
       enable = true;
       group = "users";

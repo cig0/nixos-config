@@ -6,13 +6,13 @@
 }: let
   cfg = config.mySystem.services.syncthing;
 in {
-  options.mySystem.services.syncthing = lib.mkOption {
+  options.mySystem.services.syncthing.enable = lib.mkOption {
     type = lib.types;
     default = false;
     description = "Whether to enable Syncthing service";
   };
 
-  config = lib.mkIf (cfg == true) {
+  config = lib.mkIf cfg.enable {
     services.syncthing = {
       enable = true;
       openDefaultPorts = true;
