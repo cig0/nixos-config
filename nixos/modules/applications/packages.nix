@@ -1,8 +1,9 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
-  pkgsUnstable,
+  system,
   ...
 }: let
   cfg = config.mySystem.packages;
@@ -366,6 +367,14 @@
     ++ (with pkgsUnstable; [
       nvtop
     ]);
+
+  # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
+  pkgsUnstable = import inputs.nixpkgs-unstable {
+    inherit system;
+    config = {
+      allowUnfree = true;
+    };
+  };
 in {
   options.mySystem = {
     packages = {
@@ -393,22 +402,22 @@ in {
 
   config = {
     environment.systemPackages =
-      [] # Start with empty list or your base packages
-      ++ (lib.optionals (cfg.baseline == true) packagesBaseline)
-      ++ (lib.optionals (cfg.cli._all == true) (builtins.concatLists (builtins.attrValues packagesCli)))
-      ++ (lib.optionals (cfg.cli.ai == true) packagesCli.ai)
-      ++ (lib.optionals (cfg.cli.backup == true) packagesCli.backup)
-      ++ (lib.optionals (cfg.cli.comms == true) packagesCli.comms)
-      ++ (lib.optionals (cfg.cli.cloudNativeTools == true) packagesCli.cloudNativeTools)
-      ++ (lib.optionals (cfg.cli.misc == true) packagesCli.misc)
-      ++ (lib.optionals (cfg.cli.multimedia == true) packagesCli.multimedia)
-      ++ (lib.optionals (cfg.cli.programming == true) packagesCli.programming)
-      ++ (lib.optionals (cfg.cli.security == true) packagesCli.security)
-      ++ (lib.optionals (cfg.cli.vcs == true) packagesCli.vcs)
-      ++ (lib.optionals (cfg.cli.web == true) packagesCli.web)
-      ++ (lib.optionals (cfg.gui == true) packagesGui)
-      ++ (lib.optionals (cfg.guiShell.kde == true) packagesGuiShell.kde)
-      ++ (lib.optionals (cfg.nvidia == true) packagesNvidia);
+      [] # Start with an empty list or your base packages
+      ++ lib.optionals cfg.baseline packagesBaseline
+      ++ lib.optionals cfg.cli._all (builtins.concatLists (builtins.attrValues packagesCli))
+      ++ lib.optionals cfg.cli.ai packagesCli.ai
+      ++ lib.optionals cfg.cli.backup packagesCli.backup
+      ++ lib.optionals cfg.cli.comms packagesCli.comms
+      ++ lib.optionals cfg.cli.cloudNativeTools packagesCli.cloudNativeTools
+      ++ lib.optionals cfg.cli.misc packagesCli.misc
+      ++ lib.optionals cfg.cli.multimedia packagesCli.multimedia
+      ++ lib.optionals cfg.cli.programming packagesCli.programming
+      ++ lib.optionals cfg.cli.security packagesCli.security
+      ++ lib.optionals cfg.cli.vcs packagesCli.vcs
+      ++ lib.optionals cfg.cli.web packagesCli.web
+      ++ lib.optionals cfg.gui packagesGui
+      ++ lib.optionals cfg.guiShell.kde packagesGuiShell.kde
+      ++ lib.optionals cfg.nvidia packagesNvidia;
 
     nixpkgs.config.allowUnfree = true; # Allow lincense-burdened packages
   };
