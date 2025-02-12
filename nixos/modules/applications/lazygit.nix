@@ -22,7 +22,7 @@ in
         git = {
           commit = {
             signOff = true;
-            autoWrapCommitMessage = true;
+            autoWrapCommitMessage = false;
           };
           merging = {
             manualCommit = true;
