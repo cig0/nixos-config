@@ -23,7 +23,6 @@ in
           commit = {
             signOff = true;
             autoWrapCommitMessage = true;
-            # autoWrapWidth = 144;
           };
           merging = {
             manualCommit = true;
