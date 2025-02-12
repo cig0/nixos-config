@@ -120,17 +120,10 @@
     # Laptop: Intel CPU & GPU + KDE
     nixosConfigurations = {
       perrrkele = let
-        # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
-        pkgsUnstable = import nixpkgs-unstable {
-          inherit system;
-          config = {
-            allowUnfree = true;
-          };
-        };
         system = "x86_64-linux";
       in
         nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs system pkgsUnstable;};
+          specialArgs = {inherit inputs system;};
           modules =
             sharedModules
             ++ [
@@ -150,17 +143,10 @@
 
       # Desktop: Intel CPU, Nvidia GPU
       desktop = let
-        # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
-        pkgsUnstable = import nixpkgs-unstable {
-          inherit system;
-          config = {
-            allowUnfree = true;
-          };
-        };
         system = "x86_64-linux";
       in
         nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs system pkgsUnstable;};
+          specialArgs = {inherit inputs system;};
           modules =
             sharedModules
             ++ [
@@ -179,17 +165,10 @@
 
       # Headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
       chuwi = let
-        # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
-        pkgsUnstable = import nixpkgs-unstable {
-          inherit system;
-          config = {
-            allowUnfree = true;
-          };
-        };
         system = "x86_64-linux";
       in
         nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs system pkgsUnstable;};
+          specialArgs = {inherit inputs system;};
           modules =
             sharedModules
             ++ [
