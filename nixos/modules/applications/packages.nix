@@ -100,6 +100,7 @@
       nix-index # Files database for nixpkgs :: https://github.com/nix-community/nix-index
       nix-melt # Ranger-like flake.lock viewer :: https://github.com/nix-community/nix-melt
       nix-tree # Interactively browse a Nix store paths dependencies :: https://hackage.haskell.org/package/nix-tree
+      nixfmt-rfc-style #   Official formatter for Nix code :: https://github.com/NixOS/nixfmt
       nixpkgs-review # Review pull-requests on https://github.com/NixOS/nixpkgs :: https://github.com/Mic92/nixpkgs-review
       nvd # Nix/NixOS package version diff tool :: https://khumba.net/projects/nvd
       # Nix - Development Environments
@@ -108,7 +109,6 @@
       # Nix - LSP
       nil # Yet another language server for Nix :: https://github.com/oxalica/nil
       nixd # Feature-rich Nix language server interoperating with C++ nix :: https://github.com/nix-community/nixd
-      alejandra # The Uncompromising Nix Code Formatter :: https://github.com/kamadorueda/alejandra
 
       # Storage
       du-dust
