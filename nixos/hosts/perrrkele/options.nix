@@ -5,17 +5,8 @@
   # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
   # For Home Manager options, check home-manager/home.nix
 
-  # NixOS
+  # NixOS host-specific options
   hardware.cpu.intel.updateMicrocode = true;
-
-  programs = {
-    # https://wiki.nixos.org/wiki/Appimage
-    appimage = {
-      enable = true;
-      binfmt = true;
-    };
-    fuse.userAllowOther = true;
-  };
 
   services.zram-generator.enable = true;
   zramSwap = {
@@ -24,19 +15,22 @@
     memoryPercent = 15;
   };
 
+  # Options overrides from modules
   mySystem = {
-    # Applications - From NixOS options
+    # Applications - From options
+    programs.appimage.enable = true;
+    programs.firefox.enable = true;
+    services.flatpak.enable = true;
     programs.git = {
       enable = true;
       lfs.enable = true;
     };
+    programs.kde-pim.enable = false;
+    programs.kdeconnect.enable = true;
     programs.lazygit.enable = true;
     programs.nixvim.enable = true;
-    programs.firefox.enable = true;
-    programs.kdeconnect.enable = true;
-    services.flatpak.enable = true;
-    programs.kde-pim.enable = false;
     services.tailscale.enable = true;
+    programs.yazi.enable = true;
     programs.zsh.enable = true;
     # Applications - From packages
     packages = {
@@ -115,7 +109,7 @@
     };
     system.autoUpgrade.enable = true;
     # System - Time
-    networking.timeServers = ["argentina"];
+    networking.timeServers = [ "argentina" ];
     time.timeZone = "America/Buenos_Aires";
     # System - User management
     users.users.doomguy = true;
