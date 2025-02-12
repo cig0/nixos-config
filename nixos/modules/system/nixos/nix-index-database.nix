@@ -1,16 +1,13 @@
-{ config, lib, ... }:
-
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.mySystem.programs.nix-index-database.comma;
-
 in {
-  options.mySystem.programs.nix-index-database.comma = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable using comma for nix-index-database";
-  };
+  options.mySystem.programs.nix-index-database.comma.enable = lib.mkEnableOption "Whether to enable using comma for nix-index-database";
 
-  config = lib.mkIf (cfg == true) {
+  config = lib.mkIf cfg.enable {
     programs.nix-index-database.comma.enable = true;
   };
 }

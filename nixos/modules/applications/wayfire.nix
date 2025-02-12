@@ -1,18 +1,16 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.mySystem.wayfire;
-
 in {
-  options.mySystem.wayfire = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Whether to enable Wayfire WM";
-  };
+  options.mySystem.wayfire = lib.mkEnableOption "Whether to enable Wayfire WM";
 
-  config = lib.mkIf (cfg == true) {
+  config = lib.mkIf cfg.enable {
     programs.wayfire = {
-      enable = false;
+      enable = true;
       plugins = with pkgs.wayfirePlugins; [
         wcm
         wf-shell

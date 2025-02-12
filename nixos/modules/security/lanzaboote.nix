@@ -1,18 +1,16 @@
-{ config, inputs, lib, ... }:
-
-let
-  cfg = config.mySystem.boot.lanzaboote.enable;
-
+{
+  config,
+  inputs,
+  lib,
+  ...
+}: let
+  cfg = config.mySystem.boot.lanzaboote;
 in {
-  imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
+  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
 
-  options.mySystem.boot.lanzaboote.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Secure boot for NixOS";
-  };
+  options.mySystem.boot.lanzaboote.enable = lib.mkEnableOption "Secure boot for NixOS";
 
-  config = lib.mkIf (cfg == true) {
+  config = lib.mkIf cfg.enable {
     # Refs:
     # https://github.com/nix-community/lanzaboote/blob/master/docs/QUICK_START.md
     # https://wiki.nixos.org/wiki/Secure_Boot
