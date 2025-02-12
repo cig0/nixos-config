@@ -5,10 +5,12 @@
   pkgs,
   system,
   ...
-}: let
+}:
+let
   cfg = config.mySystem.packages;
 
-  packagesBaseline = with pkgs;
+  packagesBaseline =
+    with pkgs;
     [
       # Nix - Security
       vulnix # NixOS vulnerability scanner :: https://github.com/nix-community/vulnix
@@ -33,12 +35,11 @@
       fd
       fdupes
       file
-      fx #   Terminal JSON viewer :: https://github.com/antonmedv/fx
+      fx # Terminal JSON viewer :: https://github.com/antonmedv/fx
       fzf
       getent
       goaccess
       gum
-      joshuto
       jq
       just # https://github.com/casey/just :: A handy way to save and run project-specific commands
       libva-utils
@@ -100,7 +101,7 @@
       nix-index # Files database for nixpkgs :: https://github.com/nix-community/nix-index
       nix-melt # Ranger-like flake.lock viewer :: https://github.com/nix-community/nix-melt
       nix-tree # Interactively browse a Nix store paths dependencies :: https://hackage.haskell.org/package/nix-tree
-      nixfmt-rfc-style #   Official formatter for Nix code :: https://github.com/NixOS/nixfmt
+      nixfmt-rfc-style # Official formatter for Nix code :: https://github.com/NixOS/nixfmt
       nixpkgs-review # Review pull-requests on https://github.com/NixOS/nixpkgs :: https://github.com/Mic92/nixpkgs-review
       nvd # Nix/NixOS package version diff tool :: https://khumba.net/projects/nvd
       # Nix - Development Environments
@@ -130,7 +131,8 @@
       iamb
       weechat
     ];
-    cloudNativeTools = with pkgs;
+    cloudNativeTools =
+      with pkgs;
       [
         awscli2 # Temporarily revert to the stable channel: ⚠ awscli2-2.22.13 failed with exit code 1 after ⏱ 0s in configurePhase
         vagrant # Should always follow the main channel.
@@ -213,7 +215,8 @@
       pngcrush
       yt-dlp
     ];
-    programming = with pkgs;
+    programming =
+      with pkgs;
       [
       ]
       ++ (with pkgsUnstable; [
@@ -246,7 +249,8 @@
         yamlfmt
         zig
       ]);
-    security = with pkgs;
+    security =
+      with pkgs;
       [
         mitmproxy
       ]
@@ -283,7 +287,8 @@
     ];
   };
 
-  packagesGui = with pkgs;
+  packagesGui =
+    with pkgs;
     [
       # Misc
       cool-retro-term # Let's avoid pulling unnecessary dependencies, as the app last release date was at the end of January 2022.
@@ -361,7 +366,8 @@
     # ];
   };
 
-  packagesNvidia = with pkgs;
+  packagesNvidia =
+    with pkgs;
     [
     ]
     ++ (with pkgsUnstable; [
@@ -375,7 +381,8 @@
       allowUnfree = true;
     };
   };
-in {
+in
+{
   options.mySystem = {
     packages = {
       baseline = lib.mkEnableOption "Whether to install a baseline set of applications packages.";
@@ -402,7 +409,7 @@ in {
 
   config = {
     environment.systemPackages =
-      [] # Start with an empty list or your base packages
+      [ ] # Start with an empty list or your base packages
       ++ lib.optionals cfg.baseline packagesBaseline
       ++ lib.optionals cfg.cli._all (builtins.concatLists (builtins.attrValues packagesCli))
       ++ lib.optionals cfg.cli.ai packagesCli.ai
@@ -439,4 +446,3 @@ in {
 # nix-prefetch-github NixOS nixpkgs --no-deep-clone -v --rev The_Commit_Hash
 # Nix-prefetch-github can be installed as a normal package, or invoked on-demand if using `comma` (https://github.com/nix-community/comma, available in the official repositories.
 # Of course it can also be installed with `nix-env -iA nixpkgs.nix-prefetch-github`, or temporarily with nix-shell.
-
