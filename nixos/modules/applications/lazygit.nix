@@ -32,10 +32,10 @@ in
             days = 14;
           };
           os = {
-            edit = "nvim {{filename}}";
-            editAtLine = "nvim {{filename}} +{{line}}";
+            edit = "${config.mySystem.cli.editor} {{filename}}";
+            editAtLine = "${config.mySystem.cli.editor} {{filename}} +{{line}}";
             editInTerminal = true;
-            openDirInEditor = "nvim {{dir}}";
+            openDirInEditor = "${config.mySystem.cli.editor} {{dir}}";
           };
         };
 
