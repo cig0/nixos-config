@@ -7,9 +7,11 @@
   # pkgs,
   # pkgsUnstable,
   ...
-}: let
-  cfg = lib.getAttrFromPath ["mySystem" "home-manager" "enable"] config;
-in {
+}:
+let
+  cfg = lib.getAttrFromPath [ "mySystem" "home-manager" "enable" ] config;
+in
+{
   imports = [
     # (modulesPath + "/profiles/minimal.nix")
     inputs.home-manager.nixosModules.home-manager
@@ -24,127 +26,134 @@ in {
       useUserPackages = true;
       users = lib.mkMerge [
         {
-          cig0 = {...}: {
-            imports = [
-              # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
-              # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
-              # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
-              ./modules/applications/default.nix
-              ./modules/config-files/default.nix
-              ./modules/user/maintenance/apps-cargo.nix
-            ];
+          cig0 =
+            { ... }:
+            {
+              imports = [
+                # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
+                # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
+                # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
+                ./modules/applications/default.nix
+                ./modules/config-files/default.nix
+                ./modules/user/maintenance/apps-cargo.nix
+              ];
 
-            # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-            # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-            # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-            myHM = {
-              # Config-files
-              xdg.configFile."git/config".enable = false; # We're using programs.git.config
-              xdg.configFile."git/gitignore_global".enable = true;
-            };
-
-            home = {
-              homeDirectory = "/home/cig0";
-
-              sessionVariables = {
-                EDITOR = "nvim";
-                VISUAL = "code";
+              # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
+              # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
+              # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+              myHM = {
+                # Config-files
+                xdg.configFile."git/config".enable = false; # We're using programs.git.config
+                xdg.configFile."git/gitignore_global".enable = true;
               };
 
-              # packages = with pkgs;
-              #   [
-              #   ]
-              #   ++ (with pkgsUnstable; [
-              #     # Web
-              #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-              #   ]);
+              home = {
+                homeDirectory = "/home/cig0";
 
-              # The state version is required and should stay at the version you
-              # originally installed.
-              stateVersion = "24.11";
+                sessionVariables = {
+                  # EDITOR = "nvim";
+                  EDITOR = config.mySystem.cli.editor;
+                  VISUAL = "code";
+                };
+
+                # packages = with pkgs;
+                #   [
+                #   ]
+                #   ++ (with pkgsUnstable; [
+                #     # Web
+                #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+                #   ]);
+
+                # The state version is required and should stay at the version you
+                # originally installed.
+                stateVersion = "24.11";
+              };
             };
-          };
         }
         {
-          fine = {...}: {
-            imports = [
-              # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
-              # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
-              # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
-              ./modules/applications/default.nix
-              ./modules/config-files/default.nix
-              ./modules/user/maintenance/apps-cargo.nix
-            ];
+          fine =
+            { ... }:
+            {
+              imports = [
+                # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
+                # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
+                # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
+                ./modules/applications/default.nix
+                ./modules/config-files/default.nix
+                ./modules/user/maintenance/apps-cargo.nix
+              ];
 
-            # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-            # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-            # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-            myHM = {
-              # Config-files
-              xdg.configFile."git/config".enable = false; # We're using programs.git.config now!
-            };
-
-            home = {
-              homeDirectory = "/home/fine";
-
-              sessionVariables = {
-                EDITOR = "nvim";
-                VISUAL = "code";
+              # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
+              # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
+              # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+              myHM = {
+                # Config-files
+                xdg.configFile."git/config".enable = false; # We're using programs.git.config now!
               };
 
-              # packages = with pkgs;
-              #   [
-              #   ]
-              #   ++ (with pkgsUnstable; [
-              #     # Web
-              #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-              #   ]);
+              home = {
+                homeDirectory = "/home/fine";
 
-              # The state version is required and should stay at the version you
-              # originally installed.
-              stateVersion = "24.11";
+                sessionVariables = {
+                  EDITOR = "nvim";
+                  VISUAL = "code";
+                };
+
+                # packages = with pkgs;
+                #   [
+                #   ]
+                #   ++ (with pkgsUnstable; [
+                #     # Web
+                #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+                #   ]);
+
+                # The state version is required and should stay at the version you
+                # originally installed.
+                stateVersion = "24.11";
+              };
             };
-          };
         }
         (lib.mkIf config.mySystem.users.users.doomguy {
-          doomguy = {...}: {
-            imports = [
-              # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
-              # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
-              # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
-              ./modules/applications/default.nix
-              ./modules/config-files/default.nix
-              ./modules/user/maintenance/apps-cargo.nix
-            ];
+          doomguy =
+            { ... }:
+            {
+              imports = [
+                # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
+                # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
+                # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
+                ./modules/applications/default.nix
+                ./modules/config-files/default.nix
+                ./modules/user/maintenance/apps-cargo.nix
+              ];
 
-            # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-            # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-            # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-            myHM = {
-              # Config-files
-              xdg.configFile."git/config".enable = false; # We're using programs.git.config
-            };
-
-            home = {
-              homeDirectory = "/home/doomguy";
-
-              sessionVariables = {
-                EDITOR = "nvim";
-                VISUAL = "code";
+              # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
+              # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
+              # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+              myHM = {
+                # Config-files
+                xdg.configFile."git/config".enable = false; # We're using programs.git.config
               };
 
-              # packages = with pkgs; [
-              #   ] ++
-              #   (with pkgsUnstable; [
-              #   # Web
-              #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-              # ]);
+              home = {
+                homeDirectory = "/home/doomguy";
 
-              # The state version is required and should stay at the version you
-              # originally installed.
-              stateVersion = "24.11";
+                sessionVariables = {
+                  EDITOR = "nvim";
+                  VISUAL = "code";
+                };
+
+                # packages = with pkgs; [
+                #   ] ++
+                #   (with pkgsUnstable; [
+                #   # Web
+                #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+                # ]);
+
+                # The state version is required and should stay at the version you
+                # originally installed.
+                stateVersion = "24.11";
+              };
             };
-          };
         })
       ];
     };
