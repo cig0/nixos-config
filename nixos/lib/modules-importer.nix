@@ -6,14 +6,25 @@ let
   # Construct the header line
   firstLine = "# Don't remove this line! This is a NixOS ${modulesType} module.";
 
+  # Check if file exists and is within size limit
+  isValidFile =
+    file:
+    let
+      maxSizeBytes = 15 * 1024; # 5KB in bytes
+      tryRead = builtins.tryEval (builtins.readFile file);
+      fileSize = builtins.stringLength (builtins.readFile file);
+    in
+    tryRead.success && fileSize <= maxSizeBytes;
+
   # Check if the first line matches the specified criteria
   hasValidHeader =
     file:
     let
-      content = builtins.readFile file;
-      firstLineFromFile = builtins.head (builtins.split "\n" content);
+      tryContent = builtins.tryEval (builtins.readFile file);
+      firstLineFromFile =
+        if tryContent.success then builtins.head (builtins.split "\n" tryContent.value) else "";
     in
-    firstLineFromFile == firstLine;
+    tryContent.success && firstLineFromFile == firstLine;
 
   # Helper function to check if a string ends with a specific suffix
   hasSuffix =
@@ -38,7 +49,7 @@ let
         in
         if type == "directory" then
           findAllNixFiles path
-        else if type == "regular" && hasSuffix ".nix" name && name != "default.nix" then
+        else if type == "regular" && hasSuffix ".nix" name && name != "default.nix" && isValidFile path then
           [ path ]
         else
           [ ];
