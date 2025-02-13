@@ -1,9 +1,12 @@
 {
-  firstLine,
   dir,
   moduleArgs ? { },
+  modulesType,
 }:
 let
+  # Construct the header line
+  firstLine = "# Don't remove this line! This is a NixOS ${modulesType} module.";
+
   # Check if the first line matches the specified criteria
   hasValidHeader =
     file:
@@ -60,5 +63,5 @@ let
 
 in
 {
-  imports = allModules;
+  imports = builtins.filter (x: x != null) allModules;
 }
