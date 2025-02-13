@@ -1,3 +1,5 @@
+# Don't remove this line! This is a NixOS APPLICATIONS module.
+
 # TODO: investigate moving to Home Manager
 {
   config,
