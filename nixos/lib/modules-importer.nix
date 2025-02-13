@@ -1,6 +1,5 @@
 {
   dir,
-  moduleArgs ? { },
   modulesType,
 }:
 let
