@@ -1,4 +1,4 @@
-# Don't remove this line! This is a NixOS APPLICATIONS module.
+# Don't remove this line! This is a NixOS applications module.
 
 {
   config,
