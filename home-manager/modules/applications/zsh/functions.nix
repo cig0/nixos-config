@@ -1,29 +1,36 @@
+# TODO: add safety check similar to modules-importer.nix
 # Import all function modules found in the functions directory.
-{config, ...}: let
-  ansiColors = import ./ansi-colors.nix {};
+{ config, ... }:
+let
+  ansiColors = import ./ansi-colors.nix { };
 
   # Check if first line matches criteria
-  hasValidHeader = file: let
-    content = builtins.readFile file;
-    firstLine = builtins.head (builtins.split "\n" content);
-  in
+  hasValidHeader =
+    file:
+    let
+      content = builtins.readFile file;
+      firstLine = builtins.head (builtins.split "\n" content);
+    in
     firstLine == "# Don't remove this line! This is a NixOS Zsh function module.";
 
-  importFunctionFiles = dir: let
-    files = builtins.attrNames (builtins.readDir dir);
-    nixFiles = builtins.filter (n: builtins.match ".*\\.nix" n != null) files;
-    fullPaths = map (f: dir + "/${f}") nixFiles;
-    validFiles = builtins.filter hasValidHeader fullPaths;
-    contents = map (file: let
-      imported = import file {inherit ansiColors config;};
+  importFunctionFiles =
+    dir:
+    let
+      files = builtins.attrNames (builtins.readDir dir);
+      nixFiles = builtins.filter (n: builtins.match ".*\\.nix" n != null) files;
+      fullPaths = map (f: dir + "/${f}") nixFiles;
+      validFiles = builtins.filter hasValidHeader fullPaths;
+      contents = map (
+        file:
+        let
+          imported = import file { inherit ansiColors config; };
+        in
+        if builtins.hasAttr "functions" imported then imported.functions else ""
+      ) validFiles;
+      merged = builtins.concatStringsSep "\n" contents;
     in
-      if builtins.hasAttr "functions" imported
-      then imported.functions
-      else "")
-    validFiles;
-    merged = builtins.concatStringsSep "\n" contents;
-  in
     merged;
-in {
+in
+{
   allFunctions = importFunctionFiles ./functions;
 }
