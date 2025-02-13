@@ -1,3 +1,5 @@
+# Don't remove this line! This is a NixOS APPLICATIONS module.
+
 #  _____                          _____
 # ( ___ )                        ( ___ )
 #  |   |~~~~~~~~~~~~~~~~~~~~~~~~~~|   |
@@ -7,9 +9,6 @@
 #  |___|~~~~~~~~~~~~~~~~~~~~~~~~~~|___|
 # (_____)                        (_____)
 {
-  imports = builtins.filter (x: x != null) [
-    ./kde-connect.nix
-    ./kde-pim.nix
-    ./kde-plasma.nix
-  ];
+  #   imports = builtins.filter (x: x != null) [
+  #   ];
 }
