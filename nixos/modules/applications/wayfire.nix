@@ -1,16 +1,12 @@
-# Don't remove this line! This is a NixOS applications module.
-
 {
   config,
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.mySystem.wayfire;
-in
-{
-  options.mySystem.wayfire.enable = lib.mkEnableOption "Whether to enable Wayfire WM";
+in {
+  options.mySystem.wayfire = lib.mkEnableOption "Whether to enable Wayfire WM";
 
   config = lib.mkIf cfg.enable {
     programs.wayfire = {

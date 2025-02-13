@@ -1,5 +1,3 @@
-# Don't remove this line! This is a NixOS applications module.
-
 # TODO: configure Yazi
 { config, lib, ... }:
 let

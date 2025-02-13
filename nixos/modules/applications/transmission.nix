@@ -1,5 +1,3 @@
-# Don't remove this line! This is a NixOS applications module.
-
 # transmission.nix - https://transmissionbt.com/
 #
 # TODO: this setting still uses Transmission 3; disabled in favor of the client app which uses v4.x (./nix-flatpak.nix)
