@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.mySystem.ollama;
-in {
+in
+{
   options.mySystem.ollama.enable = lib.mkEnableOption "Whether to enable Ollama local server";
 
   config = lib.mkIf cfg.enable {
