@@ -1,5 +1,3 @@
-# Don't remove this line! This is a NixOS applications module.
-
 # { pkgs, ... }:
 
 {

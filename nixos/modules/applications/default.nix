@@ -1,5 +1,4 @@
-# Don't remove this line! This is a NixOS applications module.
-
+# TODO: recursively load every module in a similar fashion I'm doing with the Zsh aliases and functions
 #  _____                                                              _____
 # ( ___ )                                                            ( ___ )
 #  |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   |
@@ -8,8 +7,22 @@
 #  |   | ░░░░░░░▀░▀░▀░░░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░ |   |
 #  |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___|
 # (_____)                                                            (_____)
-
-import ../../lib/modules-importer.nix {
-  modulesType = "applications";
-  dir = builtins.path { path = ./.; };
+{
+  imports = builtins.filter (x: x != null) [
+    ./kde/default.nix
+    ./appimage.nix
+    ./cli.nix
+    ./display-manager.nix
+    ./firefox.nix
+    ./git.nix
+    ./lazygit.nix
+    ./nix-flatpak.nix
+    ./nixvim.nix
+    ./ollama.nix
+    ./packages.nix
+    ./tailscale.nix
+    ./xdg-portal.nix
+    ./yazi.nix
+    ./zsh.nix
+  ];
 }

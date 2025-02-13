@@ -1,5 +1,3 @@
-# Don't remove this line! This is a NixOS hardware module.
-
 #  _____                                              _____
 # ( ___ )                                            ( ___ )
 #  |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   |
@@ -8,8 +6,10 @@
 #  |   | ░░░░░░░▀░▀░▀░▀░▀░▀░▀▀░░▀░▀░▀░▀░▀░▀░▀▀▀░░░░░░ |   |
 #  |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___|
 # (_____)                                            (_____)
-
-import ../../lib/modules-importer.nix {
-  modulesType = "hardware";
-  dir = builtins.path { path = ./.; };
+{
+  imports = builtins.filter (x: x != null) [
+    ./power-management/default.nix
+    ./radio/default.nix
+    ./nvidia.nix
+  ];
 }
