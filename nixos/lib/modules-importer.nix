@@ -10,11 +10,16 @@ let
   isValidFile =
     file:
     let
-      maxSizeBytes = 15 * 1024; # 5KB in bytes
+      maxSizeBytes = 16 * 1024; # 14KB in bytes
       tryRead = builtins.tryEval (builtins.readFile file);
       fileSize = builtins.stringLength (builtins.readFile file);
     in
-    tryRead.success && fileSize <= maxSizeBytes;
+    if !tryRead.success then
+      throw "Error: Could not read file ${file}. The file might be corrupted or not a valid text file."
+    else if fileSize > maxSizeBytes then
+      throw "File ${file} is too large (${toString fileSize} bytes). \nThis is a safety measure, don't panic! The current maximum allowed size is ${toString maxSizeBytes} bytes.\nYou can change it by modifying the value of the 'maxSizeBytes' variable in the 'modules-importer.nix' file."
+    else
+      true;
 
   # Check if the first line matches the specified criteria
   hasValidHeader =
