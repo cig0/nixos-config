@@ -1,6 +1,7 @@
 # Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./modules/system/keyd.nix # Keyboard mapping. Useful to re-map keys in keyboards with missing keys, e.g. the Insert key
     ./hardware-configuration.nix # Include the results of the hardware scan
@@ -39,7 +40,7 @@
   # Automatically mount the LUKS-encrypted internal data storage
   systemd.services.ensure-run-media-internalData-dir = {
     description = "Ensure /run/media/internalData directory exists";
-    wantedBy = ["multi-user.target"];
+    wantedBy = [ "multi-user.target" ];
     serviceConfig.ExecStart = [
       "${pkgs.bash}/bin/bash -c 'if [ ! -d /run/media/internalData ]; then ${pkgs.coreutils}/bin/mkdir -p /run/media/internalData && ${pkgs.coreutils}/bin/chown -R root:users /run/media; fi'"
     ];
@@ -51,7 +52,7 @@
   systemd.paths.ensure-run-media-internalData-dir = {
     description = "Path unit to trigger directory creation";
     pathConfig.PathExists = "/run/media/internalData";
-    unitConfig.WantedBy = ["multi-user.target"];
+    unitConfig.WantedBy = [ "multi-user.target" ];
   };
 
   environment.etc.crypttab.text = ''
@@ -63,20 +64,34 @@
     # /etc/fstab mount options.
     "/" = {
       # options = [ "commit=15" "data=journal" "discard" "errors=remount-ro" "noatime"  ];
-      options = ["commit=15" "errors=remount-ro" "noatime"];
+      options = [
+        "commit=15"
+        "errors=remount-ro"
+        "noatime"
+      ];
     };
     "/run/media/internalData" = {
       device = "/dev/mapper/internalData";
       fsType = "xfs";
       label = "internalData";
       # Temporarily disable "discard": Dec 08 22:33:42 perrrkele kernel: XFS (dm-2): mounting with "discard" option, but the device does not support discard
-      options = ["allocsize=64m" "defaults" "inode64" "logbsize=256k" "logbufs=8" "noatime" "nodiratime" "nofail" "users"];
+      options = [
+        "allocsize=64m"
+        "defaults"
+        "inode64"
+        "logbsize=256k"
+        "logbufs=8"
+        "noatime"
+        "nodiratime"
+        "nofail"
+        "users"
+      ];
     };
     "/home/cig0/media" = {
       device = "/run/media";
       fsType = "none";
       label = "media";
-      options = ["bind"];
+      options = [ "bind" ];
     };
   };
 
@@ -95,11 +110,21 @@
   # auto-optimise-store: the option is managed by the module nixos/modules/system/maintenance.nix
   nix = {
     settings = {
-      allowed-users = ["@builders" "@wheel"];
-      cores = 4;
-      experimental-features = ["nix-command" "flakes"];
-      max-jobs = 4;
-      trusted-users = ["root" "cig0" "fine"];
+      allowed-users = [
+        "@builders"
+        "@wheel"
+      ];
+      cores = 8;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      max-jobs = 8;
+      trusted-users = [
+        "root"
+        "cig0"
+        "fine"
+      ];
     };
   };
 
