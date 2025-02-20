@@ -30,7 +30,7 @@
     programs.lazygit.enable = true;
     programs.nixvim.enable = true;
     services.ollama = {
-      enable = true;
+      enable = false;
       acceleration = null;
     };
     services.tailscale.enable = true;
