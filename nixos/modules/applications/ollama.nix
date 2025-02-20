@@ -1,23 +1,34 @@
+# TODO: WIP // needs finish implementation
+
 {
   config,
   lib,
   ...
 }:
 let
-  cfg = config.mySystem.ollama;
+  cfg = config.mySystem.services.ollama;
 in
 {
-  options.mySystem.ollama.enable = lib.mkEnableOption "Whether to enable Ollama local server";
-
-  config = lib.mkIf cfg.enable {
-    services.ollama = {
+  options.mySystem.services.ollama = {
+    enable = lib.mkEnableOption "Whether to enable Ollama local server";
+    acceleration = lib.mkOption {
+      type = lib.types.enum [
+        null
+        "false"
+        "rocm"
+        "cuda"
+      ];
+      description = "See: services.ollama.acceleration";
+      default = null;
+    };
+  };
+  config = {
+    services.ollama = lib.mkIf cfg.enable {
       enable = true;
       group = "users";
-      acceleration = false; # TODO: add hostnameLogic to enable Vittu's Nvidia GPU
+      acceleration = config.mySystem.services.ollama.acceleration;
       home = "${config.users.users.cig0.home}/.local/share/ollama";
       models = "${config.users.users.cig0.home}/ModelZoo";
-      # home = "/home/cig0/.local/share/ollama";
-      # models = "/home/cig0/ModelZoo";
     };
   };
 }
