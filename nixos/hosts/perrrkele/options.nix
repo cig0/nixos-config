@@ -29,6 +29,10 @@
     programs.kdeconnect.enable = true;
     programs.lazygit.enable = true;
     programs.nixvim.enable = true;
+    services.ollama = {
+      enable = true;
+      acceleration = null;
+    };
     services.tailscale.enable = true;
     programs.yazi.enable = true;
     programs.zsh.enable = true;
