@@ -1,14 +1,17 @@
 # TODO: investigate moving to Home Manager
+
 {
   config,
   inputs,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.mySystem.programs.nixvim;
-in {
-  imports = [inputs.nixvim.nixosModules.nixvim];
+in
+{
+  imports = [ inputs.nixvim.nixosModules.nixvim ];
 
   options.mySystem.programs.nixvim.enable = lib.mkEnableOption "Configure Neovim with Nix!";
 
