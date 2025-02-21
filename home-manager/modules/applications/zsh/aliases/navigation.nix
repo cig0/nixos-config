@@ -1,9 +1,9 @@
 # Don't remove this line! This is a NixOS Zsh alias module.
-{...}: let
+{ ... }:
+let
   aliases = {
     # Navigation (CLI)
     e = "exit";
-    jo = "joshuto";
     o = "ranger";
     y = "yazi";
 
@@ -14,11 +14,17 @@
     DE = "cd ~/Desktop";
     DOC = "cd ~/Documents";
     F = "cd /etc/nixos/nixos-config"; # Flake directory.
-    Ff = "cd ~/w/cig0/nixos/nixos-config-public"; # Public flake.
+    Ff = "cd ~/workdir/cig0/nixos/nixos-config-public"; # Public flake.
     N = "cd ~/Notes";
     P = "cd ~/Pictures";
     S = "cd ~/Sync";
     T = "cd ~/tmp";
-    W = "cd ~/w";
+    W = "cd ~/workdir";
+    Wc = "cd ~/workdir/cig0";
+    Wcn = "cd ~/workdir/cig0/nixos";
+    Wcnp = "cd ~/workdir/cig0/nixpkgs";
   };
-in {aliases = aliases;}
+in
+{
+  aliases = aliases;
+}
