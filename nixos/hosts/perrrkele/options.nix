@@ -29,6 +29,8 @@
     programs.kdeconnect.enable = true;
     programs.krew = {
       enable = true;
+
+      # TODO: wip
       install = [
         "ktop"
         "slowdrain"
