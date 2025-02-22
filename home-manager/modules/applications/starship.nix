@@ -14,6 +14,8 @@
         disabled = false;
       };
 
+      command_timeout = 1000; # Give enough time for gathering git information on big repos like nixpkgs.
+
       directory = {
         style = "white";
         # truncation_length = "14";
@@ -45,7 +47,7 @@
       };
 
       aws = {
-        disabled=false;
+        disabled = false;
         symbol = "🅰 ";
         format = "[($profile )(\($region\))](bold fg:215)";
       };
@@ -81,8 +83,12 @@
       terraform = {
         disabled = false;
         format = " :: [$workspace]($style)";
-        detect_extensions = ["tf" "tfplan" "tfstate"];
-        detect_folders = [".terraform"];
+        detect_extensions = [
+          "tf"
+          "tfplan"
+          "tfstate"
+        ];
+        detect_folders = [ ".terraform" ];
       };
 
       package = {
@@ -101,7 +107,7 @@
         format = " :: [$version](bold green)";
       };
 
-      python  = {
+      python = {
         python_binary = "python3";
         format = " :: [($virtualenv)](bold fg:228)";
       };
