@@ -9,6 +9,11 @@
 let
   cfg = config.mySystem.packages;
 
+  # Install packages from modules
+  packagesFromModules = lib.flatten [
+    (lib.optional config.mySystem.programs.krew.enable pkgsUnstable.krew)
+  ];
+
   packagesBaseline =
     with pkgs;
     [
@@ -151,7 +156,6 @@ let
         k9s
         kdash
         kind
-        krew
         kube-bench
         kubecolor
         kubectl
@@ -423,7 +427,8 @@ in
       ++ lib.optionals cfg.cli.web packagesCli.web
       ++ lib.optionals cfg.gui packagesGui
       ++ lib.optionals cfg.guiShell.kde packagesGuiShell.kde
-      ++ lib.optionals cfg.nvidia packagesNvidia;
+      ++ lib.optionals cfg.nvidia packagesNvidia
+      ++ packagesFromModules;
 
     nixpkgs.config.allowUnfree = true; # Allow lincense-burdened packages
   };

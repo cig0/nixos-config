@@ -27,6 +27,13 @@
     };
     programs.kde-pim.enable = false;
     programs.kdeconnect.enable = true;
+    programs.krew = {
+      enable = true;
+      install = [
+        "ktop"
+        "slowdrain"
+      ];
+    };
     programs.lazygit.enable = true;
     programs.nixvim.enable = true;
     services.ollama = {
