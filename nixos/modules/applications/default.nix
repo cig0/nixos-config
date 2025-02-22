@@ -10,12 +10,12 @@
 {
   imports = builtins.filter (x: x != null) [
     ./kde/default.nix
+    ./krew/default.nix
     ./appimage.nix
     ./cli-default-applications.nix
     ./display-manager.nix
     ./firefox.nix
     ./git.nix
-    ./krew.nix
     ./lazygit.nix
     ./nix-flatpak.nix
     ./nixvim.nix
