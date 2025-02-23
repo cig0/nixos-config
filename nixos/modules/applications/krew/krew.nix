@@ -3,6 +3,7 @@
 {
   config,
   lib,
+  pkgsUnstable,
   ...
 }:
 {
@@ -20,6 +21,12 @@
   };
 
   config = lib.mkIf config.mySystem.programs.krew.enable {
-    mySystem.lib.krew.installPlugins = config.mySystem.programs.krew.install;
+    mySystem.lib = {
+      krew.installPlugins = config.mySystem.programs.krew.install;
+      modulePackages = lib.mkMerge [
+        (config.mySystem.modulePackages or [ ])
+        [ pkgsUnstable.krew ]
+      ];
+    };
   };
 }
