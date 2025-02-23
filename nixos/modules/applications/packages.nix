@@ -24,8 +24,8 @@ let
       httping # Ping with HTTP requests :: https://vanheusden.com/httping
 
       # Python
-      python312 # High-level dynamically-typed programming language :: https://www.python.org
-      python312Packages.ipython # IPython: Productive Interactive Computing :: https://ipython.org/
+      python314 # High-level dynamically-typed programming language :: https://www.python.org
+      python314Packages.ipython # IPython: Productive Interactive Computing :: https://ipython.org/
 
       # Storage
       nfstrace # NFS and CIFS tracing/monitoring/capturing/analyzing tool :: NFS and CIFS tracing/monitoring/capturing/analyzing tool
