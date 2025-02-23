@@ -26,6 +26,9 @@ let
       # Python
       python312 # High-level dynamically-typed programming language :: https://www.python.org
       python312Packages.ipython # IPython: Productive Interactive Computing :: https://ipython.org/
+
+      # Storage
+      nfstrace # NFS and CIFS tracing/monitoring/capturing/analyzing tool :: NFS and CIFS tracing/monitoring/capturing/analyzing tool
     ]
     ++ (with pkgsUnstable; [
       # Misc
@@ -81,7 +84,6 @@ let
       iperf
       iw
       lftp
-      nfstrace
       nmap
       ookla-speedtest
       rustscan # Faster Nmap Scanning with Rust :: https://github.com/RustScan/RustScan
