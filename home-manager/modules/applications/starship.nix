@@ -14,7 +14,7 @@
         disabled = false;
       };
 
-      command_timeout = 1250; # Give enough time for gathering git information on big repos like nixpkgs.
+      command_timeout = 1500; # Give enough time for gathering git information on big repos like nixpkgs.
 
       directory = {
         style = "white";
