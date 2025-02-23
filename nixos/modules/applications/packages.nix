@@ -140,12 +140,12 @@ let
     cloudNativeTools =
       with pkgs;
       [
-        awscli2 # Temporarily revert to the stable channel: ⚠ awscli2-2.22.13 failed with exit code 1 after ⏱ 0s in configurePhase
         vagrant # Should always follow the main channel.
       ]
       ++ (with pkgsUnstable; [
         aiac # Artificial Intelligence Infrastructure-as-Code Generator :: https://github.com/gofireflyio/aiac/
         argocd
+        awscli2 # Unified tool to manage your AWS services :: https://aws.amazon.com/cli/
         bootc
         buildah
         cosign
