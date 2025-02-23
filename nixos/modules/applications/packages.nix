@@ -9,11 +9,6 @@
 let
   cfg = config.mySystem.packages;
 
-  # Install packages from modules
-  packagesFromModules = lib.flatten [
-    (lib.optional config.mySystem.programs.krew.enable pkgsUnstable.krew)
-  ];
-
   packagesBaseline =
     with pkgs;
     [
@@ -389,6 +384,16 @@ let
 in
 {
   options.mySystem = {
+    lib = {
+      # Create a flattened list of packages to install contributed by modules
+      modulePackages = lib.mkOption {
+        type = with lib.types; listOf package;
+        default = [ ];
+        description = "List of packages contributed by modules";
+        apply = x: lib.flatten x; # This ensures nested lists are flattened
+        internal = true;
+      };
+    };
     packages = {
       baseline = lib.mkEnableOption "Whether to install a baseline set of applications packages.";
       cli = {
@@ -430,9 +435,12 @@ in
       ++ lib.optionals cfg.gui packagesGui
       ++ lib.optionals cfg.guiShell.kde packagesGuiShell.kde
       ++ lib.optionals cfg.nvidia packagesNvidia
-      ++ packagesFromModules;
+      ++ config.mySystem.lib.modulePackages; # Add module-contributed packages
 
     nixpkgs.config.allowUnfree = true; # Allow lincense-burdened packages
+    _module.args = {
+      pkgsUnstable = pkgsUnstable; # Expose the unstable channel to modules
+    };
   };
 }
 # READ ME!
