@@ -82,51 +82,52 @@
     # sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
   };
 
-  outputs = {
-    auto-cpufreq, # Energy efficiency.
-    flake-compat, # Make nixos-option work with flakes. # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
-    home-manager, # User-specific settings and packages.
-    lanzaboote, # Secure Boot for NixOS.
-    nix-flatpak, # Enhanced Flatpak support.
-    nix-index, # A files database for nixpkgs.
-    nix-ld, # Run unpatched dynamic binaries on NixOS.
-    nixos-cosmic, # COSMIC Desktop Environment.
-    nixos-hardware, # Additional hardware configuration.
-    nixpkgs,
-    nixpkgs-unstable,
-    nixvim, # A Neovim configuration system for nix.
-    rust-overlay, # Oxalica's Rust toolchain overlay.
-    self,
-    # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation. # TODO: pending implementation.
-    ...
-  } @ inputs: let
-    sharedModules = [
-      # ░░░░░░░█▀▀░█░█░█▀█░█▀▄░█▀▀░█▀▄░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
-      # ░░░░░░░▀▀█░█▀█░█▀█░█▀▄░█▀▀░█░█░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
-      # ░░░░░░░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
-      ./home-manager/home.nix
-      ./nixos/modules/applications/default.nix
-      ./nixos/modules/hardware/default.nix
-      ./nixos/modules/networking/default.nix
-      ./nixos/modules/observability/default.nix
-      ./nixos/modules/security/default.nix
-      ./nixos/modules/system/default.nix
-      ./nixos/modules/virtualisation/default.nix
-    ];
+  outputs =
+    {
+      auto-cpufreq, # Energy efficiency.
+      flake-compat, # Make nixos-option work with flakes. # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+      home-manager, # User-specific settings and packages.
+      lanzaboote, # Secure Boot for NixOS.
+      nix-flatpak, # Enhanced Flatpak support.
+      nix-index, # A files database for nixpkgs.
+      nix-ld, # Run unpatched dynamic binaries on NixOS.
+      nixos-cosmic, # COSMIC Desktop Environment.
+      nixos-hardware, # Additional hardware configuration.
+      nixpkgs,
+      nixpkgs-unstable,
+      nixvim, # A Neovim configuration system for nix.
+      rust-overlay, # Oxalica's Rust toolchain overlay.
+      self,
+      # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation. # TODO: pending implementation.
+      ...
+    }@inputs:
+    let
+      sharedModules = [
+        # ░░░░░░░█▀▀░█░█░█▀█░█▀▄░█▀▀░█▀▄░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
+        # ░░░░░░░▀▀█░█▀█░█▀█░█▀▄░█▀▀░█░█░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
+        # ░░░░░░░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
+        ./home-manager/home.nix
+        ./nixos/modules/applications/default.nix
+        ./nixos/modules/hardware/default.nix
+        ./nixos/modules/networking/default.nix
+        ./nixos/modules/observability/default.nix
+        ./nixos/modules/security/default.nix
+        ./nixos/modules/system/default.nix
+        ./nixos/modules/virtualisation/default.nix
+      ];
 
-    nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
-    # "Syntax error to break the build"
-  in {
-    # Laptop: Intel CPU & GPU + KDE
-    nixosConfigurations = {
-      perrrkele = let
-        system = "x86_64-linux";
-      in
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs system;};
-          modules =
-            sharedModules
-            ++ [
+      nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+    in
+    {
+      # Laptop: Intel CPU & GPU + KDE
+      nixosConfigurations = {
+        perrrkele =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system; };
+            modules = sharedModules ++ [
               inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
               ./nixos/hosts/perrrkele/default.nix
               {
@@ -139,17 +140,16 @@
                 ];
               }
             ];
-        };
+          };
 
-      # Desktop: Intel CPU, Nvidia GPU
-      desktop = let
-        system = "x86_64-linux";
-      in
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs system;};
-          modules =
-            sharedModules
-            ++ [
+        # Desktop: Intel CPU, Nvidia GPU
+        desktop =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system; };
+            modules = sharedModules ++ [
               ./nixos/hosts/desktop/configuration.nix
               {
                 # ░░░░░░░█▀█░█░█░█▀▀░█▀▄░█░░░█▀█░█░█░█▀▀░░░░░░░
@@ -161,17 +161,16 @@
                 ];
               }
             ];
-        };
+          };
 
-      # Headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
-      chuwi = let
-        system = "x86_64-linux";
-      in
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs system;};
-          modules =
-            sharedModules
-            ++ [
+        # Headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
+        chuwi =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs system; };
+            modules = sharedModules ++ [
               ./nixos/hosts/chuwi/configuration.nix
               {
                 # ░░░░░░░█▀█░█░█░█▀▀░█▀▄░█░░░█▀█░█░█░█▀▀░░░░░░░
@@ -183,7 +182,7 @@
                 ];
               }
             ];
-        };
+          };
+      };
     };
-  };
 }
