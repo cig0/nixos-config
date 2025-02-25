@@ -9,13 +9,13 @@ let
 
     # Directories shortcuts
     D = "cd ~/Downloads";
-    DA = "cd ~/data";
-    DAr = "cd /run/media/data";
-    DE = "cd ~/Desktop";
-    DOC = "cd ~/Documents";
+    Da = "cd ~/data";
+    Darr = "cd /run/media/data";
+    E = "cd ~/Desktop";
     F = "cd /etc/nixos/nixos-config"; # Flake directory.
     Ff = "cd ~/workdir/cig0/nixos/nixos-config-public"; # Public flake.
     N = "cd ~/Notes";
+    O = "cd ~/Documents";
     P = "cd ~/Pictures";
     S = "cd ~/Sync";
     T = "cd ~/tmp";
