@@ -196,6 +196,7 @@ let
       qrscan
       rust-petname
       pipe-rename
+      syncterm # BBS terminal emulator :: Homepage: https://syncterm.bbsdev.net/
       terminal-parrot
       tesseract
       translate-shell
