@@ -123,7 +123,7 @@ in
                 # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
                 ./modules/applications/default.nix
                 ./modules/config-files/default.nix
-                ./modules/user/maintenance/apps-cargo.nix
+                ./modules/maintenance/apps-cargo.nix
               ];
 
               # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
