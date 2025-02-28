@@ -11,6 +11,6 @@
   imports = builtins.filter (x: x != null) [
     ./applications/default.nix
     ./config-files/default.nix
-    ./system/system/default.nix
+    ./system/default.nix
   ];
 }
