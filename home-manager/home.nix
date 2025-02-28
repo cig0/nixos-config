@@ -119,7 +119,7 @@ in
                 # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
                 ./modules/applications/default.nix
                 ./modules/config-files/default.nix
-                ./modules/system/maintenance/default.nix
+                ./modules/system/default.nix
               ];
 
               # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
