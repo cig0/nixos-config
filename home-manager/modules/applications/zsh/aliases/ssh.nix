@@ -4,8 +4,8 @@
 
 let
   aliases = {
-    sshFingerprint = "ssh-keygen -E hash_type -lf /path/to/key"; # Get key fingerprint
-    sshKeygen = "ssh-keygen -t ecdsa -b 521 -N " " -f $1"; # Generate a passwordless SSH key pair suitable for non-critical chores
+    sshFingerprint = "ssh-keygen -E hash_type -lf $@"; # Get key fingerprint
+    sshKeygen = "ssh-keygen -t ecdsa -b 521 -N '' -f $1"; # Generate a passwordless SSH key pair suitable for non-critical chores
   };
 
 in
