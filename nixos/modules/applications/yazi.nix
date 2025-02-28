@@ -11,6 +11,10 @@ in
   config = lib.mkIf cfg.enable {
     programs.yazi = {
       enable = true;
+      # "https://yazi-rs.github.io/docs/tips/"
+      # plugins = {
+      #   toggle-pane = "yazi-rs/plugins:toggle-pane";
+      # };
     };
   };
 }
