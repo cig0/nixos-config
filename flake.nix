@@ -84,21 +84,21 @@
 
   outputs =
     {
-      auto-cpufreq, # Energy efficiency.
-      flake-compat, # Make nixos-option work with flakes. # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
-      home-manager, # User-specific settings and packages.
-      lanzaboote, # Secure Boot for NixOS.
-      nix-flatpak, # Enhanced Flatpak support.
-      nix-index, # A files database for nixpkgs.
-      nix-ld, # Run unpatched dynamic binaries on NixOS.
-      nixos-cosmic, # COSMIC Desktop Environment.
-      nixos-hardware, # Additional hardware configuration.
+      auto-cpufreq, # Energy efficiency
+      flake-compat, # Make nixos-option work with flakes # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+      home-manager, # User-specific settings and packages
+      lanzaboote, # Secure Boot for NixOS
+      nix-flatpak, # Enhanced Flatpak support
+      nix-index, # A files database for nixpkgs
+      nix-ld, # Run unpatched dynamic binaries on NixOS
+      nixos-cosmic, # COSMIC Desktop Environment
+      nixos-hardware, # Additional hardware configuration
       nixpkgs,
       nixpkgs-unstable,
-      nixvim, # A Neovim configuration system for nix.
-      rust-overlay, # Oxalica's Rust toolchain overlay.
+      nixvim, # A Neovim configuration system for nix
+      rust-overlay, # Oxalica's Rust toolchain overlay
       self,
-      # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation. # TODO: pending implementation.
+      # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation # TODO: pending implementation.
       ...
     }@inputs:
     let
