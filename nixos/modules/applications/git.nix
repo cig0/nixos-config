@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
-  cfg = lib.getAttrFromPath ["mySystem" "programs" "git"] config;
-in {
+}:
+let
+  cfg = lib.getAttrFromPath [ "mySystem" "programs" "git" ] config;
+in
+{
   options.mySystem.programs.git = {
     enable = lib.mkEnableOption "Whether to enable git, a distributed version control system.";
     lfs.enable = lib.mkEnableOption "Whether to enable git-lfs (Large File Storage).";
@@ -90,6 +92,11 @@ in {
 
         merge.conflictstyle = "diff3";
 
+        pack = {
+          packSizeLimit = "2g";
+          threads = 2;
+        };
+
         pager = {
           branch = false;
           difftool = true;
@@ -101,6 +108,10 @@ in {
           insteadOf = "https://github.com/";
         };
 
+        # TODO: evaluate moving Git management and configuration to Home Manager.
+        # One way to do this would be to manage the actual applications from this general module, but create the configuration file and the global .git_ignore file for each user.
+        # However, given that I'm the only human user of my systems, I'm setting my user info here temporarily to make it available to all the system users in all my hosts.
+        # Food for thought!
         user = {
           signingkey = "BB81CA1B11628BF9929C7F733663FC5D6230F078";
           name = "Martin Cigorraga";
