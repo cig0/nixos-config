@@ -4,15 +4,14 @@
   lib,
   pkgs,
   ...
-}: let
-  hostSelector = import ../../lib/host-selector.nix {inherit config lib;}; # TODO: remove this legacy configuration
+}:
+let
+  hostSelector = import ../host-selector.nix { inherit config lib; }; # TODO: remove this legacy configuration
 
-  cfg = lib.getAttrFromPath ["mySystem" "boot"] config;
+  cfg = lib.getAttrFromPath [ "mySystem" "boot" ] config;
 
   kernelPackageName =
-    if cfg.kernelPackages == "stable"
-    then "linuxPackages"
-    else "linuxPackages_" + cfg.kernelPackages;
+    if cfg.kernelPackages == "stable" then "linuxPackages" else "linuxPackages_" + cfg.kernelPackages;
 
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`
   # kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
@@ -68,20 +67,39 @@
     "udev.log_level=1" # Print error messages. Change to 2, 3 or 4 for Warning, Info and Debug messages respectively.
     # "quiet"
   ];
-in {
+in
+{
   options.mySystem.boot.kernelPackages = lib.mkOption {
-    type = lib.types.enum ["latest" "latest_hardened" "lqx" "stable" "xanmod_latest" "xanmod_stable"];
+    type = lib.types.enum [
+      "latest"
+      "latest_hardened"
+      "lqx"
+      "stable"
+      "xanmod_latest"
+      "xanmod_stable"
+    ];
     default = "stable";
     description = "What kernel package to use.";
   };
 
   config = {
     boot = {
-      initrd.availableKernelModules = ["xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod"]; # Override parameter in hardware-configuration.nix
+      initrd.availableKernelModules = [
+        "xhci_pci"
+        "thunderbolt"
+        "nvme"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+      ]; # Override parameter in hardware-configuration.nix
       kernelModules =
-        if hostSelector.isIntelGPUHost
-        then ["kvm-intel" "i915"]
-        else []; # Override parameter in hardware-configuration.nix
+        if hostSelector.isIntelGPUHost then
+          [
+            "kvm-intel"
+            "i915"
+          ]
+        else
+          [ ]; # Override parameter in hardware-configuration.nix
       kernelPackages = builtins.getAttr kernelPackageName pkgs;
       # kernelPackages =
       #   if hostSelector.isChuweiMiniPC
@@ -92,17 +110,17 @@ in {
 
       kernel.sysctl =
         # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
-        if hostSelector.isDesktop || hostSelector.isChuweiMiniPC
-        then commonKernelSysctl // {"net.ipv4.tcp_congestion_control" = "bbr";}
+        if hostSelector.isDesktop || hostSelector.isChuweiMiniPC then
+          commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "bbr"; }
         # bbr: A newer algorithm designed for higher throughput and lower latency.
-        else if hostSelector.isPerrrkele
-        then commonKernelSysctl // {"net.ipv4.tcp_congestion_control" = "westwood";}
+        else if hostSelector.isPerrrkele then
+          commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "westwood"; }
         # westwood: Aimed at improving performance over wireless networks and other lossy links by using end-to-end bandwidth estimation.
-        else throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
+        else
+          throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 
       kernelParams =
-        if hostSelector.isIntelGPUHost
-        then
+        if hostSelector.isIntelGPUHost then
           commonKernelParams
           ++ [
             "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
@@ -118,30 +136,31 @@ in {
             "iommu=pt"
             "mitigations=off" # Turns off certain CPU security mitigations. It might enhance performance
           ]
-        else if hostSelector.isNvidiaGPUHost
-        then
+        else if hostSelector.isNvidiaGPUHost then
           commonKernelParams
           ++ [
             "nvidia_drm.modeset=1" # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
           ]
-        else {};
+        else
+          { };
 
       kernelPatches =
-        if kernelPatches_enable == "true"
-        then [
-          {
-            name = "tux-logo";
-            patch = null;
-            extraConfig = ''
-              FRAMEBUFFER_CONSOLE y
-              LOGO y
-              LOGO_LINUX_MONO y
-              LOGO_LINUX_VGA16 y
-              LOGO_LINUX_CLUT224 y
-            '';
-          }
-        ]
-        else [];
+        if kernelPatches_enable == "true" then
+          [
+            {
+              name = "tux-logo";
+              patch = null;
+              extraConfig = ''
+                FRAMEBUFFER_CONSOLE y
+                LOGO y
+                LOGO_LINUX_MONO y
+                LOGO_LINUX_VGA16 y
+                LOGO_LINUX_CLUT224 y
+              '';
+            }
+          ]
+        else
+          [ ];
     };
   };
 }
@@ -181,4 +200,3 @@ in {
 # Nvidia
 # "nvidia_drm.fbdev=1"           # Enables the use of a framebuffer device for NVIDIA graphics. This can be useful for certain configurations.
 # "nvidia_drm.modeset=1"         # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
-

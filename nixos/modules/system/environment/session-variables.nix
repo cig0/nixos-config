@@ -3,8 +3,9 @@
   lib,
   pkgs,
   ...
-}: let
-  hostSelector = import ../../../lib/host-selector.nix {inherit config lib;}; # TODO: remove this legacy selector
+}:
+let
+  hostSelector = import ../../host-selector.nix { inherit config lib; }; # TODO: remove this legacy selector
 
   # TODO: Investigate why I can't dynamically assign to the GITHUB_USERNAME variable the content of primaryUser.
   # primaryUser = builtins.getEnv "USER";
@@ -54,7 +55,8 @@
     LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver.
     EGL_DRIVER = "mesa";
   };
-in {
+in
+{
   imports = [
     ./console-keymap.nix # Configure console keymap
     ./i18n.nix # Internationalisation
@@ -64,15 +66,16 @@ in {
     homeBinInPath = true;
     localBinInPath = true;
 
-    pathsToLink = ["/share/zsh"]; # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
+    pathsToLink = [ "/share/zsh" ]; # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
 
     sessionVariables =
       (
-        if hostSelector.isIntelGPUHost
-        then commonEnvSessionVars // intelEnvSessionVars
-        else if hostSelector.isNvidiaGPUHost
-        then commonEnvSessionVars
-        else {}
+        if hostSelector.isIntelGPUHost then
+          commonEnvSessionVars // intelEnvSessionVars
+        else if hostSelector.isNvidiaGPUHost then
+          commonEnvSessionVars
+        else
+          { }
       )
       // githubVars;
   };
