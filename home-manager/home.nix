@@ -41,7 +41,7 @@ in
               # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
               myHM = {
                 # Config-files
-                xdg.configFile."git/config".enable = false; # We're using programs.git.config
+                xdg.configFile."git/config".enable = false; # Testing programs.git.config. Check for nixos/modules/applications/gix.nix.
                 xdg.configFile."git/gitignore_global".enable = true;
               };
 
@@ -84,14 +84,15 @@ in
               # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
               myHM = {
                 # Config-files
-                xdg.configFile."git/config".enable = false; # We're using programs.git.config now!
+                xdg.configFile."git/config".enable = false; # Testing programs.git.config.Check for nixos/modules/applications/gix.nix.
+                xdg.configFile."git/gitignore_global".enable = true;
               };
 
               home = {
                 homeDirectory = "/home/fine";
 
                 sessionVariables = {
-                  EDITOR = "nvim";
+                  EDITOR = config.mySystem.cli.editor;
                   VISUAL = "code";
                 };
 
@@ -127,14 +128,15 @@ in
               # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
               myHM = {
                 # Config-files
-                xdg.configFile."git/config".enable = false; # We're using programs.git.config
+                xdg.configFile."git/config".enable = false; # Testing programs.git.config.Check for nixos/modules/applications/gix.nix.
+                xdg.configFile."git/gitignore_global".enable = true;
               };
 
               home = {
                 homeDirectory = "/home/doomguy";
 
                 sessionVariables = {
-                  EDITOR = "nvim";
+                  EDITOR = config.mySystem.cli.editor;
                   VISUAL = "code";
                 };
 
