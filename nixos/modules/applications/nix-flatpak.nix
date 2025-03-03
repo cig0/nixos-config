@@ -4,12 +4,15 @@
   lib,
   pkgs,
   ...
-}: let
-  cfg = lib.getAttrFromPath ["mySystem" "services" "flatpak"] config;
-in {
-  options.mySystem.services.flatpak.enable = lib.mkEnableOption "Whether to automatically manage flatpaks";
+}:
+let
+  cfg = lib.getAttrFromPath [ "mySystem" "services" "flatpak" ] config;
+in
+{
+  options.mySystem.services.flatpak.enable =
+    lib.mkEnableOption "Whether to automatically manage flatpaks";
 
-  imports = [inputs.nix-flatpak.nixosModules.nix-flatpak];
+  imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
 
   config = {
     services.flatpak = {
@@ -99,6 +102,7 @@ in {
         "com.notesnook.Notesnook"
         "md.obsidian.Obsidian"
         "com.todoist.Todoist"
+        "net.xmind.XMind"
 
         # Programming
         "net.werwolv.ImHex"
@@ -137,4 +141,3 @@ in {
 # READE ME!
 # =========
 # https://github.com/gmodena/nix-flatpak?tab=readme-ov-file
-
