@@ -1,5 +1,6 @@
 # Don't remove this line! This is a NixOS Zsh alias module.
-{...}: let
+{ ... }:
+let
   # Bat - A cat(1) clone with syntax highlighting and Git integration.
   # https://github.com/sharkdp/bat
   aliases = {
@@ -7,4 +8,7 @@
     bb = " bat --paging=always --style=plain --theme='Dracula' --wrap=auto"; # Plain + paging=always
     bn = "bat --paging=always --style=numbers --theme='Dracula' --wrap=auto"; # Numbers + paging=always
   };
-in {aliases = aliases;}
+in
+{
+  aliases = aliases;
+}
