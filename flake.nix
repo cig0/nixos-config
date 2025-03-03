@@ -107,13 +107,7 @@
         # ░░░░░░░▀▀█░█▀█░█▀█░█▀▄░█▀▀░█░█░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
         # ░░░░░░░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
         ./home-manager/home.nix
-        ./nixos/modules/applications/default.nix
-        ./nixos/modules/hardware/default.nix
-        ./nixos/modules/networking/default.nix
-        ./nixos/modules/observability/default.nix
-        ./nixos/modules/security/default.nix
-        ./nixos/modules/system/default.nix
-        ./nixos/modules/virtualisation/default.nix
+        ./nixos/modules/default.nix
       ];
 
       nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
