@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = {
     gitConfig = config.myHM.xdg.configFile."git/config".enable;
     gitIgnoreGlobal = config.myHM.xdg.configFile."git/gitignore_global".enable;
@@ -174,6 +175,10 @@
       [merge]
         conflictstyle = diff3
 
+      [pack]
+        packSizeLimit = 2g
+        threads = 2
+
       [pager]
         branch = false
         difftool = true
@@ -201,12 +206,18 @@
       .vscode/
     '';
   };
-in {
+in
+{
   options.myHM.xdg.configFile = {
-    "git/config".enable = lib.mkEnableOption "Whether to write Git's configuration file to user's $XDG_HOME_CONFIG/git/config directory.";
+    "git/config".enable =
+      lib.mkEnableOption "Whether to write Git's configuration file to user's $XDG_HOME_CONFIG/git/config directory.";
 
-    "git/gitignore_global".enable = lib.mkEnableOption "Whether to write Git's ignore file to user's $XDG_HOME_CONFIG/git/config directory.";
+    "git/gitignore_global".enable =
+      lib.mkEnableOption "Whether to write Git's ignore file to user's $XDG_HOME_CONFIG/git/config directory.";
   };
 
-  config = lib.mkMerge [conditionalGitConfig conditionalGitIgnoreGlobal];
+  config = lib.mkMerge [
+    conditionalGitConfig
+    conditionalGitIgnoreGlobal
+  ];
 }
