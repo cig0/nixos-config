@@ -109,8 +109,8 @@ in
         };
 
         # TODO: evaluate moving Git management and configuration to Home Manager.
-        # One way to do this would be to manage the actual applications from this general module, but create the configuration file and the global .git_ignore file for each user.
-        # However, given that I'm the only human user of my systems, I'm setting my user info here temporarily to make it available to all the system users in all my hosts.
+        # One way to do this would be to manage the actual applications from this general module, but create the configuration file and the global .git_ignore file for each user from Home Manager.
+        # However, given that I'm the only human user of my systems, I'm temporarily setting my personal settings here to make them available to all the system users in all my hosts.
         # Food for thought!
         user = {
           signingkey = "BB81CA1B11628BF9929C7F733663FC5D6230F078";
