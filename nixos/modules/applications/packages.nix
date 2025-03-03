@@ -29,6 +29,7 @@ let
       # Misc
       at
       bat
+      broot
       chezmoi
       cyme # https://github.com/tuna-f1sh/cyme :: List system USB buses and devices.
       difftastic
