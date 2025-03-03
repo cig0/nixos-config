@@ -1,3 +1,4 @@
+# TODO: migrate from automagic logic to host-specific configuration. It served well while I was learning how to properly configure NixOS, but it's time to move on and embrace the good practices
 {
   config,
   pkgs,
