@@ -110,6 +110,12 @@
         ./nixos/modules/default.nix
       ];
 
+      sharedOVerlays = [
+        # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+        nixos-option
+        rust-overlay.overlays.default
+      ];
+
       nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
     in
     {
@@ -128,10 +134,7 @@
                 # ░░░░░░░█▀█░█░█░█▀▀░█▀▄░█░░░█▀█░█░█░█▀▀░░░░░░░
                 # ░░░░░░░█░█░▀▄▀░█▀▀░█▀▄░█░░░█▀█░░█░░▀▀█░░░░░░░
                 # ░░░░░░░▀▀▀░░▀░░▀▀▀░▀░▀░▀▀▀░▀░▀░░▀░░▀▀▀░░░░░░░
-                nixpkgs.overlays = [
-                  nixos-option # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
-                  rust-overlay.overlays.default
-                ];
+                nixpkgs.overlays = sharedOVerlays ++ [ ];
               }
             ];
           };
