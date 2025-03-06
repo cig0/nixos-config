@@ -21,8 +21,6 @@ in
       useGlobalPkgs = true;
       useUserPackages = true;
       users = lib.mkMerge [
-        #       ---------   ATTENTION!   ---------
-        # Always use stateVersion = "24.11" for new users
         {
           cig0 =
             { ... }:
