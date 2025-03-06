@@ -93,8 +93,8 @@
       nix-ld, # Run unpatched dynamic binaries on NixOS
       nixos-cosmic, # COSMIC Desktop Environment
       nixos-hardware, # Additional hardware configuration
-      nixpkgs,
-      nixpkgs-unstable,
+      nixpkgs, # NixOS release channel
+      nixpkgs-unstable, # NixOS release channel
       nixvim, # A Neovim configuration system for nix
       rust-overlay, # Oxalica's Rust toolchain overlay
       self,
@@ -102,21 +102,21 @@
       ...
     }@inputs:
     let
+      # ░░░░░░░█▀▀░█░█░█▀█░█▀▄░█▀▀░█▀▄░░░░█▀▀░█▀▀░█▀▀░▀█▀░▀█▀░█▀█░█▀█░░░░░░░
+      # ░░░░░░░▀▀█░█▀█░█▀█░█▀▄░█▀▀░█░█░░░░▀▀█░█▀▀░█░░░░█░░░█░░█░█░█░█░░░░░░░
+      # ░░░░░░░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀░░░░░▀▀▀░▀▀▀░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░░░░░░░
+      nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+
       sharedModules = [
-        # ░░░░░░░█▀▀░█░█░█▀█░█▀▄░█▀▀░█▀▄░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
-        # ░░░░░░░▀▀█░█▀█░█▀█░█▀▄░█▀▀░█░█░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
-        # ░░░░░░░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
         ./home-manager/home.nix
         ./nixos/modules/default.nix
       ];
 
       sharedOVerlays = [
-        # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
-        nixos-option
+        nixos-option # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
         rust-overlay.overlays.default
       ];
 
-      nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
     in
     {
       # Laptop: Intel CPU & GPU + KDE
@@ -152,10 +152,7 @@
                 # ░░░░░░░█▀█░█░█░█▀▀░█▀▄░█░░░█▀█░█░█░█▀▀░░░░░░░
                 # ░░░░░░░█░█░▀▄▀░█▀▀░█▀▄░█░░░█▀█░░█░░▀▀█░░░░░░░
                 # ░░░░░░░▀▀▀░░▀░░▀▀▀░▀░▀░▀▀▀░▀░▀░░▀░░▀▀▀░░░░░░░
-                nixpkgs.overlays = [
-                  nixos-option # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
-                  rust-overlay.overlays.default
-                ];
+                nixpkgs.overlays = sharedOVerlays ++ [ ];
               }
             ];
           };
@@ -173,10 +170,7 @@
                 # ░░░░░░░█▀█░█░█░█▀▀░█▀▄░█░░░█▀█░█░█░█▀▀░░░░░░░
                 # ░░░░░░░█░█░▀▄▀░█▀▀░█▀▄░█░░░█▀█░░█░░▀▀█░░░░░░░
                 # ░░░░░░░▀▀▀░░▀░░▀▀▀░▀░▀░▀▀▀░▀░▀░░▀░░▀▀▀░░░░░░░
-                nixpkgs.overlays = [
-                  nixos-option # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
-                  rust-overlay.overlays.default
-                ];
+                nixpkgs.overlays = sharedOVerlays ++ [ ];
               }
             ];
           };
