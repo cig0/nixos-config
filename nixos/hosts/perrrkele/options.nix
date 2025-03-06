@@ -1,4 +1,8 @@
-# TODO: split into modules in nixos/profiles (../../profiles)
+# TODO: possibly split into modules in nixos/profiles (../../profiles)
+# The consideration here is if further splitting this options file
+# into smaller modules improves options management, or if we risk
+# ofuscating the host configuration.
+
 {
   # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
   # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
@@ -32,7 +36,9 @@
 
       # TODO: wip
       install = [
+        "ctx"
         "ktop"
+        "ns"
         "slowdrain"
       ];
     };
@@ -125,7 +131,7 @@
     networking.timeServers = [ "argentina" ];
     time.timeZone = "America/Buenos_Aires";
     # System - User management
-    users.users.doomguy = true;
+    users.users.doomguy = true; # Enable or disable test account
 
     # Virtualisation
     virtualisation = {
