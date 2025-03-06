@@ -1,5 +1,3 @@
-# TODO: think about adding toggle to enable/disable importing modules
-# { modulesPath, pkgsUnstable, ... }:
 {
   config,
   inputs,
