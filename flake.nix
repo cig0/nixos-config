@@ -132,7 +132,7 @@
               inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
               ./nixos/hosts/perrrkele/default.nix
               {
-                # ░░░░   O V E R L A Y S   ░░░░
+                # ░░░░    O V E R L A Y S    ░░░░
                 nixpkgs.overlays = sharedOVerlays ++ [ ];
               }
             ];
@@ -148,7 +148,7 @@
             modules = sharedModules ++ [
               ./nixos/hosts/desktop/configuration.nix
               {
-                # ░░░░   O V E R L A Y S   ░░░░
+                # ░░░░    O V E R L A Y S    ░░░░
                 nixpkgs.overlays = sharedOVerlays ++ [ ];
               }
             ];
@@ -164,7 +164,7 @@
             modules = sharedModules ++ [
               ./nixos/hosts/chuwi/configuration.nix
               {
-                # ░░░░   O V E R L A Y S   ░░░░
+                # ░░░░    O V E R L A Y S    ░░░░
                 nixpkgs.overlays = sharedOVerlays ++ [ ];
               }
             ];
