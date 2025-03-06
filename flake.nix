@@ -39,7 +39,7 @@
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
-    # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+    # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
     flake-compat.url = "github:edolstra/flake-compat"; # Make nixos-option work with flakes.
 
     home-manager = {
@@ -85,7 +85,7 @@
   outputs =
     {
       auto-cpufreq, # Energy efficiency
-      flake-compat, # Make nixos-option work with flakes # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+      flake-compat, # Make nixos-option work with flakes # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
       home-manager, # User-specific settings and packages
       lanzaboote, # Secure Boot for NixOS
       nix-flatpak, # Enhanced Flatpak support
@@ -106,7 +106,7 @@
       # ░░░░░░░▀▀█░█▀█░█▀█░█▀▄░█▀▀░█░█░░░░░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
       # ░░░░░░░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀░░░░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
 
-      nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+      nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
 
       sharedModules = [
         ./home-manager/home.nix
@@ -114,7 +114,7 @@
       ];
 
       sharedOVerlays = [
-        nixos-option # TODO: To be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+        nixos-option # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
         rust-overlay.overlays.default
       ];
 
