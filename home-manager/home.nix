@@ -4,8 +4,6 @@
   config,
   inputs,
   lib,
-  # pkgs,
-  # pkgsUnstable,
   ...
 }:
 let
@@ -30,42 +28,39 @@ in
             { ... }:
             {
               imports = [
-                # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
-                # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
-                # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
+                # ░░░░    M O D U L E S    ░░░░
                 ./modules/default.nix
+                ./users/cig0/default.nix
               ];
 
-              # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-              # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-              # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-              myHM = {
-                # Config-files
-                xdg.configFile."git/config".enable = false; # Testing programs.git.config. Check for nixos/modules/applications/gix.nix.
-                xdg.configFile."git/gitignore_global".enable = true;
-              };
+              # ░░░░    O P T I O N S    ░░░░
+              # myHM = {
+              #   # Config-files
+              #   xdg.configFile."git/config".enable = false; # Testing programs.git.config. Check for nixos/modules/applications/gix.nix.
+              #   xdg.configFile."git/gitignore_global".enable = true;
+              # };
 
-              home = {
-                homeDirectory = "/home/cig0";
+              # home = {
+              #   homeDirectory = "/home/cig0";
 
-                sessionVariables = {
-                  # EDITOR = "nvim";
-                  EDITOR = config.mySystem.cli.editor;
-                  VISUAL = "code";
-                };
+              #   sessionVariables = {
+              #     # EDITOR = "nvim";
+              #     EDITOR = config.mySystem.cli.editor;
+              #     VISUAL = "code";
+              #   };
 
-                # packages = with pkgs;
-                #   [
-                #   ]
-                #   ++ (with pkgsUnstable; [
-                #     # Web
-                #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-                #   ]);
+              # packages = with pkgs;
+              #   [
+              #   ]
+              #   ++ (with pkgsUnstable; [
+              #     # Web
+              #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
+              #   ]);
 
-                # The state version is required and should stay at the version you
-                # originally installed.
-                stateVersion = "24.11";
-              };
+              # The state version is required and should stay at the version you
+              # originally installed.
+              # stateVersion = "24.11";
+              # };
             };
         }
         {
@@ -73,15 +68,11 @@ in
             { ... }:
             {
               imports = [
-                # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
-                # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
-                # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
+                # ░░░░    M O D U L E S    ░░░░
                 ./modules/default.nix
               ];
 
-              # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-              # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-              # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+              # ░░░░    O P T I O N S    ░░░░
               myHM = {
                 # Config-files
                 xdg.configFile."git/config".enable = false; # Testing programs.git.config.Check for nixos/modules/applications/gix.nix.
@@ -115,17 +106,13 @@ in
             { ... }:
             {
               imports = [
-                # ░░░░░░░█▄█░█▀█░█▀▄░█░█░█░░░█▀▀░█▀▀░░░░░░░
-                # ░░░░░░░█░█░█░█░█░█░█░█░█░░░█▀▀░▀▀█░░░░░░░
-                # ░░░░░░░▀░▀░▀▀▀░▀▀░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░░░░░░
+                # ░░░░    M O D U L E S    ░░░░
                 ./modules/applications/default.nix
                 ./modules/config-files/default.nix
                 ./modules/system/default.nix
               ];
 
-              # ░░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-              # ░░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-              # ░░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+              # ░░░░    O P T I O N S    ░░░░
               myHM = {
                 # Config-files
                 xdg.configFile."git/config".enable = false; # Testing programs.git.config.Check for nixos/modules/applications/gix.nix.
