@@ -146,7 +146,7 @@
           nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system; };
             modules = sharedModules ++ [
-              ./nixos/hosts/desktop/configuration.nix
+              ./nixos/hosts/desktop/default.nix
               {
                 # ░░░░    O V E R L A Y S    ░░░░
                 nixpkgs.overlays = sharedOVerlays ++ [ ];
@@ -162,7 +162,7 @@
           nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system; };
             modules = sharedModules ++ [
-              ./nixos/hosts/chuwi/configuration.nix
+              ./nixos/hosts/chuwi/default.nix
               {
                 # ░░░░    O V E R L A Y S    ░░░░
                 nixpkgs.overlays = sharedOVerlays ++ [ ];
