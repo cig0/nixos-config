@@ -126,7 +126,6 @@ in
         "com.brave.Browser"
         "com.google.Chrome"
         "com.google.EarthPro"
-        "io.gitlab.librewolf-community"
         "org.torproject.torbrowser-launcher"
       ];
     };
