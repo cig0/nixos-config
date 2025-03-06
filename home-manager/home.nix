@@ -79,37 +79,9 @@ in
             { ... }:
             {
               imports = [
-                # ░░░░    M O D U L E S    ░░░░
                 ./modules/default.nix # Shared modules
+                ./users/fine/default.nix # User configuration
               ];
-
-              # ░░░░    O P T I O N S    ░░░░
-              myHM = {
-                # Config-files
-                xdg.configFile."git/config".enable = false; # Testing programs.git.config.Check for nixos/modules/applications/gix.nix.
-                xdg.configFile."git/gitignore_global".enable = true;
-              };
-
-              home = {
-                homeDirectory = "/home/fine";
-
-                sessionVariables = {
-                  EDITOR = config.mySystem.cli.editor;
-                  VISUAL = "code";
-                };
-
-                # packages = with pkgs;
-                #   [
-                #   ]
-                #   ++ (with pkgsUnstable; [
-                #     # Web
-                #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-                #   ]);
-
-                # The state version is required and should stay at the version you
-                # originally installed.
-                stateVersion = "24.11";
-              };
             };
         }
       ];
