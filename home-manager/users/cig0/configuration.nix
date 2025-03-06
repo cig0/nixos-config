@@ -1,29 +1,19 @@
+# ░░░░░░█▀▀░▀█▀░█▀▀░▄▀▄░▀░█▀▀░░░░░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█░░░░░░
+# ░░░░░░█░░░░█░░█░█░█/█░░░▀▀█░░░░░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█░░░░░░
+# ░░░░░░▀▀▀░▀▀▀░▀▀▀░░▀░░░░▀▀▀░░░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░░░░░░
 {
   config,
-  inputs,
-  lib,
+  nixosConfig, # Required to access NixOS configuration when using Home Manager as a module
   ...
 }:
 {
-  # ░░░░░░█▀▀░▀█▀░█▀▀░▄▀▄░▀░█▀▀░░░░░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█░░░░░░
-  # ░░░░░░█░░░░█░░█░█░█/█░░░▀▀█░░░░░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█░░░░░░
-  # ░░░░░░▀▀▀░▀▀▀░▀▀▀░░▀░░░░▀▀▀░░░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░░░░░░
-
   home = {
     homeDirectory = "/home/cig0";
 
     sessionVariables = {
-      EDITOR = config.mySystem.cli.editor;
+      EDITOR = nixosConfig.mySystem.cli.editor;
       VISUAL = "code";
     };
-
-    # packages = with pkgs;
-    #   [
-    #   ]
-    #   ++ (with pkgsUnstable; [
-    #     # Web
-    #     # (pkgsUnstable.wrapFirefox (pkgsUnstable.firefox-unwrapped.override { pipewireSupport = true;}) {})
-    #   ]);
 
     # The state version is required and should stay at the version you
     # originally installed.
