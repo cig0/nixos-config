@@ -110,6 +110,9 @@
   # auto-optimise-store: the option is managed by the module nixos/modules/system/maintenance.nix
   nix = {
     settings = {
+      substituters = [ "https://cache.nixos.org" ];
+      trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+
       allowed-users = [
         "@builders"
         "@wheel"
