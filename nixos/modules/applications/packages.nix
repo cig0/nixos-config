@@ -209,7 +209,8 @@ let
     ];
     multimedia = with pkgsUnstable; [
       exiftool
-      imagemagick
+      ffmpeg # Complete, cross-platform solution to record, convert and stream audio and video :: https://ffmpeg.org [Yazi's requirement: https://yazi-rs.github.io/docs/installation/]
+      imagemagick # Software suite to create, edit, compose, or convert bitmap images :: https://imagemagick.org
       jp2a
       libheif
       mediainfo
