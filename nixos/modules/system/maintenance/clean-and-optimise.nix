@@ -1,10 +1,14 @@
+# TODO: dispose of this module. There's no need for it, as this is a NixOS built-in option, and also it is wrong to set the same maintenance schedule for eveyry host (that should be decided in each host's options module)
+
 {
   config,
   lib,
   ...
-}: let
-  cfg = lib.getAttrFromPath ["mySystem" "nix"] config;
-in {
+}:
+let
+  cfg = lib.getAttrFromPath [ "mySystem" "nix" ] config;
+in
+{
   options.mySystem.nix = {
     settings.auto-optimise-store = lib.mkEnableOption "If set to true, Nix automatically detects files in the store that have
 identical contents, and replaces them with hard links to a single copy.
