@@ -80,6 +80,8 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     # sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
+
+    yazi.url = "github:sxyazi/yazi";
   };
 
   outputs =
