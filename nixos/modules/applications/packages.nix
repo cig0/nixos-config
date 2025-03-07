@@ -1,3 +1,5 @@
+# TODO: polish up the packages lists in a way that makes it easier to maintain and update them for their roles. packagesBaseline is becoming an everything-and-the-kitchen-sink list.
+
 {
   config,
   inputs,
@@ -36,11 +38,11 @@ let
       delta
       direnv
       dmidecode
-      fd
+      fd # Simple, fast and user-friendly alternative to find :: https://github.com/sharkdp/fd [Yazi's requirement: https://yazi-rs.github.io/docs/installation/]
       fdupes
       file
       fx # Terminal JSON viewer :: https://github.com/antonmedv/fx
-      fzf
+      fzf # Command-line fuzzy finder written in Go :: https://github.com/junegunn/fzf [Yazi's requirement: https://yazi-rs.github.io/docs/installation/]
       getent
       goaccess
       gum
@@ -52,13 +54,15 @@ let
       mc
       p7zip
       pciutils
-      ripgrep
+      poppler # PDF rendering library :: [Yazi's requirement: https://yazi-rs.github.io/docs/installation/]
+      ripgrep # Utility that combines the usability of The Silver Searcher with the raw speed of grep :: https://github.com/BurntSushi/ripgrep [Yazi's requirement: https://yazi-rs.github.io/docs/installation/]
       strace-analyzer
       tmux
       tree
       ugrep
       usbutils
-      yq-go
+      yq-go # Portable command-line YAML processor :: https://mikefarah.gitbook.io/yq/
+      zoxide # Fast cd command that learns your habits :: https://github.com/ajeetdsouza/zoxide
 
       # Monitoring & Observability
       btop
@@ -111,7 +115,7 @@ let
       devenv # Fast, Declarative, Reproducible, and Composable Developer Environments :: https://github.com/cachix/devenv
       # Nix - LSP
       nil # Yet another language server for Nix :: https://github.com/oxalica/nil
-      nixd # Feature-rich Nix language server interoperating with C++ nix :: https://github.com/nix-community/nixd
+      # nixd # Feature-rich Nix language server interoperating with C++ nix :: https://github.com/nix-community/nixd
 
       # Storage
       du-dust
@@ -128,11 +132,7 @@ let
     backup = with pkgsUnstable; [
       borgbackup
     ];
-    comms = with pkgsUnstable; [
-      discordo
-      iamb
-      weechat
-    ];
+    comms = with pkgsUnstable; [ ];
     cloudNativeTools =
       with pkgs;
       [
