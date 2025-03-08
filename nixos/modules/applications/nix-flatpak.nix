@@ -6,7 +6,7 @@
   ...
 }:
 let
-  cfg = config.mySystem.services.flatpak.enable;
+  cfg = config.mySystem.services.flatpak;
   packages = {
     all = [
       # { appId = "com.brave.Browser"; origin = "flathub";  }
@@ -130,7 +130,7 @@ in
         onActivation = false;
       };
       uninstallUnmanaged = true;
-      packages = [ packages.all ]; # I want the same stuff replicated on all my machines
+      packages = packages.all; # I want the same stuff replicated on all my machines
     };
 
     systemd.services."flatpak-managed-install" = {
