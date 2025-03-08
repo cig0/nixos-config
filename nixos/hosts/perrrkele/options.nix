@@ -31,35 +31,6 @@
     };
 
     fuse.userAllowOther = true; # Recommended for programs.appimage
-
-    lazygit = {
-      enable = true;
-      settings = {
-        gui = {
-          scrollPastBottom = false;
-        };
-        git = {
-          commit = {
-            signOff = true;
-            autoWrapCommitMessage = false;
-          };
-          merging = {
-            manualCommit = true;
-          };
-          update = {
-            method = "background";
-            days = 14;
-          };
-          os = {
-            edit = "${config.mySystem.cli.editor} {{filename}}";
-            editAtLine = "${config.mySystem.cli.editor} {{filename}} +{{line}}";
-            editInTerminal = true;
-            openDirInEditor = "${config.mySystem.cli.editor} {{dir}}";
-          };
-        };
-        promptToReturnFromSubprocess = false;
-      };
-    };
   };
 
   # Services
@@ -118,6 +89,7 @@
         "slowdrain"
       ];
     };
+    programs.lazygit.enable = true;
     programs.nixvim.enable = true;
 
     services.ollama = {
