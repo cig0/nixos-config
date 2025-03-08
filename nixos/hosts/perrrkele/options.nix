@@ -49,7 +49,8 @@
       acceleration = null;
     };
     services.tailscale.enable = true;
-    programs.yazi.enable = true;
+    package.yazi.enable = true;
+    programs.yazi.enable = false;
     programs.zsh.enable = true;
     # Applications - From packages
     packages = {
