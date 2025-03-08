@@ -101,7 +101,7 @@
       rust-overlay, # Oxalica's Rust toolchain overlay
       self,
       # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation # TODO: pending implementation.
-      yazi,
+      yazi, # Blazing fast terminal file manager written in Rust, based on async I/O
       ...
     }@inputs:
     let
@@ -135,7 +135,7 @@
               inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
               ./nixos/hosts/perrrkele/default.nix
               {
-                # ░░░░    O V E R L A Y S    ░░░░
+                # ░░░░    O V E R L A Y S    ░░░░ #
                 nixpkgs.overlays = sharedOVerlays ++ [ ];
               }
             ];
@@ -151,7 +151,7 @@
             modules = sharedModules ++ [
               ./nixos/hosts/desktop/default.nix
               {
-                # ░░░░    O V E R L A Y S    ░░░░
+                # ░░░░    O V E R L A Y S    ░░░░ #
                 nixpkgs.overlays = sharedOVerlays ++ [ ];
               }
             ];
@@ -167,7 +167,7 @@
             modules = sharedModules ++ [
               ./nixos/hosts/chuwi/default.nix
               {
-                # ░░░░    O V E R L A Y S    ░░░░
+                # ░░░░    O V E R L A Y S    ░░░░ #
                 nixpkgs.overlays = sharedOVerlays ++ [ ];
               }
             ];
