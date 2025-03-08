@@ -130,7 +130,7 @@
             system = "x86_64-linux";
           in
           nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system yazi; };
+            specialArgs = { inherit inputs system; };
             modules = sharedModules ++ [
               inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
               ./nixos/hosts/perrrkele/default.nix
