@@ -21,6 +21,12 @@
       enable = true;
       binfmt = true;
     };
+    firefox = {
+      enable = true;
+      preferences = {
+        "widget.use-xdg-desktop-portal.file-picker" = "1";
+      }; # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
+    };
     fuse.userAllowOther = true; # Recommended for programs.appimage
   };
 
@@ -40,7 +46,6 @@
   # Options overrides from modules
   mySystem = {
     # Applications - From options
-    programs.firefox.enable = true;
     services.flatpak.enable = true;
     programs.git = {
       enable = true;
