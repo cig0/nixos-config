@@ -10,7 +10,7 @@
 {
   imports = [
     ./auto-upgrade.nix
-    ./clean-and-optimise.nix
+    ./nix-store.nix
     ./nh.nix
   ];
 }
