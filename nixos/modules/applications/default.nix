@@ -13,7 +13,6 @@
     ./krew/default.nix
     ./cli-default-applications.nix
     ./display-manager.nix
-    ./firefox.nix
     ./git.nix
     ./lazygit.nix
     ./nix-flatpak.nix
