@@ -15,24 +15,6 @@
   # Hardware
   hardware.cpu.intel.updateMicrocode = true;
 
-  # Programs
-  programs = {
-    appimage = {
-      # "https://wiki.nixos.org/wiki/Appimage"
-      enable = true;
-      binfmt = true;
-    };
-
-    firefox = {
-      enable = true;
-      preferences = {
-        "widget.use-xdg-desktop-portal.file-picker" = "1";
-      }; # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
-    };
-
-    fuse.userAllowOther = true; # Recommended for programs.appimage
-  };
-
   # Services
   services = {
     flatpak = {
@@ -72,6 +54,8 @@
   # ░░░░     OPTIONS FROM MODULES     ░░░░ #
   mySystem = {
     # Applications
+    programs.appimage.enable = true;
+    programs.firefox.enable = true;
     programs.git = {
       enable = true;
       lfs.enable = true;
