@@ -1,9 +1,8 @@
-# TODO: possibly split into modules in nixos/profiles (../../profiles)
-# The consideration here is if further splitting this options file
-# into smaller modules improves options management, or if we risk
-# ofuscating the host configuration.
+# TODO: Consider splitting into modules under nixos/profiles (../../profiles)
+# Splitting may improve options management but risks obfuscating the host config.
 {
   config,
+  pkgs,
   ...
 }:
 {
@@ -13,24 +12,26 @@
   # For Home Manager options, check home-manager/home.nix
 
   # NixOS host-specific options
-
   # Hardware
   hardware.cpu.intel.updateMicrocode = true;
 
   # Programs
   programs = {
-    # "https://wiki.nixos.org/wiki/Appimage"
     appimage = {
+      # "https://wiki.nixos.org/wiki/Appimage"
       enable = true;
       binfmt = true;
     };
+
     firefox = {
       enable = true;
       preferences = {
         "widget.use-xdg-desktop-portal.file-picker" = "1";
       }; # Use the KDE file picker - https://wiki.archlinux.org/title/firefox#KDE_integration
     };
+
     fuse.userAllowOther = true; # Recommended for programs.appimage
+
     lazygit = {
       enable = true;
       settings = {
@@ -56,7 +57,6 @@
             openDirInEditor = "${config.mySystem.cli.editor} {{dir}}";
           };
         };
-
         promptToReturnFromSubprocess = false;
       };
     };
@@ -64,8 +64,30 @@
 
   # Services
   services = {
+    flatpak = {
+      # https://github.com/gmodena/nix-flatpak?tab=readme-ov-file
+      # Depends on: ../../modules/applications/nix-flatpak.nix
+      enable = true;
+      packages = config._module.args.packages.all;
+      update = {
+        auto = {
+          enable = true;
+          onCalendar = "weekly"; # Default value
+        };
+        onActivation = false;
+      };
+      uninstallUnmanaged = true;
+    };
+
     fwupd.enable = true;
     zram-generator.enable = true;
+  };
+
+  # Systemd
+  systemd.services."flatpak-managed-install" = {
+    serviceConfig = {
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 3";
+    }; # Required for services.flatpak to work properly
   };
 
   # ZramSwap
@@ -78,17 +100,16 @@
   # Options overrides from modules
   mySystem = {
     # Applications - From options
-    services.flatpak.enable = true;
     programs.git = {
       enable = true;
       lfs.enable = true;
     };
+
     programs.kde-pim.enable = false;
     programs.kdeconnect.enable = true;
     programs.krew = {
-      enable = true;
-
       # TODO: wip
+      enable = true;
       install = [
         "ctx"
         "ktop"
@@ -97,10 +118,12 @@
       ];
     };
     programs.nixvim.enable = true;
+
     services.ollama = {
       enable = false;
       acceleration = null;
     };
+
     services.tailscale.enable = true;
     package.yazi.enable = true;
     programs.yazi.enable = false;
@@ -118,6 +141,7 @@
       ly.enable = false;
       sddm.enable = true;
     };
+
     services.desktopManager.plasma6.enable = true;
     xdg.portal.enable = true;
 
@@ -175,10 +199,12 @@
       gc.automatic = false;
       settings.auto-optimise-store = true;
     };
+
     programs.nh = {
       enable = true;
       clean.enable = true;
     };
+
     system.autoUpgrade.enable = true;
     # System - Time
     networking.timeServers = [ "argentina" ];
