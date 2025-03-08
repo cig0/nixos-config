@@ -112,7 +112,7 @@ in
 {
   imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
 
-  _module.args = {
+  _module.args.nix-flatpak = {
     packages = {
       all = packages.all;
     };

@@ -68,7 +68,7 @@
       # https://github.com/gmodena/nix-flatpak?tab=readme-ov-file
       # Depends on: ../../modules/applications/nix-flatpak.nix
       enable = true;
-      packages = config._module.args.packages.all;
+      packages = config._module.args.nix-flatpak.packages.all;
       update = {
         auto = {
           enable = true;
