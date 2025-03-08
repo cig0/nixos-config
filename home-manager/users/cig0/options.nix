@@ -2,7 +2,6 @@
 # ░░░░░░░█░░░░█░░█░█░█/█░░░▀▀█░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
 # ░░░░░░░▀▀▀░▀▀▀░▀▀▀░░▀░░░░▀▀▀░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
 {
-
   myHM = {
     # Config-files
     xdg.configFile."git/config".enable = false; # I'm testing programs.git.config. Check nixos/modules/applications/gix.nix for details. Learn more here [0]
