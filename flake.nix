@@ -101,6 +101,7 @@
       rust-overlay, # Oxalica's Rust toolchain overlay
       self,
       # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation # TODO: pending implementation.
+      yazi,
       ...
     }@inputs:
     let
@@ -129,7 +130,7 @@
             system = "x86_64-linux";
           in
           nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system; };
+            specialArgs = { inherit inputs system yazi; };
             modules = sharedModules ++ [
               inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
               ./nixos/hosts/perrrkele/default.nix
