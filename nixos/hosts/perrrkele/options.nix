@@ -99,7 +99,7 @@
 
   # Options overrides from modules
   mySystem = {
-    # Applications - From options
+    # Applications
     programs.git = {
       enable = true;
       lfs.enable = true;
@@ -128,7 +128,7 @@
     package.yazi.enable = true;
     programs.yazi.enable = false;
     programs.zsh.enable = true;
-    # Applications - From packages
+
     packages = {
       baseline = true;
       cli._all = true;
