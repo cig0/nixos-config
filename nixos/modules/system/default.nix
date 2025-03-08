@@ -15,7 +15,6 @@
     ./maintenance/default.nix
     ./nixos/default.nix
     ./fonts.nix
-    ./fwupd.nix
     ./hwaccel.nix
     ./kernel.nix
     ./keyd.nix
