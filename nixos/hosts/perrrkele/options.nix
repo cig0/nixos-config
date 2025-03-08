@@ -37,16 +37,7 @@
 
     programs.kde-pim.enable = false;
     programs.kdeconnect.enable = true;
-    programs.krew = {
-      # TODO: wip
-      enable = true;
-      install = [
-        "ctx"
-        "ktop"
-        "ns"
-        "slowdrain"
-      ];
-    };
+    programs.krew.enable = false; # WIP
     programs.lazygit.enable = true;
     programs.nixvim.enable = true;
 
