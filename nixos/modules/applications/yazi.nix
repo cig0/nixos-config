@@ -31,7 +31,7 @@ in
         assertion =
           lib.count (x: x) [
             config.programs.yazi.enable
-            config.mySystem.packages.yazi.enable
+            config.mySystem.package.yazi.enable
             config.mySystem.programs.yazi.enable
           ] <= 1;
         message = "Only one of config.programs.yazi.enable, mySystem.packages.yazi.enable, or mySystem.programs.yazi.enable can be enabled at a time.";
