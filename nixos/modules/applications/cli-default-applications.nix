@@ -42,10 +42,12 @@
       fileManager = {
         type = lib.types.str;
         default =
-          if config.programs.yazi.enable then
+          if config.mySystem.packages.yazi.enable || config.mySystem.programs.yazi.enable then
             "yazi"
+          else if config.programs.yazi.enable then
+            builtins.trace "Warning: NixOS's default option config.programs.yazi.enable is enabled, which is not supported by this flake."
           else
-            builtins.trace "Warning: Yazi NixOS option not enabled!" null;
+            builtins.trace "Warning: Yazi set as the default CLI file manager, but NixOS option is not enabled and the package is not installed!" null;
         description = "The default CLI file manager.";
       };
     };
