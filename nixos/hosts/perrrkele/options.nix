@@ -10,9 +10,27 @@
   # For Home Manager options, check home-manager/home.nix
 
   # NixOS host-specific options
+
+  # Hardware
   hardware.cpu.intel.updateMicrocode = true;
 
-  services.zram-generator.enable = true;
+  # Programs
+  programs = {
+    # "https://wiki.nixos.org/wiki/Appimage"
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+    fuse.userAllowOther = true; # Recommended for programs.appimage
+  };
+
+  # Services
+  services = {
+    fwupd.enable = true;
+    zram-generator.enable = true;
+  };
+
+  # ZramSwap
   zramSwap = {
     enable = true;
     priority = 5;
@@ -22,7 +40,6 @@
   # Options overrides from modules
   mySystem = {
     # Applications - From options
-    programs.appimage.enable = true;
     programs.firefox.enable = true;
     services.flatpak.enable = true;
     programs.git = {
@@ -111,7 +128,6 @@
 
     # System
     current-system-packages-list.enable = true;
-    services.fwupd.enable = true;
     programs.nix-ld.enable = true;
     # System - Audio
     audio-subsystem.enable = true;
