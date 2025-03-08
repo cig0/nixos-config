@@ -130,7 +130,7 @@ in
         onActivation = false;
       };
       uninstallUnmanaged = true;
-      packages = packages.all; # I want the same stuff replicated on all my machines
+      packages = packages.all; # I want the same stuff replicated on all my GUI hosts
     };
 
     systemd.services."flatpak-managed-install" = {
