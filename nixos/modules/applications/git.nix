@@ -4,7 +4,7 @@
   ...
 }:
 let
-  cfg = lib.getAttrFromPath [ "mySystem" "programs" "git" ] config;
+  cfg = config.mySystem.programs.git;
 in
 {
   options.mySystem.programs.git = {
@@ -13,6 +13,14 @@ in
   };
 
   config = {
+    # assertions = [
+    # TODO: fix this assertion
+    #   {
+    #     assertion = !(config.programs.git.enable && config.home-manager.xdg.configFile."git/config".enable);
+    #     message = "Only one of 'programs.git.enable' or 'myHM.xdg.configFile.\"git/config\".enable' can be enabled at a time.";
+    #   }
+    # ];
+
     programs.git = lib.mkIf cfg.enable {
       enable = true;
       config = {
