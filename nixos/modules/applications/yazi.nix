@@ -8,7 +8,7 @@
   ...
 }:
 let
-  cfg = {
+  cfg.mySystem = {
     package = config.mySystem.package.yazi.enable;
     programs = config.mySystem.programs.yazi.enable;
   };
@@ -39,13 +39,13 @@ in
     ];
 
     # Install Yazi from pkgsUnstable if the package option is enabled
-    environment.systemPackages = lib.mkIf cfg.package [ pkgsUnstable.yazi ];
+    environment.systemPackages = lib.mkIf cfg.mySystem.package [ pkgsUnstable.yazi ];
 
     # TODO: remove this after upgrading to NixOS 25.05
     # Install Yazi from the flake if the program option is enabled
     # Disabled as of Fri 7 Mar 2025 because NixOS tracks the stable channel and Yazi's flake needs to pull about half a gigabyte of dependencies from unstable
     # This will be reverted and this notice removed after upgrading to NixOS 25.05
-    programs.yazi = lib.mkIf cfg.programs {
+    programs.yazi = lib.mkIf cfg.mySystem.programs {
       enable = true;
 
       # TODO: decide which way to go with the following options
@@ -61,7 +61,7 @@ in
     };
 
     # TODO: (wip) -- I NEED TO ADD the options to correctly handling nix.settings.extra-* so each module doesn't overwrite the other
-    nix.settings = lib.mkIf cfg.programs {
+    nix.settings = lib.mkIf cfg.mySystem.programs {
       extra-substituters = [ "https://yazi.cachix.org" ];
       extra-trusted-public-keys = [ "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k=" ];
     };
