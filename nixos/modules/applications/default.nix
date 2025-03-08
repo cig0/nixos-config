@@ -14,7 +14,6 @@
     ./cli-default-applications.nix
     ./display-manager.nix
     ./git.nix
-    ./lazygit.nix
     ./nix-flatpak.nix
     ./nixvim.nix
     ./ollama.nix
