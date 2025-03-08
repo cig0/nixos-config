@@ -1,9 +1,12 @@
-# TODO: as this list grows, I will replicate the same pattern from modules/applucations/packages.nix to split applications in groups
 {
+  config,
   inputs,
+  lib,
+  pkgs,
   ...
 }:
 let
+  cfg = config.mySystem.services.flatpak.enable;
   packages = {
     all = [
       # { appId = "com.brave.Browser"; origin = "flathub";  }
@@ -112,9 +115,28 @@ in
 {
   imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
 
-  _module.args.nix-flatpak = {
-    packages = {
-      all = packages.all;
+  options.mySystem.services.flatpak.enable =
+    lib.mkEnableOption "Whether to manage flatpaks with nix-flatpak.";
+
+  config = lib.mkIf cfg.enable {
+    # https://github.com/gmodena/nix-flatpak?tab=readme-ov-file
+    services.flatpak = {
+      enable = true;
+      update = {
+        auto = {
+          enable = true;
+          onCalendar = "weekly"; # Default value
+        };
+        onActivation = false;
+      };
+      uninstallUnmanaged = true;
+      packages = [ packages.all ]; # I want the same stuff replicated on all my machines
+    };
+
+    systemd.services."flatpak-managed-install" = {
+      serviceConfig = {
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep 0.1";
+      };
     };
   };
 }

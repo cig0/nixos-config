@@ -2,7 +2,6 @@
 # Splitting may improve options management but risks obfuscating the host config.
 {
   config,
-  pkgs,
   ...
 }:
 {
@@ -12,50 +11,25 @@
   # For Home Manager options, check home-manager/home.nix
 
   # NixOS host-specific options
-  # Hardware
   hardware.cpu.intel.updateMicrocode = true;
 
-  # Services
   services = {
-    flatpak = {
-      # https://github.com/gmodena/nix-flatpak?tab=readme-ov-file
-      # Depends on: ../../modules/applications/nix-flatpak.nix
-      enable = true;
-      packages = config._module.args.nix-flatpak.packages.all;
-      update = {
-        auto = {
-          enable = true;
-          onCalendar = "weekly"; # Default value
-        };
-        onActivation = false;
-      };
-      uninstallUnmanaged = true;
-    };
-
     fwupd.enable = true;
     zram-generator.enable = true;
   };
 
-  # Systemd
-  systemd.services."flatpak-managed-install" = {
-    serviceConfig = {
-      ExecStartPre = "${pkgs.coreutils}/bin/sleep 3";
-    }; # Required for services.flatpak to work properly
-  };
-
-  # ZramSwap
   zramSwap = {
     enable = true;
     priority = 5;
     memoryPercent = 15;
   };
 
-  # ░░░░           mySystem           ░░░░ #
-  # ░░░░     OPTIONS FROM MODULES     ░░░░ #
+  # ░░░░    mySystem: Options from modules     ░░░░ #
   mySystem = {
     # Applications
     programs.appimage.enable = true;
     programs.firefox.enable = true;
+    services.flatpak.enable = true;
     programs.git = {
       enable = true;
       lfs.enable = true;
