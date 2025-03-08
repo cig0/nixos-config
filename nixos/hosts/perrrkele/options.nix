@@ -97,7 +97,8 @@
     memoryPercent = 15;
   };
 
-  # Options overrides from modules
+  # ░░░░           mySystem           ░░░░ #
+  # ░░░░     OPTIONS FROM MODULES     ░░░░ #
   mySystem = {
     # Applications
     programs.git = {
