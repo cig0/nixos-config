@@ -1,4 +1,6 @@
-{config, ...}: let
+# TODO: remove this module and remaining hardcoded logic tied to this module
+{ config, ... }:
+let
   myHostName = config.networking.hostName;
 
   # Hosts definitions.
@@ -16,7 +18,8 @@
   # GPU grpupings.
   isIntelGPUHost = isChuweiMiniPC || isPerrrkele; # Combined condition for Intel iGPU hostSelector
   isNvidiaGPUHost = isWorkstation;
-in {
+in
+{
   inherit
     isChuweiMiniPC
     isPerrrkele
