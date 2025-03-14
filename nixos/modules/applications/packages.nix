@@ -119,7 +119,6 @@ let
 
       # Storage
       du-dust
-      duf
       dysk
       ncdu
     ]);
