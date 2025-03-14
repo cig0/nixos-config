@@ -80,6 +80,7 @@ let
       "org.wireshark.Wireshark"
 
       # Productivity
+      "org.libreoffice.LibreOffice"
       "org.fedoraproject.MediaWriter"
       "com.notesnook.Notesnook"
       "md.obsidian.Obsidian"
