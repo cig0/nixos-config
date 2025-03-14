@@ -1,4 +1,4 @@
-# NixOS's
+# NixOS' modules loader
 #  _____                                                                      _____
 # ( ___ )                                                                    ( ___ )
 #  |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   |
@@ -13,6 +13,7 @@
     ./hardware/default.nix
     ./networking/default.nix
     ./observability/default.nix
+    # ./secrets/default.nix # TODO: to be implemented
     ./security/default.nix
     ./system/default.nix
     ./virtualisation/default.nix

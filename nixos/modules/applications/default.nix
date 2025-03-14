@@ -1,4 +1,5 @@
 # TODO: recursively load every module in a similar fashion I'm doing with the Zsh aliases and functions
+# NixOS' modules loader
 #  _____                                                              _____
 # ( ___ )                                                            ( ___ )
 #  |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   |
