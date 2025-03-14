@@ -1,4 +1,4 @@
-# perrrkele's shared modules loader
+# perrrkele's modules loader
 #  _____                                                                      _____
 # ( ___ )                                                                    ( ___ )
 #  |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   |
