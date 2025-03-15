@@ -25,14 +25,18 @@
   };
 
   # ░░░░    mySystem: Options from modules     ░░░░ #
+
   mySystem = {
-    customOptions = {
+    myOptions = {
       hardware = {
         cpu = "intel";
         gpu = "intel";
       };
 
       nixos = {
+        # Channel abstraction handled via `channelPkgs` for stable (`pkgs`) or unstable (`pkgsUnstable`) selection
+        # See hardware-acceleration.nix for an example
+        # Defined in: nixos/modules/common/options/nixos.nix
         channelPkgs = "pkgs";
       };
     };
@@ -131,7 +135,6 @@
       gc.automatic = false;
       settings.auto-optimise-store = true;
     };
-
     programs.nh = {
       enable = true;
       clean.enable = true;
