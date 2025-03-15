@@ -5,8 +5,8 @@
 }:
 let
   cfg = {
-    cpu = config.mySystem.customOptions.hardware.cpu;
-    gpu = config.mySystem.customOptions.hardware.gpu;
+    cpu = config.mySystem.myOptions.hardware.cpu;
+    gpu = config.mySystem.myOptions.hardware.gpu;
   };
 
   githubVars = {

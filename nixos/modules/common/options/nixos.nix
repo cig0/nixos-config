@@ -3,7 +3,7 @@
   ...
 }:
 {
-  options.mySystem.customOptions.nixos.channelPkgs = lib.mkOption {
+  options.mySystem.myOptions.nixos.channelPkgs = lib.mkOption {
     type = lib.types.enum [
       "pkgs"
       "pkgsUnstable"
