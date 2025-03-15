@@ -164,6 +164,7 @@ let
         odo # odo is a CLI tool for fast iterative application development deployed immediately to your kubernetes cluster :: https://odo.dev
         opentofu
         packer
+        podlet # Generate Podman Quadlet files from a Podman command, compose file, or existing object :: https://github.com/containers/podlet
         podman-compose
         podman-tui
         pulumi # Pulumi is a cloud development platform that makes creating cloud programs easy and productive :: https://pulumi.io/
