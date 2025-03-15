@@ -10,6 +10,7 @@
 {
   imports = builtins.filter (x: x != null) [
     ./applications/default.nix
+    ./common/hardware-options.nix
     ./hardware/default.nix
     ./networking/default.nix
     ./observability/default.nix
