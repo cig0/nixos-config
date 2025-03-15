@@ -32,10 +32,10 @@ in
             days = 14;
           };
           os = {
-            edit = "${config.mySystem.cli.editor} {{filename}}";
-            editAtLine = "${config.mySystem.cli.editor} {{filename}} +{{line}}";
+            edit = "${config.mySystem.myOptions.cli.editor} {{filename}}";
+            editAtLine = "${config.mySystem.myOptions.cli.editor} {{filename}} +{{line}}";
             editInTerminal = true;
-            openDirInEditor = "${config.mySystem.cli.editor} {{dir}}";
+            openDirInEditor = "${config.mySystem.myOptions.cli.editor} {{dir}}";
           };
         };
 

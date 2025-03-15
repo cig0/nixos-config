@@ -1,6 +1,6 @@
 { config, lib, ... }:
 {
-  options.mySystem = {
+  options.mySystem.myOptions = {
     cli = {
       editor = lib.mkOption {
         type = lib.types.str;
