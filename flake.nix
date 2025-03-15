@@ -71,6 +71,11 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # Hardware-specific optimizations
 
+    nix-snapd = {
+      url = "github:nix-community/nix-snapd";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     nixvim = {
       # The intended way to configure Neovim
       inputs.nixpkgs.follows = "nixpkgs";
