@@ -26,6 +26,13 @@
 
   # ░░░░    mySystem: Options from modules     ░░░░ #
   mySystem = {
+    customOptions = {
+      hardware = {
+        cpu = "intel";
+        gpu = "intel";
+      };
+    };
+
     # Applications
     programs.appimage.enable = true;
     programs.firefox.enable = true;
