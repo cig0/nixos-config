@@ -26,16 +26,16 @@
 
   # ░░░░    mySystem: Options from modules     ░░░░ #
   mySystem = {
-    customOptions = {
-      hardware = {
-        cpu = "intel";
-        gpu = "intel";
-      };
+    # customOptions = {
+    #   hardware = {
+    #     cpu = "intel";
+    #     gpu = "intel";
+    #   };
 
-      nixos = {
-        channelPkgs = "pkgs";
-      };
-    };
+    #   nixos = {
+    #     channelPkgs = "pkgs";
+    #   };
+    # };
 
     # Applications
     programs.appimage.enable = true;
