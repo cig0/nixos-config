@@ -11,11 +11,13 @@
 
   # It can be used as follows:
   # let
-  #   cfg = {
-  #     cpu = config.mySystem.customOptions.hardware.cpu;
-  #     gpu = config.mySystem.customOptions.hardware.gpu;
-  #   };
+  #   cfg = config.mySystem.customOptions;
   # in
+  # { cfg.hardware = {
+  #     cpu = "";
+  #     gpu = "";
+  #   }
+  # }
 
   options.mySystem.customOptions.hardware = {
     cpu = lib.mkOption {
