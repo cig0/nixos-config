@@ -19,6 +19,7 @@
     ./hardware-acceleration.nix
     ./kernel.nix
     ./keyd.nix
+    ./nix-snapd.nix
     ./ntp.nix
     ./users.nix
   ];

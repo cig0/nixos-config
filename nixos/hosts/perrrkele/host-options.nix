@@ -15,6 +15,7 @@
 
   services = {
     fwupd.enable = true;
+    snap.enable = true; # nix-snapd
     zram-generator.enable = true;
   };
 
