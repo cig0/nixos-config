@@ -16,7 +16,7 @@
     ./maintenance/default.nix
     ./nixos/default.nix
     ./fonts.nix
-    ./hwaccel.nix
+    ./hardware-acceleration.nix
     ./kernel.nix
     ./keyd.nix
     ./ntp.nix
