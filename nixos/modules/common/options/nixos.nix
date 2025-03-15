@@ -3,12 +3,12 @@
   ...
 }:
 {
-  options.mySystem.customOptions.nixos.currentChannelInUse = {
+  options.mySystem.customOptions.nixos.currentChannelInUse = lib.mkOption {
     type = lib.types.enum [
       "pkgs"
       "pkgsUnstable"
     ];
     default = null;
-    description = "What channel to use for NixOS  base system, packages overrides and supporting packages.";
+    description = "Channel to use for the NixOS base system, package overrides, and supporting packages.";
   };
 }
