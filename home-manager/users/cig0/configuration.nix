@@ -11,7 +11,7 @@
     homeDirectory = "/home/cig0";
 
     sessionVariables = {
-      EDITOR = nixosConfig.mySystem.cli.editor; # TODO: update to add .myOptions.cli
+      EDITOR = nixosConfig.mySystem.myOptions.cli.editor;
       VISUAL = "code";
     };
 

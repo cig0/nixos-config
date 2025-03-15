@@ -11,7 +11,7 @@
     homeDirectory = "/home/doomguy";
 
     sessionVariables = {
-      EDITOR = nixosConfig.mySystem.cli.editor;
+      EDITOR = nixosConfig.mySystem.myOptions.cli.editor;
       VISUAL = "code";
     };
 
