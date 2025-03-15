@@ -9,8 +9,8 @@
 # (_____)                                                        (_____)
 {
   imports = builtins.filter (x: x != null) [
-    ./console-keymap.nix
-    ./i18n.nix
+    ./console-keymap.nix # Configure console keymap
+    ./i18n.nix # Internationalisation
     ./session-variables.nix
   ];
 }
