@@ -28,6 +28,7 @@
       ];
       description = "The CPU type of the host system";
     };
+
     gpu = lib.mkOption {
       type = lib.types.enum [
         "amd"
