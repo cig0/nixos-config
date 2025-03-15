@@ -11,6 +11,5 @@
   imports = [
     ./auto-upgrade.nix
     ./nix-store.nix
-    ./nh.nix
   ];
 }
