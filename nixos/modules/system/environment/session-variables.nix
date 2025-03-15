@@ -1,5 +1,4 @@
 # TODO: migrate from automagic logic to host-specific configuration. It served well while I was learning how to properly configure NixOS, but it's time to move on and embrace the good practices
-
 {
   config,
   lib,
@@ -7,17 +6,14 @@
   ...
 }:
 let
-  hostSelector = import ../../host-selector.nix { inherit config lib; }; # TODO: remove this legacy selector
-
-  # TODO: Investigate why I can't dynamically assign to the GITHUB_USERNAME variable the content of primaryUser.
-  # primaryUser = builtins.getEnv "USER";
-  # primaryUser = builtins.head (builtins.attrNames (lib.filterAttrs (n: v: v.isNormalUser or false) config.users.users));
-  # Debug statement to verify primaryUser
-  # _ = builtins.trace "Primary user: ${primaryUser}" primaryUser;
+  cfg = {
+    cpu = config.mySystem.customOptions.hardware.cpu;
+    gpu = config.mySystem.customOptions.hardware.gpu;
+  };
 
   githubVars = {
-    GITHUB_TOKEN = ""; # TODO: Implement SOPS.
-    GITHUB_USERNAME = "cig0";
+    GITHUB_TOKEN = "WIP_OPTION"; # TODO: Implement SOPS.
+    GITHUB_USERNAME = "WIP_OPTION";
   };
 
   commonEnvSessionVars = {
@@ -53,32 +49,53 @@ let
     TMPDIR = "/tmp";
   };
 
-  intelEnvSessionVars = {
+  GpuIntelEnvSessionVars = {
     LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver.
     EGL_DRIVER = "mesa";
   };
 in
 {
-  imports = [
-    ./console-keymap.nix # Configure console keymap
-    ./i18n.nix # Internationalisation
-  ];
+  options.mySystem = {
+    customOptions = {
+      hardware = {
+        cpu = lib.mkOption {
+          type = lib.types.enum [
+            "amd"
+            "arm"
+            "intel"
+          ];
+          description = "The CPU type of the host system";
+        };
 
-  environment = {
-    homeBinInPath = true;
-    localBinInPath = true;
+        gpu = lib.mkOption {
+          type = lib.types.enum [
+            "amd"
+            "intel"
+            "nvidia"
+          ];
+          description = "The GPU type of the host system";
+        };
+      };
+    };
+  };
 
-    pathsToLink = [ "/share/zsh" ]; # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
+  config = {
+    environment = {
+      homeBinInPath = true;
+      localBinInPath = true;
 
-    sessionVariables =
-      (
-        if hostSelector.isIntelGPUHost then
-          commonEnvSessionVars // intelEnvSessionVars
-        else if hostSelector.isNvidiaGPUHost then
-          commonEnvSessionVars
-        else
-          { }
-      )
-      // githubVars;
+      pathsToLink = [ "/share/zsh" ]; # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
+
+      sessionVariables =
+        (
+          if cfg.gpu == "intel" then
+            commonEnvSessionVars // GpuIntelEnvSessionVars
+          else if cfg.gpu == "nvidia" then
+            commonEnvSessionVars
+          else
+            { }
+        )
+        // githubVars;
+    };
   };
 }
