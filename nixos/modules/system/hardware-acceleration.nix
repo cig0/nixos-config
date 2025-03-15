@@ -1,23 +1,28 @@
 {
   config,
   lib,
-  pkgs, # Channel abstraction handled via `channelPkgs` for stable (`pkgs`) or unstable (`pkgsUnstable`) selection.
+  pkgs,
   pkgsUnstable,
   ...
 }:
 let
-  # `customOptions` defines shared settings used by many modules; they live in `./nixos/modules/common/`
-  cfg = config.mySystem.customOptions;
+  # `myOptions` defines shared settings used by many modules; they live in `./nixos/modules/common/`
+  cfg = config.mySystem.myOptions;
 
   # Select the channel based on currentChannelInUse
   channelPkgs = if cfg.nixos.channelPkgs == "pkgs" then pkgs else pkgsUnstable;
 in
 {
-  # Intel iGPU hosts
-  nixpkgs.config = lib.mkIf (cfg.hardware.gpu == "intel") {
-    packageOverrides = pkgs: {
-      intel-vaapi-driver = channelPkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
-    };
+  # Define packageOverrides without recursion
+  nixpkgs.config.packageOverrides = pkgs: {
+    intel-vaapi-driver =
+      # Use pkgs as default, override only if needed
+      if cfg.hardware.gpu == "intel" then
+        (if cfg.nixos.channelPkgs == "pkgs" then pkgs else pkgsUnstable).intel-vaapi-driver.override {
+          enableHybridCodec = true;
+        }
+      else
+        pkgs.intel-vaapi-driver;
   };
 
   hardware.graphics = lib.mkIf (cfg.hardware.gpu == "intel") {
