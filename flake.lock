@@ -465,25 +465,11 @@
         "nixpkgs-stable": "nixpkgs-stable_2"
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1741965386,
-        "narHash": "sha256-dK4jTXLm0iU2m49um7OJ9jpgQJfLcIsy04z6if66bHs=",
-||||||| parent of 409e89c (WIP)
-        "lastModified": 1741392207,
-        "narHash": "sha256-qpvyfopzxdDQ8Un3G+zhRVC56j5JfKrW4ZiaZL/g8Lk=",
-=======
-        "lastModified": 1741432127,
-        "narHash": "sha256-JrN9MWJLVVEjVYINDX0NHI2U91/7qSywm6m6mGKwB0E=",
->>>>>>> 409e89c (WIP)
+        "lastModified": 1742006448,
+        "narHash": "sha256-8OmMOm7MeuhBYYIu9an/OaeH9+mJLXKVj2g/TY8qAg0=",
         "owner": "lilyinstarlight",
         "repo": "nixos-cosmic",
-<<<<<<< HEAD
-        "rev": "21efbc7120177bfec45df9ead5d2736e8bc794d9",
-||||||| parent of 409e89c (WIP)
-        "rev": "3721f567dc4d508ecaed8a9a6b9d673cb313b236",
-=======
-        "rev": "bf3d41b9fc89883823ce9fadbec1b44f2cdd1fac",
->>>>>>> 409e89c (WIP)
+        "rev": "d63e6b46e0d080fa7cab2cb3ee37b46873615fa3",
         "type": "github"
       },
       "original": {
@@ -541,25 +527,11 @@
     },
     "nixpkgs-stable_2": {
       "locked": {
-<<<<<<< HEAD
         "lastModified": 1741862977,
         "narHash": "sha256-prZ0M8vE/ghRGGZcflvxCu40ObKaB+ikn74/xQoNrGQ=",
-||||||| parent of 409e89c (WIP)
-        "lastModified": 1741196730,
-        "narHash": "sha256-0Sj6ZKjCpQMfWnN0NURqRCQn2ob7YtXTAOTwCuz7fkA=",
-=======
-        "lastModified": 1741332913,
-        "narHash": "sha256-ri1e8ZliWS3Jnp9yqpKApHaOo7KBN33W8ECAKA4teAQ=",
->>>>>>> 409e89c (WIP)
         "owner": "NixOS",
         "repo": "nixpkgs",
-<<<<<<< HEAD
         "rev": "cdd2ef009676ac92b715ff26630164bb88fec4e0",
-||||||| parent of 409e89c (WIP)
-        "rev": "48913d8f9127ea6530a2a2f1bd4daa1b8685d8a3",
-=======
-        "rev": "20755fa05115c84be00b04690630cb38f0a203ad",
->>>>>>> 409e89c (WIP)
         "type": "github"
       },
       "original": {
@@ -754,11 +726,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1741919466,
-        "narHash": "sha256-xto0Oq+WItjDZvafo6ZVI4TZa6/2oxJHb0tkcSGVUJI=",
+        "lastModified": 1742005800,
+        "narHash": "sha256-6wuOGWkyW6R4A6Th9NMi6WK2jjddvZt7V2+rLPk6L3o=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "8b137260b776525542d47d3a4dbac753df478a42",
+        "rev": "028cd247a6375f83b94adc33d83676480fc9c294",
         "type": "github"
       },
       "original": {
@@ -846,25 +818,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-<<<<<<< HEAD
         "lastModified": 1741760227,
         "narHash": "sha256-5yZ3FQZFG0DSssr8NRa+JWGOojHLDFG2L+icNVnj+tw=",
-||||||| parent of 409e89c (WIP)
-        "lastModified": 1741398638,
-        "narHash": "sha256-l4gU8cmSZL9B8FN5kUf+IWtCQsmAOJbZhgezlLWhtrQ=",
-=======
-        "lastModified": 1741418166,
-        "narHash": "sha256-9/KZCzO2V2DgNp5225dvNjWFUZDSRNc52wV4a/tU95Y=",
->>>>>>> 409e89c (WIP)
         "owner": "sxyazi",
         "repo": "yazi",
-<<<<<<< HEAD
         "rev": "abfbd1cd9f0dd428d134f257ec89c25dac842b65",
-||||||| parent of 409e89c (WIP)
-        "rev": "ece635d6b899a90315b7175db071fe4d902fa5ce",
-=======
-        "rev": "31177fd1fd71500e6a30edee60a122f78e5e7424",
->>>>>>> 409e89c (WIP)
         "type": "github"
       },
       "original": {
