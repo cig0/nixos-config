@@ -1,4 +1,3 @@
-# TODO: migrate from automagic logic to host-specific configuration. It served well while I was learning how to properly configure NixOS, but it's time to move on and embrace the good practices
 {
   config,
   lib,
@@ -12,7 +11,7 @@ let
   };
 
   githubVars = {
-    GITHUB_TOKEN = "WIP_OPTION"; # TODO: Implement SOPS.
+    GITHUB_TOKEN = "WIP_OPTION"; # TODO: Implement SOPS
     GITHUB_USERNAME = "WIP_OPTION";
   };
 
@@ -24,10 +23,10 @@ let
     MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
 
-    FZF_DEFAULT_OPTS = "--height 50% --layout=reverse --border"; # Fuzzy finder.
-    GDK_DPI_SCALE = "1.13"; # Flatpak applications display scaling.
+    FZF_DEFAULT_OPTS = "--height 50% --layout=reverse --border"; # Fuzzy finder
+    GDK_DPI_SCALE = "1.13"; # Flatpak applications display scaling
     LD_BIND_NOW = "1"; # Linker.
-    PAGER = "${pkgs.less}/bin/less"; # CLI pager.
+    PAGER = "${pkgs.less}/bin/less"; # CLI pager
 
     # https://specifications.freedesktop.org/basedir-spec/latest/
     # Publication Date: 08th May 2021, Version: Version 0.8
@@ -50,35 +49,11 @@ let
   };
 
   GpuIntelEnvSessionVars = {
-    LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver.
+    LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver
     EGL_DRIVER = "mesa";
   };
 in
 {
-  options.mySystem = {
-    customOptions = {
-      hardware = {
-        cpu = lib.mkOption {
-          type = lib.types.enum [
-            "amd"
-            "arm"
-            "intel"
-          ];
-          description = "The CPU type of the host system";
-        };
-
-        gpu = lib.mkOption {
-          type = lib.types.enum [
-            "amd"
-            "intel"
-            "nvidia"
-          ];
-          description = "The GPU type of the host system";
-        };
-      };
-    };
-  };
-
   config = {
     environment = {
       homeBinInPath = true;
