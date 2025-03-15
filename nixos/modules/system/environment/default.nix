@@ -11,6 +11,6 @@
   imports = builtins.filter (x: x != null) [
     ./console-keymap.nix # Configure console keymap
     ./i18n.nix # Internationalisation
-    ./session-variables.nix
+    ./session-variables.nix # Environment variables
   ];
 }
