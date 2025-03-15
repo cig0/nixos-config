@@ -31,6 +31,10 @@
         cpu = "intel";
         gpu = "intel";
       };
+
+      nixos = {
+        currentChannelInUse = "pkgs";
+      };
     };
 
     # Applications

@@ -8,7 +8,7 @@
       "pkgs"
       "pkgsUnstable"
     ];
-    default = "pkgs";
-    description = "The CPU type of the host system";
+    default = null;
+    description = "What channel to use for NixOS  base system, packages overrides and supporting packages.";
   };
 }

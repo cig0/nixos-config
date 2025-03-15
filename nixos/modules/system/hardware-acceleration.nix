@@ -1,7 +1,7 @@
 {
   config,
-  currentChannelInUse,
   pkgs, # TODO: I should consider an abstraction layer for pkgs to make it easier to switch between the stable and unstable release channel for the base system in case I need to. By hard-coding below `pkgs.intel-vaapi-driver.override` (similarly as I do in a few of other modules), I risk from collision of packages to make my NixOS generation way bigger than necessary. By implementing here an alternative input, e.g. `currentChannelInUse.intel-vaapi-driver.override`, I could easily switch between the stable and unstable release channel for the base system while ensuring the change would cascade to all the appropriate places. I should also create an option to easily manage currentChannelInUse from a host-options.nix file.
+  pkgsUnstable,
   ...
 }:
 let
@@ -15,7 +15,9 @@ in
     if cfg.gpu == "intel" then
       {
         packageOverrides = pkgs: {
-          intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+          intel-vaapi-driver =
+            "${config.mySystem.customOptions.nixos.currentChannelInUse}.intel-vaapi-driver.override"
+              { enableHybridCodec = true; };
         };
       }
     else
