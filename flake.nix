@@ -105,18 +105,21 @@
       ...
     }@inputs:
     let
-      # ░░░░░░░█▀▀░█░█░█▀█░█▀▄░█▀▀░█▀▄░░░░░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-      # ░░░░░░░▀▀█░█▀█░█▀█░█▀▄░█▀▀░█░█░░░░░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-      # ░░░░░░░▀▀▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀░░░░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀░▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-
       nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
 
-      sharedModules = [
-        ./home-manager/home.nix
-        ./nixos/modules/default.nix
+      nixosModulesBaseline = [
+        (import ./nixos/modules/applications/default.nix)
+        (import ./nixos/modules/common/default.nix)
+        (import ./nixos/modules/hardware/default.nix)
+        (import ./nixos/modules/networking/default.nix)
+        (import ./nixos/modules/observability/default.nix)
+        (import ./nixos/modules/secrets/default.nix)
+        (import ./nixos/modules/security/default.nix)
+        (import ./nixos/modules/system/default.nix)
+        (import ./nixos/modules/virtualisation/default.nix)
       ];
 
-      sharedOVerlays = [
+      overlaysBaseline = [
         nixos-option # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
         rust-overlay.overlays.default
       ];
@@ -131,12 +134,13 @@
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system; };
-            modules = sharedModules ++ [
+            modules = nixosModulesBaseline ++ [
               inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
+              ./home-manager/home.nix
               ./nixos/hosts/perrrkele/default.nix
               {
                 # ░░░░    O V E R L A Y S    ░░░░ #
-                nixpkgs.overlays = sharedOVerlays ++ [ ];
+                nixpkgs.overlays = overlaysBaseline ++ [ ];
               }
             ];
           };
@@ -148,11 +152,12 @@
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system; };
-            modules = sharedModules ++ [
+            modules = nixosModulesBaseline ++ [
+              ./home-manager/home.nix
               ./nixos/hosts/desktop/default.nix
               {
                 # ░░░░    O V E R L A Y S    ░░░░ #
-                nixpkgs.overlays = sharedOVerlays ++ [ ];
+                nixpkgs.overlays = overlaysBaseline ++ [ ];
               }
             ];
           };
@@ -164,11 +169,12 @@
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system; };
-            modules = sharedModules ++ [
+            modules = nixosModulesBaseline ++ [
+              ./home-manager/home.nix
               ./nixos/hosts/chuwi/default.nix
               {
                 # ░░░░    O V E R L A Y S    ░░░░ #
-                nixpkgs.overlays = sharedOVerlays ++ [ ];
+                nixpkgs.overlays = overlaysBaseline ++ [ ];
               }
             ];
           };
