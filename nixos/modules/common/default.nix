@@ -9,6 +9,6 @@
 # (_____)                                     (_____)
 {
   imports = builtins.filter (x: x != null) [
-    ./hardware-options.nix # Hardware options reusable across modules
+    ./options/hardware.nix # Hardware options reusable across modules
   ];
 }
