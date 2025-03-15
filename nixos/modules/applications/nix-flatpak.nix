@@ -56,7 +56,7 @@ let
       "org.naev.Naev"
 
       # Infrastructure: CNCF / K8s / OCI / virtualization
-      "app.freeLens.Freelens"
+      "app.freelens.Freelens"
       "io.podman_desktop.PodmanDesktop"
 
       # Maintenance
