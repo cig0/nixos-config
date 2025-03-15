@@ -5,7 +5,8 @@
     enable = true;
 
     keyboards = {
-      SINOWealthGaming = {  # Portable keyboard.
+      # Portable keyboard
+      SINOWealthGaming = {
         ids = [ "258a:002a" ];
         settings = {
           main = {
