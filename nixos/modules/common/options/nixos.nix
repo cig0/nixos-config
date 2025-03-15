@@ -3,7 +3,7 @@
   ...
 }:
 {
-  options.mySystem.customOptions.nixos.currentChannelInUse = lib.mkOption {
+  options.mySystem.customOptions.nixos.channelPkgs = lib.mkOption {
     type = lib.types.enum [
       "pkgs"
       "pkgsUnstable"

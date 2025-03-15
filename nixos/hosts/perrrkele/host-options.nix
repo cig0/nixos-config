@@ -33,7 +33,7 @@
       };
 
       nixos = {
-        currentChannelInUse = "pkgs";
+        channelPkgs = "pkgs";
       };
     };
 
@@ -127,9 +127,6 @@
     # System - Kernel
     boot.kernelPackages = "xanmod_latest";
     # System - Maintenance
-    myOptions.nix-store.nh.enable = true;
-    myOptions.nix-store.nixos.enable = true;
-
     nix = {
       gc.automatic = false;
       settings.auto-optimise-store = true;
