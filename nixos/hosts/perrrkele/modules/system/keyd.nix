@@ -1,5 +1,7 @@
-# TODO: investigate moving this module to options.nix
-{ config, ... }:
+{
+  config,
+  ...
+}:
 let
   mainConfig = import ../../../../modules/system/keyd.nix { inherit config; };
 in
