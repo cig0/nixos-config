@@ -11,7 +11,7 @@
 
   # It can be used as follows:
   # let
-  #   cfg = config.mySystem.customOptions;
+  #   cfg = config.mySystem.myOptions;
   # in
   # { cfg.hardware = {
   #     cpu = "";
@@ -19,7 +19,7 @@
   #   }
   # }
 
-  options.mySystem.customOptions.hardware = {
+  options.mySystem.myOptions.hardware = {
     cpu = lib.mkOption {
       type = lib.types.enum [
         "amd"

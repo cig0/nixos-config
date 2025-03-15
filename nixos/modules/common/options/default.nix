@@ -9,7 +9,7 @@
 # (_____)                                          (_____)
 {
   imports = builtins.filter (x: x != null) [
-    ./hardware.nix # customOptions.hardware
-    ./nixos.nix # customOptions.nixos
+    ./hardware.nix # myOptions.hardware
+    ./nixos.nix # myOptions.nixos
   ];
 }
