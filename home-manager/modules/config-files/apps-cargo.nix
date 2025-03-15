@@ -11,8 +11,12 @@
       # Jumpy is a tool that allows to quickly jump to one of the directory you've visited in the past.
       # https://github.com/ClementNerma/Jumpy
 
-    podlet
+    # podlet :: it has been added to NixOS repository 8D
       # Podlet generates podman quadlet files from a podman command, compose file, or existing object.
       # https://github.com/containers/podlet
+
+    trasher
+      # A small command-line utility to replace 'rm' and 'del' by a trash system
+      # https://github.com/ClementNerma/Trasher
   '';
 }
