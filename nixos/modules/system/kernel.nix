@@ -1,4 +1,8 @@
-# TODO: (WIP) migrate from automagic logic to host-specific configuration. It served well while I was learning how to properly configure NixOS, but it's time to move on and embrace the good practices
+/*
+  TODO: (WIP) migrate from automagic logic to host-specific configuration. It served well while I was learning how to properly configure NixOS, but it's time to move on and embrace the good practices
+  TODO: (WIP) add option to select network protocol, instead of choosing it based on the host (!)
+  Now we have the 'host-options.nix' configuration file, everything is much simpler.
+*/
 
 # https://wiki.nixos.org/wiki/Linux_kernel
 {
@@ -22,8 +26,14 @@ let
   kernelPatches_enable = "false"; # Enable/disable applying kernel patches
 
   commonKernelSysctl = {
-    # ref: https://wiki.archlinux.org/title/Gaming
-    # ref: https://wiki.nixos.org/wiki/Linux_kernel
+    /*
+      Some of these kernel flags could eventually make it to an option
+      to allow for better granularity, if needed.
+
+      ref: https://wiki.archlinux.org/title/Gaming
+      ref: https://wiki.nixos.org/wiki/Linux_kernel
+    */
+
     "compaction_proactiveness" = false;
     "min_free_kbytes" = "1048576";
     "page_lock_unfairness" = true;
@@ -52,6 +62,11 @@ let
   };
 
   commonKernelParams = [
+    /*
+      Some of these kernel flags could eventually make it to an option
+      to allow for better granularity, if needed.
+    */
+
     "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the fb
     "kvm.ignore_msrs=1"
     "kvm.report_ignored_msrs=0"
@@ -97,17 +112,13 @@ in
         "sd_mod"
       ]; # Overrides parameter in hardware-configuration.nix
 
-      kernelModules =
-        if hostSelector.isIntelGPUHost then
-          [
-            "kvm-intel"
-            "i915"
-          ]
-        else
-          [ ]; # Overrides parameter in hardware-configuration.nix
+      kernelModules = lib.mkIf (cfg.hardware.gpu == "intel") [
+        "kvm-intel"
+        "i915"
+      ];
 
       # ================================================= #
-      kernelPackages = pkgs.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgSet
+      kernelPackages = pkgs.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgs
 
       /*
         Previous iterations I'm leaving here momentarily as a reminder of the walked path.
@@ -131,6 +142,12 @@ in
       */
       # ================================================= #
 
+      /*
+        Networking. Choose network control method depending on if it's a LAN or WLAN network.
+
+        It's worth investigating if more than one can be enable concurrently,
+        and pinned to different network interfaces.
+      */
       kernel.sysctl =
         # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
         if hostSelector.isDesktop || hostSelector.isChuweiMiniPC then
@@ -162,6 +179,7 @@ in
           "nvidia_drm.modeset=1" # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
         ]);
 
+      # WIP: needs option to enable
       kernelPatches =
         if kernelPatches_enable == "true" then
           [
