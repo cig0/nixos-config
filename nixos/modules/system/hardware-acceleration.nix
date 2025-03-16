@@ -2,15 +2,11 @@
   config,
   lib,
   pkgs,
-  pkgsUnstable,
   ...
 }:
 let
   # `myOptions` defines shared settings used by many modules; they live in `./nixos/modules/common/`
   cfg = config.mySystem.myOptions;
-
-  # Select the channel based on currentChannelInUse
-  channelPkgs = if cfg.nixos.channelPkgs == "stable" then pkgs else pkgsUnstable;
 in
 {
   # Define packageOverrides without recursion
@@ -18,7 +14,7 @@ in
     intel-vaapi-driver =
       # Use pkgs as default, override only if needed
       if cfg.hardware.gpu == "intel" then
-        (if cfg.nixos.channelPkgs == "stable" then pkgs else pkgsUnstable).intel-vaapi-driver.override {
+        pkgs {
           enableHybridCodec = true;
         }
       else
@@ -27,7 +23,7 @@ in
 
   hardware.graphics = lib.mkIf (cfg.hardware.gpu == "intel") {
     enable = true;
-    extraPackages = with channelPkgs; [
+    extraPackages = with pkgs; [
       intel-compute-runtime
       intel-ocl
       intel-media-driver
@@ -36,7 +32,7 @@ in
       libGL
       mesa
     ];
-    extraPackages32 = with channelPkgs.pkgsi686Linux; [
+    extraPackages32 = with pkgs.pkgsi686Linux; [
       intel-media-driver
     ];
   };
