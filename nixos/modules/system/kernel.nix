@@ -6,7 +6,6 @@
   config,
   lib,
   pkgs,
-  pkgsUnstable,
   ...
 }:
 let
@@ -111,11 +110,7 @@ in
           [ ]; # Overrides parameter in hardware-configuration.nix
 
       # ================================================= #
-      kernelPackages =
-        let
-          pkgSet = if cfg.nixos.channelPkgs == "stable" then pkgs else pkgsUnstable;
-        in
-        pkgSet.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgSet
+      kernelPackages = pkgs.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgSet
 
       /*
         Previous iterations I'm leaving here momentarily as a reminder of the walked path.
