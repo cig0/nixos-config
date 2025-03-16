@@ -35,12 +35,6 @@
         gpu = "intel";
       };
 
-      nixos = {
-        # Channel abstraction handled via `channelPkgs` for stable (`pkgs`) or unstable (`pkgsUnstable`) selection
-        # See hardware-acceleration.nix for an example
-        # Defined in: nixos/modules/common/options/nixos.nix
-        channelPkgs = "stable";
-      };
     };
 
     # Applications
