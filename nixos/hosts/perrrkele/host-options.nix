@@ -1,5 +1,5 @@
 /*
-  For the back burner:
+  I’ll keep this idea on the back burner for now and revisit it later:
 
   Is it worth splitting this configuration module into modules under
   nixos/modules/common/profiles?
@@ -11,10 +11,12 @@
   ...
 }:
 {
-  # ░░░░░░░█▀█░█▀▀░█▀▄░█▀▄░█▀▄░█░█░█▀▀░█░░░█▀▀░▀░█▀▀░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-  # ░░░░░░░█▀▀░█▀▀░█▀▄░█▀▄░█▀▄░█▀▄░█▀▀░█░░░█▀▀░░░▀▀█░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-  # ░░░░░░░▀░░░▀▀▀░▀░▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░░░▀▀▀░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-  # For Home Manager options, check home-manager/home.nix
+  /*
+    ░░░░░░░█▀█░█▀▀░█▀▄░█▀▄░█▀▄░█░█░█▀▀░█░░░█▀▀░▀░█▀▀░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
+    ░░░░░░░█▀▀░█▀▀░█▀▄░█▀▄░█▀▄░█▀▄░█▀▀░█░░░█▀▀░░░▀▀█░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
+    ░░░░░░░▀░░░▀▀▀░▀░▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░░░▀▀▀░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
+    For Home Manager options, check home-manager/home.nix
+  */
 
   # NixOS host-specific options
   hardware.cpu.intel.updateMicrocode = true;
@@ -139,6 +141,21 @@
     services.speechd.enable = true;
     # System - Kernel
     boot.kernelPackages = "xanmod_latest";
+    # System - Keyboard
+    services.keyd.enable = true;
+    myOptions.services.keyd.addKeydKeyboards = {
+      TUXEDOInfinityBookPro14Gen6Standard = {
+        ids = [ "0001:0001" ];
+        settings = {
+          main = {
+            "capslock" = "capslock";
+          };
+          shift = {
+            "capslock" = "insert";
+          };
+        };
+      };
+    };
     # System - Maintenance
     nix = {
       gc.automatic = false;
