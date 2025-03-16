@@ -25,16 +25,21 @@
     memoryPercent = 15;
   };
 
-  # mySystem: Personalized options from modules that shadows NixOS' options to set default values without polluting this host configuration file. Defined in each module.
-  # mySystem.myOptions: a customized options layer to conviniently customize different aspects of the host. Defined in ./nixos/modules/common/options.
+  /*
+    mySystem: Custom options defined in modules that override NixOS options.
+    These allow setting default values without cluttering this configuration file,
+    and makes it easy to follow what the options do if you already know them.
+    Each module defines its own `mySystem` options.
 
+    mySystem.myOptions: A layer of customized options for conveniently configuring
+    various aspects of the host. Defined in `./nixos/modules/common/options`.
+  */
   mySystem = {
     myOptions = {
       hardware = {
         cpu = "intel";
         gpu = "intel";
       };
-
     };
 
     # Applications
