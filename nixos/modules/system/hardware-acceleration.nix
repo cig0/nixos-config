@@ -10,7 +10,7 @@ let
   cfg = config.mySystem.myOptions;
 
   # Select the channel based on currentChannelInUse
-  channelPkgs = if cfg.nixos.channelPkgs == "pkgs" then pkgs else pkgsUnstable;
+  channelPkgs = if cfg.nixos.channelPkgs == "stable" then pkgs else pkgsUnstable;
 in
 {
   # Define packageOverrides without recursion
@@ -18,7 +18,7 @@ in
     intel-vaapi-driver =
       # Use pkgs as default, override only if needed
       if cfg.hardware.gpu == "intel" then
-        (if cfg.nixos.channelPkgs == "pkgs" then pkgs else pkgsUnstable).intel-vaapi-driver.override {
+        (if cfg.nixos.channelPkgs == "stable" then pkgs else pkgsUnstable).intel-vaapi-driver.override {
           enableHybridCodec = true;
         }
       else
