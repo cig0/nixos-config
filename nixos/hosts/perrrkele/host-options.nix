@@ -1,7 +1,13 @@
-# TODO: Consider splitting into modules under nixos/profiles (../../profiles)
-# Splitting may improve options management but risks obfuscating the host config.
+/*
+  For the back burner:
+
+  Is it worth splitting this configuration module into modules under
+  nixos/modules/common/profiles?
+
+  Splitting may improve the handlong of options management, but at the risk
+  of obfuscating this host configuration.
+*/
 {
-  config,
   ...
 }:
 {
@@ -40,6 +46,7 @@
         cpu = "intel";
         gpu = "intel";
       };
+      nixos.flake.path = "/home/cig0/workdir/cig0/nixos-config";
     };
 
     # Applications

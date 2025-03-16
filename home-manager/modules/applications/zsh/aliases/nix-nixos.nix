@@ -1,7 +1,8 @@
 # Don't remove this line! This is a NixOS Zsh alias module.
-
-{ ... }:
-
+{
+  nixosConfig,
+  ...
+}:
 let
   aliases = {
     # Cleaning
@@ -26,16 +27,15 @@ let
     nixlg = "nixos-rebuild list-generations";
 
     # Update NixOS
-    nhosb = "nh os boot ~/workdir/cig0/nixos-config";
-    nhosbd = "nh os boot --dry ~/workdir/cig0/nixos-config";
-    nhosbu = "nh os boot --update ~/workdir/cig0/nixos-config";
-    nhosbud = "nh os boot --update --dry ~/workdir/cig0/nixos-config";
-    nhoss = "nh os switch ~/workdir/cig0/nixos-config";
-    nhossd = "nh os switch --dry ~/workdir/cig0/nixos-config";
-    nhossu = "nh os switch --update ~/workdir/cig0/nixos-config";
-    nhossud = "nh os switch --update --dry ~/workdir/cig0/nixos-config";
+    nhosb = "nh os boot ${nixosConfig.mySystem.myOptions.nixos.flake.path}";
+    nhosbd = "nh os boot --dry ${nixosConfig.mySystem.myOptions.nixos.flake.path}";
+    nhosbu = "nh os boot --update ${nixosConfig.mySystem.myOptions.nixos.flake.path}";
+    nhosbud = "nh os boot --update --dry ${nixosConfig.mySystem.myOptions.nixos.flake.path}";
+    nhoss = "nh os switch ${nixosConfig.mySystem.myOptions.nixos.flake.path}";
+    nhossd = "nh os switch --dry ${nixosConfig.mySystem.myOptions.nixos.flake.path}";
+    nhossu = "nh os switch --update ${nixosConfig.mySystem.myOptions.nixos.flake.path}";
+    nhossud = "nh os switch --update --dry ${nixosConfig.mySystem.myOptions.nixos.flake.path}";
   };
-
 in
 {
   aliases = aliases;
