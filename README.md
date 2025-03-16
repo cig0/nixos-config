@@ -7,4 +7,5 @@ This branch tracks the clean-up job to consolidate coding practices, defined myS
 myOptions:
 - cli: settings related to CLI applications and shell
 - hardware: settings related to hardware information, like setting CPU or GPU hardware
+- kernel: settings related to the kernel or kernel components
 - nixos: settings related to NixOS itself, like channelPkgs to travers between channels

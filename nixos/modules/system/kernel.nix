@@ -1,9 +1,3 @@
-/*
-  TODO: (WIP) migrate from automagic logic to host-specific configuration. It served well while I was learning how to properly configure NixOS, but it's time to move on and embrace the good practices
-  TODO: (WIP) add option to select network protocol, instead of choosing it based on the host (!)
-  Now we have the 'host-options.nix' configuration file, everything is much simpler.
-*/
-
 # https://wiki.nixos.org/wiki/Linux_kernel
 {
   config,
@@ -12,16 +6,14 @@
   ...
 }:
 let
-  hostSelector = import ../host-selector.nix { inherit config lib; }; # TODO: remove this legacy configuration
-
   # cfg = lib.getAttrFromPath [ "mySystem" "boot" ] config;
-  cfg = config.mySystem.myOptions;
+  cfg = config.mySystem;
 
   kernelPackageName =
-    if config.mySystem.boot.kernelPackages == "stable" then
+    if cfg.boot.kernelPackages == "stable" then
       "linuxPackages"
     else
-      "linuxPackages_" + config.mySystem.boot.kernelPackages;
+      "linuxPackages_" + cfg.boot.kernelPackages;
 
   kernelPatches_enable = "false"; # Enable/disable applying kernel patches
 
@@ -85,20 +77,38 @@ let
   ];
 in
 {
-  options.mySystem.boot.kernelPackages = lib.mkOption {
-    type = lib.types.enum [
-      "hardened"
-      "latest" # NixOS unstable branch default kernel
-      "latest-libre"
-      "latest_hardened"
-      "libre"
-      "lqx"
-      "stable" # NixOS stable branch default kernel
-      "xanmod_latest"
-      "xanmod_stable"
-    ];
-    default = "stable";
-    description = "What kernel package to use.";
+  options.mySystem = {
+    myOptions = {
+      # The network congestion control algorithms to be used for managing congestion in TCP connections
+      kernel.sysctl.netIpv4TcpCongestionControl = lib.mkOption {
+        type = lib.types.nullOr (
+          lib.types.enum [
+            "bbr" # A newer algorithm designed for higher throughput and lower latency
+            "westwood" # Aimed at improving performance over wireless networks and other lossy links by using end-to-end bandwidth estimation
+          ]
+        );
+        default = null;
+        description = "The network congestion control algorithm to use.";
+      };
+    };
+
+    boot = {
+      kernelPackages = lib.mkOption {
+        type = lib.types.enum [
+          "hardened"
+          "latest" # NixOS unstable branch default kernel
+          "latest-libre"
+          "latest_hardened"
+          "libre"
+          "lqx"
+          "stable" # NixOS stable branch default kernel
+          "xanmod_latest"
+          "xanmod_stable"
+        ];
+        default = "stable";
+        description = "What kernel package to use.";
+      };
+    };
   };
 
   config = {
@@ -112,7 +122,7 @@ in
         "sd_mod"
       ]; # Overrides parameter in hardware-configuration.nix
 
-      kernelModules = lib.mkIf (cfg.hardware.gpu == "intel") [
+      kernelModules = lib.mkIf (cfg.myOptions.hardware.gpu == "intel") [
         "kvm-intel"
         "i915"
       ];
@@ -142,26 +152,15 @@ in
       */
       # ================================================= #
 
-      /*
-        Networking. Choose network control method depending on if it's a LAN or WLAN network.
-
-        It's worth investigating if more than one can be enable concurrently,
-        and pinned to different network interfaces.
-      */
       kernel.sysctl =
-        # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
-        if hostSelector.isDesktop || hostSelector.isChuweiMiniPC then
-          commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "bbr"; }
-        # bbr: A newer algorithm designed for higher throughput and lower latency.
-        else if hostSelector.isPerrrkele then
-          commonKernelSysctl // { "net.ipv4.tcp_congestion_control" = "westwood"; }
-        # westwood: Aimed at improving performance over wireless networks and other lossy links by using end-to-end bandwidth estimation.
-        else
-          throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
+        commonKernelSysctl
+        // (lib.optionalAttrs (cfg.myOptions.kernel.sysctl.netIpv4TcpCongestionControl != null) {
+          "net.ipv4.tcp_congestion_control" = cfg.myOptions.kernel.sysctl.netIpv4TcpCongestionControl;
+        });
 
       kernelParams =
         commonKernelParams
-        ++ (lib.optionals (cfg.hardware.gpu == "intel") [
+        ++ (lib.optionals (cfg.myOptions.hardware.gpu == "intel") [
           "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
           "fuse"
           "intel_pstate=disable"
@@ -175,28 +174,30 @@ in
           "iommu=pt"
           "mitigations=off" # Turns off certain CPU security mitigations. It might enhance performance
         ])
-        ++ (lib.optionals (cfg.hardware.gpu == "nvidia") [
+        ++ (lib.optionals (cfg.myOptions.hardware.gpu == "nvidia") [
           "nvidia_drm.modeset=1" # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
         ]);
 
-      # WIP: needs option to enable
-      kernelPatches =
-        if kernelPatches_enable == "true" then
-          [
-            {
-              name = "tux-logo";
-              patch = null;
-              extraConfig = ''
-                FRAMEBUFFER_CONSOLE y
-                LOGO y
-                LOGO_LINUX_MONO y
-                LOGO_LINUX_VGA16 y
-                LOGO_LINUX_CLUT224 y
-              '';
-            }
-          ]
-        else
-          [ ];
+      /*
+        # TODO: needs option
+        kernelPatches =
+          if kernelPatches_enable == "true" then
+            [
+              {
+                name = "tux-logo";
+                patch = null;
+                extraConfig = ''
+                  FRAMEBUFFER_CONSOLE y
+                  LOGO y
+                  LOGO_LINUX_MONO y
+                  LOGO_LINUX_VGA16 y
+                  LOGO_LINUX_CLUT224 y
+                '';
+              }
+            ]
+          else
+            [];
+      */
     };
   };
 }
