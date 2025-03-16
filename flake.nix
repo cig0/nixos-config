@@ -1,31 +1,34 @@
-#------------------------------------------------------------------
-# My personal NixOS multi-host configuration flake ¯\_(ツ)_/¯
-# https://github.com/cig0/nixos-config
-# Initial release on May 1st, 2024
-#
-# ASCII art credits: https://www.asciiart.eu/
-#------------------------------------------------------------------
-#                                                                     _------__--___.__.
-#                                                                   /            `  `    \
-#                                                                  |                      \
-#                                                                  |                       |
-#                                                                   \                      |
-#                                                                     ~/ --`-`-`-\         |
-#                                                                     |            |       |
-#                                                                     |            |       |
-#                                                                      |   _--    |       |
-#                                                   Hey Butthead,      _| =-.    |.-.    |
-#                                                                      o|/o/       _.   |
-#                                                  does this suck?     /  ~          \ |
-#                                                                    (____@)  ___~    |
-#                                                                       |_===~~~.`    |
-#                                                                    _______.--~     |
-#                                                                    \________       |
-#                                                                             \      |
-#                                                                           __/-___-- -__
-#                                                                          /            __\
-#                                                                         /-| Metallica|| |
-#                                                                        / /|          || |
+/*
+  ------------------------------------------------------------------
+   My personal NixOS multi-host configuration flake ¯\_(ツ)_/¯
+   https://github.com/cig0/nixos-config
+   Initial release on May 1st, 2024
+
+   ASCII art credits: https://www.asciiart.eu/
+  ------------------------------------------------------------------
+                                                                       _------__--___.__.
+                                                                     /            `  `    \
+                                                                    |                      \
+                                                                    |                       |
+                                                                     \                      |
+                                                                       ~/ --`-`-`-\         |
+                                                                       |            |       |
+                                                                       |            |       |
+                                                                        |   _--    |       |
+                                                     Hey Butthead,      _| =-.    |.-.    |
+                                                                        o|/o/       _.   |
+                                                    does this suck?     /  ~          \ |
+                                                                      (____@)  ___~    |
+                                                                         |_===~~~.`    |
+                                                                      _______.--~     |
+                                                                      \________       |
+                                                                               \      |
+                                                                             __/-___-- -__
+                                                                            /            __\
+                                                                           /-| Metallica|| |
+                                                                          / /|          || |
+*/
+
 {
   description = "cig0's NixOS flake";
 
