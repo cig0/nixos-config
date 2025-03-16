@@ -48,11 +48,6 @@ nix-store --optimise to get rid of duplicate files.";
           type = lib.types.str;
           default = "--keep 5";
         };
-        flake = {
-          type = lib.types.nullOr lib.types.path;
-          default = inputs.self.outPath;
-          description = "The path that will be used for the `FLAKE` environment variable. Use as input the flake of the current system.";
-        };
       };
     };
   };
@@ -81,8 +76,13 @@ nix-store --optimise to get rid of duplicate files.";
     };
 
     programs.nh = lib.mkIf cfg.programs.nh.enable {
-      clean.enable = cfg.programs.nh.clean.enable;
       enable = true;
+      flake = inputs.self.outPath;
+      clean = {
+        enable = cfg.programs.nh.clean.enable;
+        dates = cfg.programs.nh.clean.dates;
+        extraArgs = cfg.programs.nh.clean.dates;
+      };
     };
   };
 }
