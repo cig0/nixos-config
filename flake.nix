@@ -131,18 +131,17 @@
 
     in
     {
-      # Laptop: Intel CPU & GPU + KDE
       nixosConfigurations = {
-        perrrkele =
+        # Headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
+        chuwi =
           let
             system = "x86_64-linux";
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system; };
             modules = nixosModulesBaseline ++ [
-              inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
               ./home-manager/home.nix
-              ./nixos/hosts/perrrkele/default.nix
+              ./nixos/hosts/chuwi/default.nix
               {
                 # ░░░░    O V E R L A Y S    ░░░░ #
                 nixpkgs.overlays = overlaysBaseline ++ [ ];
@@ -167,16 +166,17 @@
             ];
           };
 
-        # Headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
-        chuwi =
+        # Laptop: Intel CPU & GPU + KDE
+        perrrkele =
           let
             system = "x86_64-linux";
           in
           nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs system; };
             modules = nixosModulesBaseline ++ [
+              inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
               ./home-manager/home.nix
-              ./nixos/hosts/chuwi/default.nix
+              ./nixos/hosts/perrrkele/default.nix
               {
                 # ░░░░    O V E R L A Y S    ░░░░ #
                 nixpkgs.overlays = overlaysBaseline ++ [ ];
