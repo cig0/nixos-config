@@ -11,10 +11,14 @@
 let
   hostSelector = import ../host-selector.nix { inherit config lib; }; # TODO: remove this legacy configuration
 
-  cfg = lib.getAttrFromPath [ "mySystem" "boot" ] config;
+  # cfg = lib.getAttrFromPath [ "mySystem" "boot" ] config;
+  cfg = config.mySystem.myOptions;
 
   kernelPackageName =
-    if cfg.kernelPackages == "stable" then "linuxPackages" else "linuxPackages_" + cfg.kernelPackages;
+    if config.mySystem.boot.kernelPackages == "stable" then
+      "linuxPackages"
+    else
+      "linuxPackages_" + config.mySystem.boot.kernelPackages;
 
   # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`
   # kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
@@ -123,29 +127,24 @@ in
           throw "Hostname '${config.networking.hostName}' does not match any expected hosts!";
 
       kernelParams =
-        if hostSelector.isIntelGPUHost then
-          commonKernelParams
-          ++ [
-            "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
-            "fuse"
-            "intel_pstate=disable"
-            "i915.enable_fbc=1"
-            "i915.enable_guc=2"
-            "i915.enable_psr=1"
-            "logo.nologo=0"
-            "init_on_alloc=1"
-            "init_on_free=1"
-            "intel_iommu=sm_on"
-            "iommu=pt"
-            "mitigations=off" # Turns off certain CPU security mitigations. It might enhance performance
-          ]
-        else if hostSelector.isNvidiaGPUHost then
-          commonKernelParams
-          ++ [
-            "nvidia_drm.modeset=1" # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
-          ]
-        else
-          { };
+        commonKernelParams
+        ++ (lib.optionals (cfg.hardware.gpu == "intel") [
+          "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
+          "fuse"
+          "intel_pstate=disable"
+          "i915.enable_fbc=1"
+          "i915.enable_guc=2"
+          "i915.enable_psr=1"
+          "logo.nologo=0"
+          "init_on_alloc=1"
+          "init_on_free=1"
+          "intel_iommu=sm_on"
+          "iommu=pt"
+          "mitigations=off" # Turns off certain CPU security mitigations. It might enhance performance
+        ])
+        ++ (lib.optionals (cfg.hardware.gpu == "nvidia") [
+          "nvidia_drm.modeset=1" # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
+        ]);
 
       kernelPatches =
         if kernelPatches_enable == "true" then
