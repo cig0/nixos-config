@@ -99,7 +99,7 @@ in
         "usbhid"
         "usb_storage"
         "sd_mod"
-      ]; # Override parameter in hardware-configuration.nix
+      ]; # Overrides parameter in hardware-configuration.nix
 
       kernelModules =
         if hostSelector.isIntelGPUHost then
@@ -108,32 +108,36 @@ in
             "i915"
           ]
         else
-          [ ]; # Override parameter in hardware-configuration.nix
+          [ ]; # Overrides parameter in hardware-configuration.nix
 
+      # ================================================= #
       kernelPackages =
         let
           pkgSet = if cfg.nixos.channelPkgs == "stable" then pkgs else pkgsUnstable;
         in
         pkgSet.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgSet
 
-      # Previous iterations I'm leaving here for now as a reminder of the walked path.
-      # kernelPackages = builtins.getAttr kernelPackageName (
-      #   if cfg.nixos.channelPkgs == "stable" then
-      #     pkgs
-      #   else if cfg.nixos.channelPkgs == "unstable" then
-      #     pkgsUnstable
-      #   else
-      #     pkgs # Default to the stable channel
-      # );
+      /*
+        Previous iterations I'm leaving here momentarily as a reminder of the walked path.
+        kernelPackages = builtins.getAttr kernelPackageName (
+          if cfg.nixos.channelPkgs == "stable" then
+            pkgs
+          else if cfg.nixos.channelPkgs == "unstable" then
+            pkgsUnstable
+          else
+            pkgs # Default to the stable channel
+        );
 
-      # My very first implementation based on a module I built that used an automated logic
-      # Luckily all of that is way behind now :')
-      # # kernelPackages =
-      #   if hostSelector.isChuweiMiniPC
-      #   then kernelPackages_isChuweiMiniPC
-      #   else if hostSelector.isPerrrkele
-      #   then kernelPackages_isPerrrkele
-      #   else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
+        The very first implementation based on a module I built that used an automated logic
+        Luckily all of that is way behind now :')
+        kernelPackages =
+          if hostSelector.isChuweiMiniPC
+          then kernelPackages_isChuweiMiniPC
+          else if hostSelector.isPerrrkele
+          then kernelPackages_isPerrrkele
+          else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
+      */
+      # ================================================= #
 
       kernel.sysctl =
         # net.ipv4.tcp_congestion_control: This parameter specifies the TCP congestion control algorithm to be used for managing congestion in TCP connections.
