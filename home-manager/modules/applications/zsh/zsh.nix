@@ -1,12 +1,16 @@
 {
   config,
+  lib,
+  nixosConfig,
   pkgs,
   ...
-}: let
+}:
+let
   # Optionaly, you can import individual aliases and functions.
-  allAliases = (import ./aliases.nix {}).allAliases;
-  allFunctions = (import ./functions.nix {inherit config;}).allFunctions;
-in {
+  allAliases = (import ./aliases.nix { inherit config lib nixosConfig; }).allAliases;
+  allFunctions = (import ./functions.nix { inherit config lib nixosConfig; }).allFunctions;
+in
+{
   programs.command-not-found.enable = false;
 
   programs.zsh = {
@@ -80,10 +84,10 @@ in {
     };
   };
 }
-# READ ME!
-# ========
-# Refs:
-# https://superuser.com/questions/519596/share-history-in-multiple-zsh-shell
-# https://unix.stackexchange.com/questions/669971/zsh-can-i-have-a-combined-history-for-all-of-my-shells
-# https://github.com/cig0/Phantas0s-dotfiles/blob/master/zsh/zshrc
 
+/*
+  Refs:
+  https://superuser.com/questions/519596/share-history-in-multiple-zsh-shell
+  https://unix.stackexchange.com/questions/669971/zsh-can-i-have-a-combined-history-for-all-of-my-shells
+  https://github.com/cig0/Phantas0s-dotfiles/blob/master/zsh/zshrc
+*/
