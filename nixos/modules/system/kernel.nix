@@ -6,6 +6,7 @@
   config,
   lib,
   pkgs,
+  pkgsUnstable,
   ...
 }:
 let
@@ -99,6 +100,7 @@ in
         "usb_storage"
         "sd_mod"
       ]; # Override parameter in hardware-configuration.nix
+
       kernelModules =
         if hostSelector.isIntelGPUHost then
           [
@@ -107,8 +109,26 @@ in
           ]
         else
           [ ]; # Override parameter in hardware-configuration.nix
-      kernelPackages = builtins.getAttr kernelPackageName pkgs;
-      # kernelPackages =
+
+      kernelPackages =
+        let
+          pkgSet = if cfg.nixos.channelPkgs == "stable" then pkgs else pkgsUnstable;
+        in
+        pkgSet.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgSet
+
+      # Previous iterations I'm leaving here for now as a reminder of the walked path.
+      # kernelPackages = builtins.getAttr kernelPackageName (
+      #   if cfg.nixos.channelPkgs == "stable" then
+      #     pkgs
+      #   else if cfg.nixos.channelPkgs == "unstable" then
+      #     pkgsUnstable
+      #   else
+      #     pkgs # Default to the stable channel
+      # );
+
+      # My very first implementation based on a module I built that used an automated logic
+      # Luckily all of that is way behind now :')
+      # # kernelPackages =
       #   if hostSelector.isChuweiMiniPC
       #   then kernelPackages_isChuweiMiniPC
       #   else if hostSelector.isPerrrkele
