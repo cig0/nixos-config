@@ -1,7 +1,7 @@
 # Don't remove this line! This is a NixOS Zsh function module.
-
-{ ... }:
-
+{
+  ...
+}:
 let
   functions = ''
     diffstring() {
@@ -10,4 +10,7 @@ let
     }
   '';
 
-in { functions = functions; }
+in
+{
+  functions = functions;
+}
