@@ -1,5 +1,4 @@
-# TODO: migrate from automagic logic to host-specific configuration. It served well while I was learning how to properly configure NixOS, but it's time to move on and embrace the good practices
-# TODO: evaluate which of these options should be kept here and which ones should instead be set per-host.
+# TODO: (WIP) migrate from automagic logic to host-specific configuration. It served well while I was learning how to properly configure NixOS, but it's time to move on and embrace the good practices
 
 # https://wiki.nixos.org/wiki/Linux_kernel
 {
@@ -19,11 +18,6 @@ let
       "linuxPackages"
     else
       "linuxPackages_" + config.mySystem.boot.kernelPackages;
-
-  # Define kernel type per host, group, role, etc., e.g. `kernelPackages_isPerrrkele = "pkgs.linuxPackages_xanmod_latest";`
-  # kernelPackages_isChuweiMiniPC = pkgs.linuxPackages_hardened;
-  # kernelPackages_isPerrrkele = pkgs.linuxPackages_latest;
-  # kernelPackages_fallback = pkgs.linuxPackages_latest;
 
   kernelPatches_enable = "false"; # Enable/disable applying kernel patches
 
@@ -78,10 +72,13 @@ in
 {
   options.mySystem.boot.kernelPackages = lib.mkOption {
     type = lib.types.enum [
-      "latest"
+      "hardened"
+      "latest" # NixOS unstable branch default kernel
+      "latest-libre"
       "latest_hardened"
+      "libre"
       "lqx"
-      "stable"
+      "stable" # NixOS stable branch default kernel
       "xanmod_latest"
       "xanmod_stable"
     ];
