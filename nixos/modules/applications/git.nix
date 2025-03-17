@@ -110,7 +110,10 @@ in
           difftool = true;
         };
 
-        tag.gpgsign = true;
+        tag = {
+          gpgsign = true;
+          forceSignAnnotated = true;
+        };
 
         url."git@github.com:" = {
           insteadOf = "https://github.com/";
