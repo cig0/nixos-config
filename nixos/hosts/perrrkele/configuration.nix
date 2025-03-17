@@ -7,12 +7,15 @@
 
 {
   imports = [
-    ./hardware-configuration.nix
     /*
       Include the results of the hardware scan.
 
       Run nixos-generate-config --dir ~/tmp to create a fresh set of configuration.nix and hardware-configuration.nix.
     */
+    ./hardware-configuration.nix
+
+    # Main host configuration file
+    ./profile.nix
   ];
 
   # Bootloader

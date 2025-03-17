@@ -1,6 +1,6 @@
+# TODO: apply same dynamic module loading as in NixOS
 {
   config,
-  inputs,
   lib,
   ...
 }:
@@ -10,7 +10,6 @@ in
 {
   imports = [
     # (modulesPath + "/profiles/minimal.nix")
-    inputs.home-manager.nixosModules.home-manager
   ];
 
   options.mySystem.home-manager.enable = lib.mkEnableOption "Whether to enable Home Manager.";

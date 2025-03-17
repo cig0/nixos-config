@@ -108,22 +108,36 @@
       ...
     }@inputs:
     let
-      nixosModulesBaseline = [
-        (import ./nixos/modules/default.nix)
-        # (import ./nixos/modules/applications/default.nix)
-        # (import ./nixos/modules/common/default.nix)
-        # (import ./nixos/modules/hardware/default.nix)
-        # (import ./nixos/modules/networking/default.nix)
-        # (import ./nixos/modules/observability/default.nix)
-        # (import ./nixos/modules/secrets/default.nix)
-        # (import ./nixos/modules/security/default.nix)
-        # (import ./nixos/modules/system/default.nix)
-        # (import ./nixos/modules/virtualisation/default.nix)
-      ];
+      # Create a nixosSystem for each host
+      mkHost =
+        hostname: hostConfig:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            system = hostConfig.system; # Use the system from the host config
+          };
+          modules = [
+            # Home Manager
+            (import ./home-manager/home.nix)
+            home-manager.nixosModules.home-manager
 
-      overlaysBaseline = [
-        rust-overlay.overlays.default
-      ];
+            # NixOS dynamic modules loader
+            (import ./nixos/modules/default.nix)
+
+            # Host configuration (dynamic path constructed after the host name)
+            (./. + "/nixos/hosts/${hostname}/configuration.nix")
+
+            # Additional configurations
+            {
+              /*
+                ░░░░      O V E R L A Y S      ░░░░
+                These overlays are shared across all hosts. If this is not what you want,
+                move the desired overlays to the specific host within the extraModules sections"
+              */
+              nixpkgs.overlays = [ rust-overlay.overlays.default ];
+            }
+          ] ++ hostConfig.extraModules;
+        };
 
       # Define host-specific configurations
       hosts = {
@@ -143,28 +157,6 @@
           extraModules = [ inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7 ];
         };
       };
-
-      # Create a nixosSystem for each host
-      mkHost =
-        hostname: hostConfig:
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            system = hostConfig.system; # Use the system from the host config
-          };
-          modules =
-            nixosModulesBaseline
-            ++ [
-              ./home-manager/home.nix
-              (./. + "/nixos/hosts/${hostname}/default.nix") # Dynamic path based on the host name
-              {
-                # ░░░░    O V E R L A Y S    ░░░░ #
-                nixpkgs.overlays = overlaysBaseline ++ [ ];
-              }
-            ]
-            ++ hostConfig.extraModules;
-        };
-
     in
     {
       nixosConfigurations = nixpkgs.lib.mapAttrs mkHost hosts;
