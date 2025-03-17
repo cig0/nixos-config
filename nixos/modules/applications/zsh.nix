@@ -1,5 +1,4 @@
-# TODO: get rid of these and similar options that are already provided by NixOS and don't add any value to the flake
-
+# Bare configuration, as we're using the Home Manager to fully configure Zsh.
 {
   config,
   lib,
@@ -19,6 +18,3 @@ option for that user. To enable zsh system-wide use the
     programs.zsh.enable = cfg.enable;
   };
 }
-# READ ME!
-# ========
-# Bare configuration, as we're using the Home Manager to fully configure Zsh.
