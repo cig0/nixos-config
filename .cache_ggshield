@@ -1,1 +1,1 @@
-{"last_found_secrets": [{"match": "dddb09cbc05035166150697ab814080dd575a773e9f93ac7ec63eed9f97c8949", "name": "Generic Password - commit://staged/nixos/modules/applications/syncthing.nix"}]}
+{"last_found_secrets": [{"match": "b658467eac775ffc104e206031d04567e6ff13f4106a20ca03dd6207d09888f4", "name": "Grafana Cloud API Key - commit://staged/nixos/modules/observability/grafana-alloy.nix"}]}
