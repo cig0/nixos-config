@@ -9,7 +9,6 @@ let
       d <(echo "$1") <(echo "$2")
     }
   '';
-
 in
 {
   functions = functions;

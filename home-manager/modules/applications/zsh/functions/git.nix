@@ -1,6 +1,7 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-{...}: let
-  ansiColors = import ../ansi-colors.nix {};
+# Home Manager Zsh functions module. Do not remove this header.
+{ ... }:
+let
+  ansiColors = import ../ansi-colors.nix { };
   functions = ''
     gd() {
       # TL;DR: git diff
@@ -44,4 +45,7 @@
       fi
     }
   '';
-in {functions = functions;}
+in
+{
+  functions = functions;
+}

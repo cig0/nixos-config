@@ -1,7 +1,5 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-
+# Home Manager Zsh aliases module. Do not remove this header.
 { ... }:
-
 let
   # Distrobox :: https://github.com/89luca89/distrobox :: https://distrobox.it/
   aliases = {
@@ -11,5 +9,7 @@ let
     dbl = "db list";
     dbr = "db run";
   };
-
-in { aliases = aliases; }
+in
+{
+  aliases = aliases;
+}

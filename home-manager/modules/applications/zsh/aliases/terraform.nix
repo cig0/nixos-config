@@ -1,12 +1,12 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-
+# Home Manager Zsh aliases module. Do not remove this header.
 { ... }:
-
 let
   # Terraform / OpenTofu
   aliases = {
     ot = "opentofu";
     tf = "terraform";
   };
-
-in { aliases = aliases; }
+in
+{
+  aliases = aliases;
+}

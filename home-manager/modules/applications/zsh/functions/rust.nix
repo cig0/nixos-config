@@ -1,7 +1,9 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-
-{ ansiColors, config, ... }:
-
+# Home Manager Zsh functions module. Do not remove this header.
+{
+  ansiColors,
+  config,
+  ...
+}:
 let
   functions = ''
     _upgrade-apps-cargo() {
@@ -37,5 +39,7 @@ let
       done < "$file"
     }
   '';
-
-in { functions = functions; }
+in
+{
+  functions = functions;
+}

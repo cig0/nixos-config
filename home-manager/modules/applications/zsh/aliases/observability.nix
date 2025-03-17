@@ -1,11 +1,12 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-
+# Home Manager Zsh aliases module. Do not remove this header.
 { ... }:
-
 let
   aliases = {
     bt = "btop";
     t = "top";
   };
 
-in { aliases = aliases; }
+in
+{
+  aliases = aliases;
+}

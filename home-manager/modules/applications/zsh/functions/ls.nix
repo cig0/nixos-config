@@ -1,9 +1,6 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-
+# Home Manager Zsh functions module. Do not remove this header.
 { ... }:
-
 let
-  # Description
   functions = ''
     a() {
       setopt null_glob
@@ -25,5 +22,7 @@ let
       unsetopt null_glob
     }
   '';
-
-in { functions = functions; }
+in
+{
+  functions = functions;
+}

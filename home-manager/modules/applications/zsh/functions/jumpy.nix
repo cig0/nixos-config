@@ -1,9 +1,12 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-
+# Home Manager Zsh functions module. Do not remove this header.
 { ... }:
-
 let
-  # Jumpy - https://github.com/ClementNerma/Jumpy
+  /*
+    Jumpy - https://github.com/ClementNerma/Jumpy
+
+    For reference, here's the original implementation of chpwd_functions:
+    chpwd_functions=(${chpwd_functions[@]} "jumpy_handler")
+  */
   functions = ''
     j() {
       local result=$(jumpy query "$1" --checked --after "$PWD")
@@ -24,12 +27,7 @@ let
 
     chpwd_functions+=("jumpy_handler")
   '';
-
-in { functions = functions; }
-
-
-# READ ME!
-# =======
-
-# For reference, here's the original implementation of chpwd_functions:
-# chpwd_functions=(${chpwd_functions[@]} "jumpy_handler")
+in
+{
+  functions = functions;
+}

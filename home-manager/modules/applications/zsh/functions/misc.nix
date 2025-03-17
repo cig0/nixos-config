@@ -1,7 +1,5 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-
+# Home Manager Zsh functions module. Do not remove this header.
 { ... }:
-
 let
   functions = ''
     bkp() {
@@ -18,5 +16,7 @@ let
       ps -eo comm,%mem,rss --sort=comm | awk 'NR > 1 {a[$1]+=$2; b[$1]+=$3} END {for (i in a) printf "%-20s %5.2f%% %10.2f MB\n", i, a[i], b[i]/1024}' | sort -k2 -nr | head -n 20
     }
   '';
-
-in { functions = functions; }
+in
+{
+  functions = functions;
+}

@@ -1,7 +1,5 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-
+# Home Manager Zsh aliases module. Do not remove this header.
 { ... }:
-
 let
   aliases = {
     l = "ls -lh --group-directories-first";
@@ -15,5 +13,7 @@ let
     lsa = "ls -a --color=always --group-directories-first";
     lsrt = "ls -rt";
   };
-
-in { aliases = aliases; }
+in
+{
+  aliases = aliases;
+}

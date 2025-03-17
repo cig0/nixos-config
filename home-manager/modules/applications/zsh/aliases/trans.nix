@@ -1,7 +1,5 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-
+# Home Manager Zsh aliases module. Do not remove this header.
 { ... }:
-
 let
   # Trans - CLI client for Goolge Translator
   aliases = {
@@ -12,5 +10,7 @@ let
     tenfi = "trans en:fi";
     tfien = "trans fi:en";
   };
-
-in { aliases = aliases; }
+in
+{
+  aliases = aliases;
+}

@@ -15,7 +15,8 @@ let
       content = builtins.readFile file;
       firstLine = builtins.head (builtins.split "\n" content);
     in
-    firstLine == "# Don't remove this line! This is a NixOS Zsh function module.";
+    firstLine
+    == "# Home Manager Zsh functions module. Do not remove this header.";
 
   # Import function files, dynamically passing inputs (e.g. `nixosConfig`) when required
   importFunctionFiles =

@@ -1,7 +1,5 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-
+# Home Manager Zsh functions module. Do not remove this header.
 { ... }:
-
 let
   # Tools and concepts aligned with the cloud-native movement, including orchestration, containers, and resource management.
   functions = ''
@@ -37,5 +35,7 @@ let
       podman rmi --force $(podman images | grep -i '<none>' | awk -F' ' '{ print $3 }')
     }
   '';
-
-in { functions = functions; }
+in
+{
+  functions = functions;
+}

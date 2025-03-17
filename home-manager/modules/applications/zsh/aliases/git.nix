@@ -1,5 +1,6 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-{...}: let
+# Home Manager Zsh aliases module. Do not remove this header.
+{ ... }:
+let
   aliases = {
     # GitHub CLI
     ghrw = "gh run watch";
@@ -49,4 +50,7 @@
     ggs = "ggshield --no-check-for-updates";
     ggssr = "ggshield --no-check-for-updates secret scan repo";
   };
-in {aliases = aliases;}
+in
+{
+  aliases = aliases;
+}

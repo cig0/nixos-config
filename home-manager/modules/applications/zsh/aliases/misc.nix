@@ -1,5 +1,6 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-{...}: let
+# Home Manager Zsh aliases module. Do not remove this header.
+{ ... }:
+let
   aliases = {
     _h = "history | grep -i";
     ___ = "_h";
@@ -19,4 +20,7 @@
     sw3m = "s -b w3m";
     v = "nvim";
   };
-in {aliases = aliases;}
+in
+{
+  aliases = aliases;
+}

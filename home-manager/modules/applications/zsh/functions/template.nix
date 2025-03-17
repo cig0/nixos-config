@@ -1,10 +1,8 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-
+# Home Manager Zsh functions module. Do not remove this header.
 { ... }:
-
 let
-  # Description
-  functions = ''
-  '';
-
-in { functions = functions; }
+  functions = '''';
+in
+{
+  functions = functions;
+}

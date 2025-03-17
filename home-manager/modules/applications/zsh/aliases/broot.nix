@@ -1,4 +1,4 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
+# Home Manager Zsh aliases module. Do not remove this header.
 { ... }:
 let
   # Interactive tree view, a fuzzy search, a balanced BFS descent and customizable commands
