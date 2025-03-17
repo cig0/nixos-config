@@ -28,7 +28,6 @@
                                                                            /-| Metallica|| |
                                                                           / /|          || |
 */
-
 {
   description = "cig0's NixOS flake";
 
@@ -132,60 +131,48 @@
         rust-overlay.overlays.default
       ];
 
+      # Define host-specific configurations
+      hosts = {
+        chuwi = {
+          description = "Headless MiniPC: Intel CPU & GPU, lab + NAS + streaming";
+          system = "x86_64-linux";
+          extraModules = [ ];
+        };
+        desktop = {
+          description = "Desktop: Intel CPU, Nvidia GPU";
+          system = "x86_64-linux";
+          extraModules = [ ];
+        };
+        perrrkele = {
+          description = "Laptop: Intel CPU & GPU + KDE";
+          system = "x86_64-linux";
+          extraModules = [ inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7 ];
+        };
+      };
+
+      # Function to create a nixosSystem for each host
+      mkHost =
+        hostname: hostConfig:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            system = hostConfig.system; # Use the system from the host config
+          };
+          modules =
+            nixosModulesBaseline
+            ++ [
+              ./home-manager/home.nix
+              (./. + "/nixos/hosts/${hostname}/default.nix") # Dynamic path based on the host name
+              {
+                # ░░░░    O V E R L A Y S    ░░░░ #
+                nixpkgs.overlays = overlaysBaseline ++ [ ];
+              }
+            ]
+            ++ hostConfig.extraModules;
+        };
+
     in
     {
-      nixosConfigurations = {
-        # Headless MiniPC: Intel CPU & GPU, lab + NAS + streaming
-        chuwi =
-          let
-            system = "x86_64-linux";
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system; };
-            modules = nixosModulesBaseline ++ [
-              ./home-manager/home.nix
-              ./nixos/hosts/chuwi/default.nix
-              {
-                # ░░░░    O V E R L A Y S    ░░░░ #
-                nixpkgs.overlays = overlaysBaseline ++ [ ];
-              }
-            ];
-          };
-
-        # Desktop: Intel CPU, Nvidia GPU
-        desktop =
-          let
-            system = "x86_64-linux";
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system; };
-            modules = nixosModulesBaseline ++ [
-              ./home-manager/home.nix
-              ./nixos/hosts/desktop/default.nix
-              {
-                # ░░░░    O V E R L A Y S    ░░░░ #
-                nixpkgs.overlays = overlaysBaseline ++ [ ];
-              }
-            ];
-          };
-
-        # Laptop: Intel CPU & GPU + KDE
-        perrrkele =
-          let
-            system = "x86_64-linux";
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit inputs system; };
-            modules = nixosModulesBaseline ++ [
-              inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
-              ./home-manager/home.nix
-              ./nixos/hosts/perrrkele/default.nix
-              {
-                # ░░░░    O V E R L A Y S    ░░░░ #
-                nixpkgs.overlays = overlaysBaseline ++ [ ];
-              }
-            ];
-          };
-      };
+      nixosConfigurations = nixpkgs.lib.mapAttrs mkHost hosts;
     };
 }
