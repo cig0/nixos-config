@@ -1,3 +1,15 @@
+/*
+  NixOS dynamic modules loader.
+
+  This module recursively scans current and child directory for Nix modules;
+  hasModulePattern defines the criteria to determine if a .nix file is a Nix module or not.
+
+  In order to avoid "manually" enabling or disabling modules from the module itself,
+  each module must have its own set of options that at the very least allows to enable
+  or disable the module through the overlapping systemwide option config.mySystem.
+
+  As of now, each host is assembled from the profile.nix module living next to the configuration.nix and hardware-configuration.nix modules.
+*/
 {
   lib,
   ...
