@@ -1,7 +1,5 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-
+# Home Manager Zsh aliases module. Do not remove this header.
 { ... }:
-
 let
   aliases = {
     fli = "flatpak install";
@@ -10,4 +8,7 @@ let
     fls = "flatpak search";
   };
 
-in { aliases = aliases; }
+in
+{
+  aliases = aliases;
+}

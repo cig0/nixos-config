@@ -1,7 +1,5 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-
+# Home Manager Zsh functions module. Do not remove this header.
 { ... }:
-
 let
   functions = ''
     zr() {  # zsh_reload
@@ -13,5 +11,7 @@ let
       fi
     }
   '';
-
-in { functions = functions; }
+in
+{
+  functions = functions;
+}

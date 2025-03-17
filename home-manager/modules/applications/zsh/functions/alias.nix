@@ -1,7 +1,8 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-
-{ ansiColors, ... }:
-
+# Home Manager Zsh functions module. Do not remove this header.
+{
+  ansiColors,
+  ...
+}:
 let
   # Aliases helper functions.
   functions = ''
@@ -12,5 +13,7 @@ let
       alias | grep --color=always --ignore-case "$1"
     }
   '';
-
-in { functions = functions; }
+in
+{
+  functions = functions;
+}

@@ -1,7 +1,5 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-
+# Home Manager Zsh aliases module. Do not remove this header.
 { ... }:
-
 let
   aliases = {
     codif = "colordiff -y -W 212";
@@ -10,4 +8,7 @@ let
     dt = "difft";
   };
 
-in { aliases = aliases; }
+in
+{
+  aliases = aliases;
+}

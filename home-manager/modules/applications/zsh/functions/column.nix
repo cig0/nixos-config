@@ -1,5 +1,6 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-{...}: let
+# Home Manager Zsh functions module. Do not remove this header.
+{ ... }:
+let
   functions = ''
     cvs2json() {
       # Credits: Veronica Explains https://youtu.be/uL7KvRskeog?si=VkM7rRQD7QE-IkiA
@@ -14,4 +15,7 @@
       column -t -s ":" $1 -N USERNAME,PWD,UI,GUI,COMMENT,HOME,"SHELL INTERPRETER" -J -n myNewTable
     }
   '';
-in {functions = functions;}
+in
+{
+  functions = functions;
+}

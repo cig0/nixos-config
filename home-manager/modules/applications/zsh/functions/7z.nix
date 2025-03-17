@@ -1,7 +1,8 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-
-{ ansiColors, ... }:
-
+# Home Manager Zsh functions module. Do not remove this header.
+{
+  ansiColors,
+  ...
+}:
 let
   functions = ''
     7za9() {
@@ -11,5 +12,7 @@ let
       7z a -mx=9 -m0=lzma2 -mmt=on "$1".7z "$2"
     }
   '';
-
-in { functions = functions; }
+in
+{
+  functions = functions;
+}

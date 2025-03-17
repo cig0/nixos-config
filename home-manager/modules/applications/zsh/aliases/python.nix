@@ -1,8 +1,12 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-{...}: let
+# Home Manager Zsh aliases module. Do not remove this header.
+{ ... }:
+let
   aliases = {
     p = "python";
     vac = ". .venv/bin/activate";
     vde = "deactivate";
   };
-in {aliases = aliases;}
+in
+{
+  aliases = aliases;
+}

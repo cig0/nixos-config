@@ -1,7 +1,5 @@
-# Don't remove this line! This is a NixOS Zsh function module.
-
+# Home Manager Zsh functions module. Do not remove this header.
 { ... }:
-
 let
   functions = ''
     # Hydra
@@ -58,5 +56,7 @@ let
         echo -e "\n$bold_greenNix channel version: $bold_white$channel_version$reset"
       }
   '';
-
-in { functions = functions; }
+in
+{
+  functions = functions;
+}

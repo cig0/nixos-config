@@ -1,5 +1,6 @@
-# Don't remove this line! This is a NixOS Zsh alias module.
-{...}: let
+# Home Manager Zsh aliases module. Do not remove this header.
+{ ... }:
+let
   aliases = {
     sperrrkele = "ssh perrrkele";
     shomelabnas = "ssh homelabnas";
@@ -10,4 +11,7 @@
     tterasbetoni = "ssh terasbetoni -t 'tmux attach-session -t'";
     tdesktop = "ssh desktop -t 'tmux attach-session -t'";
   };
-in {aliases = aliases;}
+in
+{
+  aliases = aliases;
+}
