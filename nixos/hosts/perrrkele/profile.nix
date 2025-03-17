@@ -4,20 +4,13 @@
   Is it worth splitting this configuration module into modules under
   nixos/modules/common/profiles?
 
-  Splitting may improve the handlong of options management, but at the risk
+  Splitting may improve the handling of options management, but at the risk
   of obfuscating this host configuration.
 */
 {
   ...
 }:
 {
-  /*
-    ░░░░░░░█▀█░█▀▀░█▀▄░█▀▄░█▀▄░█░█░█▀▀░█░░░█▀▀░▀░█▀▀░░░░░░█▀█░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀░░░░░░░
-    ░░░░░░░█▀▀░█▀▀░█▀▄░█▀▄░█▀▄░█▀▄░█▀▀░█░░░█▀▀░░░▀▀█░░░░░░█░█░█▀▀░░█░░░█░░█░█░█░█░▀▀█░░░░░░░
-    ░░░░░░░▀░░░▀▀▀░▀░▀░▀░▀░▀░▀░▀░▀░▀▀▀░▀▀▀░▀▀▀░░░▀▀▀░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
-    For Home Manager options, check home-manager/home.nix
-  */
-
   # NixOS host-specific options
   hardware.cpu.intel.updateMicrocode = true;
 
