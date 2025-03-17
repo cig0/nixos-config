@@ -54,7 +54,7 @@
       lfs.enable = true;
     };
 
-    programs.krew.enable = false; # WIP
+    # programs.krew.enable = false; # WIP
     programs.lazygit.enable = true;
     programs.nixvim.enable = true;
 
