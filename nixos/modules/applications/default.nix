@@ -18,6 +18,7 @@ let
       # Check for common module patterns using simple string contains
       hasModulePattern =
         lib.strings.hasInfix "... }:" content
+        || lib.strings.hasInfix "}:" content
         || lib.strings.hasInfix "config," content
         || lib.strings.hasInfix "lib," content
         || lib.strings.hasInfix "inputs," content
@@ -26,6 +27,7 @@ let
         || lib.strings.hasInfix "config =" content
         || lib.strings.hasInfix "imports =" content
         || lib.strings.hasInfix "options =" content;
+
     in
     hasModulePattern;
 
