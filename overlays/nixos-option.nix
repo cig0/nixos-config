@@ -1,9 +1,16 @@
-# Fixes nixos-option not working with flakes :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-1075818028
-# I modified the overlay slightly to make it more flexible when changing the flake location.
-# Replace myFlakeDir with the path to your flake.
+/*
+  Fixes nixos-option not working with flakes :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-1075818028
 
-self: super: let
-  myFlakeDir = "/etc/nixos/nixos-config";
+  I modified the overlay slightly to make it more flexible when changing the flake location.
+  Replace myFlakeDir with the path to your flake.
+
+  TODO: deprecate this workaround with NixOS 25.05 as it already includes this fix.
+*/
+{ config, ... }:
+self: super:
+let
+  # myFlakeDir = "${config.mySystem.myOptions.nixos.flake.path};";
+  myFlakeDir = "/home/cig0/workdir/cig0/nixos-config";
   flake-compact = super.fetchFromGitHub {
     owner = "edolstra";
     repo = "flake-compat";
@@ -11,7 +18,8 @@ self: super: let
     sha256 = "sha256-hY8g6H2KFL8ownSiFeMOjwPC8P0ueXpCVEbxgda3pko=";
   };
   prefix = ''(import ${flake-compact} { src = ${myFlakeDir}; }).defaultNix.nixosConfigurations.\$(hostname)'';
-in {
+in
+{
   nixos-option = super.runCommandNoCC "nixos-option" { buildInputs = [ super.makeWrapper ]; } ''
     makeWrapper ${super.nixos-option}/bin/nixos-option $out/bin/nixos-option \
       --add-flags --config_expr \

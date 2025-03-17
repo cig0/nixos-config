@@ -112,22 +112,23 @@
       ...
     }@inputs:
     let
-      nixos-option = import ./overlays/nixos-option.nix; # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+      # nixos-option = import ./overlays/nixos-option.nix; # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
 
       nixosModulesBaseline = [
-        (import ./nixos/modules/applications/default.nix)
-        (import ./nixos/modules/common/default.nix)
-        (import ./nixos/modules/hardware/default.nix)
-        (import ./nixos/modules/networking/default.nix)
-        (import ./nixos/modules/observability/default.nix)
-        (import ./nixos/modules/secrets/default.nix)
-        (import ./nixos/modules/security/default.nix)
-        (import ./nixos/modules/system/default.nix)
-        (import ./nixos/modules/virtualisation/default.nix)
+        (import ./nixos/modules/default.nix)
+        # (import ./nixos/modules/applications/default.nix)
+        # (import ./nixos/modules/common/default.nix)
+        # (import ./nixos/modules/hardware/default.nix)
+        # (import ./nixos/modules/networking/default.nix)
+        # (import ./nixos/modules/observability/default.nix)
+        # (import ./nixos/modules/secrets/default.nix)
+        # (import ./nixos/modules/security/default.nix)
+        # (import ./nixos/modules/system/default.nix)
+        # (import ./nixos/modules/virtualisation/default.nix)
       ];
 
       overlaysBaseline = [
-        nixos-option # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+        (import ./overlays/nixos-option.nix) # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
         rust-overlay.overlays.default
       ];
 
