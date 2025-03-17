@@ -150,7 +150,7 @@
         };
       };
 
-      # Function to create a nixosSystem for each host
+      # Create a nixosSystem for each host
       mkHost =
         hostname: hostConfig:
         nixpkgs.lib.nixosSystem {
