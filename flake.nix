@@ -112,7 +112,7 @@
       ...
     }@inputs:
     let
-      nixos-option = import ./nixos/modules/common/overlays/nixos-option.nix; # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
+      nixos-option = import ./nixos/overlays/nixos-option.nix; # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
 
       nixosModulesBaseline = [
         (import ./nixos/modules/applications/default.nix)
