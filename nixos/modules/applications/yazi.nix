@@ -60,7 +60,7 @@ in
       # };
     };
 
-    # TODO: (wip) -- I NEED TO ADD the options to correctly handling nix.settings.extra-* so each module doesn't overwrite the other
+    # TODO: (wip) -- I NEED TO ADD the options to correctly handling nix.settings.extra-* so each module doesn't overwrite each others' configurations
     nix.settings = lib.mkIf cfg.mySystem.programs {
       extra-substituters = [ "https://yazi.cachix.org" ];
       extra-trusted-public-keys = [ "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k=" ];
