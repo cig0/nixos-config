@@ -41,9 +41,6 @@
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
-    # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
-    flake-compat.url = "github:edolstra/flake-compat"; # Make nixos-option work with flakes.
-
     home-manager = {
       # User-specific settings and packages: https://github.com/nix-community/home-manager
       inputs.nixpkgs.follows = "nixpkgs";
@@ -94,7 +91,6 @@
   outputs =
     {
       auto-cpufreq, # Energy efficiency
-      flake-compat, # Make nixos-option work with flakes # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
       home-manager, # User-specific settings and packages
       lanzaboote, # Secure Boot for NixOS
       nix-flatpak, # Enhanced Flatpak support
@@ -112,8 +108,6 @@
       ...
     }@inputs:
     let
-      # nixos-option = import ./overlays/nixos-option.nix; # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
-
       nixosModulesBaseline = [
         (import ./nixos/modules/default.nix)
         # (import ./nixos/modules/applications/default.nix)
@@ -128,7 +122,6 @@
       ];
 
       overlaysBaseline = [
-        (import ./overlays/nixos-option.nix) # TODO: Will be removed with the release of 25.05 :: https://github.com/NixOS/nixpkgs/issues/97855#issuecomment-2637395681
         rust-overlay.overlays.default
       ];
 
