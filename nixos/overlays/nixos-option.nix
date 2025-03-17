@@ -6,7 +6,6 @@
 
   TODO: deprecate this workaround with NixOS 25.05 as it already includes this fix.
 */
-{ config, ... }:
 self: super:
 let
   # myFlakeDir = "${config.mySystem.myOptions.nixos.flake.path};";
