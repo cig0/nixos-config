@@ -25,7 +25,6 @@ in
             { ... }:
             {
               imports = [
-                ./modules/applications/zsh/zsh.nix # Temporary workaround for Zsh stuff
                 ./modules/default.nix # Shared modules
                 ./users/cig0/default.nix # User configuration
               ];
@@ -36,7 +35,6 @@ in
             { ... }:
             {
               imports = [
-                ./modules/applications/zsh/zsh.nix # Temporary workaround for Zsh stuff
                 ./modules/default.nix # Shared modules
                 ./users/doomguy/default.nix # User configuration
               ];
@@ -47,7 +45,6 @@ in
             { ... }:
             {
               imports = [
-                ./modules/applications/zsh/zsh.nix # Temporary workaround for Zsh stuff
                 ./modules/default.nix # Shared modules
                 ./users/fine/default.nix # User configuration
               ];

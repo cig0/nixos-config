@@ -12,13 +12,12 @@ let
   modules = moduleLoader.collectModules {
     inherit dir;
     excludePaths = [
-      # "applications/zsh/aliases"
-      # "applications/zsh/functions"
-      # "applications/zsh/lib"
       "applications/zsh"
     ];
   };
 in
 {
-  imports = builtins.filter (x: x != null) modules;
+  imports = builtins.filter (x: x != null) modules ++ [
+    ./applications/zsh/zsh.nix # Temporary workaround
+  ];
 }
