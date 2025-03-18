@@ -1,3 +1,21 @@
+.
+├── assets/                # Media assets for documentation
+├── configs/               # All system configurations
+│   ├── home-manager/      # Home Manager configurations (renamed from home-manager)
+│   │   ├── modules/       # Home Manager modules
+│   │   └── users/         # User-specific configurations
+│   └── nixos/             # NixOS configurations
+│       ├── hosts/         # Host-specific configurations
+│       ├── modules/       # NixOS modules
+│       └── overlays/      # NixOS overlays
+├── flake.lock
+├── flake.nix
+├── lib/                   # Shared libraries and helper tools
+├── README.md
+└── tests/                 # Tests for modules
+    ├── home-manager       # Home Manager tests
+    └── nixos/             # NixOS tests
+
 This branch tracks the clean-up job to consolidate coding practices, defined mySystem options, modules rename when applicable, and the documentation of a proper naming pattern for mySystem options, i.e.:
 
 - mySystem.myOptions: any options not matching NixOS built-in options resides under this attribute set. This is to differentiate options created by my, from those that follows NixOS' options sets.
