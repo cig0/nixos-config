@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = lib.getAttrFromPath [ "mySystem" "home-manager" "enable" ] config;
+  cfg = config.mySystem.home-manager.enable;
 in
 {
   imports = [
@@ -25,6 +25,7 @@ in
             { ... }:
             {
               imports = [
+                ./modules/applications/zsh/zsh.nix # Temporary workaround for Zsh stuff
                 ./modules/default.nix # Shared modules
                 ./users/cig0/default.nix # User configuration
               ];
@@ -35,11 +36,8 @@ in
             { ... }:
             {
               imports = [
-                ./modules/applications/zsh/zsh.nix
-                ./modules/applications/atuin.nix
-                ./modules/applications/starship.nix
-                ./modules/config-files/default.nix
-                ./modules/system/default.nix
+                ./modules/applications/zsh/zsh.nix # Temporary workaround for Zsh stuff
+                ./modules/default.nix # Shared modules
                 ./users/doomguy/default.nix # User configuration
               ];
             };
@@ -49,6 +47,7 @@ in
             { ... }:
             {
               imports = [
+                ./modules/applications/zsh/zsh.nix # Temporary workaround for Zsh stuff
                 ./modules/default.nix # Shared modules
                 ./users/fine/default.nix # User configuration
               ];

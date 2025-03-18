@@ -1,11 +1,12 @@
 /*
-=== ANSI escape codes for colors ===
+  === ANSI escape codes for colors ===
 
-Note: Use double forward slashes (\\) for escape sequences!
+  Note: Use double forward slashes (\\) for escape sequences!
 
-Otherwise, Nix will render the content of the string as regular characters.
+  Otherwise, Nix will render the content of the string as regular characters.
 */
-{...}: let
+{ ... }:
+let
   # ----+ Common attributes +----
   reset = "\\e[0m"; # Useful to reset text attributes.
 
@@ -20,7 +21,8 @@ Otherwise, Nix will render the content of the string as regular characters.
       italic = "\\033[3m";
     };
   };
-in {
+in
+{
   # ----+ Current color scheme +----
   inherit reset;
   bold_green = theme.nushell.bold.green;
