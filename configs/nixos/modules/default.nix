@@ -3,7 +3,7 @@
   ...
 }:
 let
-  moduleLoader = import ../../lib/module-loader.nix { inherit lib; };
+  moduleLoader = import ../../../lib/module-loader.nix { inherit lib; };
   
   # Get the directory of this file
   dir = ./.;
