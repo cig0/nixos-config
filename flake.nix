@@ -118,14 +118,13 @@
           };
           modules = [
             # Home Manager
-            (import ./home-manager/home.nix)
+            (import ./configs/home-manager/home.nix)
             home-manager.nixosModules.home-manager
 
-            # NixOS dynamic modules loader
-            (import ./nixos/modules/default.nix)
-
+            # NixOS
+            (import ./configs/nixos/modules/default.nix)
             # Host configuration (dynamic path constructed after the host name)
-            (./. + "/nixos/hosts/${hostname}/configuration.nix")
+            (./. + "/configs/nixos/hosts/${hostname}/configuration.nix")
 
             # Additional configurations
             {
