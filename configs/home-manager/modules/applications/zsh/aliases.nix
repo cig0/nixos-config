@@ -14,8 +14,7 @@ let
       content = builtins.readFile file;
       firstLine = builtins.head (builtins.split "\n" content);
     in
-    firstLine
-    == "# Home Manager Zsh aliases module. Do not remove this header.";
+    firstLine == "# Home Manager Zsh aliases module. Do not remove this header.";
 
   # Import alias files, dynamically passing inputs (e.g. `nixosConfig`) when required
   importAliasFiles =

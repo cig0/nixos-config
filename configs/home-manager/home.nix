@@ -1,11 +1,15 @@
-# TODO: apply same dynamic module loading as in NixOS
+/*
+  TODO: apply same dynamic module loading as in NixOS
+
+  Being worked on in branch refactor/home-manager/autoload-module
+*/
 {
   config,
   lib,
   ...
 }:
 let
-  cfg = lib.getAttrFromPath [ "mySystem" "home-manager" "enable" ] config;
+  cfg = config.mySystem.home-manager.enable;
 in
 {
   imports = [
@@ -35,11 +39,7 @@ in
             { ... }:
             {
               imports = [
-                ./modules/applications/zsh/zsh.nix
-                ./modules/applications/atuin.nix
-                ./modules/applications/starship.nix
-                ./modules/config-files/default.nix
-                ./modules/system/default.nix
+                ./modules/default.nix # Shared modules
                 ./users/doomguy/default.nix # User configuration
               ];
             };
