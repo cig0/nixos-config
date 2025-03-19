@@ -1,0 +1,10 @@
+pre-commit:
+  commands:
+    encrypt:
+      glob: ".autoenv*.zsh"
+      run: "bash -c '[ ! -f {0} ] || [ -f {0}.enc ] && grep -q \"^sops:\" {0}.enc || sops --encrypt --config .sops.yaml {0} > {0}.enc && git add {0}.enc'"
+post-commit:
+  commands:
+    decrypt:
+      glob: ".autoenv*.zsh.enc"
+      run: "bash -c '[ ! -f {0} ] || sops --decrypt {0} > ${0%.enc} && rm {0}'"

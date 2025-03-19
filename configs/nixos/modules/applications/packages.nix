@@ -278,6 +278,7 @@ let
       gitty # https://github.com/muesli/gitty/?tab=readme-ov-file
       glab # GitLab CLI client.
       # jujutsu
+      lefthook
       tig
 
       # Radicle
