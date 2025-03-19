@@ -12,6 +12,7 @@ let
     lma = "ls -lartA --color=always";
     lsa = "ls -a --color=always --group-directories-first";
     lsrt = "ls -rt";
+    lL = aliases.lsrt;
   };
 in
 {
