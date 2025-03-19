@@ -36,7 +36,7 @@ let
     # Log
     gloH = "git log origin..HEAD --oneline";
     glols = "git log --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
-    glo = "git log --oneliner";
+    glo = "git log --oneline";
 
     # Status
     gsb = "git status --short --branch";
