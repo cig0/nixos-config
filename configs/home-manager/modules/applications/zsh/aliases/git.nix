@@ -8,19 +8,18 @@ let
     gch = "git checkout";
     gls = "git ls-tree --full-tree --name-only -r HEAD | lines";
     gp = "git pull";
-    gpu = "git push";
     grm = "git rm --cached";
     grs = "git restore --staged";
 
     # Add
-    gaA = "git add --all";
+    gaA = aliases.ga + " --all";
     ga = "git add";
-    gaf = "git add --force";
+    gaf = aliases.ga + " --force";
 
     # branch
-    gbD = "git branch --delete --force";
+    gbD = aliases.gb + " --delete --force";
     gb = "git branch";
-    gba = "git branch --all";
+    gba = aliases.gb + " --all";
 
     # cherry-pick
     gcpXt = aliases.gcp + " -X theirs";
@@ -29,20 +28,24 @@ let
 
     # clone
     gcl = "git clone";
-    gcl1 = "git clone --depth=1";
+    gcl1 = aliases.gcl + " --depth=1";
 
     # commit
-    gca = "git commit -am";
     gco = "git commit -m";
+    gcoa = aliases.gco + " --amend";
 
     # fetch
     gf = "git fetch";
-    gf1 = "git fetch --depth=1";
+    gf1 = aliases.gf + " --depth=1";
 
     # log
     gloH = "git log origin..HEAD --oneline";
     glols = "git log --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
     glo = "git log --oneline";
+
+    # push
+    gpu = "git push";
+    gpum = aliases.gpu + " --mirror";
 
     # reflog
     grlH1 = aliases.grl + " --format=%H -1"; # Shows latest commit in long-format
