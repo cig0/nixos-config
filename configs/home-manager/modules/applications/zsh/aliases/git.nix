@@ -17,9 +17,9 @@ let
     gaf = aliases.ga + " --force";
 
     # branch
-    gbD = aliases.gb + " --delete --force";
-    gb = "git branch";
-    gba = aliases.gb + " --all";
+    gbrD = aliases.gbr + " --delete --force";
+    gbr = "git branch";
+    gbra = aliases.gbr + " --all";
 
     # cherry-pick
     gcpXt = aliases.gcp + " -X theirs";
@@ -31,44 +31,49 @@ let
     gcl1 = aliases.gcl + " --depth=1";
 
     # commit
-    gco = "git commit -m";
-    gcoa = aliases.gco + " --amend";
+    gcom = "git commit -m";
+    gcoma = aliases.gcom + " --amend";
 
     # fetch
-    gf = "git fetch";
-    gf1 = aliases.gf + " --depth=1";
+    gfe = "git fetch";
+    gfe1 = aliases.gfe + " --depth=1";
 
     # log
-    gloH = "git log origin..HEAD --oneline";
-    glols = "git log --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
-    glo = "git log --oneline";
+    glols =
+      aliases.glo
+      + " --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
+    glo = "git log";
+    gloaH1 = aliases.glo + "--all --format=%H -1";
+    gloah1 = aliases.glo + "--all --format=%h -1";
+    glooH = aliases.glo + " origin..HEAD --oneline";
+    gloo = aliases.glo + " --oneline";
 
     # push
-    gpu = "git push";
-    gpum = aliases.gpu + " --mirror";
+    gpus = "git push";
+    gpusm = aliases.gpus + " --mirror";
 
     # reflog
-    grlH1 = aliases.grl + " --format=%H -1"; # Shows latest commit in long-format
-    grl = "git reflog";
-    grlh1 = aliases.grl + " --format=%h -1"; # Shows latest commit in short-format
+    greflH1 = aliases.gref + " --format=%H -1";
+    gref = "git reflog";
+    greflh1 = aliases.gref + " --format=%h -1";
 
     # status
-    gsb = "git status --short --branch";
+    gsb = aliases.gs + " --short --branch";
     gs = "git status";
 
     # switch
     gsw = "git switch";
-    gswc = "git switch --create";
-    gswm = "git switch $\"\(git_main_branch\)\"";
-    gswd = "git switch $\"\(git_develop_branch\)\"";
-    gsws = "git switch sandbox";
+    gswc = aliases.gsw + " --create";
+    gswm = aliases.gsw + " main";
+    gswd = aliases.gsw + " $\"\(git_develop_branch\)\""; # TODO: direnv? E.g. in the .env file: "git_development_branch=dev/refactor-module-loader-for-home-manager"
+    gsws = aliases.gsw + " sandbox";
 
     # ===== Git helpers  =====
     gg = "lazygit";
 
     # GitGuardian
     ggs = "ggshield --no-check-for-updates";
-    ggssr = "ggshield --no-check-for-updates secret scan repo";
+    ggssr = aliases.ggs + " --no-check-for-updates secret scan repo";
 
     # GitHub CLI
     ghrw = "gh run watch";
