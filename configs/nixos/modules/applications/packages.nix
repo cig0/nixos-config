@@ -153,6 +153,7 @@ let
         k9s
         kdash
         kind
+        krew
         kube-bench
         kubecolor
         kubectl
