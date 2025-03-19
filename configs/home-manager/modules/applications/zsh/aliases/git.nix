@@ -31,8 +31,8 @@ let
     gcl1 = aliases.gcl + " --depth=1";
 
     # commit
-    gcom = "git commit -m";
-    gcoma = aliases.gcom + " --amend";
+    gco = "git commit -m";
+    gcoa = aliases.gco + " --amend";
 
     # fetch
     gfe = "git fetch";
