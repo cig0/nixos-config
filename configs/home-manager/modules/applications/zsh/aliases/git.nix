@@ -21,6 +21,7 @@ let
     gcl = "git clone";
     gcl1 = "git clone --depth=1";
     gco = "git commit -m";
+    gcp = "git cherry-pick";
     gf = "git fetch";
     gf1 = "git fetch --depth=1";
     gls = "git ls-tree --full-tree --name-only -r HEAD | lines";
