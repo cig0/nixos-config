@@ -57,14 +57,24 @@ let
     gf1 = "git fetch --depth=1";
 
     # log
-    gloH = "git log origin..HEAD --oneline";
-    glols = "git log --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
-    glo = "git log --oneline";
+    glols =
+      aliases.glo
+      + " --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
+    glo = "git log";
+    gloa1H = aliases.glo + " --all -1 --format=%H";
+    gloa1 = aliases.glo + " --all -1 --format=%h";
+    glooH = aliases.glo + " origin..HEAD --oneline";
+    gloo = aliases.glo + " --oneline";
+
+    # push
+    gpus = "git push";
+    gpusm = aliases.gpus + " --mirror";
+    gpussu = aliases.gpus + " --set-upstream origin $(git branch --show-current)";
 
     # reflog
-    grlH1 = aliases.grl + " --format=%H -1"; # Shows latest commit in long-format
-    grl = "git reflog";
-    grlh1 = aliases.grl + " --format=%h -1"; # Shows latest commit in short-format
+    grefl1H = aliases.gref + " -1 --format=%H";
+    gref = "git reflog";
+    grefl1 = aliases.gref + " -1 --format=%h";
 
     # status
     gsb = "git status --short --branch";
