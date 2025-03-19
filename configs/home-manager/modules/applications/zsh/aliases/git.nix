@@ -16,14 +16,14 @@ let
     grs = "git restore --staged";
 
     # Add
-    ga = "git add";
     gaA = "git add --all";
+    ga = "git add";
     gaf = "git add --force";
 
     # Branch
+    gbD = "git branch --delete --force";
     gb = "git branch";
     gba = "git branch --all";
-    gbD = "git branch --delete --force";
 
     # Commit
     gca = "git commit -am";
@@ -34,9 +34,9 @@ let
     gf1 = "git fetch --depth=1";
 
     # Log
+    gloH = "git log origin..HEAD --oneline";
     glols = "git log --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
     glo = "git log --oneliner";
-    gloH = "git log origin..HEAD --oneline";
 
     # Status
     gsb = "git status --short --branch";

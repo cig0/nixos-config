@@ -2,6 +2,7 @@
 { ... }:
 let
   aliases = {
+    lL = aliases.lsrt;
     l = "ls -lh --group-directories-first";
     l1 = "ls -1 --group-directories-first";
     l11 = "ls -1rt";
@@ -12,7 +13,6 @@ let
     lma = "ls -lartA --color=always";
     lsa = "ls -a --color=always --group-directories-first";
     lsrt = "ls -rt";
-    lL = aliases.lsrt;
   };
 in
 {
