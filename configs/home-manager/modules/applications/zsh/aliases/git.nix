@@ -6,9 +6,6 @@ let
   aliases = {
     # Ungrouped git aliases
     gch = "git checkout";
-    gcl = "git clone";
-    gcl1 = "git clone --depth=1";
-    gcp = "git cherry-pick";
     gls = "git ls-tree --full-tree --name-only -r HEAD | lines";
     gp = "git pull";
     gpu = "git push";
@@ -20,29 +17,38 @@ let
     ga = "git add";
     gaf = "git add --force";
 
-    # Branch
+    # branch
     gbD = "git branch --delete --force";
     gb = "git branch";
     gba = "git branch --all";
 
-    # Commit
+    # cherry-pick
+    gcpXt = aliases.gcp + "-X theirs";
+    gcp = "git cherry-pick";
+    gcpe = aliases.gcp + "-e";
+
+    # clone
+    gcl = "git clone";
+    gcl1 = "git clone --depth=1";
+
+    # commit
     gca = "git commit -am";
     gco = "git commit -m";
 
-    # Fetch
+    # fetch
     gf = "git fetch";
     gf1 = "git fetch --depth=1";
 
-    # Log
+    # log
     gloH = "git log origin..HEAD --oneline";
     glols = "git log --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
     glo = "git log --oneline";
 
-    # Status
+    # status
     gsb = "git status --short --branch";
     gst = "git status";
 
-    # Switch
+    # switch
     gsw = "git switch";
     gswc = "git switch --create";
     gswm = "git switch $\"\(git_main_branch\)\"";
