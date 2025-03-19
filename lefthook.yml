@@ -2,9 +2,9 @@ pre-commit:
   commands:
     encrypt:
       glob: ".autoenv*.zsh"
-      run: "bash -c '[ ! -f {0} ] || [ -f {0}.enc ] && grep -q \"^sops:\" {0}.enc || sops --encrypt --config .sops.yaml {0} > {0}.enc && git add {0}.enc'"
+      run: "bash -c 'file={0}; encfile={0}.enc; if [ -f \"$file\" ] && { [ ! -f \"$encfile\" ] || ! grep -q \"^sops:\" \"$encfile\"; }; then sops --encrypt --config .sops.yaml \"$file\" > \"$encfile\" && git add \"$encfile\"; fi'"
 post-commit:
   commands:
     decrypt:
       glob: ".autoenv*.zsh.enc"
-      run: "bash -c '[ ! -f {0} ] || sops --decrypt {0} > ${0%.enc} && rm {0}'"
+      run: "bash -c 'encfile={0}; file=${0%.enc}; if [ -f \"$encfile\" ]; then sops --decrypt --config .sops.yaml \"$encfile\" > \"$file\" && rm \"$encfile\"; fi'"
