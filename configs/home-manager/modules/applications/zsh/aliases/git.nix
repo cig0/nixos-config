@@ -43,8 +43,8 @@ let
       aliases.glo
       + " --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
     glo = "git log";
-    gloaH1 = aliases.glo + "--all --format=%H -1";
-    gloah1 = aliases.glo + "--all --format=%h -1";
+    gloa1H = aliases.glo + " --all -1 --format=%H";
+    gloa1 = aliases.glo + " --all -1 --format=%h";
     glooH = aliases.glo + " origin..HEAD --oneline";
     gloo = aliases.glo + " --oneline";
 
@@ -54,9 +54,9 @@ let
     gpussu = aliases.gpus + " --set-upstream origin $(git branch --show-current)";
 
     # reflog
-    greflH1 = aliases.gref + " --format=%H -1";
+    grefl1H = aliases.gref + " -1 --format=%H";
     gref = "git reflog";
-    greflh1 = aliases.gref + " --format=%h -1";
+    grefl1 = aliases.gref + " -1 --format=%h";
 
     # status
     gsb = aliases.gs + " --short --branch";
