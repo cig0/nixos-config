@@ -49,9 +49,9 @@ let
     gloo = aliases.glo + " --oneline";
 
     # push
-    gpus = "git push";
-    gpusm = aliases.gpus + " --mirror";
-    gpussu = aliases.gpus + " --set-upstream origin $(git branch --show-current)";
+    gpu = "git push";
+    gpum = aliases.gpu + " --mirror";
+    gpusu = aliases.gpu + " --set-upstream origin $(git branch --show-current)";
 
     # reflog
     grefl1H = aliases.gref + " -1 --format=%H";
