@@ -58,6 +58,10 @@ let
     gref = "git reflog";
     grefl1 = aliases.gref + " -1 --format=%h";
 
+    # stash
+    gst = "git stash";
+    gstp = aliases.gst + " pop";
+
     # status
     gsb = aliases.gs + " --short --branch";
     gs = "git status";
@@ -66,7 +70,7 @@ let
     gsw = "git switch";
     gswc = aliases.gsw + " --create";
     gswm = aliases.gsw + " main";
-    gswd = aliases.gsw + " $\"\(git_develop_branch\)\""; # TODO: direnv? E.g. in the .env file: "git_development_branch=dev/refactor-module-loader-for-home-manager"
+    gswd = aliases.gsw + " $GIT_REPO_NIXOS_CONFIG_CURRENT_DEV";
     gsws = aliases.gsw + " sandbox";
 
     # ===== Git helpers  =====
