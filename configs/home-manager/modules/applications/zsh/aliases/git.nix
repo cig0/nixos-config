@@ -51,6 +51,7 @@ let
     # push
     gpus = "git push";
     gpusm = aliases.gpus + " --mirror";
+    gpussu = aliases.gpus + " --set-upstream origin $(git branch --show-current)";
 
     # reflog
     greflH1 = aliases.gref + " --format=%H -1";
