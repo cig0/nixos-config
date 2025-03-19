@@ -200,8 +200,6 @@ let
     xdg.configFile."git/gitignore_global".text = ''
       *~
       myvars.tf
-      .autoenv.zsh
-      .autoenv_leave.zsh
       .cache_ggshield
       .DS_Store
       .env
