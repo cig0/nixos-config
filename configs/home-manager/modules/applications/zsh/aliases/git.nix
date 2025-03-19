@@ -23,9 +23,9 @@ let
     gba = "git branch --all";
 
     # cherry-pick
-    gcpXt = aliases.gcp + "-X theirs";
+    gcpXt = aliases.gcp + " -X theirs";
     gcp = "git cherry-pick";
-    gcpe = aliases.gcp + "-e";
+    gcpe = aliases.gcp + " -e";
 
     # clone
     gcl = "git clone";
@@ -44,9 +44,14 @@ let
     glols = "git log --graph --pretty='\''%n%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%x2C'\'' --stat";
     glo = "git log --oneline";
 
+    # reflog
+    grlH1 = aliases.grl + " --format=%H -1"; # Shows latest commit in long-format
+    grl = "git reflog";
+    grlh1 = aliases.grl + " --format=%h -1"; # Shows latest commit in short-format
+
     # status
     gsb = "git status --short --branch";
-    gst = "git status";
+    gs = "git status";
 
     # switch
     gsw = "git switch";
