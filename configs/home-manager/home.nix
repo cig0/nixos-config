@@ -1,8 +1,4 @@
-/*
-  TODO: apply same dynamic module loading as in NixOS
-
-  Being worked on in branch refactor/home-manager/autoload-module
-*/
+# TODO: apply same dynamic module loading as in NixOS
 {
   config,
   lib,

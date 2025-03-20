@@ -1,7 +1,8 @@
 /*
   === ANSI escape codes for colors ===
 
-  Use double forward slashes (\\) for escape sequences!
+  Note: Use double forward slashes (\\) for escape sequences!
+
   Otherwise, Nix will render the content of the string as regular characters.
 */
 { ... }:
