@@ -15,6 +15,9 @@ option for that user. To enable zsh system-wide use the
 {option}`users.defaultUserShell` option.";
 
   config = {
-    programs.zsh.enable = cfg.enable;
+    programs.zsh = {
+      enable = cfg.enable;
+      zsh-autoenv.enable = true;
+    };
   };
 }
