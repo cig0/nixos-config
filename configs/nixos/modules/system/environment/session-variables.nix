@@ -1,18 +1,51 @@
+/*
+  TODO: move user-related environment variables to Home Manager
+
+  # environment.sessionVariables
+  A set of environment variables used in the global environment.
+  These variables will be set by PAM early in the login process.
+
+  The value of each session variable can be either a string or a
+  list of strings. The latter is concatenated, interspersed with
+  colon characters.
+
+  Note, due to limitations in the PAM format values may not
+  contain the `"` character.
+
+  Also, these variables are merged into
+  [](#opt-environment.variables) and it is
+  therefore not possible to use PAM style variables such as
+  `@{HOME}`.
+
+  type: attribute set of ((list of (signed integer or string or path)) or signed integer or string or path)
+*/
 {
   config,
+  lib,
   pkgs,
   ...
 }:
 let
+  # TODO: clean up this!
   cfg = {
-    cpu = config.mySystem.myOptions.hardware.cpu;
-    gpu = config.mySystem.myOptions.hardware.gpu;
+    path = config.mySystem.myOptions;
+
+    cpu = cfg.path.hardware.cpu;
+    gpu = cfg.path.hardware.gpu;
+
+    gh = {
+      token = cfg.path.environment.sessionVariables.gh.token;
+      username = cfg.path.environment.sessionVariables.gh.username;
+    };
   };
 
-  githubVars = {
-    GITHUB_TOKEN = "WIP_OPTION"; # TODO: Implement SOPS
-    GITHUB_USERNAME = "WIP_OPTION";
-  };
+  githubVars =
+    lib.optionalAttrs (cfg.gh.username != null) {
+      GITHUB_USERNAME = cfg.gh.username;
+    }
+    // lib.optionalAttrs (cfg.gh.token != null) {
+      GITHUB_TOKEN = cfg.gh.token; # TODO: Implement SOPS
+    };
 
   commonEnvSessionVars = {
     EGL_PLATFORM = "wayland";
@@ -53,6 +86,19 @@ let
   };
 in
 {
+  options.mySystem.myOptions.environment.sessionVariables = {
+    gh.username = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "The GitHub user name to use for the CLI tool 'gh'";
+    };
+    gh.token = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "The GitHub token to use for the CLI tool 'gh'"; # TODO: handle with nix-sops
+    };
+  };
+
   config = {
     environment = {
       homeBinInPath = true;
