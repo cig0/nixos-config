@@ -153,6 +153,7 @@ in
     environment.etc."gitignore".text = ''
       *~
       myvars.tf
+      testy-test
       .autoenv.zsh
       .autoenv_leave.zsh
       .cache_ggshield
