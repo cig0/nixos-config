@@ -17,9 +17,9 @@ let
     gaf = aliases.ga + " --force";
 
     # branch
-    gbrD = aliases.gbr + " --delete --force";
-    gbr = "git branch";
-    gbra = aliases.gbr + " --all";
+    gbD = aliases.gb + " --delete --force";
+    gb = "git branch";
+    gba = aliases.gb + " --all";
 
     # cherry-pick
     gcpXt = aliases.gcp + " -X theirs";
