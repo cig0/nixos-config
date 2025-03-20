@@ -1,0 +1,21 @@
+{
+	"data": "ENC[AES256_GCM,data:1sKLHueW1a+WfmjErjn3DKPPt+/xPtztKUF4HmRtjJ21cg7//9v9uuJIyWYAixcOY9BtGfwgN7Rks80baGD2dji2bseHS6bwyKbqFKtWkJid,iv:4/5NsB4Mfd2axohopVq5v0a3+nIRCBHnTpTdQUahFmg=,tag:Rr+bWInvrzqdzLK5P31v6A==,type:str]",
+	"sops": {
+		"kms": null,
+		"gcp_kms": null,
+		"azure_kv": null,
+		"hc_vault": null,
+		"age": null,
+		"lastmodified": "2025-03-20T19:06:59Z",
+		"mac": "ENC[AES256_GCM,data:hAezNZ6KJET8XrLjO4ve0u+FnqAuwjXWeqSERp75sELfu+camU941915h979JwDhrSI+RlmdTH0JOKOamQdYuosUalNvvXEvtV0ZcTE16m7RMmb4ss0XsjpBtcg4xHmECdgO8xQvQmT90BxNglh8HKuvZoMc4WURvU94qDPi7fs=,iv:yGn+hlJBoTIjPFX87Dk03vr6xqeo3oVbzoGF5HPZAzA=,tag:1NOLz/eu8aOVpiGIV6Auug==,type:str]",
+		"pgp": [
+			{
+				"created_at": "2025-03-20T19:06:59Z",
+				"enc": "-----BEGIN PGP MESSAGE-----\n\nhF4Dtd2P4pYmSkQSAQdAEFBLESLQ0+eZBAzMkFmgLFC4BVUTrJ4c72B7wH0nTWgw\n0xifev+ZqmLbBrwpg07oLJSwT5YC0zxC8D2n//Iux8qdgfztsTb0c5D3m5uQkn7I\n1GYBCQIQVUfzmHVMK9Zba30KqXvIzLIrJUhBvXQfMgHcWL139sGiaHDTXc94VvGA\nXMt0bCRiGRkgBAHw981nLxfE35PsIE73ItzuiwgAH8bbop7RQNKjNQQsLRfMo7Dj\njmUz7ZU8XPU=\n=kwcg\n-----END PGP MESSAGE-----",
+				"fp": "BB81CA1B11628BF9929C7F733663FC5D6230F078"
+			}
+		],
+		"unencrypted_suffix": "_unencrypted",
+		"version": "3.9.4"
+	}
+}
