@@ -9,7 +9,6 @@ let
     gls = "git ls-tree --full-tree --name-only -r HEAD | lines";
     gp = "git pull";
     grm = "git rm --cached";
-    grs = "git restore --staged";
 
     # Add
     gaA = aliases.ga + " --all";
@@ -58,6 +57,10 @@ let
     grefl1H = aliases.gref + " -1 --format=%H";
     gref = "git reflog";
     grefl1 = aliases.gref + " -1 --format=%h";
+
+    # restore
+    gr = "git restore";
+    grs = aliases.gr + " --staged";
 
     # stash
     gst = "git stash";
