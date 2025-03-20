@@ -35,8 +35,9 @@ let
     gcoa = aliases.gco + " --amend";
 
     # fetch
-    gfe = "git fetch";
-    gfe1 = aliases.gfe + " --depth=1";
+    gf = "git fetch";
+    gf1 = aliases.gf + " --depth=1";
+    gfp = aliases.gf + " --prune";
 
     # log
     glols =
