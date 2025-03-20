@@ -67,7 +67,7 @@
     services.tailscale.enable = true;
     package.yazi.enable = true;
     programs.yazi.enable = false;
-    programs.zsh.enable = true;
+    programs.zsh.enable = true; # If disabled, this option is automatically enabled when Zsh is the default CLI shell for all users
 
     packages = {
       baseline = true;
@@ -165,6 +165,7 @@
     networking.timeServers = [ "argentina" ];
     time.timeZone = "America/Buenos_Aires";
     # System - User management
+    users.defaultUserShell = "zsh";
     users.users.doomguy = true; # Enable or disable test account
 
     # Virtualisation

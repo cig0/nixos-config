@@ -4,9 +4,6 @@
   lib,
   ...
 }:
-let
-  cfg = lib.getAttrFromPath [ "mySystem" "programs" "zsh" ] config;
-in
 {
   options.mySystem.programs.zsh.enable =
     lib.mkEnableOption "Whether to configure zsh as an interactive shell. To enable zsh for
@@ -16,7 +13,7 @@ option for that user. To enable zsh system-wide use the
 
   config = {
     programs.zsh = {
-      enable = cfg.enable;
+      enable = config.mySystem.programs.zsh.enable || (config.mySystem.users.defaultUserShell == "zsh");
       zsh-autoenv.enable = true;
     };
   };

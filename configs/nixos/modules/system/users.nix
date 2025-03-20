@@ -3,15 +3,35 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.mySystem.users.users;
-in {
-  options.mySystem.users.users = {
-    doomguy = lib.mkEnableOption "Whether to create the test account.";
+in
+{
+  options.mySystem.users = {
+    defaultUserShell = lib.mkOption {
+      type = lib.types.enum [
+        "bash"
+        "zsh"
+      ];
+      default = "bash";
+      description = "This option defines the default shell assigned to user
+accounts. This can be either a full system path or a shell package.
+
+This must not be a store path, since the path is
+used outside the store (in particular in /etc/passwd).
+
+type: path or package";
+
+    };
+    users = {
+      doomguy = lib.mkEnableOption "Whether to create the test account.";
+    };
   };
 
   config = {
-    users.defaultUserShell = pkgs.zsh;
+    users.defaultUserShell = pkgs.${config.mySystem.users.defaultUserShell};
+
     users.mutableUsers = true;
 
     users.users = lib.mkMerge [
@@ -132,11 +152,11 @@ in {
 
     users.extraUsers = lib.mkMerge [
       {
-        cig0.extraGroups = ["kvm"];
-        fine.extraGroups = ["kvm"];
+        cig0.extraGroups = [ "kvm" ];
+        fine.extraGroups = [ "kvm" ];
       }
       (lib.mkIf cfg.doomguy {
-        doomguy.extraGroups = ["kvm"];
+        doomguy.extraGroups = [ "kvm" ];
       })
     ];
   };
