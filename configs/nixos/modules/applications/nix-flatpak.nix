@@ -109,6 +109,7 @@ let
       "com.brave.Browser"
       "com.google.Chrome"
       "com.google.EarthPro"
+      "one.ablaze.floorp"
       "org.torproject.torbrowser-launcher"
     ];
   };
