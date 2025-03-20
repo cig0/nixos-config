@@ -45,7 +45,7 @@ in
         };
 
         core = {
-          excludesfile = "~/.config/git/gitignore_global";
+          excludesFile = "/etc/gitignore";
           pager = "delta";
           hooksPath = "~/.config/git/hooks";
           editor = "nvim";
@@ -119,10 +119,6 @@ in
           insteadOf = "https://github.com/";
         };
 
-        # TODO: evaluate moving Git management and configuration to Home Manager.
-        # One way to do this would be to manage the actual applications from this general module, but create the configuration file and the global .git_ignore file for each user from Home Manager.
-        # However, given that I'm the only human user of my systems, I'm temporarily setting my personal settings here to make them available to all the system users in all my hosts.
-        # Food for thought!
         user = {
           signingkey = "BB81CA1B11628BF9929C7F733663FC5D6230F078";
           name = "Martin Cigorraga";
@@ -153,5 +149,18 @@ in
       };
       lfs.enable = cfg.lfs.enable;
     };
+
+    environment.etc."gitignore".text = ''
+      *~
+      myvars.tf
+      testy-test
+      .autoenv.zsh
+      .autoenv_leave.zsh
+      .cache_ggshield
+      .DS_Store
+      .env
+      .favorites.json
+      .vscode/
+    '';
   };
 }

@@ -13,7 +13,6 @@
     ./apps-cargo.nix
     ./atuin.nix
     ./aws.nix
-    ./git.nix
     ./starship.nix
     # ./syncthing.nix
   ];
