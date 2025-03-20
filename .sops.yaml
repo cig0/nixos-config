@@ -14,6 +14,6 @@
 # 
 
 creation_rules:
-  - path_regex: \.autoenv(_leave)?\.zsh\.enc$
+  - path_regex: \.autoenv(_leave)?\.zsh$
     pgp: BB81CA1B11628BF9929C7F733663FC5D6230F078
 
