@@ -14,20 +14,20 @@
     */
     ./hardware-configuration.nix
 
-    # Main host configuration file
+    # Main host configuration (options) file
     ./profile.nix
   ];
 
   # Bootloader
   boot = {
     initrd = {
-      luks.devices."swap".device = "/dev/disk/by-uuid/edf43523-db06-4b35-9868-170c2a8ff06c"; # Encrypted swap partition.
+      luks.devices."swap".device = "/dev/disk/by-uuid/edf43523-db06-4b35-9868-170c2a8ff06c"; # Encrypted swap partition
     };
 
     loader = {
       efi.canTouchEfiVariables = true;
 
-      # Systemd-boot bootloader.
+      # Systemd-boot bootloader
       systemd-boot = {
         enable = true;
         consoleMode = "max";
@@ -48,7 +48,7 @@
   };
 
   fileSystems = {
-    # /etc/fstab mount options.
+    # /etc/fstab mount options
     "/" = {
       # options = [ "commit=15" "data=journal" "discard" "errors=remount-ro" "noatime"  ];
       options = [
