@@ -1,6 +1,5 @@
 {
   config,
-  # inputs,
   lib,
   pkgs,
   ...
@@ -11,8 +10,6 @@ in
 {
   options.mySystem.programs.nix-ld.enable =
     lib.mkEnableOption "Run unpatched dynamic binaries on NixOS.";
-
-  # imports = [inputs.nix-ld.nixosModules.nix-ld];
 
   config = lib.mkIf cfg.enable {
     programs.nix-ld = {
