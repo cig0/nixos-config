@@ -5,7 +5,6 @@ let
 
   aliases = {
     # Ungrouped git aliases
-    gch = "git checkout";
     gls = "git ls-tree --full-tree --name-only -r HEAD | lines";
     gp = "git pull";
     grm = "git rm --cached";
@@ -28,6 +27,9 @@ let
     # clone
     gcl = "git clone";
     gcl1 = aliases.gcl + " --depth=1";
+
+    # checkout
+    gc = "git checkout";
 
     # commit
     gco = "git commit -m";
