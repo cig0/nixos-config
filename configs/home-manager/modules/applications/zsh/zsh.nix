@@ -2,7 +2,6 @@
   config,
   lib,
   nixosConfig,
-  pkgs,
   ...
 }:
 let
@@ -11,7 +10,14 @@ let
   allFunctions = (import ./functions.nix { inherit config lib nixosConfig; }).allFunctions;
 in
 {
-  programs.command-not-found.enable = true;
+  programs.command-not-found.enable = false;
+
+  /*
+    TODO: with NixOS 25.05: https://github.com/nix-community/nix-index?tab=readme-ov-file#usage-as-a-command-not-found-replacement
+    TODO: https://github.com/nix-community/nix-index-database#usage-in-home-manager
+
+    Additionally, if your shell is managed by home-manager, you can have nix-index integrate with your shell's command-not-found functionality by setting programs.nix-index.enable = true.
+  */
 
   programs.zsh = {
     enable = true;
@@ -51,9 +57,6 @@ in
         zstyle ':completion:*' use-cache on
         zstyle ':completion:*' cache-path "$HOME/.cache/zcompcache"
         zstyle ':completion:*' group-name null
-
-      # Needs https://github.com/nix-community/nix-index
-      source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
 
       # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
       COMPLETION_WAITING_DOTS="true"
