@@ -2,7 +2,6 @@
 
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -11,8 +10,6 @@ let
   cfg = config.mySystem.programs.nixvim;
 in
 {
-  imports = [ inputs.nixvim.nixosModules.nixvim ];
-
   options.mySystem.programs.nixvim.enable = lib.mkEnableOption "Configure Neovim with Nix!";
 
   config = lib.mkIf cfg.enable {

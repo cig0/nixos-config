@@ -1,13 +1,12 @@
 {
   config,
-  inputs,
   lib,
   ...
-}: let
-  cfg = lib.getAttrFromPath ["mySystem" "programs" "auto-cpufreq"] config;
-in {
-  imports = [inputs.auto-cpufreq.nixosModules.default];
-
+}:
+let
+  cfg = lib.getAttrFromPath [ "mySystem" "programs" "auto-cpufreq" ] config;
+in
+{
   options.mySystem.programs.auto-cpufreq.enable =
     lib.mkEnableOption "Whether to enable auto-cpufreq daemon.";
 
@@ -26,6 +25,10 @@ in {
       };
     };
 
-    services.power-profiles-daemon.enable = false; # Used by GUI shells, like KDE. Needs to be disable as it interferes with auto-cpufreq.
+    /*
+      Used by GUI shells, like KDE.
+      It has to be disable as it interferes with auto-cpufreq.
+    */
+    services.power-profiles-daemon.enable = false;
   };
 }

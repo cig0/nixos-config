@@ -133,10 +133,12 @@
             system = hostConfig.system; # Use the system architecture from the host config
           };
           modules = [
-            # Imported flakes modules common to all hosts
+            # Common hosts modules imported from flakes
+            lanzaboote.nixosModules.lanzaboote
             nix-index-database.nixosModules.nix-index
             nix-ld.nixosModules.nix-ld
             nix-snapd.nixosModules.default
+            nixvim.nixosModules.nixvim
 
             # Home Manager
             home-manager.nixosModules.home-manager
@@ -164,12 +166,16 @@
         desktop = {
           description = "Desktop: Intel CPU, Nvidia GPU";
           system = "x86_64-linux";
-          extraModules = [ ];
+          extraModules = [ nix-flatpak.nixosModules.nix-flatpak ];
         };
         perrrkele = {
           description = "Laptop: Intel CPU & GPU + KDE";
           system = "x86_64-linux";
-          extraModules = [ inputs.nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7 ];
+          extraModules = [
+            auto-cpufreq.nixosModules.default
+            nix-flatpak.nixosModules.nix-flatpak
+            nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
+          ];
         };
       };
     in

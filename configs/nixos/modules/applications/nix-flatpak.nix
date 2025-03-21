@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -115,8 +114,6 @@ let
   };
 in
 {
-  imports = [ inputs.nix-flatpak.nixosModules.nix-flatpak ];
-
   options.mySystem.services.flatpak.enable =
     lib.mkEnableOption "Whether to manage flatpaks with nix-flatpak.";
 
