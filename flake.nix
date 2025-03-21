@@ -32,79 +32,95 @@
   description = "cig0's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-24.11"; # Main NixOS release channel
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # NixOS release channel to allow for additional fresher packages
 
     auto-cpufreq = {
-      # Energy efficiency: https://github.com/AdnanHodzic/auto-cpufreq
+      # Energy efficiency :: https://github.com/AdnanHodzic/auto-cpufreq
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
     home-manager = {
-      # User-specific settings and packages: https://github.com/nix-community/home-manager
+      # User-specific settings and packages
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager?ref=release-24.11";
     };
 
+    # Secure Boot for NixOS
     lanzaboote = {
-      # Enable Secure Boot: https://github.com/nix-community/lanzaboote
       inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of your system closure
       url = "github:nix-community/lanzaboote/v0.4.2";
     };
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest"; # Declarative Flatpak management for NixOS
+    # Declarative Flatpak management for NixOS
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
-    nix-index.url = "github:nix-community/nix-index"; # https://github.com/nix-community/nix-index
+    # A files database for nixpkgs(-unstable)
+    nix-index.url = "github:nix-community/nix-index";
 
+    # Weekly updated nix-index database for nixos-unstable channel
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # Run unpatched dynamic binaries on NixOS
     nix-ld = {
-      # https://github.com/nix-community/nix-ld
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:Mic92/nix-ld";
     };
 
+    # COSMIC Desktop Environment
     nixos-cosmic = {
       inputs.nixpkgs.follows = "nixos-cosmic/nixpkgs-stable";
       url = "github:lilyinstarlight/nixos-cosmic";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # Hardware-specific optimizations
+    # Additional hardware configurations
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    # Snapd support for NixOS
     nix-snapd = {
       url = "github:nix-community/nix-snapd";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    # A Neovim configuration system for nix
     nixvim = {
-      # The intended way to configure Neovim
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixvim/nixos-24.11";
     };
 
+    # Oxalica's Rust toolchain overlay
     rust-overlay.url = "github:oxalica/rust-overlay";
 
-    # sops-nix.url = "github:Mic92/sops-nix"; # Secure secrets
+    # Secure secrets
+    # sops-nix.url = "github:Mic92/sops-nix";
 
+    # Blazing fast terminal file manager written in Rust, based on async I/O
     yazi.url = "github:sxyazi/yazi";
   };
 
   outputs =
     {
-      auto-cpufreq, # Energy efficiency
-      home-manager, # User-specific settings and packages
-      lanzaboote, # Secure Boot for NixOS
-      nix-flatpak, # Enhanced Flatpak support
-      nix-index, # A files database for nixpkgs
-      nix-ld, # Run unpatched dynamic binaries on NixOS
-      nixos-cosmic, # COSMIC Desktop Environment
-      nixos-hardware, # Additional hardware configuration
-      nixpkgs, # NixOS release channel
-      nixpkgs-unstable, # NixOS release channel
-      nixvim, # A Neovim configuration system for nix
-      rust-overlay, # Oxalica's Rust toolchain overlay
+      auto-cpufreq,
+      home-manager,
+      lanzaboote,
+      nix-flatpak,
+      nix-index,
+      nix-index-database,
+      nix-ld,
+      nix-snapd,
+      nixos-cosmic,
+      nixos-hardware,
+      nixpkgs,
+      nixpkgs-unstable,
+      nixvim,
+      rust-overlay,
       self,
-      # sops-nix, # Mic92 NixOS' Mozilla SOPS implementation # TODO: pending implementation.
-      yazi, # Blazing fast terminal file manager written in Rust, based on async I/O
+      # sops-nix, # TODO: pending implementation.
+      yazi,
       ...
     }@inputs:
     let
@@ -114,25 +130,25 @@
         nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
-            system = hostConfig.system; # Use the system from the host config
+            system = hostConfig.system; # Use the system architecture from the host config
           };
           modules = [
+            # Imported flakes modules common to all hosts
+            nix-index-database.nixosModules.nix-index
+            nix-ld.nixosModules.nix-ld
+            nix-snapd.nixosModules.default
+
             # Home Manager
-            (import ./configs/home-manager/home.nix)
             home-manager.nixosModules.home-manager
+            (import ./configs/home-manager/home.nix) # Configuration declared separately to keep flake.nix slim
 
             # NixOS
-            (import ./configs/nixos/modules/default.nix)
-            # Host configuration (dynamic path constructed after the host name)
-            (./. + "/configs/nixos/hosts/${hostname}/configuration.nix")
+            (import ./configs/nixos/modules/default.nix) # Dynamically load NixOS modules
+            (./. + "/configs/nixos/hosts/${hostname}/configuration.nix") # Load host configuration (dynamic path constructed after the host name)
 
             # Additional configurations
             {
-              /*
-                ░░░░      O V E R L A Y S      ░░░░
-                These overlays are shared across all hosts. If this is not what you want,
-                move the desired overlays to the specific host within the extraModules sections"
-              */
+              # Hosts shared ░░ OVERLAYS ░░
               nixpkgs.overlays = [ rust-overlay.overlays.default ];
             }
           ] ++ hostConfig.extraModules;
