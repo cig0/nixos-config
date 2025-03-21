@@ -32,24 +32,24 @@
   description = "cig0's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.11"; # Main NixOS release channel
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # NixOS release channel to allow for additional fresher packages
+    nixpkgs.url = "nixpkgs/nixos-24.11"; # Main NixOS release channel followed by the flake
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # The unstable NixOS release channel to allow for fresher packages
 
+    # Energy efficiency for battery-powered devices
     auto-cpufreq = {
-      # Energy efficiency :: https://github.com/AdnanHodzic/auto-cpufreq
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
+    # Home Manager: user-specific packages and settings
     home-manager = {
-      # User-specific settings and packages
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager?ref=release-24.11";
     };
 
     # Secure Boot for NixOS
     lanzaboote = {
-      inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of your system closure
+      inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of the system closure
       url = "github:nix-community/lanzaboote/v0.4.2";
     };
 
@@ -61,8 +61,8 @@
 
     # Weekly updated nix-index database for nixos-unstable channel
     nix-index-database = {
-      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:nix-community/nix-index-database";
     };
 
     # Run unpatched dynamic binaries on NixOS
@@ -82,8 +82,8 @@
 
     # Snapd support for NixOS
     nix-snapd = {
-      url = "github:nix-community/nix-snapd";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:nix-community/nix-snapd";
     };
 
     # A Neovim configuration system for nix
@@ -124,16 +124,20 @@
       ...
     }@inputs:
     let
-      # Create a nixosSystem for each host
       mkHost =
+        /*
+          Create a nixosSystem for each host.
+          Settings common to all hosts should live here.
+        */
         hostname: hostConfig:
         nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
-            system = hostConfig.system; # Use the system architecture from the host config
+            system = hostConfig.system; # Use the system architecture defined by each host configuration
           };
           modules = [
-            # Common hosts modules imported from flakes
+            # Modules from flakes
+            home-manager.nixosModules.home-manager
             lanzaboote.nixosModules.lanzaboote
             nix-index-database.nixosModules.nix-index
             nix-ld.nixosModules.nix-ld
@@ -141,16 +145,14 @@
             nixvim.nixosModules.nixvim
 
             # Home Manager
-            home-manager.nixosModules.home-manager
             (import ./configs/home-manager/home.nix) # Configuration declared separately to keep flake.nix slim
 
-            # NixOS
+            # NixOS setup
             (import ./configs/nixos/modules/default.nix) # Dynamically load NixOS modules
             (./. + "/configs/nixos/hosts/${hostname}/configuration.nix") # Load host configuration (dynamic path constructed after the host name)
 
-            # Additional configurations
             {
-              # Hosts shared ░░ OVERLAYS ░░
+              # Overlays
               nixpkgs.overlays = [ rust-overlay.overlays.default ];
             }
           ] ++ hostConfig.extraModules;
