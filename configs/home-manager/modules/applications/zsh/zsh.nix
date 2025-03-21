@@ -11,7 +11,7 @@ let
   allFunctions = (import ./functions.nix { inherit config lib nixosConfig; }).allFunctions;
 in
 {
-  programs.command-not-found.enable = false;
+  programs.command-not-found.enable = true;
 
   programs.zsh = {
     enable = true;
@@ -82,6 +82,20 @@ in
         "history-substring-search"
       ];
     };
+
+    /*
+      https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.localVariables
+
+      Extra local variables defined at the top of .zshrc.
+
+      {
+        POWERLEVEL9K_LEFT_PROMPT_ELEMENTS = [
+          "dir"
+          "vcs"
+        ];
+      }
+    */
+    localVariables = { };
   };
 }
 

@@ -103,7 +103,6 @@ let
       nickel # Better configuration for less :: https://nickel-lang.org/
       niv # Easy dependency management for Nix projects :: https://hackage.haskell.org/package/niv
       nix-diff # Explain why two Nix derivations differ :: https://github.com/nix-community/nix-index
-      nix-index # Files database for nixpkgs :: https://github.com/nix-community/nix-index
       nix-melt # Ranger-like flake.lock viewer :: https://github.com/nix-community/nix-melt
       nix-tree # Interactively browse a Nix store paths dependencies :: https://hackage.haskell.org/package/nix-tree
       nixfmt-rfc-style # Official formatter for Nix code :: https://github.com/NixOS/nixfmt

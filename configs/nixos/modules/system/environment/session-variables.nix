@@ -1,5 +1,12 @@
 /*
-  TODO: move user-related environment variables to Home Manager
+  TODO:
+  Investigate moving user-related environment variables to Home Manager.
+
+  The wiki mentions that this might not be needed, though, as refreshing the
+  environment variables should be as easy reloading the shell session, for which
+  I already have a function zr().
+
+  https://wiki.nixos.org/wiki/Environment_variables#Configuration_of_shell_environment_on_NixOS
 
   # environment.sessionVariables
   A set of environment variables used in the global environment.
