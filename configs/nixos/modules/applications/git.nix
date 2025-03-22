@@ -1,4 +1,4 @@
-# TODO: migrate to Home Manager. It's not a prio.
+# TODO: migrate to Home Manager. It's a prio now (I'm lacking autocomplete for TAB).
 {
   config,
   lib,
