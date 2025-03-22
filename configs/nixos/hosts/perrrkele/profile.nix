@@ -42,7 +42,7 @@
         cpu = "intel";
         gpu = "intel";
       };
-      kernel.sysctl.netIpv4TcpCongestionControl = "westwood";
+      kernel.sysctl.netIpv4TcpCongestionControl = "westwood"; # Optimized for wireless networks
       nixos.flake.path = "/home/cig0/workdir/cig0/nixos-config";
     };
 
