@@ -143,9 +143,11 @@
           modules = [
             # Modules from flakes
             agenix.nixosModules.default
+            auto-cpufreq.nixosModules.default
             home-manager.nixosModules.home-manager
             lanzaboote.nixosModules.lanzaboote
             nix-index-database.nixosModules.nix-index
+            nix-flatpak.nixosModules.nix-flatpak
             nix-ld.nixosModules.nix-ld
             nix-snapd.nixosModules.default
             nixvim.nixosModules.nixvim
@@ -174,14 +176,12 @@
         desktop = {
           description = "Desktop: Intel CPU, Nvidia GPU";
           system = "x86_64-linux";
-          extraModules = [ nix-flatpak.nixosModules.nix-flatpak ];
+          extraModules = [ ];
         };
         perrrkele = {
           description = "Laptop: Intel CPU & GPU + KDE";
           system = "x86_64-linux";
           extraModules = [
-            auto-cpufreq.nixosModules.default
-            nix-flatpak.nixosModules.nix-flatpak
             nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           ];
         };
