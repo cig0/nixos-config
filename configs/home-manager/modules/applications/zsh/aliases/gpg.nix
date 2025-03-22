@@ -2,7 +2,8 @@
 { ... }:
 let
   aliases = {
-    gpgc = "gpg -c --cipher-algo aes256";
+    gpgc = "gpg -c --cipher-algo aes256 --output";
+    gpgcs = "gpg --symmetric --cipher-algo AES256 --output";
     gpgd = "gpg -d";
 
     # Compress and encrypt files & dirs using GNU GPG
