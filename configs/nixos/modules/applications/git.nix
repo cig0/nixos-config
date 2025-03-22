@@ -155,7 +155,7 @@ in
       *~
       myvars.tf
       testy-test
-      *.kdbx
+      *.kbdx
       .autoenv.zsh
       .autoenv_leave.zsh
       .cache_ggshield
