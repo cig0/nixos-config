@@ -42,7 +42,7 @@
         cpu = "intel";
         gpu = "nvidia";
       };
-      kernel.sysctl.netIpv4TcpCongestionControl = "westwood";
+      kernel.sysctl.netIpv4TcpCongestionControl = "bbr"; # Maximum throughput on wired networks
       nixos.flake.path = "/home/cig0/workdir/cig0/nixos-config";
     };
 
@@ -137,19 +137,6 @@
     boot.kernelPackages = "xanmod_latest";
     # System - Keyboard
     services.keyd.enable = true;
-    myOptions.services.keyd.addKeydKeyboards = {
-      TUXEDOInfinityBookPro14Gen6Standard = {
-        ids = [ "0001:0001" ];
-        settings = {
-          main = {
-            "capslock" = "capslock";
-          };
-          shift = {
-            "capslock" = "insert";
-          };
-        };
-      };
-    };
     # System - Maintenance
     nix = {
       gc.automatic = false;
@@ -159,7 +146,6 @@
       enable = true;
       clean.enable = true;
     };
-
     system.autoUpgrade.enable = true;
     # System - Time
     networking.timeServers = [ "argentina" ];
