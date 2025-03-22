@@ -35,6 +35,10 @@
     nixpkgs.url = "nixpkgs/nixos-24.11"; # Main NixOS release channel followed by the flake
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # The unstable NixOS release channel to allow for fresher packages
 
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs"; # optional, not necessary for the module
+    agenix.inputs.darwin.follows = ""; # optionally choose not to download darwin deps (saves some resources on Linux)
+
     # Energy efficiency for battery-powered devices
     auto-cpufreq = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -104,6 +108,7 @@
 
   outputs =
     {
+      agenix,
       auto-cpufreq,
       home-manager,
       lanzaboote,
@@ -137,6 +142,7 @@
           };
           modules = [
             # Modules from flakes
+            agenix.nixosModules.default
             home-manager.nixosModules.home-manager
             lanzaboote.nixosModules.lanzaboote
             nix-index-database.nixosModules.nix-index
