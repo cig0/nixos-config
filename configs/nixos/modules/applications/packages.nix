@@ -301,9 +301,9 @@ let
     vcs = with pkgsUnstable; [
       # Git
       ggshield # GitGuardian
-      gh # GitHub CLI client.
+      gh # GitHub CLI client
       gitmoji-cli # https://github.com/carloscuesta/gitmoji-cli
-      glab # GitLab CLI client.
+      glab # GitLab CLI client
       lefthook
       serie # A rich git commit graph in your terminal, like magic :: https://github.com/lusingander/serie
 
