@@ -302,13 +302,12 @@ let
       # Git
       ggshield # GitGuardian
       gh # GitHub CLI client.
-      git-crypt
       gitmoji-cli # https://github.com/carloscuesta/gitmoji-cli
-      gitty # https://github.com/muesli/gitty/?tab=readme-ov-file
       glab # GitLab CLI client.
-      # jujutsu
       lefthook
-      tig
+      serie # A rich git commit graph in your terminal, like magic :: https://github.com/lusingander/serie
+
+      # jujutsu
 
       # Radicle
       radicle-node
