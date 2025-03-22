@@ -42,7 +42,7 @@
         cpu = "intel";
         gpu = "nvidia";
       };
-      kernel.sysctl.netIpv4TcpCongestionControl = "bbr"; # Maximum throughput on wired networks
+      kernel.sysctl.netIpv4TcpCongestionControl = "westwood"; # Optimized for wireless networks
       nixos.flake.path = "/home/cig0/workdir/cig0/nixos-config";
     };
 
@@ -103,7 +103,7 @@
     };
 
     # Power Management
-    programs.auto-cpufreq.enable = true;
+    programs.auto-cpufreq.enable = false;
     powerManagement.enable = true;
     services.thermald.enable = true;
 
@@ -112,7 +112,7 @@
 
     # Security
     programs.gnupg.enable = true;
-    boot.lanzaboote.enable = true;
+    boot.lanzaboote.enable = false;
     services.openssh.enable = true;
     # Security - Firewall
     networking.firewall = {
@@ -134,7 +134,7 @@
     audio-subsystem.enable = true;
     services.speechd.enable = true;
     # System - Kernel
-    boot.kernelPackages = "xanmod_latest";
+    boot.kernelPackages = "stable"; # TODO: find out if it's possible to use the latest NVIDIA driver with the latest Linux kernel while keeping NixOS tracking the stable release channel 
     # System - Keyboard
     services.keyd.enable = true;
     # System - Maintenance
