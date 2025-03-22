@@ -67,7 +67,7 @@
     services.tailscale.enable = true;
     package.yazi.enable = true;
     programs.yazi.enable = false;
-    programs.zsh.enable = true; # If disabled, this option is automatically enabled when Zsh is the default CLI shell for all users
+    programs.zsh.enable = true; # If disabled, this option is automatically enabled when users.defaultUserShell="zsh"
 
     packages = {
       baseline = true;
