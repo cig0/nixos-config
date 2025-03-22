@@ -1,19 +1,28 @@
+/*
+  TODO:
+
+  Health check:
+      - Tailscale can't reach the configured DNS servers. Internet connectivity may be affected.
+*/
 {
   config,
   lib,
   ...
-}: let
-  cfg = lib.getAttrFromPath ["mySystem" "services" "tailscale"] config;
-in {
-  options.mySystem.services.tailscale.enable = lib.mkEnableOption "Whether to enable Tailscale client daemon.";
+}:
+let
+  cfg = lib.getAttrFromPath [ "mySystem" "services" "tailscale" ] config;
+in
+{
+  options.mySystem.services.tailscale.enable =
+    lib.mkEnableOption "Whether to enable Tailscale client daemon.";
 
   config = lib.mkIf cfg.enable {
     networking = {
       firewall = {
-        trustedInterfaces = lib.mkBefore ["tailscale0"];
+        trustedInterfaces = lib.mkBefore [ "tailscale0" ];
       };
-      nameservers = lib.mkBefore ["100.100.100.100"]; # TODO: 1. SOPS/ 2. Get rid of lib.mkBefore
-      search = lib.mkBefore ["tuxedo-goanna.ts.net"]; # TODO: 1. SOPS/ 2. Get rid of lib.mkBefore
+      nameservers = lib.mkBefore [ "100.100.100.100" ]; # TODO: 1. SOPS/ 2. Get rid of lib.mkBefore
+      search = lib.mkBefore [ "tuxedo-goanna.ts.net" ]; # TODO: 1. SOPS/ 2. Get rid of lib.mkBefore
     };
 
     services = {
@@ -28,7 +37,7 @@ in {
       tailscale = {
         enable = true;
         openFirewall = true;
-        extraUpFlags = ["--ssh"];
+        extraUpFlags = [ "--ssh" ];
       };
     };
   };
@@ -38,4 +47,3 @@ in {
 # Check these modules for additional options:
 #   - ../networking/dns.nix
 #   - ../security/firewall.nix
-
