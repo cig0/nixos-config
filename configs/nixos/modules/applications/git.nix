@@ -155,6 +155,7 @@ in
       *~
       myvars.tf
       testy-test
+      Vohault.*
       .autoenv.zsh
       .autoenv_leave.zsh
       .cache_ggshield
