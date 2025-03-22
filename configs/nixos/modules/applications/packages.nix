@@ -293,6 +293,7 @@ let
       ++ (with pkgsUnstable; [
         chkrootkit
         lynis
+        netscanner # Network scanner with features like WiFi scanning, packetdump and more :: https://github.com/Chleba/netscanner
         nikto
         oath-toolkit
         protonvpn-cli
