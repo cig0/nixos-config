@@ -6,7 +6,6 @@
   ...
 }:
 let
-  # cfg = lib.getAttrFromPath [ "mySystem" "boot" ] config;
   cfg = config.mySystem;
 
   kernelPackageName =
@@ -15,13 +14,35 @@ let
     else
       "linuxPackages_" + cfg.boot.kernelPackages;
 
-  kernelPatches_enable = "false"; # Enable/disable applying kernel patches
+  /*
+    Enable/disable applying kernel patches.
+    Note that this will force compiling the kernel from source.
+  */
+  kernelPatches_enable = "false";
+
+  commonKernelParams = [
+    "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the fb
+    "fuse"
+    "init_on_alloc=1"
+    "init_on_free=1"
+    "iommu=pt"
+    "logo.nologo=0"
+    # "logo.nologo" # Disable boot logo if any
+    "mem_sleep_default=deep"
+    "mitigations=off" # Turns off certain CPU security mitigations. It might enhance performance
+    "page_alloc.shuffle=1"
+    "pti=on"
+    "randomize_kstack_offset=on"
+    "rd.driver.pre=vfio_pci"
+    "rd.luks.options=discard"
+    "rd.udev.log_level=2" # Print warnings and errors during early boot.
+    # "rd.systemd.show_status=auto" # Disable systemd status messages
+    "udev.log_level=1" # Print error messages. Change to 2, 3 or 4 for Warning, Info and Debug messages respectively.
+    # "quiet"
+  ];
 
   commonKernelSysctl = {
     /*
-      Some of these kernel flags could eventually make it to an option
-      to allow for better granularity, if needed.
-
       ref: https://wiki.archlinux.org/title/Gaming
       ref: https://wiki.nixos.org/wiki/Linux_kernel
     */
@@ -52,29 +73,6 @@ let
     # Lower Values (<100): Favor retaining the inode and dentry caches longer, which improves file system performance by reducing disk I/O. A value of 50 strikes a reasonable balance for systems with moderate memory capacity and workloads that benefit from efficient file system operations.
     # Higher Values (>100): Increase the rate at which the kernel reclaims inode and dentry caches, which can free up memory for applications faster but might result in more frequent disk I/O. This is not ideal for a laptop used with a workload based on virtualization and programming.
   };
-
-  commonKernelParams = [
-    /*
-      Some of these kernel flags could eventually make it to an option
-      to allow for better granularity, if needed.
-    */
-
-    "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the fb
-    "kvm.ignore_msrs=1"
-    "kvm.report_ignored_msrs=0"
-    # "logo.nologo" # Disable boot logo if any
-    "mem_sleep_default=deep"
-    "mitigations=auto"
-    "page_alloc.shuffle=1"
-    "pti=on"
-    "randomize_kstack_offset=on"
-    "rd.driver.pre=vfio_pci"
-    "rd.luks.options=discard"
-    # "rd.systemd.show_status=auto" # Disable systemd status messages
-    "rd.udev.log_level=2" # Print warnings and errors during early boot.
-    "udev.log_level=1" # Print error messages. Change to 2, 3 or 4 for Warning, Info and Debug messages respectively.
-    # "quiet"
-  ];
 in
 {
   options.mySystem = {
@@ -113,6 +111,7 @@ in
 
   config = {
     boot = {
+      # Overrides parameter in hardware-configuration.nix
       initrd.availableKernelModules = [
         "xhci_pci"
         "thunderbolt"
@@ -120,16 +119,19 @@ in
         "usbhid"
         "usb_storage"
         "sd_mod"
-      ]; # Overrides parameter in hardware-configuration.nix
-
-      kernelModules = lib.mkIf (cfg.myOptions.hardware.gpu == "intel") [
-        "kvm-intel"
-        "i915"
       ];
 
-      # ================================================= #
-      kernelPackages = pkgs.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgs
+      kernel.sysctl =
+        commonKernelSysctl
+        // (lib.optionalAttrs (cfg.myOptions.kernel.sysctl.netIpv4TcpCongestionControl != null) {
+          "net.ipv4.tcp_congestion_control" = cfg.myOptions.kernel.sysctl.netIpv4TcpCongestionControl;
+        });
 
+      kernelModules =
+        (lib.optionals (cfg.myOptions.hardware.cpu == "intel") [ "kvm-intel" ])
+        ++ (lib.optionals (cfg.myOptions.hardware.gpu == "intel") [ "i915" ]);
+
+      kernelPackages = pkgs.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgs
       /*
         Previous iterations I'm leaving here momentarily as a reminder of the walked path.
         kernelPackages = builtins.getAttr kernelPackageName (
@@ -150,32 +152,26 @@ in
           then kernelPackages_isPerrrkele
           else kernelPackages_fallback; # If no specific kernel package is selected, default to NixOS latest kernel.
       */
-      # ================================================= #
-
-      kernel.sysctl =
-        commonKernelSysctl
-        // (lib.optionalAttrs (cfg.myOptions.kernel.sysctl.netIpv4TcpCongestionControl != null) {
-          "net.ipv4.tcp_congestion_control" = cfg.myOptions.kernel.sysctl.netIpv4TcpCongestionControl;
-        });
 
       kernelParams =
         commonKernelParams
-        ++ (lib.optionals (cfg.myOptions.hardware.gpu == "intel") [
-          "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the framebuffer.
-          "fuse"
+        ++ (lib.optionals (cfg.myOptions.hardware.cpu == "intel") [
+          "intel_iommu=sm_on"
           "intel_pstate=disable"
+          "kvm.ignore_msrs=1"
+          "kvm.report_ignored_msrs=0"
+        ])
+        ++ (lib.optionals (cfg.myOptions.hardware.gpu == "intel") [
           "i915.enable_fbc=1"
           "i915.enable_guc=2"
           "i915.enable_psr=1"
-          "logo.nologo=0"
-          "init_on_alloc=1"
-          "init_on_free=1"
-          "intel_iommu=sm_on"
-          "iommu=pt"
-          "mitigations=off" # Turns off certain CPU security mitigations. It might enhance performance
         ])
         ++ (lib.optionals (cfg.myOptions.hardware.gpu == "nvidia") [
-          "nvidia_drm.modeset=1" # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
+          /*
+            Enables kernel modesetting for NVIDIA graphics.
+            This is essential for proper graphics support on NVIDIA GPUs.
+          */
+          "nvidia_drm.modeset=1"
         ]);
 
       /*
