@@ -1,3 +1,4 @@
+# TODO: migrate to Home Manager. It's not a prio.
 {
   config,
   lib,
