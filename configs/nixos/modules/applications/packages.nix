@@ -446,7 +446,7 @@ in
       guiShell = {
         kde = lib.mkEnableOption "Whether to install KDE Desktop Environment complementary applications packages";
       };
-      nvidia = lib.mkEnableOption "Whether to install Nvidia-releated tools";
+      nvidia = lib.mkEnableOption "Whether to install NVIDIA-releated tools";
     };
   };
 
