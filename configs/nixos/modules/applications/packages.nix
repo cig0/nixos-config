@@ -1,5 +1,25 @@
-# TODO: polish up the packages lists in a way that makes it easier to maintain and update them for their roles. packagesBaseline is becoming an everything-and-the-kitchen-sink list.
+/*
+  TODO: polish the packages lists in a way that makes it easier to maintain and update them for their roles.
+  Particularly packagesBaseline, it is becoming an everything-and-the-kitchen-sink list.
 
+  Hint: How to pin a package to a specific version
+  To pin a package to a specific version, use the following syntax:
+   (Your_Package_Name.overrideAttrs (oldAttrs: {
+      src = fetchFromGitHub {
+        owner = "NixOS";
+        repo = "nixpkgs";
+        rev = "the commit hash";
+        hash = "the sha265 hash of the tarball";
+      };
+    }))
+
+  To get the commit hash check the packages repository and look for the package in the correct channel branch, e.g. nixpkgs-unstable:
+  https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/by-name/aw/awscli2/package.nix => https://github.com/NixOS/nixpkgs/commit/62fcc798988975fab297b87345d93919cd6f6389
+  To get the sha256 hash of a package, run the following command:
+  nix-prefetch-github NixOS nixpkgs --no-deep-clone -v --rev The_Commit_Hash
+  Nix-prefetch-github can be installed as a normal package, or invoked on-demand if using `comma` (https://github.com/nix-community/comma, available in the official repositories.
+  Of course it can also be installed with `nix-env -iA nixpkgs.nix-prefetch-github`, or temporarily with nix-shell.
+*/
 {
   config,
   inputs,
@@ -179,6 +199,12 @@ let
         tfsec
         tfswitch
       ]);
+    databases = with pkgsUnstable; [
+      # dbmate # Database migration tool :: https://github.com/amacneil/dbmate
+      # rainfrog # A database management TUI for postgres :: https://github.com/achristmascarl/rainfrog
+    ];
+
+    # TODO: properly categorize `misc` packages
     misc = with pkgsUnstable; [
       antora
       asciinema # Terminal session recorder and the best companion of asciinema.org :: https://asciinema.org/
@@ -225,7 +251,7 @@ let
         devpod # Codespaces but open-source, client-only and unopinionated: Works with any IDE and lets you use any cloud, kubernetes or just localhost docker :: https://devpod.sh
 
         # Go
-        go # Needed to install individual apps
+        go
         # golangci-lint
         # golangci-lint-langserver
         # gopls
@@ -242,30 +268,34 @@ let
         chit
         rust-bin.stable.latest.default # https://github.com/oxalica/rust-overlay
 
+        # YAML
+        yamlfmt
+
         # Everything else...
         gcc
         guix
         mold
         shellcheck
         tokei
-        yamlfmt
         zig
       ]);
+    secrets = with pkgsUnstable; [
+      age
+      gpg-tui
+      kpcli
+      sops
+    ];
     security =
       with pkgs;
       [
         mitmproxy
       ]
       ++ (with pkgsUnstable; [
-        age
         chkrootkit
-        gpg-tui
-        kpcli
         lynis
         nikto
         oath-toolkit
         protonvpn-cli
-        sops
         vt-cli
       ]);
     vcs = with pkgsUnstable; [
@@ -390,31 +420,33 @@ in
       modulePackages = lib.mkOption {
         type = with lib.types; listOf package;
         default = [ ];
-        description = "List of packages contributed by modules";
+        description = "List of additional packages contributed by modules";
         apply = x: lib.flatten x; # This ensures nested lists are flattened
         internal = true;
       };
     };
     packages = {
-      baseline = lib.mkEnableOption "Whether to install a baseline set of applications packages.";
+      baseline = lib.mkEnableOption "The baseline set of tools and applications to install on every host";
       cli = {
-        _all = lib.mkEnableOption "Whether to install all the CLI applications packages.";
-        ai = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        backup = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        cloudNativeTools = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        comms = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        misc = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        multimedia = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        programming = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        security = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        vcs = lib.mkEnableOption "Whether to install CLI related applications packages.";
-        web = lib.mkEnableOption "Whether to install CLI related applications packages.";
+        _all = lib.mkEnableOption "Whether to install all the CLI tools and applications";
+        ai = lib.mkEnableOption "Whether to install CLI AI related tools and applications";
+        backup = lib.mkEnableOption "Whether to install CLI backups related tools and applications";
+        cloudNativeTools = lib.mkEnableOption "Whether to install CLI cloud native related tools and applications";
+        comms = lib.mkEnableOption "Whether to install CLI comms related tools and applications";
+        databases = lib.mkEnableOption "Whether to install CLI databases related tools and applications";
+        misc = lib.mkEnableOption "Whether to install a CLI related applications packages"; # TODO: properly categorize the packages
+        multimedia = lib.mkEnableOption "Whether to install CLI multimedia related tools and applications";
+        programming = lib.mkEnableOption "Whether to install CLI programming related tools and applications";
+        secrets = lib.mkEnableOption "Whether to install CLI secrets related tools and applications";
+        security = lib.mkEnableOption "Whether to install CLI security related tools and applications";
+        vcs = lib.mkEnableOption "Whether to install CLI VCS related tools and applications";
+        web = lib.mkEnableOption "Whether to install CLI web related tools and applications";
       };
-      gui = lib.mkEnableOption "Whether to install GUI applications packages.";
+      gui = lib.mkEnableOption "Whether to install GUI applications and tools";
       guiShell = {
-        kde = lib.mkEnableOption "Whether to install DE/WM complementary applications packages.";
+        kde = lib.mkEnableOption "Whether to install KDE Desktop Environment complementary applications packages";
       };
-      nvidia = lib.mkEnableOption "Whether to install Nvidia-releated applications packages.";
+      nvidia = lib.mkEnableOption "Whether to install Nvidia-releated tools";
     };
   };
 
@@ -425,11 +457,13 @@ in
       ++ lib.optionals cfg.cli._all (builtins.concatLists (builtins.attrValues packagesCli))
       ++ lib.optionals cfg.cli.ai packagesCli.ai
       ++ lib.optionals cfg.cli.backup packagesCli.backup
-      ++ lib.optionals cfg.cli.comms packagesCli.comms
       ++ lib.optionals cfg.cli.cloudNativeTools packagesCli.cloudNativeTools
-      ++ lib.optionals cfg.cli.misc packagesCli.misc
+      ++ lib.optionals cfg.cli.comms packagesCli.comms
+      ++ lib.optionals cfg.cli.databases packagesCli.databases
+      ++ lib.optionals cfg.cli.misc packagesCli.misc # TODO: properly categorize the packages
       ++ lib.optionals cfg.cli.multimedia packagesCli.multimedia
       ++ lib.optionals cfg.cli.programming packagesCli.programming
+      ++ lib.optionals cfg.cli.secrets packagesCli.secrets
       ++ lib.optionals cfg.cli.security packagesCli.security
       ++ lib.optionals cfg.cli.vcs packagesCli.vcs
       ++ lib.optionals cfg.cli.web packagesCli.web
@@ -444,20 +478,3 @@ in
     };
   };
 }
-# READ ME!
-# =======
-# To pin a package to a specific version, use the following syntax:
-#  (Your_Package_Name.overrideAttrs (oldAttrs: {
-#     src = fetchFromGitHub {
-#       owner = "NixOS";
-#       repo = "nixpkgs";
-#       rev = "the commit hash";
-#       hash = "the sha265 hash of the tarball";
-#     };
-#   }))
-# To get the commit hash check the packages repository and look for the package in the correct channel branch, e.g. nixpkgs-unstable:
-# https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/by-name/aw/awscli2/package.nix => https://github.com/NixOS/nixpkgs/commit/62fcc798988975fab297b87345d93919cd6f6389
-# To get the sha256 hash of a package, run the following command:
-# nix-prefetch-github NixOS nixpkgs --no-deep-clone -v --rev The_Commit_Hash
-# Nix-prefetch-github can be installed as a normal package, or invoked on-demand if using `comma` (https://github.com/nix-community/comma, available in the official repositories.
-# Of course it can also be installed with `nix-env -iA nixpkgs.nix-prefetch-github`, or temporarily with nix-shell.
