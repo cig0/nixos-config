@@ -15,10 +15,12 @@ let
       "linuxPackages_" + cfg.boot.kernelPackages;
 
   /*
+    TODO: needs implementation
     Enable/disable applying kernel patches.
     Note that this will force compiling the kernel from source.
+
+    kernelPatches_enable = "false";
   */
-  kernelPatches_enable = "false";
 
   commonKernelParams = [
     "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the fb
@@ -53,8 +55,10 @@ let
     "watermark_boost_factor" = true;
     "watermark_scale_factor" = "500";
 
-    # ref: https://oglo.dev/tutorials/sysrq/index.html
-    # ref: https://github.com/tolgaerok/nixos-kde/tree/main
+    /*
+      ref: https://oglo.dev/tutorials/sysrq/index.html
+      ref: https://github.com/tolgaerok/nixos-kde/tree/main
+    */
     "kernel.sysrq" = 1; # SysRQ for is rebooting their machine properly if it freezes: SOURCE: https://oglo.dev/tutorials/sysrq/index.html
     "net.core.rmem_default" = 16777216; # Default socket receive buffer size, improve network performance & applications that use sockets
     "net.core.rmem_max" = 16777216; # Maximum socket receive buffer size, determin the amount of data that can be buffered in memory for network operations
@@ -68,10 +72,12 @@ let
     "vm.min_free_kbytes" = 65536; # Minimum free memory for safety (in KB), can help prevent memory exhaustion situations
     "vm.swappiness" = 10; # how aggressively the kernel swaps data from RAM to disk. Lower values prioritize keeping data in RAM
     "vm.vfs_cache_pressure" = 50; # Adjust vfs_cache_pressure (0-1000), how the kernel reclaims memory used for caching filesystem objects
-    # A good starting value would be 50. Here's why:
-    # Default (100): Balances the reclaiming of inode and dentry caches with reclaiming other memory types. This is general-purpose but can be suboptimal for workloads involving many file accesses.
-    # Lower Values (<100): Favor retaining the inode and dentry caches longer, which improves file system performance by reducing disk I/O. A value of 50 strikes a reasonable balance for systems with moderate memory capacity and workloads that benefit from efficient file system operations.
-    # Higher Values (>100): Increase the rate at which the kernel reclaims inode and dentry caches, which can free up memory for applications faster but might result in more frequent disk I/O. This is not ideal for a laptop used with a workload based on virtualization and programming.
+    /*
+      A good starting value would be 50. Here's why:
+      - Default (100): Balances the reclaiming of inode and dentry caches with reclaiming other memory types. This is general-purpose but can be suboptimal for workloads involving many file accesses.
+      - Lower Values (<100): Favor retaining the inode and dentry caches longer, which improves file system performance by reducing disk I/O. A value of 50 strikes a reasonable balance for systems with moderate memory capacity and workloads that benefit from efficient file system operations.
+      - Higher Values (>100): Increase the rate at which the kernel reclaims inode and dentry caches, which can free up memory for applications faster but might result in more frequent disk I/O. This is not ideal for a laptop used with a workload based on virtualization and programming.
+    */
   };
 in
 {
@@ -179,7 +185,7 @@ in
         ]);
 
       /*
-        # TODO: needs option
+        # TODO: needs needs implementation. See note in the `let` block.
         kernelPatches =
           if kernelPatches_enable == "true" then
             [
