@@ -55,7 +55,6 @@ let
 
     # push
     gpu = "git push";
-    gpum = aliases.gpu + " --mirror";
     gpusu = aliases.gpu + " --set-upstream origin $(git branch --show-current)";
 
     # reflog
