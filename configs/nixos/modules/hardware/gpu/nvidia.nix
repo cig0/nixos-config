@@ -1,8 +1,12 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgsUnstable,
+  ...
+}:
 
 let
   cfg = config.mySystem;
-
 in
 {
   options.mySystem.hardware.nvidia-container-toolkit.enable = lib.mkOption {
@@ -14,21 +18,22 @@ nvidia-container-toolkit on boot.";
 
   config = lib.mkIf (cfg.myOptions.hardware.gpu == "nvidia") {
 
+    # Additional module packages
+    mySystem.myOptions.packages.modulePackages = with pkgsUnstable; [
+      nvtopPackages.nvidia
+    ];
+
     hardware = {
       nvidia-container-toolkit.enable = cfg.hardware.nvidia-container-toolkit.enable;
       graphics.enable = true;
 
       nvidia = {
-        open = true;
+        open = false;
         dynamicBoost.enable = true;
         modesetting.enable = true; # TODO: remove the modesetting option from module kernel.nix?
-        powerManagement.enable = true;
-        prime = {
-          sync.enable = false;
-
-          intelBusId = "PCI:0:2:0";
-          nvidiaBusId = "PCI:1:0:0";
-          #amdgpuBusId = "PCI:54:0:0"; # If you have an AMD iGPU
+        powerManagement = {
+          enable = true;
+          finegrained = false;
         };
       };
     };

@@ -416,7 +416,7 @@ let
 in
 {
   options.mySystem = {
-    lib = {
+    myOptions.packages = {
       # Create a flattened list of packages to install contributed by modules
       modulePackages = lib.mkOption {
         type = with lib.types; listOf package;
@@ -471,7 +471,7 @@ in
       ++ lib.optionals cfg.gui packagesGui
       ++ lib.optionals cfg.guiShell.kde packagesGuiShell.kde
       ++ lib.optionals cfg.nvidia packagesNvidia
-      ++ config.mySystem.lib.modulePackages; # Add module-contributed packages
+      ++ config.mySystem.myOptions.packages.modulePackages; # Add module-contributed packages
 
     nixpkgs.config.allowUnfree = true; # Allow lincense-burdened packages
     _module.args = {
