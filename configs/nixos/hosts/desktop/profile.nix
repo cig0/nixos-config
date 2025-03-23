@@ -139,7 +139,7 @@
     # System - Kernel
     boot.kernelPackages = "stable"; # TODO: find out if it's possible to use the latest NVIDIA driver with the latest Linux kernel while keeping NixOS tracking the stable release channel
     # System - Keyboard
-    services.keyd.enable = true;
+    services.keyd.enable = false;
     # System - Maintenance
     nix = {
       gc.automatic = false;
