@@ -1,7 +1,8 @@
 TODO:
 - Migrate apps-cargo function to the systemd unit
 - Migrate .config/yakuakerc configuration to a Home Manager module (also check the Nix KDE project)
-
+- nearsk/cargo (on Grok)
+- We have a new rabbit hole to explore: flake-utils (and possbily a new flake refactor on the horizon, yay!)
 
 
 .
