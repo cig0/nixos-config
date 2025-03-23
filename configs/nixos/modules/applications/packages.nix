@@ -471,7 +471,7 @@ in
       ++ lib.optionals cfg.gui packagesGui
       ++ lib.optionals cfg.guiShell.kde packagesGuiShell.kde
       ++ lib.optionals cfg.nvidia packagesNvidia
-      ++ config.mySystem.myOptions.packages.modulePackages; # Add module-contributed packages
+      ++ config.mySystem.myOptions.packages.modulePackages; # Add packages contributed by other modules
 
     nixpkgs.config.allowUnfree = true; # Allow lincense-burdened packages
     _module.args = {
