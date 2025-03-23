@@ -28,8 +28,8 @@ nvidia-container-toolkit on boot.";
       graphics.enable = true;
 
       nvidia = {
-        open = false;
-        dynamicBoost.enable = true;
+        open = true;
+        dynamicBoost.enable = false;
         modesetting.enable = true; # TODO: remove the modesetting option from module kernel.nix?
         powerManagement = {
           enable = true;
