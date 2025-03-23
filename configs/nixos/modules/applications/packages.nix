@@ -272,12 +272,10 @@ let
         yamlfmt
 
         # Everything else...
-        gcc
         guix
         mold
         shellcheck
         tokei
-        zig
       ]);
     secrets = with pkgsUnstable; [
       age
