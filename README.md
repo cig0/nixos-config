@@ -1,3 +1,8 @@
+TODO:
+- Migrate .config/yakuakerc configuration to a Home Manager module (also check the Nix KDE project)
+
+
+
 .
 ├── assets/                # Media assets for documentation
 ├── configs/               # All system configurations
