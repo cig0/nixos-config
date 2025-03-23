@@ -303,6 +303,7 @@ let
       # Git
       ggshield # GitGuardian
       gh # GitHub CLI client
+      git-filter-repo # Quickly rewrite git repository history :: https://github.com/newren/git-filter-repo
       gitmoji-cli # https://github.com/carloscuesta/gitmoji-cli
       glab # GitLab CLI client
       lefthook
