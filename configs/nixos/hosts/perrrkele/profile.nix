@@ -136,7 +136,7 @@
     # System - Kernel
     boot.kernelPackages = "xanmod_latest";
     # System - Keyboard
-    services.keyd.enable = true;
+    services.keyd.enable = false;
     myOptions.services.keyd.addKeydKeyboards = {
       TUXEDOInfinityBookPro14Gen6Standard = {
         ids = [ "0001:0001" ];
