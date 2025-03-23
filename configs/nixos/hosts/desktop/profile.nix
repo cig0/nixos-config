@@ -86,6 +86,9 @@
     services.desktopManager.plasma6.enable = true;
     xdg.portal.enable = true;
 
+    # Hardware
+    hardware.nvidia-container-toolkit.enable = true;
+
     # Home Manager
     home-manager.enable = true;
 
