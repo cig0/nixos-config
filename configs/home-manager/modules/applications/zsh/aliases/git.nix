@@ -6,7 +6,6 @@ let
   aliases = {
     # Ungrouped git aliases
     gls = "git ls-tree --full-tree --name-only -r HEAD | lines";
-    gp = "git pull";
     grm = "git rm --cached";
 
     # Add
@@ -49,6 +48,10 @@ let
     gloa1 = aliases.glo + " --all -1 --format=%h";
     glooH = aliases.glo + " origin..HEAD --oneline";
     gloo = aliases.glo + " --oneline";
+
+    # pull
+    gp = "git pull";
+    gpr = aliases.gp + " --rebase";
 
     # push
     gpu = "git push";
