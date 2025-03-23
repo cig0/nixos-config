@@ -32,4 +32,4 @@ myOptions:
 - environment: useful to set shell environment variables
 - hardware: settings related to hardware information, like setting CPU or GPU hardware
 - kernel: settings related to the kernel or kernel components
-- nixos: settings related to NixOS itself, like channelPkgs to travers between channels
+- nixos: settings related to NixOS itself, like channelPkgs to traverse between channels
