@@ -3,8 +3,8 @@
   config,
   inputs,
   lib,
+  myArgs,
   pkgs,
-  pkgsUnstable,
   ...
 }:
 let
@@ -39,7 +39,7 @@ in
     ];
 
     # Install Yazi from pkgsUnstable if the package option is enabled
-    environment.systemPackages = lib.mkIf cfg.mySystem.package [ pkgsUnstable.yazi ];
+    environment.systemPackages = lib.mkIf cfg.mySystem.package [ myArgs.packages.pkgsUnstable.yazi ];
 
     # TODO: remove this after upgrading to NixOS 25.05
     # Install Yazi from the flake if the program option is enabled
