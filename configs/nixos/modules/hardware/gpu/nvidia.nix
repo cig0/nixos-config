@@ -31,8 +31,14 @@ nvidia-container-toolkit on boot.";
         open = true;
         dynamicBoost.enable = false;
         modesetting.enable = true;
+        nvidiaSettings = true;
         powerManagement = {
           enable = true;
+
+          /*
+            Fine-grained power management. Turns off GPU when not in use.
+            Experimental and only works on modern Nvidia GPUs (Turing or newer).
+          */
           finegrained = false;
         };
       };
