@@ -36,17 +36,18 @@
   ...
 }:
 let
+  # Conditionals
   cfg = {
     path = config.mySystem.myOptions.environment.variables.gh;
     gh = {
       token = cfg.path.token;
       username = cfg.path.username;
     };
-
-    isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
-    isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
   };
+  isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
+  isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
 
+  # Variables definitions
   githubVars =
     lib.optionalAttrs (cfg.gh.username != null) {
       GITHUB_USERNAME = cfg.gh.username;
