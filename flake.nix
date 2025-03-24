@@ -129,19 +129,52 @@
       ...
     }@inputs:
     let
+      # Import libraries. We need them for the `mkHost` function.
+      lib = inputs.nixpkgs.lib;
+
+      /*
+        mkHost function:
+        - Assemble a nixosSystem for each host.
+        - Shared host settings should live here.
+      */
       mkHost =
-        /*
-          Create a nixosSystem for each host.
-          Settings common to all hosts should live here.
-        */
         hostname: hostConfig:
+        let
+          /*
+            We will use the CPU architecture declared in hardware-configuration.nix,
+            created by `nixos-generate-config` (and originally provided by the NixOS installer).
+
+            The path is constructed after the host name dynamically, so we can have a single
+            function for all hosts.
+
+            With this approach we avoid:
+            - Manual intervention when adding new hosts
+            - Redundancy in the configuration (DRY principle)
+            - Hardcoding the architecture for each host
+
+            Because we are limited in what we can do here, we parse the file for the
+            string `nixpkgs.hostPlatform` and extract the value from the line.
+
+            Because `system` is a local variable, we need to later inherit it and pass it to specialArgs.
+          */
+          hwConfigText = builtins.readFile (
+            ./. + "/configs/nixos/hosts/${hostname}/hardware-configuration.nix"
+          );
+
+          lines = lib.splitString "\n" hwConfigText;
+          platformLine = lib.findFirst (line: lib.hasInfix "nixpkgs.hostPlatform" line) "" lines;
+
+          system =
+            if platformLine != "" then
+              lib.elemAt (lib.splitString "\"" (lib.elemAt (lib.splitString "=" platformLine) 1)) 1
+            else
+              "x86_64-linux"; # Fallback architecture
+        in
         nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            system = hostConfig.system; # Use the system architecture defined by each host configuration
-          };
+          inherit system;
+          specialArgs = { inherit inputs system; };
           modules = [
-            # Modules from flakes
+            # Import modules from flakes
             agenix.nixosModules.default
             auto-cpufreq.nixosModules.default
             home-manager.nixosModules.home-manager
@@ -152,35 +185,44 @@
             nix-snapd.nixosModules.default
             nixvim.nixosModules.nixvim
 
-            # Home Manager
-            (import ./configs/home-manager/home.nix) # Configuration declared separately to keep flake.nix slim
+            /*
+              Home Manager:
+              - The configuration is split to keep this flake.nix file slim
+              - A module (in the list above) is imported from the flake
+            */
+            (import ./configs/home-manager/home.nix)
 
-            # NixOS setup
-            (import ./configs/nixos/modules/default.nix) # Dynamically load NixOS modules
-            (./. + "/configs/nixos/hosts/${hostname}/configuration.nix") # Load host configuration (dynamic path constructed after the host name)
+            /*
+              NixOS modules:
+              - Load host configuration (dynamic path constructed after the host name)
+              - Dynamically load modules with a plug-and-play approach. Just drop a new module
+                within the host's configuration directory or globally in `configs/nixos/modules`,
+                and it will be automatically imported next time you create a new generation.
+            */
+            (./. + "/configs/nixos/hosts/${hostname}/configuration.nix")
+            (import ./configs/nixos/modules/default.nix)
 
             {
               # Overlays
-              nixpkgs.overlays = [ rust-overlay.overlays.default ];
+              nixpkgs.overlays = [
+                rust-overlay.overlays.default
+              ];
             }
           ] ++ hostConfig.extraModules;
         };
 
-      # Define host-specific configurations
+      # Define host-specific configurations here
       hosts = {
         chuwi = {
           description = "Headless MiniPC: Intel CPU & GPU, lab + NAS + streaming";
-          system = "x86_64-linux";
           extraModules = [ ];
         };
         desktop = {
           description = "Desktop: Intel CPU, Nvidia GPU";
-          system = "x86_64-linux";
           extraModules = [ ];
         };
         perrrkele = {
           description = "Laptop: Intel CPU & GPU + KDE";
-          system = "x86_64-linux";
           extraModules = [
             nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen7
           ];
