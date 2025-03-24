@@ -90,13 +90,22 @@ let
   };
 
   IntelGpuEnvVars = {
-    LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver
     EGL_DRIVER = "mesa";
+    LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver
   };
 
   NvidiaGpuEnvVars = {
-    LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver
-    EGL_DRIVER = "mesa";
+    # Required to run the correct GBM backend for nvidia GPUs on wayland
+    GBM_BACKEND = "nvidia-drm";
+    # Apparently, without this nouveau may attempt to be used instead
+    # (despite it being blacklisted)
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+
+    LIBVA_DRIVER_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+
+    # Hardware cursors are currently broken on wlroots
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
 in
 {
@@ -109,7 +118,7 @@ in
     gh.token = lib.mkOption {
       type = lib.types.str;
       default = "";
-      description = "The GitHub token to use for the CLI tool 'gh'"; # TODO: handle with nix-sops
+      description = "The GitHub token to use for the CLI tool 'gh'"; # TODO: handle with nix-sops or agenix
     };
   };
 
