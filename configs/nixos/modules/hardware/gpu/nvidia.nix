@@ -25,7 +25,6 @@ nvidia-container-toolkit on boot.";
 
     hardware = {
       nvidia-container-toolkit.enable = cfg.hardware.nvidia-container-toolkit.enable;
-      graphics.enable = true;
 
       nvidia = {
         open = true;
