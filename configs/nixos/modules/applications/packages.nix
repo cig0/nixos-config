@@ -472,8 +472,9 @@ in
       ++ config.mySystem.myOptions.packages.modulePackages; # Add packages contributed by other modules
 
     nixpkgs.config.allowUnfree = true; # Allow lincense-burdened packages
-    _module.args = {
-      pkgsUnstable = pkgsUnstable; # Expose the unstable channel to modules
+
+    mySystem.myArgsContributions.packages = {
+      pkgsUnstable = pkgsUnstable;
     };
   };
 }

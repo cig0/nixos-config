@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  pkgsUnstable,
+  myArgs,
   ...
 }:
 
@@ -20,7 +20,7 @@ nvidia-container-toolkit on boot.";
   config = lib.mkIf (cfg.myOptions.hardware.gpu == "nvidia") {
 
     # Additional module packages
-    mySystem.myOptions.packages.modulePackages = with pkgsUnstable; [
+    mySystem.myOptions.packages.modulePackages = with myArgs.packages.pkgsUnstable; [
       nvtopPackages.nvidia
     ];
 
