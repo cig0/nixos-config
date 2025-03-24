@@ -44,8 +44,6 @@ let
       username = cfg.path.username;
     };
   };
-  isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
-  isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
 
   # Variables definitions
   githubVars =
@@ -131,9 +129,9 @@ in
 
       variables =
         (
-          if isIntelGpu then
+          if (config.mySystem.myOptions.hardware.gpu == "intel") then
             commonEnvVars // IntelGpuEnvVars
-          else if isNvidiaGpu then
+          else if (config.mySystem.myOptions.hardware.gpu == "nvidia") then
             commonEnvVars
           else
             { }

@@ -2,20 +2,10 @@
 {
   config,
   lib,
-  myArgs,
   pkgs,
   ...
 }:
 let
-  /*
-    inherit (myArgs.hardware) cpuType gpuType;
-    inherit (cpuType) isIntelCpu;
-    inherit (gpuType) isIntelGpu isNvidiaGpu;
-  */
-
-  inherit (myArgs.hardware.cpuType) isIntelCpu;
-  inherit (myArgs.hardware.gpuType) isIntelGpu isNvidiaGpu;
-
   cfg = config.mySystem;
 
   kernelPackageName =
@@ -128,8 +118,8 @@ in
   config = {
     boot = {
       blacklistedKernelModules =
-        lib.optionals isIntelGpu [ "" ]
-        ++ lib.optionals isNvidiaGpu [ "nouveau" ];
+        lib.optionals (config.mySystem.myOptions.hardware.gpu == "intel") [ "" ]
+        ++ lib.optionals (config.mySystem.myOptions.hardware.gpu == "nvidia") [ "nouveau" ];
 
       # Overrides parameter in hardware-configuration.nix
       extraModprobeConfig =
@@ -161,7 +151,9 @@ in
           "net.ipv4.tcp_congestion_control" = cfg.myOptions.kernel.sysctl.netIpv4TcpCongestionControl;
         });
 
-      kernelModules = (lib.optionals isIntelCpu [ "kvm-intel" ]) ++ (lib.optionals isIntelGpu [ "i915" ]);
+      kernelModules =
+        (lib.optionals (config.mySystem.myOptions.hardware.cpu == "intel") [ "kvm-intel" ])
+        ++ (lib.optionals (config.mySystem.myOptions.hardware.gpu == "intel") [ "i915" ]);
 
       kernelPackages = pkgs.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgs
       /*
@@ -187,18 +179,18 @@ in
 
       kernelParams =
         commonKernelParams
-        ++ (lib.optionals isIntelCpu [
+        ++ (lib.optionals (config.mySystem.myOptions.hardware.cpu == "intel") [
           "intel_iommu=sm_on"
           "intel_pstate=disable"
           "kvm.ignore_msrs=1"
           "kvm.report_ignored_msrs=0"
         ])
-        ++ (lib.optionals isIntelGpu [
+        ++ (lib.optionals (config.mySystem.myOptions.hardware.gpu == "intel") [
           "i915.enable_fbc=1"
           "i915.enable_guc=2"
           "i915.enable_psr=1"
         ])
-        ++ (lib.optionals isNvidiaGpu [
+        ++ (lib.optionals (config.mySystem.myOptions.hardware.gpu == "nvidia") [
           "nvidia-drm.fbdev=1"
           "nvidia-drm.modeset=1"
         ]);

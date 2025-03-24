@@ -32,12 +32,12 @@ This branch tracks the clean-up job to consolidate coding practices, defined myS
 - mySystem.myOptions or mySystem.options, for short?
 - mySystem.{programs,environment, lib (like in the krew.nix WIP),` etc.}: this pattern is used whenever I need to create an option that overlaps with an existing NixOS option.
 
-myArgs:
-- packages: _module.args related to system packages, e.g. the pkgsUnstable set. Defined in nixos/modules/common/module-args.nix
+myArgs (defined in nixos/modules/common/module-args.nix):
+- packages: _module.args related to system packages, e.g. the pkgsUnstable set. 
 
 myOptions:
 - cli: settings related to CLI applications and shell
 - environment: useful to set shell environment variables
-- hardware: settings related to hardware information, like setting CPU or GPU hardware
+- hardware: settings related to hardware information, like setting CPU or GPU hardware (e.g.  isIntelCpu, isIntelGpu, isNvidiaGpu)
 - kernel: settings related to the kernel or kernel components
 - nixos: settings related to NixOS itself, like channelPkgs to traverse between channels

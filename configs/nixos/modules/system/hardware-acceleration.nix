@@ -9,14 +9,9 @@
 {
   config,
   lib,
-  myArgs,
   pkgs,
   ...
 }:
-let
-  inherit (myArgs.hardware.cpuType) isIntelCpu;
-  inherit (myArgs.hardware.gpuType) isIntelGpu isNvidiaGpu;
-in
 {
   options.mySystem.hardware.graphics.enable =
     lib.mkEnableOption "Whether to enable hardware accelerated graphics drivers.
@@ -27,7 +22,7 @@ This option should be enabled by default by the corresponding modules, so you do
 
   config = {
     nixpkgs.config = (
-      lib.mkIf isIntelGpu {
+      lib.mkIf (config.mySystem.myOptions.hardware.gpu == "intel") {
         packageOverrides = pkgs: {
           intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
         };
@@ -37,7 +32,7 @@ This option should be enabled by default by the corresponding modules, so you do
     hardware.graphics = lib.mkIf config.mySystem.hardware.graphics.enable {
       enable = true;
       extraPackages =
-        lib.optionals isIntelGpu (
+        lib.optionals (config.mySystem.myOptions.hardware.gpu == "intel") (
           with pkgs;
           [
             intel-compute-runtime
@@ -49,7 +44,7 @@ This option should be enabled by default by the corresponding modules, so you do
             mesa
           ]
         )
-        ++ lib.optionals isNvidiaGpu (
+        ++ lib.optionals (config.mySystem.myOptions.hardware.gpu == "nvidia") (
           with pkgs;
           [
             libva-utils
@@ -58,13 +53,13 @@ This option should be enabled by default by the corresponding modules, so you do
           ]
         );
       extraPackages32 =
-        lib.optionals isIntelGpu (
+        lib.optionals (config.mySystem.myOptions.hardware.gpu == "intel") (
           with pkgs.pkgsi686Linux;
           [
             intel-media-driver
           ]
         )
-        ++ lib.optionals isNvidiaGpu (
+        ++ lib.optionals (config.mySystem.myOptions.hardware.gpu == "nvidia") (
           with pkgs.pkgsi686Linux;
           [
           ]
@@ -72,11 +67,11 @@ This option should be enabled by default by the corresponding modules, so you do
     };
 
     services.xserver.videoDrivers =
-      lib.mkIf isIntelGpu ([
+      lib.mkIf (config.mySystem.myOptions.hardware.gpu == "intel") ([
         "modesetting"
         "fbdev"
       ])
-      // lib.mkIf isNvidiaGpu ([
+      // lib.mkIf (config.mySystem.myOptions.hardware.gpu == "nvidia") ([
         "nvidia"
       ]);
   };

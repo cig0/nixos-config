@@ -23,14 +23,4 @@
       description = "The GPU type of the host system";
     };
   };
-
-  config = {
-    mySystem.myArgsContributions.hardware = {
-      cpuType.isIntelCpu = config.mySystem.myOptions.hardware.cpu == "intel";
-      gpuType = {
-        isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
-        isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
-      };
-    };
-  };
 }
