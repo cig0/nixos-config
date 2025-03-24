@@ -1,33 +1,33 @@
 /*
-  ------------------------------------------------------------------
+  ------------------------------------------------------------------------
   My personal NixOS multi-host configuration flake ¯\_(ツ)_/¯
   https://github.com/cig0/nixos-config
   Kickoff commit on May 29th 2024, 4:20 AM.
   Initial public release on ${TBD}.
 
-  ASCII art credits: https://www.asciiart.eu/
-  ------------------------------------------------------------------
-                                                                       _------__--___.__.
-                                                                     /            `  `    \
-                                                                    |                      \
-                                                                    |                       |
-                                                                     \                      |
-                                                                       ~/ --`-`-`-\         |
-                                                                       |            |       |
-                                                                       |            |       |
-                                                                        |   _--    |       |
-                                                     Hey Butthead,      _| =-.    |.-.    |
-                                                                        o|/o/       _.   |
-                                                    does this suck?     /  ~          \ |
-                                                                      (____@)  ___~    |
-                                                                         |_===~~~.`    |
-                                                                      _______.--~     |
-                                                                      \________       |
-                                                                               \      |
-                                                                             __/-___-- -__
-                                                                            /            __\
-                                                                           /-| Metallica|| |
-                                                                          / /|          || |
+  ASCII art credits: https://www.asciiart.eu/cartoons/beavis-and-butt-head
+  ------------------------------------------------------------------------
+                                                                                     _------__--___.__.
+                                                                                   /            `  `    \
+                                                                                  |                      \
+                                                                                  |                       |
+                                                                                   \                      |
+                                                                                     ~/ --`-`-`-\         |
+                                                                                     |            |       |
+                                                                                     |            |       |
+                                                                                      |   _--    |       |
+                                                                   Hey Butthead,      _| =-.    |.-.    |
+                                                                                      o|/o/       _.   |
+                                                                  does this suck?     /  ~          \ |
+                                                                                    (____@)  ___~    |
+                                                                                       |_===~~~.`    |
+                                                                                    _______.--~     |
+                                                                                    \________       |
+                                                                                             \      |
+                                                                                           __/-___-- -__
+                                                                                          /            __\
+                                                                                         /-| Metallica|| |
+                                                                                        / /|          || |
 */
 {
   description = "cig0's NixOS flake";
