@@ -33,12 +33,12 @@
   description = "cig0's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.11"; # Main NixOS release channel followed by the flake
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # The unstable NixOS release channel to allow for fresher packages
+    nixpkgs.url = "nixpkgs/nixos-24.11"; # NixOS release channel
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # The unstable release channel to allow for fresher packages
 
     agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs"; # optional, not necessary for the module
-    agenix.inputs.darwin.follows = ""; # optionally choose not to download darwin deps (saves some resources on Linux)
+    agenix.inputs.nixpkgs.follows = "nixpkgs"; # Optional, not necessary for the module
+    agenix.inputs.darwin.follows = ""; # Optionally choose not to download darwin deps (saves some resources on Linux)
 
     # Energy efficiency for battery-powered devices
     auto-cpufreq = {
@@ -61,7 +61,7 @@
     # Declarative Flatpak management for NixOS
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
-    # A files database for nixpkgs(-unstable)
+    # A files database for nixpkgs{-unstable}
     nix-index.url = "github:nix-community/nix-index";
 
     # Weekly updated nix-index database for nixos-unstable channel
@@ -91,7 +91,7 @@
       url = "github:nix-community/nix-snapd";
     };
 
-    # A Neovim configuration system for nix
+    # A Neovim configuration system for Nix
     nixvim = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixvim/nixos-24.11";
@@ -125,38 +125,40 @@
       nixvim,
       rust-overlay,
       self,
-      # sops-nix, # TODO: pending implementation.
+      # sops-nix, # TODO: pending implementation. I need to compare it with Agenix and decide which one to use.
       yazi,
       ...
     }@inputs:
     let
-      # Import libraries. We need them for the `mkHost` function.
+      # Import libraries. We need them for the `mkHost` function below.
       lib = inputs.nixpkgs.lib;
 
       /*
-        mkHost function:
-        - Assemble a nixosSystem for each host.
-        - Shared host settings should live here.
+        The mkHost function:
+        - Assembles a nixosSystem for each host.
+        - Makes it easy to share modules, options, and configurations for all hosts.
       */
       mkHost =
         hostname: hostConfig:
         let
           /*
             We will use the CPU architecture declared in hardware-configuration.nix,
-            created by `nixos-generate-config` (and originally provided by the NixOS installer).
+            created by `nixos-generate-config` (and originally provided by the NixOS installer),
+            to determine the system architecture.
 
-            The path is constructed after the host name dynamically, so we can have a single
-            function for all hosts.
+            The path to hardware-configuration.nix is constructed after the host name dynamically,
+            so we can use a single function for all hosts.
 
-            With this approach we avoid:
-            - Manual intervention when adding new hosts
-            - Redundancy in the configuration (DRY principle)
-            - Hardcoding the architecture for each host
+            With this approach we:
+            - Drastically reducec manual intervention when adding new hosts
+            - Avoid redundancy in the configuration (DRY principle)
+            - Avoid hardcoding the architecture for each host
 
             Because we are limited in what we can do here, we parse the file for the
             string `nixpkgs.hostPlatform` and extract the value from the line.
 
-            Because `system` is a local variable, we need to later inherit it and pass it to specialArgs.
+            Given that `system` is a local variable, we need to inherit it and pass it to the
+             modules using specialArgs.
           */
           hwConfigText = builtins.readFile (
             ./. + "/configs/nixos/hosts/${hostname}/hardware-configuration.nix"
@@ -175,7 +177,7 @@
           inherit system;
           specialArgs = { inherit inputs system; };
           modules = [
-            # Import modules from flakes
+            # Import modules from the added flakes
             agenix.nixosModules.default
             auto-cpufreq.nixosModules.default
             home-manager.nixosModules.home-manager
@@ -187,18 +189,19 @@
             nixvim.nixosModules.nixvim
 
             /*
-              Home Manager:
+              Home Manager
               - The configuration is split to keep this flake.nix file slim
-              - A module (in the list above) is imported from the flake
             */
             (import ./configs/home-manager/home.nix)
 
             /*
-              NixOS modules:
-              - Load host configuration (dynamic path constructed after the host name)
-              - Dynamically load modules with a plug-and-play approach. Just drop a new module
-                within the host's configuration directory or globally in `configs/nixos/modules`,
-                and it will be automatically imported next time you create a new generation.
+              NixOS
+              - Load host configuration (dynamic path constructed after the host name).
+                Find the host custom option toggles in `./configs/nixos/hosts/${hostname}/profile.nix`.
+              - Dynamically load modules with a plug-and-play approach.
+                Just drop a new module within the host's configuration directory or globally in
+                `./configs/nixos/modules`, and it should be automatically imported next time you create
+                a new generation. Check `./lib/modules.nix` for more details.
             */
             (./. + "/configs/nixos/hosts/${hostname}/configuration.nix")
             (import ./configs/nixos/modules/default.nix)
@@ -219,7 +222,7 @@
           extraModules = [ ];
         };
         desktop = {
-          description = "Desktop: Intel CPU, Nvidia GPU";
+          description = "Desktop: Intel CPU, Nvidia GPU + KDE";
           extraModules = [ ];
         };
         perrrkele = {
