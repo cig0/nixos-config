@@ -3,11 +3,6 @@
   lib,
   ...
 }:
-let
-  isIntelCpu = config.mySystem.myOptions.hardware.cpu == "intel";
-  isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
-  isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
-in
 {
   options.mySystem.myOptions.hardware = {
     cpu = lib.mkOption {
@@ -31,10 +26,10 @@ in
 
   config = {
     mySystem.myModuleArgs.hardware = {
-      cpuType.isIntelCpu = isIntelCpu;
+      cpuType.isIntelCpu = config.mySystem.myOptions.hardware.cpu == "intel";
       gpuType = {
-        isIntelGpu = isIntelGpu;
-        isNvidiaGpu = isNvidiaGpu;
+        isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
+        isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
       };
     };
   };
