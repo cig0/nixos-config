@@ -37,7 +37,7 @@
   */
   mySystem = {
     myOptions = {
-      environment.sessionVariables.gh.username = "cig0";
+      environment.variables.gh.username = "cig0";
       hardware = {
         cpu = "intel";
         gpu = "intel";
