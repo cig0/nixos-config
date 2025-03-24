@@ -86,6 +86,12 @@
     services.desktopManager.plasma6.enable = true;
     xdg.portal.enable = true;
 
+    # Hardware
+    hardware = {
+      graphics.enable = true;
+      nvidia-container-toolkit.enable = false;
+    };
+
     # Home Manager
     home-manager.enable = true;
 
@@ -159,7 +165,6 @@
       enable = true;
       clean.enable = true;
     };
-
     system.autoUpgrade.enable = true;
     # System - Time
     networking.timeServers = [ "argentina" ];

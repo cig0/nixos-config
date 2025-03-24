@@ -87,7 +87,10 @@
     xdg.portal.enable = true;
 
     # Hardware
-    hardware.nvidia-container-toolkit.enable = true;
+    hardware = {
+      graphics.enable = true;
+      nvidia-container-toolkit.enable = true;
+    };
 
     # Home Manager
     home-manager.enable = true;
