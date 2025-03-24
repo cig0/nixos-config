@@ -30,15 +30,11 @@ in
   };
 
   config = {
-    _module.args = {
-      myArgs = {
-        hardware = {
-          cpuType.isIntelCpu = isIntelCpu;
-          gpuType = {
-            isIntelGpu = isIntelGpu;
-            isNvidiaGpu = isNvidiaGpu;
-          };
-        };
+    mySystem.myArgsContributions.hardware = {
+      cpuType.isIntelCpu = isIntelCpu;
+      gpuType = {
+        isIntelGpu = isIntelGpu;
+        isNvidiaGpu = isNvidiaGpu;
       };
     };
   };
