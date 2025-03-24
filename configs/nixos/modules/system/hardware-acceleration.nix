@@ -14,7 +14,6 @@
   ...
 }:
 let
-  # `myOptions` defines shared settings used by many modules; they live in `./nixos/modules/common/`
   isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
   isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
 in
