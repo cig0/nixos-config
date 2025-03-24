@@ -1,24 +1,13 @@
 {
+  config,
   lib,
   ...
 }:
+let
+  isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
+  isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
+in
 {
-  # Custom hardware configuration options.
-  #
-  # Defines the CPU and GPU types for the host system, enabling modules such as
-  # environment variables, hardware acceleration, and kernel settings to access
-  # this information easily.
-
-  # It can be used as follows:
-  # let
-  #   cfg = config.mySystem.myOptions;
-  # in
-  # { cfg.hardware = {
-  #     cpu = "";
-  #     gpu = "";
-  #   }
-  # }
-
   options.mySystem.myOptions.hardware = {
     cpu = lib.mkOption {
       type = lib.types.enum [
@@ -36,6 +25,19 @@
         "nvidia"
       ];
       description = "The GPU type of the host system";
+    };
+  };
+
+  config = {
+    _module.args = {
+      myArgs = {
+        hardware = {
+          gpuType = {
+            isIntelGpu = isIntelGpu;
+            isNvidiaGpu = isNvidiaGpu;
+          };
+        };
+      };
     };
   };
 }
