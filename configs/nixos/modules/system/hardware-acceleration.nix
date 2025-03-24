@@ -6,7 +6,6 @@
 
   There's no need to do any more work here as these dependencies automatically adjust to NixOS channel.
 */
-
 {
   config,
   lib,
@@ -52,7 +51,9 @@ This option should be enabled by default by the corresponding modules, so you do
         ++ lib.optionals isNvidiaGpu (
           with pkgs;
           [
+            libva-utils
             nvidia-vaapi-driver
+            vdpauinfo
           ]
         );
       extraPackages32 =
