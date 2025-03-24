@@ -125,7 +125,7 @@
       nixvim,
       rust-overlay,
       self,
-      # sops-nix, # TODO: pending implementation. I need to compare it with Agenix and decide which one to use.
+      # sops-nix, # TODO: https://github.com/users/cig0/projects/1/views/1?pane=issue&itemId=103254314&issue=cig0%7Cnixos-config%7C6
       yazi,
       ...
     }@inputs:
