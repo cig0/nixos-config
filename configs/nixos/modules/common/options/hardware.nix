@@ -4,6 +4,7 @@
   ...
 }:
 let
+  isIntelCpu = config.mySystem.myOptions.hardware.cpu == "intel";
   isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
   isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
 in
@@ -32,6 +33,7 @@ in
     _module.args = {
       myArgs = {
         hardware = {
+          cpuType.isIntelCpu = isIntelCpu;
           gpuType = {
             isIntelGpu = isIntelGpu;
             isNvidiaGpu = isNvidiaGpu;
