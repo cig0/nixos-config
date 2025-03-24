@@ -36,16 +36,15 @@
   ...
 }:
 let
-  # TODO: clean up this!
-  isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
-  isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
-
   cfg = {
     path = config.mySystem.myOptions.environment.variables.gh;
     gh = {
       token = cfg.path.token;
       username = cfg.path.username;
     };
+
+    isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
+    isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
   };
 
   githubVars =
