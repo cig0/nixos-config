@@ -25,7 +25,7 @@
   };
 
   config = {
-    mySystem.myModuleArgs.hardware = {
+    mySystem.myArgsContributions.hardware = {
       cpuType.isIntelCpu = config.mySystem.myOptions.hardware.cpu == "intel";
       gpuType = {
         isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
