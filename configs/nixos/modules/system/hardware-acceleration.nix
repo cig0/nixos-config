@@ -9,12 +9,13 @@
 {
   config,
   lib,
+  myArgs,
   pkgs,
   ...
 }:
 let
-  isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
-  isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
+  inherit (myArgs.hardware.cpuType) isIntelCpu;
+  inherit (myArgs.hardware.gpuType) isIntelGpu isNvidiaGpu;
 in
 {
   options.mySystem.hardware.graphics.enable =
