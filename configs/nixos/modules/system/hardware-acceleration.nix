@@ -37,7 +37,7 @@ This option should be enabled by default by the corresponding modules, so you do
     hardware.graphics = lib.mkIf config.mySystem.hardware.graphics.enable {
       enable = true;
       extraPackages =
-        lib.mkIf isIntelGpu (
+        lib.optionals isIntelGpu (
           with pkgs;
           [
             intel-compute-runtime
@@ -49,20 +49,20 @@ This option should be enabled by default by the corresponding modules, so you do
             mesa
           ]
         )
-        // lib.mkIf isNvidiaGpu (
+        ++ lib.optionals isNvidiaGpu (
           with pkgs;
           [
             nvidia-vaapi-driver
           ]
         );
       extraPackages32 =
-        lib.mkIf isIntelGpu (
+        lib.optionals isIntelGpu (
           with pkgs.pkgsi686Linux;
           [
             intel-media-driver
           ]
         )
-        // lib.mkIf isNvidiaGpu (
+        ++ lib.optionals isNvidiaGpu (
           with pkgs.pkgsi686Linux;
           [
           ]
