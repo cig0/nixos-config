@@ -37,15 +37,14 @@
 }:
 let
   # TODO: clean up this!
+  isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
+  isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
+
   cfg = {
-    path = config.mySystem.myOptions;
-
-    cpu = cfg.path.hardware.cpu;
-    gpu = cfg.path.hardware.gpu;
-
+    path = config.mySystem.myOptions.environment.variables.gh;
     gh = {
-      token = cfg.path.environment.sessionVariables.gh.token;
-      username = cfg.path.environment.sessionVariables.gh.username;
+      token = cfg.path.token;
+      username = cfg.path.username;
     };
   };
 
@@ -54,10 +53,10 @@ let
       GITHUB_USERNAME = cfg.gh.username;
     }
     // lib.optionalAttrs (cfg.gh.token != null) {
-      GITHUB_TOKEN = cfg.gh.token; # TODO: Implement SOPS
+      GITHUB_TOKEN = cfg.gh.token; # TODO: Implement SOPS or Agenix
     };
 
-  commonEnvSessionVars = {
+  commonEnvVars = {
     EGL_PLATFORM = "wayland";
     EGL_LOG_LEVEL = "fatal";
 
@@ -90,13 +89,18 @@ let
     TMPDIR = "/tmp";
   };
 
-  GpuIntelEnvSessionVars = {
+  IntelGpuEnvVars = {
+    LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver
+    EGL_DRIVER = "mesa";
+  };
+
+  NvidiaGpuEnvVars = {
     LIBVA_DRIVER_NAME = "iHD"; # Force intel-media-driver
     EGL_DRIVER = "mesa";
   };
 in
 {
-  options.mySystem.myOptions.environment.sessionVariables = {
+  options.mySystem.myOptions.environment.variables = {
     gh.username = lib.mkOption {
       type = lib.types.str;
       default = "";
@@ -116,12 +120,12 @@ in
 
       pathsToLink = [ "/share/zsh" ]; # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
 
-      sessionVariables =
+      variables =
         (
-          if cfg.gpu == "intel" then
-            commonEnvSessionVars // GpuIntelEnvSessionVars
-          else if cfg.gpu == "nvidia" then
-            commonEnvSessionVars
+          if isIntelGpu then
+            commonEnvVars // IntelGpuEnvVars
+          else if isNvidiaGpu then
+            commonEnvVars
           else
             { }
         )
