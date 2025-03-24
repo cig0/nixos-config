@@ -16,6 +16,7 @@ in
 nvidia-container-toolkit on boot.";
   };
 
+  # TODO: replace with isNvidiaGpu
   config = lib.mkIf (cfg.myOptions.hardware.gpu == "nvidia") {
 
     # Additional module packages
