@@ -8,6 +8,10 @@
 let
   cfg = config.mySystem;
 
+  # TODO: evaluate if I should pass this options to all modules in the flake
+  isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
+  isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
+
   kernelPackageName =
     if cfg.boot.kernelPackages == "stable" then
       "linuxPackages"
@@ -117,7 +121,25 @@ in
 
   config = {
     boot = {
+      blacklistedKernelModules =
+        lib.optionals isIntelGpu [ "" ]
+        ++ lib.optionals isNvidiaGpu [ "nouveau" ];
+
       # Overrides parameter in hardware-configuration.nix
+      extraModprobeConfig =
+        "options nvidia "
+        + lib.concatStringsSep " " [
+          # nvidia assume that by default your CPU does not support PAT,
+          # but this is effectively never the case in 2023
+          "NVreg_UsePageAttributeTable=1"
+          # This is sometimes needed for ddc/ci support, see
+          # https://www.ddcutil.com/nvidia/
+          #
+          # Current monitor does not support it, but this is useful for
+          # the future
+          "NVreg_RegistryDwords=RMUseSwI2c=0x01;RMI2cSpeed=100"
+        ];
+
       initrd.availableKernelModules = [
         "xhci_pci"
         "thunderbolt"
