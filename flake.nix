@@ -1,10 +1,11 @@
 /*
   ------------------------------------------------------------------
-   My personal NixOS multi-host configuration flake ¯\_(ツ)_/¯
-   https://github.com/cig0/nixos-config
-   Initial release on May 1st, 2024
+  My personal NixOS multi-host configuration flake ¯\_(ツ)_/¯
+  https://github.com/cig0/nixos-config
+  Kickoff commit on May 29th 2024, 4:20 AM.
+  Initial public release on ${TBD}.
 
-   ASCII art credits: https://www.asciiart.eu/
+  ASCII art credits: https://www.asciiart.eu/
   ------------------------------------------------------------------
                                                                        _------__--___.__.
                                                                      /            `  `    \
