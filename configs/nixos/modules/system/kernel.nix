@@ -195,15 +195,8 @@ in
           "i915.enable_psr=1"
         ])
         ++ (lib.optionals (cfg.myOptions.hardware.gpu == "nvidia") [
-          /*
-            TODO: needs action
-            This section was originally intended to manually enable kernel modesetting for the
-            NVIDIA graphics (nvidia_drm.modeset=1).
-
-            I later found there exist the option `hardware.nvidia.modesetting.enable` that do this :P
-            I'll keep this section around for a while in case I need to add more kernel parameters
-            not directly supported by a NixOS option.
-          */
+          "nvidia-drm.fbdev=1"
+          "nvidia-drm.modeset=1"
         ]);
 
       /*
@@ -266,6 +259,6 @@ in
    "tuxedo_keyboard.brightness=127"
    "tuxedo_keyboard.color_left=0xff0a0a"
    Nvidia
-   "nvidia_drm.fbdev=1"           # Enables the use of a framebuffer device for NVIDIA graphics. This can be useful for certain configurations.
-   "nvidia_drm.modeset=1"         # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
+   "nvidia-drm.fbdev=1"           # Enables the use of a framebuffer device for NVIDIA graphics. This can be useful for certain configurations.
+   "nvidia-drm.modeset=1"         # Enables kernel modesetting for NVIDIA graphics. This is essential for proper graphics support on NVIDIA GPUs.
 */
