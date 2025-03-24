@@ -15,53 +15,68 @@
 }:
 let
   # `myOptions` defines shared settings used by many modules; they live in `./nixos/modules/common/`
-  cfg = config.mySystem.myOptions;
+  isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
+  isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
 in
 {
-  # Intel iGPU hosts
-  nixpkgs.config = (
-    lib.mkIf (cfg.hardware.gpu == "intel") {
-      packageOverrides = pkgs: {
-        intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
-      };
-    }
-  );
+  options.mySystem.hardware.graphics.enable =
+    lib.mkEnableOption "Whether to enable hardware accelerated graphics drivers.
 
-  hardware.graphics = (
-    lib.mkIf (cfg.hardware.gpu == "intel") {
+This is required to allow most graphical applications and environments to use hardware rendering, video encode/decode acceleration, etc.
+
+This option should be enabled by default by the corresponding modules, so you do not usually have to set it yourself.";
+
+  config = {
+    nixpkgs.config = (
+      lib.mkIf isIntelGpu {
+        packageOverrides = pkgs: {
+          intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+        };
+      }
+    );
+
+    hardware.graphics = lib.mkIf config.mySystem.hardware.graphics.enable {
       enable = true;
-      extraPackages = with pkgs; [
-        intel-compute-runtime
-        intel-ocl
-        intel-media-driver
-        libvdpau-va-gl
-        libdrm
-        libGL
-        mesa
-      ];
-      extraPackages32 = with pkgs.pkgsi686Linux; [
-        intel-media-driver
-      ];
-    }
-  );
+      extraPackages =
+        lib.mkIf isIntelGpu (
+          with pkgs;
+          [
+            intel-compute-runtime
+            intel-ocl
+            intel-media-driver
+            libvdpau-va-gl
+            libdrm
+            libGL
+            mesa
+          ]
+        )
+        // lib.mkIf isNvidiaGpu (
+          with pkgs;
+          [
+            nvidia-vaapi-driver
+          ]
+        );
+      extraPackages32 =
+        lib.mkIf isIntelGpu (
+          with pkgs.pkgsi686Linux;
+          [
+            intel-media-driver
+          ]
+        )
+        // lib.mkIf isNvidiaGpu (
+          with pkgs.pkgsi686Linux;
+          [
+          ]
+        );
+    };
 
-  services.xserver.videoDrivers =
-    if cfg.hardware.gpu == "intel" then
-      [
+    services.xserver.videoDrivers =
+      lib.mkIf isIntelGpu ([
         "modesetting"
         "fbdev"
-      ]
-    else if cfg.hardware.gpu == "nvidia" then
-      [ "nvidia" ]
-    else
-      throw "Hostname '${config.networking.hostName}' hardware does not support the GPU architecture '${cfg.hardware.gpu}'!";
-
-  # Nvidia GPU host
-  # This is one way to do this. If `cfg.hardware.gpu` matches nvidia then the NixOS option is set to true, otherwise it remains unchanged.
-  # This method also needs the `lib` input.
-  hardware.nvidia.modesetting.enable = lib.mkIf (cfg.hardware.gpu == "nvidia") true;
-
-  # This is another way to do this, simpler and concise, but with a slightly different behavior.
-  # If `cfg.hardware.gpu` matches nvidia then the NixOS option is set to true, otherwise it is set to false.
-  # hardware.nvidia.modesetting.enable = cfg.hardware.gpu == "nvidia";
+      ])
+      // lib.mkIf isNvidiaGpu ([
+        "nvidia"
+      ]);
+  };
 }
