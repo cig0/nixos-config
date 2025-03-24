@@ -30,7 +30,7 @@ in
   };
 
   config = {
-    mySystem.myArgsContributions.hardware = {
+    mySystem.myModuleArgs.hardware = {
       cpuType.isIntelCpu = isIntelCpu;
       gpuType = {
         isIntelGpu = isIntelGpu;
