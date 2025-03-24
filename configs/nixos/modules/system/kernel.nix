@@ -2,15 +2,21 @@
 {
   config,
   lib,
+  myArgs,
   pkgs,
   ...
 }:
 let
-  cfg = config.mySystem;
+  /*
+    inherit (myArgs.hardware) cpuType gpuType;
+    inherit (cpuType) isIntelCpu;
+    inherit (gpuType) isIntelGpu isNvidiaGpu;
+  */
 
-  # TODO: evaluate if I should pass this options to all modules in the flake
-  isIntelGpu = config.mySystem.myOptions.hardware.gpu == "intel";
-  isNvidiaGpu = config.mySystem.myOptions.hardware.gpu == "nvidia";
+  inherit (myArgs.hardware.cpuType) isIntelCpu;
+  inherit (myArgs.hardware.gpuType) isIntelGpu isNvidiaGpu;
+
+  cfg = config.mySystem;
 
   kernelPackageName =
     if cfg.boot.kernelPackages == "stable" then
@@ -155,9 +161,7 @@ in
           "net.ipv4.tcp_congestion_control" = cfg.myOptions.kernel.sysctl.netIpv4TcpCongestionControl;
         });
 
-      kernelModules =
-        (lib.optionals (cfg.myOptions.hardware.cpu == "intel") [ "kvm-intel" ])
-        ++ (lib.optionals (cfg.myOptions.hardware.gpu == "intel") [ "i915" ]);
+      kernelModules = (lib.optionals isIntelCpu [ "kvm-intel" ]) ++ (lib.optionals isIntelGpu [ "i915" ]);
 
       kernelPackages = pkgs.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgs
       /*
@@ -183,18 +187,18 @@ in
 
       kernelParams =
         commonKernelParams
-        ++ (lib.optionals (cfg.myOptions.hardware.cpu == "intel") [
+        ++ (lib.optionals isIntelCpu [
           "intel_iommu=sm_on"
           "intel_pstate=disable"
           "kvm.ignore_msrs=1"
           "kvm.report_ignored_msrs=0"
         ])
-        ++ (lib.optionals (cfg.myOptions.hardware.gpu == "intel") [
+        ++ (lib.optionals isIntelGpu [
           "i915.enable_fbc=1"
           "i915.enable_guc=2"
           "i915.enable_psr=1"
         ])
-        ++ (lib.optionals (cfg.myOptions.hardware.gpu == "nvidia") [
+        ++ (lib.optionals isNvidiaGpu [
           "nvidia-drm.fbdev=1"
           "nvidia-drm.modeset=1"
         ]);
