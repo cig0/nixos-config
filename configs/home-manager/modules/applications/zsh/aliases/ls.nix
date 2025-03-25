@@ -7,6 +7,7 @@ let
     l1 = "ls -1 --group-directories-first";
     l11 = "ls -1rt";
     ldir = "ls -dl */ --color=always --group-directories-first";
+    lg = "ls | grep --color=always -i";
     ll = "ls -1rt";
     lla = "ls -lAh --group-directories-first";
     lm = "ls -lrt --color=always";
