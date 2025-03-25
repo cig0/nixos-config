@@ -1,4 +1,4 @@
-# TODO: migrate to Home Manager. It's a prio now (I'm lacking autocomplete for TAB).
+# TODO: migrate to Home Manager. It's a prio now (I'm lacking autocomplete for TAB). Also, VSCode expects to find the git config in the user home directory.
 {
   config,
   lib,
