@@ -121,6 +121,7 @@
     networking.firewall = {
       enable = true;
       allowPing = false;
+      allowedTCPPorts = [ ];
     };
     # Security - Sudo
     security.sudo = {
