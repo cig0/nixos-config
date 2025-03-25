@@ -82,7 +82,20 @@ let
       "org.libreoffice.LibreOffice"
       "org.fedoraproject.MediaWriter"
       "com.notesnook.Notesnook"
-      "md.obsidian.Obsidian"
+
+      /*
+        Flatpak is not officialy supported by Obsidian, see:
+        https://publish.obsidian.md/git-doc/Installation
+
+        I guess I could make Flatpak work with my Git configuration
+        managed with NixOS (nixos/modules/applications/git/git.nix)
+        to read the /etc/gitconfig file, but I don't see the point
+        as Obsidian is packaged by some wonderful folks at Nixpkgs.
+
+        I leave here the Flatpak reference for future use if needed:
+        "md.obsidian.Obsidian"
+      */
+
       "com.todoist.Todoist"
       "net.xmind.XMind"
 

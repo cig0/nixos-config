@@ -345,11 +345,14 @@ let
         ];
       })
 
-      # Misc
+      # CLI
       kitty
       warp-terminal
       waveterm
       wezterm
+
+      # Misc
+      obsidian
 
       # Multimedia
       # cinelerra
