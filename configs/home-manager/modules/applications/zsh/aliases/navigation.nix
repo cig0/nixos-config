@@ -1,5 +1,8 @@
 # Home Manager Zsh aliases module. Do not remove this header.
-{ ... }:
+{
+  nixosConfig,
+  ...
+}:
 let
   aliases = {
     # Navigation (CLI)
@@ -10,8 +13,8 @@ let
     C = "cd ~/workdir/cig0";
     D = "cd ~/Downloads";
     E = "cd ~/Desktop";
-    F = "cd ~/workdir/cig0/nixos-config"; # Flake directory.
-    Fp = "cd ~/workdir/cig0/nixos/nixos-config-public"; # Public flake.
+    F = "cd ${nixosConfig.mySystem.myOptions.nixos.flake.path}"; # Flake directory
+    Fp = "cd ${nixosConfig.mySystem.myOptions.nixos.flake.path}-public"; # Public flake
     N = "cd ~/Notes";
     O = "cd ~/Documents";
     P = "cd ~/Pictures";
