@@ -135,30 +135,27 @@
 
       /*
         The mkHost function:
-        - Assembles a nixosSystem for each host.
-        - Makes it easy to share modules, options, and configurations for all hosts.
+        - Assembles a nixosSystem for each host
+        - Makes it easy to share modules, options, and configurations for all hosts
       */
       mkHost =
         hostname: hostConfig:
         let
           /*
-            We will use the CPU architecture declared in hardware-configuration.nix,
-            created by `nixos-generate-config` (and originally provided by the NixOS installer),
-            to determine the system architecture.
+            We use the CPU arch from `hardware-configuration.nix`, created by `nixos-generate-config`
+            (from the NixOS installer), to set the system arch.
 
-            The path to hardware-configuration.nix is constructed after the host name dynamically,
-            so we can use a single function for all hosts.
+            The path to `hardware-configuration.nix` is built dynamically from the host name, allowing
+            a single function for all hosts.
 
-            With this approach we:
-            - Drastically reducec manual intervention when adding new hosts
-            - Avoid redundancy in the configuration (DRY principle)
-            - Avoid hardcoding the architecture for each host
+            This approach:
+            - Greatly reduces manual work when adding new hosts
+            - Avoids config redundancy (DRY principle)
+            - Avoids hardcoding the arch for each host
 
-            Because we are limited in what we can do here, we parse the file for the
-            string `nixpkgs.hostPlatform` and extract the value from the line.
+            Due to limits here, we parse the file for `nixpkgs.hostPlatform` and extract its value.
 
-            Given that `system` is a local variable, we need to inherit it and pass it to the
-             modules using specialArgs.
+            Since `system` is a local var, we inherit it and pass it to modules via `specialArgs`.
           */
           hwConfigText = builtins.readFile (
             ./. + "/configs/nixos/hosts/${hostname}/hardware-configuration.nix"
@@ -196,12 +193,11 @@
 
             /*
               NixOS
-              - Load host configuration (dynamic path constructed after the host name).
-                Find the host custom option toggles in `./configs/nixos/hosts/${hostname}/profile.nix`.
-              - Dynamically load modules with a plug-and-play approach.
-                Just drop a new module within the host's configuration directory or globally in
-                `./configs/nixos/modules`, and it should be automatically imported next time you create
-                a new generation. Check `./lib/modules.nix` for more details.
+              - Load host config (dynamic path built from host name). Find custom option toggles in
+                `./configs/nixos/hosts/${hostname}/profile.nix`.
+              - Dynamically load modules with a plug-and-play approach. Add a new module in the host’s
+                config dir or globally in `./configs/nixos/modules`, and it’s auto-imported on the next
+                generation. See `./lib/modules.nix` for details.
             */
             (./. + "/configs/nixos/hosts/${hostname}/configuration.nix")
             (import ./configs/nixos/modules/default.nix)
