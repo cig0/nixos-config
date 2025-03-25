@@ -15,7 +15,8 @@ in
       default = 3000;
       description = "The port on which Open WebUI will listen";
     };
-    openFirewall = lib.mkEnableOption "Whether to open the firewall for Open WebUI";
+    openFirewall = lib.mkEnableOption "Whether to open the firewall for Open WebUI. This option
+is managed by the `firewall` module.";
   };
 
   config = lib.mkIf cfg.enable {
@@ -23,7 +24,6 @@ in
       enable = true;
       # package = myArgs.packages.pkgsUnstable.open-webui;
       port = 3000;
-      openFirewall = true;
     };
   };
 }
