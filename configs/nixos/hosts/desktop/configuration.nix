@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 {
   imports = [
     /*
@@ -21,7 +20,8 @@
   # Bootloader
   boot = {
     initrd = {
-    	luks.devices."luks-f9958b9b-9485-4a62-ab29-0b571196e660".device = "/dev/disk/by-uuid/f9958b9b-9485-4a62-ab29-0b571196e660";
+      luks.devices."luks-f9958b9b-9485-4a62-ab29-0b571196e660".device =
+        "/dev/disk/by-uuid/f9958b9b-9485-4a62-ab29-0b571196e660";
     };
 
     loader = {
@@ -71,7 +71,6 @@
   };
 
   # Nix settings
-  # auto-optimise-store: the option is managed by the module nixos/modules/system/maintenance.nix
   nix = {
     settings = {
       substituters = [ "https://cache.nixos.org" ];
@@ -88,7 +87,6 @@
       ];
       max-jobs = 8;
       trusted-users = [
-        "root"
         "cig0"
         "fine"
       ];

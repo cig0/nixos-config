@@ -71,7 +71,6 @@
   };
 
   # Nix settings
-  # auto-optimise-store: the option is managed by the module nixos/modules/system/maintenance.nix
   nix = {
     settings = {
       substituters = [ "https://cache.nixos.org" ];
@@ -81,14 +80,13 @@
         "@builders"
         "@wheel"
       ];
-      cores = 8;
+      cores = 4;
       experimental-features = [
         "nix-command"
         "flakes"
       ];
       max-jobs = 8;
       trusted-users = [
-        "root"
         "cig0"
         "fine"
       ];
