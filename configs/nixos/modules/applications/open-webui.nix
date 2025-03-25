@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = lib.getAttrFromPath [ "mySystem" "programs" "lazygit" ] config;
+  cfg = lib.getAttrFromPath [ "mySystem" "services" "open-webui" ] config;
 in
 {
   options.mySystem.services.open-webui = {
