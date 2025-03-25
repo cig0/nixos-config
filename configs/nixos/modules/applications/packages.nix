@@ -123,6 +123,7 @@ let
       nickel # Better configuration for less :: https://nickel-lang.org/
       niv # Easy dependency management for Nix projects :: https://hackage.haskell.org/package/niv
       nix-diff # Explain why two Nix derivations differ :: https://github.com/nix-community/nix-index
+      nix-init # Command line tool to generate Nix packages from URLs :: https://github.com/nix-community/nix-init
       nix-melt # Ranger-like flake.lock viewer :: https://github.com/nix-community/nix-melt
       nix-tree # Interactively browse a Nix store paths dependencies :: https://hackage.haskell.org/package/nix-tree
       nixfmt-rfc-style # Official formatter for Nix code :: https://github.com/NixOS/nixfmt
@@ -301,6 +302,7 @@ let
       # Git
       ggshield # GitGuardian
       gh # GitHub CLI client
+      git-crypt # Transparent file encryption in git :: https://www.agwa.name/projects/git-crypt
       git-filter-repo # Quickly rewrite git repository history :: https://github.com/newren/git-filter-repo
       gitmoji-cli # https://github.com/carloscuesta/gitmoji-cli
       glab # GitLab CLI client
