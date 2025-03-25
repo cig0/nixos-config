@@ -54,21 +54,18 @@
       enable = true;
       lfs.enable = true;
     };
-
     # programs.krew.enable = false; # WIP
     programs.lazygit.enable = true;
     programs.nixvim.enable = true;
-
     services.ollama = {
       enable = false;
       acceleration = null;
     };
-
+    services.open-webui.enable = false;
     services.tailscale.enable = true;
     package.yazi.enable = true;
     programs.yazi.enable = false;
     programs.zsh.enable = true; # If disabled, this option is automatically enabled when users.defaultUserShell="zsh"
-
     packages = {
       baseline = true;
       cli._all = true;
