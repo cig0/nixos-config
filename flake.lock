@@ -30,11 +30,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1742644875,
-        "narHash": "sha256-AJH2wgat6ssid3oYb0KBgO4qxhZD6/OWNHwYj11Yfy4=",
+        "lastModified": 1742884175,
+        "narHash": "sha256-ibb1siD9TtXaqfT7id8vslPqaO/TVbv1zCPVqhG2ovA=",
         "owner": "AdnanHodzic",
         "repo": "auto-cpufreq",
-        "rev": "8f026ac6497050c0e07c55b751c4b80401e932ec",
+        "rev": "af5fb382e1a467a372d1bf7b6ea09e70e44412d0",
         "type": "github"
       },
       "original": {
@@ -972,11 +972,11 @@
         "rust-overlay": "rust-overlay_4"
       },
       "locked": {
-        "lastModified": 1742831546,
-        "narHash": "sha256-MEsUqHEeolyjDTfTkMthW5xPcPHQumD6VoxD2Xup208=",
+        "lastModified": 1742895436,
+        "narHash": "sha256-xC6kA5EMZ6mK1uG2BtWi63fiF3CB0whW7SFb+dxYsQQ=",
         "owner": "sxyazi",
         "repo": "yazi",
-        "rev": "31fccd4052d87273da884675ca5fd9c0d7ae9e7f",
+        "rev": "aedfe766c5d116395ca50b0119fcb1101e66633c",
         "type": "github"
       },
       "original": {
