@@ -2,10 +2,14 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.mySystem.services.openssh.enable;
-in {
-  options.mySystem.services.openssh.enable = lib.mkEnableOption "Whether to enable the OpenSSH server";
+in
+{
+  options.mySystem.services.openssh = {
+    enable = lib.mkEnableOption "Whether to enable the OpenSSH server";
+  };
 
   config = lib.mkIf cfg {
     services.openssh = {
