@@ -2,10 +2,11 @@
 { ... }:
 let
   aliases = {
-    _h = "history | grep -i";
     ___ = "_h";
+    _amnsesicShellSession = "unset HISTFILE && history -c && exit";
     _fi = "find . -maxdepth 1 -iname";
     _t = "tmux -f $HOME/.config/tmux/tmux-zsh.conf new-session -s $(hostnamectl hostname)";
+    _h = "history | grep -i";
     cp = "cp -i";
     dudir = "du -sh ./"; # Use */ for all dirs in the target directory.
     g = "gwenview";
