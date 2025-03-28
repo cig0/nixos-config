@@ -1,3 +1,13 @@
+/*
+  TODO:
+  NixOS Options
+  ────────────────────
+  # hardware.nvidia.powerManagement.enable
+  Whether to enable experimental power management through systemd. For more information, see
+  the NVIDIA docs, on Chapter 21. Configuring Power Management Support
+  .
+  type: boolean
+*/
 {
   config,
   lib,
@@ -16,7 +26,6 @@ in
 nvidia-container-toolkit on boot.";
   };
 
-  # TODO: replace with isNvidiaGpu
   config = lib.mkIf (cfg.myOptions.hardware.gpu == "nvidia") {
 
     # Additional module packages
