@@ -117,9 +117,9 @@ in
 
   config = {
     boot = {
-      blacklistedKernelModules =
-        lib.optionals (config.mySystem.myOptions.hardware.gpu == "intel") [ "" ]
-        ++ lib.optionals (config.mySystem.myOptions.hardware.gpu == "nvidia") [ "nouveau" ];
+      blacklistedKernelModules = lib.optionals (config.mySystem.myOptions.hardware.gpu == "nvidia") [
+        "nouveau"
+      ];
 
       # Overrides parameter in hardware-configuration.nix
       extraModprobeConfig =
