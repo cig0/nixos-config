@@ -16,6 +16,7 @@
 
   services = {
     fwupd.enable = true;
+    tlp.enable = false; # Using auto-cpufreq
     snap.enable = true; # nix-snapd
     zram-generator.enable = true;
   };
