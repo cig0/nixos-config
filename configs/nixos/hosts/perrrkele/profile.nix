@@ -64,6 +64,7 @@
     };
     services.open-webui.enable = false;
     services.tailscale.enable = true;
+    programs.tmux.enable = true;
     package.yazi.enable = true;
     programs.yazi.enable = false;
     programs.zsh.enable = true; # If disabled, this option is automatically enabled when users.defaultUserShell="zsh"
