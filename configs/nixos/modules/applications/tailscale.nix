@@ -1,8 +1,7 @@
 /*
-  TODO:
-
-  Health check:
-      - Tailscale can't reach the configured DNS servers. Internet connectivity may be affected.
+  Check these modules for additional options:
+    - ../networking/dns.nix
+    - ../security/firewall.nix
 */
 {
   config,
@@ -21,16 +20,14 @@ in
       firewall = {
         trustedInterfaces = lib.mkBefore [ "tailscale0" ];
       };
-      nameservers = lib.mkBefore [ "100.100.100.100" ]; # TODO: 1. SOPS/ 2. Get rid of lib.mkBefore
-      search = lib.mkBefore [ "tuxedo-goanna.ts.net" ]; # TODO: 1. SOPS/ 2. Get rid of lib.mkBefore
+      search = [ "tuxedo-goanna.ts.net" ]; # TODO: SOPS/age
     };
 
     services = {
       openssh = {
-        listenAddresses = lib.mkAfter [
+        listenAddresses = [
           {
-            addr = "100.0.0.0";
-            port = 22222;
+            addr = "0.0.0.0";
           }
         ];
       };
@@ -42,8 +39,3 @@ in
     };
   };
 }
-# READ ME!
-# ========
-# Check these modules for additional options:
-#   - ../networking/dns.nix
-#   - ../security/firewall.nix
