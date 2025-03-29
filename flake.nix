@@ -97,6 +97,11 @@
       url = "github:nix-community/nixvim/nixos-24.11";
     };
 
+    plymouth-is-underrated = {
+      flake = false;
+      url = "/home/cig0/workdir/nix-nixos/plymouth-is-underrated";
+    };
+
     # Oxalica's Rust toolchain overlay
     rust-overlay.url = "github:oxalica/rust-overlay";
 
@@ -123,6 +128,7 @@
       nixpkgs,
       nixpkgs-unstable,
       nixvim,
+      plymouth-is-underrated,
       rust-overlay,
       self,
       # sops-nix, # TODO: https://github.com/users/cig0/projects/1/views/1?pane=issue&itemId=103254314&issue=cig0%7Cnixos-config%7C6
