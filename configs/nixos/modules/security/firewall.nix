@@ -32,7 +32,10 @@ less effective.";
         allowedTCPPortRanges = [ ];
         allowedUDPPorts = [ ];
         allowedUDPPortRanges = [ ];
-        trustedInterfaces = [ "virbr0" ];
+        trustedInterfaces = [
+          "tailscale0"
+          "virbr0"
+        ];
         checkReversePath = "loose";
         /*
           The networking.firewall.checkReversePath option in NixOS controls whether the Linux kernel's
@@ -54,7 +57,7 @@ less effective.";
         Module: ../applications/kde/kdeconnect.nix
 
         OpenSSH server:
-        Ports: 22, 22222 (for Tailscale)
+        Ports: 22
         Module: ../security/openssh.nix
 
         Syncthing:
