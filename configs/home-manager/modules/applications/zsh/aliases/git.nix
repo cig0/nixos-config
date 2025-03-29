@@ -1,5 +1,8 @@
 # Home Manager Zsh aliases module. Do not remove this header.
-{ ... }:
+{
+  nixosConfig,
+  ...
+}:
 let
   # Ref: https://git-scm.com/docs/pretty-formats.
 
@@ -87,6 +90,7 @@ let
 
     # ===== Git helpers  =====
     gg = "lazygit";
+    ggF = "cd ${nixosConfig.mySystem.myOptions.nixos.flake.path} && lazygit && cd -";
 
     # GitGuardian
     ggs = "ggshield --no-check-for-updates";
