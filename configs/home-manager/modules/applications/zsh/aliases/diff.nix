@@ -3,9 +3,7 @@
 let
   aliases = {
     codif = "colordiff -y -W 212";
-    d = "delta --paging=never";
-    dp = "delta --paging=auto";
-    dt = "difft";
+    dft = "difft";
   };
 
 in
