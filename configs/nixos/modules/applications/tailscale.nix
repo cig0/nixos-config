@@ -20,7 +20,7 @@ in
   config = lib.mkIf cfg.enable {
     networking = {
       firewall = {
-        trustedInterfaces = lib.mkBefore [ "tailscale0" ];
+        trustedInterfaces = [ "tailscale0" ];
       };
       search = [ "tuxedo-goanna.ts.net" ];
     };

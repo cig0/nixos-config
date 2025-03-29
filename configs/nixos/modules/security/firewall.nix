@@ -33,7 +33,6 @@ less effective.";
         allowedUDPPorts = [ ];
         allowedUDPPortRanges = [ ];
         trustedInterfaces = [
-          "tailscale0"
           "virbr0"
         ];
         checkReversePath = "loose";
