@@ -16,6 +16,13 @@
       terminal = "tmux-direct";
       newSession = true;
       historyLimit = 20000;
+      extraConfig =
+        if config.networking.hostName == "desktop" then
+          "set -g status-style bg=colour91,fg=white"
+        else if config.networking.hostName == "perrrkele" then
+          "set -g status-style bg=blue,fg=white"
+        else
+          [ ];
     };
   };
 }
