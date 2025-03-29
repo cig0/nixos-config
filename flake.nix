@@ -99,7 +99,7 @@
 
     plymouth-is-underrated = {
       flake = false;
-      url = "/home/cig0/workdir/nix-nixos/plymouth-is-underrated";
+      url = "./assets/plymouth-is-underrated-cab404"; # TODO: learn how to make a flake with this repo and send upstream
     };
 
     # Oxalica's Rust toolchain overlay
