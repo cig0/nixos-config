@@ -89,8 +89,8 @@ let
     gsws = aliases.gsw + " sandbox";
 
     # ===== Git helpers  =====
-    gg = "lazygit";
-    ggF = "cd ${nixosConfig.mySystem.myOptions.nixos.flake.path} && lazygit && cd -";
+    gg = "/run/current-system/sw/bin/lazygit";
+    ggF = "cd ${nixosConfig.mySystem.myOptions.nixos.flake.path} && " + aliases.gg + " && cd -";
 
     # GitGuardian
     ggs = "ggshield --no-check-for-updates";
