@@ -98,8 +98,8 @@
     };
 
     plymouth-is-underrated = {
-      flake = false;
-      url = "./assets/plymouth-is-underrated-cab404"; # TODO: learn how to make a flake with this repo and send upstream
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:cig0/plymouth-is-underrated-cab404";
     };
 
     # Oxalica's Rust toolchain overlay
