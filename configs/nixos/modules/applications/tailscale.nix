@@ -2,6 +2,8 @@
   Check these modules for additional options:
     - ../networking/dns.nix
     - ../security/firewall.nix
+
+  TODO: SOPS/age all sensible data
 */
 {
   config,
@@ -20,16 +22,18 @@ in
       firewall = {
         trustedInterfaces = lib.mkBefore [ "tailscale0" ];
       };
-      search = [ "tuxedo-goanna.ts.net" ]; # TODO: SOPS/age
+      search = [ "tuxedo-goanna.ts.net" ];
     };
 
     services = {
       openssh = {
         listenAddresses = [
-          {
-            addr = "0.0.0.0";
-          }
+          { addr = "100.116.13.66"; } # A55
+          { addr = "100.107.5.119"; } # iPad
+          { addr = "100.113.250.86"; } # desktop
+          { addr = "100.76.132.63"; } # perrrkele
         ];
+        ports = [ 22 ];
       };
       tailscale = {
         enable = true;

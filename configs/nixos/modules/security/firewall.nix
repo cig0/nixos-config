@@ -28,7 +28,7 @@ less effective.";
       firewall = {
         enable = true;
         allowPing = cfg.allowPing;
-        allowedTCPPorts = [ ];
+        allowedTCPPorts = [ 22 ];
         allowedTCPPortRanges = [ ];
         allowedUDPPorts = [ ];
         allowedUDPPortRanges = [ ];
