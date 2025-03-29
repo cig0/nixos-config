@@ -6,6 +6,7 @@ let
     _amnsesicShellSession = "unset HISTFILE && history -c && exit";
     _fi = "find . -maxdepth 1 -iname";
     _t = "tmux -f $HOME/.config/tmux/tmux-zsh.conf new-session -s $(hostnamectl hostname)";
+    _terminalColors = "for i in {0..255}; do printf \"\\x1b[38;5;\${i}mcolour\${i}\\x1b[0m\\n\"; done";
     _h = "history | grep -i";
     cp = "cp -i";
     dudir = "du -sh ./"; # Use */ for all dirs in the target directory.
