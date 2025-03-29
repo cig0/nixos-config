@@ -23,7 +23,6 @@ let
   */
 
   commonKernelParams = [
-    "fbcon=nodefer" # Prevent the kernel from blanking plymouth out of the fb
     "fuse"
     "init_on_alloc=1"
     "init_on_free=1"
@@ -40,7 +39,6 @@ let
     "rd.udev.log_level=2" # Print warnings and errors during early boot.
     # "rd.systemd.show_status=auto" # Disable systemd status messages
     "udev.log_level=1" # Print error messages. Change to 2, 3 or 4 for Warning, Info and Debug messages respectively.
-    # "quiet"
   ];
 
   commonKernelSysctl = {
