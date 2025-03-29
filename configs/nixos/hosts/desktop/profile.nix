@@ -139,6 +139,7 @@
     services.speechd.enable = true;
     # System - Kernel
     boot.kernelPackages = "stable";
+    boot.plymouth.enable = true;
     # System - Keyboard
     services.keyd.enable = false;
     # System - Maintenance

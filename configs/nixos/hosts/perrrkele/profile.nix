@@ -140,6 +140,7 @@
     services.speechd.enable = true;
     # System - Kernel
     boot.kernelPackages = "xanmod_latest";
+    boot.plymouth.enable = true;
     # System - Keyboard
     services.keyd.enable = false;
     myOptions.services.keyd.addKeydKeyboards = {
