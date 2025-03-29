@@ -34,6 +34,10 @@ let
     gco = "git commit -m";
     gcoa = aliases.gco + " --amend";
 
+    # diff
+    gdi = "delta --paging=never";
+    gdip = "delta --paging=auto";
+
     # fetch
     gf = "git fetch";
     gf1 = aliases.gf + " --depth=1";
