@@ -30,6 +30,7 @@ in
         listenAddresses = builtins.concatLists [
           (lib.optionals (config.networking.hostName == "desktop") [ { addr = "100.113.250.86"; } ])
           (lib.optionals (config.networking.hostName == "perrrkele") [ { addr = "100.76.132.63"; } ])
+          { addr = "192.168.0.0"; } # WLAN
         ];
         ports = [ 22 ];
       };
