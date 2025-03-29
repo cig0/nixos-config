@@ -2,7 +2,6 @@
 { ... }:
 let
   aliases = {
-    codif = "colordiff -y -W 212";
     dft = "difft";
   };
 
