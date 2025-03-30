@@ -147,7 +147,7 @@
         }
         {
           # This host Tailscale's IP address
-          addr = "100.113.250.86";
+          addr = "100.76.132.63";
           port = 22;
         }
       ];
