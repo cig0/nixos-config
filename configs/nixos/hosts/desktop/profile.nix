@@ -25,16 +25,6 @@
 
   services = {
     fwupd.enable = true;
-
-    # Security
-    openssh = {
-      listenAddresses = [
-        { addr = "192.168.0.0"; } # WLAN address
-        { addr = "100.113.250.86"; } # This host Tailscale's IP address
-      ];
-      ports = [ 22 ];
-    };
-
     snap.enable = true; # nix-snapd
     zram-generator.enable = true;
   };
@@ -88,7 +78,10 @@
       enable = false;
       acceleration = null;
     };
-    services.open-webui.enable = false;
+    services.open-webui = {
+      enable = false;
+      # port = 3000; # Default port
+    };
     services.tailscale.enable = true;
     programs.tmux.enable = true;
     package.yazi.enable = true;
@@ -134,7 +127,6 @@
     };
 
     # Power Management
-    programs.auto-cpufreq.enable = false;
     powerManagement.enable = true;
     services.thermald.enable = true;
 
@@ -144,12 +136,31 @@
     # Security
     programs.gnupg.enable = true;
     boot.lanzaboote.enable = false;
-    services.openssh.enable = true;
+    services.openssh = {
+      enable = true;
+      listenAddresses = [
+        # { addr = "192.168.0.1"; } # WLAN address
+        {
+          addr = "127.0.0.1";
+          port = 22;
+        }
+        {
+          # This host Tailscale's IP address
+          addr = "100.76.132.63";
+          port = 22;
+        }
+      ];
+    };
     # Security - Firewall
     networking.firewall = {
       enable = true;
       allowPing = false;
-      allowedTCPPorts = [ ];
+      allowedTCPPorts = [
+        22
+        3000
+        8080
+        8443
+      ];
     };
     # Security - Sudo
     security.sudo = {

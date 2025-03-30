@@ -22,5 +22,10 @@ in
         }
       ];
     };
+
+    systemd.services.sshd = lib.mkIf config.mySystem.services.tailscale.enable {
+      after = [ "tailscaled.service" ];
+      requires = [ "tailscaled.service" ];
+    };
   };
 }
