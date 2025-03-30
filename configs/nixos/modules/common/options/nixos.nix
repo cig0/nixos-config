@@ -14,8 +14,8 @@
 
     flake.path = lib.mkOption {
       type = lib.types.path;
-      default = "/etc/nixos/nixos-config";
-      description = "The path that will be used for the `FLAKE` environment variable.";
+      default = "/etc/nixos/";
+      description = "The flake system path that will be used across this flake.";
     };
   };
 }
