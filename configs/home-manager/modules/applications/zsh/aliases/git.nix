@@ -89,7 +89,13 @@ let
     gsws = aliases.gsw + " sandbox";
 
     # ===== Git helpers  =====
-    gg = "/run/current-system/sw/bin/lazygit --use-config-file /etc/lazygit";
+    /*
+      See: commit ccc9718. I'm leaving the commented alias around for some time in case I need it
+      again.
+      gg = "/run/current-system/sw/bin/lazygit --use-config-file /etc/lazygit";
+    */
+    gg = "/run/current-system/sw/bin/lazygit";
+
     ggF = "cd ${nixosConfig.mySystem.myOptions.nixos.flake.path} && " + aliases.gg + " && cd -";
 
     # GitGuardian
