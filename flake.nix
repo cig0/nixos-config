@@ -199,20 +199,23 @@
 
             /*
               Home Manager
-              - The configuration is split to keep this flake.nix file slim
+              The configuration is split to keep this flake.nix file slim.
             */
             (import ./configs/home-manager/home.nix)
 
             /*
               NixOS
-              - Load host config (dynamic path built from host name). Find custom option toggles in
-                `./configs/nixos/hosts/${hostname}/profile.nix`.
-              - Dynamically load modules with a plug-and-play approach. Add a new module in the host’s
-                config dir or globally in `./configs/nixos/modules`, and it’s auto-imported on the
-                next generation. See `./lib/modules.nix` for details.
+              Load host config (dynamic path built from host name). Find custom option toggles in
+              `./configs/nixos/hosts/${hostname}/profile.nix`.
             */
             (./. + "/configs/nixos/hosts/${hostname}/configuration.nix")
             (import ./configs/nixos/hosts/${hostname}/profile/default.nix)
+
+            /*
+              Dynamically load modules with a plug-and-play approach. Add a new module in the host’s
+              config dir or globally in `./configs/nixos/modules`, and it’s auto-imported on the
+              next generation. See `./lib/modules.nix` for details.
+            */
             (import ./configs/nixos/modules/default.nix)
 
             {
