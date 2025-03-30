@@ -212,6 +212,7 @@
                 next generation. See `./lib/modules.nix` for details.
             */
             (./. + "/configs/nixos/hosts/${hostname}/configuration.nix")
+            (import ./configs/nixos/hosts/${hostname}/profile/default.nix)
             (import ./configs/nixos/modules/default.nix)
 
             {
