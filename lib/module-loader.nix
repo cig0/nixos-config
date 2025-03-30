@@ -1,34 +1,55 @@
 /*
-  Dynamic modules loader.
+  Dynamic module loader:
+  Recursively scans directories for Nix modules, with configurable exclusions and detection.
 
-  This module provides functions to recursively scan directories for Nix modules
-  with configurable exclusion paths and module detection patterns.
+  Do not modify `excludePaths ? [ ]` here—it's intentionally outside the main `let` block.
+  See README.md for details.
 */
 {
   lib,
   ...
 }:
+let
+  # List of module names to exclude
+  excludeModules = [
+    "configuration.nix"
+    "default.nix"
+  ];
+
+  # TODO: think about a more robust way to detect if a file is a NixOS module
+  modulePatterns = [
+    # Patterns to identify modules
+    "... }:"
+    "}:"
+    "config,"
+    "lib,"
+    "inputs,"
+    "nixosConfig,"
+    "pkgs,"
+    "config ="
+    "imports ="
+    "options ="
+  ];
+in
 {
   # Collect modules from a directory with configurable options
   collectModules =
     {
       dir, # Directory to scan
-      excludePaths ? [ ], # Paths to exclude
-      modulePatterns ? [
-        # Patterns to identify modules
-        "... }:"
-        "}:"
-        "config,"
-        "lib,"
-        "inputs,"
-        "nixosConfig,"
-        "pkgs,"
-        "config ="
-        "imports ="
-        "options ="
-      ],
+      excludePaths ? [ ],
+      moduleDetection ? modulePatterns,
     }:
     let
+      # Ensure excludePaths is empty when passed to this function
+      _ =
+        if excludePaths != [ ] then
+          throw ''
+            Error: 'excludePaths' must be empty when passed to 'collectModules'. (Did you read the accompanying documentation?)\n
+            Found: ${toString excludePaths}"
+          ''
+        else
+          null;
+
       # Check if a path contains any of the special paths that should be excluded
       isExcludedPath =
         path:
@@ -43,7 +64,7 @@
         let
           content = builtins.readFile file;
         in
-        builtins.any (pattern: lib.strings.hasInfix pattern content) modulePatterns;
+        builtins.any (pattern: lib.strings.hasInfix pattern content) moduleDetection;
 
       # Recursively collect .nix files from a directory
       collectModulesRec =
@@ -58,15 +79,14 @@
             let
               fullPath = path + "/${name}";
             in
-            if type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix" then
-              # It's a .nix file that's not default.nix, check if it's a module
+            if type == "regular" && lib.hasSuffix ".nix" name && !(lib.elem name excludeModules) then
+              # It's a .nix file that's not a known NixOS module, e.g. configuration.nix or
+              # default.nix, check if it's a module
               if isExcludedPath fullPath then
                 # Skip files in excluded paths
                 [ ]
-              else if isNixModule fullPath then
-                [ fullPath ]
               else
-                [ ]
+                lib.optional (isNixModule fullPath) fullPath
             else if type == "directory" then
               # It's a directory, recurse into it
               collectModulesRec fullPath
