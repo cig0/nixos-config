@@ -3,15 +3,26 @@
   ...
 }:
 let
-  moduleLoader = import ../../../lib/module-loader.nix { inherit lib; };
+  moduleLoader = import ../../../lib/module-loader/lib.nix { inherit lib; };
 
-  # Get the directory of this file
+  /*
+    This module performs a recursive directory scan and should be initialized from its own directory,
+    unless explicitly overridden.
+
+    Initializing it from a different location may cause unexpected behavior by deviating from the
+    module's intended design.
+
+    For more details, see README.md.
+  */
+
+  # Define the directory root to search for modules
   dir = ./.;
 
-  # Collect Home Manager modules
+  # Collect NixOS modules
   modules = moduleLoader.collectModules {
     inherit dir;
-    # Files and directories to exclude
+
+    # Files and directories to exclude. Use this list to exclude specific modules too.
     excludePaths = [
       "applications/zsh"
     ];
@@ -19,6 +30,6 @@ let
 in
 {
   imports = builtins.filter (x: x != null) modules ++ [
-    ./applications/zsh/zsh.nix # Temporary workaround
+    ./applications/zsh/zsh.nix
   ];
 }

@@ -3,15 +3,19 @@
   ...
 }:
 let
-  moduleLoader = import ../../../lib/module-loader.nix { inherit lib; };
+  moduleLoader = import ../../../lib/module-loader/lib.nix { inherit lib; };
 
   /*
-    Get the directory of this module.
+    This module performs a recursive directory scan and should be initialized from its own directory,
+    unless explicitly overridden.
 
-    This module performs recursive directory scanning and should always be initialized from its own
-    directory unless intentionally overridden. Scanning a different location may cause unintended
-    behavior, as it deviates from the module's intended design.
+    Initializing it from a different location may cause unexpected behavior by deviating from the
+    module's intended design.
+
+    For more details, see README.md.
   */
+
+  # Define the directory root to search for modules
   dir = ./.;
 
   # Collect NixOS modules
@@ -24,5 +28,6 @@ let
   };
 in
 {
-  imports = builtins.filter (x: x != null) modules;
+  imports = builtins.filter (x: x != null) modules ++ [
+  ];
 }
