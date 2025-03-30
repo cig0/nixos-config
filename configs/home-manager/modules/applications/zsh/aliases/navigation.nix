@@ -13,8 +13,8 @@ let
     C = "cd ~/workdir/cig0";
     D = "cd ~/Downloads";
     E = "cd ~/Desktop";
-    F = "cd ${nixosConfig.mySystem.myOptions.nixos.flake.path}"; # Flake directory
-    Fp = "cd ${nixosConfig.mySystem.myOptions.nixos.flake.path}-public"; # Public flake directory
+    F = "cd ${nixosConfig.mySystem.myOptions.nixos.flakePath}"; # Flake directory
+    Fp = "cd ${nixosConfig.mySystem.myOptions.nixos.flakePath}-public"; # Public flake directory
     N = "cd ~/Notes";
     O = "cd ~/Documents";
     P = "cd ~/Pictures";
