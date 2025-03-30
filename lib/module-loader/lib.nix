@@ -2,8 +2,10 @@
   Dynamic module loader:
   Recursively scans directories for Nix modules, with configurable exclusions and detection.
 
-  Do not modify `excludePaths ? [ ]` here—it's intentionally outside the main `let` block.
-  See README.md for details.
+  Do not modify `excludePaths ? [ ]` here; there's a reason it's intentionally defined  outside
+  the main `let` block.
+
+  For more details, see README.md.
 */
 {
   lib,
