@@ -178,7 +178,7 @@
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs system self; };
+          specialArgs = { inherit inputs system; };
           modules = [
             /*
               Import modules from the added flakes.
