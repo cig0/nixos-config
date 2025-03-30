@@ -3,16 +3,16 @@
   lib,
   pkgs,
   ...
-}: let
-  cfg = lib.getAttrFromPath ["mySystem" "virtualisation" "libvirtd"] config;
-in {
-  options.mySystem.virtualisation.libvirtd.enable = lib.mkEnableOption "This option enables libvirtd, a daemon that manages
+}:
+{
+  options.mySystem.virtualisation.libvirtd.enable =
+    lib.mkEnableOption "This option enables libvirtd, a daemon that manages
 virtual machines. Users in the \"libvirtd\" group can interact with
 the daemon (e.g. to start or stop VMs) using the
 {command}`virsh` command line tool, among others.";
 
-  config = lib.mkIf cfg.enable {
-    environment.sessionVariables.LIBVIRT_DEFAULT_URI = ["qemu:///system"];
+  config = lib.mkIf config.mySystem.virtualisation.libvirtd.enable {
+    environment.sessionVariables.LIBVIRT_DEFAULT_URI = [ "qemu:///system" ];
     programs.virt-manager.enable = true;
     services.spice-vdagentd.enable = false;
 
@@ -23,7 +23,7 @@ the daemon (e.g. to start or stop VMs) using the
         qemu = {
           swtpm.enable = true;
           ovmf.enable = true;
-          ovmf.packages = [pkgs.OVMFFull.fd];
+          ovmf.packages = [ pkgs.OVMFFull.fd ];
           runAsRoot = false;
         };
       };
