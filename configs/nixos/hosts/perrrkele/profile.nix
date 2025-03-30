@@ -1,13 +1,23 @@
 /*
-  I’ll keep this idea on the back burner for now and revisit it later:
+  Idea for the back burner:
 
   Is it worth splitting this configuration module into modules under
-  nixos/modules/common/profiles?
+  nixos/modules/common/profiles after a separation of concerns pattern?
 
   Splitting may improve the handling of options management, but at the risk
   of obfuscating this host configuration.
+
+  Also, while many options do repeat themselves between hosts, each host is
+  different.
+  I imagine this profile configuration module showing a handful of host-specific
+  options with the rest of the configuration imported dynamically from the profile
+  modules (which isn't bad), but at the same time that approach will hide the rest
+  of the host configuration... 🤨
 */
 {
+  config,
+  lib,
+  self,
   ...
 }:
 {
@@ -16,8 +26,22 @@
 
   services = {
     fwupd.enable = true;
-    tlp.enable = false; # Using auto-cpufreq
+
+    # Security
+    openssh = {
+      listenAddresses = builtins.concatLists [
+        # WLAN address; I'm wrapping it in a singleton list
+        (lib.singleton { addr = "192.168.0.0"; })
+
+        # Tailscale
+        (lib.optionals (config.networking.hostName == "desktop") [ { addr = "100.113.250.86"; } ])
+        (lib.optionals (config.networking.hostName == "perrrkele") [ { addr = "100.76.132.63"; } ])
+      ];
+      ports = [ 22 ];
+    };
+
     snap.enable = true; # nix-snapd
+    tlp.enable = false; # I'm using auto-cpufreq
     zram-generator.enable = true;
   };
 
@@ -28,7 +52,7 @@
   };
 
   /*
-    mySystem: Custom options defined in modules that override NixOS options.
+    mySystem options: Custom options defined in modules that override NixOS options.
     These allow setting default values without cluttering this configuration file,
     and makes it easy to follow what the options do if you already know them.
     Each module defines its own `mySystem` options.
@@ -44,6 +68,14 @@
         gpu = "intel";
       };
       kernel.sysctl.netIpv4TcpCongestionControl = "westwood"; # Optimized for wireless networks
+
+      /*
+        nixos.flake.path:
+
+        Ensure the directory is writable!
+        Setting this option to `self.outPath` is the shortest way to get locked out from your own
+        system.
+      */
       nixos.flake.path = "/home/cig0/workdir/cig0/nixos-config";
     };
 
@@ -67,7 +99,7 @@
     programs.tmux.enable = true;
     package.yazi.enable = true;
     programs.yazi.enable = false;
-    programs.zsh.enable = true; # If disabled, this option is automatically enabled when users.defaultUserShell="zsh"
+    programs.zsh.enable = true; # If disabled, this option is automatically enabled when users.defaultUserShell="zsh" is set
     packages = {
       baseline = true;
       cli._all = true;
@@ -88,7 +120,6 @@
     # Hardware
     hardware = {
       graphics.enable = true;
-      nvidia-container-toolkit.enable = false;
     };
 
     # Home Manager
@@ -128,9 +159,15 @@
     # Security - Sudo
     security.sudo = {
       enable = true;
+
+      /*
+        passwd_timeout=1440, timestamp_timeout=1440:
+        Extending sudo timeout this much is generally unsafe, especially on servers!
+        I only enable this setting on personal devices for convenience.
+      */
       extraConfig = ''
         Defaults passwd_timeout=1440, timestamp_timeout=1440
-      ''; # From a security perspective, it isn't a good idea to extend the sudo *_timeout (let alone doing so on a server!). I set this on my personal laptop and desktop for convenience.
+      '';
     };
 
     # System
