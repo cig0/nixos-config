@@ -29,13 +29,9 @@
 
     # Security
     openssh = {
-      listenAddresses = builtins.concatLists [
-        # WLAN address; I'm wrapping it in a singleton list
-        (lib.singleton { addr = "192.168.0.0"; })
-
-        # Tailscale
-        (lib.optionals (config.networking.hostName == "desktop") [ { addr = "100.113.250.86"; } ])
-        (lib.optionals (config.networking.hostName == "perrrkele") [ { addr = "100.76.132.63"; } ])
+      listenAddresses = [
+        { addr = "192.168.0.0"; } # WLAN address
+        { addr = "100.76.132.63"; } # This host Tailscale's IP address
       ];
       ports = [ 22 ];
     };
