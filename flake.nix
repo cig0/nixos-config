@@ -178,9 +178,15 @@
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs system; };
+          specialArgs = { inherit inputs system self; };
           modules = [
-            # Import modules from the added flakes
+            /*
+              Import modules from the added flakes.
+
+              Since many of these module options mirror mySystem options (to mask the originalones),
+              the final host configuration is assembled using only those options explicitly declared
+              in the host's profile.nix module.
+            */
             agenix.nixosModules.default
             auto-cpufreq.nixosModules.default
             home-manager.nixosModules.home-manager
@@ -202,8 +208,8 @@
               - Load host config (dynamic path built from host name). Find custom option toggles in
                 `./configs/nixos/hosts/${hostname}/profile.nix`.
               - Dynamically load modules with a plug-and-play approach. Add a new module in the host’s
-                config dir or globally in `./configs/nixos/modules`, and it’s auto-imported on the next
-                generation. See `./lib/modules.nix` for details.
+                config dir or globally in `./configs/nixos/modules`, and it’s auto-imported on the
+                next generation. See `./lib/modules.nix` for details.
             */
             (./. + "/configs/nixos/hosts/${hostname}/configuration.nix")
             (import ./configs/nixos/modules/default.nix)
