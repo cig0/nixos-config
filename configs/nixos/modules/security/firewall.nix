@@ -5,17 +5,19 @@
   ...
 }:
 let
-  cfg = lib.getAttrFromPath [ "mySystem" "networking" "firewall" ] config;
+  cfg = config.mySystem.networking.firewall;
 in
 {
   options.mySystem.networking.firewall = {
     enable = lib.mkEnableOption "Whether to enable the firewall. This is a simple stateful
 firewall that blocks connection attempts to unauthorised TCP
 or UDP ports on this machine.";
+
     allowPing = lib.mkEnableOption "Whether to respond to incoming ICMPv4 echo requests
 (\"pings\").  ICMPv6 pings are always allowed because the
 larger address space of IPv6 makes network scanning much
 less effective.";
+
     allowedTCPPorts = lib.mkOption {
       type = lib.types.listOf lib.types.int;
       default = [ ];
@@ -28,7 +30,7 @@ less effective.";
       firewall = {
         enable = true;
         allowPing = cfg.allowPing;
-        allowedTCPPorts = [ 22 ];
+        allowedTCPPorts = [ ];
         allowedTCPPortRanges = [ ];
         allowedUDPPorts = [ ];
         allowedUDPPortRanges = [ ];
@@ -42,31 +44,29 @@ less effective.";
           preventing IP spoofing attacks but may also cause issues in certain network configurations.
         */
       };
+      nftables.enable = true;
     };
 
-    services = {
-      open-webui = {
-        port = config.mySystem.services.open-webui.port;
-        openFirewall = config.mySystem.services.open-webui.openFirewall;
-      };
+    /*
+      KDE Connect:
+      Ports: 1714 to 1764 TCP/UDP
+      Module: ../applications/kde/kdeconnect.nix
 
-      /*
-        KDE Connect:
-        Ports: 1714 to 1764 TCP/UDP
-        Module: ../applications/kde/kdeconnect.nix
+      Open WebUI server:
+      Ports: 3000
+      Module: ../applications/open-webui.nix
 
-        OpenSSH server:
-        Ports: 22
-        Module: ../security/openssh.nix
+      OpenSSH server:
+      Ports: 22
+      Module: ../security/openssh.nix
 
-        Syncthing:
-        Ports: 22000/TCP 21027,22000/UDP
-        Module: ../applications/syncthing.
+      Syncthing:
+      Ports: 22000/TCP 21027,22000/UDP
+      Module: ../applications/syncthing.
 
-        Tailscale:
-        Ports:
-        Module: ../networking/tailscale.nix
-      */
-    };
+      Tailscale:
+      Ports:
+      Module: ../networking/tailscale.nix
+    */
   };
 }
