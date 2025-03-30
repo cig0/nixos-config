@@ -2,22 +2,17 @@
   Check these modules for additional options:
     - ../networking/dns.nix
     - ../security/firewall.nix
-
-  TODO: SOPS/age all sensible data
 */
 {
   config,
   lib,
   ...
 }:
-let
-  cfg = lib.getAttrFromPath [ "mySystem" "services" "tailscale" ] config;
-in
 {
   options.mySystem.services.tailscale.enable =
     lib.mkEnableOption "Whether to enable Tailscale client daemon.";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.mySystem.services.tailscale.enable {
     networking = {
       firewall = {
         trustedInterfaces = [ "tailscale0" ];
