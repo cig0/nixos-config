@@ -13,9 +13,6 @@
       Run nixos-generate-config --dir ~/tmp to create a fresh set of configuration.nix and hardware-configuration.nix.
     */
     ./hardware-configuration.nix
-
-    # Main host configuration (options) file
-    ./profile.nix
   ];
 
   # Bootloader
