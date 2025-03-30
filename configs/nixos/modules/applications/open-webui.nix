@@ -22,8 +22,8 @@ is managed by the `firewall` module.";
   config = lib.mkIf cfg.enable {
     services.open-webui = {
       enable = true;
-      # package = myArgs.packages.pkgsUnstable.open-webui;
-      port = 3000;
+      openFirewall = config.mySystem.services.open-webui.openFirewall;
+      port = config.mySystem.services.open-webui.port;
     };
   };
 }
