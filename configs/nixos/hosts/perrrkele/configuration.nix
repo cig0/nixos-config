@@ -7,11 +7,7 @@
 
 {
   imports = [
-    /*
-      Include the results of the hardware scan.
-
-      Run nixos-generate-config --dir ~/tmp to create a fresh set of configuration.nix and hardware-configuration.nix.
-    */
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -36,8 +32,6 @@
         enable = false;
         device = "nodev";
         efiSupport = true;
-        # gfxmodeEfi= "text";
-        # gfxmodeBios= "text";
       };
     };
 
