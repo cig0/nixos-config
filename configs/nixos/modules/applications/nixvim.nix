@@ -1,4 +1,4 @@
-# TODO: investigate moving to Home Manager
+# TODO_ investigate moving to Home Manager
 
 {
   config,

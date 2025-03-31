@@ -4,7 +4,7 @@
   I modified the overlay slightly to make it more flexible when changing the flake location.
   Replace myFlakeDir with the path to your flake.
 
-  TODO: deprecate this workaround with NixOS 25.05 as it already includes this fix.
+  TODO_ deprecate this workaround with NixOS 25.05 as it already includes this fix.
 */
 self: super:
 let

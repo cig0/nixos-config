@@ -1,4 +1,4 @@
-# TODO: apply same dynamic module loading as in NixOS
+# TODO_ apply same dynamic module loading as in NixOS
 {
   config,
   lib,

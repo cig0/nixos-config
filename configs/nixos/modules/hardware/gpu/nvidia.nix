@@ -1,5 +1,5 @@
 /*
-  TODO:
+  TODO_
   NixOS Options
   ────────────────────
   # hardware.nvidia.powerManagement.enable

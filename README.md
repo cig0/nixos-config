@@ -1,4 +1,4 @@
-TODO:
+TODO_
 - Migrate apps-cargo function to the systemd unit
 - Migrate .config/yakuakerc configuration to a Home Manager module (also check the Nix KDE project)
 - .netrc / token

@@ -131,7 +131,7 @@
       plymouth-is-underrated,
       rust-overlay,
       self,
-      # sops-nix, # TODO: https://github.com/users/cig0/projects/1/views/1?pane=issue&itemId=103254314&issue=cig0%7Cnixos-config%7C6
+      # sops-nix, # TODO_ https://github.com/users/cig0/projects/1/views/1?pane=issue&itemId=103254314&issue=cig0%7Cnixos-config%7C6
       yazi,
       ...
     }@inputs:

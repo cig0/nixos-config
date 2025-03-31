@@ -1,4 +1,4 @@
-# TODO: https://github.com/users/cig0/projects/1/views/6?pane=issue&itemId=103540326&issue=cig0%7Cnixos-config%7C16
+# TODO_ https://github.com/users/cig0/projects/1/views/6?pane=issue&itemId=103540326&issue=cig0%7Cnixos-config%7C16
 {
   config,
   lib,

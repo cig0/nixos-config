@@ -15,7 +15,7 @@ let
       "linuxPackages_" + cfg.boot.kernelPackages;
 
   /*
-    TODO: needs implementation
+    TODO_ needs implementation
     Enable/disable applying kernel patches.
     Note that this will force compiling the kernel from source.
 
@@ -194,7 +194,7 @@ in
         ]);
 
       /*
-        # TODO: needs needs implementation. See note in the `let` block.
+        # TODO_ needs needs implementation. See note in the `let` block.
         kernelPatches =
           if kernelPatches_enable == "true" then
             [

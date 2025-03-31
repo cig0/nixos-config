@@ -1,5 +1,5 @@
 /*
-  TODO: polish the packages lists in a way that makes it easier to maintain and update them for their roles.
+  TODO_ polish the packages lists in a way that makes it easier to maintain and update them for their roles.
   Particularly packagesBaseline, it is becoming an everything-and-the-kitchen-sink list.
 
   Hint: How to pin a package to a specific version
@@ -51,7 +51,7 @@ let
       # Misc
       at
       bat
-      broot
+      broot # Interactive tree view, a fuzzy search, a balanced BFS descent and customizable commands :: https://dystroy.org/broot/
       chezmoi
       cyme # https://github.com/tuna-f1sh/cyme :: List system USB buses and devices.
       difftastic
@@ -204,7 +204,7 @@ let
       # rainfrog # A database management TUI for postgres :: https://github.com/achristmascarl/rainfrog
     ];
 
-    # TODO: properly categorize `misc` packages
+    # TODO_ properly categorize `misc` packages
     misc = with pkgsUnstable; [
       antora
       asciinema # Terminal session recorder and the best companion of asciinema.org :: https://asciinema.org/
@@ -437,7 +437,7 @@ in
         cloudNativeTools = lib.mkEnableOption "Whether to install CLI cloud native related tools and applications";
         comms = lib.mkEnableOption "Whether to install CLI comms related tools and applications";
         databases = lib.mkEnableOption "Whether to install CLI databases related tools and applications";
-        misc = lib.mkEnableOption "Whether to install a CLI related applications packages"; # TODO: properly categorize the packages
+        misc = lib.mkEnableOption "Whether to install a CLI related applications packages"; # TODO_ properly categorize the packages
         multimedia = lib.mkEnableOption "Whether to install CLI multimedia related tools and applications";
         programming = lib.mkEnableOption "Whether to install CLI programming related tools and applications";
         secrets = lib.mkEnableOption "Whether to install CLI secrets related tools and applications";
@@ -463,7 +463,7 @@ in
       ++ lib.optionals cfg.cli.cloudNativeTools packagesCli.cloudNativeTools
       ++ lib.optionals cfg.cli.comms packagesCli.comms
       ++ lib.optionals cfg.cli.databases packagesCli.databases
-      ++ lib.optionals cfg.cli.misc packagesCli.misc # TODO: properly categorize the packages
+      ++ lib.optionals cfg.cli.misc packagesCli.misc # TODO_ properly categorize the packages
       ++ lib.optionals cfg.cli.multimedia packagesCli.multimedia
       ++ lib.optionals cfg.cli.programming packagesCli.programming
       ++ lib.optionals cfg.cli.secrets packagesCli.secrets

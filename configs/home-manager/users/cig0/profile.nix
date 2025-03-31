@@ -14,7 +14,7 @@
 
     sessionVariables = {
       /*
-        TODO: FIX: These variables should be configurable and properly initialized after a new NixOS generation is deployed
+        TODO_ FIX: These variables should be configurable and properly initialized after a new NixOS generation is deployed
 
         Unless I'm missing something, this shouldn't be sessionVariables.
       */

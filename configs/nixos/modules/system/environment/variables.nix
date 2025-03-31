@@ -1,8 +1,8 @@
 /*
-  TODO: (SPIKE) error: file 'nixos-config' was not found in the Nix search path (add it using $NIX_PATH or -I)
+  TODO_ (SPIKE) error: file 'nixos-config' was not found in the Nix search path (add it using $NIX_PATH or -I)
   - Investigate if it's necessary/useful to add the flake path to the NIX_PATH environment variable.
 
-  TODO:
+  TODO_
   Investigate moving user-related environment variables to Home Manager.
 
   The wiki mentions that this might not be needed, though, as refreshing the
@@ -51,7 +51,7 @@ let
       GITHUB_USERNAME = cfg.gh.username;
     }
     // lib.optionalAttrs (cfg.gh.token != null) {
-      GITHUB_TOKEN = cfg.gh.token; # TODO: Implement SOPS or Agenix
+      GITHUB_TOKEN = cfg.gh.token; # TODO_ Implement SOPS or Agenix
     };
 
   commonEnvVars = {
@@ -116,7 +116,7 @@ in
     gh.token = lib.mkOption {
       type = lib.types.str;
       default = "";
-      description = "The GitHub token to use for the CLI tool 'gh'"; # TODO: handle with nix-sops or agenix
+      description = "The GitHub token to use for the CLI tool 'gh'"; # TODO_ handle with nix-sops or agenix
     };
   };
 
