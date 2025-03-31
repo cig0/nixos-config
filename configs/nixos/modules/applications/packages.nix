@@ -190,7 +190,7 @@ let
         pulumi-esc # Pulumi ESC (Environments, Secrets, and Configuration) for cloud applications and infrastructure :: https://github.com/pulumi/esc/tree/main
         pulumictl # Swiss Army Knife for Pulumi Development :: https://github.com/pulumi/pulumictl
         pulumiPackages.pulumi-aws-native
-        pulumiPackages.pulumi-language-python
+        pulumiPackages.pulumi-python
         pulumiPackages.pulumi-random
         telepresence2
         terraformer
