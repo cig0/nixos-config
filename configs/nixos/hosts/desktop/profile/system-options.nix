@@ -11,7 +11,7 @@
     services.speechd.enable = true;
 
     # Environment
-    environment.variables.gh.username = "cig0";
+    myOptions.environment.variables.gh.username = "cig0";
 
     # Kernel
     boot.kernelPackages = "stable";
