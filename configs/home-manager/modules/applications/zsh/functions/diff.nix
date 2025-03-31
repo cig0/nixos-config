@@ -1,4 +1,5 @@
 # Don't remove this line! This is a NixOS Zsh function module.
+# TODO_ review this function; I believe Delta only works with git?
 {
   ...
 }:
@@ -11,5 +12,5 @@ let
   '';
 in
 {
-  functions = functions;
+  inherit functions;
 }

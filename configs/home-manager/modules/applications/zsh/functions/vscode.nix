@@ -1,6 +1,8 @@
-# TODO: add option to allow for different Profiles
 # Home Manager Zsh functions module. Do not remove this header.
-{ ... }:
+# TODO_ add option to allow for different Profiles
+{
+  ...
+}:
 let
   functions = ''
     c() {
@@ -9,5 +11,5 @@ let
   '';
 in
 {
-  functions = functions;
+  inherit functions;
 }

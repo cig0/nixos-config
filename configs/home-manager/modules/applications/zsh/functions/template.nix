@@ -4,5 +4,5 @@ let
   functions = '''';
 in
 {
-  functions = functions;
+  inherit functions;
 }

@@ -15,5 +15,5 @@ let
   '';
 in
 {
-  functions = functions;
+  inherit functions;
 }

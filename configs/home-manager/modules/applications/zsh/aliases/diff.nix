@@ -7,5 +7,5 @@ let
 
 in
 {
-  aliases = aliases;
+  inherit aliases;
 }

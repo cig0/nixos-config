@@ -1,5 +1,7 @@
 # Home Manager Zsh aliases module. Do not remove this header.
-{ ... }:
+{
+  ...
+}:
 let
   # Trans - CLI client for Goolge Translator
   aliases = {
@@ -12,5 +14,5 @@ let
   };
 in
 {
-  aliases = aliases;
+  inherit aliases;
 }

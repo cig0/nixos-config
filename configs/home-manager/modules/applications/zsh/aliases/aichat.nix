@@ -1,5 +1,7 @@
 # Home Manager Zsh aliases module. Do not remove this header.
-{ ... }:
+{
+  ...
+}:
 let
   aliases = {
     # Google Gemini
@@ -10,5 +12,5 @@ let
   };
 in
 {
-  aliases = aliases;
+  inherit aliases;
 }

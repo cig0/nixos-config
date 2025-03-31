@@ -5,12 +5,14 @@
 }:
 let
   aliases = {
-    # Navigation (CLI)
-    e = "exit";
+    # Browsers
+    br = "broot --no-only-folders --no-hidden --tree --sort-by-type-dirs-first --no-whale-spotting";
     y = "yazi";
 
     # Directories shortcuts
     C = "cd ~/workdir/cig0";
+    Cn = "cd ~/workdir/cig0/nixos";
+    Cnp = "cd ~/workdir/cig0/nixpkgs";
     D = "cd ~/Downloads";
     E = "cd ~/Desktop";
     F = "cd ${nixosConfig.mySystem.myOptions.nixos.flakePath}"; # Flake directory
@@ -21,10 +23,11 @@ let
     S = "cd ~/Sync";
     T = "cd ~/tmp";
     W = "cd ~/workdir";
-    Wcn = "cd ~/workdir/cig0/nixos";
-    Wcnp = "cd ~/workdir/cig0/nixpkgs";
+
+    # Session
+    e = "exit";
   };
 in
 {
-  aliases = aliases;
+  inherit aliases;
 }
