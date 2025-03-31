@@ -1,5 +1,8 @@
 # Home Manager Zsh aliases module. Do not remove this header.
-{...}: let
+{
+  ...
+}:
+let
   # Trasher - https://crates.io/crates/trasher
   aliases = {
     rm = "trasher --exclude /var rm";
@@ -8,4 +11,7 @@
     tls = "trasher --exclude /var ls";
     tp = "trasher --exclude /var path-of";
   };
-in {aliases = aliases;}
+in
+{
+  inherit aliases;
+}
