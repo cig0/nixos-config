@@ -6,6 +6,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -23,9 +24,31 @@
     services = {
       tailscale = {
         enable = true;
+        authKeyFile = ../../../../ts;
         openFirewall = true;
         extraUpFlags = [ "--ssh" ];
       };
+      tailscaleAuth = {
+        enable = false;
+        group = "users";
+        user = "cig0";
+      };
+    };
+
+    systemd.services.tailscale-auth = {
+      description = "Authenticate Tailscale";
+      after = [ "tailscaled.service" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.tailscale}/bin/tailscale up --authkey=${config.services.tailscale.authKeyFile}";
+      };
+    };
+
+    systemd.services.tailscaled = {
+      after = [ "network-online.target" ];
+      before = [ "sshd.service" ]; # Ensures it runs before sshd
+      wants = [ "network-online.target" ];
     };
   };
 }
