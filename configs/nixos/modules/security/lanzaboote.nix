@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  myArgs,
   ...
 }:
 let
@@ -24,10 +25,17 @@ in
       Also, if at any time we disable Lanzaboote, we don't need to change
       back anything in the configuration.nix file.
     */
-    boot.loader.systemd-boot.enable = lib.mkForce false;
-    boot.lanzaboote = {
-      enable = true;
-      pkiBundle = "/etc/secureboot";
+    boot = {
+      loader.systemd-boot.enable = lib.mkForce false;
+      lanzaboote = {
+        enable = true;
+        pkiBundle = "/var/lib/sbctl";
+      };
     };
+
+    # Additional module packages
+    mySystem.myOptions.packages.modulePackages = with myArgs.packages.pkgsUnstable; [
+      sbctl
+    ];
   };
 }
