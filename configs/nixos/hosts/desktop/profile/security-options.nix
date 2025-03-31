@@ -4,7 +4,7 @@
 {
   mySystem = {
     programs.gnupg.enable = true;
-    boot.lanzaboote.enable = false;
+    boot.lanzaboote.enable = true;
 
     services.openssh = {
       enable = true;

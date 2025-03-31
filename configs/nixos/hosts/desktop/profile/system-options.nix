@@ -10,12 +10,15 @@
     audio-subsystem.enable = true;
     services.speechd.enable = true;
 
+    # Environment
+    environment.variables.gh.username = "cig0";
+
     # Kernel
     boot.kernelPackages = "stable";
     boot.plymouth.enable = true;
 
     # Keyboard
-    services.keyd.enable = false;
+    services.keyd.enable = true;
 
     # Maintenance
     nix = {

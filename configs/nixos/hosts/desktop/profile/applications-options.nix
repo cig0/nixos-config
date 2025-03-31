@@ -2,6 +2,8 @@
   ...
 }:
 {
+  services.snap.enable = true; # nix-snapd
+
   mySystem = {
     programs.appimage.enable = true;
     programs.firefox.enable = true;
@@ -32,5 +34,15 @@
       gui = true;
       guiShell.kde = true;
     };
+
+    # GUI Shell - KDE Plasma Desktop
+    programs.kde-pim.enable = false;
+    programs.kdeconnect.enable = true;
+    services.displayManager = {
+      ly.enable = false;
+      sddm.enable = true;
+    };
+    services.desktopManager.plasma6.enable = true;
+    xdg.portal.enable = true;
   };
 }
