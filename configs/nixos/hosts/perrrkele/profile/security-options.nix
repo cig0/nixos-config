@@ -19,11 +19,11 @@
           addr = "192.168.0.56";
           port = 22;
         }
-        {
-          # Tailscale's IP address
-          # addr = "100.76.132.63";
-          # port = 22;
-        }
+        # {
+        # Tailscale's IP address
+        # addr = "100.76.132.63";
+        # port = 22;
+        # }
       ];
     };
 
