@@ -66,6 +66,15 @@ let
       # Multimedia
       "org.blender.Blender"
       "org.darktable.Darktable"
+      "org.gimp.GIMP"
+      # "org.gimp.GIMP.Plugin.Resynthesizer//3.0-beta~9cd2113"
+      # "org.gimp.GIMP.Plugin.Lensfun" # Not updated to branch 3 yet
+      ##"org.gimp.GIMP.Plugin.Fourier//0.4.5+gimp3rc1"
+      # "org.gimp.GIMP.Plugin.BIMP" # Not updated to branch 3 yet
+      # "org.gimp.GIMP.Plugin.LiquidRescale" # Not updated to branch 3 yet
+      # "org.gimp.GIMP.Plugin.FocusBlur" # Not updated to branch 3 yet
+      ##"org.gimp.GIMP.Plugin.GMic//3.5.2"
+      "com.github.vikdevelop.photopea_app"
       "fr.handbrake.ghb"
       "org.inkscape.Inkscape"
       "org.openshot.OpenShot"
