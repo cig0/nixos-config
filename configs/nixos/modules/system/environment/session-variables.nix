@@ -15,8 +15,8 @@ let
 
   commonEnvSessionVars = {
     # GitHub Access Token
-    GH_USERNAME = cfg.gh.username or null;
-    GH_TOKEN = cfg.gh.token or null;
+    GH_USERNAME = cfg.gh.username or "";
+    GH_TOKEN = cfg.gh.token or "";
 
     # Wayland/Graphics
     EGL_PLATFORM = "wayland";
@@ -71,12 +71,12 @@ in
 
   config = {
     environment.sessionVariables =
-      # GPU-specific (Intel/Nvidia)
-      (
+      commonEnvSessionVars
+      // (
         if (config.mySystem.myOptions.hardware.gpu == "intel") then
-          commonEnvSessionVars // IntelGpuEnvVars
+          IntelGpuEnvVars
         else if (config.mySystem.myOptions.hardware.gpu == "nvidia") then
-          commonEnvSessionVars // NvidiaGpuEnvVars
+          NvidiaGpuEnvVars
         else
           { }
       );
