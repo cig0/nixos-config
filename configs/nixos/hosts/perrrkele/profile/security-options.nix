@@ -21,8 +21,8 @@
         }
         {
           # Tailscale's IP address
-          addr = "100.76.132.63";
-          port = 22;
+          # addr = "100.76.132.63";
+          # port = 22;
         }
       ];
     };
