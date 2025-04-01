@@ -19,8 +19,4 @@
       "es_AR.UTF-8/UTF-8"
     ];
   };
-  environment.sessionVariables = {
-    LANG = "en_US.UTF-8";
-    LANGUAGE = "en"; # Useful for GNU gettext library
-  };
 }
