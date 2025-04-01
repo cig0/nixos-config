@@ -9,17 +9,13 @@
     services.openssh = {
       enable = true;
       listenAddresses = [
-        # {
-        #   # DEBUG_
-        #   addr = "0.0.0.0";
-        #   port = 22;
-        # }
         {
+          # localhost
           addr = "127.0.0.1";
           port = 22;
         }
         {
-          # WLAN
+          # WLAN IP address
           addr = "192.168.0.246";
           port = 22;
         }
