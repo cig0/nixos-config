@@ -1,10 +1,23 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
+  cfg = {
+    path = config.mySystem.myOptions.environment.variables.gh;
+    gh = {
+      token = cfg.path.token;
+      username = cfg.path.username;
+    };
+  };
+
   commonEnvSessionVars = {
+    # GitHub Access Token
+    GH_USERNAME = cfg.gh.username or null;
+    GH_TOKEN = cfg.gh.token or null;
+
     # Wayland/Graphics
     EGL_PLATFORM = "wayland";
     EGL_LOG_LEVEL = "fatal";
@@ -16,6 +29,11 @@ let
     # Flatpak integration (use lib.mkAfter to append)
     # GDK_DPI_SCALE = "1.13"; # Flatpak applications display scaling
     XDG_DATA_DIRS = lib.mkAfter [ "/var/lib/flatpak/exports/share" ];
+
+    # Shell/User tools
+    FZF_DEFAULT_OPTS = "--height 50% --layout=reverse --border"; # Fuzzy finder
+    LD_BIND_NOW = "1"; # Linker.
+    PAGER = "${pkgs.less}/bin/less"; # CLI pager
   };
 
   IntelGpuEnvVars = {
@@ -36,11 +54,23 @@ let
     # Hardware cursors are currently broken on wlroots
     WLR_NO_HARDWARE_CURSORS = "1";
   };
-
 in
 {
-  environment = {
-    sessionVariables =
+  options.mySystem.myOptions.environment.variables = {
+    gh.username = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "The GitHub user name to use for the CLI tool 'gh'";
+    };
+    gh.token = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "The GitHub token to use for the CLI tool 'gh'"; # TODO_ handle with sops-nix or agenix
+    };
+  };
+
+  config = {
+    environment.sessionVariables =
       # GPU-specific (Intel/Nvidia)
       (
         if (config.mySystem.myOptions.hardware.gpu == "intel") then

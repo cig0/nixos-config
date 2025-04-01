@@ -9,13 +9,17 @@
     services.openssh = {
       enable = true;
       listenAddresses = [
-        # { addr = "192.168.0.1"; } # WLAN address
         {
           addr = "127.0.0.1";
           port = 22;
         }
         {
-          # This host Tailscale's IP address
+          # WLAN
+          addr = "192.168.0.246";
+          port = 22;
+        }
+        {
+          # Tailscale's IP address
           addr = "100.113.250.86";
           port = 22;
         }
