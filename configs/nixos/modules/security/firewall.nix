@@ -1,3 +1,7 @@
+/*
+  TODO_ define settings per Trusted Interface, not globally
+  https://github.com/users/cig0/projects/1/views/6?pane=issue&itemId=104610250&issue=cig0%7Cnixos-config%7C29
+*/
 {
   config,
   lib,
@@ -46,27 +50,5 @@ less effective.";
         */
       };
     };
-
-    /*
-      KDE Connect:
-      Ports: 1714 to 1764 TCP/UDP
-      Module: ../applications/kde/kdeconnect.nix
-
-      Open WebUI server:
-      Ports: 3000
-      Module: ../applications/open-webui.nix
-
-      OpenSSH server:
-      Ports: 22
-      Module: ../security/openssh.nix
-
-      Syncthing:
-      Ports: 22000/TCP 21027,22000/UDP
-      Module: ../applications/syncthing.
-
-      Tailscale:
-      Ports:
-      Module: ../networking/tailscale.nix
-    */
   };
 }
