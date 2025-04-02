@@ -1,35 +1,36 @@
-# TODO_ https://github.com/users/cig0/projects/1/views/6?pane=issue&itemId=103540326&issue=cig0%7Cnixos-config%7C16
 {
   config,
   lib,
   ...
 }:
 let
-  cfg = config.mySystem.networking.firewall;
+  cfg = config.mySystem.networking;
 in
 {
-  options.mySystem.networking.firewall = {
-    enable = lib.mkEnableOption "Whether to enable the firewall. This is a simple stateful
+  options.mySystem.networking = {
+    firewall = {
+      enable = lib.mkEnableOption "Whether to enable the firewall. This is a simple stateful
 firewall that blocks connection attempts to unauthorised TCP
 or UDP ports on this machine.";
 
-    allowPing = lib.mkEnableOption "Whether to respond to incoming ICMPv4 echo requests
+      allowPing = lib.mkEnableOption "Whether to respond to incoming ICMPv4 echo requests
 (\"pings\").  ICMPv6 pings are always allowed because the
 larger address space of IPv6 makes network scanning much
 less effective.";
 
-    allowedTCPPorts = lib.mkOption {
-      type = lib.types.listOf lib.types.int;
-      default = [ ];
-      description = "List of TCP ports to allow incoming connections to.";
+      allowedTCPPorts = lib.mkOption {
+        type = lib.types.listOf lib.types.int;
+        default = [ ];
+        description = "List of TCP ports to allow incoming connections to.";
+      };
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.firewall.enable {
     networking = {
       firewall = {
         enable = true;
-        allowPing = cfg.allowPing;
+        allowPing = cfg.firewall.allowPing;
         allowedTCPPorts = [ ];
         allowedTCPPortRanges = [ ];
         allowedUDPPorts = [ ];
@@ -44,7 +45,6 @@ less effective.";
           preventing IP spoofing attacks but may also cause issues in certain network configurations.
         */
       };
-      nftables.enable = true;
     };
 
     /*
