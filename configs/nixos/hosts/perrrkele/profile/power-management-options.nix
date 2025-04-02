@@ -6,10 +6,10 @@
   services.tlp.enable = false; # I'm using auto-cpufreq
 
   mySystem = {
-
-    # Auto-cpufreq
+    # auto-cpufreq
     programs.auto-cpufreq.enable = true;
 
+    # NixOS built-ins
     powerManagement.enable = true;
     services.thermald.enable = true;
   };

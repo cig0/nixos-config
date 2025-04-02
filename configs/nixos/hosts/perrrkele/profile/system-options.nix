@@ -8,6 +8,7 @@
 
     # kernel.nix
     boot.kernelPackages = "xanmod_latest";
+    myOptions.kernel.sysctl.netIpv4TcpCongestionControl = "westwood";
 
     # keyd.nix :: Keyboard remapping
     services.keyd.enable = true;

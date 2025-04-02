@@ -1,19 +1,25 @@
+# TODO_ Add description of the module to the rest of the default.nix modules.
+
+/*
+  This module is a sidecar of `module-loades`:
+  - Defines what directories `module-loader` will recursively scan; the default value is `dir = ./.`
+  - Allows to exclude directories
+  - Allows to import specific modules. This is specially useful when you have to exclude a path, but
+  still want to import some of the modules from there.
+
+  Running `module-loader` from a different location by declaring a different path for `dir` may
+  cause unexpected behavior. I performed some simple tests and everything worked as expected, yet
+  that deviates from the original design idea for `module-loader`.
+
+  For more details, see the README.md.
+*/
 {
+  config,
   lib,
   ...
 }:
 let
   moduleLoader = import ../../../lib/module-loader/lib.nix { inherit lib; };
-
-  /*
-    This module performs a recursive directory scan and should be initialized from its own directory,
-    unless explicitly overridden.
-
-    Initializing it from a different location may cause unexpected behavior by deviating from the
-    module's intended design.
-
-    For more details, see README.md.
-  */
 
   # Define the directory root to search for modules
   dir = ./.;
@@ -29,9 +35,9 @@ let
   };
 in
 {
-  # TODO_ Add description to template file, replicate changes
-  # You can cherry-pick modules to import here from excluded directories
+  # Cherry-pick modules to import here from excluded directories
   imports = builtins.filter (x: x != null) modules ++ [
     ./applications/zsh/zsh.nix
+    (import ./environment/session.nix { inherit config lib; }) # Shared modules
   ];
 }

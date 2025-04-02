@@ -13,11 +13,12 @@
     homeDirectory = "/home/cig0";
 
     sessionVariables = {
-      /*
-        TODO_ FIX: These variables should be configurable and properly initialized after a new NixOS generation is deployed
+      GH_USERNAME = "${config.home.username}";
+      GH_TOKEN = "sops-nix coming soon, i.e.: GH_TOKEN-${config.home.username}";
 
-        Unless I'm missing something, this shouldn't be sessionVariables.
-      */
+      # DEBUG_ Make sure this module is being integrated correctly
+      PEPOTE = "PEPIN";
+
       EDITOR = nixosConfig.mySystem.myOptions.cli.editor;
       VISUAL = "code";
     };

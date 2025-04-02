@@ -14,9 +14,9 @@ let
   };
 
   commonEnvSessionVars = {
-    # GitHub Access Token
-    GH_USERNAME = cfg.gh.username or "";
-    GH_TOKEN = cfg.gh.token or "";
+    # # GitHub Access Token
+    # GH_USERNAME = cfg.gh.username or "";
+    # GH_TOKEN = cfg.gh.token or "";
 
     # Wayland/Graphics
     EGL_PLATFORM = "wayland";

@@ -1,4 +1,3 @@
-# TODO_ apply same dynamic module loading as in NixOS
 {
   config,
   lib,
@@ -6,6 +5,16 @@
 }:
 let
   cfg = config.mySystem.home-manager.enable;
+
+  mkUserConfig =
+    username:
+    { config, ... }:
+    {
+      imports = [
+        ./modules/default.nix # Shared modules
+        ./users/${username}/profile.nix # User configuration
+      ];
+    };
 in
 {
   imports = [
@@ -21,34 +30,13 @@ in
       useUserPackages = true;
       users = lib.mkMerge [
         {
-          cig0 =
-            { ... }:
-            {
-              imports = [
-                ./modules/default.nix # Shared modules
-                ./users/cig0/default.nix # User configuration
-              ];
-            };
+          cig0 = mkUserConfig "cig0";
         }
         (lib.mkIf config.mySystem.users.users.doomguy {
-          doomguy =
-            { ... }:
-            {
-              imports = [
-                ./modules/default.nix # Shared modules
-                ./users/doomguy/default.nix # User configuration
-              ];
-            };
+          doomguy = mkUserConfig "doomguy";
         })
         {
-          fine =
-            { ... }:
-            {
-              imports = [
-                ./modules/default.nix # Shared modules
-                ./users/fine/default.nix # User configuration
-              ];
-            };
+          fine = mkUserConfig "fine";
         }
       ];
     };
