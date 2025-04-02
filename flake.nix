@@ -223,6 +223,11 @@
               nixpkgs.overlays = [
                 rust-overlay.overlays.default
               ];
+
+              # myArgs
+              mySystem.myArgsContributions.system = {
+                hostname = hostname;
+              };
             }
           ] ++ hostConfig.extraModules;
         };
