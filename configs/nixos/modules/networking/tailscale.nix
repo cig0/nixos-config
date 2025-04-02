@@ -18,10 +18,17 @@
       };
     };
 
-    myOptions.services.tailscale.ip = lib.mkOption {
-      type = lib.types.str;
-      default = null;
-      description = "The Tailscale IP address assigned to this host; useful to configure other modules like opensshd.nix.";
+    myOptions.services.tailscale = {
+      ip = lib.mkOption {
+        type = lib.types.str;
+        default = null;
+        description = "The Tailscale IP address assigned to this host; useful to configure other modules like opensshd.nix.";
+      };
+      openssh.port = lib.mkOption {
+        type = lib.types.port;
+        default = 22;
+        description = "The Tailscale IP address assigned to this host; useful to configure other modules like opensshd.nix.";
+      };
     };
   };
 
