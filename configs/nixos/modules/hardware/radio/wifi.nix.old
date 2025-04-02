@@ -1,0 +1,60 @@
+{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = {
+    powerSave = config.mySystem.networking.networkmanager.wifi.powersave;
+    enable = config.mySystem.networking.wireless.enable;
+  };
+in
+{
+  options.mySystem = {
+    networking.networkmanager.wifi.powersave = lib.mkEnableOption "Whether to enable Wi-Fi power saving (can cause kernel panics).";
+
+    networking.wireless.enable = lib.mkEnableOption "Whether to enable wpa_supplicant.";
+  };
+
+  config = {
+    networking.networkmanager.wifi.powersave = cfg.powerSave;
+    networking.wireless.enable = cfg.enable; # Disable wpa_supplicant to avoid conflicts with NetworkManager
+    systemd.network.wait-online.enable = false;
+
+    # Enable NetworkManager for Wi-Fi management
+    networking.networkmanager = {
+      enable = true;
+
+      # Define Wi-Fi profiles and reference secrets
+      ensureProfiles = {
+        profiles = {
+          "home-wifi" = {
+            connection = {
+              id = "HomeWiFi";
+              type = "wifi";
+              autoconnect = true; # Connect automatically when in range
+            };
+            wifi = {
+              ssid = "HomeSSID"; # Replace with your Wi-Fi SSID
+            };
+            wifi-security = {
+              key-mgmt = "wpa-psk";
+              psk = "home-wifi-psk"; # Reference the secret name
+            };
+          };
+        };
+        secrets.entries = {
+          "home-wifi-psk" = {
+            file = "$FLAKE/home-wifi-psk.txt"; # Point to the password file in the flake root
+          };
+        };
+      };
+
+      # Prevent auto-connection to untrusted networks
+      extraConfig = ''
+        [main]
+        no-auto-default=*
+      '';
+    };
+  };
+}
