@@ -3,7 +3,6 @@
 }:
 {
   mySystem = {
-    programs.mtr.enable = true;
     networking.nameservers = true;
     networking.nftables.enable = true;
     services.resolved.enable = true;
@@ -12,6 +11,7 @@
       dns = "systemd-resolved";
     };
 
+    # Steven Black Hosts File Blacklist
     networking.stevenblack = {
       enable = true;
       block = [
@@ -29,6 +29,7 @@
       */
       kernel.sysctl.netIpv4TcpCongestionControl = "westwood";
 
+      # Tailscale IP
       services.tailscale.ip = "100.76.132.63";
     };
   };

@@ -14,6 +14,7 @@
     };
     # programs.krew.enable = false; # WIP
     programs.lazygit.enable = true;
+    programs.mtr.enable = true;
     programs.nixvim.enable = true;
     services.ollama = {
       enable = false;

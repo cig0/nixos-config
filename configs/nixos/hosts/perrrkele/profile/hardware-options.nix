@@ -17,20 +17,12 @@
 
   mySystem = {
     hardware = {
-      graphics.enable = true;
 
-      # Radio
+      # Bluetooth
       bluetooth.enable = true;
-    };
 
-    networking = {
-      /*
-        networkmanager.wifi.powersave = false;
-
-        Disabled, as it makes buggy drivers crash under heavy CPU load or when waking up back from
-        suspend.
-      */
-      networkmanager.wifi.powersave = false;
+      # Hardware Acceleration
+      graphics.enable = true;
     };
 
     myOptions = {

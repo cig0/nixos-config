@@ -1,3 +1,4 @@
+# TODO_ This is an old module, bring it up to date
 { config, lib, ... }:
 
 let
@@ -6,15 +7,16 @@ let
     cupsPdfEnable = config.mySystem.services.printing.cups-pdf;
   };
 
-in {
+in
+{
   options.mySystem.services.printing = {
     enable = lib.mkOption {
-      type = lib.types.bool;  # lib.types.bool doesn't take arguments
+      type = lib.types.bool; # lib.types.bool doesn't take arguments
       default = false;
       description = "Whether to enable printing support through the CUPS daemon.";
     };
     cups-pdf = lib.mkOption {
-      type = lib.types.bool;  # lib.types.bool doesn't take arguments
+      type = lib.types.bool; # lib.types.bool doesn't take arguments
       default = false;
       description = "Whether to enable the cups-pdf virtual PDF printer backend.";
     };

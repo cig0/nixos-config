@@ -29,6 +29,8 @@ let
   };
 in
 {
+  # TODO_ Add description to template file, replicate changes
+  # You can cherry-pick modules to import here from excluded directories
   imports = builtins.filter (x: x != null) modules ++ [
     ./applications/zsh/zsh.nix
   ];

@@ -17,11 +17,15 @@
 
   mySystem = {
     hardware = {
-      graphics.enable = true;
-      nvidia-container-toolkit.enable = true;
 
-      # Radio
+      # Bluetooth
       bluetooth.enable = true;
+
+      # Hardware Acceleration
+      graphics.enable = true;
+
+      # NVIDIA CNDF containers passthrough
+      nvidia-container-toolkit.enable = true;
     };
 
     myOptions = {

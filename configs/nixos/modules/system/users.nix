@@ -15,13 +15,14 @@ in
         "zsh"
       ];
       default = "bash";
-      description = "This option defines the default shell assigned to user
-accounts. This can be either a full system path or a shell package.
+      description = ''
+        This option defines the default shell assigned to user
+        accounts. This can be either a full system path or a shell package.
 
-This must not be a store path, since the path is
-used outside the store (in particular in /etc/passwd).
+        This must not be a store path, since the path is
+        used outside the store (in particular in /etc/passwd).
 
-type: path or package";
+        type: path or package'';
 
     };
     users = {

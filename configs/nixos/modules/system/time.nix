@@ -1,8 +1,10 @@
+# TODO_ This is an old module, bring it up to date
 {
   config,
   lib,
   ...
-}: let
+}:
+let
   time = config.mySystem.time;
 
   pool = {
@@ -30,40 +32,49 @@
   };
 
   # Helper function to resolve pool names to their corresponding NTP servers
-  resolvePool = poolName:
+  resolvePool =
+    poolName:
     {
       inherit pool;
     }
-    .pool
-    .${poolName};
-in {
+    .pool.${poolName};
+in
+{
   options.mySystem.networking.timeServers = lib.mkOption {
-    type = lib.types.nullOr (lib.types.listOf (lib.types.enum [
-      "argentina"
-      "europe"
-      "nixos"
-      "north-america"
-    ]));
+    type = lib.types.nullOr (
+      lib.types.listOf (
+        lib.types.enum [
+          "argentina"
+          "europe"
+          "nixos"
+          "north-america"
+        ]
+      )
+    );
     default = null;
     description = "The set of NTP servers from which to synchronise.";
   };
 
   options.mySystem.time = {
-    timeZone =
-      lib.mkOption {
-        type = lib.types.nullOr lib.types.str;
-        default = null;
-        example = "America/Buenos_Aires";
-        description = "The time zone used when displaying times and dates. See <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+    timeZone = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      example = "America/Buenos_Aires";
+      description = "The time zone used when displaying times and dates. See <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
   for a comprehensive list of possible values for this setting.
 
   If null, the timezone will default to UTC and can be set imperatively
   using timedatectl.";
-      };
-    check = timeZone: let
-      isValid = timeZone == null || builtins.pathExists "/etc/zoneinfo/${timeZone}";
-    in
-      lib.assertMsg isValid "Invalid timezone: ${timeZone}. Must be a valid timezone path in /etc/zoneinfo/";
+    };
+
+    check =
+      timeZone:
+      let
+        isValid = timeZone == null || builtins.pathExists "/etc/zoneinfo/${timeZone}";
+      in
+      lib.assertMsg isValid ''
+        Invalid timezone: ${timeZone}.
+        Must be a valid timezone path in /etc/zoneinfo/'';
   };
 
   config = {

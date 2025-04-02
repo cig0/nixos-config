@@ -2,7 +2,6 @@
   config,
   ...
 }:
-
 {
   mySystem = {
     programs.gnupg.enable = true;
@@ -22,7 +21,7 @@
           port = 22;
         }
         {
-          #Tailscale's IP address
+          # Tailscale's IP address
           addr = "${config.mySystem.myOptions.services.tailscale.ip}";
           port = config.mySystem.myOptions.services.tailscale.openssh.port;
         }

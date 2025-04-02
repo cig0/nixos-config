@@ -1,4 +1,5 @@
 {
+  config,
   ...
 }:
 {
@@ -21,8 +22,8 @@
         }
         {
           # Tailscale's IP address
-          # addr = "100.113.250.86";
-          # port = 22;
+          addr = "${config.mySystem.myOptions.services.tailscale.ip}";
+          port = config.mySystem.myOptions.services.tailscale.openssh.port;
         }
       ];
     };

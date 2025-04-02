@@ -78,7 +78,6 @@ nix-store --optimise to get rid of duplicate files.";
     programs.nh = lib.mkIf cfg.programs.nh.enable {
       enable = true;
       flake = inputs.self.outPath;
-      # flake = "${config.mySystem.myOptions.nixos.flakePath}";
       clean = {
         enable = cfg.programs.nh.clean.enable;
         dates = cfg.programs.nh.clean.dates;

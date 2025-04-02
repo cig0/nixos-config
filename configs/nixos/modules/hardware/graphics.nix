@@ -1,11 +1,3 @@
-/*
-  'pkgs' follows the nixpkgs.url attribute defined in the flake input,usually set to track the stable channel.
-
-  If for any reason I want to assemble a NixOS generation from the unstable channel,
-  by changing the channel in the nixpkgs.url input automatically cascade everything to 'pkgs'.
-
-  There's no need to do any more work here as these dependencies automatically adjust to NixOS channel.
-*/
 {
   config,
   lib,
