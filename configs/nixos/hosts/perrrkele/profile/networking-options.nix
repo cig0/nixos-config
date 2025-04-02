@@ -29,7 +29,8 @@
     };
     systemd.services.stevenblack-unblock.enable = true;
 
-    # tailscale.nix :: Tailscale IP
-    myOptions.services.tailscale.ip = "100.113.250.86";
+    # tailscale.nix
+    services.tailscale.enable = true;
+    myOptions.services.tailscale.ip = "100.76.132.63"; # Tailscale IP
   };
 }
