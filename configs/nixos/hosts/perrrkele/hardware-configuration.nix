@@ -23,7 +23,6 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
-    "i8042.nopnp"
     "i915"
     "kvm-intel"
   ];
