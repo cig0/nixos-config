@@ -23,7 +23,6 @@ let
   */
 
   commonKernelParams = [
-    "fuse"
     "init_on_alloc=1"
     "init_on_free=1"
     "iommu=pt"
@@ -135,12 +134,13 @@ in
         ];
 
       initrd.availableKernelModules = [
-        "xhci_pci"
-        "thunderbolt"
+        "fuse"
         "nvme"
-        "usbhid"
-        "usb_storage"
         "sd_mod"
+        "thunderbolt"
+        "usb_storage"
+        "usbhid"
+        "xhci_pci"
       ];
 
       kernel.sysctl =
