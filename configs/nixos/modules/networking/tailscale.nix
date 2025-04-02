@@ -48,7 +48,7 @@
         extraUpFlags = [ "--ssh" ];
       };
       /*
-        TODO_ Create options to:
+        TODO_ Add options to:
         - Enable/disable tailscaleAuth
         - Group and user
 
