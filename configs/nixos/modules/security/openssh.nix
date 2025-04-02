@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.mySystem.services.openssh.enable;
+  tsIpPerrrkele = "100.76.132.63"; # FIXME_ Create option
 in
 {
   options.mySystem = {
@@ -33,35 +34,49 @@ in
       enable = true;
       openFirewall = true;
       listenAddresses = config.mySystem.services.openssh.listenAddresses;
+      # startWhenNeeded = true; # Enable socket activation
     };
 
-    # BUG_
     systemd.services = {
       sshd = lib.mkIf config.mySystem.services.tailscale.enable {
-        after = [
-          "tailscaled.service"
-          # "wait-for-tailscale.service"
-        ];
-        # requires = [ "wait-for-tailscale.service" ]; # Hard dependency on the wait service
-        # wants = [ "network-online.target" ]; # Ensures network-online.target is pulled in but not a hard dep.
-      };
+        /*
+           HACK_ Add an ExecStartPre to ensure Tailscale interface is ready.
 
-      # # Custom service to wait for Tailscale interface to be fully up
-      # systemd.services.wait-for-tailscale = {
-      #   description = "Wait for Tailscale interface to have an IP";
-      #   after = [ "tailscaled.service" ];
-      #   wantedBy = [ "sshd.service" ]; # Ties it to sshd startup
-      #   before = [ "sshd.service" ]; # Ensures it runs before sshd
-      #   serviceConfig = {
-      #     Type = "oneshot";
-      #     RemainAfterExit = "yes";
-      #     ExecStart = ''
-      #       ${pkgs.busybox}/bin/sh -c 'until ${pkgs.iproute2}/bin/ip addr show tailscale0 | ${pkgs.busybox}/bin/grep -q "inet "; do ${pkgs.busybox}/bin/sleep 1; ${pkgs.busybox}/bin/echo "Waiting for tailscale0..."; done'
-      #     '';
-      #     ExecStartPost = "${pkgs.busybox}/bin/echo 'Tailscale interface is up'";
-      #     TimeoutSec = "45"; # Fails after 45s if tailscale0 never gets an IP
-      #   };
-      # };
+          I absolutely hate that this is the only way I've found to force `sshd.service` to wait for
+          `tailscaled.service` to create the network interface and assign the IP address.
+        */
+        serviceConfig.ExecStartPre = [
+          "${pkgs.bash}/bin/bash -c 'until ${pkgs.iproute2}/bin/ip addr show dev tailscale0 | ${pkgs.gnugrep}/bin/grep -q \"${tsIpPerrrkele}\"; do sleep 1; done'"
+        ];
+
+        # TODO_ Clean up unnecessary services and target dependencies
+        after = [
+          "network-online.target"
+          "nm-file-secret-agent.service"
+          "tailscaled.service"
+          "late-multi-user.target"
+        ];
+        requires = [
+          "network-online.target"
+          "nm-file-secret-agent.service"
+        ];
+        wants = [
+          "tailscaled.service"
+        ];
+      };
     };
+
+    /*
+      FIXME_ I'm leaving this option here to revisit this approach in the future
+
+      systemd.sockets.sshd = lib.mkIf config.mySystem.services.tailscale.enable {
+        # This ensures the socket will correctly bind once the interface is available
+        bindsTo = [ "sys-subsystem-net-devices-tailscale0.device" ];
+        after = [
+          # "network-online.target"
+          "sys-subsystem-net-devices-tailscale0.device"
+        ];
+      };
+    */
   };
 }
