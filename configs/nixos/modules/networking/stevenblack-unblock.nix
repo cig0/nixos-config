@@ -5,16 +5,13 @@
   pkgs,
   ...
 }:
-let
-  cfg = lib.getAttrFromPath [ "mySystem" "systemd" "services" "stevenblack-unblock" "enable" ] config;
-in
 {
   options.mySystem.systemd.services.stevenblack-unblock.enable =
     lib.mkEnableOption "Whether to unblock hosts added by {option}networking.stevenblack.block to /etc/hosts.";
 
-  config = lib.mkIf cfg {
+  config = lib.mkIf config.mySystem.systemd.services.stevenblack-unblock.enable {
     systemd.services.stevenblack-unblock = {
-      description = "Unblock a few domains from the StevenBlack block lists";
+      description = "Unblock the specified domains from the StevenBlack block lists";
       after = [ "multi-user.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
