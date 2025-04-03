@@ -62,18 +62,17 @@
 
     systemd.services.tailscaled = {
       after = [
-        "network-online.target"
-        "nm-file-secret-agent.service"
+        "network-pre.target"
+        "NetworkManager.service"
+        "systemd-resolved.service"
       ];
       before = [ "sshd.service" ];
-      requires = [
-        "network-online.target"
+      bindsTo = [
         "nm-file-secret-agent.service"
       ];
-      # wants = [
-      #   "network-online.target"
-      #   "nm-file-secret-agent.service"
-      # ];
+      wants = [
+        "network-pre.target"
+      ];
     };
   };
 }

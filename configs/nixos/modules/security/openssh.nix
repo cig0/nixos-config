@@ -46,18 +46,10 @@
           "${pkgs.bash}/bin/bash -c 'until ${pkgs.iproute2}/bin/ip addr show dev tailscale0 | ${pkgs.gnugrep}/bin/grep -q \"${config.mySystem.myOptions.services.tailscale.ip}\"; do sleep 1; done'"
         ];
 
-        after = [
-          "network-online.target"
+        bindsTo = [
           "nm-file-secret-agent.service"
           "tailscaled.service"
         ];
-        requires = [
-          "network-online.target"
-          "nm-file-secret-agent.service"
-        ];
-        # wants = [
-        #   "tailscaled.service"
-        # ];
       };
     };
 
