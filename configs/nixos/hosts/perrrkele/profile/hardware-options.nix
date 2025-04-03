@@ -13,8 +13,8 @@
     };
 
     # cpu-gpu.nix
-    myOptions.hardware.gpu = "intel";
     myOptions.hardware.cpu = "intel";
+    myOptions.hardware.gpu = "intel";
   };
 
   # NixOS built-in options
