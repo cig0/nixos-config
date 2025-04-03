@@ -34,6 +34,7 @@ This option should be enabled by default by the corresponding modules, so you do
             libdrm
             libGL
             mesa
+            vpl-gpu-rt
           ]
         )
         ++ lib.optionals (config.mySystem.myOptions.hardware.gpu == "nvidia") (
