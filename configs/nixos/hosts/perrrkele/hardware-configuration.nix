@@ -23,7 +23,6 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [
-    "i915"
     "kvm-intel"
   ];
   boot.extraModulePackages = [ ];
