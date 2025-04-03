@@ -2,7 +2,7 @@
 { ... }:
 let
   aliases = {
-    dft = "difft";
+    dft = "difft --color=always --syntax-highlight=on --skip-unchanged";
   };
 
 in
