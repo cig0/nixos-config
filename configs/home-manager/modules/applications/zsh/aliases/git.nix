@@ -5,7 +5,6 @@
 }:
 let
   # Ref: https://git-scm.com/docs/pretty-formats.
-
   aliases = {
     # Ungrouped git aliases
     gls = "git ls-tree --full-tree --name-only -r HEAD | lines";
