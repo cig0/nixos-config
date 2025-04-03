@@ -125,6 +125,7 @@ let
       "com.google.EarthPro"
       "one.ablaze.floorp"
       "org.torproject.torbrowser-launcher"
+      "com.vivaldi.Vivaldi"
     ];
   };
 in
