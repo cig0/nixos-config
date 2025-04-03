@@ -4,10 +4,6 @@
   pkgs,
   ...
 }:
-let
-  cfg = config.mySystem.services.openssh.enable;
-  tsIpPerrrkele = "100.76.132.63"; # FIXME_ Create option
-in
 {
   options.mySystem = {
     services.openssh = {
@@ -29,7 +25,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg {
+  config = lib.mkIf config.mySystem.services.openssh.enable {
     services.openssh = {
       enable = true;
       openFirewall = true;
@@ -46,18 +42,14 @@ in
           `tailscaled.service` to create the network interface and assign the IP address.
         */
         serviceConfig.ExecStartPre = [
-          "${pkgs.bash}/bin/bash -c 'until ${pkgs.iproute2}/bin/ip addr show dev tailscale0 | ${pkgs.gnugrep}/bin/grep -q \"${tsIpPerrrkele}\"; do sleep 1; done'"
+          "${pkgs.bash}/bin/bash -c 'until ${pkgs.iproute2}/bin/ip addr show dev tailscale0 | ${pkgs.gnugrep}/bin/grep -q \"${config.mySystem.myOptions.services.tailscale.ip}\"; do sleep 1; done'"
         ];
 
-        # TODO_ Clean up unnecessary services and target dependencies
         after = [
-          "network-online.target"
           "nm-file-secret-agent.service"
           "tailscaled.service"
-          "late-multi-user.target"
         ];
         requires = [
-          "network-online.target"
           "nm-file-secret-agent.service"
         ];
         wants = [
