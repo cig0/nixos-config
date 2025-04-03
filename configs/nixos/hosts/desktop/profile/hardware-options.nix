@@ -8,7 +8,7 @@
       # bluetooth.nix
       bluetooth.enable = true;
 
-      # graphics.nix :: Hardware Acceleration
+      # graphics-acceleration.nix :: Hardware Acceleration
       graphics.enable = true;
 
       # NVIDIA CNDF containers passthrough

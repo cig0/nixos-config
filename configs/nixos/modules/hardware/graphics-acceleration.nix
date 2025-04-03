@@ -41,6 +41,7 @@ This option should be enabled by default by the corresponding modules, so you do
           [
             libva-utils
             nvidia-vaapi-driver
+            vaapiVdpau
             vdpauinfo
           ]
         );
