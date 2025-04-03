@@ -60,6 +60,7 @@
 
     /*
       FIXME_ I'm leaving this option here to revisit this approach in the future
+      Remember to enable `startWhenNeeded`.
 
       systemd.sockets.sshd = lib.mkIf config.mySystem.services.tailscale.enable {
         # This ensures the socket will correctly bind once the interface is available
