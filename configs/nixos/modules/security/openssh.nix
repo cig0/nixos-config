@@ -39,22 +39,25 @@
            HACK_ Add an ExecStartPre to ensure Tailscale interface is ready.
 
           I absolutely hate that this is the only way I've found to force `sshd.service` to wait for
-          `tailscaled.service` to create the network interface and assign the IP address.
+          `tailscaled.service` to create the network interface and assign the IP address (othwerwise
+          fails).
         */
         serviceConfig.ExecStartPre = [
           "${pkgs.bash}/bin/bash -c 'until ${pkgs.iproute2}/bin/ip addr show dev tailscale0 | ${pkgs.gnugrep}/bin/grep -q \"${config.mySystem.myOptions.services.tailscale.ip}\"; do sleep 1; done'"
         ];
 
         after = [
+          "network-online.target"
           "nm-file-secret-agent.service"
           "tailscaled.service"
         ];
         requires = [
+          "network-online.target"
           "nm-file-secret-agent.service"
         ];
-        wants = [
-          "tailscaled.service"
-        ];
+        # wants = [
+        #   "tailscaled.service"
+        # ];
       };
     };
 

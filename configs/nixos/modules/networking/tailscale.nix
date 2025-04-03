@@ -70,6 +70,10 @@
         "network-online.target"
         "nm-file-secret-agent.service"
       ];
+      # wants = [
+      #   "network-online.target"
+      #   "nm-file-secret-agent.service"
+      # ];
     };
   };
 }
