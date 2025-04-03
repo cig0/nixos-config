@@ -325,7 +325,6 @@ let
       cool-retro-term # Let's avoid pulling unnecessary dependencies, as the app last release date was at the end of January 2022.
 
       # Multimedia
-      gimp-with-plugins # Fails to build from unstable because of some plugins.
 
       # Security
       keepassxc
