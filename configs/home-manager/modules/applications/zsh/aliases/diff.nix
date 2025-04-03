@@ -4,7 +4,6 @@ let
   aliases = {
     dft = "difft --color=always --syntax-highlight=on --skip-unchanged";
   };
-
 in
 {
   inherit aliases;

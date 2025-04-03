@@ -1,5 +1,4 @@
 # Home Manager Zsh aliases module. Do not remove this header.
-
 {
   ...
 }:
@@ -8,7 +7,6 @@ let
   aliases = {
     apps-cargo = "$EDITOR ~/.config/apps-cargo";
   };
-
 in
 {
   inherit aliases;
