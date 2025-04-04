@@ -34,7 +34,7 @@ let
   packagesBaseline =
     with pkgs;
     [
-      # Nix - Security
+      # Nix
       vulnix # NixOS vulnerability scanner :: https://github.com/nix-community/vulnix
 
       # Networking
@@ -278,7 +278,7 @@ let
         tokei
       ]);
     secrets = with pkgsUnstable; [
-      age
+      age # https://github.com/FiloSottile/age/discussions/231
       gpg-tui
       kpcli
       sops
