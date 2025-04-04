@@ -36,10 +36,6 @@
     nixpkgs.url = "nixpkgs/nixos-24.11"; # NixOS release channel
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable"; # The unstable release channel to allow for fresher packages
 
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs"; # Optional, not necessary for the module
-    agenix.inputs.darwin.follows = ""; # Optionally choose not to download darwin deps (saves some resources on Linux)
-
     # Energy efficiency for battery-powered devices
     auto-cpufreq = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -106,7 +102,10 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     # Secure secrets
-    # sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:Mic92/sops-nix";
+    };
 
     # Blazing fast terminal file manager written in Rust, based on async I/O
     yazi.url = "github:sxyazi/yazi";
@@ -114,7 +113,6 @@
 
   outputs =
     {
-      agenix,
       auto-cpufreq,
       home-manager,
       lanzaboote,
@@ -131,7 +129,7 @@
       plymouth-is-underrated,
       rust-overlay,
       self,
-      # sops-nix, # TODO_ https://github.com/users/cig0/projects/1/views/1?pane=issue&itemId=103254314&issue=cig0%7Cnixos-config%7C6
+      sops-nix, # TODO_ https://github.com/users/cig0/projects/1/views/1?pane=issue&itemId=103254314&issue=cig0%7Cnixos-config%7C6
       yazi,
       ...
     }@inputs:
@@ -187,7 +185,6 @@
               the final host configuration is assembled using only those options explicitly declared
               in the host's profile.nix module.
             */
-            agenix.nixosModules.default
             auto-cpufreq.nixosModules.default
             home-manager.nixosModules.home-manager
             lanzaboote.nixosModules.lanzaboote
@@ -196,6 +193,7 @@
             nix-ld.nixosModules.nix-ld
             nix-snapd.nixosModules.default
             nixvim.nixosModules.nixvim
+            sops-nix.nixosModules.sops
 
             /*
               Home Manager
