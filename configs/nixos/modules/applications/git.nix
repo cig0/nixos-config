@@ -89,6 +89,10 @@ in
           smudge = "git-lfs smudge -- %f";
         };
 
+        gpg = {
+          format = "ssh";
+        };
+
         init.defaultBranch = "main";
 
         interactive = {
@@ -121,9 +125,10 @@ in
         };
 
         user = {
-          signingkey = "BB81CA1B11628BF9929C7F733663FC5D6230F078";
-          name = "Martin Cigorraga";
-          email = "cig0.github@tutanota.com";
+          name = "Martín Cigorraga";
+          email = "cig0.github@gmail.com";
+          # signingkey = "BB81CA1B11628BF9929C7F733663FC5D6230F078"; # GPG key
+          signingkey = "/home/cig0/.ssh/keys/GitHub/GitHub_Main";
         };
 
         # Color customizations for branch
