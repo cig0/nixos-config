@@ -13,7 +13,10 @@
       sshKeyPaths = [ "./nixos-config.pub" ];
 
       secrets = {
-        "syncthing/cig0/password" = config.services.syncthing.settings.gui.password;
+        # example-secret.mode = "0440";
+        # example-secret.owner = config.users.users.nobody.name;
+        # example-secret.group = config.users.users.users.group;
+        "cig0/github/gh_token" = { };
       };
     };
 
