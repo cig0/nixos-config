@@ -52,7 +52,7 @@
   };
   mySystem.package.yazi.enable = true; # yazi.nix
   mySystem.programs.yazi.enable = false; # yazi.nix
-  mySystem.programs.zsh.enable = true; # zsh.nix. If disabled, this option is automatically enabled when `users.defaultUserShell` is set to "zsh"
+  mySystem.programs.zsh.enable = true; # zsh.nix. If disabled, this option is automatically enabled when `users.defaultUserShell` is set to "zsh".
   mySystem.xdg.portal.enable = true; # xdg-portal.nix
 
   /*
@@ -89,6 +89,11 @@
   services = {
     fwupd.enable = true;
     zram-generator.enable = true;
+  };
+  zramSwap = {
+    enable = true;
+    priority = 5;
+    memoryPercent = 15;
   };
 
   /*
