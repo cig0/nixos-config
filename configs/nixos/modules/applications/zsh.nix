@@ -14,6 +14,7 @@
   config = {
     programs.zsh = {
       enable = config.mySystem.programs.zsh.enable || (config.mySystem.users.defaultUserShell == "zsh");
+      enableBashCompletion = true;
       zsh-autoenv.enable = true;
     };
   };
