@@ -6,13 +6,10 @@
   pkgs,
   ...
 }:
-let
-  cfg = config.mySystem.programs.nixvim;
-in
 {
   options.mySystem.programs.nixvim.enable = lib.mkEnableOption "Configure Neovim with Nix!";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.mySystem.programs.nixvim.enable {
     programs.nixvim = {
       enable = true;
       colorschemes.catppuccin.enable = true;
