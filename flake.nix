@@ -103,7 +103,6 @@
 
     # Secure secrets
     sops-nix = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:Mic92/sops-nix";
     };
 
