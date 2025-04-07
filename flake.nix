@@ -206,7 +206,8 @@
               `./configs/nixos/hosts/${hostname}/profile.nix`.
             */
             (./. + "/configs/nixos/hosts/${hostname}/configuration.nix")
-            (import ./configs/nixos/hosts/${hostname}/profile/default.nix)
+            (import ./configs/nixos/hosts/${hostname}/profile.nix)
+            # (import ./configs/nixos/hosts/${hostname}/profile/default.nix)
 
             /*
               Dynamically load modules with a plug-and-play approach. Add a new module in the host’s
