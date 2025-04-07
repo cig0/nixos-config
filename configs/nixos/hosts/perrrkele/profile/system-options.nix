@@ -41,7 +41,10 @@
     programs.nix-ld.enable = true;
 
     # plymouth.nix
-    boot.plymouth.enable = true;
+    boot.plymouth = {
+      enable = true;
+      theme = "spinner";
+    };
 
     # time.nix :: Timezone and time servers (NTP)
     networking.timeServers = [ "argentina" ];
