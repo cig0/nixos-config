@@ -1,32 +1,15 @@
-/*
-  TODO_
-  NixOS Options
-  ────────────────────
-  # hardware.nvidia.powerManagement.enable
-  Whether to enable experimental power management through systemd. For more information, see
-  the NVIDIA docs, on Chapter 21. Configuring Power Management Support
-  .
-  type: boolean
-*/
 {
   config,
   lib,
   myArgs,
+  pkgs,
   ...
 }:
-
-let
-  cfg = config.mySystem;
-in
 {
-  options.mySystem.hardware.nvidia-container-toolkit.enable = lib.mkOption {
-    type = lib.types.bool;
-    default = false;
-    description = "Enable dynamic CDI configuration for Nvidia devices by running
-nvidia-container-toolkit on boot.";
-  };
+  options.mySystem.hardware.nvidia-container-toolkit.enable =
+    lib.mkEnableOption "Enable dynamic CDI configuration for Nvidia devices by running nvidia-container-toolkit on boot.";
 
-  config = lib.mkIf (cfg.myOptions.hardware.gpu == "nvidia") {
+  config = lib.mkIf (config.mySystem.myOptions.hardware.gpu == "nvidia") {
 
     # Additional module packages
     mySystem.myOptions.packages.modulePackages = with myArgs.packages.pkgsUnstable; [
@@ -34,7 +17,17 @@ nvidia-container-toolkit on boot.";
     ];
 
     hardware = {
-      nvidia-container-toolkit.enable = cfg.hardware.nvidia-container-toolkit.enable;
+      graphics = lib.mkIf config.mySystem.hardware.graphics.enable {
+        enable = true;
+        extraPackages = with pkgs; [
+          libva-utils
+          nvidia-vaapi-driver
+          vaapiVdpau
+          vdpauinfo
+        ];
+      };
+
+      nvidia-container-toolkit.enable = config.mySystem.hardware.nvidia-container-toolkit.enable;
 
       nvidia = {
         open = true;
@@ -52,5 +45,9 @@ nvidia-container-toolkit on boot.";
         };
       };
     };
+
+    services.xserver.videoDrivers = [
+      "nvidia"
+    ];
   };
 }
