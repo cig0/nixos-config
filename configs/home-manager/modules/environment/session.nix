@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}:
-{
+{ ... }: {
   home.sessionPath = [
     "$HOME/.cargo/bin"
     "$HOME/.krew/bin"
