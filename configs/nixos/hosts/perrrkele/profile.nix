@@ -48,7 +48,7 @@
   mySystem.programs.tmux = {
     # tmux.nix
     enable = true;
-    extraConfig = "set -g status-style bg=colour53,fg=white";
+    extraConfig = "set -g status-style bg=colour26,fg=white";
   };
   mySystem.package.yazi.enable = true; # yazi.nix
   mySystem.programs.yazi.enable = false; # yazi.nix
