@@ -364,7 +364,6 @@ let
       sublime-merge
       vscode-fhs
 
-      # Security
       # Web
       burpsuite
     ]);
