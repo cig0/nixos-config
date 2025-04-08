@@ -9,7 +9,8 @@
     Whether to configure zsh as an interactive shell. To enable zsh for
     a particular user, use the {option}`users.users.<name?>.shell`
     option for that user. To enable zsh system-wide use the
-    {option}`users.defaultUserShell` option.'';
+    {option}`users.defaultUserShell` option.
+  '';
 
   config = {
     programs.zsh = {
