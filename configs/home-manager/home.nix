@@ -11,7 +11,7 @@ let
     { config, ... }:
     {
       imports = [
-        ./modules/default.nix # Shared modules
+        ./modules/module-loader.nix # Shared modules
         ./users/${username}/profile.nix # User configuration
       ];
     };

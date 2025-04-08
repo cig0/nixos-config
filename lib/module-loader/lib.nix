@@ -15,7 +15,8 @@ let
   # List of module names to exclude
   excludeModules = [
     "configuration.nix"
-    "default.nix"
+    "hardware-configuration.nix"
+    "module-loader.nix"
   ];
 
   # TODO: think about a more robust way to detect if a file is a NixOS module
