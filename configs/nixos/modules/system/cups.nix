@@ -1,4 +1,4 @@
-# TODO_ This is an old module, bring it up to date
+# TODO: This is an old module, bring it up to date
 { config, lib, ... }:
 
 let

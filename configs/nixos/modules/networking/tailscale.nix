@@ -37,7 +37,7 @@
       firewall = {
         trustedInterfaces = [ "tailscale0" ];
       };
-      search = [ "tuxedo-goanna.ts.net" ]; # FIXME_ sops-nix
+      search = [ "tuxedo-goanna.ts.net" ]; # FIXME: sops-nix
     };
 
     services = {
@@ -48,7 +48,7 @@
         extraUpFlags = [ "--ssh" ];
       };
       /*
-        TODO_ Add options to:
+        TODO: Add options to:
         - Enable/disable tailscaleAuth
         - Group and user
 

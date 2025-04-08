@@ -21,6 +21,4 @@
     # originally installed.
     stateVersion = "24.11";
   };
-
-  # myHM = {};
 }

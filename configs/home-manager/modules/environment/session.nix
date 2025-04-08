@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   home.sessionPath = [
     "$HOME/.cargo/bin"
     "$HOME/.krew/bin"
@@ -8,7 +9,7 @@
   ];
 
   home.sessionVariables = {
-    # DEBUG_ Rompé Pepe, rompé!
+    # DEBUG: Rompé Pepe, rompé!
     PEPITO = "PEPAZO";
 
     # https://specifications.freedesktop.org/basedir-spec/latest/

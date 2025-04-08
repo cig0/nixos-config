@@ -13,8 +13,8 @@ in
   programs.command-not-found.enable = false;
 
   /*
-    TODO_ with NixOS 25.05: https://github.com/nix-community/nix-index?tab=readme-ov-file#usage-as-a-command-not-found-replacement
-    TODO_ https://github.com/nix-community/nix-index-database#usage-in-home-manager
+    TODO: with NixOS 25.05: https://github.com/nix-community/nix-index?tab=readme-ov-file#usage-as-a-command-not-found-replacement
+    TODO: https://github.com/nix-community/nix-index-database#usage-in-home-manager
 
     Additionally, if your shell is managed by home-manager, you can have nix-index integrate with your shell's command-not-found functionality by setting programs.nix-index.enable = true.
   */

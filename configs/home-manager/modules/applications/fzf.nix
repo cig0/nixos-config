@@ -1,5 +1,5 @@
 /*
-  TODO_ add options
+  TODO: add options
 
   fzf is currently installed via the NixOS module packages.nix.
 

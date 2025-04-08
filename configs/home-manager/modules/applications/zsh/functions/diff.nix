@@ -1,5 +1,5 @@
 # Don't remove this line! This is a NixOS Zsh function module.
-# TODO_ review this function; I believe Delta only works with git?
+# TODO: review this function; I believe Delta only works with git?
 {
   ...
 }:

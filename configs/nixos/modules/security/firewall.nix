@@ -1,5 +1,5 @@
 /*
-  TODO_ define settings per Trusted Interface, not globally
+  TODO: define settings per Trusted Interface, not globally
   https://github.com/users/cig0/projects/1/views/6?pane=issue&itemId=104610250&issue=cig0%7Cnixos-config%7C29
 */
 {

@@ -37,7 +37,7 @@
         impure_msg = "[impure shell](bold red)";
         pure_msg = "[pure shell](bold green)";
         unknown_msg = "[unknown shell](bold yellow)";
-        # format = "[${symbol} $state( \($name\))](bold blue) "; # Nix complains of 'variable symbol not defined' -- TODO_ further investigate the issue.
+        # format = "[${symbol} $state( \($name\))](bold blue) "; # Nix complains of 'variable symbol not defined' -- TODO: further investigate the issue.
         format = "[(bold blue)\(nix\) $state( \($name\))](bold blue) "; # I had to replace the '${symbol}' reference for the whole definition.
       };
 

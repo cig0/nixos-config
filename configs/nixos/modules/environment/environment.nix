@@ -1,8 +1,8 @@
 /*
-  TODO_ (SPIKE) error: file 'nixos-config' was not found in the Nix search path (add it using $NIX_PATH or -I)
+  TODO: (SPIKE) error: file 'nixos-config' was not found in the Nix search path (add it using $NIX_PATH or -I)
   - Investigate if it's necessary/useful to add the flake path to the NIX_PATH environment variable.
 
-  TODO_
+  TODO:
   Investigate moving user-related environment variables to Home Manager.
 
   The wiki mentions that this might not be needed, though, as refreshing the

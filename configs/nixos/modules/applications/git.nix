@@ -1,4 +1,4 @@
-# TODO_ migrate to Home Manager. It's a prio now (I'm lacking autocomplete for TAB). Also, VSCode expects to find the git config in the user home directory.
+# TODO: migrate to Home Manager. It's a prio now (I'm lacking autocomplete for TAB). Also, VSCode expects to find the git config in the user home directory.
 {
   config,
   lib,
@@ -15,7 +15,7 @@ in
 
   config = {
     # assertions = [
-    # TODO_ fix this assertion
+    # TODO: fix this assertion
     #   {
     #     assertion = !(config.programs.git.enable && config.home-manager.xdg.configFile."git/config".enable);
     #     message = "Only one of 'programs.git.enable' or 'myHM.xdg.configFile.\"git/config\".enable' can be enabled at a time.";

@@ -49,7 +49,7 @@
       enable = true;
       dns = config.mySystem.networking.networkmanager.dns;
 
-      # TODO_ Split/move shared profiles anywhere else--maybe modules/common?
+      # TODO: Split/move shared profiles anywhere else--maybe modules/common?
       # Define Wi-Fi profiles shared across hosts, and reference secrets
       ensureProfiles = {
         profiles = {
@@ -75,7 +75,7 @@
             {
               key = "home-wifi-psk"; # Name of the secret, matches placeholder above
 
-              # TODO_ Implement nix-sops
+              # TODO: Implement nix-sops
               file = "${inputs.self.outPath}/home-wifi-psk.txt"; # Path to the password file
             }
           ];

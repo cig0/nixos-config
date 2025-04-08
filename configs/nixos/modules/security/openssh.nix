@@ -36,7 +36,7 @@
     systemd.services = {
       sshd = lib.mkIf config.mySystem.services.tailscale.enable {
         /*
-           HACK_ Add an ExecStartPre to ensure Tailscale interface is ready.
+           HACK: Add an ExecStartPre to ensure Tailscale interface is ready.
 
           I absolutely hate that this is the only way I've found to force `sshd.service` to wait for
           `tailscaled.service` to create the network interface and assign the IP address (othwerwise
@@ -54,7 +54,7 @@
     };
 
     /*
-      FIXME_ I'm leaving this option here to revisit this approach in the future
+      FIXME: I'm leaving this option here to revisit this approach in the future
       Remember to enable `startWhenNeeded`.
 
       systemd.sockets.sshd = lib.mkIf config.mySystem.services.tailscale.enable {
