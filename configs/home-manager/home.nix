@@ -6,12 +6,26 @@
 let
   mkUserConfig =
     username:
-    { config, ... }:
+    { config, nixosConfig, ... }:
     {
       imports = [
         ./modules/module-loader.nix # Shared modules
+        # ./users/${username}/profile.nix # User configuration
         ./users/${username}.nix # User configuration
       ];
+
+      home = {
+        homeDirectory = "/home/${username}";
+
+        sessionVariables = {
+          EDITOR = nixosConfig.mySystem.myOptions.cli.editor;
+          VISUAL = "code";
+        };
+
+        # The state version is required and should stay at the version you
+        # originally installed.
+        stateVersion = "24.11";
+      };
     };
 in
 {
