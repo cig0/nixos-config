@@ -135,7 +135,7 @@
     Power Management
     ═══════════════════════════════
   */
-  programs.auto-cpufreq.enable = true; # auto-cpufreq.nix
+  mySystem.programs.auto-cpufreq.enable = true; # auto-cpufreq.nix
   mySystem.powerManagement.enable = true; # power-management.nix
   mySystem.services.thermald.enable = true; # thermald.nix
   services.tlp.enable = false; # Disabled, as I'm using auto-cpufreq
