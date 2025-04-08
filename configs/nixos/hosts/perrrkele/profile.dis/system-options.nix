@@ -52,6 +52,6 @@
 
     # user.nix :: User management
     users.defaultUserShell = "zsh";
-    users.users.doomguy = true; # Enable or disable test account
+    users.users.doomguy = true; # Enable or disable the test account
   };
 }
