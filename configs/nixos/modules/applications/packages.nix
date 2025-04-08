@@ -398,14 +398,6 @@ let
     # ];
   };
 
-  packagesNvidia =
-    with pkgs;
-    [
-    ]
-    ++ (with pkgsUnstable; [
-      nvtop
-    ]);
-
   # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
   pkgsUnstable = import inputs.nixpkgs-unstable {
     inherit system;
@@ -447,7 +439,6 @@ in
       guiShell = {
         kde = lib.mkEnableOption "Whether to install KDE Desktop Environment complementary applications packages";
       };
-      nvidia = lib.mkEnableOption "Whether to install NVIDIA-releated tools";
     };
   };
 
@@ -470,7 +461,6 @@ in
       ++ lib.optionals cfg.cli.web packagesCli.web
       ++ lib.optionals cfg.gui packagesGui
       ++ lib.optionals cfg.guiShell.kde packagesGuiShell.kde
-      ++ lib.optionals cfg.nvidia packagesNvidia
       ++ config.mySystem.myOptions.packages.modulePackages; # Add packages contributed by other modules
 
     nixpkgs.config.allowUnfree = true; # Allow lincense-burdened packages
