@@ -28,10 +28,7 @@
 
   config = lib.mkMerge [
     # Editor configurations
-    (lib.mkIf config.mySystem.programs.nixvim.enable {
-      mySystem.myOptions.cli.editor = "nvim";
-    })
-    (lib.mkIf config.programs.neovim.enable {
+    (lib.mkIf (config.mySystem.programs.nixvim.enable || lib.mkIf config.programs.neovim.enable) {
       mySystem.myOptions.cli.editor = "nvim";
     })
 
