@@ -77,11 +77,11 @@
   */
   mySystem.hardware = {
     bluetooth.enable = true; # bluetooth.nix
-    graphics.enable = true; # graphics-acceleration.nix
+    graphics.enable = true; # options.nix, intel.nix, nvidia.nix
     nvidia-container-toolkit.enable = true;
   };
   mySystem.myOptions.hardware = {
-    # cpu-gpu.nix
+    # options.nix
     cpu = "intel";
     gpu = "nvidia";
   };
