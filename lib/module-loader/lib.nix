@@ -29,9 +29,10 @@ let
     "inputs,"
     "nixosConfig,"
     "pkgs,"
-    "config ="
-    "imports ="
-    "options ="
+    "config = {"
+    "home = {"
+    "imports = ["
+    "options."
   ];
 in
 {
