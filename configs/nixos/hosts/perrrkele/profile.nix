@@ -229,7 +229,7 @@
   mySystem.boot.plymouth = {
     # plymouth.nix
     enable = true;
-    theme = "spinner";
+    theme = "bgrt";
   };
   mySystem.networking.timeServers = [ "argentina" ]; # time.nix
   mySystem.time.timeZone = "America/Buenos_Aires"; # time.nix
