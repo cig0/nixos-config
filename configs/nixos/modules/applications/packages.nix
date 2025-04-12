@@ -1,38 +1,29 @@
-/*
-  TODO: polish the packages lists in a way that makes it easier to maintain and update them for their roles.
-  Particularly packagesBaseline, it is becoming an everything-and-the-kitchen-sink list.
+/* TODO: polish the packages lists in a way that makes it easier to maintain and update them for their roles.
+   Particularly packagesBaseline, it is becoming an everything-and-the-kitchen-sink list.
 
-  Hint: How to pin a package to a specific version
-  To pin a package to a specific version, use the following syntax:
-   (Your_Package_Name.overrideAttrs (oldAttrs: {
-      src = fetchFromGitHub {
-        owner = "NixOS";
-        repo = "nixpkgs";
-        rev = "the commit hash";
-        hash = "the sha265 hash of the tarball";
-      };
-    }))
+   Hint: How to pin a package to a specific version
+   To pin a package to a specific version, use the following syntax:
+    (Your_Package_Name.overrideAttrs (oldAttrs: {
+       src = fetchFromGitHub {
+         owner = "NixOS";
+         repo = "nixpkgs";
+         rev = "the commit hash";
+         hash = "the sha265 hash of the tarball";
+       };
+     }))
 
-  To get the commit hash check the packages repository and look for the package in the correct channel branch, e.g. nixpkgs-unstable:
-  https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/by-name/aw/awscli2/package.nix => https://github.com/NixOS/nixpkgs/commit/62fcc798988975fab297b87345d93919cd6f6389
-  To get the sha256 hash of a package, run the following command:
-  nix-prefetch-github NixOS nixpkgs --no-deep-clone -v --rev The_Commit_Hash
-  Nix-prefetch-github can be installed as a normal package, or invoked on-demand if using `comma` (https://github.com/nix-community/comma, available in the official repositories.
-  Of course it can also be installed with `nix-env -iA nixpkgs.nix-prefetch-github`, or temporarily with nix-shell.
+   To get the commit hash check the packages repository and look for the package in the correct channel branch, e.g. nixpkgs-unstable:
+   https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/by-name/aw/awscli2/package.nix => https://github.com/NixOS/nixpkgs/commit/62fcc798988975fab297b87345d93919cd6f6389
+   To get the sha256 hash of a package, run the following command:
+   nix-prefetch-github NixOS nixpkgs --no-deep-clone -v --rev The_Commit_Hash
+   Nix-prefetch-github can be installed as a normal package, or invoked on-demand if using `comma` (https://github.com/nix-community/comma, available in the official repositories.
+   Of course it can also be installed with `nix-env -iA nixpkgs.nix-prefetch-github`, or temporarily with nix-shell.
 */
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  system,
-  ...
-}:
+{ config, inputs, lib, pkgs, system, ... }:
 let
   cfg = config.mySystem.packages;
 
-  packagesBaseline =
-    with pkgs;
+  packagesBaseline = with pkgs;
     [
       # Nix
       vulnix # NixOS vulnerability scanner :: https://github.com/nix-community/vulnix
@@ -46,8 +37,7 @@ let
 
       # Storage
       nfstrace # NFS and CIFS tracing/monitoring/capturing/analyzing tool :: NFS and CIFS tracing/monitoring/capturing/analyzing tool
-    ]
-    ++ (with pkgsUnstable; [
+    ] ++ (with pkgsUnstable; [
       # Misc
       at
       bat
@@ -142,20 +132,13 @@ let
     ]);
 
   packagesCli = {
-    ai = with pkgsUnstable; [
-      aichat
-      oterm
-    ];
-    backup = with pkgsUnstable; [
-      borgbackup
-    ];
+    ai = with pkgsUnstable; [ aichat oterm ];
+    backup = with pkgsUnstable; [ borgbackup ];
     comms = with pkgsUnstable; [ ];
-    cloudNativeTools =
-      with pkgs;
+    cloudNativeTools = with pkgs;
       [
         vagrant # Should always follow the main channel.
-      ]
-      ++ (with pkgsUnstable; [
+      ] ++ (with pkgsUnstable; [
         aiac # Artificial Intelligence Infrastructure-as-Code Generator :: https://github.com/gofireflyio/aiac/
         argocd
         awscli2 # Unified tool to manage your AWS services :: https://aws.amazon.com/cli/
@@ -199,10 +182,11 @@ let
         tfsec
         tfswitch
       ]);
-    databases = with pkgsUnstable; [
-      # dbmate # Database migration tool :: https://github.com/amacneil/dbmate
-      # rainfrog # A database management TUI for postgres :: https://github.com/achristmascarl/rainfrog
-    ];
+    databases = with pkgsUnstable;
+      [
+        # dbmate # Database migration tool :: https://github.com/amacneil/dbmate
+        # rainfrog # A database management TUI for postgres :: https://github.com/achristmascarl/rainfrog
+      ];
 
     # TODO: properly categorize `misc` packages
     misc = with pkgsUnstable; [
@@ -218,10 +202,12 @@ let
       helix
       hollywood # Fill your console with Hollywood melodrama technobabble :: https://a.hollywood.computer
       k6 # A modern load testing tool, using Go and JavaScript :: https://github.com/grafana/k6
+      ntfs3g
       nms # A command line tool that recreates the famous data decryption effect seen in the 1992 movie Sneakers :: https://github.com/bartobri/no-more-secrets
       qrscan
       rust-petname
       pipe-rename
+      sbctl # Secure boot
       syncterm # BBS terminal emulator :: Homepage: https://syncterm.bbsdev.net/
       terminal-parrot
       tesseract
@@ -243,11 +229,8 @@ let
       pngcrush
       yt-dlp
     ];
-    programming =
-      with pkgs;
-      [
-      ]
-      ++ (with pkgsUnstable; [
+    programming = with pkgs;
+      [ ] ++ (with pkgsUnstable; [
         devpod # Codespaces but open-source, client-only and unopinionated: Works with any IDE and lets you use any cloud, kubernetes or just localhost docker :: https://devpod.sh
 
         # Go
@@ -283,12 +266,8 @@ let
       kpcli
       sops
     ];
-    security =
-      with pkgs;
-      [
-        mitmproxy
-      ]
-      ++ (with pkgsUnstable; [
+    security = with pkgs;
+      [ mitmproxy ] ++ (with pkgsUnstable; [
         chkrootkit
         lynis
         netscanner # Network scanner with features like WiFi scanning, packetdump and more :: https://github.com/Chleba/netscanner
@@ -313,13 +292,10 @@ let
       # Radicle
       radicle-node
     ];
-    web = with pkgsUnstable; [
-      elinks
-    ];
+    web = with pkgsUnstable; [ elinks ];
   };
 
-  packagesGui =
-    with pkgs;
+  packagesGui = with pkgs;
     [
       # Misc
       cool-retro-term # Let's avoid pulling unnecessary dependencies, as the app last release date was at the end of January 2022.
@@ -332,8 +308,7 @@ let
 
       # Virtualization
       virt-viewer
-    ]
-    ++ (with pkgsUnstable; [
+    ] ++ (with pkgsUnstable; [
       # AI
       (lmstudio.override {
         commandLineArgs = [
@@ -401,12 +376,9 @@ let
   # Leverage NixOS might by allowing to mix packages from both the stable and unstable release channels
   pkgsUnstable = import inputs.nixpkgs-unstable {
     inherit system;
-    config = {
-      allowUnfree = true;
-    };
+    config = { allowUnfree = true; };
   };
-in
-{
+in {
   options.mySystem = {
     myOptions.packages = {
       # Create a flattened list of packages to install contributed by modules
@@ -419,25 +391,40 @@ in
       };
     };
     packages = {
-      baseline = lib.mkEnableOption "The baseline set of tools and applications to install on every host";
+      baseline = lib.mkEnableOption
+        "The baseline set of tools and applications to install on every host";
       cli = {
-        _all = lib.mkEnableOption "Whether to install all the CLI tools and applications";
-        ai = lib.mkEnableOption "Whether to install CLI AI related tools and applications";
-        backup = lib.mkEnableOption "Whether to install CLI backups related tools and applications";
-        cloudNativeTools = lib.mkEnableOption "Whether to install CLI cloud native related tools and applications";
-        comms = lib.mkEnableOption "Whether to install CLI comms related tools and applications";
-        databases = lib.mkEnableOption "Whether to install CLI databases related tools and applications";
-        misc = lib.mkEnableOption "Whether to install a CLI related applications packages"; # TODO: properly categorize the packages
-        multimedia = lib.mkEnableOption "Whether to install CLI multimedia related tools and applications";
-        programming = lib.mkEnableOption "Whether to install CLI programming related tools and applications";
-        secrets = lib.mkEnableOption "Whether to install CLI secrets related tools and applications";
-        security = lib.mkEnableOption "Whether to install CLI security related tools and applications";
-        vcs = lib.mkEnableOption "Whether to install CLI VCS related tools and applications";
-        web = lib.mkEnableOption "Whether to install CLI web related tools and applications";
+        _all = lib.mkEnableOption
+          "Whether to install all the CLI tools and applications";
+        ai = lib.mkEnableOption
+          "Whether to install CLI AI related tools and applications";
+        backup = lib.mkEnableOption
+          "Whether to install CLI backups related tools and applications";
+        cloudNativeTools = lib.mkEnableOption
+          "Whether to install CLI cloud native related tools and applications";
+        comms = lib.mkEnableOption
+          "Whether to install CLI comms related tools and applications";
+        databases = lib.mkEnableOption
+          "Whether to install CLI databases related tools and applications";
+        misc = lib.mkEnableOption
+          "Whether to install a CLI related applications packages"; # TODO: properly categorize the packages
+        multimedia = lib.mkEnableOption
+          "Whether to install CLI multimedia related tools and applications";
+        programming = lib.mkEnableOption
+          "Whether to install CLI programming related tools and applications";
+        secrets = lib.mkEnableOption
+          "Whether to install CLI secrets related tools and applications";
+        security = lib.mkEnableOption
+          "Whether to install CLI security related tools and applications";
+        vcs = lib.mkEnableOption
+          "Whether to install CLI VCS related tools and applications";
+        web = lib.mkEnableOption
+          "Whether to install CLI web related tools and applications";
       };
       gui = lib.mkEnableOption "Whether to install GUI applications and tools";
       guiShell = {
-        kde = lib.mkEnableOption "Whether to install KDE Desktop Environment complementary applications packages";
+        kde = lib.mkEnableOption
+          "Whether to install KDE Desktop Environment complementary applications packages";
       };
     };
   };
@@ -446,13 +433,15 @@ in
     environment.systemPackages =
       [ ] # Start with an empty list or your base packages
       ++ lib.optionals cfg.baseline packagesBaseline
-      ++ lib.optionals cfg.cli._all (builtins.concatLists (builtins.attrValues packagesCli))
+      ++ lib.optionals cfg.cli._all
+      (builtins.concatLists (builtins.attrValues packagesCli))
       ++ lib.optionals cfg.cli.ai packagesCli.ai
       ++ lib.optionals cfg.cli.backup packagesCli.backup
       ++ lib.optionals cfg.cli.cloudNativeTools packagesCli.cloudNativeTools
       ++ lib.optionals cfg.cli.comms packagesCli.comms
       ++ lib.optionals cfg.cli.databases packagesCli.databases
-      ++ lib.optionals cfg.cli.misc packagesCli.misc # TODO: properly categorize the packages
+      ++ lib.optionals cfg.cli.misc
+      packagesCli.misc # TODO: properly categorize the packages
       ++ lib.optionals cfg.cli.multimedia packagesCli.multimedia
       ++ lib.optionals cfg.cli.programming packagesCli.programming
       ++ lib.optionals cfg.cli.secrets packagesCli.secrets
@@ -465,8 +454,6 @@ in
 
     nixpkgs.config.allowUnfree = true; # Allow lincense-burdened packages
 
-    mySystem.myArgsContributions.packages = {
-      pkgsUnstable = pkgsUnstable;
-    };
+    mySystem.myArgsContributions.packages = { pkgsUnstable = pkgsUnstable; };
   };
 }
