@@ -12,10 +12,7 @@
 
   # Bootloader
   boot = {
-    initrd = {
-      luks.devices."luks-f9958b9b-9485-4a62-ab29-0b571196e660".device =
-        "/dev/disk/by-uuid/f9958b9b-9485-4a62-ab29-0b571196e660";
-    };
+    initrd.luks.devices."swap".device = "/dev/disk/by-uuid/f9958b9b-9485-4a62-ab29-0b571196e660"; # Encrypted swap partition
 
     loader = {
       efi.canTouchEfiVariables = true;

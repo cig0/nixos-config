@@ -4,6 +4,7 @@
 {
   config,
   lib,
+  pkgs,
   modulesPath,
   ...
 }:
@@ -17,25 +18,22 @@
     "xhci_pci"
     "thunderbolt"
     "nvme"
-    "usbhid"
     "usb_storage"
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [
-    "kvm-intel"
-  ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/7b13c713-17aa-465a-9d7c-18e02a04fba7";
+    device = "/dev/disk/by-uuid/df71023f-2b19-4cfd-ba4a-9d44344f6d36";
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/e1b97f6f-9713-43d1-980f-b840cd89ca67";
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/ae5a57b0-c294-4f0a-8941-7d0c5457999c";
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/A73B-F25A";
+    device = "/dev/disk/by-uuid/D962-5283";
     fsType = "vfat";
     options = [
       "fmask=0077"
@@ -45,7 +43,7 @@
 
   swapDevices = [
     {
-      device = "/dev/disk/by-uuid/30cda3d5-cc88-4c4a-a7c5-71b12963f7e4";
+      device = "/dev/disk/by-uuid/b8e19c38-9180-4331-88e1-1f6e9c161bbc";
       priority = 1;
     }
   ];

@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 {
   imports = [
     # Include the results of the hardware scan.
@@ -13,9 +12,7 @@
 
   # Bootloader
   boot = {
-    initrd = {
-      luks.devices."swap".device = "/dev/disk/by-uuid/edf43523-db06-4b35-9868-170c2a8ff06c"; # Encrypted swap partition
-    };
+    initrd.luks.devices."swap".device = "/dev/disk/by-uuid/6dc9cbae-7757-4a14-a738-8d82c1ecaa3d"; # Encrypted swap partition
 
     loader = {
       efi.canTouchEfiVariables = true;
@@ -76,7 +73,7 @@
         "nix-command"
         "flakes"
       ];
-      max-jobs = 8;
+      max-jobs = 4;
       trusted-users = [
         "cig0"
         "fine"
