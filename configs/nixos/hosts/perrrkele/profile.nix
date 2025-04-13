@@ -225,7 +225,7 @@
   mySystem.programs.nix-ld.enable = true; # nix-ld.nix
   mySystem.boot.plymouth = {
     # plymouth.nix
-    enable = true;
+    enable = false;
     theme = "evil-nixos";
   };
   mySystem.networking.timeServers = [ "argentina" ]; # time.nix
