@@ -101,11 +101,6 @@
     # Oxalica's Rust toolchain overlay
     rust-overlay.url = "github:oxalica/rust-overlay";
 
-    # Secure secrets
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-    };
-
     # Blazing fast terminal file manager written in Rust, based on async I/O
     yazi.url = "github:sxyazi/yazi";
   };
@@ -128,7 +123,6 @@
       plymouth-is-underrated,
       rust-overlay,
       self,
-      sops-nix, # TODO: https://github.com/users/cig0/projects/1/views/1?pane=issue&itemId=103254314&issue=cig0%7Cnixos-config%7C6
       yazi,
       ...
     }@inputs:
@@ -165,7 +159,6 @@
             nix-ld.nixosModules.nix-ld
             nix-snapd.nixosModules.default
             nixvim.nixosModules.nixvim
-            sops-nix.nixosModules.sops
 
             /*
               Home Manager
