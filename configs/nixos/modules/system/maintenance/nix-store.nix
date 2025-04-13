@@ -46,7 +46,7 @@ nix-store --optimise to get rid of duplicate files.";
         };
         extraArgs = lib.mkOption {
           type = lib.types.str;
-          default = "--keep 5";
+          default = "--keep 3";
         };
       };
     };
