@@ -13,8 +13,8 @@ let
     nixfc = "nix flake check";
 
     # nh - Yet another nix helper
-    nhcak3 = "nh clean all --keep 5";
-    nhcuk3 = "nh clean user --keep 5";
+    nhcak2 = "nh clean all --keep 5";
+    nhcuk2 = "nh clean user --keep 5";
 
     # Search (options and packages)
     nixs = "nix search nixpkgs";
