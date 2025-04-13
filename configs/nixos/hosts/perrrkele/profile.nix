@@ -1,7 +1,9 @@
-{ config, ... }: {
-  /* ═══════════════════════════════
-     Applications
-     ═══════════════════════════════
+{ config, ... }:
+{
+  /*
+    ═══════════════════════════════
+    Applications
+    ═══════════════════════════════
   */
   mySystem.programs.appimage.enable = true; # appimage.nix
   mySystem.services.displayManager = {
@@ -47,27 +49,28 @@
   };
   mySystem.package.yazi.enable = true; # yazi.nix
   mySystem.programs.yazi.enable = false; # yazi.nix
-  mySystem.programs.zsh.enable =
-    true; # zsh.nix. If disabled, this option is automatically enabled when `users.defaultUserShell` is set to "zsh".
+  mySystem.programs.zsh.enable = true; # zsh.nix. If disabled, this option is automatically enabled when `users.defaultUserShell` is set to "zsh".
   mySystem.xdg.portal.enable = true; # xdg-portal.nix
 
-  /* ═══════════════════════════════
-     Audio
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Audio
+    ═══════════════════════════════
   */
   mySystem.audio-subsystem.enable = true;
   mySystem.services.speechd.enable = true;
 
-  /* ═══════════════════════════════
-     Common
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Common
+    ═══════════════════════════════
   */
-  mySystem.myOptions.nixos.flakePath =
-    "/home/cig0/workdir/cig0/nixos-config"; # nixos.nix
+  mySystem.myOptions.nixos.flakePath = "/home/cig0/workdir/cig0/nixos-config"; # nixos.nix
 
-  /* ═══════════════════════════════
-     Hardware
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Hardware
+    ═══════════════════════════════
   */
   mySystem.hardware = {
     bluetooth.enable = true; # bluetooth.nix
@@ -89,17 +92,19 @@
     memoryPercent = 5;
   };
 
-  /* ═══════════════════════════════
-     Home Manager
-     Make sure your system user and shell environment is properly configured
-     before disabling this option!
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Home Manager
+    Make sure your system user and shell environment is properly configured
+    before disabling this option!
+    ═══════════════════════════════
   */
   mySystem.home-manager.enable = true;
 
-  /* ═══════════════════════════════
-     Networking
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Networking
+    ═══════════════════════════════
   */
   mySystem.networking.nameservers = true; # nameservers.nix
   mySystem.networking.nftables.enable = true; # nftables.nix
@@ -112,33 +117,44 @@
   mySystem.networking.stevenblack = {
     # stevenblack.nix
     enable = true;
-    block = [ "gambling" "porn" "social" ];
+    block = [
+      "gambling"
+      "porn"
+      "social"
+    ];
   };
   mySystem.systemd.services.stevenblack-unblock.enable = true; # stevenblack.nix
   mySystem.services.tailscale.enable = true; # tailscale.nix
   mySystem.myOptions.services.tailscale.ip = "100.76.132.63"; # tailscale.nix
 
-  /* ═══════════════════════════════
-     Power Management
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Power Management
+    ═══════════════════════════════
   */
   mySystem.programs.auto-cpufreq.enable = true; # auto-cpufreq.nix
   mySystem.powerManagement.enable = true; # power-management.nix
   mySystem.services.thermald.enable = true; # thermald.nix
   services.tlp.enable = false; # Disabled, as I'm using auto-cpufreq
 
-  /* ═══════════════════════════════
-     Security
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Security
+    ═══════════════════════════════
   */
   mySystem.networking.firewall = {
     # firewall.nix
     enable = true;
     allowPing = false;
-    allowedTCPPorts = [ 22 3000 8080 8443 ];
+    allowedTCPPorts = [
+      22
+      3000
+      8080
+      8443
+    ];
   };
   mySystem.programs.gnupg.enable = true; # gnupg.nix
-  mySystem.boot.lanzaboote.enable = false; # lanzaboote.nix
+  mySystem.boot.lanzaboote.enable = true; # lanzaboote.nix
   mySystem.services.openssh = {
     # opensshd.nix
     enable = true;
@@ -166,28 +182,32 @@
     extraConfig = ''
       Defaults passwd_timeout=1440, timestamp_timeout=1440
     '';
-    /* passwd_timeout=1440, timestamp_timeout=1440:
-       Extending sudo timeout this much is generally unsafe, especially on servers!
-       I only enable this setting on personal devices for convenience.
+    /*
+      passwd_timeout=1440, timestamp_timeout=1440:
+      Extending sudo timeout this much is generally unsafe, especially on servers!
+      I only enable this setting on personal devices for convenience.
     */
   };
 
-  /* ═══════════════════════════════
-     System
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    System
+    ═══════════════════════════════
   */
-  mySystem.current-system-packages-list.enable =
-    true; # current-system-packages-list.nix
+  mySystem.current-system-packages-list.enable = true; # current-system-packages-list.nix
   mySystem.boot.kernelPackages = "xanmod_latest"; # kernel.nix
-  mySystem.myOptions.kernel.sysctl.netIpv4TcpCongestionControl =
-    "westwood"; # kernel.nix
+  mySystem.myOptions.kernel.sysctl.netIpv4TcpCongestionControl = "westwood"; # kernel.nix
   mySystem.services.keyd.enable = true; # keyd.nix
   mySystem.myOptions.services.keyd.addKeydKeyboards = {
     TUXEDOInfinityBookPro14Gen6Standard = {
       ids = [ "0001:0001" ];
       settings = {
-        main = { "capslock" = "capslock"; };
-        shift = { "capslock" = "insert"; };
+        main = {
+          "capslock" = "capslock";
+        };
+        shift = {
+          "capslock" = "insert";
+        };
       };
     };
   };
@@ -216,9 +236,10 @@
     users.doomguy = true; # Enable or disable the test account
   };
 
-  /* ═══════════════════════════════
-     Virtualisation
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Virtualisation
+    ═══════════════════════════════
   */
   mySystem.virtualisation = {
     incus.enable = true; # incus.nix
