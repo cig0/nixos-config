@@ -8,6 +8,7 @@
       "${config.home.homeDirectory}/.cargo/bin"
       "${config.home.homeDirectory}/.krew/bin"
       "${config.home.homeDirectory}/.npm_global/bin"
+      "${config.home.homeDirectory}/bin"
       "${config.home.homeDirectory}/exe"
       "${config.home.homeDirectory}/go/bin"
     ];
