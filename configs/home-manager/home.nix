@@ -1,3 +1,4 @@
+# Skeleton config. Check the modules for the actual configuration.
 {
   config,
   lib,
