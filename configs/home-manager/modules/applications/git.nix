@@ -11,9 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.git = {
       enable = true;
-      lfs.enable = lib.mkIf cfg.lfs.enable {
-        enable = true;
-      };
+      lfs.enable = cfg.lfs.enable;
       extraConfig = {
         color = {
           diff = true;
