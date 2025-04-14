@@ -13,8 +13,8 @@ let
     _h = "history | grep -i";
     cp = "cp -i";
     dudir = "du -sh ./"; # Use */ for all dirs in the target directory.
-    g = "gwenview";
     gi = "grep -i --color=always";
+    gir = "grep -ir --color=always";
     glow = "glow --pager -"; # glow
     ic = "imgcat";
     mv = "mv -i";
