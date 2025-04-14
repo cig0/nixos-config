@@ -93,9 +93,9 @@ let
       again.
       gg = "/run/current-system/sw/bin/lazygit --use-config-file /etc/lazygit";
     */
-    gg = "/run/current-system/sw/bin/lazygit";
+    g = "/run/current-system/sw/bin/lazygit";
 
-    ggF = "cd ${nixosConfig.myNixos.myOptions.flakePath} && " + aliases.gg + " && cd -";
+    gF = "cd ${nixosConfig.myNixos.myOptions.flakePath} && " + aliases.g + " && cd -";
 
     # GitGuardian
     ggs = "ggshield --no-check-for-updates";
