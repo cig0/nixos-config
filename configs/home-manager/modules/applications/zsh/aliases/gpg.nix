@@ -1,5 +1,7 @@
 # Home Manager Zsh aliases module. Do not remove this header.
-{ ... }:
+{
+  ...
+}:
 let
   aliases = {
     gpgc = "gpg -c --cipher-algo aes256 --output";

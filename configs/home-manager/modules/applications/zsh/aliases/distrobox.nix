@@ -1,5 +1,7 @@
 # Home Manager Zsh aliases module. Do not remove this header.
-{ ... }:
+{
+  ...
+}:
 let
   # Distrobox :: https://github.com/89luca89/distrobox :: https://distrobox.it/
   aliases = {

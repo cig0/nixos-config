@@ -5,7 +5,9 @@
 
   Otherwise, Nix will render the content of the string as regular characters.
 */
-{ ... }:
+{
+  ...
+}:
 let
   # ----+ Common attributes +----
   reset = "\\e[0m"; # Useful to reset text attributes.

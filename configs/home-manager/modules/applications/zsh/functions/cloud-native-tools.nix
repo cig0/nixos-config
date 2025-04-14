@@ -1,5 +1,7 @@
 # Home Manager Zsh functions module. Do not remove this header.
-{ ... }:
+{
+  ...
+}:
 let
   # Tools and concepts aligned with the cloud-native movement, including orchestration, containers, and resource management.
   functions = ''

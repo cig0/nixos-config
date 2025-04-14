@@ -1,5 +1,4 @@
 # Home Manager Zsh functions module. Do not remove this header.
-# TODO: add option to allow for different Profiles
 {
   ...
 }:
