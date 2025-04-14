@@ -4,11 +4,11 @@
   ...
 }:
 let
-  cfg = config.mySystem.programs.direnv.enable;
+  cfg = config.myNixos.programs.direnv.enable;
 
 in
 {
-  options.mySystem.programs.direnv.enable =
+  options.myNixos.programs.direnv.enable =
     lib.mkEnableOption "Whether to enable direnv integration. Takes care of both installation and
 setting up the sourcing of the shell. Additionally enables nix-direnv
 integration. Note that you need to logout and login for this change to apply";

@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "programs" "mtr"] config;
+  cfg = lib.getAttrFromPath ["myNixos" "programs" "mtr"] config;
 in {
-  options.mySystem.programs.mtr.enable = lib.mkEnableOption "Whether to enable the mtr network diagnostic tool";
+  options.myNixos.programs.mtr.enable = lib.mkEnableOption "Whether to enable the mtr network diagnostic tool";
 
   config = lib.mkIf cfg.enable {
     programs.mtr.enable = true; # Network diagnostic tool

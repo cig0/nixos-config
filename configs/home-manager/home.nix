@@ -30,9 +30,9 @@ in
     # (modulesPath + "/profiles/minimal.nix")
   ];
 
-  options.mySystem.home-manager.enable = lib.mkEnableOption "Whether to enable Home Manager.";
+  options.myNixos.home-manager.enable = lib.mkEnableOption "Whether to enable Home Manager.";
 
-  config = lib.mkIf config.mySystem.home-manager.enable {
+  config = lib.mkIf config.myNixos.home-manager.enable {
     home-manager = {
       backupFileExtension = "backup";
       useGlobalPkgs = true;
@@ -41,7 +41,7 @@ in
         {
           cig0 = mkUserConfig "cig0";
         }
-        (lib.mkIf config.mySystem.users.users.doomguy {
+        (lib.mkIf config.myNixos.users.users.doomguy {
           doomguy = mkUserConfig "doomguy";
         })
         {

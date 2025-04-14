@@ -95,7 +95,7 @@ let
     */
     gg = "/run/current-system/sw/bin/lazygit";
 
-    ggF = "cd ${nixosConfig.mySystem.myOptions.nixos.flakePath} && " + aliases.gg + " && cd -";
+    ggF = "cd ${nixosConfig.myNixos.myOptions.flakePath} && " + aliases.gg + " && cd -";
 
     # GitGuardian
     ggs = "ggshield --no-check-for-updates";

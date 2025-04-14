@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = nixosConfig.myHM.programs.git;
+  cfg = nixosConfig.myHm.programs.git;
 in
 {
   config = lib.mkIf cfg.enable {

@@ -4,10 +4,10 @@
   ...
 }:
 let
-  cfg = config.mySystem;
+  cfg = config.myNixos;
 in
 {
-  options.mySystem = {
+  options.myNixos = {
     programs = {
       kde-pim = {
         enable = lib.mkEnableOption "Whether to enable KDE PIM base packages.";

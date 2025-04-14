@@ -4,7 +4,7 @@
   ...
 }:
 {
-  options.mySystem.myOptions.cli = {
+  options.myNixos.myOptions.cli = {
     editor = lib.mkOption {
       type = lib.types.enum [
         "nvim"
@@ -28,13 +28,13 @@
 
   config = lib.mkMerge [
     # Editor configurations
-    (lib.mkIf (config.mySystem.programs.nixvim.enable || lib.mkIf config.programs.neovim.enable) {
-      mySystem.myOptions.cli.editor = "nvim";
+    (lib.mkIf (config.myNixos.programs.nixvim.enable || lib.mkIf config.programs.neovim.enable) {
+      myNixos.myOptions.cli.editor = "nvim";
     })
 
     # File manager configurations
-    (lib.mkIf (config.mySystem.programs.yazi.enable || config.mySystem.packages.yazi.enable) {
-      mySystem.myOptions.cli.fileManager = "yazi";
+    (lib.mkIf (config.myNixos.programs.yazi.enable || config.mmyNixos.ckages.yazi.enable) {
+      myNixos.myOptions.cli.fileManager = "yazi";
     })
   ];
 }

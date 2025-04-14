@@ -3,15 +3,15 @@
   lib,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "services" "displayManager"] config;
+  cfg = lib.getAttrFromPath ["myNixos" "services" "displayManager"] config;
   # cfg = {
-  #   autoLoginEnable = config.mySystem.services.displayManager.autoLogin.enable;
-  #   autoLoginUser = config.mySystem.services.displayManager.autoLogin.user;
-  #   ly = config.mySystem.services.displayManager.ly.enable;
-  #   sddm = config.mySystem.services.displayManager.sddm.enable;
+  #   autoLoginEnable = config.myNixos.services.displayManager.autoLogin.enable;
+  #   autoLoginUser = config.myNixos.ervices.displayManager.autoLogin.user;
+  #   ly = config.myNixos.ervices.displayManager.ly.enable;
+  #   sddm = config.myNixos.ervices.displayManager.sddm.enable;
   # };
 in {
-  options.mySystem = {
+  options.myNixos = {
     services.displayManager = {
       autoLogin = {
         enable = lib.mkEnableOption "Automatically log in as {option}`autoLogin.user`.";

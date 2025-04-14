@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.mySystem.services.flatpak;
+  cfg = config.myNixos.services.flatpak;
   packages = {
     all = [
       # { appId = "com.brave.Browser"; origin = "flathub";  }
@@ -130,7 +130,7 @@ let
   };
 in
 {
-  options.mySystem.services.flatpak.enable =
+  options.myNixos.services.flatpak.enable =
     lib.mkEnableOption "Whether to manage flatpaks with nix-flatpak.";
 
   config = lib.mkIf cfg.enable {

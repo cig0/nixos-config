@@ -9,9 +9,9 @@
       # DEBUG: Rompé Pepe, rompé!
       PEPITO = "PEPAZO";
 
-      FLAKE_PATH = "${nixosConfig.mySystem.myOptions.nixos.flakePath}";
+      FLAKE_PATH = "${nixosConfig.myNixos.myOptions.flakePath}";
 
-      EDITOR = nixosConfig.mySystem.myOptions.cli.editor;
+      EDITOR = nixosConfig.myNixos.myOptions.cli.editor;
       VISUAL = "code";
 
       # https://specifications.freedesktop.org/basedir-spec/latest/

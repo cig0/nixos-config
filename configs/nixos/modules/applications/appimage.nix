@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
-  cfg = config.mySystem.programs.appimage;
+  cfg = config.myNixos.programs.appimage;
 in
 {
-  options.mySystem.programs.appimage = {
+  options.myNixos.programs.appimage = {
     enable = lib.mkEnableOption "Whether to enable appimage-run wrapper script for executing appimages on NixOS.";
   };
 

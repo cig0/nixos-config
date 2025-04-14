@@ -4,10 +4,10 @@
   ...
 }:
 let
-  cfg = lib.getAttrFromPath [ "mySystem" "programs" "firefox" ] config;
+  cfg = lib.getAttrFromPath [ "myNixos" "programs" "firefox" ] config;
 in
 {
-  options.mySystem.programs.firefox.enable =
+  options.myNixos.programs.firefox.enable =
     lib.mkEnableOption "Whether to enable the Firefox web browser.";
 
   config = {

@@ -193,7 +193,7 @@
               nixpkgs.overlays = [ rust-overlay.overlays.default ];
 
               # myArgs
-              mySystem.myArgsContributions.system = {
+              myNixos.myArgsContributions.system = {
                 hostname = hostname;
               };
             }
