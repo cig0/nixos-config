@@ -9,8 +9,14 @@
       # DEBUG: Rompé Pepe, rompé!
       PEPITO = "PEPAZO";
 
+      # Flake source code path
       FLAKE_PATH = "${nixosConfig.myNixos.myOptions.flakePath}";
 
+      # GitHub's `gh` CLI tool
+      GH_USERNAME = "${config.home.username}";
+      GH_TOKEN = "SOPS secret here, i.e.: GH_TOKEN-${config.home.username}";
+
+      # Editor
       EDITOR = nixosConfig.myNixos.myOptions.cli.editor;
       VISUAL = "code";
 
