@@ -12,8 +12,8 @@
     sddm.enable = true;
   };
   mySystem.programs.firefox.enable = true; # firefox.nix
-  mySystem.programs.git = {
-    # git.nix
+  myHM.programs.git = {
+    # common/options/myHM/default.nix
     enable = true;
     lfs.enable = true;
   };
@@ -125,7 +125,7 @@
   };
   mySystem.systemd.services.stevenblack-unblock.enable = true; # stevenblack.nix
   mySystem.services.tailscale.enable = true; # tailscale.nix
-  mySystem.myOptions.services.tailscale.ip = "100.76.132.63"; # tailscale.nix
+  mySystem.myOptions.services.tailscale.ip = "100.95.128.128"; # tailscale.nix
 
   /*
     ═══════════════════════════════

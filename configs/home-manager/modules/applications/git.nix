@@ -1,30 +1,20 @@
-# TODO: migrate to Home Manager. It's a prio now (I'm lacking autocomplete for TAB). Also, VSCode expects to find the git config in the user home directory.
 {
   config,
+  nixosConfig,
   lib,
   ...
 }:
 let
-  cfg = config.mySystem.programs.git;
+  cfg = nixosConfig.myHM.programs.git;
 in
 {
-  options.mySystem.programs.git = {
-    enable = lib.mkEnableOption "Whether to enable git, a distributed version control system.";
-    lfs.enable = lib.mkEnableOption "Whether to enable git-lfs (Large File Storage).";
-  };
-
-  config = {
-    # assertions = [
-    # TODO: fix this assertion
-    #   {
-    #     assertion = !(config.programs.git.enable && config.home-manager.xdg.configFile."git/config".enable);
-    #     message = "Only one of 'programs.git.enable' or 'myHM.xdg.configFile.\"git/config\".enable' can be enabled at a time.";
-    #   }
-    # ];
-
-    programs.git = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
+    programs.git = {
       enable = true;
-      config = {
+      lfs.enable = lib.mkIf cfg.lfs.enable {
+        enable = true;
+      };
+      extraConfig = {
         color = {
           diff = true;
           status = true;
@@ -41,14 +31,14 @@ in
         };
 
         commit = {
-          template = "~/.config/git/stCommitMsg";
+          template = "${config.home.homeDirectory}/.config/git/stCommitMsg";
           gpgsign = true;
         };
 
         core = {
-          excludesFile = "/etc/gitignore";
+          excludesFile = "${config.home.homeDirectory}/.config/git/gitignore";
           pager = "delta";
-          hooksPath = "~/.config/git/hooks";
+          hooksPath = "${config.home.homeDirectory}/.config/git/hooks";
           editor = "nvim";
         };
 
@@ -128,7 +118,7 @@ in
           name = "Martín Cigorraga";
           email = "cig0.github@gmail.com";
           # signingkey = "BB81CA1B11628BF9929C7F733663FC5D6230F078"; # GPG key
-          signingkey = "/home/cig0/.ssh/keys/GitHub/GitHub_Main";
+          signingkey = "/home/cig0/.ssh/keys/GitHub/GitHub_Main"; # TODO: store as a sops-nix secret
         };
 
         # Color customizations for branch
@@ -153,10 +143,9 @@ in
           untracked = "cyan";
         };
       };
-      lfs.enable = cfg.lfs.enable;
     };
 
-    environment.etc."gitignore".text = ''
+    home.file."${config.home.homeDirectory}/.config/git/gitignore".text = ''
       *~
       myvars.tf
       testy-test

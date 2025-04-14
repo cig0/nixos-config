@@ -1,14 +1,15 @@
 {
+  config,
   ...
 }:
 {
   home = {
     sessionPath = [
-      "$HOME/.cargo/bin"
-      "$HOME/.krew/bin"
-      "$HOME/.npm_global/bin"
-      "$HOME/exe"
-      "$HOME/go/bin"
+      "${config.home.homeDirectory}/.cargo/bin"
+      "${config.home.homeDirectory}/.krew/bin"
+      "${config.home.homeDirectory}/.npm_global/bin"
+      "${config.home.homeDirectory}/exe"
+      "${config.home.homeDirectory}/go/bin"
     ];
   };
 }

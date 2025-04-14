@@ -6,7 +6,10 @@
 let
   mkUserConfig =
     username:
-    { config, nixosConfig, ... }:
+    {
+      nixosConfig,
+      ...
+    }:
     {
       imports = [
         ./modules/module-loader.nix # Shared modules
