@@ -8,7 +8,7 @@
 */
 self: super:
 let
-  # myFlakeDir = "${config.mySystem.myOptions.nixos.flakePath};";
+  # myFlakeDir = "${config.myNixos.myOptions.flakePath};";
   myFlakeDir = "/home/cig0/workdir/cig0/nixos-config";
   flake-compact = super.fetchFromGitHub {
     owner = "edolstra";

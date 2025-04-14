@@ -6,18 +6,18 @@
   ...
 }:
 {
-  options.mySystem.hardware.nvidia-container-toolkit.enable =
+  options.myNixos.hardware.nvidia-container-toolkit.enable =
     lib.mkEnableOption "Enable dynamic CDI configuration for Nvidia devices by running nvidia-container-toolkit on boot.";
 
-  config = lib.mkIf (config.mySystem.myOptions.hardware.gpu == "nvidia") {
+  config = lib.mkIf (config.myNixos.myOptions.hardware.gpu == "nvidia") {
 
     # Additional module packages
-    mySystem.myOptions.packages.modulePackages = with myArgs.packages.pkgsUnstable; [
+    myNixos.myOptions.packages.modulePackages = with myArgs.packages.pkgsUnstable; [
       nvtopPackages.nvidia
     ];
 
     hardware = {
-      graphics = lib.mkIf config.mySystem.hardware.graphics.enable {
+      graphics = lib.mkIf config.myNixos.hardware.graphics.enable {
         enable = true;
         extraPackages = with pkgs; [
           libva-utils
@@ -27,7 +27,7 @@
         ];
       };
 
-      nvidia-container-toolkit.enable = config.mySystem.hardware.nvidia-container-toolkit.enable;
+      nvidia-container-toolkit.enable = config.myNixos.hardware.nvidia-container-toolkit.enable;
 
       nvidia = {
         open = true;

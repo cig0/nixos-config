@@ -48,9 +48,9 @@ in
     environment.sessionVariables =
       commonEnvSessionVars
       // (
-        if (config.mySystem.myOptions.hardware.gpu == "intel") then
+        if (config.myNixos.myOptions.hardware.gpu == "intel") then
           IntelGpuEnvVars
-        else if (config.mySystem.myOptions.hardware.gpu == "nvidia") then
+        else if (config.myNixos.myOptions.hardware.gpu == "nvidia") then
           NvidiaGpuEnvVars
         else
           { }

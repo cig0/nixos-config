@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.mySystem = {
+  options.myNixos = {
     services.tailscale = {
       enable = lib.mkEnableOption "Whether to enable Tailscale client daemon.";
       authKeyFile = lib.mkOption {
@@ -32,7 +32,7 @@
     };
   };
 
-  config = lib.mkIf config.mySystem.services.tailscale.enable {
+  config = lib.mkIf config.myNixos.services.tailscale.enable {
     networking = {
       firewall = {
         trustedInterfaces = [ "tailscale0" ];
@@ -43,7 +43,7 @@
     services = {
       tailscale = {
         enable = true;
-        # authKeyFile = config.mySystem.services.tailscale.authKeyFile;
+        # authKeyFile = config.myNixos.ervices.tailscale.authKeyFile;
         openFirewall = true;
         extraUpFlags = [ "--ssh" ];
       };

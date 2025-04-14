@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.mySystem.programs.tmux = {
+  options.myNixos.programs.tmux = {
     enable = lib.mkEnableOption "Whenever to configure {command}`tmux` system-wide.";
     extraConfig = lib.mkOption {
       type = lib.types.str;
@@ -16,14 +16,14 @@
     };
   };
 
-  config = lib.mkIf config.mySystem.programs.tmux.enable {
+  config = lib.mkIf config.myNixos.programs.tmux.enable {
     programs.tmux = {
       enable = true;
       clock24 = true;
       terminal = "tmux-direct";
       newSession = true;
       historyLimit = 20000;
-      extraConfig = config.mySystem.programs.tmux.extraConfig;
+      extraConfig = config.myNixos.programs.tmux.extraConfig;
     };
   };
 }

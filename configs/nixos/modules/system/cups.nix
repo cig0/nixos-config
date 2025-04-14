@@ -3,13 +3,13 @@
 
 let
   cfg = {
-    printingEnable = config.mySystem.services.printing.enable;
-    cupsPdfEnable = config.mySystem.services.printing.cups-pdf;
+    printingEnable = config.myNixos.services.printing.enable;
+    cupsPdfEnable = config.myNixos.services.printing.cups-pdf;
   };
 
 in
 {
-  options.mySystem.services.printing = {
+  options.myNixos.services.printing = {
     enable = lib.mkOption {
       type = lib.types.bool; # lib.types.bool doesn't take arguments
       default = false;

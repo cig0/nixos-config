@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "services" "thermald"] config;
+  cfg = lib.getAttrFromPath ["myNixos" "services" "thermald"] config;
 in {
-  options.mySystem.services.thermald = {enable = lib.mkEnableOption "Whether to enable thermald";};
+  options.myNixos.services.thermald = {enable = lib.mkEnableOption "Whether to enable thermald";};
 
   config = {
     services.thermald.enable = cfg.enable;

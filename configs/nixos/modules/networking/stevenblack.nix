@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.mySystem;
+  cfg = config.myNixos;
 in
 {
-  options.mySystem = {
+  options.myNixos = {
     networking.stevenblack = {
       enable = lib.mkEnableOption "the StevenBlack hosts file blocklist";
       block = lib.mkOption {

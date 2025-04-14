@@ -9,7 +9,7 @@ import ./make-test-python.nix ({ pkgs, ... }: {
     ];
     
     # Enable the Firefox module
-    mySystem.programs.firefox.enable = true;
+    myNixos.programs.firefox.enable = true;
     
     # Add a user for testing
     users.users.testuser = {

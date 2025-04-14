@@ -5,7 +5,7 @@
   ...
 }:
 let
-  time = config.mySystem.time;
+  time = config.myNixos.time;
 
   pool = {
     argentina = [
@@ -40,7 +40,7 @@ let
     .pool.${poolName};
 in
 {
-  options.mySystem.networking.timeServers = lib.mkOption {
+  options.myNixos.networking.timeServers = lib.mkOption {
     type = lib.types.nullOr (
       lib.types.listOf (
         lib.types.enum [
@@ -55,7 +55,7 @@ in
     description = "The set of NTP servers from which to synchronise.";
   };
 
-  options.mySystem.time = {
+  options.myNixos.time = {
     timeZone = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       default = null;
@@ -79,7 +79,7 @@ in
 
   config = {
     networking.timeServers = builtins.concatLists (
-      map resolvePool config.mySystem.networking.timeServers
+      map resolvePool config.myNixos.networking.timeServers
     );
     time.timeZone = time.timeZone;
   };

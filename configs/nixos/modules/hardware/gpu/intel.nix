@@ -6,14 +6,14 @@
   ...
 }:
 {
-  config = lib.mkIf (config.mySystem.myOptions.hardware.gpu == "intel") {
+  config = lib.mkIf (config.myNixos.myOptions.hardware.gpu == "intel") {
 
     # Additional module packages
-    mySystem.myOptions.packages.modulePackages = with myArgs.packages.pkgsUnstable; [
+    myNixos.myOptions.packages.modulePackages = with myArgs.packages.pkgsUnstable; [
       nvtopPackages.intel
     ];
 
-    hardware.graphics = lib.mkIf config.mySystem.hardware.graphics.enable {
+    hardware.graphics = lib.mkIf config.myNixos.hardware.graphics.enable {
       enable = true;
       extraPackages = with pkgs; [
         intel-compute-runtime

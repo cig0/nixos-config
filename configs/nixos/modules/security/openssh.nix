@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.mySystem = {
+  options.myNixos = {
     services.openssh = {
       enable = lib.mkEnableOption "Whether to enable the OpenSSH server";
       listenAddresses = lib.mkOption {
@@ -25,16 +25,16 @@
     };
   };
 
-  config = lib.mkIf config.mySystem.services.openssh.enable {
+  config = lib.mkIf config.myNixos.services.openssh.enable {
     services.openssh = {
       enable = true;
       openFirewall = true;
-      listenAddresses = config.mySystem.services.openssh.listenAddresses;
+      listenAddresses = config.myNixos.services.openssh.listenAddresses;
       # startWhenNeeded = true; # Enable socket activation
     };
 
     systemd.services = {
-      sshd = lib.mkIf config.mySystem.services.tailscale.enable {
+      sshd = lib.mkIf config.myNixos.services.tailscale.enable {
         /*
            HACK: Add an ExecStartPre to ensure Tailscale interface is ready.
 
@@ -43,7 +43,7 @@
           fails).
         */
         serviceConfig.ExecStartPre = [
-          "${pkgs.bash}/bin/bash -c 'until ${pkgs.iproute2}/bin/ip addr show dev tailscale0 | ${pkgs.gnugrep}/bin/grep -q \"${config.mySystem.myOptions.services.tailscale.ip}\"; do sleep 1; done'"
+          "${pkgs.bash}/bin/bash -c 'until ${pkgs.iproute2}/bin/ip addr show dev tailscale0 | ${pkgs.gnugrep}/bin/grep -q \"${config.myNixos.myOptions.services.tailscale.ip}\"; do sleep 1; done'"
         ];
 
         bindsTo = [
@@ -57,7 +57,7 @@
       FIXME: I'm leaving this option here to revisit this approach in the future
       Remember to enable `startWhenNeeded`.
 
-      systemd.sockets.sshd = lib.mkIf config.mySystem.services.tailscale.enable {
+      systemd.sockets.sshd = lib.mkIf config.myNixos.ervices.tailscale.enable {
         # This ensures the socket will correctly bind once the interface is available
         bindsTo = [ "sys-subsystem-net-devices-tailscale0.device" ];
         after = [

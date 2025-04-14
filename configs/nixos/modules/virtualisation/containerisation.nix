@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "virtualisation" "podman"] config;
+  cfg = lib.getAttrFromPath ["myNixos" "virtualisation" "podman"] config;
 in {
-  options.mySystem.virtualisation.podman = {
+  options.myNixos.virtualisation.podman = {
     enable =
       lib.mkEnableOption "This option enables Podman, a daemonless container engine for
 developing, managing, and running OCI Containers on your Linux System.

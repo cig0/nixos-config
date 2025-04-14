@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.mySystem.programs.nix-ld;
+  cfg = config.myNixos.programs.nix-ld;
 in
 {
-  options.mySystem.programs.nix-ld.enable =
+  options.myNixos.programs.nix-ld.enable =
     lib.mkEnableOption "Run unpatched dynamic binaries on NixOS.";
 
   config = lib.mkIf cfg.enable {

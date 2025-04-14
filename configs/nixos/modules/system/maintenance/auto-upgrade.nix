@@ -4,9 +4,9 @@
   lib,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "system" "autoUpgrade"] config;
+  cfg = lib.getAttrFromPath ["myNixos" "system" "autoUpgrade"] config;
 in {
-  options.mySystem.system.autoUpgrade.enable =
+  options.myNixos.system.autoUpgrade.enable =
     lib.mkEnableOption "Whether to periodically upgrade NixOS to the latest
 version. If enabled, a systemd timer will run
 `nixos-rebuild switch --upgrade` once a

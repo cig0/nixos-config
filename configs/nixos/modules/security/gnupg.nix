@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = config.mySystem.programs.gnupg;
+  cfg = config.myNixos.programs.gnupg;
 in {
-  options.mySystem.programs.gnupg.enable = lib.mkEnableOption "Whether to enable the GNU GPG agent";
+  options.myNixos.programs.gnupg.enable = lib.mkEnableOption "Whether to enable the GNU GPG agent";
 
   config = lib.mkIf cfg.enable {
     programs.gnupg.agent = {

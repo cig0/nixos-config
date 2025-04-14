@@ -8,10 +8,10 @@
   ...
 }:
 let
-  cfg = config.mySystem.networking;
+  cfg = config.myNixos.networking;
 in
 {
-  options.mySystem.networking = {
+  options.myNixos.networking = {
     firewall = {
       enable = lib.mkEnableOption "Whether to enable the firewall. This is a simple stateful
 firewall that blocks connection attempts to unauthorised TCP

@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = lib.getAttrFromPath [ "mySystem" "services" "open-webui" ] config;
+  cfg = lib.getAttrFromPath [ "myNixos" "services" "open-webui" ] config;
 in
 {
-  options.mySystem.services.open-webui = {
+  options.myNixos.services.open-webui = {
     enable = lib.mkEnableOption "Whether to enable Open WebUI, a self-hosted AI platform";
     port = lib.mkOption {
       type = lib.types.int;
@@ -22,8 +22,8 @@ is managed by the `firewall` module.";
   config = lib.mkIf cfg.enable {
     services.open-webui = {
       enable = true;
-      openFirewall = config.mySystem.services.open-webui.openFirewall;
-      port = config.mySystem.services.open-webui.port;
+      openFirewall = config.myNixos.ervices.open-webui.openFirewall;
+      port = config.myNixos.ervices.open-webui.port;
     };
   };
 }

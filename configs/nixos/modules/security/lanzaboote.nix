@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.mySystem.boot.lanzaboote;
+  cfg = config.myNixos.boot.lanzaboote;
 in
 {
-  options.mySystem.boot.lanzaboote.enable = lib.mkEnableOption "Secure boot for NixOS";
+  options.myNixos.boot.lanzaboote.enable = lib.mkEnableOption "Secure boot for NixOS";
 
   config = lib.mkIf cfg.enable {
     /*
@@ -34,7 +34,7 @@ in
     };
 
     # Additional module packages
-    mySystem.myOptions.packages.modulePackages = with myArgs.packages.pkgsUnstable; [
+    myNixos.myOptions.packages.modulePackages = with myArgs.packages.pkgsUnstable; [
       sbctl
     ];
   };

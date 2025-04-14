@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.mySystem;
+  cfg = config.myNixos;
 in
 {
-  options.mySystem = {
+  options.myNixos = {
     nix = {
       settings.auto-optimise-store = lib.mkEnableOption "If set to true, Nix automatically detects files in the store that have
 identical contents, and replaces them with hard links to a single copy.
@@ -55,9 +55,9 @@ nix-store --optimise to get rid of duplicate files.";
   config = {
     assertions = [
       {
-        # assertion = !(config.mySystem.nix.gc.automatic && config.mySystem.programs.nh.enable.clean.enable);
+        # assertion = !(config.myNixos.nix.gc.automatic && config.myNixos.programs.nh.enable.clean.enable);
         assertion = !(cfg.nix.gc.automatic && cfg.programs.nh.clean.enable);
-        message = "Only one of `mySystem.nix.gc.automatic` or `mySystem.programs.nh.clean.enable` can be enabled at a time.";
+        message = "Only one of `myNixos.ix.gc.automatic` or `mmyNixos.ograms.nh.clean.enable` can be enabled at a time.";
       }
     ];
 

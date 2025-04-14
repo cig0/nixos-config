@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "atop"] config;
+  cfg = lib.getAttrFromPath ["myNixos" "atop"] config;
 in {
-  options.mySystem.atop.enable = lib.mkEnableOption "Whether to enable Atop, a tool for monitoring system resources.";
+  options.myNixos.atop.enable = lib.mkEnableOption "Whether to enable Atop, a tool for monitoring system resources.";
 
   config = {
     programs.atop = {

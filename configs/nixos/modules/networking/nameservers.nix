@@ -23,10 +23,10 @@
   ...
 }:
 let
-  cfg = lib.getAttrFromPath [ "mySystem" "networking" "nameservers" ] config;
+  cfg = lib.getAttrFromPath [ "myNixos" "networking" "nameservers" ] config;
 in
 {
-  options.mySystem.networking.nameservers = lib.mkEnableOption "The list of nameservers.It can be left empty if it is auto-detected through DHCP.";
+  options.myNixos.networking.nameservers = lib.mkEnableOption "The list of nameservers.It can be left empty if it is auto-detected through DHCP.";
 
   config = lib.mkIf cfg {
     networking = {

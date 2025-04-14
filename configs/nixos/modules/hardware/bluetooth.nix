@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "hardware" "bluetooth" "enable"] config;
+  cfg = lib.getAttrFromPath ["myNixos" "hardware" "bluetooth" "enable"] config;
 in {
-  options.mySystem.hardware.bluetooth.enable = lib.mkEnableOption "Whether to enable the Bluetooth radio";
+  options.myNixos.hardware.bluetooth.enable = lib.mkEnableOption "Whether to enable the Bluetooth radio";
 
   config = lib.mkIf cfg {
     hardware = {

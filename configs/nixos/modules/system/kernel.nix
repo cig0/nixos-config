@@ -6,7 +6,7 @@
   ...
 }:
 let
-  cfg = config.mySystem;
+  cfg = config.myNixos;
 
   kernelPackageName =
     if cfg.boot.kernelPackages == "stable" then
@@ -78,7 +78,7 @@ let
   };
 in
 {
-  options.mySystem = {
+  options.myNixos = {
     myOptions = {
       # The network congestion control algorithms to be used for managing congestion in TCP connections
       kernel.sysctl.netIpv4TcpCongestionControl = lib.mkOption {
@@ -114,7 +114,7 @@ in
 
   config = {
     boot = {
-      blacklistedKernelModules = lib.optionals (config.mySystem.myOptions.hardware.gpu == "nvidia") [
+      blacklistedKernelModules = lib.optionals (config.myNixos.myOptions.hardware.gpu == "nvidia") [
         "nouveau"
       ];
 
@@ -150,8 +150,8 @@ in
         });
 
       kernelModules =
-        (lib.optionals (config.mySystem.myOptions.hardware.cpu == "intel") [ "kvm-intel" ])
-        ++ (lib.optionals (config.mySystem.myOptions.hardware.gpu == "intel") [ "i915" ]);
+        (lib.optionals (config.myNixos.myOptions.hardware.cpu == "intel") [ "kvm-intel" ])
+        ++ (lib.optionals (config.myNixos.myOptions.hardware.gpu == "intel") [ "i915" ]);
 
       kernelPackages = pkgs.${kernelPackageName}; # or builtins.getAttr kernelPackageName pkgs
       /*
@@ -177,18 +177,18 @@ in
 
       kernelParams =
         commonKernelParams
-        ++ (lib.optionals (config.mySystem.myOptions.hardware.cpu == "intel") [
+        ++ (lib.optionals (config.myNixos.myOptions.hardware.cpu == "intel") [
           "intel_iommu=sm_on"
           "intel_pstate=disable"
           "kvm.ignore_msrs=1"
           "kvm.report_ignored_msrs=0"
         ])
-        ++ (lib.optionals (config.mySystem.myOptions.hardware.gpu == "intel") [
+        ++ (lib.optionals (config.myNixos.myOptions.hardware.gpu == "intel") [
           "i915.enable_fbc=1"
           "i915.enable_guc=2"
           "i915.enable_psr=1"
         ])
-        ++ (lib.optionals (config.mySystem.myOptions.hardware.gpu == "nvidia") [
+        ++ (lib.optionals (config.myNixos.myOptions.hardware.gpu == "nvidia") [
           "nvidia-drm.fbdev=1"
           "nvidia-drm.modeset=1"
         ]);

@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "xdg" "portal"] config;
+  cfg = lib.getAttrFromPath ["myNixos" "xdg" "portal"] config;
 in {
-  options.mySystem.xdg.portal.enable = lib.mkEnableOption "Whether to enable [xdg desktop integration](https://github.com/flatpak/xdg-desktop-portal).";
+  options.myNixos.xdg.portal.enable = lib.mkEnableOption "Whether to enable [xdg desktop integration](https://github.com/flatpak/xdg-desktop-portal).";
 
   config = lib.mkIf cfg.enable {
     xdg.portal = {

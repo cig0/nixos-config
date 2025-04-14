@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.mySystem.services.ollama;
+  cfg = config.myNixos.services.ollama;
 in
 {
-  options.mySystem.services.ollama = {
+  options.myNixos.services.ollama = {
     enable = lib.mkEnableOption "Whether to enable Ollama local server";
     acceleration = lib.mkOption {
       type = lib.types.enum [
@@ -26,7 +26,7 @@ in
     services.ollama = lib.mkIf cfg.enable {
       enable = true;
       group = "users";
-      acceleration = config.mySystem.services.ollama.acceleration;
+      acceleration = config.myNixos.services.ollama.acceleration;
       home = "${config.users.users.cig0.home}/.local/share/ollama";
       models = "${config.users.users.cig0.home}/ModelZoo";
     };

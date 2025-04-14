@@ -7,9 +7,9 @@
   ...
 }:
 {
-  options.mySystem.programs.nixvim.enable = lib.mkEnableOption "Configure Neovim with Nix!";
+  options.myNixos.programs.nixvim.enable = lib.mkEnableOption "Configure Neovim with Nix!";
 
-  config = lib.mkIf config.mySystem.programs.nixvim.enable {
+  config = lib.mkIf config.myNixos.programs.nixvim.enable {
     programs.nixvim = {
       enable = true;
       colorschemes.catppuccin.enable = false;

@@ -1,10 +1,13 @@
-{ config, lib, ... }:
-
+{
+  config,
+  lib,
+  ...
+}:
 let
-  cfg = config.mySystem.console.keyMap;
-
-in {
-  options.mySystem.console.keyMap = lib.mkOption {
+  cfg = config.myNixos.console.keyMap;
+in
+{
+  options.myNixos.console.keyMap = lib.mkOption {
     type = lib.types.nullOr lib.types.str;
     default = "us-acentos";
     description = "Set console key layout";

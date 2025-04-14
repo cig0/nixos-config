@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.mySystem.programs.zsh.enable = lib.mkEnableOption ''
+  options.myNixos.programs.zsh.enable = lib.mkEnableOption ''
     Whether to configure zsh as an interactive shell. To enable zsh for
     a particular user, use the {option}`users.users.<name?>.shell`
     option for that user. To enable zsh system-wide use the
@@ -14,7 +14,7 @@
 
   config = {
     programs.zsh = {
-      enable = config.mySystem.programs.zsh.enable || (config.mySystem.users.defaultUserShell == "zsh");
+      enable = config.myNixos.programs.zsh.enable || (config.myNixos.users.defaultUserShell == "zsh");
       enableBashCompletion = true;
       zsh-autoenv.enable = true;
     };

@@ -4,10 +4,10 @@
   ...
 }:
 let
-  cfg = lib.getAttrFromPath [ "mySystem" "programs" "auto-cpufreq" ] config;
+  cfg = lib.getAttrFromPath [ "myNixos" "programs" "auto-cpufreq" ] config;
 in
 {
-  options.mySystem.programs.auto-cpufreq.enable =
+  options.myNixos.programs.auto-cpufreq.enable =
     lib.mkEnableOption "Whether to enable auto-cpufreq daemon.";
 
   config = lib.mkIf cfg.enable {

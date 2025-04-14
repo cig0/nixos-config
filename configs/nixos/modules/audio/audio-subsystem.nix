@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "audio-subsystem"] config;
+  cfg = lib.getAttrFromPath ["myNixos" "audio-subsystem"] config;
 in {
-  options.mySystem.audio-subsystem.enable = lib.mkEnableOption "Whether to enable the audio subsystem with Pipewire";
+  options.myNixos.audio-subsystem.enable = lib.mkEnableOption "Whether to enable the audio subsystem with Pipewire";
 
   config = lib.mkIf cfg.enable {
     hardware.pulseaudio.enable = false;

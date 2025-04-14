@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  cfg = lib.getAttrFromPath ["mySystem" "services" "resolved" "enable"] config;
+  cfg = lib.getAttrFromPath ["myNixos" "services" "resolved" "enable"] config;
 in {
-  options.mySystem.services.resolved.enable = lib.mkEnableOption "Whether to enable resolved for stage 1 networking.
+  options.myNixos.services.resolved.enable = lib.mkEnableOption "Whether to enable resolved for stage 1 networking.
 Uses the toplevel 'services.resolved' options for 'resolved.conf'";
 
   config = lib.mkIf cfg {

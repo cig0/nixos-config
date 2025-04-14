@@ -3,7 +3,7 @@
   ...
 }:
 {
-  options.mySystem = {
+  options.myNixos = {
     myOptions.hardware = {
       cpu = lib.mkOption {
         type = lib.types.enum [

@@ -174,7 +174,7 @@ in
 Your custom options under `mySystem` would benefit from more structured documentation. Consider adding descriptions to your options using `lib.mkOption`:
 
 ```nix
-options.mySystem.programs.appimage = {
+options.myNixos.programs.appimage = {
   enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
@@ -266,7 +266,7 @@ import ./make-test-python.nix ({ pkgs, ... }:
     ];
 
     # Enable the AppImage module
-    mySystem.programs.appimage.enable = true;
+    myNixos.programs.appimage.enable = true;
 
     # Add a user for testing
     users.users.testuser = {
@@ -301,7 +301,7 @@ import ./make-test-python.nix ({ pkgs, ... }:
     ];
 
     # Disable the AppImage module
-    mySystem.programs.appimage.enable = false;
+    myNixos.programs.appimage.enable = false;
   };
 })
 ```
@@ -321,8 +321,8 @@ import ./make-test-python.nix ({ pkgs, ... }:
     ];
 
     # Enable the KDE module
-    mySystem.programs.kde-pim.enable = true;
-    mySystem.services.desktopManager.plasma6.enable = true;
+    myNixos.programs.kde-pim.enable = true;
+    myNixos.services.desktopManager.plasma6.enable = true;
 
     # Add a user for testing
     users.users.testuser = {
@@ -357,8 +357,8 @@ import ./make-test-python.nix ({ pkgs, ... }:
     ];
 
     # Enable Plasma but disable KDE PIM
-    mySystem.programs.kde-pim.enable = false;
-    mySystem.services.desktopManager.plasma6.enable = true;
+    myNixos.programs.kde-pim.enable = false;
+    myNixos.services.desktopManager.plasma6.enable = true;
   };
 })
 ```
@@ -378,7 +378,7 @@ import ./make-test-python.nix ({ pkgs, ... }:
     ];
 
     # Enable the Tailscale module
-    mySystem.services.tailscale.enable = true;
+    myNixos.services.tailscale.enable = true;
 
     # Mock networking for test
     networking.useDHCP = false;
@@ -411,7 +411,7 @@ import ./make-test-python.nix ({ pkgs, ... }:
     ];
 
     # Disable the Tailscale module
-    mySystem.services.tailscale.enable = false;
+    myNixos.services.tailscale.enable = false;
 
     # Mock networking for test
     networking.useDHCP = false;
@@ -435,7 +435,7 @@ import ./make-test-python.nix ({ pkgs, ... }:
     ];
 
     # Enable the Firefox module
-    mySystem.programs.firefox.enable = true;
+    myNixos.programs.firefox.enable = true;
 
     # Add a user for testing
     users.users.testuser = {
@@ -475,7 +475,7 @@ import ./make-test-python.nix ({ pkgs, ... }:
     ];
 
     # Disable the Firefox module
-    mySystem.programs.firefox.enable = false;
+    myNixos.programs.firefox.enable = false;
 
     # Add a user for testing
     users.users.testuser = {
@@ -612,7 +612,7 @@ import ./make-test-python.nix ({ pkgs, ... }: {
     ];
 
     # Enable the Firefox module
-    mySystem.programs.firefox.enable = true;
+    myNixos.programs.firefox.enable = true;
 
     # Add a user for testing
     users.users.testuser = {

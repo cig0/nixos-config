@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.mySystem.users.users;
+  cfg = config.myNixos.users.users;
 in
 {
-  options.mySystem.users = {
+  options.myNixos.users = {
     defaultUserShell = lib.mkOption {
       type = lib.types.enum [
         "bash"
@@ -31,7 +31,7 @@ in
   };
 
   config = {
-    users.defaultUserShell = pkgs.${config.mySystem.users.defaultUserShell};
+    users.defaultUserShell = pkgs.${config.myNixos.users.defaultUserShell};
 
     users.mutableUsers = true;
 

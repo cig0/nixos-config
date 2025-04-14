@@ -5,7 +5,7 @@
   ...
 }:
 {
-  options.mySystem = {
+  options.myNixos = {
     networking.networkmanager = {
       dns = lib.mkOption {
         type = lib.types.enum [
@@ -37,7 +37,7 @@
     };
   };
 
-  config = lib.mkIf config.mySystem.networking.networkmanager.enable {
+  config = lib.mkIf config.myNixos.networking.networkmanager.enable {
     # Disable wpa_supplicant to avoid conflicts with NetworkManager
     networking.wireless.enable = false;
 
@@ -47,7 +47,7 @@
     # Configure NetworkManager
     networking.networkmanager = {
       enable = true;
-      dns = config.mySystem.networking.networkmanager.dns;
+      dns = config.myNixos.networking.networkmanager.dns;
 
       # TODO: Split/move shared profiles anywhere else--maybe modules/common?
       # Define Wi-Fi profiles shared across hosts, and reference secrets
@@ -87,7 +87,7 @@
           "no-auto-default" = "*"; # Prevent auto-connection to untrusted networks
         };
         connection = {
-          "wifi.powersave" = if config.mySystem.networking.networkmanager.wifi.powersave then 3 else 2; # 3 = enable, 2 = disable
+          "wifi.powersave" = if config.myNixos.networking.networkmanager.wifi.powersave then 3 else 2; # 3 = enable, 2 = disable
         };
       };
     };

@@ -4,10 +4,10 @@
   ...
 }:
 let
-  cfg = config.mySystem;
+  cfg = config.myNixos;
 in
 {
-  options.mySystem = {
+  options.myNixos = {
     myOptions.services.keyd.addKeydKeyboards = lib.mkOption {
       type = lib.types.attrsOf lib.types.attrs;
       default = { };

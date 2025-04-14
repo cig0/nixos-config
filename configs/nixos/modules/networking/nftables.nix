@@ -4,10 +4,10 @@
   ...
 }:
 let
-  cfg = config.mySystem.networking.nftables;
+  cfg = config.myNixos.networking.nftables;
 in
 {
-  options.mySystem.networking.nftables.enable =
+  options.myNixos.networking.nftables.enable =
     lib.mkEnableOption "Whether to enable nftables and use nftables based firewall if enabled.
 nftables is a Linux-based packet filtering framework intended to
 replace frameworks like iptables.

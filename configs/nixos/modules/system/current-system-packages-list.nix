@@ -6,9 +6,9 @@
   ...
 }:
 {
-  options.mySystem.current-system-packages-list.enable = lib.mkEnableOption "Create a list of the installed packages in `/etc/current-system-packages`.";
+  options.myNixos.current-system-packages-list.enable = lib.mkEnableOption "Create a list of the installed packages in `/etc/current-system-packages`.";
 
-  config = lib.mkIf config.mySystem.current-system-packages-list.enable {
+  config = lib.mkIf config.myNixos.current-system-packages-list.enable {
     environment.etc."current-system-packages-list".text =
       let
         packages = builtins.map (p: "${p.name}") config.environment.systemPackages;

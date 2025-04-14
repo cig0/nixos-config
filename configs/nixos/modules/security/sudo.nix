@@ -1,17 +1,20 @@
+# Hardening tips: https://xeiaso.net/blog/paranoid-nixos-2021-07-18/
 {
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = {
-    enable = config.mySystem.security.sudo.enable;
-    extraConfig = config.mySystem.security.sudo.extraConfig;
+    enable = config.myNixos.security.sudo.enable;
+    extraConfig = config.myNixos.ecurity.sudo.extraConfig;
   };
   defaultExtraConfig = ''
     Defaults env_reset, env_keep="SSH_AUTH_SOCK"
   '';
-in {
-  options.mySystem.security.sudo = {
+in
+{
+  options.myNixos.security.sudo = {
     enable = lib.mkEnableOption "Whether to enable the {command}`sudo` command, which
 allows non-root users to execute commands as root.";
 
@@ -28,12 +31,8 @@ allows non-root users to execute commands as root.";
       execWheelOnly = true;
       extraConfig = lib.mkMerge [
         defaultExtraConfig
-        config.mySystem.security.sudo.extraConfig
+        config.myNixos.security.sudo.extraConfig
       ];
     };
   };
 }
-# READ ME!
-# ========
-# Hardening tips: https://xeiaso.net/blog/paranoid-nixos-2021-07-18/
-
