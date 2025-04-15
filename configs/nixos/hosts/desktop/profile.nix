@@ -1,7 +1,9 @@
-{ config, ... }: {
-  /* ═══════════════════════════════
-     Applications
-     ═══════════════════════════════
+{ config, ... }:
+{
+  /*
+    ═══════════════════════════════
+    Applications
+    ═══════════════════════════════
   */
   myNixos.programs.appimage.enable = true; # appimage.nix
   myNixos.services.displayManager = {
@@ -47,27 +49,28 @@
   };
   myNixos.package.yazi.enable = true; # yazi.nix
   myNixos.programs.yazi.enable = false; # yazi.nix
-  myNixos.programs.zsh.enable =
-    true; # zsh.nix. If disabled, this option is automatically enabled when `users.defaultUserShell` is set to "zsh".
+  myNixos.programs.zsh.enable = true; # zsh.nix. If disabled, this option is automatically enabled when `users.defaultUserShell` is set to "zsh".
   myNixos.xdg.portal.enable = true; # xdg-portal.nix
 
-  /* ═══════════════════════════════
-     Audio
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Audio
+    ═══════════════════════════════
   */
   myNixos.audio-subsystem.enable = true;
   myNixos.services.speechd.enable = true;
 
-  /* ═══════════════════════════════
-     Common
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Common
+    ═══════════════════════════════
   */
-  myNixos.myOptions.flakePath =
-    "/home/cig0/workdir/cig0/nixos-config"; # common/options/myoptions.nix
+  myNixos.myOptions.flakePath = "/home/cig0/workdir/cig0/nixos-config"; # common/options/myoptions.nix
 
-  /* ═══════════════════════════════
-     Hardware
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Hardware
+    ═══════════════════════════════
   */
   myNixos.hardware = {
     bluetooth.enable = true; # bluetooth.nix
@@ -90,17 +93,19 @@
     memoryPercent = 15;
   };
 
-  /* ═══════════════════════════════
-     Home Manager
-     Make sure your system user and shell environment is properly configured
-     before disabling this option!
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Home Manager
+    Make sure your system user and shell environment is properly configured
+    before disabling this option!
+    ═══════════════════════════════
   */
   myNixos.home-manager.enable = true;
 
-  /* ═══════════════════════════════
-     Networking
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Networking
+    ═══════════════════════════════
   */
   myNixos.networking.nameservers = true; # nameservers.nix
   myNixos.networking.nftables.enable = true; # nftables.nix
@@ -113,28 +118,39 @@
   myNixos.networking.stevenblack = {
     # stevenblack.nix
     enable = true;
-    block = [ "gambling" "porn" "social" ];
+    block = [
+      "gambling"
+      "porn"
+      "social"
+    ];
   };
   myNixos.systemd.services.stevenblack-unblock.enable = true; # stevenblack.nix
   myNixos.services.tailscale.enable = true; # tailscale.nix
-  myNixos.myOptions.services.tailscale.ip = "100.113.20.86"; # tailscale.nix
+  myNixos.myOptions.services.tailscale.ip = "100.113.250.86"; # tailscale.nix
 
-  /* ═══════════════════════════════
-     Power Management
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Power Management
+    ═══════════════════════════════
   */
   myNixos.powerManagement.enable = true; # power-management.nix
   myNixos.services.thermald.enable = true; # thermald.nix
 
-  /* ═══════════════════════════════
-     Security
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Security
+    ═══════════════════════════════
   */
   myNixos.networking.firewall = {
     # firewall.nix
     enable = true;
     allowPing = false;
-    allowedTCPPorts = [ 22 3000 8080 8443 ];
+    allowedTCPPorts = [
+      22
+      3000
+      8080
+      8443
+    ];
   };
   myNixos.programs.gnupg.enable = true; # gnupg.nix
   myNixos.boot.lanzaboote.enable = true; # lanzaboote.nix
@@ -165,21 +181,21 @@
     extraConfig = ''
       Defaults passwd_timeout=1440, timestamp_timeout=1440
     '';
-    /* passwd_timeout=1440, timestamp_timeout=1440:
-       Extending sudo timeout this much is generally unsafe, especially on servers!
-       I only enable this setting on personal devices for convenience.
+    /*
+      passwd_timeout=1440, timestamp_timeout=1440:
+      Extending sudo timeout this much is generally unsafe, especially on servers!
+      I only enable this setting on personal devices for convenience.
     */
   };
 
-  /* ═══════════════════════════════
-     System
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    System
+    ═══════════════════════════════
   */
-  myNixos.current-system-packages-list.enable =
-    true; # current-system-packages-list.nix
+  myNixos.current-system-packages-list.enable = true; # current-system-packages-list.nix
   myNixos.boot.kernelPackages = "stable"; # kernel.nix
-  myNixos.myOptions.kernel.sysctl.netIpv4TcpCongestionControl =
-    "westwood"; # kernel.nix
+  myNixos.myOptions.kernel.sysctl.netIpv4TcpCongestionControl = "westwood"; # kernel.nix
   myNixos.services.keyd.enable = true; # keyd.nix
   myNixos.nix = {
     # maintenance.nix
@@ -206,9 +222,10 @@
     users.doomguy = true; # Enable or disable the test account
   };
 
-  /* ═══════════════════════════════
-     Virtualisation
-     ═══════════════════════════════
+  /*
+    ═══════════════════════════════
+    Virtualisation
+    ═══════════════════════════════
   */
   myNixos.virtualisation = {
     incus.enable = true; # incus.nix
