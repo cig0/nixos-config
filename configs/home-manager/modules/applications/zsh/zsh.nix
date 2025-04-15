@@ -41,22 +41,22 @@ in
       umask 0077
     '';
     initExtra = ''
-        # Completion setup
-        # Zsh completions configuration file: https://thevaluable.dev/zsh-completion-guide-examples/
+      # Completion setup
+      # Zsh completions configuration file: https://thevaluable.dev/zsh-completion-guide-examples/
 
-        unsetopt no_complete_aliases
-        zstyle ':completion:*' completer _expand_alias _extensions _complete _approximate
-        # zstyle ':completion:*' completer _expand _complete _ignored _correct _path_files _approximate _prefix _camel_case
-        zstyle ':completion:*' expand prefix suffix
-        zstyle ':completion:*' squeeze-slashes true
-        zstyle ':completion:*' matcher-list 'r:[^A-Z0-9]||[A-Z0-9]=** r:|=*'
-        zstyle ':completion:*' list-dirs-first true
-        zstyle ':completion:*' menu select
+      unsetopt no_complete_aliases
+      zstyle ':completion:*' completer _expand_alias _extensions _complete _approximate
+      # zstyle ':completion:*' completer _expand _complete _ignored _correct _path_files _approximate _prefix _camel_case
+      zstyle ':completion:*' expand prefix suffix
+      zstyle ':completion:*' squeeze-slashes true
+      zstyle ':completion:*' matcher-list 'r:[^A-Z0-9]||[A-Z0-9]=** r:|=*'
+      zstyle ':completion:*' list-dirs-first true
+      zstyle ':completion:*' menu select
 
-        # Caching completions
-        zstyle ':completion:*' use-cache on
-        zstyle ':completion:*' cache-path "$HOME/.cache/zcompcache"
-        zstyle ':completion:*' group-name null
+      # Caching completions
+      zstyle ':completion:*' use-cache on
+      zstyle ':completion:*' cache-path "$HOME/.cache/zcompcache"
+      zstyle ':completion:*' group-name null
 
       # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
       COMPLETION_WAITING_DOTS="true"
@@ -70,7 +70,7 @@ in
       # Shell editing Emacs' style
       bindkey -e
 
-      . "$XDG_HOME/.aws/env"
+      . ~/.aws/env
 
       # Import functions
       unalias la && ${allFunctions}
