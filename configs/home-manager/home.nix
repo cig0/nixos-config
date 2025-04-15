@@ -8,13 +8,21 @@ let
   mkUserConfig =
     username:
     {
-      nixosConfig,
       ...
     }:
     {
       imports = [
-        ./modules/module-loader.nix # Shared modules
-        ./users/${username}.nix # User configuration
+        /*
+          Importing the shared modules for each user isn't the best approach, but otherwise I have
+          to modify the module-loader library to pass `nixosConfi` to the modules it loads.
+
+          This way, though, because the modules are loaded under the user namespace, they  already
+          can access the `nixosConfig` and `config` variables.
+        */
+        ./modules/module-loader.nix
+
+        # User configuration
+        ./users/${username}.nix
       ];
 
       home = {
