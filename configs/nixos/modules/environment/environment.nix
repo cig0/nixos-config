@@ -36,6 +36,10 @@
   environment = {
     homeBinInPath = true;
     localBinInPath = true;
-    pathsToLink = [ "/share/zsh" ]; # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
+    pathsToLink = [
+      "/share/applications"
+      "/share/xdg-desktop-portal"
+      "/share/zsh" # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
+    ];
   };
 }
