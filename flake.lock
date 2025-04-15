@@ -9,9 +9,15 @@
       "locked": {
         "lastModified": 1744578060,
         "narHash": "sha256-ApX5u3aXtmthemPSnZls/oxvqpNR7C9t4Ut57MTvces=",
+        "lastModified": 1743325743,
+        "narHash": "sha256-p2ZlFUBy10SV0b2g8ZOWse01mgaeU4haZN+dgHcoN6U=",
+        "lastModified": 1744304520,
+        "narHash": "sha256-vZlMyTK6zEi/JA2XPkAGfuTsD/U+hOXJnY63UmxVNII=",
         "owner": "AdnanHodzic",
         "repo": "auto-cpufreq",
         "rev": "b6493edc7033beac216b8836af4994e56c6682f4",
+        "rev": "00be2a5d91832519823990deb7b87af85fc78017",
+        "rev": "6789cb6ce48a741dbd881dc3fc5fcd12250dc876",
         "type": "github"
       },
       "original": {
@@ -459,11 +465,25 @@
         ]
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1744518957,
         "narHash": "sha256-RLBSWQfTL0v+7uyskC5kP6slLK1jvIuhaAh8QvB75m4=",
+||||||| parent of 548c8f2 (wip)
+        "lastModified": 1743306489,
+        "narHash": "sha256-LROaIjSLo347cwcHRfSpqzEOa2FoLSeJwU4dOrGm55E=",
+=======
+        "lastModified": 1743911143,
+        "narHash": "sha256-4j4JPwr0TXHH4ZyorXN5yIcmqIQr0WYacsuPA4ktONo=",
+>>>>>>> 548c8f2 (wip)
         "owner": "nix-community",
         "repo": "nix-index-database",
+<<<<<<< HEAD
         "rev": "4fc9ea78c962904f4ea11046f3db37c62e8a02fd",
+||||||| parent of 548c8f2 (wip)
+        "rev": "b3696bfb6c24aa61428839a99e8b40c53ac3a82d",
+=======
+        "rev": "a36f6a7148aec2c77d78e4466215cceb2f5f4bfb",
+>>>>>>> 548c8f2 (wip)
         "type": "github"
       },
       "original": {
@@ -525,11 +545,25 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1744542555,
         "narHash": "sha256-wRnfAOt5MZbRT/sE3kGJ2OP1oB0ekViwFjCeuM1rgDY=",
+||||||| parent of 548c8f2 (wip)
+        "lastModified": 1743690417,
+        "narHash": "sha256-vjyJTDAJfhDEduLaQv/j1M6iQSsvj1tDI5V5rMVPyVk=",
+=======
+        "lastModified": 1744456153,
+        "narHash": "sha256-xTaAboh9p0Mz0UEgcKe+B1zVKoRFG7RQR+gf7ypMQVA=",
+>>>>>>> 548c8f2 (wip)
         "owner": "lilyinstarlight",
         "repo": "nixos-cosmic",
+<<<<<<< HEAD
         "rev": "fb8e1f6ae3e755263a8eecaa8db4ad34cf0137b3",
+||||||| parent of 548c8f2 (wip)
+        "rev": "cd185ca7ed5fc0ad766370abc48294abe36dec52",
+=======
+        "rev": "a76a451a2c97aa37a7741bdf8244ad91205776b8",
+>>>>>>> 548c8f2 (wip)
         "type": "github"
       },
       "original": {
@@ -599,11 +633,25 @@
     },
     "nixpkgs-stable_2": {
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1744440957,
         "narHash": "sha256-FHlSkNqFmPxPJvy+6fNLaNeWnF1lZSgqVCl/eWaJRc4=",
+||||||| parent of 548c8f2 (wip)
+        "lastModified": 1743576891,
+        "narHash": "sha256-vXiKURtntURybE6FMNFAVpRPr8+e8KoLPrYs9TGuAKc=",
+=======
+        "lastModified": 1744309437,
+        "narHash": "sha256-QZnNHM823am8apCqKSPdtnzPGTy2ZB4zIXOVoBp5+W0=",
+>>>>>>> 548c8f2 (wip)
         "owner": "NixOS",
         "repo": "nixpkgs",
+<<<<<<< HEAD
         "rev": "26d499fc9f1d567283d5d56fcf367edd815dba1d",
+||||||| parent of 548c8f2 (wip)
+        "rev": "44a69ed688786e98a101f02b712c313f1ade37ab",
+=======
+        "rev": "f9ebe33a928b5d529c895202263a5ce46bdf12f7",
+>>>>>>> 548c8f2 (wip)
         "type": "github"
       },
       "original": {
@@ -630,11 +678,25 @@
     },
     "nixpkgs_2": {
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1744440957,
         "narHash": "sha256-FHlSkNqFmPxPJvy+6fNLaNeWnF1lZSgqVCl/eWaJRc4=",
+||||||| parent of 548c8f2 (wip)
+        "lastModified": 1743576891,
+        "narHash": "sha256-vXiKURtntURybE6FMNFAVpRPr8+e8KoLPrYs9TGuAKc=",
+=======
+        "lastModified": 1744309437,
+        "narHash": "sha256-QZnNHM823am8apCqKSPdtnzPGTy2ZB4zIXOVoBp5+W0=",
+>>>>>>> 548c8f2 (wip)
         "owner": "NixOS",
         "repo": "nixpkgs",
+<<<<<<< HEAD
         "rev": "26d499fc9f1d567283d5d56fcf367edd815dba1d",
+||||||| parent of 548c8f2 (wip)
+        "rev": "44a69ed688786e98a101f02b712c313f1ade37ab",
+=======
+        "rev": "f9ebe33a928b5d529c895202263a5ce46bdf12f7",
+>>>>>>> 548c8f2 (wip)
         "type": "github"
       },
       "original": {
@@ -661,6 +723,7 @@
     },
     "nixpkgs_4": {
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1744502386,
         "narHash": "sha256-QAd1L37eU7ktL2WeLLLTmI6P9moz9+a/ONO8qNBYJgM=",
         "owner": "NixOS",
@@ -677,6 +740,25 @@
     },
     "nixpkgs_5": {
       "locked": {
+||||||| parent of 548c8f2 (wip)
+=======
+        "lastModified": 1743689281,
+        "narHash": "sha256-y7Hg5lwWhEOgflEHRfzSH96BOt26LaYfrYWzZ+VoVdg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "2bfc080955153be0be56724be6fa5477b4eefabb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
+>>>>>>> 548c8f2 (wip)
         "lastModified": 1737003892,
         "narHash": "sha256-RCzJE9wKByLCXmRBp+z8LK9EgdW+K+W/DXnJS4S/NVo=",
         "owner": "NixOS",
@@ -840,11 +922,25 @@
         ]
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1744513456,
         "narHash": "sha256-NLVluTmK8d01Iz+WyarQhwFcXpHEwU7m5hH3YQQFJS0=",
+||||||| parent of 548c8f2 (wip)
+        "lastModified": 1743647602,
+        "narHash": "sha256-fXd8fA6HR7MlUJQzz31zjBzUji4HpGCJ7CMVKSZOe8c=",
+=======
+        "lastModified": 1744425163,
+        "narHash": "sha256-iFcqIbyY25uhtRrQal5vFTxt0q59vDf++nY8du5hof4=",
+>>>>>>> 548c8f2 (wip)
         "owner": "oxalica",
         "repo": "rust-overlay",
+<<<<<<< HEAD
         "rev": "730fd8e82799219754418483fabe1844262fd1e2",
+||||||| parent of 548c8f2 (wip)
+        "rev": "5b2d60b2e25bcb498103f6fae08da561f6b671da",
+=======
+        "rev": "4bb0b6dfc5bafa8b4e8dbe1170f051c437b2cb79",
+>>>>>>> 548c8f2 (wip)
         "type": "github"
       },
       "original": {
@@ -858,11 +954,25 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1744513456,
         "narHash": "sha256-NLVluTmK8d01Iz+WyarQhwFcXpHEwU7m5hH3YQQFJS0=",
+||||||| parent of 548c8f2 (wip)
+        "lastModified": 1743682350,
+        "narHash": "sha256-S/MyKOFajCiBm5H5laoE59wB6w0NJ4wJG53iAPfYW3k=",
+=======
+        "lastModified": 1744425163,
+        "narHash": "sha256-iFcqIbyY25uhtRrQal5vFTxt0q59vDf++nY8du5hof4=",
+>>>>>>> 548c8f2 (wip)
         "owner": "oxalica",
         "repo": "rust-overlay",
+<<<<<<< HEAD
         "rev": "730fd8e82799219754418483fabe1844262fd1e2",
+||||||| parent of 548c8f2 (wip)
+        "rev": "c4a8327b0f25d1d81edecbb6105f74d7cf9d7382",
+=======
+        "rev": "4bb0b6dfc5bafa8b4e8dbe1170f051c437b2cb79",
+>>>>>>> 548c8f2 (wip)
         "type": "github"
       },
       "original": {
@@ -892,6 +1002,7 @@
         "type": "github"
       }
     },
+<<<<<<< HEAD
     "sops-nix": {
       "inputs": {
         "nixpkgs": "nixpkgs_4"
@@ -910,6 +1021,27 @@
         "type": "github"
       }
     },
+||||||| parent of 548c8f2 (wip)
+=======
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1744103455,
+        "narHash": "sha256-SR6+qjkPjGQG+8eM4dCcVtss8r9bre/LAxFMPJpaZeU=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "69d5a5a4635c27dae5a742f36108beccc506c1ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+>>>>>>> 548c8f2 (wip)
     "systems": {
       "locked": {
         "lastModified": 1681028828,
@@ -968,11 +1100,25 @@
         "rust-overlay": "rust-overlay_4"
       },
       "locked": {
+<<<<<<< HEAD
         "lastModified": 1744526776,
         "narHash": "sha256-H+RSj9U8tZ5jh5UzCjt2kBvpN0AsyELAv8ZOP42Kt74=",
+||||||| parent of 548c8f2 (wip)
+        "lastModified": 1743669585,
+        "narHash": "sha256-uAOZg2vsMooemIpV0jdgy7JicuVNBbJl2gRN7m/N0ZM=",
+=======
+        "lastModified": 1744451963,
+        "narHash": "sha256-WCl0rIeud8mC8SLiO1yrxNcZXTI7S40c70nmpD9ca20=",
+>>>>>>> 548c8f2 (wip)
         "owner": "sxyazi",
         "repo": "yazi",
+<<<<<<< HEAD
         "rev": "d2cc73c9277662f05be12e1cdd1c9659dd1d6268",
+||||||| parent of 548c8f2 (wip)
+        "rev": "b725b86be13ffc127094dbb981d667d3d7d8c64a",
+=======
+        "rev": "af92b92da81addab089e0f490f79f09a6f63857f",
+>>>>>>> 548c8f2 (wip)
         "type": "github"
       },
       "original": {
