@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   ...
 }:
@@ -23,11 +24,11 @@ let
     inherit dir;
 
     # Files and directories to exclude. Use this list to exclude specific modules too.
-    excludePaths = [
-    ];
+    excludePaths = [ ];
   };
 in
 {
+  # Add modules to import here, maybe from excluded directories
   imports = builtins.filter (x: x != null) modules ++ [
   ];
 }
