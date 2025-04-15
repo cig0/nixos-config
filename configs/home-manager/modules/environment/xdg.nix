@@ -6,7 +6,7 @@
   xdg = {
     enable = true;
     portal = {
-      enable = true;
+      enable = false;
       config = {
         common = {
           default = [
