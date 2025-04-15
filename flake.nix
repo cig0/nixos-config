@@ -7,27 +7,27 @@
 
   ASCII art credits: https://www.asciiart.eu/cartoons/beavis-and-butt-head
   ------------------------------------------------------------------------
-                                                                             _------__--___.__.
-                                                                           /            `  `    \
-                                                                          |                      \
-                                                                          |                       |
-                                                                           \                      |
-                                                                             ~/ --`-`-`-\         |
-                                                                             |            |       |
-                                                                             |            |       |
-                                                                              |   _--    |       |
-                                                           Hey Butthead,      _| =-.    |.-.    |
-                                                                              o|/o/       _.   |
-                                                          does this suck?     /  ~          \ |
-                                                                            (____@)  ___~    |
-                                                                               |_===~~~.`    |
-                                                                            _______.--~     |
-                                                                            \________       |
-                                                                                     \      |
-                                                                                   __/-___-- -__
-                                                                                  /            __\
-                                                                                 /-| Metallica|| |
-                                                                                / /|          || |
+                                                                           _------__--___.__.
+                                                                         /            `  `    \
+                                                                        |                      \
+                                                                        |                       |
+                                                                         \                      |
+                                                                           ~/ --`-`-`-\         |
+                                                                           |            |       |
+                                                                           |            |       |
+                                                                            |   _--    |       |
+                                                         Hey Butthead,      _| =-.    |.-.    |
+                                                                            o|/o/       _.   |
+                                                        does this suck?     /  ~          \ |
+                                                                          (____@)  ___~    |
+                                                                             |_===~~~.`    |
+                                                                          _______.--~     |
+                                                                          \________       |
+                                                                                   \      |
+                                                                                 __/-___-- -__
+                                                                                /            __\
+                                                                               /-| Metallica|| |
+                                                                              / /|          || |
 */
 {
   description = "cig0's NixOS flake";
@@ -168,25 +168,25 @@
             sops-nix.nixosModules.sops
 
             /*
-              Home Manager
-              The configuration is split to keep this flake.nix file slim.
+              Dynamically import modules with a plug-and-play approach. Add a new module in the host’s
+              config dir or globally in `./configs/nixos/modules`, and it’s auto-imported on the
+              next generation. See `./lib/modules.nix` for details.
             */
-            (import ./configs/home-manager/home.nix)
+            (import ./configs/nixos/modules/module-loader.nix)
 
             /*
               NixOS
               Load host config (dynamic path built from host name). Find custom option toggles in
               `./configs/nixos/hosts/${hostname}/profile.nix`.
             */
-            (./. + "/configs/nixos/hosts/${hostname}/configuration.nix")
+            (import ./configs/nixos/hosts/${hostname}/configuration.nix)
             (import ./configs/nixos/hosts/${hostname}/profile.nix)
 
             /*
-              Dynamically load modules with a plug-and-play approach. Add a new module in the host’s
-              config dir or globally in `./configs/nixos/modules`, and it’s auto-imported on the
-              next generation. See `./lib/modules.nix` for details.
+              Home Manager
+              The configuration is split to keep this flake.nix file slim.
             */
-            (import ./configs/nixos/modules/module-loader.nix)
+            (import ./configs/home-manager/home.nix)
 
             {
               # Overlays
