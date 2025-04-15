@@ -6,15 +6,12 @@
 let
   aliases = {
     # Cleaning
-    nhc = "nh clean all --keep 3";
-    nixc = "nix-collect-garbage -d 3";
+    nhcak3 = "nh clean all --keep 3 && nix store optimise --verbose";
+    nhcuk3 = "nh clean user --keep 3 && nix store optimise --verbose";
+    nixcg3 = "nix-collect-garbage -d 3";
 
     # Flakes
     nixfc = "nix flake check";
-
-    # nh - Yet another nix helper
-    nhcak2 = "nh clean all --keep 5";
-    nhcuk2 = "nh clean user --keep 5";
 
     # Search (options and packages)
     nixs = "nix search nixpkgs";
