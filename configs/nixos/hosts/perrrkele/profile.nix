@@ -68,7 +68,7 @@
     Common
     ═══════════════════════════════
   */
-  myNixos.myOptions.flakePath = "/home/cig0/workdir/cig0/nixos-config"; # common/options/myoptions.nix
+  myNixos.myOptions.flakeSrcPath = "/home/cig0/workdir/cig0/nixos-config"; # common/options/myoptions.nix
 
   /*
     ═══════════════════════════════

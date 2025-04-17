@@ -31,7 +31,7 @@ toc::[]
 ==== 💡 Quick reference
 
 - The flake is always tested with `nix flake check` before commiting and pushing changes.
-- With NixOS built-in tooling: `nixos-rebuild test --use-remote-sudo --update-input nixpkgs --update-input nixpkgs-unstable --flake FLAKE_PATH`.
+- With NixOS built-in tooling: `nixos-rebuild test --use-remote-sudo --update-input nixpkgs --update-input nixpkgs-unstable --flake FLAKE_SRC_PATH`.
 - With link:https://github.com/viperML/nh[nh].
 
 image::.repo_assets/wip.webp[alt="Frosted Flakes", align="center"]

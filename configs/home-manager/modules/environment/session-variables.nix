@@ -10,11 +10,11 @@
       PEPITO = "PEPAZO";
 
       # Flake source code path
-      FLAKE_PATH = "${nixosConfig.myNixos.myOptions.flakePath}";
+      FLAKE_SRC_PATH = "${nixosConfig.myNixos.myOptions.flakeSrcPath}";
 
       # GitHub's `gh` CLI tool
       GH_USERNAME = "cig0";
-      GH_TOKEN = "SOPS secret here, i.e.: GH_TOKEN-${config.home.username}";
+      GH_TOKEN = nixosConfig.mySecrets.getSecret "GH_TOKEN";
 
       # Editor
       EDITOR = nixosConfig.myNixos.myOptions.cli.editor;
