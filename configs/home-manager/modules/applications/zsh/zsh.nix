@@ -1,18 +1,28 @@
 {
   ansiColors,
   config,
+  inputs,
   lib,
   nixosConfig,
   ...
 }:
 let
   # Optionaly, you can import individual aliases and functions.
-  allAliases = (import ./aliases.nix { inherit ansiColors lib nixosConfig; }).allAliases;
+  allAliases =
+    (import ./aliases.nix {
+      inherit
+        ansiColors
+        inputs
+        lib
+        nixosConfig
+        ;
+    }).allAliases;
   allFunctions =
     (import ./functions.nix {
       inherit
         ansiColors
         config
+        inputs
         lib
         nixosConfig
         ;

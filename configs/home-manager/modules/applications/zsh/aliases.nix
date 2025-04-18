@@ -1,6 +1,7 @@
 # Import all aliases modules found in the aliases directory
 {
   ansiColors,
+  inputs,
   lib,
   nixosConfig,
   ...
@@ -32,6 +33,7 @@ let
             {
               inherit ansiColors;
             }
+            // (if args ? "inputs" then { inherit inputs; } else { })
             // (if args ? "lib" then { inherit lib; } else { })
             // (if args ? "nixosConfig" then { inherit nixosConfig; } else { });
           result = importedFn actualArgs; # Call the function with appropriate args

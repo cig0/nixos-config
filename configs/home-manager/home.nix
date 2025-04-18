@@ -2,6 +2,7 @@
 {
   ansiColors,
   config,
+  inputs,
   lib,
   ...
 }:
@@ -45,7 +46,7 @@ in
   config = lib.mkIf config.myNixos.home-manager.enable {
     home-manager = {
       backupFileExtension = "backup";
-      extraSpecialArgs = { inherit ansiColors; };
+      extraSpecialArgs = { inherit ansiColors inputs; };
       useGlobalPkgs = true;
       useUserPackages = true;
       users = lib.mkMerge [

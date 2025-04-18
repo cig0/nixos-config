@@ -2,6 +2,7 @@
 {
   ansiColors,
   config,
+  inputs,
   lib,
   nixosConfig,
   ...
@@ -34,6 +35,7 @@ let
               inherit ansiColors;
             }
             // (if args ? "config" then { inherit config; } else { })
+            // (if args ? "inputs" then { inherit inputs; } else { })
             // (if args ? "lib" then { inherit lib; } else { })
             // (if args ? "nixosConfig" then { inherit nixosConfig; } else { });
           result = importedFn actualArgs; # Call the function with appropriate args
