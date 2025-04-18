@@ -9,6 +9,7 @@
     ═══════════════════════════════
   */
   myNixos.programs.appimage.enable = true; # appimage.nix
+  myHm.programs.atuin.enable = true; # common/myhm/default.nix
   myNixos.services.displayManager = {
     # display-manager.nix
     ly.enable = false;
@@ -179,6 +180,8 @@
       }
     ];
   };
+  myNixos.programs.ssh.startAgent = true; # ssh.nix
+  myNixos.programs.gnupg.enableSSHSupport = false; # gnupg.nix. myNixos.programs.gnupg must be enabled.
   myNixos.security.sudo = {
     # sudo.nix
     enable = true;
