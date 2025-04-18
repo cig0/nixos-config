@@ -4,8 +4,8 @@ pre-commit:
     - name: encrypt-secrets
       glob: secrets/secrets.json
       run: sops -i -e secrets/secrets.json || { echo "SOPS encryption failed."; exit 1; }
-    - name: encrypt-majo-home-wifi
-      glob: secrets/majo-wifi-psk.txt
+    - name: encrypt-profile0-home-wifi
+      glob: secrets/profile0-wifi-psk.txt
       run: sops -i -e secrets/majo-wifi-psk.txt || { echo "SOPS encryption failed."; exit 1; }
 
 # post-merge:
