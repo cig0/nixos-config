@@ -59,6 +59,8 @@ in
     initExtraFirst = ''
       umask 0077
     '';
+
+    # TODO: what happened with the other Zsh options!?
     initExtra = ''
             # Completion setup
             # Zsh completions configuration file: https://thevaluable.dev/zsh-completion-guide-examples/
