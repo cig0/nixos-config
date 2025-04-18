@@ -2,6 +2,7 @@
   ...
 }:
 {
+  # TODO: add option
   programs.atuin = {
     enable = true;
     enableZshIntegration = true;
