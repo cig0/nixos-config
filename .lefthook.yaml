@@ -3,11 +3,35 @@ pre-commit:
   jobs:
     - name: encrypt-secrets
       glob: secrets/secrets.json
-      run: sops -d secrets/secrets.json &>/dev/null && echo "secrets.json is already encrypted, skipping" || sops -i -e secrets/secrets.json
+      run: |
+        if ! sops -d secrets/secrets.json &>/dev/null; then
+          echo "Encrypting secrets.json..."
+          sops -i -e secrets/secrets.json
+          git add secrets/secrets.json
+        else
+          echo "secrets.json is already encrypted, skipping"
+        fi
 
     - name: encrypt-profile0-wifi-psk
       glob: secrets/profile0-wifi-psk.txt
-      run: sops -d secrets/profile0-wifi-psk.txt &>/dev/null && echo "profile0-wifi-psk.txt is already encrypted, skipping" || sops -i -e secrets/profile0-wifi-psk.txt
+      run: |
+        if ! sops -d secrets/profile0-wifi-psk.txt &>/dev/null; then
+          echo "Encrypting profile0-wifi-psk.txt..."
+          sops -i -e secrets/profile0-wifi-psk.txt
+          git add secrets/profile0-wifi-psk.txt
+        else
+          echo "profile0-wifi-psk.txt is already encrypted, skipping"
+        fi
+# pre-commit:
+#   parallel: true
+#   jobs:
+#     - name: encrypt-secrets
+#       glob: secrets/secrets.json
+#       run: sops -d secrets/secrets.json &>/dev/null && echo "secrets.json is already encrypted, skipping" || sops -i -e secrets/secrets.json
+
+#     - name: encrypt-profile0-wifi-psk
+#       glob: secrets/profile0-wifi-psk.txt
+#       run: sops -d secrets/profile0-wifi-psk.txt &>/dev/null && echo "profile0-wifi-psk.txt is already encrypted, skipping" || sops -i -e secrets/profile0-wifi-psk.txt
 
 # post-merge:
 #   parallel: true
