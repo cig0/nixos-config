@@ -3,9 +3,11 @@
   inputs,
   lib,
   ...
-}: let
-  cfg = lib.getAttrFromPath ["myNixos" "system" "autoUpgrade"] config;
-in {
+}:
+let
+  cfg = lib.getAttrFromPath [ "myNixos" "system" "autoUpgrade" ] config;
+in
+{
   options.myNixos.system.autoUpgrade.enable =
     lib.mkEnableOption "Whether to periodically upgrade NixOS to the latest
 version. If enabled, a systemd timer will run
@@ -24,7 +26,7 @@ day.";
         "--no-build-nix"
         "--print-build-logs"
       ];
-      flake = inputs.self.outPath; # Use the flake of the current system.
+      flake = inputs.self.outPath;
       operation = "boot";
       randomizedDelaySec = "720min";
       persistent = false; # Do not try to upgrade early to compensate a missed reboot
