@@ -22,7 +22,7 @@ in
       settings = {
         gui = {
           user = "cig0";
-          password = "1234";
+          password = "WIP1234";
           options = {
             minHomeDiskFree = {
               unit = "GB";
