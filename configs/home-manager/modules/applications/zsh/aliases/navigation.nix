@@ -15,8 +15,8 @@ let
     Cnp = "cd ~/workdir/cig0/nixpkgs";
     D = "cd ~/Downloads";
     E = "cd ~/Desktop";
-    F = "cd ${nixosConfig.myNixos.myOptions.flakeSrcPath}"; # Flake directory
-    Fp = "cd ${nixosConfig.myNixos.myOptions.flakeSrcPath}-public"; # Public flake directory
+    F = "cd ${nixosConfig.myNixos.myOptions.flakeSrcPath}";
+    Fp = "cd ${nixosConfig.myNixos.myOptions.flakeSrcPath}-public";
     N = "cd ~/Notes";
     O = "cd ~/Documents";
     P = "cd ~/Pictures";
