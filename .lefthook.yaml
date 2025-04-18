@@ -3,10 +3,11 @@ pre-commit:
   jobs:
     - name: encrypt-secrets
       glob: secrets/secrets.json
-      run: sops -i -e secrets/secrets.json || { echo "SOPS encryption failed."; exit 1; }
-    - name: encrypt-profile0-home-wifi
+      run: sops -d secrets/secrets.json &>/dev/null && echo "secrets.json is already encrypted, skipping" || sops -i -e secrets/secrets.json
+
+    - name: encrypt-profile0-wifi-psk
       glob: secrets/profile0-wifi-psk.txt
-      run: sops -i -e secrets/majo-wifi-psk.txt || { echo "SOPS encryption failed."; exit 1; }
+      run: sops -d secrets/profile0-wifi-psk.txt &>/dev/null && echo "profile0-wifi-psk.txt is already encrypted, skipping" || sops -i -e secrets/profile0-wifi-psk.txt
 
 # post-merge:
 #   parallel: true
