@@ -1,13 +1,12 @@
 # Import all function modules found in the functions directory
 {
+  ansiColors,
   config,
   lib,
   nixosConfig,
   ...
 }:
 let
-  ansiColors = import ./ansi-colors.nix { };
-
   # Check if the first line matches the required header
   hasValidHeader =
     file:

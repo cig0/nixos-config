@@ -29,6 +29,15 @@
                                                                                /-| Metallica|| |
                                                                               / /|          || |
 */
+
+/*
+  NixOS Configuration Strategy:
+  - Base configuration uses streamlined versions of default NixOS modules
+  - Host-specific settings are defined in each host's `profile.nix`
+  - `configuration.nix` handles hardware-specific settings and core system setup
+  - This separation keeps configurations modular and maintainable
+*/
+
 {
   description = "cig0's NixOS flake";
 
@@ -133,13 +142,15 @@
       ...
     }@inputs:
     let
-      # Import libraries. We need them for the `mkHost` function below.
-      lib = inputs.nixpkgs.lib;
+      # Import utilities and libraries
+      ansiColors = import ./lib/ansi-colors { };
 
       /*
         The mkHost function:
-        - Assembles a nixosSystem for each host
-        - Makes it easy to share modules, options, and configurations for all hosts
+        - Creates a complete NixOS system configuration for each host
+        - Applies common modules, overlays, and configurations across all hosts
+        - Incorporates host-specific settings from individual host profiles
+        - Enables dynamic module loading for easy extensibility
       */
       mkHost =
         hostname: hostConfig:
@@ -148,15 +159,8 @@
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs system; };
+          specialArgs = { inherit ansiColors inputs system; };
           modules = [
-            /*
-              Import modules from the added flakes.
-
-              Since many of these module options mirror mySystem options (to mask the originalones),
-              the final host configuration is assembled using only those options explicitly declared
-              in the host's profile.nix module.
-            */
             auto-cpufreq.nixosModules.default
             home-manager.nixosModules.home-manager
             lanzaboote.nixosModules.lanzaboote
@@ -168,39 +172,40 @@
             sops-nix.nixosModules.sops
 
             /*
-              Dynamically import modules with a plug-and-play approach. Add a new module in the host’s
-              config dir or globally in `./configs/nixos/modules`, and it’s auto-imported on the
-              next generation. See `./lib/modules.nix` for details.
+              Dynamic module loading system:
+              - Automatically discovers and imports NixOS modules from predefined directories
+              - Enables true plug-and-play configuration - just add a new module file and rebuild
+              - See `./lib/module-loader` for implementation details and customization options
             */
             (import ./configs/nixos/modules/module-loader.nix)
 
             /*
-              NixOS
-              Load host config (dynamic path built from host name). Find custom option toggles in
-              `./configs/nixos/hosts/${hostname}/profile.nix`.
+              NixOS Configuration Strategy:
+              - Base configuration uses streamlined versions of default NixOS modules
+              - Host-specific settings are defined in each host's `profile.nix`
+
+              This separation keeps configurations modular and maintainable.
             */
             (import ./configs/nixos/hosts/${hostname}/configuration.nix)
             (import ./configs/nixos/hosts/${hostname}/profile.nix)
 
-            /*
-              Home Manager
-              The configuration is split to keep this flake.nix file slim.
-            */
+            # Home Manager. The configuration is split to keep this file lean.
             (import ./configs/home-manager/home.nix)
 
             {
-              # Overlays
+              # Overlays - extend nixpkgs with additional or modified packages
               nixpkgs.overlays = [ rust-overlay.overlays.default ];
 
               # myArgs
               myNixos.myArgsContributions.system = {
+                # Make hostname available to all modules via myNixos.myArgsContributions
                 hostname = hostname;
               };
             }
           ] ++ hostConfig.extraModules;
         };
 
-      # Define host-specific configurations here
+      # Hosts definitions
       hosts = {
         chuwi = {
           description = "Headless MiniPC: Intel CPU & GPU, lab + NAS + streaming";

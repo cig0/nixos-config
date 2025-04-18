@@ -1,9 +1,9 @@
 # Home Manager Zsh functions module. Do not remove this header.
 {
+  ansiColors,
   ...
 }:
 let
-  ansiColors = import ../ansi-colors.nix { };
   functions = ''
     gd() {
       # TL;DR: git diff
