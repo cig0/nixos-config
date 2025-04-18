@@ -3,7 +3,7 @@
   ...
 }:
 let
-  moduleLoader = import ../../../lib/module-loader/lib.nix { inherit lib; };
+  moduleLoader = import ../../../lib/module-loader { inherit lib; };
 
   /*
     This module performs a recursive directory scan and should be initialized from its own directory,
