@@ -14,7 +14,7 @@
 
       # GitHub's `gh` CLI tool
       GH_USERNAME = "cig0";
-      GH_TOKEN = nixosConfig.mySecrets.getSecret "GH_TOKEN";
+      GH_TOKEN = nixosConfig.mySecrets.getSecret "gh_token";
 
       # Editor
       EDITOR = nixosConfig.myNixos.myOptions.cli.editor;
