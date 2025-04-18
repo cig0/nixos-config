@@ -2,15 +2,17 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.myNixos.programs.gnupg;
-in {
+in
+{
   options.myNixos.programs.gnupg.enable = lib.mkEnableOption "Whether to enable the GNU GPG agent";
 
   config = lib.mkIf cfg.enable {
     programs.gnupg.agent = {
       enable = true;
-      enableSSHSupport = true;
+      enableSSHSupport = false;
       settings = {
         default-cache-ttl = 86400;
         max-cache-ttl = 86400;
