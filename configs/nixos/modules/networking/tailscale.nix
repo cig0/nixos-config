@@ -10,7 +10,7 @@
       enable = lib.mkEnableOption "Whether to enable Tailscale client daemon.";
       authKeyFile = lib.mkOption {
         type = lib.types.path;
-        default = ./configs/nixos/hosts/${myArgs.system.hostname}/profile/secrets/tailscale-authKeyFile;
+        default = ./secrets/tailscale-authKeyFile-${myArgs.system.hostname};
         description = ''
           A file containing the auth key.
           Tailscale will be automatically started if provided.
@@ -37,7 +37,9 @@
       firewall = {
         trustedInterfaces = [ "tailscale0" ];
       };
-      search = [ "tuxedo-goanna.ts.net" ]; # FIXME: sops-nix
+      search = [
+        (config.mySecrets.getSecret "tailscale.tailnetName")
+      ];
     };
 
     services = {

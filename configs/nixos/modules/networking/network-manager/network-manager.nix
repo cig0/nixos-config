@@ -53,30 +53,37 @@
       # Define Wi-Fi profiles shared across hosts, and reference secrets
       ensureProfiles = {
         profiles = {
-          "home-wifi" = {
-            connection = {
-              id = "HomeWiFi";
-              type = "wifi";
-              autoconnect = true; # Connect automatically when in range
+          "${config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.name"}" =
+            {
+              connection = {
+                id = "${config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.name"}";
+                type = "wifi";
+                autoconnect = true; # Connect automatically when in range
+              };
+              wifi = {
+                ssid = "${config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.wifi.ssid"}"; # Replace with your actual Wi-Fi SSID
+              };
+              wifi-security = {
+                key-mgmt = "wpa-psk";
+                # psk = "@majo-wifi-psk@";
+                psk =
+                  "@"
+                  + (config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.name")
+                  + "-psk@";
+              };
             };
-            wifi = {
-              ssid = "HomeSSID"; # Replace with your actual Wi-Fi SSID
-            };
-            wifi-security = {
-              key-mgmt = "wpa-psk";
-              psk = "@home-wifi-psk@"; # Use placeholder syntax for the secret
-            };
-          };
         };
 
         # Define secrets globally
         secrets = {
           entries = [
             {
-              key = "home-wifi-psk"; # Name of the secret, matches placeholder above
+              key =
+                (config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.name")
+                + "-psk"; # Name of the secret, matches psk name above
 
-              # TODO: Implement nix-sops
-              file = "${inputs.self.outPath}/home-wifi-psk.txt"; # Path to the password file
+              # TODO: add option
+              file = "${inputs.self}/secrets/profile0-wifi-psk.txt"; # Path to the password file
             }
           ];
         };
