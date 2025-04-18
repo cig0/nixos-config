@@ -1,5 +1,6 @@
 # Skeleton config. Check the modules for the actual configuration.
 {
+  ansiColors,
   config,
   lib,
   ...
@@ -44,6 +45,7 @@ in
   config = lib.mkIf config.myNixos.home-manager.enable {
     home-manager = {
       backupFileExtension = "backup";
+      extraSpecialArgs = { inherit ansiColors; };
       useGlobalPkgs = true;
       useUserPackages = true;
       users = lib.mkMerge [
