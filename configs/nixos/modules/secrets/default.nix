@@ -5,10 +5,10 @@
   ...
 }:
 let
-  # Read secrets.json from the flake root's directory
-  secrets = builtins.fromJSON (builtins.readFile "${inputs.self}/secrets.json");
+  # TODO: add option for the secrets file name and directory
+  # Read secrets file
+  secrets = builtins.fromJSON (builtins.readFile "${inputs.self}/secrets/secrets.json");
 
-  # Helper function to access secrets, failing if the key is missing
   getSecret =
     key:
     let
@@ -22,23 +22,16 @@ let
 in
 {
   # Define options for type safety
-  options.mySecrets =
-    with lib;
-    mkOption {
-      type = types.submodule {
-        options = {
-          raw = mkOption {
-            type = types.attrsOf (types.either types.str (types.attrsOf types.str));
-            description = "Raw secrets from secrets.json, with string or nested string attributes";
-          };
-          getSecret = mkOption {
-            type = types.functionTo types.str;
-            description = "Function to access secrets, returning strings or failing if missing or non-string";
-          };
-        };
-      };
-      description = "Secrets management for the flake";
+  options.mySecrets = {
+    getSecret = lib.mkOption {
+      type = lib.types.functionTo lib.types.str;
+      description = "Function to access secrets, returning strings or failing if missing or non-string";
     };
+    raw = lib.mkOption {
+      type = lib.types.attrsOf (lib.types.either lib.types.str (lib.types.attrsOf lib.types.str));
+      description = "Raw secrets from secrets.json, with string or nested string attributes";
+    };
+  };
 
   # Set mySecrets.raw and mySecrets.getSecret
   config.mySecrets = {
@@ -48,7 +41,7 @@ in
 }
 
 /*
-      Possible transition to per-module:
+  Possible transition to per-module:
 
   let
     secrets = {
