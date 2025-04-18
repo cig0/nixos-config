@@ -178,6 +178,8 @@
       }
     ];
   };
+  myNixos.programs.ssh.startAgent = true; # ssh.nix
+  myNixos.programs.gnupg.enableSSHSupport = false; # gnupg.nix. myNixos.programs.gnupg must be enabled.
   myNixos.security.sudo = {
     # sudo.nix
     enable = true;
