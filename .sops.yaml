@@ -18,3 +18,7 @@ creation_rules:
     key_groups:
     - age:
       - *nixos-config
+  - path_regex: secrets/.*$
+    key_groups:
+    - age:
+      - *nixos-config
