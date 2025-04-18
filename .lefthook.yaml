@@ -1,0 +1,16 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: encrypt-secrets
+      glob: secrets/secrets.json
+      run: sops -i -e secrets/secrets.json || { echo "SOPS encryption failed."; exit 1; }
+    - name: encrypt-majo-home-wifi
+      glob: secrets/majo-wifi-psk.txt
+      run: sops -i -e secrets/majo-wifi-psk.txt || { echo "SOPS encryption failed."; exit 1; }
+
+# post-merge:
+#   parallel: true
+#   jobs:
+#     - name: encrypt-secrets
+#       glob: secrets/secrets.json
+#       run: SOPS_AGE_KEY_FILE=~/.config/age/nixos-config.txt sops -i -d --output-type json secrets.json || { echo "SOPS decryption failed."; exit 1; }
