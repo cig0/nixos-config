@@ -62,46 +62,46 @@ in
 
     # TODO: what happened with the other Zsh options!?
     initExtra = ''
-            # Completion setup
-            # Zsh completions configuration file: https://thevaluable.dev/zsh-completion-guide-examples/
-      C
-            # Controls how filename globbing behaves when there are no matches.
-            # If no files match, the expansion expands to nothing instead of the name of the directory
-            # or glob pattern, which most likely will break any script execution.
-            # This is the equivalent to Bash's `shopt -s nullglob`.
-            setopt NULL_GLOB
+      # Completion setup
+      # Zsh completions configuration file: https://thevaluable.dev/zsh-completion-guide-examples/
 
-            unsetopt no_complete_aliases
-        
-            zstyle ':completion:*' completer _expand_alias _extensions _complete _approximate
-            # zstyle ':completion:*' completer _expand _complete _ignored _correct _path_files _approximate _prefix _camel_case
-            zstyle ':completion:*' expand prefix suffix
-            zstyle ':completion:*' squeeze-slashes true
-            zstyle ':completion:*' matcher-list 'r:[^A-Z0-9]||[A-Z0-9]=** r:|=*'
-            zstyle ':completion:*' list-dirs-first true
-            zstyle ':completion:*' menu select
+      # Controls how filename globbing behaves when there are no matches.
+      # If no files match, the expansion expands to nothing instead of the name of the directory
+      # or glob pattern, which most likely will break any script execution.
+      # This is the equivalent to Bash's `shopt -s nullglob`.
+      setopt NULL_GLOB
 
-            # Caching completions
-            zstyle ':completion:*' use-cache on
-            zstyle ':completion:*' cache-path "$HOME/.cache/zcompcache"
-            zstyle ':completion:*' group-name null
+      unsetopt no_complete_aliases
 
-            # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-            COMPLETION_WAITING_DOTS="true"
+      zstyle ':completion:*' completer _expand_alias _extensions _complete _approximate
+      # zstyle ':completion:*' completer _expand _complete _ignored _correct _path_files _approximate _prefix _camel_case
+      zstyle ':completion:*' expand prefix suffix
+      zstyle ':completion:*' squeeze-slashes true
+      zstyle ':completion:*' matcher-list 'r:[^A-Z0-9]||[A-Z0-9]=** r:|=*'
+      zstyle ':completion:*' list-dirs-first true
+      zstyle ':completion:*' menu select
 
-            # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-            # or set a custom format using the strftime function format specifications,
-            # see 'man strftime' for details.
-            # HIST_STAMPS="mm/dd/yyyy"
-            HIST_STAMPS="yyyy-mm-dd"
+      # Caching completions
+      zstyle ':completion:*' use-cache on
+      zstyle ':completion:*' cache-path "$HOME/.cache/zcompcache"
+      zstyle ':completion:*' group-name null
 
-            # Shell editing Emacs' style
-            bindkey -e
+      # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+      COMPLETION_WAITING_DOTS="true"
 
-            . ~/.aws/env
+      # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+      # or set a custom format using the strftime function format specifications,
+      # see 'man strftime' for details.
+      # HIST_STAMPS="mm/dd/yyyy"
+      HIST_STAMPS="yyyy-mm-dd"
 
-            # Import functions
-            unalias la && ${allFunctions}
+      # Shell editing Emacs' style
+      bindkey -e
+
+      . ~/.aws/env
+
+      # Import functions
+      unalias la && ${allFunctions}
     '';
 
     oh-my-zsh = {
