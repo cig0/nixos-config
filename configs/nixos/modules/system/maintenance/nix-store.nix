@@ -10,10 +10,11 @@ in
 {
   options.myNixos = {
     nix = {
-      settings.auto-optimise-store = lib.mkEnableOption "If set to true, Nix automatically detects files in the store that have
-identical contents, and replaces them with hard links to a single copy.
-This saves disk space. If set to false (the default), you can still run
-nix-store --optimise to get rid of duplicate files.";
+      settings.auto-optimise-store = lib.mkEnableOption ''
+        If set to true, Nix automatically detects files in the store that have
+        identical contents, and replaces them with hard links to a single copy.
+        This saves disk space. If set to false (the default), you can still run
+        nix-store --optimise to get rid of duplicate files.'';
       gc = {
         automatic = lib.mkEnableOption "Automatically run the garbage collector at a specific time.";
         dates = lib.mkOption {
@@ -42,11 +43,11 @@ nix-store --optimise to get rid of duplicate files.";
         dates = lib.mkOption {
           type = lib.types.str;
           default = "weekly";
-          description = "How often cleanup is performed. Passed to systemd.time";
+          description = "How often cleanup is performed. Passed to systemd.time.";
         };
         extraArgs = lib.mkOption {
           type = lib.types.str;
-          default = "--keep 2";
+          default = "--keep 3";
         };
       };
     };
@@ -57,7 +58,7 @@ nix-store --optimise to get rid of duplicate files.";
       {
         # assertion = !(config.myNixos.nix.gc.automatic && config.myNixos.programs.nh.enable.clean.enable);
         assertion = !(cfg.nix.gc.automatic && cfg.programs.nh.clean.enable);
-        message = "Only one of `myNixos.ix.gc.automatic` or `mmyNixos.ograms.nh.clean.enable` can be enabled at a time.";
+        message = "Only one of `myNixos.nix.gc.automatic` or `myNixos.programs.nh.clean.enable` can be enabled at a time.";
       }
     ];
 
