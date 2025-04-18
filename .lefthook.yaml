@@ -1,13 +1,13 @@
-pre-commit:
-  parallel: true
-  jobs:
-    - name: encrypt-secrets
-      glob: secrets/secrets.json
-      run:  sops -e --output secrets/secrets.json.enc secrets/secrets.json
+# pre-commit:
+#   parallel: true
+#   jobs:
+#     - name: encrypt-secrets
+#       glob: secrets/secrets.json
+#       run:  sops -e --output secrets/secrets.json.enc secrets/secrets.json
 
-    - name: encrypt-profile0-wifi-psk
-      glob: secrets/profile0-wifi-psk.txt
-      run: sops -e --output secrets/profile0-wifi-psk.txt.enc secrets/profile0-wifi-psk.txt
+#     - name: encrypt-profile0-wifi-psk
+#       glob: secrets/profile0-wifi-psk.txt
+#       run: sops -e --output secrets/profile0-wifi-psk.txt.enc secrets/profile0-wifi-psk.txt
 
 # post-merge:
 #   parallel: true
@@ -15,3 +15,50 @@ pre-commit:
 #     - name: encrypt-secrets
 #       glob: secrets/secrets.json
 #       run: SOPS_AGE_KEY_FILE=~/.config/age/nixos-config.txt sops -i -d --output-type json secrets.json || { echo "SOPS decryption failed."; exit 1; }
+
+# pre-commit:
+#   parallel: false
+#   jobs:
+#     - name: encrypt-and-add-all-secrets
+#       glob: secrets/*.{json,txt}
+#       run: |
+#         for src in "$@"; do
+#           dst="${src}.enc"
+#           sops -e --output "$dst" "$src"
+#           git add "$dst"
+#         done
+
+# pre-commit:
+#   parallel: false
+#   jobs:
+#     - name: encrypt-secrets
+#       glob: secrets/*.json
+#       run: |
+#         for file in "$@"; do
+#           enc="${file}.enc"
+#           sops -e --output "$enc" "$file"
+#           git add "$enc"
+#         done
+
+#     - name: encrypt-wifi-psk
+#       glob: secrets/*-wifi-psk.txt
+#       run: |
+#         for file in "$@"; do
+#           enc="${file}.enc"
+#           sops -e --output "$enc" "$file"
+#           git add "$enc"
+#         done
+
+
+pre-commit:
+  commands:
+    encrypt-everything:
+      run: |
+        shopt -s nullglob
+        for src in secrets/*; do
+          [[ -f "$src" ]] || continue
+          [[ "$src" == *.enc ]] && continue
+          dst="${src}.enc"
+          sops -e --output "$dst" "$src"
+          git add "$dst"
+        done
