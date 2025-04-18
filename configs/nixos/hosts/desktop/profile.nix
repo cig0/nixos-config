@@ -51,6 +51,7 @@
     enable = true;
     extraConfig = "set -g status-style bg=colour53,fg=white";
   };
+  myNixos.services.syncthing.enable = true;
   myNixos.package.yazi.enable = true; # yazi.nix
   myNixos.programs.yazi.enable = false; # yazi.nix
   myNixos.programs.zsh.enable = true; # zsh.nix. If disabled, this option is automatically enabled when `users.defaultUserShell` is set to "zsh".
