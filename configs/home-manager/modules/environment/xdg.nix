@@ -24,5 +24,6 @@
       enable = true;
       createDirectories = true;
     };
+    systemDirs.config = [ "/etc/xdg" ];
   };
 }
