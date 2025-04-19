@@ -1,4 +1,4 @@
-# Skeleton config. Check the modules for the actual configuration.
+# Skeleton config. Check modules for the actual configuration.
 {
   ansiColors,
   config,
@@ -28,7 +28,11 @@ let
           ./users/${username}/default.nix
         ]
 
-        # User-specific modules
+        /*
+          User-specific modules
+            - Conditionally import user-specific module-loader if it exists.
+            - This allows each user to have their own module collection with custom excludes.
+        */
         ++ lib.optionals (builtins.pathExists ./users/${username}/modules/module-loader.nix) [
           ./users/${username}/modules/module-loader.nix
         ];
