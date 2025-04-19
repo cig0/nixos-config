@@ -146,13 +146,13 @@
       ansiColors = import ./lib/ansi-colors { };
 
       /*
-        The mkHost function:
+        The mkHostConfig function:
         - Creates a complete NixOS system configuration for each host
         - Applies common modules, overlays, and configurations across all hosts
         - Incorporates host-specific settings from individual host profiles
         - Enables dynamic module loading for easy extensibility
       */
-      mkHost =
+      mkHostConfig =
         hostname: hostConfig:
         let
           system = hostConfig.system;
@@ -225,6 +225,6 @@
       };
     in
     {
-      nixosConfigurations = nixpkgs.lib.mapAttrs mkHost hosts;
+      nixosConfigurations = nixpkgs.lib.mapAttrs mkHostConfig hosts;
     };
 }
