@@ -25,7 +25,7 @@ let
           ./modules/module-loader.nix
 
           # User configuration
-          ./users/${username}/default.nix
+          ./users/${username}/profile.nix
         ]
 
         /*
