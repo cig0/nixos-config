@@ -13,14 +13,16 @@ in
 {
   options.myNixos.networking = {
     firewall = {
-      enable = lib.mkEnableOption "Whether to enable the firewall. This is a simple stateful
-firewall that blocks connection attempts to unauthorised TCP
-or UDP ports on this machine.";
+      enable = lib.mkEnableOption ''
+        Whether to enable the firewall. This is a simple stateful
+        firewall that blocks connection attempts to unauthorised TCP
+        or UDP ports on this machine.'';
 
-      allowPing = lib.mkEnableOption "Whether to respond to incoming ICMPv4 echo requests
-(\"pings\").  ICMPv6 pings are always allowed because the
-larger address space of IPv6 makes network scanning much
-less effective.";
+      allowPing = lib.mkEnableOption ''
+        Whether to respond to incoming ICMPv4 echo requests
+        (\"pings\").  ICMPv6 pings are always allowed because the
+        larger address space of IPv6 makes network scanning much
+        less effective.'';
 
       allowedTCPPorts = lib.mkOption {
         type = lib.types.listOf lib.types.int;
@@ -30,16 +32,11 @@ less effective.";
     };
   };
 
-  config = lib.mkIf cfg.firewall.enable {
+  config = lib.mkIf config.networking.firewall.enable {
     networking = {
       firewall = {
-        enable = true;
-        allowPing = cfg.firewall.allowPing;
-        allowedTCPPorts = [ ];
-        allowedTCPPortRanges = [ ];
-        allowedUDPPorts = [ ];
-        allowedUDPPortRanges = [ ];
         trustedInterfaces = [
+          "lo"
           "virbr0"
         ];
         checkReversePath = "loose";
