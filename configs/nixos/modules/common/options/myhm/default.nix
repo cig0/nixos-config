@@ -13,5 +13,10 @@
         lfs.enable = lib.mkEnableOption "Whether to enable git-lfs (Large File Storage).";
       };
     };
+    services = {
+      syncthing = {
+        enable = lib.mkEnableOption "Whether to enable Syncthing service";
+      };
+    };
   };
 }

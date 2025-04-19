@@ -13,19 +13,25 @@ let
       ...
     }:
     {
-      imports = [
-        /*
-          Importing the shared modules for each user isn't the best approach, but otherwise I have
-          to modify the module-loader library to pass `nixosConfi` to the modules it loads.
+      imports =
+        [
+          /*
+            Importing the shared modules for each user isn't the best approach, but otherwise I have
+            to modify the module-loader library to pass `nixosConfig` to the modules it loads.
 
-          This way, though, because the modules are loaded under the user namespace, they  already
-          can access the `nixosConfig` and `config` variables.
-        */
-        ./modules/module-loader.nix
+            This way, though, because the modules are loaded under the user namespace, they  already
+            can access the `nixosConfig` and `config` variables.
+          */
+          ./modules/module-loader.nix
 
-        # User configuration
-        ./users/${username}.nix
-      ];
+          # User configuration
+          ./users/${username}/default.nix
+        ]
+
+        # User-specific modules
+        ++ lib.optionals (builtins.pathExists ./users/${username}/modules/module-loader.nix) [
+          ./users/${username}/modules/module-loader.nix
+        ];
 
       home = {
         homeDirectory = "/home/${username}";
