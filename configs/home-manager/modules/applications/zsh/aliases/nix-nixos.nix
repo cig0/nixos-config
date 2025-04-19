@@ -24,14 +24,14 @@ let
     nixlg = "nixos-rebuild list-generations";
 
     # Update NixOS
-    nhosb = "nh os boot ${nixosConfig.myNixos.myOptions.flakeSrcPath}";
-    nhosbd = "nh os boot --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath}";
-    nhosbu = "nh os boot --update ${nixosConfig.myNixos.myOptions.flakeSrcPath}";
-    nhosbud = "nh os boot --update --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath}";
-    nhoss = "nh os switch ${nixosConfig.myNixos.myOptions.flakeSrcPath}";
-    nhossd = "nh os switch --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath}";
-    nhossu = "nh os switch --update ${nixosConfig.myNixos.myOptions.flakeSrcPath}";
-    nhossud = "nh os switch --update --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath}";
+    nhosb = "nh os boot ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
+    nhosbd = "nh os boot --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath}  -- --show-trace";
+    nhosbu = "nh os boot --update ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
+    nhosbud = "nh os boot --update --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
+    nhoss = "nh os switch ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
+    nhossd = "nh os switch --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
+    nhossu = "nh os switch --update ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
+    nhossud = "nh os switch --update --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
   };
 in
 {
