@@ -21,13 +21,16 @@
     myOptions.services.tailscale = {
       ip = lib.mkOption {
         type = lib.types.str;
-        default = null;
         description = "The Tailscale IP address assigned to this host; useful to configure other modules like opensshd.nix.";
       };
       openssh.port = lib.mkOption {
         type = lib.types.port;
         default = 22;
         description = "The Tailscale IP address assigned to this host; useful to configure other modules like opensshd.nix.";
+      };
+      tailnetName = lib.mkOption {
+        type = lib.types.str;
+        description = "The Tailscale network name; useful to configure other modules like opensshd.nix.";
       };
     };
   };
@@ -38,28 +41,17 @@
         trustedInterfaces = [ "tailscale0" ];
       };
       search = [
-        (config.mySecrets.getSecret "tailscale.tailnetName")
+        (config.myNixos.myOptions.services.tailscale.tailnetName)
       ];
     };
 
     services = {
       tailscale = {
         enable = true;
-        # authKeyFile = config.myNixos.ervices.tailscale.authKeyFile;
+        # authKeyFile = config.myNixos.services.tailscale.authKeyFile; # TODO: evaluate using this option
         openFirewall = true;
         extraUpFlags = [ "--ssh" ];
       };
-      /*
-        TODO: Add options to:
-        - Enable/disable tailscaleAuth
-        - Group and user
-
-        tailscaleAuth = {
-          enable = false;
-          group = "";
-          user = "";
-        };
-      */
     };
 
     systemd.services.tailscaled = {
