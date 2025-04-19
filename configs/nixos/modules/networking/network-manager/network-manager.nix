@@ -65,15 +65,18 @@
               };
               wifi-security = {
                 key-mgmt = "wpa-psk";
-                # psk = "@majo-wifi-psk@";
                 psk =
                   "@"
                   + (config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.name")
-                  + "-psk@";
+                  + "-psk@"; # psk = "@PROFILE-NAME-EXAMPLE@";
               };
             };
         };
 
+        /*
+          TODO: support multiple profiles
+          This will likely requires a loop to iterate profiles names
+        */
         # Define secrets globally
         secrets = {
           entries = [
@@ -82,7 +85,6 @@
                 (config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.name")
                 + "-psk"; # Name of the secret, matches psk name above
 
-              # TODO: add option
               file = "${inputs.self}/secrets/profile0-wifi-psk.txt"; # Path to the password file
             }
           ];
