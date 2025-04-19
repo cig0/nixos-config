@@ -25,11 +25,10 @@
     };
   };
 
-  config = lib.mkIf config.myNixos.services.openssh.enable {
+  config = lib.mkIf config.services.openssh.enable {
     services.openssh = {
-      enable = true;
       openFirewall = true;
-      listenAddresses = config.myNixos.services.openssh.listenAddresses;
+      # listenAddresses = config.myNixos.services.openssh.listenAddresses;
       # startWhenNeeded = true; # Enable socket activation
     };
 
