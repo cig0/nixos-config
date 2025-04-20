@@ -302,7 +302,6 @@ let
       git-filter-repo # Quickly rewrite git repository history :: https://github.com/newren/git-filter-repo
       gitmoji-cli # https://github.com/carloscuesta/gitmoji-cli
       glab # GitLab CLI client
-      lefthook
       serie # A rich git commit graph in your terminal, like magic :: https://github.com/lusingander/serie
 
       # jujutsu
@@ -310,7 +309,10 @@ let
       # Radicle
       radicle-node
     ];
-    web = with pkgsUnstable; [ elinks ];
+    web = with pkgsUnstable; [
+      elinks
+      w3m-nox
+    ];
   };
 
   packagesGui =
