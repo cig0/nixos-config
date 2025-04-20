@@ -255,7 +255,7 @@
     ═══════════════════════════════
   */
   # Boot & Kernel
-  myNixos.boot.kernelPackages = "stable"; # kernel.nix
+  myNixos.boot.kernelPackages = "xanmod_latest"; # kernel.nix
   myNixos.myOptions.kernel.sysctl.netIpv4TcpCongestionControl = "westwood"; # kernel.nix
   myNixos.boot.plymouth = {
     # plymouth.nix
@@ -265,6 +265,19 @@
 
   # Input Devices
   myNixos.services.keyd.enable = true; # keyd.nix
+  myNixos.myOptions.services.keyd.addKeydKeyboards = {
+    TUXEDOInfinityBookPro14Gen6Standard = {
+      ids = [ "0001:0001" ];
+      settings = {
+        main = {
+          "capslock" = "capslock";
+        };
+        shift = {
+          "capslock" = "insert";
+        };
+      };
+    };
+  };
 
   # Maintenance & Updates
   myNixos.current-system-packages-list.enable = true; # current-system-packages-list.nix
