@@ -4,9 +4,6 @@
   lib,
   ...
 }:
-let
-  cfg = config.myNixos.services.syncthing;
-in
 {
   options.myNixos = {
     myOptions = {
@@ -45,7 +42,7 @@ in
             #     id = "";
             #   };
             desktop = {
-              id = config.mySecrets.getSecret "services.syncthing.settings.gui.devices.desktop";
+              id = config.mySecrets.getSecret "shared.services.syncthing.settings.gui.devices.desktop";
             };
             # folders = {
             #   ".aws" = {
