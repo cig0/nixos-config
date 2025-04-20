@@ -254,7 +254,7 @@
     ═══════════════════════════════
   */
   # Boot & Kernel
-  myNixos.boot.kernelPackages = "xanmod_latest"; # kernel.nix
+  myNixos.boot.kernelPackages = "stable"; # kernel.nix
   myNixos.myOptions.kernel.sysctl.netIpv4TcpCongestionControl = "westwood"; # kernel.nix
   myNixos.boot.plymouth = {
     # plymouth.nix
