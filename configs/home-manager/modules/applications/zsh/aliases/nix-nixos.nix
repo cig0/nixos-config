@@ -24,14 +24,14 @@ let
     nixlg = "nixos-rebuild list-generations";
 
     # Update NixOS
-    nhosb = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os boot ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
-    nhosbd = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os boot --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath}  -- --show-trace";
-    nhosbu = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os boot --update ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
-    nhosbud = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os boot --update --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
-    nhoss = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os switch ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
-    nhossd = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os switch --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
-    nhossu = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os switch --update ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
-    nhossud = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os switch --update --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace";
+    nhosb = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os boot ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace && grs ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets";
+    nhosbd = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os boot --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath}  -- --show-trace && grs ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets";
+    nhosbu = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os boot --update ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace && grs ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets";
+    nhosbud = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os boot --update --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace && grs ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets";
+    nhoss = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os switch ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace && grs ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets";
+    nhossd = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os switch --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace && grs ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets";
+    nhossu = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os switch --update ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace && grs ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets";
+    nhossud = "ga ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets && nh os switch --update --dry ${nixosConfig.myNixos.myOptions.flakeSrcPath} -- --show-trace && grs ${nixosConfig.myNixos.myOptions.flakeSrcPath}/secrets";
   };
 in
 {
