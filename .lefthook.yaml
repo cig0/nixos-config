@@ -5,3 +5,7 @@ pre-commit:
       run: python3 secrets/sops-encrypt.py secrets/
     - name: gitguardian-scan
       run: ggshield secret scan pre-commit
+pre-push:
+  jobs:
+    - name: gitguardian-scan
+      run: ggshield secret scan pre-push
