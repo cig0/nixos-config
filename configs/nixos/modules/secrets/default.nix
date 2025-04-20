@@ -5,10 +5,13 @@
   ...
 }:
 let
-  secretsFile = "secrets/secrets.json"; # TODO: creating an option, it will be useful when developing for quickly checking stuff
+  cfg = config.mySecrets;
 
-  # Read secrets file
-  secrets = builtins.fromJSON (builtins.readFile "${inputs.self}/${secretsFile}");
+  # Read secrets files
+  secrets = {
+    host = builtins.fromJSON (builtins.readFile "${inputs.self}/${cfg.secretsFile.host}");
+    shared = builtins.fromJSON (builtins.readFile "${inputs.self}/${cfg.secretsFile.shared}");
+  };
 
   getSecret =
     key:
@@ -34,7 +37,7 @@ let
       else
         throw "Secret '${key}' is not a 32-bit integer, a list of 32-bit integers, or a string"
     else
-      throw "Secret '${key}' not found in ${secretsFile}";
+      throw "Secret '${key}' not found in ${cfg.secretsFile}";
 in
 {
   # Define options for type safety
@@ -49,10 +52,20 @@ in
       type = lib.types.attrsOf (lib.types.either lib.types.str (lib.types.attrsOf lib.types.str));
       description = "Raw secrets from secrets.json, with string or nested string attributes";
     };
+    secretsFile = {
+      host = lib.mkOption {
+        type = lib.types.path;
+        description = "Path to host secrets file";
+      };
+      shared = lib.mkOption {
+        type = lib.types.path;
+        description = "Path to shared secrets file";
+      };
+    };
   };
 
   # Set mySecrets.raw and mySecrets.getSecret
-  config.mySecrets = {
+  cfg = {
     raw = secrets;
     getSecret = getSecret;
   };
