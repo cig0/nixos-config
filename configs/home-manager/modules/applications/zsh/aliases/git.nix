@@ -71,6 +71,7 @@ let
     # restore
     gr = "git restore";
     grs = aliases.gr + " --staged";
+    grsF = aliases.gr + " --staged ${nixosConfig.myNixos.myOptions.flakeSrcPath} && gsb";
 
     # stash
     gst = "git stash";
