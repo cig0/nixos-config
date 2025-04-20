@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   myArgs,
   ...
 }:
@@ -39,7 +40,7 @@
   # File Synchronization
   myNixos = {
     myOptions = {
-      services.syncthing.guiAddress.port = config.mySecrets.getSecret "host.myNixos.myOptions.services.syncthing.guiAddress.port";
+      services.syncthing.guiAddress.port = config.mySecrets.getSecret "shared.myNixos.myOptions.services.syncthing.guiAddress.port";
     }; # syncthing.nix
   };
   services.syncthing = {
@@ -181,8 +182,8 @@
     ═══════════════════════════════
   */
   mySecrets.secretsFile = {
-    host = ./secrets/hosts/${myArgs.hostname}/secrets.json;
-    shared = ./secrets/shared/secrets.json;
+    host = "secrets/hosts/${myArgs.system.hostname}/secrets.json";
+    shared = "secrets/shared/secrets.json";
   };
 
   /*
