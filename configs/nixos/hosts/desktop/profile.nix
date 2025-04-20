@@ -254,12 +254,12 @@
     ═══════════════════════════════
   */
   # Boot & Kernel
-  myNixos.boot.kernelPackages = "stable"; # kernel.nix
+  myNixos.boot.kernelPackages = "xanmod_latest"; # kernel.nix
   myNixos.myOptions.kernel.sysctl.netIpv4TcpCongestionControl = "westwood"; # kernel.nix
   myNixos.boot.plymouth = {
     # plymouth.nix
     enable = false;
-    theme = "fade-in";
+    theme = "evil-nixos";
   };
 
   # Input Devices
