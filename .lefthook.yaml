@@ -1,0 +1,7 @@
+pre-commit:
+  parallel: false
+  jobs:
+    - name: sops-encrypt-secrets
+      run: python3 secrets/sops-encrypt.py secrets/
+    - name: gitguardian-scan
+      run: ggshield secret scan pre-commit
