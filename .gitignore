@@ -1,7 +1,2 @@
-# First, ignore everything in the /secrets/ directory
-#/secrets/*
-# Then, make an exception for files ending with .enc
-#!/secrets/*.enc
-
-# flake.lock
+flake.lock
 
