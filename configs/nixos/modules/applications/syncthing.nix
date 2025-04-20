@@ -28,7 +28,7 @@ in
       settings = {
         gui = {
           user = "cig0";
-          password = config.mySecrets.getSecret "services.syncthing.settings.gui.password";
+          password = config.mySecrets.getSecret "shared.services.syncthing.settings.gui.password";
           options = {
             minHomeDiskFree = {
               unit = "GB";

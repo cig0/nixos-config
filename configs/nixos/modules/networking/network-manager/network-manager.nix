@@ -53,21 +53,21 @@
       # Define Wi-Fi profiles shared across hosts, and reference secrets
       ensureProfiles = {
         profiles = {
-          "${config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.name"}" =
+          "${config.mySecrets.getSecret "shared.networking.networkmanager.ensureProfiles.profiles.profile0.name"}" =
             {
               connection = {
-                id = "${config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.name"}";
+                id = "${config.mySecrets.getSecret "shared.networking.networkmanager.ensureProfiles.profiles.profile0.name"}";
                 type = "wifi";
                 autoconnect = true; # Connect automatically when in range
               };
               wifi = {
-                ssid = "${config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.wifi.ssid"}"; # Replace with your actual Wi-Fi SSID
+                ssid = "${config.mySecrets.getSecret "shared.networking.networkmanager.ensureProfiles.profiles.profile0.wifi.ssid"}"; # Replace with your actual Wi-Fi SSID
               };
               wifi-security = {
                 key-mgmt = "wpa-psk";
                 psk =
                   "@"
-                  + (config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.name")
+                  + (config.mySecrets.getSecret "shared.networking.networkmanager.ensureProfiles.profiles.profile0.name")
                   + "-psk@"; # psk = "@PROFILE-NAME-EXAMPLE@";
               };
             };
@@ -82,10 +82,10 @@
           entries = [
             {
               key =
-                (config.mySecrets.getSecret "networking.networkmanager.ensureProfiles.profiles.profile0.name")
+                (config.mySecrets.getSecret "shared.networking.networkmanager.ensureProfiles.profiles.profile0.name")
                 + "-psk"; # Name of the secret, matches psk name above
 
-              file = "${inputs.self}/secrets/profile0-wifi-psk.txt"; # Path to the password file
+              file = "${inputs.self}/secrets/shared/profile0-wifi-psk.txt"; # Path to the password file
             }
           ];
         };
