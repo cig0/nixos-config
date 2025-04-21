@@ -183,6 +183,8 @@
               NixOS Configuration Strategy:
               - Base configuration uses streamlined versions of default NixOS modules
               - Host-specific settings are defined in each host's `profile.nix`
+              - The modules define default settings shared across hosts, this way we don't repeat
+              ourselves and keep `profile.nix` clean an readable.
 
               This separation keeps configurations modular and maintainable.
             */
