@@ -56,11 +56,18 @@
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
+    # Determinate is an end-to-end toolchain for using Nix
+    determinate = {
+      inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
+      url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    };
+
     dynamic-module-importer = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:cig0/module-loader"; # Replace with your repo
     };
 
+    # flakehub = {
     # Home Manager: user-specific packages and settings
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -132,6 +139,7 @@
   outputs =
     {
       auto-cpufreq,
+      determinate,
       dynamic-module-importer,
       home-manager,
       lanzaboote,
@@ -182,6 +190,7 @@
           };
           modules = [
             auto-cpufreq.nixosModules.default
+            determinate.nixosModules.default
             home-manager.nixosModules.home-manager
             lanzaboote.nixosModules.lanzaboote
             nix-index-database.nixosModules.nix-index
