@@ -1,4 +1,4 @@
-# Skeleton config. Check modules for the actual configuration.
+# Skeleton config. Check shared and user modules for the actual configurations.
 {
   libraryAnsiColors,
   config,
@@ -47,11 +47,10 @@ in
             ./modules
           ];
           excludePaths = [
-            "applications/zsh"
-            "module-loader.nix"
+            "applications/zsh" # Workaround for an issue I'm having when importing this module
           ];
           extraModules = [
-            ./modules/applications/zsh/zsh.nix
+            ./modules/applications/zsh/zsh.nix # Workaround for an issue I'm having when importing this module
           ];
         })
       ];
