@@ -45,16 +45,6 @@ in
       moduleDetection ? modulePatterns,
     }:
     let
-      # Ensure excludePaths is empty when passed to this function
-      _ =
-        if excludePaths != [ ] then
-          throw ''
-            Error: 'excludePaths' must be empty when passed to 'collectModules'. (Did you read the accompanying documentation?)\n
-            Found: ${toString excludePaths}"
-          ''
-        else
-          null;
-
       # Check if a path contains any of the special paths that should be excluded
       isExcludedPath =
         path:
