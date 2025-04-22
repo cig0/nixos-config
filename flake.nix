@@ -56,6 +56,11 @@
       url = "github:AdnanHodzic/auto-cpufreq";
     };
 
+    dynamic-module-importer = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:cig0/module-loader"; # Replace with your repo
+    };
+
     # Home Manager: user-specific packages and settings
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -66,12 +71,6 @@
     lanzaboote = {
       inputs.nixpkgs.follows = "nixpkgs"; # Optional but recommended to limit the size of the system closure
       url = "github:nix-community/lanzaboote/v0.4.2";
-    };
-
-    # Dynamic module loader
-    module-loader = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:cig0/module-loader"; # Replace with your repo
     };
 
     # Declarative Flatpak management for NixOS
@@ -133,9 +132,9 @@
   outputs =
     {
       auto-cpufreq,
+      dynamic-module-importer,
       home-manager,
       lanzaboote,
-      module-loader,
       nix-flatpak,
       nix-index,
       nix-index-database,
@@ -157,7 +156,7 @@
       # Import external libraries
       mkLibrary = system: {
         ansiColors = import ./lib/ansi-colors { };
-        moduleLoader = module-loader.lib.${system};
+        moduleImporter = dynamic-module-importer.lib.${system};
       };
 
       /*
@@ -179,7 +178,7 @@
           specialArgs = {
             inherit inputs system;
             libraryAnsiColors = library.ansiColors;
-            libraryModuleLoader = library.moduleLoader;
+            libraryModuleImporter = library.moduleImporter;
           };
           modules = [
             auto-cpufreq.nixosModules.default
@@ -211,7 +210,7 @@
             (import ./configs/nixos/hosts/${hostname}/profile.nix)
             (
               # Dynamically import NixOS modules
-              library.moduleLoader {
+              library.moduleImporter {
                 dirs = [
                   ./configs/nixos/modules
                 ];

@@ -4,7 +4,7 @@
   config,
   inputs,
   lib,
-  libraryModuleLoader,
+  libraryModuleImporter,
   ...
 }:
 let
@@ -42,7 +42,7 @@ in
 
       # Dynamically import Home Manager modules
       sharedModules = [
-        (libraryModuleLoader {
+        (libraryModuleImporter {
           dirs = [
             ./modules
           ];
