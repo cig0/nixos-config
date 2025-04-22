@@ -68,6 +68,12 @@
       url = "github:nix-community/lanzaboote/v0.4.2";
     };
 
+    # Dynamic module loader
+    module-loader = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:cig0/module-loader"; # Replace with your repo
+    };
+
     # Declarative Flatpak management for NixOS
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
@@ -129,6 +135,7 @@
       auto-cpufreq,
       home-manager,
       lanzaboote,
+      module-loader,
       nix-flatpak,
       nix-index,
       nix-index-database,
@@ -147,22 +154,24 @@
       ...
     }@inputs:
     let
-      library = {
-        # Import utilities and libraries
+      # Import external libraries
+      mkLibrary = system: {
         ansiColors = import ./lib/ansi-colors { };
-        moduleLoader = import ./lib/module-loader { inherit nixpkgs; };
+        moduleLoader = module-loader.lib.${system};
       };
 
       /*
          The mkHostConfig function:
-         - Creates a complete NixOS system configuration for each host
-         - Applies common modules, overlays, and configurations across all hosts
+         - Creates a NixOS system configuration for each host
+         - Applies common modules, overlays, configurations, and (optionally) Home Manager as a
+         module across all hosts
          - Incorporates host-specific settings from individual host profiles
          - Enables dynamic module loading for easy extensibility
       */
       mkHostConfig =
         hostname: hostConfig:
         let
+          library = mkLibrary hostConfig.system;
           system = hostConfig.system;
         in
         nixpkgs.lib.nixosSystem {
@@ -206,10 +215,6 @@
                 dirs = [
                   ./configs/nixos/modules
                 ];
-                excludePaths = [
-                  "module-loader.nix"
-                ];
-                extraModules = [ ];
               }
             )
 
