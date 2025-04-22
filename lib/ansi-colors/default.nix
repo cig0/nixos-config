@@ -25,8 +25,9 @@ let
   };
 in
 {
-  # ----+ Current color scheme +----
   inherit reset;
+
+  # Build theme
   bold_green = theme.nushell.bold.green;
   bold_white = theme.nushell.bold.white;
   italic = theme.nushell.italic;
