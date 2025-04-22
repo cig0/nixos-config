@@ -21,7 +21,6 @@ let
     "module-loader.nix"
   ];
 
-  # TODO: think about a more robust way to detect if a file is a NixOS module
   modulePatterns = [
     # Patterns to identify modules
     "... }:"
