@@ -13,29 +13,10 @@ let
       ...
     }:
     {
-      imports =
-        [
-          /*
-            Importing the shared modules for each user isn't the best approach, but otherwise I have
-            to modify the module-loader library to pass `nixosConfig` to the modules it loads.
-
-            This way, though, because the modules are loaded under the user namespace, they  already
-            can access the `nixosConfig` and `config` variables.
-          */
-          ./modules/module-loader.nix
-
-          # User configuration
-          ./users/${username}/profile.nix
-        ]
-
-        /*
-          User-specific modules
-            - Conditionally import user-specific module-loader if it exists.
-            - This allows each user to have their own module collection with custom excludes.
-        */
-        ++ lib.optionals (builtins.pathExists ./users/${username}/modules/module-loader.nix) [
-          ./users/${username}/modules/module-loader.nix
-        ];
+      imports = [
+        # User-specific configuration
+        ./users/${username}/profile.nix
+      ];
 
       home = {
         homeDirectory = "/home/${username}";

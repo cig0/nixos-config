@@ -142,15 +142,18 @@
       ...
     }@inputs:
     let
-      # Import utilities and libraries
-      ansiColors = import ./lib/ansi-colors { };
+      library = {
+        # Import utilities and libraries
+        ansiColors = import ./lib/ansi-colors { };
+        moduleLoader = import ./lib/module-loader { inherit nixpkgs; };
+      };
 
       /*
-        The mkHostConfig function:
-        - Creates a complete NixOS system configuration for each host
-        - Applies common modules, overlays, and configurations across all hosts
-        - Incorporates host-specific settings from individual host profiles
-        - Enables dynamic module loading for easy extensibility
+         The mkHostConfig function:
+         - Creates a complete NixOS system configuration for each host
+         - Applies common modules, overlays, and configurations across all hosts
+         - Incorporates host-specific settings from individual host profiles
+         - Enables dynamic module loading for easy extensibility
       */
       mkHostConfig =
         hostname: hostConfig:
@@ -159,7 +162,10 @@
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit ansiColors inputs system; };
+          specialArgs = {
+            inherit inputs system;
+            ansiColors = library.ansiColors;
+          };
           modules = [
             auto-cpufreq.nixosModules.default
             home-manager.nixosModules.home-manager
@@ -172,27 +178,51 @@
             sops-nix.nixosModules.sops
 
             /*
-              Dynamic module loading system:
-              - Automatically discovers and imports NixOS modules from predefined directories
-              - Enables true plug-and-play configuration - just add a new module file and rebuild
-              - See `./lib/module-loader` for implementation details and customization options
+              ══════  Home Manager  ══════
+              The configuration is split to keep this file lean.
             */
-            (import ./configs/nixos/modules/module-loader.nix)
+            (import ./configs/home-manager/home.nix)
+            {
+              # Dynamically import Home Manager modules
+              home-manager.sharedModules = [
+                (library.moduleLoader {
+                  dirs = [
+                    ./configs/home-manager/modules
+                  ];
+                  excludePaths = [
+                    "applications/zsh"
+                    "module-loader.nix"
+                  ];
+                  extraModules = [
+                    ./configs/home-manager/modules/applications/zsh/zsh.nix
+                  ];
+                })
+              ];
+            }
 
             /*
-              NixOS Configuration Strategy:
+              ══════  NixOS Configuration Strategy  ══════
               - Base configuration uses streamlined versions of default NixOS modules
               - Host-specific settings are defined in each host's `profile.nix`
               - The modules define default settings shared across hosts, this way we don't repeat
               ourselves and keep `profile.nix` clean an readable.
 
-              This separation keeps configurations modular and maintainable.
+              This separation of concerns keeps configurations modular and maintainable.
             */
             (import ./configs/nixos/hosts/${hostname}/configuration.nix)
             (import ./configs/nixos/hosts/${hostname}/profile.nix)
-
-            # Home Manager. The configuration is split to keep this file lean.
-            (import ./configs/home-manager/home.nix)
+            (
+              # Dynamically import NixOS modules
+              library.moduleLoader {
+                dirs = [
+                  ./configs/nixos/modules
+                ];
+                excludePaths = [
+                  "module-loader.nix"
+                ];
+                extraModules = [ ];
+              }
+            )
 
             {
               # Overlays - extend nixpkgs with additional or modified packages
