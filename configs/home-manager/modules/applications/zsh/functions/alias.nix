@@ -1,6 +1,6 @@
 # Home Manager Zsh functions module. Do not remove this header.
 {
-  ansiColors,
+  libraryAnsiColors,
   ...
 }:
 let
@@ -8,7 +8,7 @@ let
   functions = ''
     alse() {
       [[ -z $1 ]] && \
-        echo -e "\n${ansiColors.bold_white}Missing alias to search!${ansiColors.reset}\n\nSyntax: ${ansiColors.bold_green}alse ${ansiColors.italic}alias_to_search${ansiColors.reset}" && \
+        echo -e "\n${libraryAnsiColors.bold_white}Missing alias to search!${libraryAnsiColors.reset}\n\nSyntax: ${libraryAnsiColors.bold_green}alse ${libraryAnsiColors.italic}alias_to_search${libraryAnsiColors.reset}" && \
           return 1
       alias | grep --color=always --ignore-case "$1"
     }

@@ -1,6 +1,6 @@
 # Home Manager Zsh functions module. Do not remove this header.
 {
-  ansiColors,
+  libraryAnsiColors,
   ...
 }:
 let
@@ -24,7 +24,7 @@ let
       done
 
       if [ ''${#skipped[@]} -gt 0 ]; then
-        echo -e "\\n${ansiColors.bold_white}=== ${ansiColors.bold_white}Skipping${ansiColors.reset} modified file(s): ${ansiColors.bold_green}$(printf "%s " ''${skipped[@]})${ansiColors.reset}"
+        echo -e "\\n${libraryAnsiColors.bold_white}=== ${libraryAnsiColors.bold_white}Skipping${libraryAnsiColors.reset} modified file(s): ${libraryAnsiColors.bold_green}$(printf "%s " ''${skipped[@]})${libraryAnsiColors.reset}"
       fi
 
       # Perform git diff based on arguments
@@ -36,7 +36,7 @@ let
         to_diff=()
         for fileName in "$@"; do
           if [[ " ''${payload[@]} " =~ " $fileName " ]]; then
-            echo -e "${ansiColors.reset}=== ${ansiColors.bold_white}Skipping file: ${ansiColors.bold_green}$fileName${ansiColors.reset}"
+            echo -e "${libraryAnsiColors.reset}=== ${libraryAnsiColors.bold_white}Skipping file: ${libraryAnsiColors.bold_green}$fileName${libraryAnsiColors.reset}"
           else
             to_diff+=("$fileName")
           fi

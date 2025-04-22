@@ -1,7 +1,7 @@
 # Home Manager Zsh functions module. Do not remove this header.
 {
-  ansiColors,
   config,
+  libraryAnsiColors,
   ...
 }:
 let
@@ -9,7 +9,7 @@ let
     _upgrade-apps-cargo() {
       local action='Upgrading:'
       local payload='Cargo packages'
-      echo -e "\\n\\n${ansiColors.bold_white}====  $action${ansiColors.reset} ${ansiColors.bold_green}$payload${ansiColors.reset}\\n"
+      echo -e "\\n\\n${libraryAnsiColors.bold_white}====  $action${libraryAnsiColors.reset} ${libraryAnsiColors.bold_green}$payload${libraryAnsiColors.reset}\\n"
 
 
       # Set the update execution bit:

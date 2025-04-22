@@ -1,8 +1,8 @@
 # Import all aliases modules found in the aliases directory
 {
-  ansiColors,
   inputs,
   lib,
+  libraryAnsiColors,
   nixosConfig,
   ...
 }:
@@ -31,7 +31,7 @@ let
           args = builtins.functionArgs importedFn; # Get expected arguments
           actualArgs =
             {
-              inherit ansiColors;
+              inherit libraryAnsiColors;
             }
             // (if args ? "inputs" then { inherit inputs; } else { })
             // (if args ? "lib" then { inherit lib; } else { })

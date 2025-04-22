@@ -1,8 +1,8 @@
 {
-  ansiColors,
   config,
   inputs,
   lib,
+  libraryAnsiColors,
   nixosConfig,
   ...
 }:
@@ -11,7 +11,7 @@ let
   allAliases =
     (import ./aliases.nix {
       inherit
-        ansiColors
+        libraryAnsiColors
         inputs
         lib
         nixosConfig
@@ -20,7 +20,7 @@ let
   allFunctions =
     (import ./functions.nix {
       inherit
-        ansiColors
+        libraryAnsiColors
         config
         inputs
         lib

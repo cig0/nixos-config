@@ -32,9 +32,15 @@
 
 /*
   NixOS Configuration Strategy:
-  - Base configuration uses streamlined versions of default NixOS modules
-  - Host-specific settings are defined in each host's `profile.nix`
-  - `configuration.nix` handles hardware-specific settings and core system setup
+  - Base configuration implements NixOS modules with default values for all hosts
+  - Host-specific options as well as module override options are defined in each host's
+  `profile.nix` module
+  - The module `configuration.nix` handles core system setup (as in a fresh NixOS installation)
+
+  Home Manager Configuration Strategy:
+  - The configuration is
+  - User-specific settings are defined in a `users.nix` module
+
   - This separation keeps configurations modular and maintainable
 */
 
@@ -164,7 +170,8 @@
           inherit system;
           specialArgs = {
             inherit inputs system;
-            ansiColors = library.ansiColors;
+            libraryAnsiColors = library.ansiColors;
+            libraryModuleLoader = library.moduleLoader;
           };
           modules = [
             auto-cpufreq.nixosModules.default
@@ -179,26 +186,9 @@
 
             /*
               ══════  Home Manager  ══════
-              The configuration is split to keep this file lean.
+              The configuration is split to keep this flake entry point lean.
             */
             (import ./configs/home-manager/home.nix)
-            {
-              # Dynamically import Home Manager modules
-              home-manager.sharedModules = [
-                (library.moduleLoader {
-                  dirs = [
-                    ./configs/home-manager/modules
-                  ];
-                  excludePaths = [
-                    "applications/zsh"
-                    "module-loader.nix"
-                  ];
-                  extraModules = [
-                    ./configs/home-manager/modules/applications/zsh/zsh.nix
-                  ];
-                })
-              ];
-            }
 
             /*
               ══════  NixOS Configuration Strategy  ══════

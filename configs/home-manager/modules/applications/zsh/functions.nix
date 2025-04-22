@@ -1,9 +1,9 @@
 # Import all function modules found in the functions directory
 {
-  ansiColors,
   config,
   inputs,
   lib,
+  libraryAnsiColors,
   nixosConfig,
   ...
 }:
@@ -32,7 +32,7 @@ let
           args = builtins.functionArgs importedFn; # Get expected arguments
           actualArgs =
             {
-              inherit ansiColors;
+              inherit libraryAnsiColors;
             }
             // (if args ? "config" then { inherit config; } else { })
             // (if args ? "inputs" then { inherit inputs; } else { })
