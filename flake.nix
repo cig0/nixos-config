@@ -38,12 +38,11 @@
   - The module `configuration.nix` handles core system setup (as in a fresh NixOS installation)
 
   Home Manager Configuration Strategy:
-  - The configuration is
-  - User-specific settings are defined in a `users.nix` module
+  - The HM entry point is the module `configs/home-manager/home.nix`
+  - The module `home.nix` has the dynamic modules loader invocation
 
-  - This separation keeps configurations modular and maintainable
+  This separation keeps configurations modular and maintainable.
 */
-
 {
   description = "cig0's NixOS flake";
 
