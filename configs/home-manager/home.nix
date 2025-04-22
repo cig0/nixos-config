@@ -1,9 +1,10 @@
 # Skeleton config. Check modules for the actual configuration.
 {
-  ansiColors,
+  libraryAnsiColors,
   config,
   inputs,
   lib,
+  libraryModuleLoader,
   ...
 }:
 let
@@ -37,7 +38,24 @@ in
   config = lib.mkIf config.myNixos.home-manager.enable {
     home-manager = {
       backupFileExtension = "backup";
-      extraSpecialArgs = { inherit ansiColors inputs; };
+      extraSpecialArgs = { inherit libraryAnsiColors inputs; };
+
+      # Dynamically import Home Manager modules
+      sharedModules = [
+        (libraryModuleLoader {
+          dirs = [
+            ./modules
+          ];
+          excludePaths = [
+            "applications/zsh"
+            "module-loader.nix"
+          ];
+          extraModules = [
+            ./modules/applications/zsh/zsh.nix
+          ];
+        })
+      ];
+
       useGlobalPkgs = true;
       useUserPackages = true;
       users = lib.mkMerge [
