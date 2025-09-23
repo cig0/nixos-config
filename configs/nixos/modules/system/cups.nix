@@ -1,0 +1,32 @@
+# TODO: This is an old module, bring it up to date
+{ config, lib, ... }:
+
+let
+  cfg = {
+    printingEnable = config.myNixos.services.printing.enable;
+    cupsPdfEnable = config.myNixos.services.printing.cups-pdf;
+  };
+
+in
+{
+  options.myNixos.services.printing = {
+    enable = lib.mkOption {
+      type = lib.types.bool; # lib.types.bool doesn't take arguments
+      default = false;
+      description = "Whether to enable printing support through the CUPS daemon.";
+    };
+    cups-pdf = lib.mkOption {
+      type = lib.types.bool; # lib.types.bool doesn't take arguments
+      default = false;
+      description = "Whether to enable the cups-pdf virtual PDF printer backend.";
+    };
+  };
+
+  config = {
+    services.printing = {
+      enable = cfg.printingEnable;
+      # drivers = [ "brlaser" "foomatic-db" "gutenprint" "hpcups" "hplip" "ipp" "papi3" "pnm2ppa" "pstotext" "rawtoaces" "splix" "ufraw" ];
+      cups-pdf.enable = cfg.cupsPdfEnable;
+    };
+  };
+}

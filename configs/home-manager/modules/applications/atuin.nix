@@ -1,0 +1,23 @@
+{
+  lib,
+  nixosConfig,
+  ...
+}:
+{
+  config = lib.mkIf nixosConfig.myHm.programs.atuin.enable {
+    programs.atuin = {
+      enable = true;
+      enableZshIntegration = true;
+      flags = [ "--disable-up-arrow" ];
+      settings = {
+        auto_sync = true;
+        inline_height = "45";
+        search_mode = "skim";
+        sync_address = "https://api.atuin.sh";
+        sync_frequency = "30m";
+        update_check = false;
+        workspaces = false;
+      };
+    };
+  };
+}
