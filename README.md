@@ -8,13 +8,7 @@
 
 <br>
 
-
-<p align="center" style="font-size: 1.5em;">
-  <em></em>
-</p>
-
-
-This modular and flexible NixOS flake supports multi-host and multi-channel setups, enabling the creation of NixOS systems in combinations such as, while remaining compatible with third-party flakes:
+A modular, flexible NixOS flake for multi-host, multi-channel setups — enabling varied system combinations while staying compatible with third‑party flakes:
 
 - Stable release with stable packages (a reliable workhorse)
 - Stable release with unstable packages (best of both worlds)
