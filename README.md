@@ -1,12 +1,20 @@
 ![bandbnixos](https://github.com/user-attachments/assets/b7163c2e-9cfd-4681-b5c3-81fd42331452)
 
-<p align="center" style="font-size: 1.5em;">Multi-host & multi-channel NixOS flake</p>
-
 <p align="center" style="font-size: 1.5em;"><em>An extensible framework to build rock-solid, up-to-date NixOS hosts</em></p>
+
+<p align="center" style="font-size: 1.5em;">
+  <strong>Powered by <a href="https://github.com/cig0/modulon" style="color: inherit; text-decoration: none;">Modulon 🤖</a></strong> — a plug-and-play module management framework for NixOS flakes
+</p>
 
 <br>
 
-This NixOS flake is modular and flexible, supporting multi-host and multi-channel setups. It enables building NixOS systems with different combinations, such as:
+
+<p align="center" style="font-size: 1.5em;">
+  <em></em>
+</p>
+
+
+This modular and flexible NixOS flake supports multi-host and multi-channel setups, enabling the creation of NixOS systems in combinations such as:
 
 - Stable release with stable packages
 - Stable release with unstable packages (best of both worlds)
