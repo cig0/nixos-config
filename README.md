@@ -18,8 +18,8 @@ This modular and flexible NixOS flake supports multi-host and multi-channel setu
 
 - Stable release with stable packages (a reliable workhorse)
 - Stable release with unstable packages (best of both worlds)
-- Development release with unstable packages (bleeding edge)
-- Development release with selected stable packages (for compatibility needs)
+- Development snapshot with unstable packages (bleeding edge)
+- Development snapshot with selected stable packages (for compatibility needs)
 
 This flake provides declarative configuration for multiple hosts, supports mixing stable and unstable Nixpkgs channels, and remains compatible with third-party flakes.
 
