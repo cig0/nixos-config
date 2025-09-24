@@ -29,7 +29,6 @@ let
       "org.kde.kget"
       "org.kde.kigo"
       "org.kde.kleopatra"
-      # "org.kde.kontact"  # Managed with NixOS: nixos/modules/applications/kde/kde-pim.nix
       "org.kde.kmymoney"
       "org.kde.krename"
       "org.kde.ksudoku"
