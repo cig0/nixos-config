@@ -14,14 +14,12 @@
 </p>
 
 
-This modular and flexible NixOS flake supports multi-host and multi-channel setups, enabling the creation of NixOS systems in combinations such as:
+This modular and flexible NixOS flake supports multi-host and multi-channel setups, enabling the creation of NixOS systems in combinations such as, while remaining compatible with third-party flakes:
 
 - Stable release with stable packages (a reliable workhorse)
 - Stable release with unstable packages (best of both worlds)
 - Development snapshot with unstable packages (bleeding edge)
 - Development snapshot with selected stable packages (for compatibility needs)
-
-It provides declarative configuration for multiple hosts, supports mixing stable and unstable Nixpkgs channels, and remains compatible with third-party flakes.
 
 While fully usable (I use it daily), this flake is still under heavy development. **Bugs may show up for lunch.** Use at your own risk! 🔥
 
