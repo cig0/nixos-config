@@ -132,7 +132,7 @@ in
           name = "Martín Cigorraga";
           email = "cig0.github@gmail.com";
           # signingkey = "BB81CA1B11628BF9929C7F733663FC5D6230F078"; # GPG key
-          signingkey = "${config.home.homeDirectory}/.ssh/keys/github/GitHub_Main";
+          signingkey = "${config.home.homeDirectory}/.ssh/keys/github_main";
           # signingkey = "${inputs.self}/${nixosConfig.mySecrets.getSecret "shared.home-manager.git.github.personal.ssh_pk"}";
         };
 
