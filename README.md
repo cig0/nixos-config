@@ -16,7 +16,7 @@
 
 This modular and flexible NixOS flake supports multi-host and multi-channel setups, enabling the creation of NixOS systems in combinations such as:
 
-- Stable release with stable packages
+- Stable release with stable packages (a reliable workhorse)
 - Stable release with unstable packages (best of both worlds)
 - Development release with unstable packages (bleeding edge)
 - Development release with selected stable packages (for compatibility needs)
