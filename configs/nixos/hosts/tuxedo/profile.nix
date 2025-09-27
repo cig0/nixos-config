@@ -1,13 +1,7 @@
-{
-  config,
-  myArgs,
-  ...
-}:
-{
-  /*
-    ═══════════════════════════════
-    Applications
-    ═══════════════════════════════
+{ config, myArgs, ... }: {
+  /* ═══════════════════════════════
+     Applications
+     ═══════════════════════════════
   */
   # AI & Machine Learning
   myNixos.services.ollama = {
@@ -36,12 +30,11 @@
   # File Synchronization
   myNixos = {
     myOptions = {
-      services.syncthing.guiAddress.port = config.mySecrets.getSecret "shared.myNixos.myOptions.services.syncthing.guiAddress.port";
+      services.syncthing.guiAddress.port = config.mySecrets.getSecret
+        "shared.myNixos.myOptions.services.syncthing.guiAddress.port";
     }; # syncthing.nix
   };
-  services.syncthing = {
-    enable = true;
-  }; # syncthing.nix
+  services.syncthing = { enable = false; }; # syncthing.nix
 
   # GUI
   myNixos.programs.firefox.enable = true; # firefox.nix
@@ -80,7 +73,8 @@
   };
   myNixos.package.yazi.enable = false; # yazi.nix
   myNixos.programs.yazi.enable = true; # yazi.nix
-  myNixos.programs.zsh.enable = true; # zsh.nix. If disabled, this option is automatically enabled when `users.defaultUserShell` is set to "zsh".
+  myNixos.programs.zsh.enable =
+    true; # zsh.nix. If disabled, this option is automatically enabled when `users.defaultUserShell` is set to "zsh".
 
   # VCS
   myHm.programs.git = {
@@ -90,25 +84,23 @@
   };
   myNixos.programs.lazygit.enable = true; # lazygit.nix
 
-  /*
-    ═══════════════════════════════
-    Audio
-    ═══════════════════════════════
+  /* ═══════════════════════════════
+     Audio
+     ═══════════════════════════════
   */
   myNixos.audio-subsystem.enable = true;
   myNixos.services.speechd.enable = true;
 
-  /*
-    ═══════════════════════════════
-    Common
-    ═══════════════════════════════
+  /* ═══════════════════════════════
+     Common
+     ═══════════════════════════════
   */
-  myNixos.myOptions.flakeSrcPath = "/home/cig0/workdir/cig0/nixos-config"; # common/options/myoptions.nix
+  myNixos.myOptions.flakeSrcPath =
+    "/home/cig0/workdir/cig0/nixos-config"; # common/options/myoptions.nix
 
-  /*
-    ═══════════════════════════════
-    Hardware
-    ═══════════════════════════════
+  /* ═══════════════════════════════
+     Hardware
+     ═══════════════════════════════
   */
   # CPU & Firmware
   hardware.cpu.${config.myNixos.myOptions.hardware.cpu}.updateMicrocode = true;
@@ -133,19 +125,17 @@
     memoryPercent = 15;
   };
 
-  /*
-    ═══════════════════════════════
-    Home Manager
-    Make sure your system user and shell environment are properly configured
-    before disabling this option!
-    ═══════════════════════════════
+  /* ═══════════════════════════════
+     Home Manager
+     Make sure your system user and shell environment are properly configured
+     before disabling this option!
+     ═══════════════════════════════
   */
   myNixos.home-manager.enable = true;
 
-  /*
-    ═══════════════════════════════
-    Networking
-    ═══════════════════════════════
+  /* ═══════════════════════════════
+     Networking
+     ═══════════════════════════════
   */
   # DNS & Network Management
   myNixos.networking.nameservers = true; # nameservers.nix
@@ -158,11 +148,7 @@
   myNixos.networking.stevenblack = {
     # stevenblack.nix
     enable = true;
-    block = [
-      "gambling"
-      "porn"
-      "social"
-    ];
+    block = [ "gambling" "porn" "social" ];
   };
   myNixos.systemd.services.stevenblack-unblock.enable = true; # stevenblack.nix
 
@@ -170,36 +156,35 @@
   myNixos.networking.nftables.enable = true; # nftables.nix
 
   # VPN & Remote Access
-  myNixos.services.tailscale.enable = true; # tailscale.nix
+  myNixos.services.tailscale.enable = false; # tailscale.nix
   myNixos.myOptions.services.tailscale = {
-    ip = config.mySecrets.getSecret "host.myNixos.myOptions.services.tailscale.ip"; # tailscale.nix
-    tailnetName = config.mySecrets.getSecret "host.myNixos.myOptions.services.tailscale.tailnetName"; # tailscale.nix
+    ip = config.mySecrets.getSecret
+      "host.myNixos.myOptions.services.tailscale.ip"; # tailscale.nix
+    tailnetName = config.mySecrets.getSecret
+      "host.myNixos.myOptions.services.tailscale.tailnetName"; # tailscale.nix
   };
 
-  /*
-    ═══════════════════════════════
-    Power Management
-    ═══════════════════════════════
+  /* ═══════════════════════════════
+     Power Management
+     ═══════════════════════════════
   */
-  myNixos.programs.auto-cpufreq.enable = true; # auto-cpufreq.nix
+  myNixos.programs.auto-cpufreq.enable = false; # auto-cpufreq.nix
   myNixos.powerManagement.enable = true; # power-management.nix
   myNixos.services.thermald.enable = true; # thermald.nix
   services.tlp.enable = false; # Disabled, as I'm using auto-cpufreq
 
-  /*
-    ═══════════════════════════════
-    Secrets
-    ═══════════════════════════════
+  /* ═══════════════════════════════
+     Secrets
+     ═══════════════════════════════
   */
   mySecrets.secretsFile = {
     host = "secrets/hosts/${myArgs.system.hostname}/secrets.json";
     shared = "secrets/shared/secrets.json";
   };
 
-  /*
-    ═══════════════════════════════
-    Security
-    ═══════════════════════════════
+  /* ═══════════════════════════════
+     Security
+     ═══════════════════════════════
   */
   # Authentication & Access Control
   myNixos.security.sudo = {
@@ -208,16 +193,16 @@
     extraConfig = ''
       Defaults passwd_timeout=1440, timestamp_timeout=1440
     '';
-    /*
-      passwd_timeout=1440, timestamp_timeout=1440:
-      Extending sudo timeout this much is generally unsafe, especially on servers!
-      I only enable this setting on personal devices for convenience.
+    /* passwd_timeout=1440, timestamp_timeout=1440:
+       Extending sudo timeout this much is generally unsafe, especially on servers!
+       I only enable this setting on personal devices for convenience.
     */
   };
 
   # Encryption & Keys
   myNixos.programs.gnupg.enable = true; # gnupg.nix
-  myNixos.programs.gnupg.enableSSHSupport = false; # gnupg.nix. myNixos.programs.gnupg must be enabled.
+  myNixos.programs.gnupg.enableSSHSupport =
+    false; # gnupg.nix. myNixos.programs.gnupg must be enabled.
   myNixos.programs.ssh.startAgent = true; # ssh.nix
 
   # Firewall
@@ -225,11 +210,12 @@
     # firewall.nix
     enable = true;
     allowPing = false;
-    allowedTCPPorts = config.mySecrets.getSecret "host.networking.firewall.allowedTCPPorts";
+    allowedTCPPorts =
+      config.mySecrets.getSecret "host.networking.firewall.allowedTCPPorts";
   };
 
   # Secure Boot
-  myNixos.boot.lanzaboote.enable = true; # lanzaboote.nix
+  myNixos.boot.lanzaboote.enable = false; # lanzaboote.nix
 
   # SSH Server
   services.openssh = {
@@ -239,16 +225,18 @@
       {
         # localhost
         addr = "127.0.0.1";
-        port = config.mySecrets.getSecret "host.services.openssh.listenAddresses.localhostPort";
+        port = config.mySecrets.getSecret
+          "host.services.openssh.listenAddresses.localhostPort";
       }
       {
-        /*
-          TODO: Make this a dynamic option, it has to work only with trusted networks.
-          That way I won't need to uncomment this address when connecting from an untrusted network.
+        /* TODO: Make this a dynamic option, it has to work only with trusted networks.
+           That way I won't need to uncomment this address when connecting from an untrusted network.
         */
         # wlo1
-        addr = config.mySecrets.getSecret "host.services.openssh.listenAddresses.wlo1Address";
-        port = config.mySecrets.getSecret "host.services.openssh.listenAddresses.wlo1Port";
+        addr = config.mySecrets.getSecret
+          "host.services.openssh.listenAddresses.wlo1Address";
+        port = config.mySecrets.getSecret
+          "host.services.openssh.listenAddresses.wlo1Port";
       }
       {
         # Tailscale's IP address
@@ -258,17 +246,17 @@
     ];
   };
 
-  /*
-    ═══════════════════════════════
-    System
-    ═══════════════════════════════
+  /* ═══════════════════════════════
+     System
+     ═══════════════════════════════
   */
   # Boot & Kernel
   myNixos.boot.kernelPackages = "xanmod_latest"; # kernel.nix
-  myNixos.myOptions.kernel.sysctl.netIpv4TcpCongestionControl = "westwood"; # kernel.nix
+  myNixos.myOptions.kernel.sysctl.netIpv4TcpCongestionControl =
+    "westwood"; # kernel.nix
   myNixos.boot.plymouth = {
     # plymouth.nix
-    enable = false;
+    enable = true;
     theme = "evil-nixos";
   };
 
@@ -278,18 +266,15 @@
     TUXEDOInfinityBookPro14Gen6Standard = {
       ids = [ "0001:0001" ];
       settings = {
-        main = {
-          "capslock" = "capslock";
-        };
-        shift = {
-          "capslock" = "insert";
-        };
+        main = { "capslock" = "capslock"; };
+        shift = { "capslock" = "insert"; };
       };
     };
   };
 
   # Maintenance & Updates
-  myNixos.myOptions.current-system-packages-list.enable = true; # current-system-packages-list.nix
+  myNixos.myOptions.current-system-packages-list.enable =
+    true; # current-system-packages-list.nix
   myNixos.nix = {
     # maintenance.nix
     gc.automatic = false;
@@ -317,17 +302,14 @@
     motd.enable = false;
   };
 
-  /*
-    ═══════════════════════════════
-    Virtualisation
-    ═══════════════════════════════
+  /* ═══════════════════════════════
+     Virtualisation
+     ═══════════════════════════════
   */
   myNixos.virtualisation = {
     incus.enable = true; # incus.nix
     libvirtd.enable = true; # libvirt.nix
     podman.enable = true; # containerisation.nix
   };
-  virtualisation = {
-    podman.autoPrune.enable = false;
-  };
+  virtualisation = { podman.autoPrune.enable = false; };
 }
