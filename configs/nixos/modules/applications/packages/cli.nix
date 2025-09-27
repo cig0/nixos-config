@@ -59,7 +59,6 @@
     k6 # A modern load testing tool, using Go and JavaScript :: https://github.com/grafana/k6
     ntfs3g
     nms # A command line tool that recreates the famous data decryption effect seen in the 1992 movie Sneakers :: https://github.com/bartobri/no-more-secrets
-    qrscan
     rust-petname
     pipe-rename
     terminal-parrot
@@ -83,12 +82,7 @@
     yt-dlp
   ];
 
-  networking =
-    with pkgs;
-    [ ]
-    ++ (with pkgs-unstable; [
-      openconnect_openssl
-    ]);
+  networking = with pkgs; [ ] ++ (with pkgs-unstable; [ openconnect_openssl ]);
 
   programming =
     with pkgs;
@@ -136,7 +130,6 @@
     with pkgs;
     [ mitmproxy ]
     ++ (with pkgs-unstable; [
-      chkrootkit
       lynis
       netscanner # Network scanner with features like WiFi scanning, packetdump and more :: https://github.com/Chleba/netscanner
       nikto
@@ -148,7 +141,7 @@
 
   vcs = with pkgs-unstable; [
     # Git
-    ggshield # GitGuardian
+    #broken::ggshield # GitGuardian
     git-crypt # Transparent file encryption in git :: https://www.agwa.name/projects/git-crypt
     git-filter-repo # Quickly rewrite git repository history :: https://github.com/newren/git-filter-repo
     gitmoji-cli # https://github.com/carloscuesta/gitmoji-cli
@@ -164,9 +157,9 @@
     zizmor # Tool for finding security issues in GitHub Actions setups :: https://woodruffw.github.io/zizmor/
 
     # Jujutsu
-    lazyjj
-    jjui
-    jujutsu
+    # lazyjj # br0ken
+    # jjui
+    # jujutsu
   ];
 
   web = with pkgs-unstable; [

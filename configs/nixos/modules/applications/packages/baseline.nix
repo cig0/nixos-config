@@ -1,11 +1,7 @@
 # @MODULON_SKIP
 # Baseline set of packages for all hosts
 # This file is extracted from packages.nix to improve modularity and maintainability.
-{
-  pkgs,
-  pkgs-unstable,
-  ...
-}:
+{ pkgs, pkgs-unstable, ... }:
 with pkgs;
 [
   # Nix
@@ -15,20 +11,20 @@ with pkgs;
   httping # Ping with HTTP requests :: https://vanheusden.com/httping
 
   # Python
-  python312 # High-level dynamically-typed programming language :: https://www.python.org
-  python312Packages.ipython # IPython: Productive Interactive Computing :: https://ipython.org/
+  python313 # High-level dynamically-typed programming language :: https://www.python.org
+  python313Packages.ipython # IPython: Productive Interactive Computing :: https://ipython.org/
 
   # Storage
   # nfstrace # TODO: build failing. NFS and CIFS tracing/monitoring/capturing/analyzing tool :: NFS and CIFS tracing/monitoring/capturing/analyzing tool
-]
-++ (with pkgs-unstable; [
+] ++ (with pkgs-unstable; [
   # Misc
   at
   broot # Interactive tree view, a fuzzy search, a balanced BFS descent and customizable commands :: https://dystroy.org/broot/
   chezmoi
   cyme # https://github.com/tuna-f1sh/cyme :: List system USB buses and devices.
-  difftastic
   delta
+  difftastic
+  direnv
   dmidecode
   fd # Simple, fast and user-friendly alternative to find :: https://github.com/sharkdp/fd [Yazi's requirement: https://yazi-rs.github.io/docs/installation/]
   fdupes
