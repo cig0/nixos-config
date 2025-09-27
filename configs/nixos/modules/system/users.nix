@@ -74,6 +74,20 @@ in
           group = "users";
           extraGroups = extraGroups;
           openssh.authorizedKeys.keys = authorizedKeys;
+
+          # Configure sub-UIDs and sub-GIDs for your user
+          subUidRanges = [
+            {
+              startUid = 100000;
+              count = 65536;
+            }
+          ];
+          subGidRanges = [
+            {
+              startGid = 100000;
+              count = 65536;
+            }
+          ];
         };
       }
       (lib.mkIf cfg.doomguy {
