@@ -1,25 +1,24 @@
 # @MODULON_SKIP
 # Set of packages for all hosts
 # This file is extracted from packages.nix to improve modularity and maintainability.
-{ pkgs, pkgs-unstable, ... }:
-{
-  ai = with pkgs-unstable; [
-    aichat
-    # oterm
-  ];
+{ pkgs, pkgs-unstable, ... }: {
+  ai = with pkgs-unstable;
+    [
+      aichat
+      # oterm
+    ];
 
   backup = with pkgs-unstable; [ borgbackup ];
 
-  comms = with pkgs-unstable; [
-    syncterm # BBS terminal emulator :: Homepage: https://syncterm.bbsdev.net/
-  ];
+  comms = with pkgs-unstable;
+    [
+      syncterm # BBS terminal emulator :: Homepage: https://syncterm.bbsdev.net/
+    ];
 
-  cloudNativeTools =
-    with pkgs;
+  cloudNativeTools = with pkgs;
     [
       vagrant # Should always follow the main channel.
-    ]
-    ++ (with pkgs-unstable; [
+    ] ++ (with pkgs-unstable; [
       # argocd
       awscli2 # Unified tool to manage your AWS services :: https://aws.amazon.com/cli/
       bootc
@@ -84,10 +83,8 @@
 
   networking = with pkgs; [ ] ++ (with pkgs-unstable; [ openconnect_openssl ]);
 
-  programming =
-    with pkgs;
-    [ ]
-    ++ (with pkgs-unstable; [
+  programming = with pkgs;
+    [ ] ++ (with pkgs-unstable; [
       # API
       atac # A simple API client (Postman-like) in your terminal :: https://github.com/Julien-cpsn/ATAC
 
@@ -126,10 +123,8 @@
     sops
   ];
 
-  security =
-    with pkgs;
-    [ mitmproxy ]
-    ++ (with pkgs-unstable; [
+  security = with pkgs;
+    [ mitmproxy ] ++ (with pkgs-unstable; [
       lynis
       netscanner # Network scanner with features like WiFi scanning, packetdump and more :: https://github.com/Chleba/netscanner
       nikto
@@ -141,12 +136,11 @@
 
   vcs = with pkgs-unstable; [
     # Git
-    #broken::ggshield # GitGuardian
+    #ggshield # GitGuardian
     git-crypt # Transparent file encryption in git :: https://www.agwa.name/projects/git-crypt
     git-filter-repo # Quickly rewrite git repository history :: https://github.com/newren/git-filter-repo
     gitmoji-cli # https://github.com/carloscuesta/gitmoji-cli
     # glab # GitLab CLI client
-    lefthook
 
     # GitHub
     gh # GitHub CLI client
@@ -162,8 +156,5 @@
     # jujutsu
   ];
 
-  web = with pkgs-unstable; [
-    elinks
-    w3m-nox
-  ];
+  web = with pkgs-unstable; [ elinks w3m-nox ];
 }
