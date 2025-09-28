@@ -79,7 +79,7 @@
      ░░░░░░░▀░▀░▀▀░░▀▀░░▀▀▀░░▀░░▀▀▀░▀▀▀░▀░▀░▀░▀░▀▀▀░░░░░░▀▀▀░▀░░░░▀░░▀▀▀░▀▀▀░▀░▀░▀▀▀░░░░░░░
   */
 
-  # I removed the additional internal SSD storage, but I keep the configuration around for future use
+  # I removed the additional internal SSD storage, but I'm keeping the configuration around for reference
   /* # Automatically mount the LUKS-encrypted internal data storage
      systemd.services.ensure-run-media-internalData-dir = {
        description = "Ensure /run/media/internalData directory exists";
