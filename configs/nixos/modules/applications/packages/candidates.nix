@@ -1,15 +1,13 @@
 # @MODULON_SKIP
-/*
-  Set of packages for all hosts
-  This file is extracted from packages.nix to improve modularity and maintainability.
+/* Set of packages for all hosts
+   This file is extracted from packages.nix to improve modularity and maintainability.
 
-  Try-before-you-buy module (!). Make sure the corresponding option is enabled in the host's
-  profile module.
+   Try-before-you-buy module (!). Make sure the corresponding option is enabled in the host's
+   profile module.
 */
 { pkgs, pkgs-unstable, ... }:
 with pkgs;
-[ ]
-++ (with pkgs-unstable; [
+[ ] ++ (with pkgs-unstable; [
   # Azure
   azure-cli
   azuredatastudio
@@ -49,6 +47,8 @@ with pkgs;
 
   # Programming
   devpod # Codespaces but open-source, client-only and unopinionated: Works with any IDE and lets you use any cloud, kubernetes or just localhost docker :: https://devpod.sh
+
+  jocalsend
 
   # Radicle
   # radicle-node
