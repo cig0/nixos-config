@@ -271,7 +271,7 @@ Contributions to improve this flake configuration are welcome! Whether it's bug 
 Unless otherwise stated, everything in this repo is covered by the following copyright notice:
 
 ```plaintext
-Automatic NixOS Module Importer.
+A NixOS multi-host, multi-channel setups flake.
 Copyright (C) 2024-2025  Martín Cigorraga <cig0.github@gmail.com>
 
 This program is free software: you can redistribute it and/or modify it
