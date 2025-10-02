@@ -41,6 +41,7 @@ with pkgs;
   lurk # A simple and pretty alternative to strace
   mc
   p7zip
+  parallel-full
   pciutils
   poppler # PDF rendering library :: [Yazi's requirement: https://yazi-rs.github.io/docs/installation/]
   ripgrep # Utility that combines the usability of The Silver Searcher with the raw speed of grep :: https://github.com/BurntSushi/ripgrep [Yazi's requirement: https://yazi-rs.github.io/docs/installation/]
